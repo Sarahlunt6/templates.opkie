@@ -34,25 +34,20 @@ export default function Template4Page() {
           </p>
         </div>
 
-        {/* Before/After Slider Hero - 65% of viewport */}
+        {/* Before/After Slider Hero */}
         <div className="flex-1 px-4 md:px-8 pb-8">
           <div className="h-full max-w-5xl mx-auto">
-            <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden shadow-2xl">
-              {/* Placeholder for Before/After */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-neutral-muted mb-4">Interactive Before/After Slider</p>
-                  <div className="w-full max-w-2xl mx-auto px-8">
-                    <BeforeAfterSlider
-                      beforeUrl="/images/cases/smile-before.png"
-                      afterUrl="/images/cases/smile-after.png"
-                      altTag="Porcelain veneers smile transformation at Summit Dental Group in Salt Lake City"
-                      aspectRatio="16/9"
-                    />
-                  </div>
-                </div>
-              </div>
+            <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <BeforeAfterSlider
+                beforeUrl="/images/cases/smile-before.png"
+                afterUrl="/images/cases/smile-after.png"
+                altTag="Porcelain veneers smile transformation at Summit Dental Group in Salt Lake City"
+                aspectRatio="16/9"
+              />
             </div>
+            <p className="text-center text-sm text-neutral-muted mt-4">
+              Drag the slider to see the transformation
+            </p>
           </div>
         </div>
       </section>

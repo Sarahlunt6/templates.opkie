@@ -118,7 +118,9 @@ export default function Template3Page() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
-              <span>🎬</span>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+              </svg>
               <span>Take a Tour</span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -157,29 +159,33 @@ export default function Template3Page() {
               {
                 title: "Invisalign",
                 description: "Clear aligners for teens and adults. Straighten teeth comfortably without metal braces.",
-                emoji: "😁",
+                icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
               },
               {
                 title: "Dental Implants",
                 description: "Permanent tooth replacement that looks and feels natural. Restore your confident smile.",
-                emoji: "🦷",
+                icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
               },
               {
                 title: "Pediatric Dentistry",
                 description: "Kid-friendly dental care that makes visits fun. Building healthy habits early.",
-                emoji: "👶",
+                icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
               },
               {
                 title: "Emergency Care",
                 description: "Same-day appointments for urgent dental needs. We're here when you need us most.",
-                emoji: "🏥",
+                icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
               },
             ].map((service, index) => (
               <div
                 key={index}
                 className="group p-6 bg-brand-canvas border border-neutral-border rounded-2xl hover:border-brand-primary hover:shadow-lg transition-all text-center"
               >
-                <div className="text-4xl mb-4">{service.emoji}</div>
+                <div className="w-14 h-14 rounded-full bg-brand-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-7 h-7 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
+                  </svg>
+                </div>
                 <h3 className="text-lg font-semibold text-brand-mainText mb-2">
                   {service.title}
                 </h3>
@@ -206,13 +212,17 @@ export default function Template3Page() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: "20+", label: "Years Serving Families", emoji: "🏠" },
-              { value: "10,000+", label: "Happy Patients", emoji: "😊" },
-              { value: "All Ages", label: "Kids to Grandparents", emoji: "👨‍👩‍👧‍👦" },
-              { value: "5 Stars", label: "Patient Satisfaction", emoji: "⭐" },
+              { value: "20+", label: "Years Serving Families", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
+              { value: "10,000+", label: "Happy Patients", icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { value: "All Ages", label: "Kids to Grandparents", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
+              { value: "5 Stars", label: "Patient Satisfaction", icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" },
             ].map((stat, index) => (
               <div key={index} className="text-center p-6 rounded-2xl bg-brand-primary/5 border border-brand-primary/10">
-                <span className="text-3xl mb-2 block">{stat.emoji}</span>
+                <div className="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center mx-auto mb-2">
+                  <svg className="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={stat.icon} />
+                  </svg>
+                </div>
                 <p className="text-2xl font-bold text-brand-primary mb-1">{stat.value}</p>
                 <p className="text-sm text-neutral-muted">{stat.label}</p>
               </div>
@@ -276,7 +286,9 @@ export default function Template3Page() {
             {/* Bio */}
             <div className="text-white">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
-                <span>👋</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
                 <span>Meet Your Dentist</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-2">
@@ -324,7 +336,11 @@ export default function Template3Page() {
             <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-neutral-border">
               <div className="absolute top-4 left-4 z-10">
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-muted text-white font-semibold text-sm">
-                  <span>📷</span> Before
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Before
                 </span>
               </div>
               <div className="aspect-[4/3] relative">
@@ -342,7 +358,10 @@ export default function Template3Page() {
             <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-brand-primary">
               <div className="absolute top-4 left-4 z-10">
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary text-white font-semibold text-sm">
-                  <span>✨</span> After
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  After
                 </span>
               </div>
               <div className="aspect-[4/3] relative">
