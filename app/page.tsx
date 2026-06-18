@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function HomePage() {
   const templates = [
     {
@@ -51,9 +49,11 @@ export default function HomePage() {
         {/* Template Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {templates.map((template) => (
-            <Link
+            <a
               key={template.id}
               href={`/${template.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group card-elevated p-6 transition-all duration-200 hover:shadow-xl hover:-translate-y-1"
             >
               {/* Template Preview Placeholder */}
@@ -82,7 +82,7 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
-            </Link>
+            </a>
           ))}
         </div>
 

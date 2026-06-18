@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews, sampleBeforeAfterCases } from "@/data/master";
 import { BeforeAfterSlider, ReviewMatrix } from "@/components/dental";
+import T4Nav from "./components/T4Nav";
+import T4Footer from "./components/T4Footer";
 
 const location = clientMasterData.locations[0];
 
@@ -12,9 +14,11 @@ export const metadata: Metadata = {
 
 export default function Template4Page() {
   const { trustSignals, doctors } = clientMasterData;
+  const primaryDoctor = doctors[0];
 
   return (
     <div className="font-sans">
+      <T4Nav />
       {/* Hero Section - Cosmetic Showcase */}
       <section className="min-h-[90vh] flex flex-col">
         {/* Top Typography Section */}
@@ -40,12 +44,90 @@ export default function Template4Page() {
                   <p className="text-neutral-muted mb-4">Interactive Before/After Slider</p>
                   <div className="w-full max-w-2xl mx-auto px-8">
                     <BeforeAfterSlider
-                      beforeUrl="/images/cases/veneers-before-placeholder.jpg"
-                      afterUrl="/images/cases/veneers-after-placeholder.jpg"
+                      beforeUrl="/images/cases/smile-before.png"
+                      afterUrl="/images/cases/smile-after.png"
                       altTag="Porcelain veneers smile transformation at Summit Dental Group in Salt Lake City"
                       aspectRatio="16/9"
                     />
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators - Cosmetic/Luxury Style */}
+      <section className="py-12 px-8 bg-brand-mainText">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { value: "1,200+", label: "Smile Makeovers", detail: "Completed" },
+              { value: "15", label: "Years of", detail: "Cosmetic Excellence" },
+              { value: "98%", label: "Patient", detail: "Satisfaction" },
+              { value: "Award", label: "Winning", detail: "Aesthetics" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <p className="text-3xl md:text-4xl font-bold text-brand-accent mb-1">{stat.value}</p>
+                <p className="text-brand-canvas/80 text-sm">
+                  {stat.label}<br />
+                  <span className="text-brand-canvas/60">{stat.detail}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Artist - Portfolio Style */}
+      <section className="py-20 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Large Portrait */}
+            <div className="lg:col-span-5">
+              <div className="relative">
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/team/doctor-portrait.png"
+                    alt={`${primaryDoctor.name}, Cosmetic Dentistry Specialist`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                </div>
+                {/* Floating Badge */}
+                <div className="absolute -bottom-4 -right-4 px-6 py-3 bg-brand-primary text-brand-canvas rounded-xl shadow-lg">
+                  <p className="text-sm font-semibold">Cosmetic Specialist</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Bio Content */}
+            <div className="lg:col-span-7">
+              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-4">
+                The Artist Behind Your Smile
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-2">
+                {primaryDoctor.name}
+              </h2>
+              <p className="text-xl text-neutral-muted mb-6">{primaryDoctor.role}</p>
+
+              <div className="prose prose-lg text-neutral-muted mb-8">
+                <p className="leading-relaxed">
+                  {primaryDoctor.biography}
+                </p>
+              </div>
+
+              {/* Credentials in elegant list */}
+              <div className="border-t border-neutral-border pt-6">
+                <p className="text-sm font-semibold text-brand-mainText mb-4">Credentials & Training</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {primaryDoctor.credentials.map((credential, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-brand-primary" />
+                      <span className="text-sm text-neutral-muted">{credential}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -102,7 +184,7 @@ export default function Template4Page() {
         </div>
       </section>
 
-      {/* Case Gallery */}
+      {/* Featured Before/After Gallery */}
       <section className="py-20 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-brand-mainText text-center mb-4">
@@ -112,6 +194,40 @@ export default function Template4Page() {
             Real results from real patients. Explore our gallery of smile makeovers.
           </p>
 
+          {/* Featured Large Comparison */}
+          <div className="mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-1 rounded-2xl overflow-hidden">
+              <div className="relative aspect-[4/3]">
+                <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-white/90 backdrop-blur rounded-full">
+                  <span className="text-sm font-semibold text-neutral-muted">Before</span>
+                </div>
+                <Image
+                  src="/images/cases/smile-before.png"
+                  alt="Before cosmetic dental treatment"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+              <div className="relative aspect-[4/3]">
+                <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-primary rounded-full">
+                  <span className="text-sm font-semibold text-brand-canvas">After</span>
+                </div>
+                <Image
+                  src="/images/cases/smile-after.png"
+                  alt="After cosmetic dental treatment - stunning smile"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+            <p className="text-center text-sm text-neutral-muted mt-4">
+              Complete smile makeover with porcelain veneers
+            </p>
+          </div>
+
+          {/* Additional Cases */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {sampleBeforeAfterCases.map((caseItem) => (
               <div key={caseItem.id} className="space-y-4">
@@ -218,38 +334,7 @@ export default function Template4Page() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-8 bg-brand-mainText">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div>
-            <h3 className="text-xl font-bold text-brand-canvas mb-4">{location.practiceNameGBP}</h3>
-            <address className="not-italic text-brand-canvas/70 leading-relaxed">
-              <p>{location.addressGBP}</p>
-              <p>{location.cityServed}, {location.stateServed}</p>
-              <p className="mt-2">
-                <a href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`} className="hover:text-brand-accent">
-                  {location.phoneGBP}
-                </a>
-              </p>
-            </address>
-          </div>
-          <div>
-            <h4 className="font-semibold text-brand-canvas mb-4">Hours</h4>
-            <ul className="text-brand-canvas/70 space-y-2">
-              {location.hoursOfOperation.map((h, i) => (
-                <li key={i} className="flex justify-between text-sm">
-                  <span>{h.dayRange}</span>
-                  <span>{h.structuralHours}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-brand-canvas mb-4">Insurance</h4>
-            <p className="text-brand-canvas/70 text-sm">{trustSignals.insuranceAcceptedText}</p>
-          </div>
-        </div>
-      </footer>
+      <T4Footer />
     </div>
   );
 }

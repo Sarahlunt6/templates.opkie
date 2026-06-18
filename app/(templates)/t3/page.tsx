@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import { ReviewMatrix } from "@/components/dental";
+import T3Nav from "./components/T3Nav";
+import T3Footer from "./components/T3Footer";
 
 const location = clientMasterData.locations[0];
 
@@ -12,6 +14,7 @@ export const metadata: Metadata = {
 
 export default function Template3Page() {
   const { trustSignals, doctors } = clientMasterData;
+  const primaryDoctor = doctors[0];
 
   const firstVisitSteps = [
     {
@@ -38,6 +41,7 @@ export default function Template3Page() {
 
   return (
     <div className="font-sans">
+      <T3Nav />
       {/* Hero Section - Wide Background with Family Focus */}
       <section className="relative min-h-[80vh] flex items-center">
         {/* Background Team Image */}
@@ -109,6 +113,26 @@ export default function Template3Page() {
         </div>
       )}
 
+      {/* Trust Badges - Family Friendly Style */}
+      <section className="py-12 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { value: "20+", label: "Years Serving Families", emoji: "🏠" },
+              { value: "10,000+", label: "Happy Patients", emoji: "😊" },
+              { value: "All Ages", label: "Kids to Grandparents", emoji: "👨‍👩‍👧‍👦" },
+              { value: "5 Stars", label: "Patient Satisfaction", emoji: "⭐" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center p-6 rounded-2xl bg-brand-primary/5 border border-brand-primary/10">
+                <span className="text-3xl mb-2 block">{stat.emoji}</span>
+                <p className="text-2xl font-bold text-brand-primary mb-1">{stat.value}</p>
+                <p className="text-sm text-neutral-muted">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* First Visit Process Map */}
       <section className="py-20 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">
@@ -140,6 +164,114 @@ export default function Template3Page() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Meet the Dentist - Family Friendly Style */}
+      <section className="py-20 px-8 bg-gradient-to-br from-brand-primary to-brand-accent">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Image with fun border */}
+            <div className="relative">
+              <div className="absolute -inset-4 bg-brand-canvas/20 rounded-3xl rotate-3" />
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/team/doctor-portrait.png"
+                  alt={`${primaryDoctor.name}, your friendly family dentist`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* Bio */}
+            <div className="text-brand-canvas">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-canvas/20 text-brand-canvas text-sm font-medium mb-4">
+                <span>👋</span>
+                <span>Meet Your Dentist</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                {primaryDoctor.name}
+              </h2>
+              <p className="text-brand-canvas/80 text-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-brand-canvas/90 leading-relaxed mb-8">
+                {primaryDoctor.biography}
+              </p>
+
+              {/* Credentials as fun badges */}
+              <div className="flex flex-wrap gap-2">
+                {primaryDoctor.credentials.map((credential, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-brand-canvas/20 text-brand-canvas text-sm"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {credential}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Before/After - Playful Side by Side */}
+      <section className="py-20 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+              Smile Transformations for the Whole Family
+            </h2>
+            <p className="text-neutral-muted max-w-2xl mx-auto">
+              See the amazing results we achieve with gentle, patient-focused care.
+              Every smile tells a story of trust and transformation.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Before Card */}
+            <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-neutral-border">
+              <div className="absolute top-4 left-4 z-10">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-muted text-white font-semibold text-sm">
+                  <span>📷</span> Before
+                </span>
+              </div>
+              <div className="aspect-[4/3] relative">
+                <Image
+                  src="/images/cases/smile-before.png"
+                  alt="Before gentle dental treatment"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* After Card */}
+            <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-brand-primary">
+              <div className="absolute top-4 left-4 z-10">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary text-white font-semibold text-sm">
+                  <span>✨</span> After
+                </span>
+              </div>
+              <div className="aspect-[4/3] relative">
+                <Image
+                  src="/images/cases/smile-after.png"
+                  alt="After gentle dental treatment - beautiful smile"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </div>
+
+          <p className="text-center text-neutral-muted mt-8">
+            Actual patient results. Your results may vary based on individual treatment needs.
+          </p>
         </div>
       </section>
 
@@ -220,38 +352,7 @@ export default function Template3Page() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-8 bg-brand-mainText">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div>
-            <h3 className="text-xl font-bold text-brand-canvas mb-4">{location.practiceNameGBP}</h3>
-            <address className="not-italic text-brand-canvas/70 leading-relaxed">
-              <p>{location.addressGBP}</p>
-              <p>{location.cityServed}, {location.stateServed}</p>
-              <p className="mt-2">
-                <a href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`} className="hover:text-brand-accent">
-                  {location.phoneGBP}
-                </a>
-              </p>
-            </address>
-          </div>
-          <div>
-            <h4 className="font-semibold text-brand-canvas mb-4">Office Hours</h4>
-            <ul className="text-brand-canvas/70 space-y-2">
-              {location.hoursOfOperation.map((h, i) => (
-                <li key={i} className="flex justify-between text-sm">
-                  <span>{h.dayRange}</span>
-                  <span>{h.structuralHours}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-brand-canvas mb-4">Insurance</h4>
-            <p className="text-brand-canvas/70 text-sm">{trustSignals.insuranceAcceptedText}</p>
-          </div>
-        </div>
-      </footer>
+      <T3Footer />
     </div>
   );
 }

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import { ReviewMatrix } from "@/components/dental";
+import T2Nav from "./components/T2Nav";
+import T2Footer from "./components/T2Footer";
 
 const location = clientMasterData.locations[0];
 
@@ -11,10 +13,12 @@ export const metadata: Metadata = {
 };
 
 export default function Template2Page() {
-  const { trustSignals } = clientMasterData;
+  const { trustSignals, doctors } = clientMasterData;
+  const primaryDoctor = doctors[0];
 
   return (
     <div className="font-sans">
+      <T2Nav />
       {/* Hero Section - Centered Canvas */}
       <section className="min-h-[80vh] flex flex-col items-center justify-center px-8 py-20 bg-brand-canvas relative overflow-hidden">
         {/* Background Team Image */}
@@ -124,6 +128,30 @@ export default function Template2Page() {
         </div>
       </section>
 
+      {/* Trust Indicators - Tech Dashboard Style */}
+      <section className="py-12 px-8 bg-brand-canvas border-y border-neutral-border">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { value: "99.2%", label: "Treatment Accuracy", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { value: "24hr", label: "Digital Turnaround", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { value: "3D", label: "Imaging Technology", icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" },
+              { value: "500+", label: "Digital Restorations", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
+            ].map((stat, index) => (
+              <div key={index} className="p-6 rounded-xl bg-brand-primary/5 border border-brand-primary/10 text-center">
+                <div className="w-10 h-10 rounded-lg bg-brand-primary/10 flex items-center justify-center mx-auto mb-3">
+                  <svg className="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={stat.icon} />
+                  </svg>
+                </div>
+                <p className="text-2xl font-bold text-brand-primary mb-1">{stat.value}</p>
+                <p className="text-sm text-neutral-muted">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Technology Features */}
       <section className="py-20 px-8 bg-brand-mainText">
         <div className="max-w-6xl mx-auto">
@@ -184,6 +212,114 @@ export default function Template2Page() {
         </div>
       </section>
 
+      {/* Before/After - Tech Comparison View */}
+      <section className="py-20 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-brand-mainText mb-4">
+              Digital Precision. Real Results.
+            </h2>
+            <p className="text-neutral-muted max-w-2xl mx-auto">
+              Our advanced imaging and treatment planning technology delivers predictable,
+              exceptional outcomes. See the difference digital dentistry makes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Before */}
+            <div className="relative rounded-2xl overflow-hidden border border-neutral-border">
+              <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-mainText/90 rounded-lg">
+                <span className="text-sm font-semibold text-brand-canvas">BEFORE</span>
+              </div>
+              <div className="aspect-[4/3] relative">
+                <Image
+                  src="/images/cases/smile-before.png"
+                  alt="Before digital smile design treatment"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="p-4 bg-brand-primary/5">
+                <p className="text-sm text-neutral-muted">Initial digital scan and analysis</p>
+              </div>
+            </div>
+
+            {/* After */}
+            <div className="relative rounded-2xl overflow-hidden border border-brand-primary">
+              <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-primary rounded-lg">
+                <span className="text-sm font-semibold text-brand-canvas">AFTER</span>
+              </div>
+              <div className="aspect-[4/3] relative">
+                <Image
+                  src="/images/cases/smile-after.png"
+                  alt="After digital smile design treatment"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="p-4 bg-brand-primary/10">
+                <p className="text-sm text-brand-primary font-medium">Precision-crafted result</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Doctor - Tech Profile Card */}
+      <section className="py-20 px-8 bg-gradient-to-br from-brand-mainText to-brand-mainText/95">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+            {/* Image */}
+            <div className="lg:col-span-2">
+              <div className="relative aspect-square rounded-2xl overflow-hidden border-4 border-brand-primary/20">
+                <Image
+                  src="/images/team/doctor-portrait.png"
+                  alt={`${primaryDoctor.name}, ${primaryDoctor.role}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                {/* Tech Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-mainText to-transparent p-6">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
+                    <span className="text-sm text-brand-canvas/80">Digital Dentistry Specialist</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bio */}
+            <div className="lg:col-span-3 text-brand-canvas">
+              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+                Lead Practitioner
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                {primaryDoctor.name}
+              </h2>
+              <p className="text-brand-accent text-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-brand-canvas/80 leading-relaxed mb-8">
+                {primaryDoctor.biography}
+              </p>
+
+              {/* Credentials Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {primaryDoctor.credentials.map((credential, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-brand-canvas/5 border border-brand-canvas/10">
+                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-sm text-brand-canvas/90">{credential}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services Grid */}
       <section className="py-20 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">
@@ -225,39 +361,7 @@ export default function Template2Page() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-8 bg-brand-mainText">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <h3 className="text-xl font-bold text-brand-canvas mb-4">
-                {location.practiceNameGBP}
-              </h3>
-              <address className="not-italic text-brand-canvas/70 leading-relaxed">
-                <p>{location.addressGBP}</p>
-                <p>{location.cityServed}, {location.stateServed}</p>
-                <p className="mt-2">
-                  <a href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`} className="hover:text-brand-accent">
-                    {location.phoneGBP}
-                  </a>
-                </p>
-              </address>
-            </div>
-            <div>
-              <h4 className="font-semibold text-brand-canvas mb-3">Hours</h4>
-              <ul className="text-brand-canvas/70 text-sm space-y-1">
-                {location.hoursOfOperation.map((h, i) => (
-                  <li key={i}>{h.dayRange}: {h.structuralHours}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-brand-canvas mb-3">Insurance</h4>
-              <p className="text-brand-canvas/70 text-sm">{trustSignals.insuranceAcceptedText}</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <T2Footer />
     </div>
   );
 }

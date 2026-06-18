@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import { ReviewMatrix } from "@/components/dental";
+import T5Nav from "./components/T5Nav";
+import T5Footer from "./components/T5Footer";
 
 const location = clientMasterData.locations[0];
 
@@ -16,6 +18,7 @@ export default function Template5Page() {
 
   return (
     <div className="font-sans">
+      <T5Nav />
       {/* Hero Section - Zen Minimalist */}
       <section className="min-h-[85vh] flex flex-col items-center justify-center px-8 py-20 bg-brand-canvas relative">
         {/* Subtle Background */}
@@ -70,8 +73,26 @@ export default function Template5Page() {
         </div>
       </section>
 
+      {/* Trust Indicators - Minimal/Zen Style */}
+      <section className="py-16 px-8 bg-brand-canvas border-y border-neutral-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-8">
+            {[
+              { value: "12", label: "Years of Mindful Practice" },
+              { value: "100%", label: "Personalized Care" },
+              { value: "Holistic", label: "Wellness Approach" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <p className="text-2xl md:text-3xl font-light text-brand-primary mb-2">{stat.value}</p>
+                <p className="text-xs uppercase tracking-[0.15em] text-neutral-muted">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Philosophy Section */}
-      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
+      <section className="py-24 px-8 bg-brand-canvas border-b border-neutral-border">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center">
@@ -105,8 +126,54 @@ export default function Template5Page() {
         </div>
       </section>
 
-      {/* Services - Minimal List */}
+      {/* Before/After - Elegant Minimal */}
       <section className="py-24 px-8 bg-brand-primary/[0.02]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+              Transformations
+            </p>
+            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+              The Art of Subtle Enhancement
+            </h2>
+          </div>
+
+          {/* Elegant Side by Side */}
+          <div className="grid grid-cols-2 gap-px bg-neutral-border">
+            <div className="relative aspect-[4/3] bg-brand-canvas">
+              <p className="absolute top-4 left-4 text-xs uppercase tracking-[0.2em] text-neutral-muted z-10">
+                Before
+              </p>
+              <Image
+                src="/images/cases/smile-before.png"
+                alt="Before holistic dental treatment"
+                fill
+                className="object-cover"
+                sizes="50vw"
+              />
+            </div>
+            <div className="relative aspect-[4/3] bg-brand-canvas">
+              <p className="absolute top-4 left-4 text-xs uppercase tracking-[0.2em] text-brand-primary z-10">
+                After
+              </p>
+              <Image
+                src="/images/cases/smile-after.png"
+                alt="After holistic dental treatment"
+                fill
+                className="object-cover"
+                sizes="50vw"
+              />
+            </div>
+          </div>
+
+          <p className="text-center text-sm text-neutral-muted mt-8 italic">
+            Natural enhancement through mindful treatment
+          </p>
+        </div>
+      </section>
+
+      {/* Services - Minimal List */}
+      <section className="py-24 px-8 bg-brand-canvas">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-light text-brand-mainText text-center mb-16">
             Our Services
@@ -141,7 +208,7 @@ export default function Template5Page() {
       </section>
 
       {/* Doctor Profile - Elegant */}
-      <section className="py-24 px-8 bg-brand-canvas">
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             {/* Doctor Portrait */}
@@ -214,56 +281,7 @@ export default function Template5Page() {
         </div>
       </section>
 
-      {/* Footer - Elegant Minimal */}
-      <footer className="py-16 px-8 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Contact */}
-            <div>
-              <h3 className="text-lg font-medium text-brand-mainText mb-6">
-                {location.practiceNameGBP}
-              </h3>
-              <address className="not-italic text-neutral-muted leading-relaxed space-y-1">
-                <p>{location.addressGBP}</p>
-                <p>{location.cityServed}, {location.stateServed}</p>
-              </address>
-              <p className="mt-4">
-                <a
-                  href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="text-brand-primary hover:underline"
-                >
-                  {location.phoneGBP}
-                </a>
-              </p>
-            </div>
-
-            {/* Hours */}
-            <div>
-              <h4 className="text-lg font-medium text-brand-mainText mb-6">Hours</h4>
-              <ul className="text-neutral-muted space-y-2">
-                {location.hoursOfOperation.map((h, i) => (
-                  <li key={i} className="flex justify-between text-sm">
-                    <span>{h.dayRange}</span>
-                    <span>{h.structuralHours}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Insurance Note */}
-          <div className="mt-12 pt-8 border-t border-neutral-border">
-            <p className="text-sm text-neutral-muted">
-              {trustSignals.insuranceAcceptedText}
-            </p>
-            {trustSignals.membershipPlanSummary && (
-              <p className="text-sm text-neutral-muted mt-2">
-                {trustSignals.membershipPlanSummary}
-              </p>
-            )}
-          </div>
-        </div>
-      </footer>
+      <T5Footer />
     </div>
   );
 }

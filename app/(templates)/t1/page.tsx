@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import { ReviewMatrix } from "@/components/dental";
+import T1Nav from "./components/T1Nav";
+import T1Footer from "./components/T1Footer";
 
 const location = clientMasterData.locations[0];
 
@@ -16,6 +18,8 @@ export default function Template1Page() {
 
   return (
     <div className="font-serif">
+      <T1Nav />
+
       {/* Hero Section - 50/50 Split */}
       <section className="min-h-[80vh] grid grid-cols-1 lg:grid-cols-2">
         {/* Left: Content */}
@@ -108,6 +112,115 @@ export default function Template1Page() {
         </div>
       </section>
 
+      {/* Meet the Dentist - T1 Style: Classic Split Layout */}
+      <section className="py-20 px-8 lg:px-16 bg-brand-mainText">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Portrait */}
+            <div className="relative aspect-[4/5] rounded-xl overflow-hidden">
+              <Image
+                src="/images/team/doctor-portrait.png"
+                alt={primaryDoctor.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+
+            {/* Bio Content */}
+            <div>
+              <p className="text-brand-accent uppercase tracking-widest text-sm mb-4">Meet Your Dentist</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-brand-canvas mb-2">
+                {primaryDoctor.name}
+              </h2>
+              <p className="text-brand-canvas/70 text-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-brand-canvas/80 leading-relaxed mb-8">
+                {primaryDoctor.biography}
+              </p>
+
+              {/* Credentials */}
+              <ul className="space-y-3 mb-8">
+                {primaryDoctor.credentials.map((credential, index) => (
+                  <li key={index} className="flex items-start gap-3 text-brand-canvas/80">
+                    <svg className="w-5 h-5 text-brand-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {credential}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Trust Indicators */}
+              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-brand-canvas/20">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-brand-accent">15+</p>
+                  <p className="text-sm text-brand-canvas/60">Years Experience</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-brand-accent">5,000+</p>
+                  <p className="text-sm text-brand-canvas/60">Smiles Created</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-brand-accent">98%</p>
+                  <p className="text-sm text-brand-canvas/60">Patient Satisfaction</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Before/After Showcase - T1 Style: Side by Side Comparison */}
+      <section className="py-20 px-8 lg:px-16 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4 text-center">
+            Real Results, Real Smiles
+          </h2>
+          <p className="text-neutral-muted text-center mb-12 max-w-2xl mx-auto">
+            See the transformative power of our cosmetic dentistry. These results showcase
+            our commitment to creating beautiful, natural-looking smiles.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Before */}
+            <div className="relative">
+              <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-mainText text-brand-canvas text-sm font-semibold rounded-lg">
+                Before
+              </div>
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden border-4 border-neutral-border">
+                <Image
+                  src="/images/cases/smile-before.png"
+                  alt="Before dental treatment"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* After */}
+            <div className="relative">
+              <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-primary text-brand-canvas text-sm font-semibold rounded-lg">
+                After
+              </div>
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden border-4 border-brand-primary">
+                <Image
+                  src="/images/cases/smile-after.png"
+                  alt="After dental treatment"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </div>
+
+          <p className="text-center text-neutral-muted mt-8 text-sm">
+            Porcelain Veneers Case Study • Completed in 2 visits
+          </p>
+        </div>
+      </section>
+
       {/* Secondary Services Section */}
       <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
         <div className="max-w-6xl mx-auto">
@@ -145,55 +258,7 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* NAP Footer Section */}
-      <footer className="py-16 px-8 lg:px-16 bg-brand-mainText text-brand-canvas">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Location NAP */}
-            <div>
-              <h3 className="text-xl font-bold mb-4">{location.practiceNameGBP}</h3>
-              <address className="not-italic text-brand-canvas/80 leading-relaxed">
-                <p>{location.addressGBP}</p>
-                <p>{location.cityServed}, {location.stateServed}</p>
-                <p className="mt-2">
-                  <a
-                    href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                    className="hover:text-brand-accent transition-colors"
-                  >
-                    {location.phoneGBP}
-                  </a>
-                </p>
-              </address>
-            </div>
-
-            {/* Hours */}
-            <div>
-              <h3 className="text-xl font-bold mb-4">Office Hours</h3>
-              <ul className="text-brand-canvas/80 space-y-2">
-                {location.hoursOfOperation.map((hours, index) => (
-                  <li key={index} className="flex justify-between">
-                    <span>{hours.dayRange}</span>
-                    <span>{hours.structuralHours}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Insurance */}
-            <div>
-              <h3 className="text-xl font-bold mb-4">Insurance & Payment</h3>
-              <p className="text-brand-canvas/80 leading-relaxed">
-                {trustSignals.insuranceAcceptedText}
-              </p>
-              {trustSignals.membershipPlanSummary && (
-                <p className="text-brand-canvas/80 leading-relaxed mt-4">
-                  {trustSignals.membershipPlanSummary}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </footer>
+      <T1Footer />
     </div>
   );
 }
