@@ -39,8 +39,8 @@ export default function Template4OrthoPage() {
           <div className="h-full max-w-5xl mx-auto">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <BeforeAfterSlider
-                beforeUrl="/images/cases/smile-before.png"
-                afterUrl="/images/cases/smile-after.png"
+                beforeUrl="/images/cases/smile-before-ortho.png"
+                afterUrl="/images/cases/smile-after-ortho.png"
                 altTag="Orthodontic smile transformation at Summit Orthodontics in Salt Lake City"
                 aspectRatio="16/9"
               />
@@ -310,7 +310,7 @@ export default function Template4OrthoPage() {
                   <span className="text-sm font-semibold text-neutral-muted">Before</span>
                 </div>
                 <Image
-                  src="/images/cases/smile-before.png"
+                  src="/images/cases/smile-before-ortho.png"
                   alt="Before orthodontic treatment"
                   fill
                   className="object-cover"
@@ -322,7 +322,7 @@ export default function Template4OrthoPage() {
                   <span className="text-sm font-semibold text-brand-canvas">After</span>
                 </div>
                 <Image
-                  src="/images/cases/smile-after.png"
+                  src="/images/cases/smile-after-ortho.png"
                   alt="After orthodontic treatment - stunning smile"
                   fill
                   className="object-cover"
