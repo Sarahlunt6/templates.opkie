@@ -159,14 +159,17 @@ export default function Template2Page() {
         </div>
       </section>
 
-      {/* Premium Services - Tech Style */}
-      <section className="py-20 px-8 bg-brand-canvas border-t border-neutral-border">
+      {/* Premium Services - Dark Tech Style */}
+      <section className="py-20 px-8 bg-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-3">
+              Digital Precision
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
               Advanced Treatment Solutions
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-slate-400 max-w-2xl mx-auto">
               Cutting-edge procedures powered by digital precision for optimal outcomes.
             </p>
           </div>
@@ -174,87 +177,55 @@ export default function Template2Page() {
             {[
               {
                 title: "Invisalign",
-                description: "AI-powered clear aligner therapy with real-time progress tracking and predictable results.",
-                icon: (
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                ),
+                description: "AI-powered clear aligner therapy with real-time progress tracking.",
+                icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
               },
               {
                 title: "Dental Implants",
-                description: "3D-guided implant placement with same-day digital crowns for permanent restoration.",
-                icon: (
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                ),
+                description: "3D-guided implant placement with same-day digital crowns.",
+                icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
               },
               {
-                title: "Full Mouth Restoration",
-                description: "Comprehensive digital treatment planning for complete smile reconstruction.",
-                icon: (
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                ),
+                title: "Full Restoration",
+                description: "Comprehensive digital treatment planning for complete reconstruction.",
+                icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15",
               },
               {
                 title: "Porcelain Veneers",
-                description: "Digital smile design with CAD/CAM precision for natural, lasting aesthetics.",
-                icon: (
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                  </svg>
-                ),
+                description: "Digital smile design with CAD/CAM precision for lasting aesthetics.",
+                icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
               },
             ].map((service, index) => (
               <div
                 key={index}
-                className="group p-6 bg-brand-canvas border border-neutral-border rounded-xl hover:border-brand-primary hover:shadow-lg transition-all"
+                className="group p-6 bg-slate-800/50 border border-slate-700 rounded-xl hover:border-brand-primary/50 hover:bg-slate-800 transition-all"
               >
-                <div className="w-14 h-14 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-4 group-hover:bg-brand-primary group-hover:text-brand-canvas transition-all">
-                  {service.icon}
+                <div className="w-12 h-12 rounded-lg bg-brand-primary/20 flex items-center justify-center mb-4">
+                  <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
+                  </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-brand-mainText mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   {service.title}
                 </h3>
-                <p className="text-sm text-neutral-muted leading-relaxed mb-4">
+                <p className="text-sm text-slate-400 leading-relaxed">
                   {service.description}
                 </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary hover:gap-2 transition-all"
-                >
-                  Learn More
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Trust Indicators - Tech Dashboard Style */}
-      <section className="py-12 px-8 bg-brand-canvas border-y border-neutral-border">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* Stats Row */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: "99.2%", label: "Treatment Accuracy", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { value: "24hr", label: "Digital Turnaround", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { value: "3D", label: "Imaging Technology", icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" },
-              { value: "500+", label: "Digital Restorations", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
+              { value: "99.2%", label: "Treatment Accuracy" },
+              { value: "24hr", label: "Digital Turnaround" },
+              { value: "3D", label: "Imaging Technology" },
+              { value: "500+", label: "Digital Restorations" },
             ].map((stat, index) => (
-              <div key={index} className="p-6 rounded-xl bg-brand-primary/5 border border-brand-primary/10 text-center">
-                <div className="w-10 h-10 rounded-lg bg-brand-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={stat.icon} />
-                  </svg>
-                </div>
-                <p className="text-2xl font-bold text-brand-primary mb-1">{stat.value}</p>
-                <p className="text-sm text-neutral-muted">{stat.label}</p>
+              <div key={index} className="text-center">
+                <p className="text-3xl font-bold text-brand-primary mb-1">{stat.value}</p>
+                <p className="text-sm text-slate-400">{stat.label}</p>
               </div>
             ))}
           </div>
