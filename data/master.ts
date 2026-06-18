@@ -186,22 +186,22 @@ export const sampleReviews: ReviewData[] = [
 export const sampleBeforeAfterCases: BeforeAfterCase[] = [
   {
     id: "case-001",
-    beforeUrl: "/images/cases/veneers-before-placeholder.jpg",
-    afterUrl: "/images/cases/veneers-after-placeholder.jpg",
+    beforeUrl: "/images/cases/smile-before.png",
+    afterUrl: "/images/cases/smile-after.png",
     procedureType: "Porcelain Veneers",
     altTag: "Porcelain veneers smile transformation",
   },
   {
     id: "case-002",
-    beforeUrl: "/images/cases/whitening-before-placeholder.jpg",
-    afterUrl: "/images/cases/whitening-after-placeholder.jpg",
+    beforeUrl: "/images/cases/smile-before.png",
+    afterUrl: "/images/cases/smile-after.png",
     procedureType: "Professional Whitening",
     altTag: "Professional teeth whitening results",
   },
   {
     id: "case-003",
-    beforeUrl: "/images/cases/invisalign-before-placeholder.jpg",
-    afterUrl: "/images/cases/invisalign-after-placeholder.jpg",
+    beforeUrl: "/images/cases/smile-before.png",
+    afterUrl: "/images/cases/smile-after.png",
     procedureType: "Invisalign Treatment",
     altTag: "Invisalign orthodontic alignment results",
   },
