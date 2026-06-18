@@ -15,7 +15,7 @@ export default function T5Nav() {
   const location = clientMasterData.locations[0];
 
   return (
-    <header className="sticky top-[88px] z-50 bg-brand-canvas border-b border-neutral-border">
+    <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
       <div className="max-w-4xl mx-auto px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo / Practice Name - Minimal */}
