@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import { ReviewMatrix } from "@/components/dental";
 
@@ -39,11 +40,17 @@ export default function Template3Page() {
     <div className="font-sans">
       {/* Hero Section - Wide Background with Family Focus */}
       <section className="relative min-h-[80vh] flex items-center">
-        {/* Background Image Placeholder */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 to-brand-accent/70">
-          <div className="absolute inset-0 flex items-center justify-center opacity-10">
-            <span className="text-[200px] font-bold text-brand-canvas">[Family Image]</span>
-          </div>
+        {/* Background Team Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/team/staff-photo.jpg"
+            alt={`Our caring dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 to-brand-accent/70" />
         </div>
 
         {/* Content */}

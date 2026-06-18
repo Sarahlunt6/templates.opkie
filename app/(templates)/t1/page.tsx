@@ -88,18 +88,22 @@ export default function Template1Page() {
           </div>
         </div>
 
-        {/* Right: Doctor Portrait */}
-        <div className="relative min-h-[400px] lg:min-h-0 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center p-8">
-              <div className="w-64 h-80 bg-neutral-border/30 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                <span className="text-neutral-muted">[Doctor Portrait]</span>
-              </div>
-              <p className="text-lg font-semibold text-brand-mainText">
-                {primaryDoctor.name}
-              </p>
-              <p className="text-sm text-neutral-muted">{primaryDoctor.role}</p>
-            </div>
+        {/* Right: Team Photo */}
+        <div className="relative min-h-[400px] lg:min-h-0">
+          <Image
+            src="/images/team/staff-photo.jpg"
+            alt={`Dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-mainText/60 via-transparent to-transparent" />
+          <div className="absolute bottom-8 left-8 right-8">
+            <p className="text-lg font-semibold text-white">
+              Our Expert Team
+            </p>
+            <p className="text-sm text-white/80">Dedicated to your smile</p>
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { clientMasterData, sampleReviews, sampleBeforeAfterCases } from "@/data/master";
 import { BeforeAfterSlider, ReviewMatrix } from "@/components/dental";
 
@@ -176,8 +177,18 @@ export default function Template4Page() {
       </section>
 
       {/* Consultation CTA */}
-      <section className="py-20 px-8 bg-brand-primary">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 px-8 bg-brand-primary relative overflow-hidden">
+        {/* Background Team Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/team/staff-photo.jpg"
+            alt={`Our cosmetic dentistry team at ${clientMasterData.globalPracticeName}`}
+            fill
+            className="object-cover opacity-20"
+            sizes="100vw"
+          />
+        </div>
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-brand-canvas mb-4">
             Ready for Your Transformation?
           </h2>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import { ReviewMatrix } from "@/components/dental";
 
@@ -16,6 +17,17 @@ export default function Template2Page() {
     <div className="font-sans">
       {/* Hero Section - Centered Canvas */}
       <section className="min-h-[80vh] flex flex-col items-center justify-center px-8 py-20 bg-brand-canvas relative overflow-hidden">
+        {/* Background Team Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/team/staff-photo.jpg"
+            alt={`Our dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
+            fill
+            className="object-cover opacity-10"
+            sizes="100vw"
+            priority
+          />
+        </div>
         {/* Background Grid Pattern */}
         <div
           className="absolute inset-0 opacity-5"

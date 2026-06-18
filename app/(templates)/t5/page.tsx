@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import { ReviewMatrix } from "@/components/dental";
 
@@ -143,9 +144,15 @@ export default function Template5Page() {
       <section className="py-24 px-8 bg-brand-canvas">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            {/* Portrait Placeholder */}
-            <div className="aspect-[3/4] bg-gradient-to-b from-brand-primary/5 to-brand-accent/5 rounded-sm flex items-center justify-center">
-              <span className="text-neutral-muted">[Portrait]</span>
+            {/* Doctor Portrait */}
+            <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
+              <Image
+                src="/images/team/doctor-portrait.png"
+                alt={`${primaryDoctor.name} at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
 
             {/* Bio */}
