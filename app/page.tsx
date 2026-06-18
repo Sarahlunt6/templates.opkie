@@ -32,14 +32,14 @@ export default function HomePage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Template Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center max-w-5xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
           {templates.map((template, index) => (
             <a
               key={template.id}
               href={`/${template.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative bg-white rounded-xl overflow-hidden ring-1 ring-slate-200 hover:ring-slate-300 hover:shadow-lg transition-all duration-300"
+              className="group relative bg-white rounded-xl overflow-hidden ring-1 ring-slate-200 hover:ring-slate-300 hover:shadow-lg transition-all duration-300 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
             >
               {/* Template Preview Image */}
               <div className="aspect-[4/3] bg-slate-100 relative overflow-hidden">
