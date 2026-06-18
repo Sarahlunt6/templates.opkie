@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews, sampleBeforeAfterCases } from "@/data/master";
-import { BeforeAfterSlider, ReviewMatrix } from "@/components/dental";
+import { BeforeAfterSlider } from "@/components/dental";
 import T4Nav from "./components/T4Nav";
 import T4Footer from "./components/T4Footer";
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function Template4Page() {
-  const { trustSignals, doctors } = clientMasterData;
+  const { doctors } = clientMasterData;
   const primaryDoctor = doctors[0];
 
   return (
@@ -367,19 +367,6 @@ export default function Template4Page() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-mainText text-center mb-4">
-            What Our Patients Say
-          </h2>
-          <p className="text-neutral-muted text-center mb-12 max-w-xl mx-auto">
-            Hear from patients who have experienced their own smile transformations.
-          </p>
-          <ReviewMatrix reviews={sampleReviews.slice(0, 3)} columns={3} />
         </div>
       </section>
 

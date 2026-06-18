@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
-import { ReviewMatrix } from "@/components/dental";
 import T2Nav from "./components/T2Nav";
 import T2Footer from "./components/T2Footer";
 
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function Template2Page() {
-  const { trustSignals, doctors } = clientMasterData;
+  const { doctors } = clientMasterData;
   const primaryDoctor = doctors[0];
 
   return (
@@ -458,16 +457,6 @@ export default function Template2Page() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="py-20 px-8 bg-gradient-to-b from-brand-canvas to-brand-primary/5">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-mainText text-center mb-12">
-            Verified Patient Reviews
-          </h2>
-          <ReviewMatrix reviews={sampleReviews.slice(0, 3)} columns={3} />
         </div>
       </section>
 

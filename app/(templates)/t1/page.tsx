@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
-import { ReviewMatrix } from "@/components/dental";
 import T1Nav from "./components/T1Nav";
 import T1Footer from "./components/T1Footer";
 
@@ -303,6 +302,36 @@ export default function Template1Page() {
         </div>
       </section>
 
+      {/* Patient Testimonials */}
+      <section className="py-20 px-8 lg:px-16 bg-slate-800">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-sky-400 uppercase tracking-widest text-sm mb-4">Patient Stories</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              Hear From Our Patients
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Real experiences from patients who have transformed their smiles with us.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {sampleReviews.slice(0, 3).map((review, index) => (
+              <div key={index} className="bg-slate-700/50 p-8 rounded-xl border border-slate-600">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-300 leading-relaxed mb-6 italic">&ldquo;{review.reviewText}&rdquo;</p>
+                <p className="text-white font-semibold">{review.reviewerName}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Secondary Services Section */}
       <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
         <div className="max-w-6xl mx-auto">
@@ -374,20 +403,6 @@ export default function Template1Page() {
               Get Directions
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Reviews Section */}
-      <section className="py-20 px-8 lg:px-16 bg-gradient-to-b from-brand-canvas to-brand-primary/5">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4 text-center">
-            What Our Patients Say
-          </h2>
-          <p className="text-neutral-muted text-center mb-12 max-w-2xl mx-auto">
-            Read verified reviews from real patients who have experienced our commitment
-            to exceptional dental care.
-          </p>
-          <ReviewMatrix reviews={sampleReviews.slice(0, 3)} columns={3} />
         </div>
       </section>
 
@@ -518,39 +533,6 @@ export default function Template1Page() {
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Kind Words - Testimonials with Stars */}
-      <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-            <div className="lg:col-span-1">
-              <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText leading-tight mb-6">
-                Kind Words From Our Patients
-              </h2>
-              <div className="flex items-center gap-2 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-sm text-neutral-muted font-medium">5 Star</p>
-              <p className="text-sm text-brand-primary font-semibold">reviews</p>
-            </div>
-
-            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {sampleReviews.slice(0, 3).map((review, index) => (
-                <div key={index} className="p-6 rounded-xl bg-neutral-border/20 border border-neutral-border">
-                  <p className="text-brand-mainText leading-relaxed mb-6">{review.reviewText}</p>
-                  <div className="border-t border-neutral-border pt-4">
-                    <p className="text-sm font-semibold text-brand-mainText">- {review.reviewerName}</p>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>

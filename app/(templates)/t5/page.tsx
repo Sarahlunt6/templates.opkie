@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
-import { ReviewMatrix } from "@/components/dental";
 import T5Nav from "./components/T5Nav";
 import T5Footer from "./components/T5Footer";
 
