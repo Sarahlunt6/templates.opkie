@@ -18,50 +18,116 @@ export default function Template5Page() {
   return (
     <div className="font-sans">
       <T5Nav />
-      {/* Hero Section - Zen Minimalist */}
-      <section className="min-h-[85vh] flex flex-col items-center justify-center px-8 py-20 bg-brand-canvas relative">
-        {/* Subtle Background */}
-        <div className="absolute inset-0 opacity-[0.02]">
+      {/* Hero Section - Zen with Visual Interest */}
+      <section className="min-h-[90vh] flex items-center px-8 py-20 bg-brand-canvas relative overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-[0.03]">
           <div className="h-full w-full" style={{
             backgroundImage: `radial-gradient(circle at center, var(--primary-brand) 1px, transparent 1px)`,
-            backgroundSize: "32px 32px"
+            backgroundSize: "40px 40px"
           }} />
         </div>
 
-        {/* Centered Content */}
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          {/* Practice Name */}
-          <p className="text-sm uppercase tracking-[0.3em] text-neutral-muted mb-8">
-            {clientMasterData.globalPracticeName}
-          </p>
+        {/* Decorative Elements */}
+        <div className="absolute top-20 right-20 w-64 h-64 bg-brand-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-48 h-48 bg-brand-accent/5 rounded-full blur-3xl" />
 
-          {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-brand-mainText leading-tight mb-8">
-            Oral Wellness,
-            <br />
-            <span className="font-normal">Thoughtfully Designed</span>
-          </h1>
+        <div className="relative z-10 max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Content */}
+            <div className="order-2 lg:order-1">
+              {/* Practice Name Badge */}
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-primary/5 border border-brand-primary/10 mb-8">
+                <div className="w-2 h-2 rounded-full bg-brand-primary" />
+                <p className="text-xs uppercase tracking-[0.2em] text-brand-primary font-medium">
+                  {clientMasterData.globalPracticeName}
+                </p>
+              </div>
 
-          {/* Divider */}
-          <div className="w-16 h-px bg-brand-primary mx-auto mb-8" />
+              {/* Main Headline */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-brand-mainText leading-[1.1] mb-6">
+                Oral Wellness,
+                <br />
+                <span className="font-normal text-brand-primary">Thoughtfully Designed</span>
+              </h1>
 
-          {/* Philosophy Statement */}
-          <p className="text-lg md:text-xl text-neutral-muted leading-relaxed mb-12 max-w-2xl mx-auto">
-            We believe exceptional dental care extends beyond treatment. Our holistic approach
-            considers your complete wellbeing, creating a personalized path to lasting oral health
-            in the heart of {location.cityServed}.
-          </p>
+              {/* Decorative Line */}
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-px bg-brand-primary" />
+                <span className="text-xs uppercase tracking-[0.15em] text-neutral-muted">Holistic Care</span>
+              </div>
 
-          {/* Minimal CTA */}
-          <a
-            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="inline-flex items-center gap-3 text-brand-primary font-medium hover:gap-4 transition-all"
-          >
-            <span>Schedule a Private Consultation</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+              {/* Philosophy Statement */}
+              <p className="text-lg text-neutral-muted leading-relaxed mb-10 max-w-lg">
+                We believe exceptional dental care extends beyond treatment. Our holistic approach
+                considers your complete wellbeing, creating a personalized path to lasting oral health
+                in the heart of {location.cityServed}.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-medium rounded-sm hover:brightness-110 transition-all"
+                >
+                  <span>Schedule Consultation</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+                <a
+                  href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                  className="inline-flex items-center gap-2 text-brand-mainText font-medium hover:text-brand-primary transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span>{location.phoneGBP}</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right: Image Composition */}
+            <div className="order-1 lg:order-2 relative">
+              {/* Main Image - Office Interior */}
+              <div className="relative aspect-[4/5] rounded-sm overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/office-interior.jpg"
+                  alt={`${clientMasterData.globalPracticeName} serene dental office interior`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+                {/* Subtle overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-mainText/30 via-transparent to-transparent" />
+              </div>
+
+              {/* Floating Stats Card */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-sm shadow-xl p-6 border border-neutral-border">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-light text-brand-mainText">100%</p>
+                    <p className="text-xs uppercase tracking-wider text-neutral-muted">Patient-Centered</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Experience Badge */}
+              <div className="absolute -top-4 -right-4 bg-brand-primary text-white rounded-sm shadow-xl px-6 py-4">
+                <p className="text-3xl font-light">15+</p>
+                <p className="text-xs uppercase tracking-wider text-white/80">Years Experience</p>
+              </div>
+
+              {/* Decorative frame accent */}
+              <div className="absolute -z-10 top-8 left-8 right-8 bottom-8 border border-brand-primary/20 rounded-sm" />
+            </div>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
