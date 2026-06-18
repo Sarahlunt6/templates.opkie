@@ -112,6 +112,64 @@ export default function Template1Page() {
         </div>
       </section>
 
+      {/* Premium Services */}
+      <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+              Premium Dental Services
+            </h2>
+            <p className="text-neutral-muted max-w-2xl mx-auto">
+              Transform your smile with our most sought-after treatments, delivered with precision and artistry.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Invisalign",
+                description: "Straighten your teeth discreetly with clear aligners custom-made for your smile.",
+                icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+              },
+              {
+                title: "Dental Implants",
+                description: "Permanent tooth replacement that looks, feels, and functions like natural teeth.",
+                icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+              },
+              {
+                title: "Full Mouth Restoration",
+                description: "Complete smile reconstruction combining multiple treatments for optimal results.",
+                icon: "M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z",
+              },
+              {
+                title: "Porcelain Veneers",
+                description: "Custom-crafted shells that create a flawless, natural-looking smile makeover.",
+                icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+              },
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="group p-6 bg-brand-canvas border border-neutral-border rounded-xl hover:border-brand-primary hover:shadow-lg transition-all"
+              >
+                <div className="w-12 h-12 rounded-lg bg-brand-primary/10 flex items-center justify-center mb-4 group-hover:bg-brand-primary/20 transition-colors">
+                  <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-brand-mainText mb-2">{service.title}</h3>
+                <p className="text-sm text-neutral-muted leading-relaxed">{service.description}</p>
+                <a href="#" className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-brand-primary hover:gap-2 transition-all">
+                  Learn More
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Meet the Dentist - T1 Style: Classic Split Layout */}
       <section className="py-20 px-8 lg:px-16 bg-slate-800">
         <div className="max-w-6xl mx-auto">

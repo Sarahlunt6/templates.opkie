@@ -57,6 +57,71 @@ export default function Template4Page() {
         </div>
       </section>
 
+      {/* Premium Services - Cosmetic/Luxury Style */}
+      <section className="py-20 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              Signature Treatments
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+              Our Most Sought-After Transformations
+            </h2>
+            <p className="text-neutral-muted max-w-2xl mx-auto">
+              Each procedure is artfully crafted to enhance your natural beauty with stunning, lasting results.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Porcelain Veneers",
+                description: "Ultra-thin, custom-crafted shells that transform your smile with Hollywood-quality aesthetics.",
+                tag: "Most Popular",
+              },
+              {
+                title: "Invisalign",
+                description: "Invisible orthodontics for the modern patient. Straighten your teeth without compromising your look.",
+                tag: "Clear Aligners",
+              },
+              {
+                title: "Full Mouth Restoration",
+                description: "Comprehensive smile reconstruction combining multiple procedures for total transformation.",
+                tag: "Complete Makeover",
+              },
+              {
+                title: "Dental Implants",
+                description: "Premium titanium implants with lifelike ceramic crowns. The gold standard in tooth replacement.",
+                tag: "Permanent Solution",
+              },
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="group relative p-6 bg-brand-canvas border border-neutral-border rounded-2xl hover:border-brand-primary hover:shadow-xl transition-all"
+              >
+                <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-brand-primary/10 text-brand-primary mb-4">
+                  {service.tag}
+                </span>
+                <h3 className="text-lg font-bold text-brand-mainText mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-neutral-muted leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary hover:gap-3 transition-all"
+                >
+                  View Gallery
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trust Indicators - Cosmetic/Luxury Style */}
       <section className="py-12 px-8 bg-slate-800">
         <div className="max-w-6xl mx-auto">

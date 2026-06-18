@@ -6,9 +6,16 @@ import { clientMasterData } from "@/data/master";
 const navLinks = [
   { href: "#", label: "Home" },
   { href: "#", label: "Technology" },
-  { href: "#", label: "Services" },
   { href: "#", label: "About" },
   { href: "#", label: "Contact" },
+];
+
+const serviceLinks = [
+  { href: "#", label: "Invisalign", description: "Clear aligner therapy" },
+  { href: "#", label: "Dental Implants", description: "Permanent tooth replacement" },
+  { href: "#", label: "Cosmetic Dentistry", description: "Veneers, bonding & whitening" },
+  { href: "#", label: "General Dentistry", description: "Cleanings, fillings & exams" },
+  { href: "#", label: "Emergency Care", description: "Same-day urgent treatment" },
 ];
 
 export default function T2Nav() {
@@ -30,7 +37,44 @@ export default function T2Nav() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            <a
+              href="#"
+              className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-primary rounded-lg transition-colors"
+            >
+              Home
+            </a>
+            <a
+              href="#"
+              className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-primary rounded-lg transition-colors"
+            >
+              Technology
+            </a>
+
+            {/* Services Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-primary rounded-lg transition-colors">
+                Services
+                <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="w-64 bg-brand-canvas rounded-xl shadow-xl border border-neutral-border py-2">
+                  {serviceLinks.map((service) => (
+                    <a
+                      key={service.label}
+                      href={service.href}
+                      className="block px-4 py-3 hover:bg-brand-primary/5 transition-colors"
+                    >
+                      <span className="block text-sm font-medium text-brand-mainText">{service.label}</span>
+                      <span className="block text-xs text-neutral-muted mt-0.5">{service.description}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {navLinks.slice(2).map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -66,8 +110,33 @@ function MobileMenu() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </summary>
-        <div className="absolute right-0 top-full mt-2 w-48 bg-brand-canvas rounded-xl shadow-xl border border-neutral-border py-2 z-50">
-          {navLinks.map((link) => (
+        <div className="absolute right-0 top-full mt-2 w-64 bg-brand-canvas rounded-xl shadow-xl border border-neutral-border py-2 z-50">
+          <a href="#" className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-colors">
+            Home
+          </a>
+          <a href="#" className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-colors">
+            Technology
+          </a>
+          <details className="group">
+            <summary className="list-none cursor-pointer px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-colors flex items-center justify-between">
+              Services
+              <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div className="bg-brand-primary/5 py-1">
+              {serviceLinks.map((service) => (
+                <a
+                  key={service.label}
+                  href={service.href}
+                  className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+                >
+                  {service.label}
+                </a>
+              ))}
+            </div>
+          </details>
+          {navLinks.slice(2).map((link) => (
             <a
               key={link.label}
               href={link.href}

@@ -73,6 +73,72 @@ export default function Template5Page() {
         </div>
       </section>
 
+      {/* Premium Services - Minimal/Zen Style */}
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+              Signature Services
+            </p>
+            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+              Thoughtful Care, Exceptional Results
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Invisalign",
+                description: "Discreet alignment therapy that works with your lifestyle. Clear, comfortable, and precisely planned.",
+                number: "01",
+              },
+              {
+                title: "Dental Implants",
+                description: "Biocompatible tooth restoration that honors your body's natural processes. Permanent and lasting.",
+                number: "02",
+              },
+              {
+                title: "Holistic Restorations",
+                description: "Mercury-free, metal-free dentistry using only the most biocompatible materials for your health.",
+                number: "03",
+              },
+              {
+                title: "Cosmetic Enhancements",
+                description: "Subtle, natural improvements that enhance rather than transform. Authentic beauty, refined.",
+                number: "04",
+              },
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="group py-8 border-b border-neutral-border hover:border-brand-primary transition-colors"
+              >
+                <div className="flex items-start gap-6">
+                  <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm font-light text-brand-primary">{service.number}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-brand-mainText mb-2 group-hover:text-brand-primary transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-neutral-muted leading-relaxed mb-3">
+                      {service.description}
+                    </p>
+                    <a
+                      href="#"
+                      className="inline-flex items-center gap-2 text-sm text-brand-primary hover:gap-3 transition-all"
+                    >
+                      <span>Explore</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trust Indicators - Minimal/Zen Style */}
       <section className="py-16 px-8 bg-brand-canvas border-y border-neutral-border">
         <div className="max-w-4xl mx-auto">

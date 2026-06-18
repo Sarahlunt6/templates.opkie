@@ -54,16 +54,16 @@ export default function Template3Page() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 to-brand-accent/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         </div>
 
         {/* Content */}
         <div className="relative z-10 w-full px-8 lg:px-16 py-20">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-canvas leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
               {location.primaryCategoryGBP} in {location.cityServed}
             </h1>
-            <p className="text-xl text-brand-canvas/90 leading-relaxed mb-8 max-w-xl">
+            <p className="text-xl text-gray-100 leading-relaxed mb-8 max-w-xl drop-shadow">
               Where every smile matters and every patient feels like family. Experience
               gentle, compassionate dental care designed for comfort at every age.
             </p>
@@ -71,7 +71,7 @@ export default function Template3Page() {
             <div className="flex flex-wrap gap-4">
               <a
                 href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-canvas text-brand-primary font-semibold hover:shadow-lg transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-lg transition-all"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
@@ -81,7 +81,7 @@ export default function Template3Page() {
               {clientMasterData.onlineBookingUrl !== "none" && (
                 <a
                   href={clientMasterData.onlineBookingUrl}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-brand-canvas text-brand-canvas font-semibold hover:bg-brand-canvas hover:text-brand-primary transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-teal-700 transition-all"
                 >
                   Schedule a Visit
                 </a>
@@ -112,6 +112,66 @@ export default function Template3Page() {
           </div>
         </div>
       )}
+
+      {/* Premium Services - Family Friendly Style */}
+      <section className="py-20 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+              Popular Services for Your Family
+            </h2>
+            <p className="text-neutral-muted max-w-2xl mx-auto">
+              Trusted treatments delivered with gentle care for patients of all ages.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Invisalign",
+                description: "Clear aligners for teens and adults. Straighten teeth comfortably without metal braces.",
+                emoji: "😁",
+              },
+              {
+                title: "Dental Implants",
+                description: "Permanent tooth replacement that looks and feels natural. Restore your confident smile.",
+                emoji: "🦷",
+              },
+              {
+                title: "Pediatric Dentistry",
+                description: "Kid-friendly dental care that makes visits fun. Building healthy habits early.",
+                emoji: "👶",
+              },
+              {
+                title: "Emergency Care",
+                description: "Same-day appointments for urgent dental needs. We're here when you need us most.",
+                emoji: "🏥",
+              },
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="group p-6 bg-brand-canvas border border-neutral-border rounded-2xl hover:border-brand-primary hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-4xl mb-4">{service.emoji}</div>
+                <h3 className="text-lg font-semibold text-brand-mainText mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-neutral-muted leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary hover:gap-2 transition-all"
+                >
+                  Learn More
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Trust Badges - Family Friendly Style */}
       <section className="py-12 px-8 bg-brand-canvas">
