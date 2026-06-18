@@ -21,8 +21,27 @@ export default function Template1Page() {
 
       {/* Hero Section - 50/50 Split */}
       <section className="min-h-[80vh] grid grid-cols-1 lg:grid-cols-2">
-        {/* Left: Content */}
-        <div className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-brand-canvas">
+        {/* Left: Team Photo */}
+        <div className="relative min-h-[400px] lg:min-h-0 order-2 lg:order-1">
+          <Image
+            src="/images/team/staff-photo.jpg"
+            alt={`Dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
+            fill
+            className="object-cover object-top"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-mainText/60 via-transparent to-transparent" />
+          <div className="absolute bottom-8 left-8 right-8">
+            <p className="text-lg font-semibold text-white">
+              Our Expert Team
+            </p>
+            <p className="text-sm text-white/80">Dedicated to your smile</p>
+          </div>
+        </div>
+
+        {/* Right: Content */}
+        <div className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-brand-canvas order-1 lg:order-2">
           {/* Trust Badge Row */}
           <div className="flex flex-wrap items-center gap-4 mb-8">
             <span className="px-4 py-2 text-sm font-semibold rounded-full bg-brand-primary text-brand-canvas">
@@ -106,24 +125,6 @@ export default function Template1Page() {
           </div>
         </div>
 
-        {/* Right: Team Photo */}
-        <div className="relative min-h-[400px] lg:min-h-0">
-          <Image
-            src="/images/team/staff-photo.jpg"
-            alt={`Dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
-            fill
-            className="object-cover object-top"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-mainText/60 via-transparent to-transparent" />
-          <div className="absolute bottom-8 left-8 right-8">
-            <p className="text-lg font-semibold text-white">
-              Our Expert Team
-            </p>
-            <p className="text-sm text-white/80">Dedicated to your smile</p>
-          </div>
-        </div>
       </section>
 
       {/* Welcome Video */}

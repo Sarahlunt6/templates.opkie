@@ -276,22 +276,8 @@ export default function Template3Page() {
       <section className="py-20 px-8 bg-gradient-to-br from-slate-800 to-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Image with elegant border */}
-            <div className="relative">
-              <div className="absolute -inset-4 bg-brand-primary/20 rounded-3xl rotate-3" />
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/team/doctor-portrait.png"
-                  alt={`${primaryDoctor.name}, your friendly family dentist`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
             {/* Bio */}
-            <div className="text-white">
+            <div className="text-white order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-sm font-medium mb-4">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -319,6 +305,20 @@ export default function Template3Page() {
                     {credential}
                   </span>
                 ))}
+              </div>
+            </div>
+
+            {/* Image with elegant border */}
+            <div className="relative order-1 lg:order-2">
+              <div className="absolute -inset-4 bg-brand-primary/20 rounded-3xl rotate-3" />
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/team/doctor-portrait.png"
+                  alt={`${primaryDoctor.name}, your friendly family dentist`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
