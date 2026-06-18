@@ -29,7 +29,7 @@ export default function T4Nav() {
           {/* Logo */}
           <Link href="/t4" className="flex items-center">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo-dental.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}

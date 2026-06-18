@@ -21,7 +21,7 @@ export default function T3Footer() {
           {/* Practice Info */}
           <div>
             <Image
-              src="/images/logo.webp"
+              src="/images/logo-dental.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}

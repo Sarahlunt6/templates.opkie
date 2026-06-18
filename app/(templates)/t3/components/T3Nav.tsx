@@ -29,7 +29,7 @@ export default function T3Nav() {
           {/* Logo */}
           <Link href="/t3" className="flex items-center">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo-dental.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}

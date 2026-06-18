@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { clientMasterDataOrtho } from "@/data/master-ortho";
 
 const navLinks = [
   { href: "#", label: "Home" },
@@ -12,24 +12,24 @@ const navLinks = [
 ];
 
 const serviceLinks = [
+  { href: "#", label: "Traditional Braces", description: "Metal & ceramic options" },
   { href: "#", label: "Invisalign", description: "Clear aligner therapy" },
-  { href: "#", label: "Dental Implants", description: "Permanent tooth replacement" },
-  { href: "#", label: "Cosmetic Dentistry", description: "Veneers, bonding & whitening" },
-  { href: "#", label: "General Dentistry", description: "Cleanings, fillings & exams" },
-  { href: "#", label: "Emergency Care", description: "Same-day urgent treatment" },
+  { href: "#", label: "Teen Orthodontics", description: "Braces for adolescents" },
+  { href: "#", label: "Adult Orthodontics", description: "It's never too late" },
+  { href: "#", label: "Early Treatment", description: "Phase 1 interceptive care" },
 ];
 
-export default function T1Nav() {
-  const location = clientMasterData.locations[0];
+export default function T1OrthoNav() {
+  const location = clientMasterDataOrtho.locations[0];
 
   return (
     <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
       <div className="max-w-6xl mx-auto px-8 lg:px-16">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/t1" className="flex items-center">
+          <Link href="/t1-ortho" className="flex items-center">
             <Image
-              src="/images/logo-dental.png"
+              src="/images/logo-ortho.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}
@@ -50,7 +50,7 @@ export default function T1Nav() {
             {/* Services Dropdown */}
             <div className="relative group">
               <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/10 rounded-lg transition-colors">
-                Services
+                Treatments
                 <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -113,7 +113,7 @@ function MobileMenu() {
           </a>
           <details className="group">
             <summary className="list-none cursor-pointer px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/5 transition-colors flex items-center justify-between">
-              Services
+              Treatments
               <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>

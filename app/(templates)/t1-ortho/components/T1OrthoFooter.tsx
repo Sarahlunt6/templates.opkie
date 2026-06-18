@@ -1,18 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { clientMasterDataOrtho } from "@/data/master-ortho";
 
 const footerLinks = [
   { href: "#", label: "Home" },
-  { href: "#", label: "Services" },
+  { href: "#", label: "Treatments" },
   { href: "#", label: "About Us" },
   { href: "#", label: "Reviews" },
   { href: "#", label: "Contact" },
 ];
 
-export default function T1Footer() {
-  const location = clientMasterData.locations[0];
-  const { trustSignals } = clientMasterData;
+export default function T1OrthoFooter() {
+  const location = clientMasterDataOrtho.locations[0];
+  const { trustSignals } = clientMasterDataOrtho;
 
   return (
     <footer className="py-16 px-8 lg:px-16 bg-slate-800 text-white">
@@ -21,7 +21,7 @@ export default function T1Footer() {
           {/* Location NAP */}
           <div>
             <Image
-              src="/images/logo-dental.png"
+              src="/images/logo-ortho.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}

@@ -1,18 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { clientMasterDataOrtho } from "@/data/master-ortho";
 
 const footerLinks = [
   { href: "#", label: "Home" },
   { href: "#", label: "Technology" },
-  { href: "#", label: "Services" },
+  { href: "#", label: "Treatments" },
   { href: "#", label: "About" },
   { href: "#", label: "Contact" },
 ];
 
-export default function T2Footer() {
-  const location = clientMasterData.locations[0];
-  const { trustSignals } = clientMasterData;
+export default function T2OrthoFooter() {
+  const location = clientMasterDataOrtho.locations[0];
+  const { trustSignals } = clientMasterDataOrtho;
 
   return (
     <footer className="py-12 px-8 bg-slate-800">
@@ -20,7 +20,7 @@ export default function T2Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <Image
-              src="/images/logo-dental.png"
+              src="/images/logo-ortho.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}
@@ -52,10 +52,10 @@ export default function T2Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-3">Insurance</h4>
+            <h4 className="font-semibold text-white mb-3">Insurance & Financing</h4>
             <p className="text-gray-300 text-sm">{trustSignals.insuranceAcceptedText}</p>
             <a
-              href={clientMasterData.onlineBookingUrl}
+              href={clientMasterDataOrtho.onlineBookingUrl}
               className="inline-block mt-4 px-5 py-2.5 rounded-lg bg-brand-primary text-white font-semibold text-sm hover:brightness-110 transition-all"
             >
               Book Online

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { clientMasterDataOrtho } from "@/data/master-ortho";
 
 const navLinks = [
   { href: "#", label: "Home" },
@@ -13,27 +13,27 @@ const navLinks = [
 
 const serviceLinks = [
   { href: "#", label: "Invisalign", description: "Clear aligner therapy" },
-  { href: "#", label: "Dental Implants", description: "Permanent tooth replacement" },
-  { href: "#", label: "Cosmetic Dentistry", description: "Veneers, bonding & whitening" },
-  { href: "#", label: "Holistic Dentistry", description: "Natural, biocompatible care" },
-  { href: "#", label: "Restorative Care", description: "Crowns, bridges & fillings" },
+  { href: "#", label: "Traditional Braces", description: "Time-tested solutions" },
+  { href: "#", label: "Ceramic Braces", description: "Discreet tooth-colored options" },
+  { href: "#", label: "Early Treatment", description: "Phase 1 interceptive care" },
+  { href: "#", label: "Adult Orthodontics", description: "It's never too late" },
 ];
 
-export default function T5Nav() {
-  const location = clientMasterData.locations[0];
+export default function T5OrthoNav() {
+  const location = clientMasterDataOrtho.locations[0];
 
   return (
     <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
       <div className="max-w-4xl mx-auto px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/t5" className="flex items-center">
+          <Link href="/t5-ortho" className="flex items-center">
             <Image
-              src="/images/logo-dental.png"
-              alt={clientMasterData.globalPracticeName}
+              src="/images/logo-ortho.png"
+              alt={clientMasterDataOrtho.globalPracticeName}
               width={180}
               height={40}
-              className="h-8 w-auto invert"
+              className="h-8 w-auto"
               priority
             />
           </Link>
@@ -56,7 +56,7 @@ export default function T5Nav() {
             {/* Services Dropdown */}
             <div className="relative group">
               <button className="flex items-center gap-1 text-sm text-neutral-muted hover:text-brand-primary transition-colors">
-                Services
+                Treatments
                 <svg className="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -90,7 +90,7 @@ export default function T5Nav() {
 
           {/* CTA - Minimal */}
           <a
-            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+            href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
             className="hidden md:inline-flex items-center gap-2 text-brand-primary text-sm font-medium hover:gap-3 transition-all"
           >
             <span>Book</span>
@@ -108,7 +108,7 @@ export default function T5Nav() {
 }
 
 function MobileMenu() {
-  const location = clientMasterData.locations[0];
+  const location = clientMasterDataOrtho.locations[0];
 
   return (
     <div className="md:hidden">
@@ -127,7 +127,7 @@ function MobileMenu() {
           </a>
           <details className="group">
             <summary className="list-none cursor-pointer px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors flex items-center justify-between">
-              Services
+              Treatments
               <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
@@ -155,7 +155,7 @@ function MobileMenu() {
           ))}
           <div className="mx-6 my-3 h-px bg-neutral-border" />
           <a
-            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+            href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
             className="block px-6 py-2 text-sm text-brand-primary font-medium"
           >
             Schedule Consultation

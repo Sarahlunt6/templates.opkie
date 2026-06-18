@@ -2,38 +2,38 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { clientMasterDataOrtho } from "@/data/master-ortho";
 
 const navLinks = [
   { href: "#", label: "Home" },
+  { href: "#", label: "Technology" },
   { href: "#", label: "About" },
-  { href: "#", label: "Reviews" },
   { href: "#", label: "Contact" },
 ];
 
 const serviceLinks = [
   { href: "#", label: "Invisalign", description: "Clear aligner therapy" },
-  { href: "#", label: "Dental Implants", description: "Permanent tooth replacement" },
-  { href: "#", label: "Cosmetic Dentistry", description: "Veneers, bonding & whitening" },
-  { href: "#", label: "General Dentistry", description: "Cleanings, fillings & exams" },
-  { href: "#", label: "Emergency Care", description: "Same-day urgent treatment" },
+  { href: "#", label: "Traditional Braces", description: "Metal & ceramic options" },
+  { href: "#", label: "Teen Orthodontics", description: "Braces designed for teens" },
+  { href: "#", label: "Adult Orthodontics", description: "It's never too late for a great smile" },
+  { href: "#", label: "Early Treatment", description: "Phase 1 interceptive care" },
 ];
 
-export default function T1Nav() {
-  const location = clientMasterData.locations[0];
+export default function T2OrthoNav() {
+  const location = clientMasterDataOrtho.locations[0];
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
-      <div className="max-w-6xl mx-auto px-8 lg:px-16">
+    <header className="sticky top-0 z-50 bg-brand-canvas/95 backdrop-blur-sm border-b border-neutral-border">
+      <div className="max-w-6xl mx-auto px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/t1" className="flex items-center">
+          <Link href="/t2-ortho" className="flex items-center">
             <Image
-              src="/images/logo-dental.png"
+              src="/images/logo-ortho.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}
-              className="h-8 w-auto invert"
+              className="h-8 w-auto"
               priority
             />
           </Link>
@@ -42,15 +42,21 @@ export default function T1Nav() {
           <nav className="hidden md:flex items-center gap-1">
             <a
               href="#"
-              className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/10 rounded-lg transition-colors"
+              className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-primary rounded-lg transition-colors"
             >
               Home
+            </a>
+            <a
+              href="#"
+              className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-primary rounded-lg transition-colors"
+            >
+              Technology
             </a>
 
             {/* Services Dropdown */}
             <div className="relative group">
-              <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/10 rounded-lg transition-colors">
-                Services
+              <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-primary rounded-lg transition-colors">
+                Treatments
                 <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -71,11 +77,11 @@ export default function T1Nav() {
               </div>
             </div>
 
-            {navLinks.slice(1).map((link) => (
+            {navLinks.slice(2).map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/10 rounded-lg transition-colors"
+                className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-primary rounded-lg transition-colors"
               >
                 {link.label}
               </a>
@@ -84,10 +90,10 @@ export default function T1Nav() {
 
           {/* CTA Button */}
           <a
-            href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+            href={clientMasterDataOrtho.onlineBookingUrl}
             className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-primary text-brand-canvas font-semibold text-sm hover:brightness-110 transition-all"
           >
-            {location.phoneGBP}
+            Book Online
           </a>
 
           {/* Mobile Menu */}
@@ -108,12 +114,15 @@ function MobileMenu() {
           </svg>
         </summary>
         <div className="absolute right-0 top-full mt-2 w-64 bg-brand-canvas rounded-xl shadow-xl border border-neutral-border py-2 z-50">
-          <a href="#" className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/5 transition-colors">
+          <a href="#" className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-colors">
             Home
           </a>
+          <a href="#" className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-colors">
+            Technology
+          </a>
           <details className="group">
-            <summary className="list-none cursor-pointer px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/5 transition-colors flex items-center justify-between">
-              Services
+            <summary className="list-none cursor-pointer px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-colors flex items-center justify-between">
+              Treatments
               <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
@@ -123,22 +132,29 @@ function MobileMenu() {
                 <a
                   key={service.label}
                   href={service.href}
-                  className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-mainText transition-colors"
+                  className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors"
                 >
                   {service.label}
                 </a>
               ))}
             </div>
           </details>
-          {navLinks.slice(1).map((link) => (
+          {navLinks.slice(2).map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/5 transition-colors"
+              className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-colors"
             >
               {link.label}
             </a>
           ))}
+          <hr className="my-2 border-neutral-border" />
+          <a
+            href={clientMasterDataOrtho.onlineBookingUrl}
+            className="block mx-2 px-4 py-2.5 text-sm font-semibold text-center rounded-lg bg-brand-primary text-brand-canvas"
+          >
+            Book Online
+          </a>
         </div>
       </details>
     </div>

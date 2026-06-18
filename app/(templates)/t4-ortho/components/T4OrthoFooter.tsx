@@ -1,27 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { clientMasterDataOrtho } from "@/data/master-ortho";
 
 const footerLinks = [
   { href: "#", label: "Home" },
-  { href: "#", label: "Services" },
+  { href: "#", label: "Treatments" },
+  { href: "#", label: "Gallery" },
   { href: "#", label: "About Us" },
-  { href: "#", label: "Reviews" },
   { href: "#", label: "Contact" },
 ];
 
-export default function T1Footer() {
-  const location = clientMasterData.locations[0];
-  const { trustSignals } = clientMasterData;
+export default function T4OrthoFooter() {
+  const location = clientMasterDataOrtho.locations[0];
+  const { trustSignals } = clientMasterDataOrtho;
 
   return (
-    <footer className="py-16 px-8 lg:px-16 bg-slate-800 text-white">
+    <footer className="py-16 px-8 bg-slate-800">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Location NAP */}
+          {/* Practice Info */}
           <div>
             <Image
-              src="/images/logo-dental.png"
+              src="/images/logo-ortho.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}
@@ -29,7 +29,9 @@ export default function T1Footer() {
             />
             <address className="not-italic text-gray-300 leading-relaxed">
               <p>{location.addressGBP}</p>
-              <p>{location.cityServed}, {location.stateServed}</p>
+              <p>
+                {location.cityServed}, {location.stateServed}
+              </p>
               <p className="mt-2">
                 <a
                   href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
@@ -43,11 +45,14 @@ export default function T1Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-gray-300 hover:text-sky-400 text-sm transition-colors">
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-gray-300 hover:text-sky-400 text-sm transition-colors"
+                  >
                     {link.label}
                   </a>
                 </li>
@@ -57,12 +62,12 @@ export default function T1Footer() {
 
           {/* Hours */}
           <div>
-            <h4 className="font-semibold mb-4">Office Hours</h4>
+            <h4 className="font-semibold text-white mb-4">Hours</h4>
             <ul className="text-gray-300 space-y-2">
-              {location.hoursOfOperation.map((hours, index) => (
-                <li key={index} className="flex justify-between text-sm">
-                  <span>{hours.dayRange}</span>
-                  <span>{hours.structuralHours}</span>
+              {location.hoursOfOperation.map((h, i) => (
+                <li key={i} className="flex justify-between text-sm gap-4">
+                  <span>{h.dayRange}</span>
+                  <span>{h.structuralHours}</span>
                 </li>
               ))}
             </ul>
@@ -70,15 +75,16 @@ export default function T1Footer() {
 
           {/* Insurance */}
           <div>
-            <h4 className="font-semibold mb-4">Insurance & Payment</h4>
-            <p className="text-gray-300 leading-relaxed text-sm">
+            <h4 className="font-semibold text-white mb-4">Insurance & Financing</h4>
+            <p className="text-gray-300 text-sm mb-4">
               {trustSignals.insuranceAcceptedText}
             </p>
-            {trustSignals.membershipPlanSummary && (
-              <p className="text-gray-300 leading-relaxed mt-4 text-sm">
-                {trustSignals.membershipPlanSummary}
-              </p>
-            )}
+            <a
+              href={clientMasterDataOrtho.onlineBookingUrl}
+              className="inline-block px-5 py-2.5 rounded-full bg-teal-600 text-white font-semibold text-sm hover:shadow-lg transition-all"
+            >
+              Book Online
+            </a>
           </div>
         </div>
 
@@ -88,8 +94,12 @@ export default function T1Footer() {
             © {new Date().getFullYear()} {location.practiceNameGBP}. All rights reserved.
           </p>
           <div className="flex gap-6 text-gray-500 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Accessibility</a>
+            <a href="#" className="hover:text-white transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Accessibility
+            </a>
           </div>
         </div>
       </div>
