@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-brand: #0f766e;
+  --secondary-accent: #38bdf8;
+  --text-main: #1e293b;
+  --bg-canvas: #ffffff;
+
+  --emergency-alert: #dc2626;
+  --success-indicator: #16a34a;
+  --neutral-border: #e2e8f0;
+  --neutral-muted: #64748b;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+    color: var(--text-main);
+    background-color: var(--bg-canvas);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-lg transition-colors duration-200;
+    background-color: var(--primary-brand);
+    color: var(--bg-canvas);
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.1);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-lg transition-colors duration-200;
+    background-color: var(--secondary-accent);
+    color: var(--text-main);
+  }
+
+  .btn-emergency {
+    @apply inline-flex items-center justify-center px-4 py-2 font-semibold rounded-lg;
+    background-color: var(--emergency-alert);
+    color: var(--bg-canvas);
+  }
+
+  .card-elevated {
+    @apply rounded-xl shadow-lg;
+    background-color: var(--bg-canvas);
+    border: 1px solid var(--neutral-border);
+  }
+
+  .text-brand-primary {
+    color: var(--primary-brand);
+  }
+
+  .text-brand-accent {
+    color: var(--secondary-accent);
+  }
+
+  .bg-brand-primary {
+    background-color: var(--primary-brand);
+  }
+
+  .bg-brand-accent {
+    background-color: var(--secondary-accent);
+  }
+
+  .border-brand-primary {
+    border-color: var(--primary-brand);
+  }
+
+  .border-brand-accent {
+    border-color: var(--secondary-accent);
+  }
+}
+
+@layer utilities {
+  .aspect-4-3 {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aspect-16-9 {
+    aspect-ratio: 16 / 9;
+  }
+
+  .no-cls {
+    contain: layout style paint;
+  }
+}
