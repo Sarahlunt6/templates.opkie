@@ -171,7 +171,7 @@ export default function Template1OrthoPage() {
               {
                 title: "Traditional Braces",
                 description: "Time-tested metal braces for reliable, precise tooth movement and beautiful results.",
-                image: "/images/services/implant.jpg",
+                image: "/images/services/braces.jpg",
               },
               {
                 title: "Ceramic Braces",

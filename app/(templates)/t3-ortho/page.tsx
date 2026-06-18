@@ -165,7 +165,7 @@ export default function Template3OrthoPage() {
               {
                 title: "Traditional Braces",
                 description: "Time-tested metal braces with modern comfort features for reliable results.",
-                image: "/images/services/implant.jpg",
+                image: "/images/services/braces.jpg",
               },
               {
                 title: "Ceramic Braces",
@@ -186,7 +186,7 @@ export default function Template3OrthoPage() {
               {
                 title: "Traditional Braces",
                 description: "Time-tested metal braces with modern comfort features for reliable results.",
-                image: "/images/services/implant.jpg",
+                image: "/images/services/braces.jpg",
               },
               {
                 title: "Ceramic Braces",

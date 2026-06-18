@@ -107,7 +107,7 @@ export default function Template4OrthoPage() {
               {
                 title: "Traditional Braces",
                 tag: "Time-Tested",
-                image: "/images/services/implant.jpg",
+                image: "/images/services/braces.jpg",
               },
               {
                 title: "Ceramic Braces",
