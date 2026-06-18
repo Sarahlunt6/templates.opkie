@@ -25,7 +25,7 @@ export default function T5OrthoFooter() {
               alt={location.practiceNameGBP}
               width={180}
               height={40}
-              className="h-10 w-auto mb-6"
+              className="h-14 w-auto mb-6"
             />
             <address className="not-italic text-neutral-muted leading-relaxed space-y-1 text-sm">
               <p>{location.addressGBP}</p>

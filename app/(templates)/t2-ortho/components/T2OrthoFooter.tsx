@@ -24,7 +24,7 @@ export default function T2OrthoFooter() {
               alt={location.practiceNameGBP}
               width={180}
               height={40}
-              className="h-10 w-auto mb-4"
+              className="h-14 w-auto mb-4"
             />
             <address className="not-italic text-gray-300 leading-relaxed">
               <p>{location.addressGBP}</p>

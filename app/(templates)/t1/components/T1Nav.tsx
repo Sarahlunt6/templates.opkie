@@ -33,7 +33,7 @@ export default function T1Nav() {
               alt={location.practiceNameGBP}
               width={180}
               height={40}
-              className="h-8 w-auto invert"
+              className="h-12 w-auto invert"
               priority
             />
           </Link>
