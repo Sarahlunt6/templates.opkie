@@ -300,7 +300,7 @@ export default function Template5OrthoPage() {
                 Before
               </p>
               <Image
-                src="/images/cases/smile-before.png"
+                src="/images/cases/smile-before-ortho.png"
                 alt="Before orthodontic treatment"
                 fill
                 className="object-cover"
@@ -312,7 +312,7 @@ export default function Template5OrthoPage() {
                 After
               </p>
               <Image
-                src="/images/cases/smile-after.png"
+                src="/images/cases/smile-after-ortho.png"
                 alt="After orthodontic treatment"
                 fill
                 className="object-cover"

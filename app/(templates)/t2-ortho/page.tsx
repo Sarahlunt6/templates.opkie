@@ -313,7 +313,7 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
               </div>
               <div className="aspect-[4/3] relative">
                 <Image
-                  src="/images/cases/smile-before.png"
+                  src="/images/cases/smile-before-ortho.png"
                   alt="Before orthodontic treatment"
                   fill
                   className="object-cover"
@@ -332,7 +332,7 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
               </div>
               <div className="aspect-[4/3] relative">
                 <Image
-                  src="/images/cases/smile-after.png"
+                  src="/images/cases/smile-after-ortho.png"
                   alt="After orthodontic treatment"
                   fill
                   className="object-cover"

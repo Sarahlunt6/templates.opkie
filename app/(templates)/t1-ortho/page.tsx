@@ -290,7 +290,7 @@ export default function Template1OrthoPage() {
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden border-4 border-neutral-border">
                 <Image
-                  src="/images/cases/smile-before.png"
+                  src="/images/cases/smile-before-ortho.png"
                   alt="Before orthodontic treatment"
                   fill
                   className="object-cover"
@@ -306,7 +306,7 @@ export default function Template1OrthoPage() {
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden border-4 border-brand-primary">
                 <Image
-                  src="/images/cases/smile-after.png"
+                  src="/images/cases/smile-after-ortho.png"
                   alt="After orthodontic treatment"
                   fill
                   className="object-cover"

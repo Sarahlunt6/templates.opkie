@@ -350,7 +350,7 @@ export default function Template3OrthoPage() {
               </div>
               <div className="aspect-[4/3] relative">
                 <Image
-                  src="/images/cases/smile-before.png"
+                  src="/images/cases/smile-before-ortho.png"
                   alt="Before orthodontic treatment"
                   fill
                   className="object-cover"
@@ -371,7 +371,7 @@ export default function Template3OrthoPage() {
               </div>
               <div className="aspect-[4/3] relative">
                 <Image
-                  src="/images/cases/smile-after.png"
+                  src="/images/cases/smile-after-ortho.png"
                   alt="After orthodontic treatment - beautiful smile"
                   fill
                   className="object-cover"
