@@ -23,7 +23,7 @@ export default function Template2OrthoPage() {
         {/* Background Team Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/team/staff-photo.jpg"
+            src="/images/team-ortho.jpeg"
             alt={`Our orthodontic team at ${clientMasterDataOrtho.globalPracticeName} in ${location.cityServed}`}
             fill
             className="object-cover opacity-10"
@@ -732,7 +732,7 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/team/staff-photo.jpg"
+            src="/images/team-ortho.jpeg"
             alt={`${clientMasterDataOrtho.globalPracticeName} team`}
             fill
             className="object-cover"

@@ -24,7 +24,7 @@ export default function Template1OrthoPage() {
         {/* Left: Team Photo */}
         <div className="relative min-h-[400px] lg:min-h-0 order-2 lg:order-1">
           <Image
-            src="/images/team/staff-photo.jpg"
+            src="/images/team-ortho.jpeg"
             alt={`Orthodontic team at ${clientMasterDataOrtho.globalPracticeName} in ${location.cityServed}`}
             fill
             className="object-cover object-top"
@@ -567,7 +567,7 @@ export default function Template1OrthoPage() {
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/team/staff-photo.jpg"
+            src="/images/team-ortho.jpeg"
             alt={`${clientMasterDataOrtho.globalPracticeName} team`}
             fill
             className="object-cover"

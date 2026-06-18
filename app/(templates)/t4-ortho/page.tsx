@@ -392,7 +392,7 @@ export default function Template4OrthoPage() {
         {/* Background Team Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/team/staff-photo.jpg"
+            src="/images/team-ortho.jpeg"
             alt={`Our orthodontic team at ${clientMasterDataOrtho.globalPracticeName}`}
             fill
             className="object-cover opacity-20"
@@ -531,7 +531,7 @@ export default function Template4OrthoPage() {
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/team/staff-photo.jpg"
+            src="/images/team-ortho.jpeg"
             alt={`${clientMasterDataOrtho.globalPracticeName} team`}
             fill
             className="object-cover"

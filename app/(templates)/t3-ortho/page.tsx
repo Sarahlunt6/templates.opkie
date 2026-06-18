@@ -46,7 +46,7 @@ export default function Template3OrthoPage() {
         {/* Background Team Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/team/staff-photo.jpg"
+            src="/images/team-ortho.jpeg"
             alt={`Our caring orthodontic team at ${clientMasterDataOrtho.globalPracticeName} in ${location.cityServed}`}
             fill
             className="object-cover"
