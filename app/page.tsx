@@ -59,7 +59,7 @@ export default function HomePage() {
               {/* Template Preview Placeholder */}
               <div className="aspect-[4/3] bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-lg mb-4 flex items-center justify-center">
                 <span className="text-6xl font-serif font-bold text-brand-primary/30">
-                  {template.id.toUpperCase()}
+                  {template.id.replace("t", "")}
                 </span>
               </div>
 
