@@ -92,19 +92,19 @@ export default function Template3Page() {
 
       {/* Emergency Alert Strip */}
       {trustSignals.hasSameDayEmergency && (
-        <div className="bg-emergency py-4 px-8">
+        <div className="bg-slate-800 py-4 px-8">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3 text-white">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
-              <span className="font-semibold">
+              <span className="font-medium">
                 Dental Emergency? Same-Day Appointments Available
               </span>
             </div>
             <a
               href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="px-6 py-2 rounded-full bg-white text-emergency font-semibold hover:bg-white/90 transition-colors"
+              className="px-6 py-2 rounded-full bg-brand-primary text-white font-semibold hover:brightness-110 transition-all"
             >
               Call Now: {location.phoneGBP}
             </a>
@@ -240,13 +240,13 @@ export default function Template3Page() {
         </div>
       </section>
 
-      {/* Meet the Dentist - Family Friendly Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-teal-700 to-sky-600">
+      {/* Meet the Dentist - Warm & Inviting Style */}
+      <section className="py-20 px-8 bg-gradient-to-br from-slate-800 to-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Image with fun border */}
+            {/* Image with elegant border */}
             <div className="relative">
-              <div className="absolute -inset-4 bg-white/20 rounded-3xl rotate-3" />
+              <div className="absolute -inset-4 bg-brand-primary/20 rounded-3xl rotate-3" />
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/team/doctor-portrait.png"
@@ -260,7 +260,7 @@ export default function Template3Page() {
 
             {/* Bio */}
             <div className="text-white">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-sm font-medium mb-4">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -269,19 +269,19 @@ export default function Template3Page() {
               <h2 className="text-3xl md:text-4xl font-bold mb-2">
                 {primaryDoctor.name}
               </h2>
-              <p className="text-gray-200 text-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-gray-100 leading-relaxed mb-8">
+              <p className="text-slate-300 text-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-slate-200 leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
-              {/* Credentials as fun badges */}
+              {/* Credentials as badges */}
               <div className="flex flex-wrap gap-2">
                 {primaryDoctor.credentials.map((credential, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/20 text-white text-sm"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/10 text-slate-200 text-sm"
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     {credential}
@@ -397,7 +397,7 @@ export default function Template3Page() {
       </section>
 
       {/* Services */}
-      <section className="py-20 px-8 bg-brand-primary/5">
+      <section className="py-20 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-brand-mainText text-center mb-12">
             Services for the Whole Family

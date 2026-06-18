@@ -29,7 +29,7 @@ export default function Template1Page() {
               Accepting New Patients
             </span>
             {trustSignals.hasSameDayEmergency && (
-              <span className="px-4 py-2 text-sm font-semibold rounded-full bg-emergency text-white">
+              <span className="px-4 py-2 text-sm font-semibold rounded-full bg-amber-600 text-white">
                 Same-Day Emergency Care
               </span>
             )}
@@ -97,7 +97,7 @@ export default function Template1Page() {
             src="/images/team/staff-photo.jpg"
             alt={`Dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
