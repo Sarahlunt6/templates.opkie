@@ -357,13 +357,13 @@ export default function Template1Page() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <div>
-                  <p className="font-semibold">{location.streetAddressGBP}</p>
-                  <p className="text-gray-300">{location.cityServed}, {location.stateServed} {location.postalCodeGBP}</p>
+                  <p className="font-semibold">{location.addressGBP}</p>
+                  <p className="text-gray-300">{location.cityServed}, {location.stateServed}</p>
                 </div>
               </div>
             </div>
             <a
-              href={`https://maps.google.com/?q=${encodeURIComponent(`${location.streetAddressGBP}, ${location.cityServed}, ${location.stateServed} ${location.postalCodeGBP}`)}`}
+              href={`https://maps.google.com/?q=${encodeURIComponent(`${location.addressGBP}, ${location.cityServed}, ${location.stateServed}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg bg-white text-brand-mainText font-semibold hover:bg-gray-100 transition-colors"
