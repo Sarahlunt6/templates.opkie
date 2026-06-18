@@ -377,6 +377,278 @@ export default function Template5Page() {
         </div>
       </section>
 
+      {/* Kind Words - Zen Testimonials */}
+      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+              Kind Words
+            </p>
+            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+              Voices of Wellness
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {sampleReviews.slice(0, 4).map((review, index) => (
+              <div
+                key={index}
+                className="p-8 bg-brand-canvas border border-neutral-border rounded-sm"
+              >
+                <div className="flex gap-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-neutral-muted leading-relaxed mb-6 italic">
+                  "{review.text}"
+                </p>
+                <p className="text-sm font-medium text-brand-mainText">{review.author}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Visit Us - Zen Style */}
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+              Visit Us
+            </p>
+            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+              Your Sanctuary Awaits
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            {/* Hours */}
+            <div>
+              <h3 className="text-lg font-medium text-brand-mainText mb-8">Hours of Wellness</h3>
+              <div className="space-y-4">
+                {[
+                  { day: "Monday", hours: "8:00 AM – 5:00 PM" },
+                  { day: "Tuesday", hours: "8:00 AM – 5:00 PM" },
+                  { day: "Wednesday", hours: "8:00 AM – 5:00 PM" },
+                  { day: "Thursday", hours: "8:00 AM – 5:00 PM" },
+                  { day: "Friday", hours: "8:00 AM – 3:00 PM" },
+                  { day: "Saturday", hours: "By Appointment" },
+                  { day: "Sunday", hours: "Closed" },
+                ].map((item, index) => (
+                  <div key={index} className="flex justify-between py-3 border-b border-neutral-border">
+                    <span className="text-neutral-muted">{item.day}</span>
+                    <span className="text-brand-mainText">{item.hours}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 pt-8 border-t border-neutral-border">
+                <p className="text-sm text-neutral-muted mb-2">{location.addressGBP}</p>
+                <p className="text-sm text-neutral-muted">{location.cityServed}, {location.stateServed}</p>
+                <a
+                  href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                  className="inline-flex items-center gap-2 text-brand-primary mt-4 hover:gap-3 transition-all"
+                >
+                  <span>{location.phoneGBP}</span>
+                </a>
+              </div>
+            </div>
+            {/* Map */}
+            <div className="aspect-square rounded-sm overflow-hidden bg-neutral-border/30">
+              {location.googleMapsEmbedUrl ? (
+                <iframe
+                  src={location.googleMapsEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Practice Location"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-neutral-muted">
+                  Map
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Membership - Zen Style */}
+      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+              Membership
+            </p>
+            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText mb-4">
+              Wellness Plans
+            </h2>
+            <p className="text-neutral-muted max-w-xl mx-auto leading-relaxed">
+              Simple, transparent care for those who value ongoing wellness. No insurance complexity.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Individual",
+                price: "$335",
+                period: "per year",
+                features: ["Two wellness visits", "Complete examinations", "Digital X-rays", "15% off treatments"],
+              },
+              {
+                name: "Couple",
+                price: "$615",
+                period: "per year",
+                features: ["All Individual benefits", "Coverage for two", "Priority scheduling", "20% off treatments"],
+                featured: true,
+              },
+              {
+                name: "Family",
+                price: "$965",
+                period: "per year",
+                features: ["All Couple benefits", "Up to 4 members", "Children's care included", "25% off treatments"],
+              },
+            ].map((plan, index) => (
+              <div
+                key={index}
+                className={`p-8 rounded-sm border transition-all ${
+                  plan.featured
+                    ? "border-brand-primary bg-brand-canvas shadow-sm"
+                    : "border-neutral-border bg-brand-canvas hover:border-brand-primary/50"
+                }`}
+              >
+                {plan.featured && (
+                  <p className="text-xs uppercase tracking-[0.15em] text-brand-primary mb-4">Recommended</p>
+                )}
+                <h3 className="text-lg font-medium text-brand-mainText mb-2">{plan.name}</h3>
+                <div className="mb-6">
+                  <span className="text-3xl font-light text-brand-primary">{plan.price}</span>
+                  <span className="text-sm text-neutral-muted ml-2">{plan.period}</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-neutral-muted">
+                      <svg className="w-4 h-4 text-brand-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                  className="block w-full py-3 text-center text-sm border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors rounded-sm"
+                >
+                  Begin Journey
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Free Consultation Banner - Zen Style */}
+      <section className="relative py-24 px-8">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/office-exterior.jpg"
+            alt="Our serene practice"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-brand-mainText/80" />
+        </div>
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <p className="text-sm uppercase tracking-[0.2em] text-white/60 mb-4">
+            Complimentary
+          </p>
+          <h2 className="text-2xl md:text-3xl font-light text-white mb-6">
+            Begin Your Wellness Journey
+          </h2>
+          <p className="text-white/70 leading-relaxed mb-8 max-w-xl mx-auto">
+            We offer complimentary consultations for new patients. A quiet conversation to understand your needs and explore how we can serve your oral health.
+          </p>
+          <a
+            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+            className="inline-flex items-center gap-3 text-white border border-white/30 px-8 py-3 hover:bg-white hover:text-brand-mainText transition-all"
+          >
+            <span>Schedule Consultation</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      {/* Why Choose Us - Zen Style */}
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+              Our Philosophy
+            </p>
+            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+              The Mindful Difference
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Holistic Approach",
+                description: "We consider your complete wellbeing, not just your teeth. Mind, body, and oral health in harmony.",
+              },
+              {
+                title: "Biocompatible Materials",
+                description: "Only the safest, most natural materials. Mercury-free, metal-free options for your health.",
+              },
+              {
+                title: "Unhurried Care",
+                description: "We never rush. Each appointment is a sanctuary of calm, focused attention on your needs.",
+              },
+              {
+                title: "Personalized Wellness",
+                description: "Your treatment plan is uniquely yours, crafted to honor your individual health journey.",
+              },
+            ].map((item, index) => (
+              <div key={index} className="p-8 border border-neutral-border rounded-sm">
+                <div className="w-10 h-10 rounded-full border border-brand-primary flex items-center justify-center mb-4">
+                  <span className="text-sm font-light text-brand-primary">0{index + 1}</span>
+                </div>
+                <h3 className="text-lg font-medium text-brand-mainText mb-2">{item.title}</h3>
+                <p className="text-sm text-neutral-muted leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The Practice Difference CTA - Zen Style */}
+      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+            Experience the Difference
+          </p>
+          <h2 className="text-2xl md:text-3xl font-light text-brand-mainText mb-6">
+            Where Wellness Meets Artistry
+          </h2>
+          <p className="text-neutral-muted leading-relaxed mb-8 max-w-xl mx-auto">
+            Step into a practice where every detail has been thoughtfully considered for your comfort and care. Your journey to oral wellness begins here.
+          </p>
+          <a
+            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+            className="inline-flex items-center gap-3 text-brand-primary font-medium hover:gap-4 transition-all"
+          >
+            <span>Begin Your Journey</span>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
       <T5Footer />
     </div>
   );

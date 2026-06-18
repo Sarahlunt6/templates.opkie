@@ -425,6 +425,313 @@ export default function Template4Page() {
         </div>
       </section>
 
+      {/* Visit Our Studio - Luxury Style */}
+      <section className="py-20 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left: Hours */}
+            <div>
+              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+                Visit Our Studio
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-8">
+                Experience Excellence
+              </h2>
+              <div className="space-y-4">
+                {[
+                  { day: "Monday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Tuesday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Wednesday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Thursday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Friday", hours: "8:00 AM - 12:00 PM" },
+                  { day: "Saturday", hours: "Closed" },
+                  { day: "Sunday", hours: "Closed" },
+                ].map((schedule, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between items-center py-3 border-b border-neutral-border last:border-0"
+                  >
+                    <span className="text-brand-mainText font-medium">{schedule.day}</span>
+                    <span className={schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-mainText"}>
+                      {schedule.hours}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <a
+                href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-full bg-brand-primary text-white font-semibold hover:brightness-110 transition-all"
+              >
+                Schedule Your Consultation
+              </a>
+            </div>
+
+            {/* Right: Map */}
+            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-neutral-border h-[400px]">
+              <iframe
+                src={location.googleMapsEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Map to ${location.practiceNameGBP}`}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Exclusive Membership - Luxury Style */}
+      <section className="py-20 px-8 bg-slate-800">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              Exclusive Membership
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              VIP Smile Care Program
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Join our exclusive membership program and save over <span className="text-brand-primary font-semibold">$300 annually</span> on
+              premium cosmetic and preventive care.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 p-8">
+              <span className="inline-block px-4 py-1 text-xs font-semibold rounded-full bg-brand-primary/20 text-brand-primary mb-4">
+                Individual
+              </span>
+              <div className="mb-6">
+                <span className="text-5xl font-bold text-white">$335</span>
+                <span className="text-gray-400">/year</span>
+              </div>
+              <ul className="space-y-3 text-gray-300">
+                {["2 Professional Cleanings", "2 Comprehensive Exams", "2 Oral Cancer Screenings", "2 Fluoride Treatments", "Digital X-rays", "25% off All Services"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-brand-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl bg-gradient-to-br from-brand-primary to-brand-primary/80 p-8 relative transform scale-105">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-white rounded-full text-xs font-bold text-brand-primary shadow-lg">
+                Most Popular
+              </div>
+              <span className="inline-block px-4 py-1 text-xs font-semibold rounded-full bg-white/20 text-white mb-4">
+                Couple
+              </span>
+              <div className="mb-6">
+                <span className="text-5xl font-bold text-white">$615</span>
+                <span className="text-white/80">/year</span>
+              </div>
+              <ul className="space-y-3 text-white/90">
+                {["2 Professional Cleanings", "2 Comprehensive Exams", "2 Oral Cancer Screenings", "2 Fluoride Treatments", "Digital X-rays", "25% off All Services"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-white" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 p-8">
+              <span className="inline-block px-4 py-1 text-xs font-semibold rounded-full bg-brand-primary/20 text-brand-primary mb-4">
+                Family
+              </span>
+              <div className="mb-6">
+                <span className="text-5xl font-bold text-white">$965</span>
+                <span className="text-gray-400">/year</span>
+              </div>
+              <ul className="space-y-3 text-gray-300">
+                {["2 Professional Cleanings", "2 Comprehensive Exams", "2 Oral Cancer Screenings", "2 Fluoride Treatments", "Digital X-rays", "25% off All Services", "Add members +$95 each"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-brand-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Patient Stories - Luxury Style */}
+      <section className="py-20 px-8 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+            <div className="lg:col-span-1">
+              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+                Patient Stories
+              </p>
+              <h2 className="text-3xl font-bold text-brand-mainText leading-tight mb-6">
+                Transformation Testimonials
+              </h2>
+              <div className="flex items-center gap-1 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-sm text-neutral-muted">5-Star Reviews</p>
+            </div>
+
+            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+              {sampleReviews.slice(0, 3).map((review, index) => (
+                <div key={index} className="p-6 rounded-2xl bg-gradient-to-br from-brand-primary/5 to-transparent border border-neutral-border">
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-brand-mainText leading-relaxed mb-6 italic">&ldquo;{review.reviewText}&rdquo;</p>
+                  <p className="text-sm font-semibold text-brand-primary">— {review.reviewerName}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Complimentary Consultations Banner */}
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/office-interior.jpg"
+            alt={`${clientMasterData.globalPracticeName} luxury interior`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        <div className="relative z-10 w-full px-8 py-16">
+          <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="bg-white p-8 lg:p-12 rounded-2xl max-w-xl shadow-2xl">
+              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+                Exclusive Offer
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+                Complimentary Smile Consultations
+              </h2>
+              <p className="text-neutral-muted mb-2">
+                On Veneers, Invisalign, and Full Smile Makeovers.
+              </p>
+              <p className="text-sm text-neutral-muted">
+                Begin your transformation journey with a no-obligation consultation.
+              </p>
+            </div>
+            <a
+              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+              className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-white text-brand-mainText font-semibold text-lg hover:shadow-xl transition-all"
+            >
+              Book Your Consultation
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us - Cosmetic Style */}
+      <section className="py-20 px-8 bg-brand-mainText">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              The Artistry of Excellence
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Why Patients Choose Us
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Award-Winning Results",
+                description: "Our cosmetic transformations have earned recognition for exceptional artistry and natural-looking results.",
+                cta: "View Gallery",
+              },
+              {
+                title: "Personalized Artistry",
+                description: "Every smile is custom-designed to complement your unique facial features and aesthetic goals.",
+                cta: "Meet the Artist",
+              },
+              {
+                title: "Luxury Experience",
+                description: "From the moment you arrive, experience spa-like comfort and white-glove service in our boutique studio.",
+                cta: "Virtual Tour",
+              },
+            ].map((item, index) => (
+              <div key={index} className="border-l border-white/20 pl-6">
+                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-gray-400 leading-relaxed mb-6">{item.description}</p>
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 text-brand-primary text-sm font-semibold hover:gap-3 transition-all"
+                >
+                  {item.cta}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The Practice Difference CTA */}
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/team/staff-photo.jpg"
+            alt={`${clientMasterData.globalPracticeName} team`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        </div>
+
+        <div className="relative z-10 w-full px-8 py-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider mb-8">
+              The {clientMasterData.globalPracticeName} Difference
+            </h2>
+            <p className="text-lg text-gray-200 leading-relaxed mb-10 max-w-2xl mx-auto italic">
+              Where artistry meets precision. Experience transformative cosmetic dentistry
+              that enhances your natural beauty and elevates your confidence.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-brand-mainText font-semibold hover:shadow-lg transition-all"
+              >
+                Call Us
+              </a>
+              {clientMasterData.onlineBookingUrl !== "none" && (
+                <a
+                  href={clientMasterData.onlineBookingUrl}
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-brand-mainText transition-all"
+                >
+                  Book Your Transformation
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <T4Footer />
     </div>
   );

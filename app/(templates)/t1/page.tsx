@@ -391,6 +391,296 @@ export default function Template1Page() {
         </div>
       </section>
 
+      {/* Come Visit Us Section - Hours + Map */}
+      <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left: Hours */}
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-8">
+                Come Visit Us
+              </h2>
+              <div className="space-y-4">
+                {[
+                  { day: "Monday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Tuesday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Wednesday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Thursday", hours: "8:00 AM - 5:00 PM" },
+                  { day: "Friday", hours: "8:00 AM - 12:00 PM" },
+                  { day: "Saturday", hours: "Closed" },
+                  { day: "Sunday", hours: "Closed" },
+                ].map((schedule, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between items-center py-3 border-b border-neutral-border last:border-0"
+                  >
+                    <span className="text-brand-mainText font-medium">{schedule.day}</span>
+                    <span className={schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-mainText"}>
+                      {schedule.hours}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <a
+                href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-lg bg-brand-primary text-brand-canvas font-semibold hover:brightness-110 transition-all"
+              >
+                Make An Appointment
+              </a>
+            </div>
+
+            {/* Right: Map */}
+            <div className="relative rounded-xl overflow-hidden shadow-lg border border-neutral-border h-[400px]">
+              <iframe
+                src={location.googleMapsEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Map to ${location.practiceNameGBP}`}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Membership Choices - Pricing Cards */}
+      <section className="py-20 px-8 lg:px-16 bg-brand-canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+                Membership Choices
+              </h2>
+              <p className="text-neutral-muted leading-relaxed">
+                Our membership will save you at least{" "}
+                <span className="font-bold text-brand-mainText">$300/person</span> on
+                preventive maintenance and more.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-brand-primary uppercase tracking-wide mb-4">
+                Membership Coverage
+              </h3>
+              <p className="text-neutral-muted leading-relaxed">
+                Preventive care is covered at 100%. All other procedures,
+                including cosmetic dentistry are 25% off.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="rounded-xl bg-brand-primary/80 p-8 text-white">
+              <h3 className="text-2xl font-bold uppercase tracking-wide mb-4">Individual</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-bold">$335</span>
+                <span className="text-white/80">/per year</span>
+              </div>
+              <ul className="space-y-3">
+                {["2 Cleanings", "2 Doctor Exams", "2 Oral Cancer Screening", "2 Fluoride Varnish", "2 Digital/3D X-ray", "25% off All Procedures"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-xl bg-neutral-muted/60 p-8 text-white">
+              <h3 className="text-2xl font-bold uppercase tracking-wide mb-4">Couple</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-bold">$615</span>
+                <span className="text-white/80">/per year</span>
+              </div>
+              <ul className="space-y-3">
+                {["2 Cleanings", "2 Doctor Exams", "2 Oral Cancer Screening", "2 Fluoride Varnish", "2 Digital/3D X-ray", "25% off All Procedures"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-xl bg-brand-primary p-8 text-white">
+              <h3 className="text-2xl font-bold uppercase tracking-wide mb-4">Family</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-bold">$965</span>
+                <span className="text-white/80">/per year</span>
+              </div>
+              <ul className="space-y-3">
+                {["2 Cleanings", "2 Doctor Exams", "2 Oral Cancer Screening", "2 Fluoride Varnish", "2 Digital/3D X-ray", "25% off All Procedures", "Add up to 5 additional members for $95 each"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Kind Words - Testimonials with Stars */}
+      <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+            <div className="lg:col-span-1">
+              <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText leading-tight mb-6">
+                Kind Words From Our Patients
+              </h2>
+              <div className="flex items-center gap-2 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-sm text-neutral-muted font-medium">5 Star</p>
+              <p className="text-sm text-brand-primary font-semibold">reviews</p>
+            </div>
+
+            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+              {sampleReviews.slice(0, 3).map((review, index) => (
+                <div key={index} className="p-6 rounded-xl bg-neutral-border/20 border border-neutral-border">
+                  <p className="text-brand-mainText leading-relaxed mb-6">{review.reviewText}</p>
+                  <div className="border-t border-neutral-border pt-4">
+                    <p className="text-sm font-semibold text-brand-mainText">- {review.reviewerName}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Free Consultations Banner */}
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/office-interior.jpg"
+            alt={`${clientMasterData.globalPracticeName} office interior`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        <div className="relative z-10 w-full px-8 lg:px-16 py-16">
+          <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="bg-white/95 backdrop-blur-sm p-8 lg:p-12 rounded-xl max-w-xl">
+              <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-2">
+                Free consultations—
+              </h2>
+              <h3 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+                always.
+              </h3>
+              <p className="text-xl text-neutral-muted mb-2">
+                On Implants, Dentures, and Invisalign.
+              </p>
+              <p className="text-sm text-neutral-muted">
+                Call us with any questions or conveniently book your appointment online today!
+              </p>
+            </div>
+            <a
+              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+              className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-brand-primary text-brand-canvas font-semibold text-lg hover:brightness-110 transition-all shadow-lg"
+            >
+              Book Online
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us - Dark Section */}
+      <section className="py-20 px-8 lg:px-16 bg-brand-mainText">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-12">
+            <span className="font-light italic">Why</span> Choose Us
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Experienced Team",
+                description: `Our ${clientMasterData.globalPracticeName} team brings decades of combined experience to your care.`,
+                cta: "Meet the Team",
+              },
+              {
+                title: "Patient-First Care",
+                description: "We prioritize your comfort and well-being with personalized treatment plans designed around your needs.",
+                cta: "Meet the Doctor",
+              },
+              {
+                title: "Comfortable Office",
+                description: "Our modern facility offers amenities including blankets, TVs, headsets, and sedation options for your comfort.",
+                cta: "Office Tour",
+              },
+            ].map((item, index) => (
+              <div key={index} className="border-l border-white/20 pl-6">
+                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-gray-400 leading-relaxed mb-6">{item.description}</p>
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/30 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                >
+                  {item.cta}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The Practice Difference CTA */}
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/team/staff-photo.jpg"
+            alt={`${clientMasterData.globalPracticeName} team`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+
+        <div className="relative z-10 w-full px-8 lg:px-16 py-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider mb-8">
+              The {clientMasterData.globalPracticeName} Difference
+            </h2>
+            <p className="text-lg text-gray-200 leading-relaxed mb-10 max-w-2xl mx-auto italic">
+              At {clientMasterData.globalPracticeName}, we provide a comprehensive range of services to
+              ensure the health and beauty of your smile. If you have questions or
+              want more information about our services, please contact us today.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-mainText font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Call Us
+              </a>
+              {clientMasterData.onlineBookingUrl !== "none" && (
+                <a
+                  href={clientMasterData.onlineBookingUrl}
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-mainText font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Request An Appointment
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <T1Footer />
     </div>
   );
