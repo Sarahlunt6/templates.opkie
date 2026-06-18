@@ -19,7 +19,7 @@ export default function Template5Page() {
     <div className="font-sans">
       <T5Nav />
       {/* Hero Section - Zen with Visual Interest */}
-      <section className="min-h-[90vh] flex items-center px-8 py-20 bg-brand-canvas relative overflow-hidden">
+      <section className="min-h-[90vh] flex items-center px-8 pt-28 pb-20 bg-brand-canvas relative overflow-hidden">
         {/* Subtle Background Pattern */}
         <div className="absolute inset-0 opacity-[0.03]">
           <div className="h-full w-full" style={{
@@ -33,7 +33,7 @@ export default function Template5Page() {
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-brand-accent/5 rounded-full blur-3xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start lg:pt-8">
             {/* Left: Content */}
             <div className="order-2 lg:order-1">
               {/* Practice Name Badge */}
