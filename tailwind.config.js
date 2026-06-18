@@ -32,6 +32,7 @@ module.exports = {
       animation: {
         "slide-in": "slideIn 0.3s ease-out",
         "fade-in": "fadeIn 0.2s ease-out",
+        "scroll": "scroll 30s linear infinite",
       },
       keyframes: {
         slideIn: {
@@ -41,6 +42,10 @@ module.exports = {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        scroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },

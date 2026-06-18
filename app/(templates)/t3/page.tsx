@@ -157,7 +157,7 @@ export default function Template3Page() {
 
         {/* Carousel Container */}
         <div className="relative">
-          <div className="flex gap-6 animate-scroll px-8">
+          <div className="flex gap-6 animate-scroll hover:[animation-play-state:paused] px-8">
             {[
               {
                 title: "Invisalign",
@@ -236,22 +236,6 @@ export default function Template3Page() {
           </div>
         </div>
 
-        <style jsx>{`
-          @keyframes scroll {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          .animate-scroll {
-            animation: scroll 30s linear infinite;
-          }
-          .animate-scroll:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
       </section>
 
       {/* First Visit Process Map */}
