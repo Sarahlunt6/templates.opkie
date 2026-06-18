@@ -83,7 +83,7 @@ export default function Template4Page() {
         </div>
       </section>
 
-      {/* Premium Services - Cosmetic/Luxury Style */}
+      {/* Premium Services - Image Boxes with Overlay */}
       <section className="py-20 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -101,48 +101,60 @@ export default function Template4Page() {
             {[
               {
                 title: "Porcelain Veneers",
-                description: "Ultra-thin, custom-crafted shells that transform your smile with Hollywood-quality aesthetics.",
                 tag: "Most Popular",
+                image: "/images/services/full-mouth-shade.jpg",
               },
               {
                 title: "Invisalign",
-                description: "Invisible orthodontics for the modern patient. Straighten your teeth without compromising your look.",
                 tag: "Clear Aligners",
+                image: "/images/services/invisalign.jpg",
               },
               {
                 title: "Full Mouth Restoration",
-                description: "Comprehensive smile reconstruction combining multiple procedures for total transformation.",
                 tag: "Complete Makeover",
+                image: "/images/services/full-mouth-smile.jpg",
               },
               {
                 title: "Dental Implants",
-                description: "Premium titanium implants with lifelike ceramic crowns. The gold standard in tooth replacement.",
                 tag: "Permanent Solution",
+                image: "/images/services/implant.jpg",
               },
             ].map((service, index) => (
-              <div
+              <a
                 key={index}
-                className="group relative p-6 bg-brand-canvas border border-neutral-border rounded-2xl hover:border-brand-primary hover:shadow-xl transition-all"
+                href="#"
+                className="group relative aspect-[3/4] rounded-2xl overflow-hidden block"
               >
-                <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-brand-primary/10 text-brand-primary mb-4">
-                  {service.tag}
-                </span>
-                <h3 className="text-lg font-bold text-brand-mainText mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-neutral-muted leading-relaxed mb-4">
-                  {service.description}
-                </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary hover:gap-3 transition-all"
-                >
-                  View Gallery
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
-              </div>
+                {/* Background Image */}
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <span className="inline-block w-fit px-3 py-1 text-xs font-semibold rounded-full bg-white/20 text-white backdrop-blur-sm mb-3">
+                    {service.tag}
+                  </span>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {service.title}
+                  </h3>
+
+                  {/* Learn More - appears on hover */}
+                  <div className="flex items-center gap-2 text-sm font-semibold text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    Learn More
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
             ))}
           </div>
         </div>

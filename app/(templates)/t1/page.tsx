@@ -135,9 +135,9 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* Premium Services */}
+      {/* Premium Services - 2x2 Grid with Images */}
       <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
               Premium Dental Services
@@ -147,46 +147,52 @@ export default function Template1Page() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
                 title: "Invisalign",
                 description: "Straighten your teeth discreetly with clear aligners custom-made for your smile.",
-icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+                image: "/images/services/invisalign.jpg",
               },
               {
                 title: "Dental Implants",
                 description: "Permanent tooth replacement that looks, feels, and functions like natural teeth.",
-                icon: "M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z",
+                image: "/images/services/implant.jpg",
               },
               {
                 title: "Full Mouth Restoration",
                 description: "Complete smile reconstruction combining multiple treatments for optimal results.",
-                icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+                image: "/images/services/full-mouth-smile.jpg",
               },
               {
                 title: "Porcelain Veneers",
                 description: "Custom-crafted shells that create a flawless, natural-looking smile makeover.",
-                icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707",
+                image: "/images/services/full-mouth-shade.jpg",
               },
             ].map((service, index) => (
               <div
                 key={index}
-                className="group p-6 bg-brand-canvas border border-neutral-border rounded-xl hover:border-brand-primary hover:shadow-lg transition-all"
+                className="group bg-brand-canvas border border-neutral-border rounded-xl overflow-hidden hover:border-brand-primary hover:shadow-lg transition-all"
               >
-                <div className="w-12 h-12 rounded-lg bg-brand-primary/10 flex items-center justify-center mb-4 group-hover:bg-brand-primary/20 transition-colors">
-                  <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
-                  </svg>
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
-                <h3 className="text-lg font-bold text-brand-mainText mb-2">{service.title}</h3>
-                <p className="text-sm text-neutral-muted leading-relaxed">{service.description}</p>
-                <a href="#" className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-brand-primary hover:gap-2 transition-all">
-                  Learn More
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-brand-mainText mb-2">{service.title}</h3>
+                  <p className="text-sm text-neutral-muted leading-relaxed">{service.description}</p>
+                  <a href="#" className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-brand-primary hover:gap-2 transition-all">
+                    Learn More
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             ))}
           </div>

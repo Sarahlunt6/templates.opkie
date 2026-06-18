@@ -142,9 +142,9 @@ export default function Template3Page() {
         </div>
       </section>
 
-      {/* Premium Services - Family Friendly Style */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
+      {/* Premium Services - Sliding Carousel */}
+      <section className="py-20 bg-brand-canvas overflow-hidden">
+        <div className="max-w-6xl mx-auto px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
               Popular Services for Your Family
@@ -153,57 +153,105 @@ export default function Template3Page() {
               Trusted treatments delivered with gentle care for patients of all ages.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        </div>
+
+        {/* Carousel Container */}
+        <div className="relative">
+          <div className="flex gap-6 animate-scroll px-8">
             {[
               {
                 title: "Invisalign",
                 description: "Clear aligners for teens and adults. Straighten teeth comfortably without metal braces.",
-icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+                image: "/images/services/invisalign.jpg",
               },
               {
                 title: "Dental Implants",
                 description: "Permanent tooth replacement that looks and feels natural. Restore your confident smile.",
-                icon: "M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z",
+                image: "/images/services/implant.jpg",
               },
               {
-                title: "Pediatric Dentistry",
-                description: "Kid-friendly dental care that makes visits fun. Building healthy habits early.",
-                icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+                title: "Full Mouth Restoration",
+                description: "Complete smile makeover combining multiple treatments for stunning results.",
+                image: "/images/services/full-mouth-smile.jpg",
               },
               {
-                title: "Emergency Care",
-                description: "Same-day appointments for urgent dental needs. We're here when you need us most.",
-                icon: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+                title: "Porcelain Veneers",
+                description: "Custom-crafted shells for a flawless, natural-looking smile transformation.",
+                image: "/images/services/full-mouth-shade.jpg",
+              },
+              // Duplicate for seamless loop
+              {
+                title: "Invisalign",
+                description: "Clear aligners for teens and adults. Straighten teeth comfortably without metal braces.",
+                image: "/images/services/invisalign.jpg",
+              },
+              {
+                title: "Dental Implants",
+                description: "Permanent tooth replacement that looks and feels natural. Restore your confident smile.",
+                image: "/images/services/implant.jpg",
+              },
+              {
+                title: "Full Mouth Restoration",
+                description: "Complete smile makeover combining multiple treatments for stunning results.",
+                image: "/images/services/full-mouth-smile.jpg",
+              },
+              {
+                title: "Porcelain Veneers",
+                description: "Custom-crafted shells for a flawless, natural-looking smile transformation.",
+                image: "/images/services/full-mouth-shade.jpg",
               },
             ].map((service, index) => (
               <div
                 key={index}
-                className="group p-6 bg-brand-canvas border border-neutral-border rounded-2xl hover:border-brand-primary hover:shadow-lg transition-all text-center"
+                className="group flex-shrink-0 w-80 bg-brand-canvas border border-neutral-border rounded-2xl overflow-hidden hover:border-brand-primary hover:shadow-lg transition-all"
               >
-                <div className="w-14 h-14 rounded-full bg-brand-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-7 h-7 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
-                  </svg>
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="320px"
+                  />
                 </div>
-                <h3 className="text-lg font-semibold text-brand-mainText mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-neutral-muted leading-relaxed mb-4">
-                  {service.description}
-                </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary hover:gap-2 transition-all"
-                >
-                  Learn More
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+                <div className="p-6 text-center">
+                  <h3 className="text-lg font-semibold text-brand-mainText mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-neutral-muted leading-relaxed mb-4">
+                    {service.description}
+                  </p>
+                  <a
+                    href="#"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary hover:gap-2 transition-all"
+                  >
+                    Learn More
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             ))}
           </div>
         </div>
+
+        <style jsx>{`
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .animate-scroll {
+            animation: scroll 30s linear infinite;
+          }
+          .animate-scroll:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
       </section>
 
       {/* First Visit Process Map */}
