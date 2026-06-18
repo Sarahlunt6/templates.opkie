@@ -128,6 +128,38 @@ export default function Template2Page() {
         </div>
       </section>
 
+      {/* Welcome Video - Tech Style */}
+      <section className="py-20 px-8 bg-slate-800">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              Behind The Scenes
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              Meet Our Digital Dentistry Team
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              See the technology, meet the team, and hear from patients about their experience with our precision-driven approach to dental care.
+            </p>
+          </div>
+          <div className="relative aspect-video rounded-2xl overflow-hidden border border-gray-600 shadow-2xl">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              poster="/images/team/staff-photo.jpg"
+            >
+              <source src="/videos/hero-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {/* Tech Corner Accent */}
+            <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-primary/90 text-white text-xs font-medium">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              Practice Tour
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Premium Services - Tech Style */}
       <section className="py-20 px-8 bg-brand-canvas border-t border-neutral-border">
         <div className="max-w-6xl mx-auto">

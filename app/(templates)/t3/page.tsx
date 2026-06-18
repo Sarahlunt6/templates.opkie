@@ -113,6 +113,34 @@ export default function Template3Page() {
         </div>
       )}
 
+      {/* Welcome Video - Family Friendly Style */}
+      <section className="py-20 px-8 bg-gradient-to-br from-teal-700 to-sky-600">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
+              <span>🎬</span>
+              <span>Take a Tour</span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              Come Meet Our Family!
+            </h2>
+            <p className="text-gray-100 max-w-2xl mx-auto">
+              Take a peek inside our practice and hear from the people who make it special—our caring team and happy patients of all ages!
+            </p>
+          </div>
+          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              poster="/images/team/staff-photo.jpg"
+            >
+              <source src="/videos/hero-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </section>
+
       {/* Premium Services - Family Friendly Style */}
       <section className="py-20 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">

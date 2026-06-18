@@ -112,6 +112,30 @@ export default function Template1Page() {
         </div>
       </section>
 
+      {/* Welcome Video */}
+      <section className="py-20 px-8 lg:px-16 bg-slate-800">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              Welcome to {clientMasterData.globalPracticeName}
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Get to know our team and see what makes our practice special. Hear from our dentists, staff, and patients about the care experience we provide.
+            </p>
+          </div>
+          <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              poster="/images/team/staff-photo.jpg"
+            >
+              <source src="/videos/hero-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </section>
+
       {/* Premium Services */}
       <section className="py-20 px-8 lg:px-16 bg-brand-canvas border-t border-neutral-border">
         <div className="max-w-6xl mx-auto">

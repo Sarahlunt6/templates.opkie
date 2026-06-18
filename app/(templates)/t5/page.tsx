@@ -73,6 +73,36 @@ export default function Template5Page() {
         </div>
       </section>
 
+      {/* Welcome Video - Minimal/Zen Style */}
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
+              Welcome
+            </p>
+            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText mb-4">
+              Our Practice, Our People
+            </h2>
+            <p className="text-neutral-muted max-w-2xl mx-auto leading-relaxed">
+              Take a moment to meet our team and hear from those we've had the privilege to serve. Discover the thoughtful care that defines our approach.
+            </p>
+          </div>
+          <div className="relative aspect-video rounded-sm overflow-hidden">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              poster="/images/team/staff-photo.jpg"
+            >
+              <source src="/videos/hero-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p className="text-center text-sm text-neutral-muted mt-6 italic">
+            A glimpse into mindful dental wellness
+          </p>
+        </div>
+      </section>
+
       {/* Premium Services - Minimal/Zen Style */}
       <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
         <div className="max-w-4xl mx-auto">

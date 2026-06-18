@@ -57,6 +57,37 @@ export default function Template4Page() {
         </div>
       </section>
 
+      {/* Welcome Video - Cosmetic/Luxury Style */}
+      <section className="py-20 px-8 bg-slate-800">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              Exclusive Access
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              Inside Our Studio
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Step behind the scenes and discover the artistry, passion, and personal attention that define every transformation at our practice.
+            </p>
+          </div>
+          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              poster="/images/team/staff-photo.jpg"
+            >
+              <source src="/videos/hero-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {/* Elegant Play Overlay Accent */}
+            <div className="absolute bottom-4 left-4 px-4 py-2 bg-white/90 backdrop-blur rounded-full">
+              <span className="text-sm font-semibold text-brand-mainText">Practice Tour & Patient Stories</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Premium Services - Cosmetic/Luxury Style */}
       <section className="py-20 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">
