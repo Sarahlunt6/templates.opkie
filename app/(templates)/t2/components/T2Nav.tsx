@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { clientMasterData } from "@/data/master";
 
 const navLinks = [
@@ -25,14 +26,16 @@ export default function T2Nav() {
     <header className="sticky top-0 z-50 bg-brand-canvas/95 backdrop-blur-sm border-b border-neutral-border">
       <div className="max-w-6xl mx-auto px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo / Practice Name */}
-          <Link href="/t2" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center">
-              <span className="text-brand-canvas font-bold text-lg">S</span>
-            </div>
-            <span className="font-bold text-brand-mainText text-lg hidden sm:block">
-              {location.practiceNameGBP}
-            </span>
+          {/* Logo */}
+          <Link href="/t2" className="flex items-center">
+            <Image
+              src="/images/logo.webp"
+              alt={location.practiceNameGBP}
+              width={180}
+              height={40}
+              className="h-8 w-auto invert"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

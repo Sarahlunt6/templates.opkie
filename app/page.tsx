@@ -47,14 +47,14 @@ export default function HomePage() {
         </header>
 
         {/* Template Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {templates.map((template) => (
             <a
               key={template.id}
               href={`/${template.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group card-elevated p-6 transition-all duration-200 hover:shadow-xl hover:-translate-y-1"
+              className="group card-elevated p-6 transition-all duration-200 hover:shadow-xl hover:-translate-y-1 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
             >
               {/* Template Preview Placeholder */}
               <div className="aspect-[4/3] bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-lg mb-4 flex items-center justify-center">

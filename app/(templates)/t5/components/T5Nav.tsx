@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { clientMasterData } from "@/data/master";
 
 const navLinks = [
@@ -25,9 +26,16 @@ export default function T5Nav() {
     <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
       <div className="max-w-4xl mx-auto px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo / Practice Name - Minimal */}
-          <Link href="/t5" className="text-sm uppercase tracking-[0.2em] text-brand-mainText hover:text-brand-primary transition-colors">
-            {clientMasterData.globalPracticeName}
+          {/* Logo */}
+          <Link href="/t5" className="flex items-center">
+            <Image
+              src="/images/logo.webp"
+              alt={clientMasterData.globalPracticeName}
+              width={180}
+              height={40}
+              className="h-8 w-auto invert"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation - Minimal */}

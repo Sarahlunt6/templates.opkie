@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { clientMasterData } from "@/data/master";
 
 const footerLinks = [
@@ -19,7 +20,13 @@ export default function T1Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Location NAP */}
           <div>
-            <h3 className="text-xl font-bold mb-4 font-serif">{location.practiceNameGBP}</h3>
+            <Image
+              src="/images/logo.webp"
+              alt={location.practiceNameGBP}
+              width={180}
+              height={40}
+              className="h-10 w-auto mb-4"
+            />
             <address className="not-italic text-gray-300 leading-relaxed">
               <p>{location.addressGBP}</p>
               <p>{location.cityServed}, {location.stateServed}</p>
