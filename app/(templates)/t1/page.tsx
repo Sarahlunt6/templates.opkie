@@ -326,6 +326,57 @@ export default function Template1Page() {
         </div>
       </section>
 
+      {/* Visit Our Office Section */}
+      <section className="relative min-h-[60vh] flex items-center">
+        {/* Background Office Exterior Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/office-exterior.jpg"
+            alt={`${clientMasterData.globalPracticeName} office exterior in ${location.cityServed}`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-mainText/90 via-brand-mainText/70 to-brand-mainText/50" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full px-8 lg:px-16 py-20">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+              Visit Our Office
+            </h2>
+            <p className="text-lg text-gray-200 leading-relaxed mb-8">
+              Conveniently located in {location.cityServed}, our modern facility is designed
+              with your comfort in mind. Easy parking and a welcoming atmosphere await you.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex items-start gap-3 text-white">
+                <svg className="w-6 h-6 text-brand-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div>
+                  <p className="font-semibold">{location.streetAddressGBP}</p>
+                  <p className="text-gray-300">{location.cityServed}, {location.stateServed} {location.postalCodeGBP}</p>
+                </div>
+              </div>
+            </div>
+            <a
+              href={`https://maps.google.com/?q=${encodeURIComponent(`${location.streetAddressGBP}, ${location.cityServed}, ${location.stateServed} ${location.postalCodeGBP}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg bg-white text-brand-mainText font-semibold hover:bg-gray-100 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Reviews Section */}
       <section className="py-20 px-8 lg:px-16 bg-gradient-to-b from-brand-canvas to-brand-primary/5">
         <div className="max-w-6xl mx-auto">
