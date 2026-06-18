@@ -359,9 +359,18 @@ export default function Template5Page() {
             </p>
           </div>
 
-          {/* Map Embed Placeholder */}
-          <div className="aspect-[21/9] bg-neutral-border/30 rounded-sm flex items-center justify-center">
-            <span className="text-neutral-muted">Google Maps Embed</span>
+          {/* Map Embed */}
+          <div className="aspect-[21/9] rounded-sm overflow-hidden">
+            <iframe
+              src={location.googleMapsEmbedUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`Map to ${location.practiceNameGBP}`}
+            />
           </div>
         </div>
       </section>
