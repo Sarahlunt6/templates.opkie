@@ -153,12 +153,12 @@ export default function Template2Page() {
       </section>
 
       {/* Technology Features */}
-      <section className="py-20 px-8 bg-brand-mainText">
+      <section className="py-20 px-8 bg-slate-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-canvas text-center mb-4">
+          <h2 className="text-3xl font-bold text-white text-center mb-4">
             Advanced Technology. Superior Results.
           </h2>
-          <p className="text-brand-canvas/70 text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
             Our investment in cutting-edge dental technology means better outcomes,
             faster recovery, and a more comfortable experience for every patient.
           </p>
@@ -183,11 +183,11 @@ export default function Template2Page() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="p-6 rounded-xl border border-brand-canvas/10 hover:border-brand-accent/50 transition-colors"
+                className="p-6 rounded-xl border border-gray-600 hover:border-brand-accent/50 transition-colors"
               >
                 <div className="w-12 h-12 rounded-lg bg-brand-primary flex items-center justify-center mb-4">
                   <svg
-                    className="w-6 h-6 text-brand-canvas"
+                    className="w-6 h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -200,10 +200,10 @@ export default function Template2Page() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-brand-canvas mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-brand-canvas/70 text-sm leading-relaxed">
+                <p className="text-gray-300 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -268,7 +268,7 @@ export default function Template2Page() {
       </section>
 
       {/* Meet the Doctor - Tech Profile Card */}
-      <section className="py-20 px-8 bg-gradient-to-br from-brand-mainText to-brand-mainText/95">
+      <section className="py-20 px-8 bg-gradient-to-br from-slate-800 to-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             {/* Image */}
@@ -282,36 +282,36 @@ export default function Template2Page() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
                 {/* Tech Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-mainText to-transparent p-6">
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900 to-transparent p-6">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-sm text-brand-canvas/80">Digital Dentistry Specialist</span>
+                    <span className="text-sm text-gray-300">Digital Dentistry Specialist</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Bio */}
-            <div className="lg:col-span-3 text-brand-canvas">
+            <div className="lg:col-span-3">
               <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
-                Lead Practitioner
+                Meet Your Dentist
               </p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
                 {primaryDoctor.name}
               </h2>
               <p className="text-brand-accent text-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-brand-canvas/80 leading-relaxed mb-8">
+              <p className="text-gray-300 leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
               {/* Credentials Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {primaryDoctor.credentials.map((credential, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-brand-canvas/5 border border-brand-canvas/10">
+                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
                     <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm text-brand-canvas/90">{credential}</span>
+                    <span className="text-sm text-gray-300">{credential}</span>
                   </div>
                 ))}
               </div>

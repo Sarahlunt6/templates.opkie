@@ -113,7 +113,7 @@ export default function Template1Page() {
       </section>
 
       {/* Meet the Dentist - T1 Style: Classic Split Layout */}
-      <section className="py-20 px-8 lg:px-16 bg-brand-mainText">
+      <section className="py-20 px-8 lg:px-16 bg-slate-800">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Portrait */}
@@ -129,20 +129,20 @@ export default function Template1Page() {
 
             {/* Bio Content */}
             <div>
-              <p className="text-brand-accent uppercase tracking-widest text-sm mb-4">Meet Your Dentist</p>
-              <h2 className="text-3xl lg:text-4xl font-bold text-brand-canvas mb-2">
+              <p className="text-sky-400 uppercase tracking-widest text-sm mb-4">Meet Your Dentist</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2">
                 {primaryDoctor.name}
               </h2>
-              <p className="text-brand-canvas/70 text-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-brand-canvas/80 leading-relaxed mb-8">
+              <p className="text-gray-400 text-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-gray-300 leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
               {/* Credentials */}
               <ul className="space-y-3 mb-8">
                 {primaryDoctor.credentials.map((credential, index) => (
-                  <li key={index} className="flex items-start gap-3 text-brand-canvas/80">
-                    <svg className="w-5 h-5 text-brand-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <li key={index} className="flex items-start gap-3 text-gray-300">
+                    <svg className="w-5 h-5 text-sky-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     {credential}
@@ -151,18 +151,18 @@ export default function Template1Page() {
               </ul>
 
               {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-brand-canvas/20">
+              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-700">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-brand-accent">15+</p>
-                  <p className="text-sm text-brand-canvas/60">Years Experience</p>
+                  <p className="text-3xl font-bold text-sky-400">15+</p>
+                  <p className="text-sm text-gray-400">Years Experience</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-brand-accent">5,000+</p>
-                  <p className="text-sm text-brand-canvas/60">Smiles Created</p>
+                  <p className="text-3xl font-bold text-sky-400">5,000+</p>
+                  <p className="text-sm text-gray-400">Smiles Created</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-brand-accent">98%</p>
-                  <p className="text-sm text-brand-canvas/60">Patient Satisfaction</p>
+                  <p className="text-3xl font-bold text-sky-400">98%</p>
+                  <p className="text-sm text-gray-400">Patient Satisfaction</p>
                 </div>
               </div>
             </div>

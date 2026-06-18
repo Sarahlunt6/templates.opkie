@@ -14,15 +14,15 @@ export default function T4Footer() {
   const { trustSignals } = clientMasterData;
 
   return (
-    <footer className="py-16 px-8 bg-brand-mainText">
+    <footer className="py-16 px-8 bg-slate-800">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Practice Info */}
           <div>
-            <h3 className="text-xl font-bold text-brand-canvas mb-4">
+            <h3 className="text-xl font-bold text-white mb-4">
               {location.practiceNameGBP}
             </h3>
-            <address className="not-italic text-brand-canvas/70 leading-relaxed">
+            <address className="not-italic text-gray-300 leading-relaxed">
               <p>{location.addressGBP}</p>
               <p>
                 {location.cityServed}, {location.stateServed}
@@ -30,7 +30,7 @@ export default function T4Footer() {
               <p className="mt-2">
                 <a
                   href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="hover:text-brand-accent transition-colors"
+                  className="hover:text-sky-400 transition-colors"
                 >
                   {location.phoneGBP}
                 </a>
@@ -40,13 +40,13 @@ export default function T4Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-brand-canvas mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-brand-canvas/70 hover:text-brand-accent text-sm transition-colors"
+                    className="text-gray-300 hover:text-sky-400 text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -57,8 +57,8 @@ export default function T4Footer() {
 
           {/* Hours */}
           <div>
-            <h4 className="font-semibold text-brand-canvas mb-4">Hours</h4>
-            <ul className="text-brand-canvas/70 space-y-2">
+            <h4 className="font-semibold text-white mb-4">Hours</h4>
+            <ul className="text-gray-300 space-y-2">
               {location.hoursOfOperation.map((h, i) => (
                 <li key={i} className="flex justify-between text-sm gap-4">
                   <span>{h.dayRange}</span>
@@ -70,13 +70,13 @@ export default function T4Footer() {
 
           {/* Insurance */}
           <div>
-            <h4 className="font-semibold text-brand-canvas mb-4">Insurance</h4>
-            <p className="text-brand-canvas/70 text-sm mb-4">
+            <h4 className="font-semibold text-white mb-4">Insurance</h4>
+            <p className="text-gray-300 text-sm mb-4">
               {trustSignals.insuranceAcceptedText}
             </p>
             <a
               href={clientMasterData.onlineBookingUrl}
-              className="inline-block px-5 py-2.5 rounded-full bg-brand-primary text-brand-canvas font-semibold text-sm hover:shadow-lg transition-all"
+              className="inline-block px-5 py-2.5 rounded-full bg-teal-600 text-white font-semibold text-sm hover:shadow-lg transition-all"
             >
               Book Online
             </a>
@@ -84,15 +84,15 @@ export default function T4Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-brand-canvas/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-brand-canvas/50 text-sm">
+        <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} {location.practiceNameGBP}. All rights reserved.
           </p>
-          <div className="flex gap-6 text-brand-canvas/50 text-sm">
-            <Link href="/t4" className="hover:text-brand-canvas transition-colors">
+          <div className="flex gap-6 text-gray-500 text-sm">
+            <Link href="/t4" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/t4" className="hover:text-brand-canvas transition-colors">
+            <Link href="/t4" className="hover:text-white transition-colors">
               Accessibility
             </Link>
           </div>

@@ -58,7 +58,7 @@ export default function Template4Page() {
       </section>
 
       {/* Trust Indicators - Cosmetic/Luxury Style */}
-      <section className="py-12 px-8 bg-brand-mainText">
+      <section className="py-12 px-8 bg-slate-800">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -68,10 +68,10 @@ export default function Template4Page() {
               { value: "Award", label: "Winning", detail: "Aesthetics" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-brand-accent mb-1">{stat.value}</p>
-                <p className="text-brand-canvas/80 text-sm">
+                <p className="text-3xl md:text-4xl font-bold text-sky-400 mb-1">{stat.value}</p>
+                <p className="text-gray-300 text-sm">
                   {stat.label}<br />
-                  <span className="text-brand-canvas/60">{stat.detail}</span>
+                  <span className="text-gray-400">{stat.detail}</span>
                 </p>
               </div>
             ))}
@@ -136,12 +136,12 @@ export default function Template4Page() {
       </section>
 
       {/* Treatment Categories with City Keywords */}
-      <section className="py-20 px-8 bg-brand-mainText">
+      <section className="py-20 px-8 bg-slate-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-canvas text-center mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
             Cosmetic Services in {location.cityServed}
           </h2>
-          <p className="text-brand-canvas/70 text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
             Each treatment is customized to enhance your unique smile while maintaining
             natural beauty and optimal oral health.
           </p>
@@ -293,7 +293,7 @@ export default function Template4Page() {
       </section>
 
       {/* Consultation CTA */}
-      <section className="py-20 px-8 bg-brand-primary relative overflow-hidden">
+      <section className="py-20 px-8 bg-teal-700 relative overflow-hidden">
         {/* Background Team Image */}
         <div className="absolute inset-0">
           <Image
@@ -305,17 +305,17 @@ export default function Template4Page() {
           />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-canvas mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready for Your Transformation?
           </h2>
-          <p className="text-brand-canvas/80 mb-8 max-w-xl mx-auto">
+          <p className="text-gray-200 mb-8 max-w-xl mx-auto">
             Schedule a complimentary smile consultation. We'll discuss your goals,
             explore options, and create a personalized treatment plan.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-canvas text-brand-primary font-semibold hover:shadow-lg transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-lg transition-all"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
@@ -325,7 +325,7 @@ export default function Template4Page() {
             {clientMasterData.onlineBookingUrl !== "none" && (
               <a
                 href={clientMasterData.onlineBookingUrl}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-brand-canvas text-brand-canvas font-semibold hover:bg-brand-canvas hover:text-brand-primary transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-teal-700 transition-all"
               >
                 Book Consultation
               </a>

@@ -168,12 +168,12 @@ export default function Template3Page() {
       </section>
 
       {/* Meet the Dentist - Family Friendly Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-brand-primary to-brand-accent">
+      <section className="py-20 px-8 bg-gradient-to-br from-teal-700 to-sky-600">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image with fun border */}
             <div className="relative">
-              <div className="absolute -inset-4 bg-brand-canvas/20 rounded-3xl rotate-3" />
+              <div className="absolute -inset-4 bg-white/20 rounded-3xl rotate-3" />
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/team/doctor-portrait.png"
@@ -186,16 +186,16 @@ export default function Template3Page() {
             </div>
 
             {/* Bio */}
-            <div className="text-brand-canvas">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-canvas/20 text-brand-canvas text-sm font-medium mb-4">
+            <div className="text-white">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
                 <span>👋</span>
                 <span>Meet Your Dentist</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-2">
                 {primaryDoctor.name}
               </h2>
-              <p className="text-brand-canvas/80 text-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-brand-canvas/90 leading-relaxed mb-8">
+              <p className="text-gray-200 text-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-gray-100 leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
@@ -204,7 +204,7 @@ export default function Template3Page() {
                 {primaryDoctor.credentials.map((credential, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-brand-canvas/20 text-brand-canvas text-sm"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/20 text-white text-sm"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />

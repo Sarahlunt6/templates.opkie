@@ -72,7 +72,7 @@ export const clientMasterData: MasterDentalPracticeSchema = {
 
   doctors: [
     {
-      name: "Dr. Sarah Mitchell, DDS",
+      name: "Dr. Michael Roberts, DDS",
       role: "Lead Cosmetic Dentist & Practice Owner",
       credentials: [
         "Doctor of Dental Surgery, University of Utah",
@@ -80,8 +80,8 @@ export const clientMasterData: MasterDentalPracticeSchema = {
         "Invisalign Diamond Provider",
       ],
       biography:
-        "With over 15 years of experience in cosmetic and restorative dentistry, Dr. Mitchell has transformed thousands of smiles across the Wasatch Front. Her patient-first philosophy combines cutting-edge technology with compassionate care.",
-      portraitUrl: "/images/doctors/dr-mitchell-placeholder.jpg",
+        "With over 15 years of experience in cosmetic and restorative dentistry, Dr. Roberts has transformed thousands of smiles across the Wasatch Front. His patient-first philosophy combines cutting-edge technology with compassionate care.",
+      portraitUrl: "/images/doctors/dr-roberts-placeholder.jpg",
     },
     {
       name: "Dr. James Chen, DMD",
