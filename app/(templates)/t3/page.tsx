@@ -389,40 +389,134 @@ export default function Template3Page() {
         </div>
       </section>
 
-      {/* Comfort Amenities */}
-      <section className="py-20 px-8 bg-brand-primary/5">
+      {/* Comfort Amenities - Elevated Design */}
+      <section className="py-20 px-8 bg-gradient-to-br from-slate-50 to-teal-50 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-mainText text-center mb-12">
-            Comfort is Our Priority
-          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Image with floating cards */}
+            <div className="relative">
+              {/* Main image */}
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/office-interior.jpg"
+                  alt="Our comfortable, modern dental office"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
+              </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: "M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z", label: "TVs in Every Room" },
-              { icon: "M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3", label: "Calming Music" },
-              { icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z", label: "Aromatherapy" },
-              { icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z", label: "Comfort Menu" },
-            ].map((amenity, index) => (
-              <div key={index} className="text-center p-6 rounded-2xl bg-brand-canvas border border-neutral-border">
-                <div className="w-14 h-14 rounded-full bg-brand-accent/20 flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-7 h-7 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={amenity.icon} />
+              {/* Floating accent cards */}
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-teal-100">
+                <div className="w-12 h-12 rounded-full bg-teal-500 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-brand-mainText">{amenity.label}</span>
+                <div>
+                  <p className="font-semibold text-slate-800">100%</p>
+                  <p className="text-xs text-slate-500">Comfort Focused</p>
+                </div>
               </div>
-            ))}
+
+              <div className="absolute -top-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-teal-100">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">😌</span>
+                  <span className="text-sm font-medium text-slate-700">Relax & Unwind</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Content */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 text-teal-700 text-sm font-medium mb-4">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                </svg>
+                <span>Your Comfort Matters</span>
+              </div>
+
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
+                Comfort is Our Priority
+              </h2>
+              <p className="text-slate-600 mb-8 leading-relaxed">
+                We've thoughtfully designed every aspect of your visit to feel more like a spa than a dental office. From the moment you arrive, you'll experience care that puts your comfort first.
+              </p>
+
+              {/* Amenity grid with hover effects */}
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  {
+                    icon: "M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z",
+                    label: "TVs in Every Room",
+                    description: "Stream your favorites"
+                  },
+                  {
+                    icon: "M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3",
+                    label: "Calming Music",
+                    description: "Curated playlists"
+                  },
+                  {
+                    icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+                    label: "Aromatherapy",
+                    description: "Soothing scents"
+                  },
+                  {
+                    icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+                    label: "Comfort Menu",
+                    description: "Blankets & pillows"
+                  },
+                ].map((amenity, index) => (
+                  <div
+                    key={index}
+                    className="group p-5 rounded-2xl bg-white border border-slate-200 hover:border-teal-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={amenity.icon} />
+                      </svg>
+                    </div>
+                    <h4 className="font-semibold text-slate-800 mb-1">{amenity.label}</h4>
+                    <p className="text-sm text-slate-500">{amenity.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
+          {/* Sedation Dentistry - Premium callout */}
           {trustSignals.hasSedationAnxietyCare && (
-            <div className="mt-12 p-8 rounded-2xl bg-brand-canvas border border-neutral-border text-center">
-              <h3 className="text-xl font-semibold text-brand-mainText mb-2">
-                Sedation Dentistry Available
-              </h3>
-              <p className="text-neutral-muted max-w-xl mx-auto">
-                For patients with dental anxiety, we offer gentle sedation options to ensure
-                a completely comfortable experience. Ask us about our anxiety-free care program.
-              </p>
+            <div className="mt-16 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-600 to-sky-600 rounded-3xl transform rotate-1" />
+              <div className="relative bg-gradient-to-r from-teal-600 to-sky-600 rounded-3xl p-8 lg:p-12">
+                <div className="flex flex-col lg:flex-row items-center gap-8">
+                  <div className="flex-shrink-0">
+                    <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1 text-center lg:text-left">
+                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">
+                      Anxiety-Free Sedation Dentistry
+                    </h3>
+                    <p className="text-teal-100 text-lg leading-relaxed max-w-2xl">
+                      Dental anxiety? We understand. Our gentle sedation options help you relax completely, so you can get the care you need without the stress. Wake up with your treatment complete!
+                    </p>
+                  </div>
+                  <a
+                    href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                    className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                    Learn More
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
           )}
         </div>
