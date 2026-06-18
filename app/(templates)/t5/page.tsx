@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function Template5Page() {
-  const { trustSignals, doctors } = clientMasterData;
+  const { doctors } = clientMasterData;
   const primaryDoctor = doctors[0];
 
   return (
@@ -366,16 +366,6 @@ export default function Template5Page() {
         </div>
       </section>
 
-      {/* Reviews - Minimal */}
-      <section className="py-24 px-8 bg-brand-canvas">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-light text-brand-mainText text-center mb-16">
-            Patient Experiences
-          </h2>
-          <ReviewMatrix reviews={sampleReviews.slice(0, 2)} columns={2} />
-        </div>
-      </section>
-
       {/* Kind Words - Zen Testimonials */}
       <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
         <div className="max-w-4xl mx-auto">
@@ -401,9 +391,9 @@ export default function Template5Page() {
                   ))}
                 </div>
                 <p className="text-neutral-muted leading-relaxed mb-6 italic">
-                  "{review.text}"
+                  "{review.reviewText}"
                 </p>
-                <p className="text-sm font-medium text-brand-mainText">{review.author}</p>
+                <p className="text-sm font-medium text-brand-mainText">{review.reviewerName}</p>
               </div>
             ))}
           </div>
