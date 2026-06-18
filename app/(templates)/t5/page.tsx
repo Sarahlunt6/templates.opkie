@@ -19,7 +19,7 @@ export default function Template5Page() {
     <div className="font-sans">
       <T5Nav />
       {/* Hero Section - Zen with Visual Interest */}
-      <section className="min-h-[90vh] flex items-center px-8 pt-28 pb-20 bg-brand-canvas relative overflow-hidden">
+      <section className="min-h-[90vh] flex items-center px-8 pt-8 pb-20 bg-brand-canvas relative overflow-hidden">
         {/* Subtle Background Pattern */}
         <div className="absolute inset-0 opacity-[0.03]">
           <div className="h-full w-full" style={{
