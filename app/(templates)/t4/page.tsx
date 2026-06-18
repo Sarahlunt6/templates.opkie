@@ -251,17 +251,22 @@ export default function Template4Page() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "Invisalign", tag: "Clear Aligners" },
-              { title: "Porcelain Veneers", tag: "Smile Makeover" },
-              { title: "Teeth Whitening", tag: "Brightening" },
-              { title: "Dental Bonding", tag: "Quick Fix" },
+              { title: "Invisalign", tag: "Clear Aligners", image: "/images/services/invisalign.jpg" },
+              { title: "Porcelain Veneers", tag: "Smile Makeover", image: "/images/services/veneers.jpg" },
+              { title: "Teeth Whitening", tag: "Brightening", image: "/images/services/whitening.jpg" },
+              { title: "Dental Bonding", tag: "Quick Fix", image: "/images/services/bonding.jpg" },
             ].map((treatment, index) => (
               <div
                 key={index}
                 className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer"
               >
-                {/* Placeholder Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary to-brand-accent" />
+                {/* Service Image */}
+                <Image
+                  src={treatment.image}
+                  alt={treatment.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

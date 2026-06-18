@@ -404,37 +404,6 @@ export default function Template5Page() {
         </div>
       </section>
 
-      {/* Location & Philosophy Block */}
-      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText mb-4">
-              Serving {location.cityServed} & Beyond
-            </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto leading-relaxed">
-              Our practice welcomes patients from throughout {location.stateServed}, including
-              {" "}{location.localizedNeighborhoods.slice(0, 3).join(", ")}, and surrounding communities.
-              We believe that exceptional dental care should be a sanctuary—a place where your
-              complete wellbeing is the priority.
-            </p>
-          </div>
-
-          {/* Map Embed */}
-          <div className="aspect-[21/9] rounded-sm overflow-hidden">
-            <iframe
-              src={location.googleMapsEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={`Map to ${location.practiceNameGBP}`}
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Kind Words - Zen Testimonials */}
       <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
         <div className="max-w-4xl mx-auto">

@@ -422,7 +422,11 @@ export default function Template3Page() {
 
               <div className="absolute -top-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-teal-100">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">😌</span>
+                  <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                  </div>
                   <span className="text-sm font-medium text-slate-700">Relax & Unwind</span>
                 </div>
               </div>
