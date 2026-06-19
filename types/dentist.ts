@@ -42,6 +42,7 @@ export interface TrustSignals {
 
 export interface MasterDentalPracticeSchema {
   globalPracticeName: string;
+  practiceNiche: 'dental' | 'ortho';
   brandingLogoUrl: string;
   onlineBookingUrl: string | "none";
   locations: LocationNAP[];

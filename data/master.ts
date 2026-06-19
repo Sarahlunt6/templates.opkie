@@ -6,6 +6,7 @@ import type {
 
 export const clientMasterData: MasterDentalPracticeSchema = {
   globalPracticeName: "Summit Dental Group",
+  practiceNiche: "dental",
   brandingLogoUrl: "/images/logo-placeholder.svg",
   onlineBookingUrl: "https://booking.example.com/summit-dental",
 
