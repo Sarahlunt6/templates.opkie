@@ -9,16 +9,12 @@ export default function HomePage() {
     { id: "t1", name: "Template 1" },
     { id: "t2", name: "Template 2" },
     { id: "t3", name: "Template 3" },
-    { id: "t4", name: "Template 4" },
-    { id: "t5", name: "Template 5" },
   ];
 
   const orthoTemplates = [
     { id: "t1-ortho", name: "Template 1" },
     { id: "t2-ortho", name: "Template 2" },
     { id: "t3-ortho", name: "Template 3" },
-    { id: "t4-ortho", name: "Template 4" },
-    { id: "t5-ortho", name: "Template 5" },
   ];
 
   const templates = practiceType === "dental" ? dentalTemplates : orthoTemplates;
