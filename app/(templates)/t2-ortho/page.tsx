@@ -19,25 +19,25 @@ export default function Template2OrthoPage() {
     <div className="font-sans">
       <T2OrthoNav />
       {/* Hero Section - Centered Canvas */}
-      <section className="min-h-[80vh] flex flex-col items-center justify-center px-8 py-20 bg-brand-canvas relative overflow-hidden">
+      <section className="min-h-[80vh] flex flex-col items-center justify-center px-fluid py-fluid-24 bg-brand-canvas relative overflow-hidden group">
         {/* Background Team Image */}
         <div className="absolute inset-0">
           <Image
             src="/images/team-ortho.jpeg"
             alt={`Our orthodontic team at ${clientMasterDataOrtho.globalPracticeName} in ${location.cityServed}`}
             fill
-            className="object-cover opacity-10"
+            className="object-cover opacity-10 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             sizes="100vw"
             priority
           />
         </div>
-        {/* Background Grid Pattern */}
+        {/* Architectural Grid Pattern */}
         <div
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
           }}
         />
 
@@ -63,14 +63,14 @@ export default function Template2OrthoPage() {
         </div>
 
         {/* Main Headline */}
-        <h1 className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-bold text-brand-mainText text-center max-w-4xl leading-tight mb-6">
+        <h1 className="relative z-10 text-fluid-4xl md:text-fluid-5xl lg:text-fluid-6xl font-bold text-brand-mainText text-center max-w-4xl leading-tight mb-6">
           Precision Digital Orthodontics.
           <br />
           <span className="text-brand-primary">Your Perfect Smile Awaits.</span>
         </h1>
 
         {/* Subheading */}
-        <p className="relative z-10 text-lg md:text-xl text-neutral-muted text-center max-w-2xl mb-10">
+        <p className="relative z-10 text-fluid-lg md:text-fluid-xl text-neutral-muted text-center max-w-2xl mb-10">
           Experience the future of orthodontic care in {location.cityServed}. Our advanced 3D imaging
           and digital treatment planning deliver exceptional results with unprecedented comfort.
         </p>
@@ -128,22 +128,31 @@ export default function Template2OrthoPage() {
       </section>
 
       {/* Welcome Video - Tech Style */}
-      <section className="py-20 px-8 bg-slate-800">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-10">
-            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
               Behind The Scenes
             </p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 className="text-fluid-3xl lg:text-fluid-4xl font-bold text-white mb-4">
               Meet Our Digital Orthodontics Team
             </h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-gray-300 max-w-2xl mx-auto">
               See the technology, meet the team, and hear from patients about their experience with our precision-driven approach to orthodontic care.
             </p>
           </div>
-          <div className="relative aspect-video rounded-2xl overflow-hidden border border-gray-600 shadow-2xl">
+          <div className="group relative aspect-video rounded-2xl overflow-hidden border border-gray-600 shadow-premium-lg transition-all duration-500 hover:border-brand-primary/50 hover:shadow-[0_24px_64px_rgba(15,118,110,0.2)]">
             <video
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
               controls
               poster="/images/team/staff-photo.jpg"
             >
@@ -160,16 +169,25 @@ export default function Template2OrthoPage() {
       </section>
 
       {/* Premium Services - Dark Tech Style */}
-      <section className="py-20 px-8 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-slate-900 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.015] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-3">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
               Digital Precision
             </p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 className="text-fluid-3xl lg:text-fluid-4xl font-bold text-white mb-4">
               Advanced Orthodontic Solutions
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-slate-400 max-w-2xl mx-auto">
               Cutting-edge treatments powered by digital precision for optimal outcomes.
             </p>
           </div>
@@ -198,17 +216,17 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
             ].map((service, index) => (
               <div
                 key={index}
-                className="group p-6 bg-slate-800/50 border border-slate-700 rounded-xl hover:border-brand-primary/50 hover:bg-slate-800 transition-all"
+                className="group p-6 bg-slate-800/50 border border-slate-700 rounded-xl hover:border-brand-primary/50 hover:bg-slate-800 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_16px_48px_rgba(15,118,110,0.15)]"
               >
-                <div className="w-12 h-12 rounded-lg bg-brand-primary/20 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-lg bg-brand-primary/20 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
                   <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-fluid-lg font-semibold text-white mb-2">
                   {service.title}
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <p className="text-fluid-sm text-slate-400 leading-relaxed">
                   {service.description}
                 </p>
               </div>
@@ -223,9 +241,9 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
               { value: "5000+", label: "Smiles Created" },
               { value: "15+", label: "Years Experience" },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <p className="text-3xl font-bold text-brand-primary mb-1">{stat.value}</p>
-                <p className="text-sm text-slate-400">{stat.label}</p>
+              <div key={index} className="text-center group">
+                <p className="text-fluid-4xl font-bold text-brand-primary mb-1 transition-transform duration-300 group-hover:scale-105">{stat.value}</p>
+                <p className="text-fluid-sm text-slate-400">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -233,12 +251,24 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Technology Features */}
-      <section className="py-20 px-8 bg-slate-800">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-white text-center mb-4">
+      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary text-center mb-3">
+            Our Technology
+          </p>
+          <h2 className="text-fluid-3xl font-bold text-white text-center mb-4">
             Advanced Technology. Superior Results.
           </h2>
-          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-fluid-base text-gray-300 text-center mb-12 max-w-2xl mx-auto">
             Our investment in cutting-edge orthodontic technology means better outcomes,
             faster treatment, and a more comfortable experience for every patient.
           </p>
@@ -263,9 +293,9 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
             ].map((feature, index) => (
               <div
                 key={index}
-                className="p-6 rounded-xl border border-gray-600 hover:border-brand-accent/50 transition-colors"
+                className="group p-6 rounded-xl border border-gray-600 hover:border-brand-accent/50 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_16px_48px_rgba(56,189,248,0.1)]"
               >
-                <div className="w-12 h-12 rounded-lg bg-brand-primary flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-lg bg-brand-primary flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
                   <svg
                     className="w-6 h-6 text-white"
                     fill="none"
@@ -280,10 +310,10 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-fluid-lg font-semibold text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-fluid-sm text-gray-300 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -293,13 +323,25 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Before/After - Tech Comparison View */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-mainText mb-4">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
+              Transformations
+            </p>
+            <h2 className="text-fluid-3xl font-bold text-brand-mainText mb-4">
               Digital Precision. Real Results.
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
               Our advanced imaging and treatment planning technology delivers predictable,
               exceptional outcomes. See the difference digital orthodontics makes.
             </p>
@@ -307,40 +349,40 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Before */}
-            <div className="relative rounded-2xl overflow-hidden border border-neutral-border">
+            <div className="group relative rounded-2xl overflow-hidden border border-neutral-border shadow-premium transition-all duration-500 hover:shadow-premium-lg hover:border-neutral-muted">
               <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-mainText/90 rounded-lg">
                 <span className="text-sm font-semibold text-brand-canvas">BEFORE</span>
               </div>
-              <div className="aspect-[4/3] relative">
+              <div className="aspect-[4/3] relative overflow-hidden">
                 <Image
                   src="/images/cases/smile-before-ortho.png"
                   alt="Before orthodontic treatment"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
               <div className="p-4 bg-brand-primary/5">
-                <p className="text-sm text-neutral-muted">Initial digital scan and analysis</p>
+                <p className="text-fluid-sm text-neutral-muted">Initial digital scan and analysis</p>
               </div>
             </div>
 
             {/* After */}
-            <div className="relative rounded-2xl overflow-hidden border border-brand-primary">
+            <div className="group relative rounded-2xl overflow-hidden border-2 border-brand-primary shadow-premium transition-all duration-500 hover:shadow-[0_24px_64px_rgba(15,118,110,0.2)]">
               <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-primary rounded-lg">
                 <span className="text-sm font-semibold text-brand-canvas">AFTER</span>
               </div>
-              <div className="aspect-[4/3] relative">
+              <div className="aspect-[4/3] relative overflow-hidden">
                 <Image
                   src="/images/cases/smile-after-ortho.png"
                   alt="After orthodontic treatment"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
               <div className="p-4 bg-brand-primary/10">
-                <p className="text-sm text-brand-primary font-medium">Precision-crafted result</p>
+                <p className="text-fluid-sm text-brand-primary font-medium">Precision-crafted result</p>
               </div>
             </div>
           </div>
@@ -348,17 +390,26 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Meet the Doctor - Tech Profile Card */}
-      <section className="py-20 px-8 bg-gradient-to-br from-slate-800 to-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.015] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             {/* Image */}
             <div className="lg:col-span-2">
-              <div className="relative aspect-square rounded-2xl overflow-hidden border-4 border-brand-primary/20">
+              <div className="group relative aspect-square rounded-2xl overflow-hidden border-4 border-brand-primary/20 shadow-premium-lg transition-all duration-500 hover:border-brand-primary/40">
                 <Image
                   src="/images/team/doctor-portrait.png"
                   alt={`${primaryDoctor.name}, ${primaryDoctor.role}`}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
                 {/* Tech Overlay */}
@@ -373,25 +424,25 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
 
             {/* Bio */}
             <div className="lg:col-span-3">
-              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
                 Meet Your Orthodontist
               </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+              <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-white mb-2">
                 {primaryDoctor.name}
               </h2>
-              <p className="text-brand-accent text-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-gray-300 leading-relaxed mb-8">
+              <p className="text-brand-accent text-fluid-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-fluid-base text-gray-300 leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
               {/* Credentials Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {primaryDoctor.credentials.map((credential, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
-                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <div key={index} className="group/cred flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10 transition-all duration-300 hover:bg-white/10 hover:border-brand-primary/30">
+                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0 transition-transform duration-300 group-hover/cred:scale-110" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm text-gray-300">{credential}</span>
+                    <span className="text-fluid-sm text-gray-300">{credential}</span>
                   </div>
                 ))}
               </div>
@@ -401,9 +452,21 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-mainText text-center mb-12">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary text-center mb-3">
+            Our Services
+          </p>
+          <h2 className="text-fluid-3xl font-bold text-brand-mainText text-center mb-12">
             Our Treatments in {location.cityServed}
           </h2>
 
@@ -411,15 +474,15 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
             {location.secondaryCategoriesGBP.map((category, index) => (
               <div
                 key={index}
-                className="group p-6 rounded-xl border border-neutral-border hover:border-brand-primary hover:shadow-lg transition-all cursor-pointer"
+                className="group p-6 rounded-xl border border-neutral-border hover:border-brand-primary hover:shadow-premium-lg transition-all duration-300 cursor-pointer hover:translate-y-[-4px]"
               >
-                <h3 className="font-semibold text-brand-mainText group-hover:text-brand-primary transition-colors">
+                <h3 className="font-semibold text-brand-mainText group-hover:text-brand-primary transition-colors text-fluid-base">
                   {category}
                 </h3>
-                <p className="text-sm text-neutral-muted mt-2">
+                <p className="text-fluid-sm text-neutral-muted mt-2">
                   Advanced {category.toLowerCase()} using the latest digital technology.
                 </p>
-                <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="inline-flex items-center gap-1 text-fluid-sm font-medium text-brand-primary mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:gap-2">
                   Learn more
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -432,15 +495,24 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Come Visit Us Section - Tech Style */}
-      <section className="py-20 px-8 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: Hours */}
             <div>
-              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
                 Location & Hours
               </p>
-              <h2 className="text-3xl font-bold text-brand-mainText mb-8">
+              <h2 className="text-fluid-3xl font-bold text-brand-mainText mb-8">
                 Visit Our Digital Orthodontics Center
               </h2>
               <div className="space-y-3">
@@ -455,10 +527,10 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
                 ].map((schedule, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center py-3 px-4 rounded-lg bg-brand-primary/5 border border-brand-primary/10"
+                    className="group flex justify-between items-center py-3 px-4 rounded-lg bg-brand-primary/5 border border-brand-primary/10 hover:border-brand-primary/30 hover:bg-brand-primary/10 transition-all duration-300 cursor-default"
                   >
-                    <span className="text-brand-mainText font-medium">{schedule.day}</span>
-                    <span className={schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-primary font-semibold"}>
+                    <span className="text-fluid-base text-brand-mainText font-medium">{schedule.day}</span>
+                    <span className={`text-fluid-base ${schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-primary font-semibold"}`}>
                       {schedule.hours}
                     </span>
                   </div>
@@ -466,7 +538,7 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
               </div>
               <a
                 href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-lg bg-brand-primary text-brand-canvas font-semibold hover:brightness-110 transition-all"
+                className="btn-primary mt-8 gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -476,7 +548,7 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
             </div>
 
             {/* Right: Map */}
-            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-neutral-border h-[450px]">
+            <div className="group relative rounded-2xl overflow-hidden shadow-premium-lg border border-neutral-border h-[450px] hover:shadow-[0_24px_60px_rgba(15,118,110,0.15)] transition-all duration-500">
               <iframe
                 src={location.googleMapsEmbedUrl}
                 width="100%"
@@ -486,6 +558,7 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title={`Map to ${location.practiceNameGBP}`}
+                className="transition-transform duration-700 ease-out group-hover:scale-[1.02]"
               />
             </div>
           </div>
@@ -493,38 +566,47 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Payment Plans - Tech Dashboard Style */}
-      <section className="py-20 px-8 bg-slate-800">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
               Flexible Financing
             </p>
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-fluid-3xl font-bold text-white mb-4">
               Affordable Orthodontic Care
             </h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-gray-300 max-w-2xl mx-auto">
               We believe everyone deserves a beautiful smile. Flexible payment plans with
               <span className="text-brand-primary font-bold"> 0% financing</span> available for up to 24 months.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-8">
+            <div className="group rounded-2xl bg-white/5 border border-white/10 p-8 hover:border-brand-primary/50 hover:bg-white/[0.08] transition-all duration-500 hover:translate-y-[-4px]">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-brand-primary" />
-                <span className="text-sm font-semibold text-white uppercase tracking-wide">Basic Braces</span>
+                <div className="w-3 h-3 rounded-full bg-brand-primary group-hover:scale-125 transition-transform duration-300" />
+                <span className="text-fluid-xs font-semibold text-white uppercase tracking-wide">Basic Braces</span>
               </div>
               <div className="mb-6">
-                <span className="text-lg text-gray-400">Starting at</span>
+                <span className="text-fluid-base text-gray-400">Starting at</span>
                 <div>
-                  <span className="text-5xl font-bold text-white">$99</span>
-                  <span className="text-gray-400">/month</span>
+                  <span className="text-fluid-5xl font-bold text-white">$99</span>
+                  <span className="text-fluid-base text-gray-400">/month</span>
                 </div>
               </div>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-fluid-sm text-gray-300">
                 {["Metal or Ceramic Brackets", "All Adjustments Included", "Retainers Included", "24/7 Emergency Support", "Flexible Scheduling"].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     {item}
@@ -533,25 +615,25 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
               </ul>
             </div>
 
-            <div className="rounded-2xl bg-brand-primary/20 border border-brand-primary/30 p-8 relative">
-              <div className="absolute -top-3 right-4 px-3 py-1 bg-brand-primary rounded-full text-xs font-semibold text-white">
+            <div className="group rounded-2xl bg-brand-primary/20 border border-brand-primary/30 p-8 relative hover:border-brand-primary/60 hover:bg-brand-primary/25 transition-all duration-500 hover:translate-y-[-4px] hover:shadow-[0_24px_60px_rgba(15,118,110,0.25)]">
+              <div className="absolute -top-3 right-4 px-3 py-1 bg-brand-primary rounded-full text-xs font-semibold text-white shadow-premium">
                 Most Popular
               </div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-brand-primary" />
-                <span className="text-sm font-semibold text-white uppercase tracking-wide">Invisalign</span>
+                <div className="w-3 h-3 rounded-full bg-brand-primary group-hover:scale-125 transition-transform duration-300" />
+                <span className="text-fluid-xs font-semibold text-white uppercase tracking-wide">Invisalign</span>
               </div>
               <div className="mb-6">
-                <span className="text-lg text-gray-400">Starting at</span>
+                <span className="text-fluid-base text-gray-400">Starting at</span>
                 <div>
-                  <span className="text-5xl font-bold text-white">$149</span>
-                  <span className="text-gray-400">/month</span>
+                  <span className="text-fluid-5xl font-bold text-white">$149</span>
+                  <span className="text-fluid-base text-gray-400">/month</span>
                 </div>
               </div>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-fluid-sm text-gray-300">
                 {["Clear Aligner Treatment", "Virtual Progress Tracking", "All Refinements Included", "Retainers Included", "Whitening Treatment"].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     {item}
@@ -560,22 +642,22 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
               </ul>
             </div>
 
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-8">
+            <div className="group rounded-2xl bg-white/5 border border-white/10 p-8 hover:border-brand-primary/50 hover:bg-white/[0.08] transition-all duration-500 hover:translate-y-[-4px]">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-brand-primary" />
-                <span className="text-sm font-semibold text-white uppercase tracking-wide">Teen Treatment</span>
+                <div className="w-3 h-3 rounded-full bg-brand-primary group-hover:scale-125 transition-transform duration-300" />
+                <span className="text-fluid-xs font-semibold text-white uppercase tracking-wide">Teen Treatment</span>
               </div>
               <div className="mb-6">
-                <span className="text-lg text-gray-400">Starting at</span>
+                <span className="text-fluid-base text-gray-400">Starting at</span>
                 <div>
-                  <span className="text-5xl font-bold text-white">$89</span>
-                  <span className="text-gray-400">/month</span>
+                  <span className="text-fluid-5xl font-bold text-white">$89</span>
+                  <span className="text-fluid-base text-gray-400">/month</span>
                 </div>
               </div>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-fluid-sm text-gray-300">
                 {["Braces or Invisalign Teen", "Fun Bracket Colors", "Sports Mouthguard", "School-Friendly Scheduling", "Sibling Discounts Available"].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     {item}
@@ -588,14 +670,23 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Patient Testimonials - Tech Style */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
             <div className="lg:col-span-1">
-              <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-2">
+              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
                 Patient Feedback
               </p>
-              <h2 className="text-3xl font-bold text-brand-mainText leading-tight mb-6">
+              <h2 className="text-fluid-3xl font-bold text-brand-mainText leading-tight mb-6">
                 5-Star Smile Experience
               </h2>
               <div className="flex items-center gap-1 mb-2">
@@ -605,20 +696,20 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
                   </svg>
                 ))}
               </div>
-              <p className="text-sm text-neutral-muted">Based on 200+ verified reviews</p>
+              <p className="text-fluid-sm text-neutral-muted">Based on 200+ verified reviews</p>
             </div>
 
             <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
               {sampleReviewsOrtho.slice(0, 3).map((review, index) => (
-                <div key={index} className="p-6 rounded-xl bg-brand-primary/5 border border-brand-primary/10">
-                  <p className="text-brand-mainText leading-relaxed mb-6">{review.reviewText}</p>
+                <div key={index} className="group p-6 rounded-xl bg-brand-primary/5 border border-brand-primary/10 hover:border-brand-primary/30 hover:shadow-premium-lg transition-all duration-500 hover:translate-y-[-4px]">
+                  <p className="text-fluid-sm text-brand-mainText leading-relaxed mb-6">{review.reviewText}</p>
                   <div className="flex items-center gap-3 pt-4 border-t border-neutral-border">
-                    <div className="w-10 h-10 rounded-full bg-brand-primary/20 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-brand-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <span className="text-sm font-semibold text-brand-primary">
                         {review.reviewerName.charAt(0)}
                       </span>
                     </div>
-                    <p className="text-sm font-semibold text-brand-mainText">{review.reviewerName}</p>
+                    <p className="text-fluid-sm font-semibold text-brand-mainText">{review.reviewerName}</p>
                   </div>
                 </div>
               ))}
@@ -628,39 +719,48 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Free Consultations Banner - Tech Style */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden group">
         <div className="absolute inset-0">
           <Image
             src="/images/office-interior.jpg"
             alt={`${clientMasterDataOrtho.globalPracticeName} office interior`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60" />
+          {/* Architectural Grid Overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.015] pointer-events-none"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+              backgroundSize: "80px 80px",
+            }}
+          />
         </div>
 
-        <div className="relative z-10 w-full px-8 py-16">
+        <div className="relative z-10 w-full px-fluid py-fluid-20">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-fluid-sm font-medium mb-6 backdrop-blur-sm">
                 <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 Now Accepting New Patients
               </div>
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-fluid-4xl font-bold text-white mb-4">
                 Free Orthodontic Consultations
               </h2>
-              <p className="text-xl text-gray-300 mb-2">
+              <p className="text-fluid-xl text-gray-300 mb-2">
                 Braces, Invisalign & More
               </p>
-              <p className="text-gray-400">
+              <p className="text-fluid-base text-gray-400">
                 Experience our 3D imaging and digital treatment planning at no cost.
               </p>
             </div>
             <div className="flex justify-center lg:justify-end">
               <a
                 href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-brand-primary text-white font-semibold text-lg hover:brightness-110 transition-all shadow-lg"
+                className="btn-primary px-10 py-5 text-lg gap-3 shadow-[0_8px_32px_rgba(15,118,110,0.4)]"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -673,13 +773,25 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* Why Choose Us - Tech Grid */}
-      <section className="py-20 px-8 bg-slate-800">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
+              Why Us
+            </p>
+            <h2 className="text-fluid-3xl font-bold text-white mb-4">
               Why Choose Digital Orthodontics?
             </h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-gray-300 max-w-2xl mx-auto">
               Experience the precision and comfort of cutting-edge orthodontic technology.
             </p>
           </div>
@@ -705,17 +817,17 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
                 cta: "Learn More",
               },
             ].map((item, index) => (
-              <div key={index} className="p-6 rounded-xl border border-gray-600 hover:border-brand-primary/50 transition-colors">
-                <div className="w-12 h-12 rounded-lg bg-brand-primary flex items-center justify-center mb-4">
+              <div key={index} className="group p-6 rounded-xl border border-gray-600 hover:border-brand-primary/50 hover:bg-white/[0.03] transition-all duration-500 hover:translate-y-[-4px]">
+                <div className="w-12 h-12 rounded-lg bg-brand-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-gray-400 leading-relaxed mb-6">{item.description}</p>
+                <h3 className="text-fluid-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-fluid-sm text-gray-400 leading-relaxed mb-6">{item.description}</p>
                 <a
                   href="#"
-                  className="inline-flex items-center gap-2 text-brand-primary text-sm font-medium hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-brand-primary text-fluid-sm font-medium hover:gap-3 transition-all duration-300"
                 >
                   {item.cta}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -729,34 +841,43 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
       </section>
 
       {/* The Practice Difference CTA */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden group">
         <div className="absolute inset-0">
           <Image
             src="/images/team-ortho.jpeg"
             alt={`${clientMasterDataOrtho.globalPracticeName} team`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/70" />
+          {/* Architectural Grid Overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.015] pointer-events-none"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+              backgroundSize: "80px 80px",
+            }}
+          />
         </div>
 
-        <div className="relative z-10 w-full px-8 py-20">
+        <div className="relative z-10 w-full px-fluid py-fluid-24">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-brand-primary font-semibold text-sm uppercase tracking-wider mb-4">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-4">
               Precision. Innovation. Results.
             </p>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+            <h2 className="text-fluid-4xl md:text-fluid-5xl font-bold text-white mb-8">
               The {clientMasterDataOrtho.globalPracticeName} Difference
             </h2>
-            <p className="text-lg text-gray-300 leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p className="text-fluid-lg text-gray-300 leading-relaxed mb-10 max-w-2xl mx-auto">
               Experience orthodontic care reimagined through digital precision. Our advanced technology
               and expert team deliver exceptional outcomes with maximum comfort.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
                 href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-white text-brand-mainText font-semibold hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-white text-brand-mainText font-semibold hover:bg-gray-100 hover:translate-y-[-2px] hover:shadow-premium-lg transition-all duration-300"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
@@ -766,7 +887,7 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
               {clientMasterDataOrtho.onlineBookingUrl !== "none" && (
                 <a
                   href={clientMasterDataOrtho.onlineBookingUrl}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border-2 border-white text-white font-semibold hover:bg-white hover:text-brand-mainText transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border-2 border-white text-white font-semibold hover:bg-white hover:text-brand-mainText hover:translate-y-[-2px] transition-all duration-300"
                 >
                   Book Online
                 </a>

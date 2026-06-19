@@ -42,27 +42,39 @@ export default function Template3Page() {
     <div className="font-sans">
       <T3Nav />
       {/* Hero Section - Wide Background with Family Focus */}
-      <section className="relative min-h-[80vh] flex items-center">
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden">
         {/* Background Team Image */}
         <div className="absolute inset-0">
           <Image
             src="/images/team/staff-photo.jpg"
             alt={`Our caring dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             sizes="100vw"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+          {/* Architectural Grid Overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+              backgroundSize: "80px 80px",
+            }}
+          />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full px-8 lg:px-16 py-20">
+        <div className="relative z-10 w-full px-fluid py-fluid-24">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
+            <p className="text-brand-accent font-semibold text-fluid-xs uppercase tracking-widest mb-4">
+              Compassionate Family Dentistry
+            </p>
+            <h1 className="text-fluid-5xl md:text-fluid-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg tracking-tight">
               {location.primaryCategoryGBP} in {location.cityServed}
             </h1>
-            <p className="text-xl text-gray-100 leading-relaxed mb-8 max-w-xl drop-shadow">
+            <p className="text-fluid-lg text-gray-100 leading-relaxed mb-8 max-w-xl drop-shadow">
               Where every smile matters and every patient feels like family. Experience
               gentle, compassionate dental care designed for comfort at every age.
             </p>
@@ -70,9 +82,9 @@ export default function Template3Page() {
             <div className="flex flex-wrap gap-4">
               <a
                 href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-lg transition-all"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold shadow-premium-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-15px_rgba(255,255,255,0.4)]"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
                 Call {location.phoneGBP}
@@ -80,9 +92,12 @@ export default function Template3Page() {
               {clientMasterData.onlineBookingUrl !== "none" && (
                 <a
                   href={clientMasterData.onlineBookingUrl}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-teal-700 transition-all"
+                  className="group inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-semibold transition-all duration-300 hover:bg-white hover:text-teal-700 hover:-translate-y-1"
                 >
                   Schedule a Visit
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </a>
               )}
             </div>
@@ -92,46 +107,65 @@ export default function Template3Page() {
 
       {/* Emergency Alert Strip */}
       {trustSignals.hasSameDayEmergency && (
-        <div className="bg-slate-800 py-4 px-8">
-          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-slate-800 py-4 px-fluid relative overflow-hidden">
+          {/* Subtle pulse animation */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/5 via-transparent to-brand-primary/5 animate-pulse" />
+          <div className="relative max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3 text-white">
-              <svg className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-              <span className="font-medium">
+              <div className="relative">
+                <svg className="w-6 h-6 text-brand-accent" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-brand-accent rounded-full animate-ping" />
+              </div>
+              <span className="font-medium text-fluid-sm">
                 Dental Emergency? Same-Day Appointments Available
               </span>
             </div>
             <a
               href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="px-6 py-2 rounded-full bg-brand-primary text-white font-semibold hover:brightness-110 transition-all"
+              className="group px-6 py-2 rounded-full bg-brand-primary text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-8px_rgba(15,118,110,0.5)]"
             >
-              Call Now: {location.phoneGBP}
+              <span className="flex items-center gap-2">
+                Call Now: {location.phoneGBP}
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
             </a>
           </div>
         </div>
       )}
 
       {/* Welcome Video - Family Friendly Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-teal-700 to-sky-600">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-teal-700 to-sky-600 relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-white text-fluid-xs font-medium mb-4">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
               </svg>
               <span>Take a Tour</span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 className="text-fluid-4xl font-bold text-white mb-4 tracking-tight">
               Come Meet Our Family!
             </h2>
-            <p className="text-gray-100 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-gray-100 max-w-2xl mx-auto">
               Take a peek inside our practice and hear from the people who make it special—our caring team and happy patients of all ages!
             </p>
           </div>
-          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">
+          <div className="group relative aspect-video rounded-3xl overflow-hidden shadow-premium-lg border-4 border-white/20 transition-all duration-500 hover:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)]">
             <video
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
               controls
               poster="/images/team/staff-photo.jpg"
             >
@@ -143,13 +177,16 @@ export default function Template3Page() {
       </section>
 
       {/* Premium Services - Sliding Carousel */}
-      <section className="py-20 bg-brand-canvas overflow-hidden">
-        <div className="max-w-6xl mx-auto px-8">
+      <section className="py-fluid-24 bg-brand-canvas overflow-hidden section-bordered">
+        <div className="max-w-6xl mx-auto px-fluid">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+            <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+              Premium Treatments
+            </p>
+            <h2 className="text-fluid-4xl font-bold text-brand-mainText mb-4 tracking-tight">
               Popular Services for Your Family
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
               Trusted treatments delivered with gentle care for patients of all ages.
             </p>
           </div>
@@ -239,13 +276,25 @@ export default function Template3Page() {
       </section>
 
       {/* First Visit Process Map */}
-      <section className="py-20 px-8 bg-gradient-to-b from-brand-canvas to-brand-primary/5">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-b from-brand-canvas to-brand-primary/5 relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+            <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+              What to Expect
+            </p>
+            <h2 className="text-fluid-4xl font-bold text-brand-mainText mb-4 tracking-tight">
               Your First Visit: Entirely Stress-Free
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
               We've designed every step of your experience to be comfortable, clear, and
               completely at your pace. Here's what to expect.
             </p>
@@ -255,15 +304,15 @@ export default function Template3Page() {
             {firstVisitSteps.map((item) => (
               <div
                 key={item.step}
-                className="relative p-6 rounded-2xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 border border-neutral-border"
+                className="group relative p-6 rounded-2xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 border border-neutral-border hover:border-brand-primary hover:shadow-premium-lg transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="w-12 h-12 rounded-full bg-brand-primary text-brand-canvas flex items-center justify-center font-bold text-lg mb-4">
+                <div className="w-12 h-12 rounded-full bg-brand-primary text-brand-canvas flex items-center justify-center font-bold text-fluid-lg mb-4 group-hover:scale-110 transition-transform duration-300">
                   {item.step}
                 </div>
-                <h3 className="text-lg font-semibold text-brand-mainText mb-2">
+                <h3 className="text-fluid-lg font-semibold text-brand-mainText mb-2">
                   {item.title}
                 </h3>
-                <p className="text-sm text-neutral-muted leading-relaxed">
+                <p className="text-fluid-sm text-neutral-muted leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -273,22 +322,31 @@ export default function Template3Page() {
       </section>
 
       {/* Meet the Dentist - Warm & Inviting Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-slate-800 to-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Bio */}
             <div className="text-white order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-dark text-brand-accent text-fluid-xs font-medium mb-4">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 <span>Meet Your Dentist</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+              <h2 className="text-fluid-4xl font-bold mb-2 tracking-tight">
                 {primaryDoctor.name}
               </h2>
-              <p className="text-slate-300 text-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-slate-200 leading-relaxed mb-8">
+              <p className="text-slate-300 text-fluid-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-slate-200 text-fluid-base leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
@@ -297,9 +355,9 @@ export default function Template3Page() {
                 {primaryDoctor.credentials.map((credential, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/10 text-slate-200 text-sm"
+                    className="group inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/10 text-slate-200 text-fluid-sm hover:bg-white/20 transition-colors duration-300"
                   >
-                    <svg className="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 text-brand-accent group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     {credential}
@@ -309,14 +367,14 @@ export default function Template3Page() {
             </div>
 
             {/* Image with elegant border */}
-            <div className="relative order-1 lg:order-2">
-              <div className="absolute -inset-4 bg-brand-primary/20 rounded-3xl rotate-3" />
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+            <div className="group relative order-1 lg:order-2">
+              <div className="absolute -inset-4 bg-brand-primary/20 rounded-3xl rotate-3 transition-transform duration-500 group-hover:rotate-2" />
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-premium-lg">
                 <Image
                   src="/images/team/doctor-portrait.png"
                   alt={`${primaryDoctor.name}, your friendly family dentist`}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
@@ -326,13 +384,16 @@ export default function Template3Page() {
       </section>
 
       {/* Before/After - Playful Side by Side */}
-      <section className="py-20 px-8 bg-brand-canvas">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas section-bordered">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+            <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+              Real Results
+            </p>
+            <h2 className="text-fluid-4xl font-bold text-brand-mainText mb-4 tracking-tight">
               Smile Transformations for the Whole Family
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
               See the amazing results we achieve with gentle, patient-focused care.
               Every smile tells a story of trust and transformation.
             </p>
@@ -340,9 +401,9 @@ export default function Template3Page() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Before Card */}
-            <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-neutral-border">
+            <div className="group relative rounded-3xl overflow-hidden shadow-premium border-4 border-neutral-border hover:shadow-premium-lg transition-all duration-500 hover:-translate-y-1">
               <div className="absolute top-4 left-4 z-10">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-muted text-white font-semibold text-sm">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-brand-mainText font-semibold text-fluid-sm">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -355,16 +416,16 @@ export default function Template3Page() {
                   src="/images/cases/smile-before.png"
                   alt="Before gentle dental treatment"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
 
             {/* After Card */}
-            <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-brand-primary">
+            <div className="group relative rounded-3xl overflow-hidden shadow-premium border-4 border-brand-primary hover:shadow-premium-lg transition-all duration-500 hover:-translate-y-1">
               <div className="absolute top-4 left-4 z-10">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary text-white font-semibold text-sm">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary text-white font-semibold text-fluid-sm shadow-premium">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
@@ -376,75 +437,87 @@ export default function Template3Page() {
                   src="/images/cases/smile-after.png"
                   alt="After gentle dental treatment - beautiful smile"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
           </div>
 
-          <p className="text-center text-neutral-muted mt-8">
+          <p className="text-center text-fluid-sm text-neutral-muted mt-8">
             Actual patient results. Your results may vary based on individual treatment needs.
           </p>
         </div>
       </section>
 
       {/* Comfort Amenities - Elevated Design */}
-      <section className="py-20 px-8 bg-gradient-to-br from-slate-50 to-teal-50 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-slate-50 to-teal-50 overflow-hidden relative">
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.015]"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: Image with floating cards */}
-            <div className="relative">
+            <div className="group relative">
               {/* Main image */}
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-premium-lg">
                 <Image
                   src="/images/office-interior.jpg"
                   alt="Our comfortable, modern dental office"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
               </div>
 
               {/* Floating accent cards */}
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-teal-100">
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-premium p-4 flex items-center gap-3 border border-teal-100 transition-all duration-300 hover:shadow-premium-lg hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-full bg-teal-500 flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold text-slate-800">100%</p>
-                  <p className="text-xs text-slate-500">Comfort Focused</p>
+                  <p className="font-semibold text-fluid-base text-slate-800">100%</p>
+                  <p className="text-fluid-xs text-slate-500">Comfort Focused</p>
                 </div>
               </div>
 
-              <div className="absolute -top-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-teal-100">
+              <div className="absolute -top-4 -left-4 bg-white rounded-2xl shadow-premium p-4 border border-teal-100 transition-all duration-300 hover:shadow-premium-lg hover:-translate-y-1">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center">
                     <svg className="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                     </svg>
                   </div>
-                  <span className="text-sm font-medium text-slate-700">Relax & Unwind</span>
+                  <span className="text-fluid-sm font-medium text-slate-700">Relax & Unwind</span>
                 </div>
               </div>
             </div>
 
             {/* Right: Content */}
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 text-teal-700 text-sm font-medium mb-4">
+              <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+                Spa-Like Experience
+              </p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 text-teal-700 text-fluid-xs font-medium mb-4">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                 </svg>
                 <span>Your Comfort Matters</span>
               </div>
 
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
+              <h2 className="text-fluid-4xl font-bold text-slate-800 mb-4 tracking-tight">
                 Comfort is Our Priority
               </h2>
-              <p className="text-slate-600 mb-8 leading-relaxed">
+              <p className="text-fluid-base text-slate-600 mb-8 leading-relaxed">
                 We've thoughtfully designed every aspect of your visit to feel more like a spa than a dental office. From the moment you arrive, you'll experience care that puts your comfort first.
               </p>
 
@@ -474,15 +547,15 @@ export default function Template3Page() {
                 ].map((amenity, index) => (
                   <div
                     key={index}
-                    className="group p-5 rounded-2xl bg-white border border-slate-200 hover:border-teal-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                    className="group p-5 rounded-2xl bg-white border border-slate-200 hover:border-teal-300 hover:shadow-premium-lg hover:-translate-y-1 transition-all duration-300"
                   >
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={amenity.icon} />
                       </svg>
                     </div>
-                    <h4 className="font-semibold text-slate-800 mb-1">{amenity.label}</h4>
-                    <p className="text-sm text-slate-500">{amenity.description}</p>
+                    <h4 className="font-semibold text-fluid-base text-slate-800 mb-1">{amenity.label}</h4>
+                    <p className="text-fluid-xs text-slate-500">{amenity.description}</p>
                   </div>
                 ))}
               </div>
@@ -491,28 +564,28 @@ export default function Template3Page() {
 
           {/* Sedation Dentistry - Premium callout */}
           {trustSignals.hasSedationAnxietyCare && (
-            <div className="mt-16 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-600 to-sky-600 rounded-3xl transform rotate-1" />
-              <div className="relative bg-gradient-to-r from-teal-600 to-sky-600 rounded-3xl p-8 lg:p-12">
+            <div className="mt-16 relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-600 to-sky-600 rounded-3xl transform rotate-1 transition-transform duration-500 group-hover:rotate-[0.5deg]" />
+              <div className="relative bg-gradient-to-r from-teal-600 to-sky-600 rounded-3xl p-8 lg:p-12 shadow-premium-lg">
                 <div className="flex flex-col lg:flex-row items-center gap-8">
                   <div className="flex-shrink-0">
-                    <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                       </svg>
                     </div>
                   </div>
                   <div className="flex-1 text-center lg:text-left">
-                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">
+                    <h3 className="text-fluid-3xl font-bold text-white mb-3 tracking-tight">
                       Anxiety-Free Sedation Dentistry
                     </h3>
-                    <p className="text-teal-100 text-lg leading-relaxed max-w-2xl">
+                    <p className="text-teal-100 text-fluid-base leading-relaxed max-w-2xl">
                       Dental anxiety? We understand. Our gentle sedation options help you relax completely, so you can get the care you need without the stress. Wake up with your treatment complete!
                     </p>
                   </div>
                   <a
                     href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                    className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-premium-lg hover:scale-105 transition-all duration-300"
                   >
                     Learn More
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -527,23 +600,37 @@ export default function Template3Page() {
       </section>
 
       {/* Services */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-mainText text-center mb-12">
-            Services for the Whole Family
-          </h2>
+      <section className="py-fluid-24 px-fluid bg-brand-canvas section-bordered relative">
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
+          <div className="text-center mb-12">
+            <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+              Comprehensive Care
+            </p>
+            <h2 className="text-fluid-4xl font-bold text-brand-mainText tracking-tight">
+              Services for the Whole Family
+            </h2>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {location.secondaryCategoriesGBP.map((category, index) => (
-              <div key={index} className="flex gap-4 p-6 rounded-2xl border border-neutral-border hover:border-brand-primary transition-colors">
-                <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex-shrink-0 flex items-center justify-center">
+              <div key={index} className="group flex gap-4 p-6 rounded-2xl border border-neutral-border hover:border-brand-primary hover:shadow-premium-lg hover:-translate-y-1 transition-all duration-300 bg-brand-canvas">
+                <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex-shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-brand-mainText mb-2">{category}</h3>
-                  <p className="text-sm text-neutral-muted leading-relaxed">
+                  <h3 className="text-fluid-lg font-semibold text-brand-mainText mb-2">{category}</h3>
+                  <p className="text-fluid-sm text-neutral-muted leading-relaxed">
                     Gentle, patient-focused {category.toLowerCase()} for every member of your family.
                     We take the time to ensure everyone feels safe and cared for.
                   </p>
@@ -555,12 +642,24 @@ export default function Template3Page() {
       </section>
 
       {/* Come Visit Us Section - Hours + Map */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: Hours */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-8">
+              <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+                Office Hours
+              </p>
+              <h2 className="text-fluid-4xl font-bold text-brand-mainText mb-8 tracking-tight">
                 Come Visit Us
               </h2>
               <div className="space-y-4">
@@ -575,10 +674,10 @@ export default function Template3Page() {
                 ].map((schedule, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center py-2 border-b border-neutral-border last:border-0"
+                    className="flex justify-between items-center py-3 border-b border-neutral-border last:border-0 hover:bg-brand-primary/5 px-2 -mx-2 rounded transition-colors duration-200"
                   >
-                    <span className="text-brand-mainText font-medium">{schedule.day}</span>
-                    <span className={schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-mainText"}>
+                    <span className="text-fluid-base text-brand-mainText font-medium">{schedule.day}</span>
+                    <span className={`text-fluid-base ${schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-mainText font-medium"}`}>
                       {schedule.hours}
                     </span>
                   </div>
@@ -586,14 +685,14 @@ export default function Template3Page() {
               </div>
               <a
                 href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-full bg-brand-primary text-white font-semibold hover:brightness-110 transition-all"
+                className="btn-primary mt-8 px-8 py-4 rounded-full"
               >
                 Make An Appointment
               </a>
             </div>
 
             {/* Right: Map */}
-            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-neutral-border h-[400px]">
+            <div className="group relative rounded-2xl overflow-hidden shadow-premium-lg border border-neutral-border h-[400px] hover:shadow-premium transition-shadow duration-300">
               <iframe
                 src={location.googleMapsEmbedUrl}
                 width="100%"
@@ -610,12 +709,15 @@ export default function Template3Page() {
       </section>
 
       {/* Kind Words From Our Patients - Styled Testimonials */}
-      <section className="py-20 px-8 bg-brand-primary/5">
+      <section className="py-fluid-24 px-fluid bg-brand-primary/5 section-bordered">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
             {/* Left: Title + Stars Badge */}
             <div className="lg:col-span-1">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText leading-tight mb-6">
+              <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+                Testimonials
+              </p>
+              <h2 className="text-fluid-3xl font-bold text-brand-mainText leading-tight mb-6 tracking-tight">
                 Kind Words From Our Patients
               </h2>
               <div className="flex items-center gap-2 mb-2">
@@ -630,8 +732,8 @@ export default function Template3Page() {
                   </svg>
                 ))}
               </div>
-              <p className="text-sm text-neutral-muted font-medium">5 Star</p>
-              <p className="text-sm text-brand-primary font-semibold">reviews</p>
+              <p className="text-fluid-sm text-neutral-muted font-medium">5 Star</p>
+              <p className="text-fluid-sm text-brand-primary font-semibold">reviews</p>
             </div>
 
             {/* Right: Testimonial Cards */}
@@ -639,13 +741,13 @@ export default function Template3Page() {
               {sampleReviews.slice(0, 3).map((review, index) => (
                 <div
                   key={index}
-                  className="p-6 rounded-xl bg-neutral-border/20 border border-neutral-border"
+                  className="group p-6 rounded-xl bg-brand-canvas border border-neutral-border hover:border-brand-primary hover:shadow-premium-lg hover:-translate-y-1 transition-all duration-300"
                 >
-                  <p className="text-brand-mainText leading-relaxed mb-6">
+                  <p className="text-fluid-base text-brand-mainText leading-relaxed mb-6">
                     {review.reviewText}
                   </p>
                   <div className="border-t border-neutral-border pt-4">
-                    <p className="text-sm font-semibold text-brand-mainText">
+                    <p className="text-fluid-sm font-semibold text-brand-mainText">
                       - {review.reviewerName}
                     </p>
                   </div>
@@ -663,31 +765,34 @@ export default function Template3Page() {
             src="/images/office-interior.jpg"
             alt={`${clientMasterData.globalPracticeName} office interior`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out hover:scale-[1.02]"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="relative z-10 w-full px-8 py-16">
+        <div className="relative z-10 w-full px-fluid py-16">
           <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="bg-white/95 backdrop-blur-sm p-8 lg:p-12 rounded-2xl max-w-xl">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-2">
+            <div className="glass p-8 lg:p-12 rounded-2xl max-w-xl shadow-premium-lg hover:shadow-premium transition-shadow duration-300">
+              <p className="text-brand-primary font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+                Special Offer
+              </p>
+              <h2 className="text-fluid-4xl font-bold text-brand-mainText mb-2 tracking-tight">
                 Free consultations—
               </h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+              <h3 className="text-fluid-4xl font-bold text-brand-mainText mb-4 tracking-tight">
                 always.
               </h3>
-              <p className="text-xl text-neutral-muted mb-2">
+              <p className="text-fluid-lg text-neutral-muted mb-2">
                 On Implants, Dentures, and Invisalign.
               </p>
-              <p className="text-sm text-neutral-muted">
+              <p className="text-fluid-sm text-neutral-muted">
                 Call us with any questions or conveniently book your appointment online today!
               </p>
             </div>
             <a
               href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-brand-primary text-white font-semibold text-lg hover:brightness-110 transition-all shadow-lg"
+              className="btn-primary px-10 py-4 rounded-full text-lg shadow-premium-lg"
             >
               Book Online
             </a>
@@ -696,13 +801,25 @@ export default function Template3Page() {
       </section>
 
       {/* Why Choose Us - Family Friendly Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-teal-700 to-sky-600">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-teal-700 to-sky-600 relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <p className="text-white/80 font-semibold text-fluid-xs uppercase tracking-widest mb-3">
+              Your Trusted Partner
+            </p>
+            <h2 className="text-fluid-4xl font-bold text-white mb-4 tracking-tight">
               Why Families Choose Us
             </h2>
-            <p className="text-gray-100 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-gray-100 max-w-2xl mx-auto">
               Trusted by families throughout {location.cityServed} for compassionate, quality care.
             </p>
           </div>
@@ -727,15 +844,15 @@ export default function Template3Page() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 text-center"
+                className="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 text-center hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-gray-100 leading-relaxed">{item.description}</p>
+                <h3 className="text-fluid-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-fluid-base text-gray-100 leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>

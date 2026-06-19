@@ -42,27 +42,40 @@ export default function Template3OrthoPage() {
     <div className="font-sans">
       <T3OrthoNav />
       {/* Hero Section - Wide Background with Family Focus */}
-      <section className="relative min-h-[80vh] flex items-center">
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden group">
         {/* Background Team Image */}
         <div className="absolute inset-0">
           <Image
             src="/images/team-ortho.jpeg"
             alt={`Our caring orthodontic team at ${clientMasterDataOrtho.globalPracticeName} in ${location.cityServed}`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             sizes="100vw"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         </div>
 
+        {/* Architectural Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.015] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+
         {/* Content */}
-        <div className="relative z-10 w-full px-8 lg:px-16 py-20">
+        <div className="relative z-10 w-full px-fluid py-fluid-24">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-4">
+              Family Orthodontics
+            </p>
+            <h1 className="text-fluid-5xl md:text-fluid-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
               {location.primaryCategoryGBP} in {location.cityServed}
             </h1>
-            <p className="text-xl text-gray-100 leading-relaxed mb-8 max-w-xl drop-shadow">
+            <p className="text-fluid-lg text-gray-100 leading-relaxed mb-8 max-w-xl drop-shadow">
               Where every smile matters and every patient feels like family. Experience
               gentle, compassionate orthodontic care designed for comfort at every age.
             </p>
@@ -70,9 +83,9 @@ export default function Template3OrthoPage() {
             <div className="flex flex-wrap gap-4">
               <a
                 href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-lg transition-all"
+                className="group/btn inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-teal-700 font-semibold hover:shadow-[0_20px_50px_rgba(255,255,255,0.3)] hover:translate-y-[-2px] transition-all duration-300"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 group-hover/btn:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
                 Call {location.phoneGBP}
@@ -80,7 +93,7 @@ export default function Template3OrthoPage() {
               {clientMasterDataOrtho.onlineBookingUrl !== "none" && (
                 <a
                   href={clientMasterDataOrtho.onlineBookingUrl}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-teal-700 transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-teal-700 hover:translate-y-[-2px] transition-all duration-300"
                 >
                   Schedule a Visit
                 </a>
@@ -91,19 +104,28 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Free Consultation Strip */}
-      <div className="bg-slate-800 py-4 px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-slate-800 py-4 px-fluid relative overflow-hidden">
+        {/* Subtle Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-white">
             <svg className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
-            <span className="font-medium">
+            <span className="font-medium text-fluid-base">
               Free Orthodontic Consultations Available!
             </span>
           </div>
           <a
             href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="px-6 py-2 rounded-full bg-brand-primary text-white font-semibold hover:brightness-110 transition-all"
+            className="px-6 py-2 rounded-full bg-brand-primary text-white font-semibold hover:brightness-110 hover:translate-y-[-1px] transition-all duration-300"
           >
             Call Now: {location.phoneGBP}
           </a>
@@ -111,23 +133,32 @@ export default function Template3OrthoPage() {
       </div>
 
       {/* Welcome Video - Family Friendly Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-teal-700 to-sky-600">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-teal-700 to-sky-600 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-fluid-sm font-medium mb-4">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
               </svg>
               <span>Take a Tour</span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 className="text-fluid-3xl lg:text-fluid-4xl font-bold text-white mb-4">
               Come Meet Our Family!
             </h2>
-            <p className="text-gray-100 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-gray-100 max-w-2xl mx-auto">
               Take a peek inside our practice and hear from the people who make it special—our caring team and happy patients of all ages!
             </p>
           </div>
-          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">
+          <div className="group relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 hover:border-white/40 transition-all duration-500">
             <video
               className="w-full h-full object-cover"
               controls
@@ -141,13 +172,25 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Premium Services - Sliding Carousel */}
-      <section className="py-20 bg-brand-canvas overflow-hidden">
-        <div className="max-w-6xl mx-auto px-8">
+      <section className="py-fluid-24 bg-brand-canvas overflow-hidden relative">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-fluid">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-brand-mainText mb-4">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
+              Our Services
+            </p>
+            <h2 className="text-fluid-3xl lg:text-fluid-4xl font-bold text-brand-mainText mb-4">
               Popular Treatments for Your Family
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
               Trusted orthodontic treatments delivered with gentle care for patients of all ages.
             </p>
           </div>
@@ -201,30 +244,30 @@ export default function Template3OrthoPage() {
             ].map((service, index) => (
               <div
                 key={index}
-                className="group flex-shrink-0 w-80 bg-brand-canvas border border-neutral-border rounded-2xl overflow-hidden hover:border-brand-primary hover:shadow-lg transition-all"
+                className="group flex-shrink-0 w-80 bg-brand-canvas border border-neutral-border rounded-2xl overflow-hidden hover:border-brand-primary hover:shadow-[0_16px_48px_rgba(15,118,110,0.15)] hover:translate-y-[-4px] transition-all duration-500"
               >
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     sizes="320px"
                   />
                 </div>
                 <div className="p-6 text-center">
-                  <h3 className="text-lg font-semibold text-brand-mainText mb-2">
+                  <h3 className="text-fluid-lg font-semibold text-brand-mainText mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-neutral-muted leading-relaxed mb-4">
+                  <p className="text-fluid-sm text-neutral-muted leading-relaxed mb-4">
                     {service.description}
                   </p>
                   <a
                     href="#"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary hover:gap-2 transition-all"
+                    className="inline-flex items-center gap-1 text-fluid-sm font-medium text-brand-primary hover:gap-2 transition-all duration-300"
                   >
                     Learn More
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </a>
@@ -237,13 +280,25 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* First Visit Process Map */}
-      <section className="py-20 px-8 bg-gradient-to-b from-brand-canvas to-brand-primary/5">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-b from-brand-canvas to-brand-primary/5 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
+              What to Expect
+            </p>
+            <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-brand-mainText mb-4">
               Your First Visit: Entirely Stress-Free
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
               We've designed every step of your experience to be comfortable, clear, and
               completely at your pace. Here's what to expect.
             </p>
@@ -253,15 +308,15 @@ export default function Template3OrthoPage() {
             {firstVisitSteps.map((item) => (
               <div
                 key={item.step}
-                className="relative p-6 rounded-2xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 border border-neutral-border"
+                className="group relative p-6 rounded-2xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 border border-neutral-border hover:border-brand-primary/50 hover:shadow-[0_16px_48px_rgba(15,118,110,0.12)] hover:translate-y-[-4px] transition-all duration-500"
               >
-                <div className="w-12 h-12 rounded-full bg-brand-primary text-brand-canvas flex items-center justify-center font-bold text-lg mb-4">
+                <div className="w-12 h-12 rounded-full bg-brand-primary text-brand-canvas flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform duration-300">
                   {item.step}
                 </div>
-                <h3 className="text-lg font-semibold text-brand-mainText mb-2">
+                <h3 className="text-fluid-lg font-semibold text-brand-mainText mb-2">
                   {item.title}
                 </h3>
-                <p className="text-sm text-neutral-muted leading-relaxed">
+                <p className="text-fluid-sm text-neutral-muted leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -271,22 +326,31 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Meet the Orthodontist - Warm & Inviting Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-slate-800 to-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Bio */}
             <div className="text-white order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-fluid-sm font-medium mb-4">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 <span>Meet Your Orthodontist</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+              <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold mb-2">
                 {primaryDoctor.name}
               </h2>
-              <p className="text-slate-300 text-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-slate-200 leading-relaxed mb-8">
+              <p className="text-slate-300 text-fluid-lg mb-6">{primaryDoctor.role}</p>
+              <p className="text-fluid-base text-slate-200 leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
@@ -295,7 +359,7 @@ export default function Template3OrthoPage() {
                 {primaryDoctor.credentials.map((credential, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/10 text-slate-200 text-sm"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/10 text-slate-200 text-fluid-sm hover:bg-white/20 transition-colors duration-300"
                   >
                     <svg className="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -307,14 +371,14 @@ export default function Template3OrthoPage() {
             </div>
 
             {/* Image with elegant border */}
-            <div className="relative order-1 lg:order-2">
-              <div className="absolute -inset-4 bg-brand-primary/20 rounded-3xl rotate-3" />
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+            <div className="relative order-1 lg:order-2 group">
+              <div className="absolute -inset-4 bg-brand-primary/20 rounded-3xl rotate-3 group-hover:rotate-2 transition-transform duration-500" />
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-premium-lg">
                 <Image
                   src="/images/team/doctor-portrait.png"
                   alt={`${primaryDoctor.name}, your friendly family orthodontist`}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
@@ -324,13 +388,25 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Before/After - Playful Side by Side */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
+        {/* Architectural Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
+              Real Results
+            </p>
+            <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-brand-mainText mb-4">
               Smile Transformations for the Whole Family
             </h2>
-            <p className="text-neutral-muted max-w-2xl mx-auto">
+            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
               See the amazing results we achieve with gentle, patient-focused care.
               Every smile tells a story of trust and transformation.
             </p>
@@ -338,9 +414,9 @@ export default function Template3OrthoPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Before Card */}
-            <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-neutral-border">
+            <div className="group relative rounded-3xl overflow-hidden shadow-lg border-4 border-neutral-border hover:border-neutral-muted hover:shadow-[0_16px_48px_rgba(0,0,0,0.12)] hover:translate-y-[-4px] transition-all duration-500">
               <div className="absolute top-4 left-4 z-10">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-muted text-white font-semibold text-sm">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-muted text-white font-semibold text-fluid-sm">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -353,16 +429,16 @@ export default function Template3OrthoPage() {
                   src="/images/cases/smile-before-ortho.png"
                   alt="Before orthodontic treatment"
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
 
             {/* After Card */}
-            <div className="relative rounded-3xl overflow-hidden shadow-lg border-4 border-brand-primary">
+            <div className="group relative rounded-3xl overflow-hidden shadow-lg border-4 border-brand-primary hover:shadow-[0_16px_48px_rgba(15,118,110,0.25)] hover:translate-y-[-4px] transition-all duration-500">
               <div className="absolute top-4 left-4 z-10">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary text-white font-semibold text-sm">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary text-white font-semibold text-fluid-sm">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
@@ -374,39 +450,48 @@ export default function Template3OrthoPage() {
                   src="/images/cases/smile-after-ortho.png"
                   alt="After orthodontic treatment - beautiful smile"
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
           </div>
 
-          <p className="text-center text-neutral-muted mt-8">
+          <p className="text-center text-fluid-sm text-neutral-muted mt-8">
             Actual patient results. Your results may vary based on individual treatment needs.
           </p>
         </div>
       </section>
 
       {/* Comfort Amenities - Elevated Design */}
-      <section className="py-20 px-8 bg-gradient-to-br from-slate-50 to-teal-50 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-slate-50 to-teal-50 relative overflow-hidden">
+        {/* Architectural grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: Image with floating cards */}
-            <div className="relative">
+            <div className="relative group">
               {/* Main image */}
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-premium-lg">
                 <Image
                   src="/images/office-interior.jpg"
                   alt="Our comfortable, modern orthodontic office"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
               </div>
 
               {/* Floating accent cards */}
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-teal-100">
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-premium p-4 flex items-center gap-3 border border-teal-100 hover:shadow-premium-lg hover:-translate-y-1 transition-all duration-300">
                 <div className="w-12 h-12 rounded-full bg-teal-500 flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -418,7 +503,7 @@ export default function Template3OrthoPage() {
                 </div>
               </div>
 
-              <div className="absolute -top-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-teal-100">
+              <div className="absolute -top-4 -left-4 bg-white rounded-2xl shadow-premium p-4 border border-teal-100 hover:shadow-premium-lg hover:-translate-y-1 transition-all duration-300">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center">
                     <svg className="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -432,17 +517,14 @@ export default function Template3OrthoPage() {
 
             {/* Right: Content */}
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 text-teal-700 text-sm font-medium mb-4">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                </svg>
-                <span>Your Comfort Matters</span>
-              </div>
+              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-4">
+                Your Comfort Matters
+              </p>
 
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
+              <h2 className="text-fluid-3xl lg:text-fluid-4xl font-bold text-slate-800 mb-4">
                 Comfort is Our Priority
               </h2>
-              <p className="text-slate-600 mb-8 leading-relaxed">
+              <p className="text-fluid-base text-slate-600 mb-8 leading-relaxed">
                 We've thoughtfully designed every aspect of your visit to feel welcoming and stress-free. From the moment you arrive, you'll experience care that puts your comfort first.
               </p>
 
@@ -472,15 +554,15 @@ export default function Template3OrthoPage() {
                 ].map((amenity, index) => (
                   <div
                     key={index}
-                    className="group p-5 rounded-2xl bg-white border border-slate-200 hover:border-teal-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                    className="group p-5 rounded-2xl bg-white border border-slate-200 hover:border-brand-primary/50 hover:shadow-[0_16px_48px_rgba(15,118,110,0.12)] hover:-translate-y-1 transition-all duration-500"
                   >
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={amenity.icon} />
                       </svg>
                     </div>
-                    <h4 className="font-semibold text-slate-800 mb-1">{amenity.label}</h4>
-                    <p className="text-sm text-slate-500">{amenity.description}</p>
+                    <h4 className="font-semibold text-fluid-base text-slate-800 mb-1">{amenity.label}</h4>
+                    <p className="text-fluid-sm text-slate-500">{amenity.description}</p>
                   </div>
                 ))}
               </div>
@@ -490,23 +572,35 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Services */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-mainText text-center mb-12">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
+        {/* Architectural grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
+          <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary text-center mb-4">
+            Comprehensive Care
+          </p>
+          <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-brand-mainText text-center mb-12">
             Treatments for the Whole Family
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {location.secondaryCategoriesGBP.map((category, index) => (
-              <div key={index} className="flex gap-4 p-6 rounded-2xl border border-neutral-border hover:border-brand-primary transition-colors">
-                <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex-shrink-0 flex items-center justify-center">
+              <div key={index} className="group flex gap-4 p-6 rounded-2xl border border-neutral-border hover:border-brand-primary/50 hover:shadow-[0_16px_48px_rgba(15,118,110,0.12)] hover:-translate-y-1 transition-all duration-500 bg-white">
+                <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex-shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-brand-mainText mb-2">{category}</h3>
-                  <p className="text-sm text-neutral-muted leading-relaxed">
+                  <h3 className="text-fluid-lg font-semibold text-brand-mainText mb-2">{category}</h3>
+                  <p className="text-fluid-sm text-neutral-muted leading-relaxed">
                     Gentle, patient-focused {category.toLowerCase()} for every member of your family.
                     We take the time to ensure everyone feels safe and cared for.
                   </p>
@@ -518,12 +612,24 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Come Visit Us Section - Hours + Map */}
-      <section className="py-20 px-8 bg-brand-canvas">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
+        {/* Architectural grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: Hours */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-8">
+              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-4">
+                Office Hours
+              </p>
+              <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-brand-mainText mb-8">
                 Come Visit Us
               </h2>
               <div className="space-y-4">
@@ -538,10 +644,10 @@ export default function Template3OrthoPage() {
                 ].map((schedule, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center py-2 border-b border-neutral-border last:border-0"
+                    className="flex justify-between items-center py-3 border-b border-neutral-border last:border-0 hover:bg-brand-primary/5 px-2 -mx-2 rounded transition-colors duration-300"
                   >
-                    <span className="text-brand-mainText font-medium">{schedule.day}</span>
-                    <span className={schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-mainText"}>
+                    <span className="text-fluid-base text-brand-mainText font-medium">{schedule.day}</span>
+                    <span className={`text-fluid-base ${schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-mainText"}`}>
                       {schedule.hours}
                     </span>
                   </div>
@@ -549,14 +655,17 @@ export default function Template3OrthoPage() {
               </div>
               <a
                 href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-full bg-brand-primary text-white font-semibold hover:brightness-110 transition-all"
+                className="group inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-full bg-brand-primary text-white font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_30px_-10px_rgba(15,118,110,0.4)] transition-all duration-300"
               >
                 Make An Appointment
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </a>
             </div>
 
             {/* Right: Map */}
-            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-neutral-border h-[400px]">
+            <div className="relative rounded-2xl overflow-hidden shadow-premium-lg border border-neutral-border h-[400px] hover:shadow-[0_24px_64px_rgba(15,118,110,0.15)] transition-shadow duration-500">
               <iframe
                 src={location.googleMapsEmbedUrl}
                 width="100%"
@@ -573,12 +682,24 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Kind Words From Our Patients - Styled Testimonials */}
-      <section className="py-20 px-8 bg-brand-primary/5">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-brand-primary/5 relative overflow-hidden">
+        {/* Architectural grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
             {/* Left: Title + Stars Badge */}
             <div className="lg:col-span-1">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText leading-tight mb-6">
+              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-4">
+                Testimonials
+              </p>
+              <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-brand-mainText leading-tight mb-6">
                 Kind Words From Our Patients
               </h2>
               <div className="flex items-center gap-2 mb-2">
@@ -593,8 +714,8 @@ export default function Template3OrthoPage() {
                   </svg>
                 ))}
               </div>
-              <p className="text-sm text-neutral-muted font-medium">5 Star</p>
-              <p className="text-sm text-brand-primary font-semibold">reviews</p>
+              <p className="text-fluid-sm text-neutral-muted font-medium">5 Star</p>
+              <p className="text-fluid-sm text-brand-primary font-semibold">reviews</p>
             </div>
 
             {/* Right: Testimonial Cards */}
@@ -602,13 +723,13 @@ export default function Template3OrthoPage() {
               {sampleReviewsOrtho.slice(0, 3).map((review, index) => (
                 <div
                   key={index}
-                  className="p-6 rounded-xl bg-neutral-border/20 border border-neutral-border"
+                  className="group p-6 rounded-xl bg-white border border-neutral-border hover:border-brand-primary/50 hover:shadow-[0_16px_48px_rgba(15,118,110,0.12)] hover:-translate-y-1 transition-all duration-500"
                 >
-                  <p className="text-brand-mainText leading-relaxed mb-6">
+                  <p className="text-fluid-base text-brand-mainText leading-relaxed mb-6">
                     {review.reviewText}
                   </p>
                   <div className="border-t border-neutral-border pt-4">
-                    <p className="text-sm font-semibold text-brand-mainText">
+                    <p className="text-fluid-sm font-semibold text-brand-mainText">
                       - {review.reviewerName}
                     </p>
                   </div>
@@ -620,52 +741,79 @@ export default function Template3OrthoPage() {
       </section>
 
       {/* Free Consultations Banner - Office Interior Background */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden group">
         <div className="absolute inset-0">
           <Image
             src="/images/office-interior.jpg"
             alt={`${clientMasterDataOrtho.globalPracticeName} office interior`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/40" />
+          {/* Architectural grid overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.015] pointer-events-none"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
         </div>
 
-        <div className="relative z-10 w-full px-8 py-16">
+        <div className="relative z-10 w-full px-fluid py-fluid-20">
           <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="bg-white/95 backdrop-blur-sm p-8 lg:p-12 rounded-2xl max-w-xl">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-2">
+            <div className="bg-white/95 backdrop-blur-sm p-8 lg:p-12 rounded-2xl max-w-xl shadow-premium-lg">
+              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-4">
+                Special Offer
+              </p>
+              <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-brand-mainText mb-2">
                 Free consultations—
               </h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-brand-mainText mb-4">
+              <h3 className="text-fluid-3xl md:text-fluid-4xl font-bold text-brand-mainText mb-4">
                 always.
               </h3>
-              <p className="text-xl text-neutral-muted mb-2">
+              <p className="text-fluid-lg text-neutral-muted mb-2">
                 On Braces, Invisalign, and More.
               </p>
-              <p className="text-sm text-neutral-muted">
+              <p className="text-fluid-sm text-neutral-muted">
                 Call us with any questions or conveniently book your appointment online today!
               </p>
             </div>
             <a
               href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-brand-primary text-white font-semibold text-lg hover:brightness-110 transition-all shadow-lg"
+              className="group/btn inline-flex items-center gap-2 px-10 py-4 rounded-full bg-brand-primary text-white font-semibold text-fluid-lg hover:translate-y-[-2px] hover:shadow-[0_10px_30px_-10px_rgba(15,118,110,0.5)] transition-all duration-300 shadow-premium-lg"
             >
               Book Online
+              <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </a>
           </div>
         </div>
       </section>
 
       {/* Why Choose Us - Family Friendly Style */}
-      <section className="py-20 px-8 bg-gradient-to-br from-teal-700 to-sky-600">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-teal-700 to-sky-600 relative overflow-hidden">
+        {/* Architectural grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-white/80 mb-4">
+              Why Us
+            </p>
+            <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-white mb-4">
               Why Families Choose Us
             </h2>
-            <p className="text-gray-100 max-w-2xl mx-auto">
+            <p className="text-fluid-base text-gray-100 max-w-2xl mx-auto">
               Trusted by families throughout {location.cityServed} for compassionate, quality care.
             </p>
           </div>
@@ -690,15 +838,15 @@ export default function Template3OrthoPage() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 text-center"
+                className="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 text-center hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 transition-all duration-500"
               >
-                <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-gray-100 leading-relaxed">{item.description}</p>
+                <h3 className="text-fluid-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-fluid-base text-gray-100 leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
