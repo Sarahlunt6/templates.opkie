@@ -28,6 +28,14 @@ export default function Template5Page() {
           }} />
         </div>
 
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+
         {/* Decorative Elements */}
         <div className="absolute top-20 right-20 w-64 h-64 bg-brand-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-brand-accent/5 rounded-full blur-3xl" />
@@ -45,7 +53,7 @@ export default function Template5Page() {
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-brand-mainText leading-[1.1] mb-6">
+              <h1 className="text-[clamp(2.25rem,5vw,3.75rem)] font-light text-brand-mainText leading-[1.1] mb-6">
                 Oral Wellness,
                 <br />
                 <span className="font-normal text-brand-primary">Thoughtfully Designed</span>
@@ -68,10 +76,10 @@ export default function Template5Page() {
               <div className="flex flex-wrap items-center gap-4">
                 <a
                   href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-medium rounded-sm hover:brightness-110 transition-all"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-medium rounded-sm hover:brightness-110 hover:shadow-xl hover:shadow-brand-primary/25 transition-all duration-300"
                 >
                   <span>Schedule Consultation</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
@@ -104,7 +112,7 @@ export default function Template5Page() {
               </div>
 
               {/* Floating Stats Card */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-sm shadow-xl p-6 border border-neutral-border">
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-sm shadow-xl hover:shadow-2xl p-6 border border-neutral-border transition-all duration-300 hover:-translate-y-1">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex items-center justify-center">
                     <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,7 +127,7 @@ export default function Template5Page() {
               </div>
 
               {/* Floating Experience Badge */}
-              <div className="absolute -top-4 -right-4 bg-brand-primary text-white rounded-sm shadow-xl px-6 py-4">
+              <div className="absolute -top-4 -right-4 bg-brand-primary text-white rounded-sm shadow-xl hover:shadow-2xl px-6 py-4 transition-all duration-300 hover:-translate-y-1">
                 <p className="text-3xl font-light">15+</p>
                 <p className="text-xs uppercase tracking-wider text-white/80">Years Experience</p>
               </div>
@@ -133,20 +141,27 @@ export default function Template5Page() {
       </section>
 
       {/* Welcome Video - Minimal/Zen Style */}
-      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
               Welcome
             </p>
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText mb-4">
+            <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText mb-4">
               Our Practice, Our People
             </h2>
             <p className="text-neutral-muted max-w-2xl mx-auto leading-relaxed">
               Take a moment to meet our team and hear from those we've had the privilege to serve. Discover the thoughtful care that defines our approach.
             </p>
           </div>
-          <div className="relative aspect-video rounded-sm overflow-hidden">
+          <div className="relative aspect-video rounded-sm overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <video
               className="w-full h-full object-cover"
               controls
@@ -163,13 +178,20 @@ export default function Template5Page() {
       </section>
 
       {/* Premium Services - Minimal/Zen Style */}
-      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
               Signature Services
             </p>
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+            <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText">
               Thoughtful Care, Exceptional Results
             </h2>
           </div>
@@ -198,11 +220,11 @@ export default function Template5Page() {
             ].map((service, index) => (
               <div
                 key={index}
-                className="group py-8 border-b border-neutral-border hover:border-brand-primary transition-colors"
+                className="group py-8 border-b border-neutral-border hover:border-brand-primary hover:bg-brand-primary/[0.02] hover:px-4 transition-all duration-300"
               >
                 <div className="flex items-start gap-6">
-                  <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm font-light text-brand-primary">{service.number}</span>
+                  <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center flex-shrink-0 group-hover:bg-brand-primary group-hover:text-white transition-all duration-300">
+                    <span className="text-sm font-light text-brand-primary group-hover:text-white transition-colors duration-300">{service.number}</span>
                   </div>
                   <div>
                     <h3 className="text-lg font-medium text-brand-mainText mb-2 group-hover:text-brand-primary transition-colors">
@@ -216,7 +238,7 @@ export default function Template5Page() {
                       className="inline-flex items-center gap-2 text-sm text-brand-primary hover:gap-3 transition-all"
                     >
                       <span>Explore</span>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </a>
@@ -229,16 +251,23 @@ export default function Template5Page() {
       </section>
 
       {/* Trust Indicators - Minimal/Zen Style */}
-      <section className="py-16 px-8 bg-brand-canvas border-y border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-16 px-8 bg-brand-canvas border-y border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="grid grid-cols-3 gap-8">
             {[
               { value: "12", label: "Years of Mindful Practice" },
               { value: "100%", label: "Personalized Care" },
               { value: "Holistic", label: "Wellness Approach" },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <p className="text-2xl md:text-3xl font-light text-brand-primary mb-2">{stat.value}</p>
+              <div key={index} className="text-center group cursor-default">
+                <p className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-primary mb-2 group-hover:scale-110 transition-transform duration-300">{stat.value}</p>
                 <p className="text-xs uppercase tracking-[0.15em] text-neutral-muted">{stat.label}</p>
               </div>
             ))}
@@ -247,32 +276,39 @@ export default function Template5Page() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-24 px-8 bg-brand-canvas border-b border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-canvas border-b border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center mx-auto mb-4">
-                <span className="text-lg font-light text-brand-primary">01</span>
+            <div className="text-center group">
+              <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-primary group-hover:scale-110 transition-all duration-300">
+                <span className="text-lg font-light text-brand-primary group-hover:text-white transition-colors duration-300">01</span>
               </div>
-              <h3 className="text-lg font-medium text-brand-mainText mb-2">Listen</h3>
+              <h3 className="text-lg font-medium text-brand-mainText mb-2 group-hover:text-brand-primary transition-colors">Listen</h3>
               <p className="text-sm text-neutral-muted leading-relaxed">
                 We begin every relationship by truly understanding your concerns, goals, and history.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center mx-auto mb-4">
-                <span className="text-lg font-light text-brand-primary">02</span>
+            <div className="text-center group">
+              <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-primary group-hover:scale-110 transition-all duration-300">
+                <span className="text-lg font-light text-brand-primary group-hover:text-white transition-colors duration-300">02</span>
               </div>
-              <h3 className="text-lg font-medium text-brand-mainText mb-2">Plan</h3>
+              <h3 className="text-lg font-medium text-brand-mainText mb-2 group-hover:text-brand-primary transition-colors">Plan</h3>
               <p className="text-sm text-neutral-muted leading-relaxed">
                 Together, we craft a comprehensive wellness strategy tailored to your unique needs.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center mx-auto mb-4">
-                <span className="text-lg font-light text-brand-primary">03</span>
+            <div className="text-center group">
+              <div className="w-12 h-12 rounded-full border border-brand-primary flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-primary group-hover:scale-110 transition-all duration-300">
+                <span className="text-lg font-light text-brand-primary group-hover:text-white transition-colors duration-300">03</span>
               </div>
-              <h3 className="text-lg font-medium text-brand-mainText mb-2">Care</h3>
+              <h3 className="text-lg font-medium text-brand-mainText mb-2 group-hover:text-brand-primary transition-colors">Care</h3>
               <p className="text-sm text-neutral-muted leading-relaxed">
                 Gentle, precise treatment delivered with respect for your time and comfort.
               </p>
@@ -282,20 +318,27 @@ export default function Template5Page() {
       </section>
 
       {/* Before/After - Elegant Minimal */}
-      <section className="py-24 px-8 bg-brand-primary/[0.02]">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-primary/[0.02] relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
               Transformations
             </p>
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+            <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText">
               The Art of Subtle Enhancement
             </h2>
           </div>
 
           {/* Elegant Side by Side */}
-          <div className="grid grid-cols-2 gap-px bg-neutral-border">
-            <div className="relative aspect-[4/3] bg-brand-canvas">
+          <div className="grid grid-cols-2 gap-px bg-neutral-border group shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <div className="relative aspect-[4/3] bg-brand-canvas overflow-hidden">
               <p className="absolute top-4 left-4 text-xs uppercase tracking-[0.2em] text-neutral-muted z-10">
                 Before
               </p>
@@ -303,11 +346,11 @@ export default function Template5Page() {
                 src="/images/cases/smile-before.png"
                 alt="Before holistic dental treatment"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="50vw"
               />
             </div>
-            <div className="relative aspect-[4/3] bg-brand-canvas">
+            <div className="relative aspect-[4/3] bg-brand-canvas overflow-hidden">
               <p className="absolute top-4 left-4 text-xs uppercase tracking-[0.2em] text-brand-primary z-10">
                 After
               </p>
@@ -315,7 +358,7 @@ export default function Template5Page() {
                 src="/images/cases/smile-after.png"
                 alt="After holistic dental treatment"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="50vw"
               />
             </div>
@@ -328,9 +371,19 @@ export default function Template5Page() {
       </section>
 
       {/* Services - Minimal List */}
-      <section className="py-24 px-8 bg-brand-canvas">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-light text-brand-mainText text-center mb-16">
+      <section className="py-24 px-8 bg-brand-canvas relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-3xl mx-auto relative">
+          <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4 text-center">
+            What We Offer
+          </p>
+          <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText text-center mb-16">
             Our Services
           </h2>
 
@@ -338,7 +391,7 @@ export default function Template5Page() {
             {location.secondaryCategoriesGBP.map((category, index) => (
               <div
                 key={index}
-                className="py-8 border-b border-neutral-border flex items-center justify-between group cursor-pointer hover:px-4 transition-all"
+                className="py-8 border-b border-neutral-border flex items-center justify-between group cursor-pointer hover:px-4 hover:bg-brand-primary/[0.02] transition-all duration-300"
               >
                 <div>
                   <h3 className="text-lg font-medium text-brand-mainText group-hover:text-brand-primary transition-colors">
@@ -349,7 +402,7 @@ export default function Template5Page() {
                   </p>
                 </div>
                 <svg
-                  className="w-5 h-5 text-neutral-muted group-hover:text-brand-primary group-hover:translate-x-1 transition-all"
+                  className="w-5 h-5 text-neutral-muted group-hover:text-brand-primary group-hover:translate-x-2 transition-all duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -363,16 +416,23 @@ export default function Template5Page() {
       </section>
 
       {/* Doctor Profile - Elegant */}
-      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             {/* Doctor Portrait */}
-            <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
+            <div className="relative aspect-[3/4] rounded-sm overflow-hidden group shadow-xl hover:shadow-2xl transition-all duration-300">
               <Image
                 src="/images/team/doctor-portrait.png"
                 alt={`${primaryDoctor.name} at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -405,13 +465,20 @@ export default function Template5Page() {
       </section>
 
       {/* Kind Words - Zen Testimonials */}
-      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
               Kind Words
             </p>
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+            <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText">
               Voices of Wellness
             </h2>
           </div>
@@ -419,7 +486,7 @@ export default function Template5Page() {
             {sampleReviews.slice(0, 4).map((review, index) => (
               <div
                 key={index}
-                className="p-8 bg-brand-canvas border border-neutral-border rounded-sm"
+                className="p-8 bg-brand-canvas border border-neutral-border rounded-sm hover:border-brand-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, i) => (
@@ -439,13 +506,20 @@ export default function Template5Page() {
       </section>
 
       {/* Visit Us - Zen Style */}
-      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
               Visit Us
             </p>
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+            <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText">
               Your Sanctuary Awaits
             </h2>
           </div>
@@ -463,7 +537,7 @@ export default function Template5Page() {
                   { day: "Saturday", hours: "By Appointment" },
                   { day: "Sunday", hours: "Closed" },
                 ].map((item, index) => (
-                  <div key={index} className="flex justify-between py-3 border-b border-neutral-border">
+                  <div key={index} className="flex justify-between py-3 border-b border-neutral-border hover:bg-brand-primary/[0.02] hover:px-2 transition-all duration-300">
                     <span className="text-neutral-muted">{item.day}</span>
                     <span className="text-brand-mainText">{item.hours}</span>
                   </div>
@@ -481,7 +555,7 @@ export default function Template5Page() {
               </div>
             </div>
             {/* Map */}
-            <div className="aspect-square rounded-sm overflow-hidden bg-neutral-border/30">
+            <div className="aspect-square rounded-sm overflow-hidden bg-neutral-border/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
               {location.googleMapsEmbedUrl ? (
                 <iframe
                   src={location.googleMapsEmbedUrl}
@@ -504,13 +578,20 @@ export default function Template5Page() {
       </section>
 
       {/* Membership - Zen Style */}
-      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
               Membership
             </p>
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText mb-4">
+            <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText mb-4">
               Wellness Plans
             </h2>
             <p className="text-neutral-muted max-w-xl mx-auto leading-relaxed">
@@ -541,10 +622,10 @@ export default function Template5Page() {
             ].map((plan, index) => (
               <div
                 key={index}
-                className={`p-8 rounded-sm border transition-all ${
+                className={`p-8 rounded-sm border transition-all duration-300 hover:-translate-y-1 ${
                   plan.featured
-                    ? "border-brand-primary bg-brand-canvas shadow-sm"
-                    : "border-neutral-border bg-brand-canvas hover:border-brand-primary/50"
+                    ? "border-brand-primary bg-brand-canvas shadow-lg hover:shadow-xl"
+                    : "border-neutral-border bg-brand-canvas hover:border-brand-primary/50 hover:shadow-lg"
                 }`}
               >
                 {plan.featured && (
@@ -567,7 +648,7 @@ export default function Template5Page() {
                 </ul>
                 <a
                   href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="block w-full py-3 text-center text-sm border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors rounded-sm"
+                  className="group block w-full py-3 text-center text-sm border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white hover:shadow-lg hover:shadow-brand-primary/25 transition-all duration-300 rounded-sm"
                 >
                   Begin Journey
                 </a>
@@ -578,21 +659,28 @@ export default function Template5Page() {
       </section>
 
       {/* Free Consultation Banner - Zen Style */}
-      <section className="relative py-24 px-8">
-        <div className="absolute inset-0">
+      <section className="relative py-24 px-8 group">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/images/office-exterior.jpg"
             alt="Our serene practice"
             fill
-            className="object-cover"
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-brand-mainText/80" />
+          {/* Architectural Grid Overlay */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+            <div className="h-full w-full" style={{
+              backgroundImage: `linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)`,
+              backgroundSize: "80px 80px"
+            }} />
+          </div>
         </div>
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-white/60 mb-4">
             Complimentary
           </p>
-          <h2 className="text-2xl md:text-3xl font-light text-white mb-6">
+          <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-white mb-6">
             Begin Your Wellness Journey
           </h2>
           <p className="text-white/70 leading-relaxed mb-8 max-w-xl mx-auto">
@@ -600,10 +688,10 @@ export default function Template5Page() {
           </p>
           <a
             href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="inline-flex items-center gap-3 text-white border border-white/30 px-8 py-3 hover:bg-white hover:text-brand-mainText transition-all"
+            className="group/btn inline-flex items-center gap-3 text-white border border-white/30 px-8 py-3 hover:bg-white hover:text-brand-mainText hover:shadow-xl transition-all duration-300"
           >
             <span>Schedule Consultation</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
@@ -611,13 +699,20 @@ export default function Template5Page() {
       </section>
 
       {/* Why Choose Us - Zen Style */}
-      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-8 bg-brand-canvas border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
               Our Philosophy
             </p>
-            <h2 className="text-2xl md:text-3xl font-light text-brand-mainText">
+            <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText">
               The Mindful Difference
             </h2>
           </div>
@@ -640,11 +735,11 @@ export default function Template5Page() {
                 description: "Your treatment plan is uniquely yours, crafted to honor your individual health journey.",
               },
             ].map((item, index) => (
-              <div key={index} className="p-8 border border-neutral-border rounded-sm">
-                <div className="w-10 h-10 rounded-full border border-brand-primary flex items-center justify-center mb-4">
-                  <span className="text-sm font-light text-brand-primary">0{index + 1}</span>
+              <div key={index} className="group p-8 border border-neutral-border rounded-sm hover:border-brand-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className="w-10 h-10 rounded-full border border-brand-primary flex items-center justify-center mb-4 group-hover:bg-brand-primary group-hover:scale-110 transition-all duration-300">
+                  <span className="text-sm font-light text-brand-primary group-hover:text-white transition-colors duration-300">0{index + 1}</span>
                 </div>
-                <h3 className="text-lg font-medium text-brand-mainText mb-2">{item.title}</h3>
+                <h3 className="text-lg font-medium text-brand-mainText mb-2 group-hover:text-brand-primary transition-colors">{item.title}</h3>
                 <p className="text-sm text-neutral-muted leading-relaxed">{item.description}</p>
               </div>
             ))}
@@ -653,12 +748,19 @@ export default function Template5Page() {
       </section>
 
       {/* The Practice Difference CTA - Zen Style */}
-      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-24 px-8 bg-brand-primary/[0.02] border-t border-neutral-border relative overflow-hidden">
+        {/* Architectural Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="h-full w-full" style={{
+            backgroundImage: `linear-gradient(var(--primary-brand) 1px, transparent 1px), linear-gradient(90deg, var(--primary-brand) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px"
+          }} />
+        </div>
+        <div className="max-w-3xl mx-auto text-center relative">
           <p className="text-sm uppercase tracking-[0.2em] text-neutral-muted mb-4">
             Experience the Difference
           </p>
-          <h2 className="text-2xl md:text-3xl font-light text-brand-mainText mb-6">
+          <h2 className="text-[clamp(1.5rem,3vw,1.875rem)] font-light text-brand-mainText mb-6">
             Where Wellness Meets Artistry
           </h2>
           <p className="text-neutral-muted leading-relaxed mb-8 max-w-xl mx-auto">
@@ -666,10 +768,10 @@ export default function Template5Page() {
           </p>
           <a
             href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="inline-flex items-center gap-3 text-brand-primary font-medium hover:gap-4 transition-all"
+            className="group inline-flex items-center gap-3 text-brand-primary font-medium hover:gap-4 transition-all"
           >
             <span>Begin Your Journey</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
