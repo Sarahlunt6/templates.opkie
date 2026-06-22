@@ -3,6 +3,7 @@ import Image from "next/image";
 import { clientMasterDataOrtho, sampleReviewsOrtho } from "@/data/master-ortho";
 import T2OrthoNav from "./components/T2OrthoNav";
 import T2OrthoFooter from "./components/T2OrthoFooter";
+import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
 
 const location = clientMasterDataOrtho.locations[0];
 
@@ -16,433 +17,425 @@ export default function Template2OrthoPage() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sans">
+    <div className="font-sans bg-zinc-950 text-white">
       <T2OrthoNav />
-      {/* Hero Section - Centered Canvas */}
-      <section className="min-h-[80vh] flex flex-col items-center justify-center px-fluid py-fluid-24 bg-brand-canvas relative overflow-hidden group">
-        {/* Background Team Image */}
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          HERO SECTION — PRECISION MEDICAL
+          Clean grid overlay, sophisticated typography, patient-focused metrics
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="min-h-screen relative overflow-hidden">
+        {/* Subtle Grid Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "48px 48px",
+          }}
+        />
+
+        {/* Background Image - Full Bleed with Refined Overlay */}
         <div className="absolute inset-0">
           <Image
             src="/images/team-ortho.jpeg"
             alt={`Our orthodontic team at ${clientMasterDataOrtho.globalPracticeName} in ${location.cityServed}`}
             fill
-            className="object-cover opacity-10 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="object-cover"
             sizes="100vw"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/60 to-zinc-950" />
         </div>
-        {/* Architectural Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
 
-        {/* Google Review Badge */}
-        <div className="relative z-10 mb-8">
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-brand-canvas border border-neutral-border shadow-sm">
-            <div className="flex items-center gap-1">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <svg
-                  key={star}
-                  className="w-5 h-5 text-yellow-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <span className="font-semibold text-brand-mainText">5.0</span>
-            <span className="text-neutral-muted">|</span>
-            <span className="text-neutral-muted">200+ Reviews on Google</span>
+        {/* Refined Corner Labels */}
+        <div className="absolute top-6 left-6 z-20">
+          <span className="text-[10px] tracking-[0.25em] text-white/40 uppercase font-medium">
+            Advanced Orthodontics
+          </span>
+        </div>
+        <div className="absolute top-6 right-6 z-20">
+          <span className="text-[10px] tracking-[0.25em] text-white/40">
+            {location.cityServed} • Now Accepting Patients
+          </span>
+        </div>
+
+        {/* Main Content - Absolute Lower Third Positioning */}
+        <div className="relative z-10 min-h-screen flex flex-col justify-end px-6 md:px-12 pb-24">
+          {/* Category Label */}
+          <div className="mb-6">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Precision Digital Orthodontics
+            </span>
           </div>
-        </div>
 
-        {/* Main Headline */}
-        <h1 className="relative z-10 text-fluid-4xl md:text-fluid-5xl lg:text-fluid-6xl font-bold text-brand-mainText text-center max-w-4xl leading-tight mb-6">
-          Precision Digital Orthodontics.
-          <br />
-          <span className="text-brand-primary">Your Perfect Smile Awaits.</span>
-        </h1>
+          {/* Main Headline - Title Case, Refined Weight */}
+          <h1 className="text-[clamp(2.5rem,7vw,5rem)] font-semibold tracking-[-0.02em] leading-[1.05] mb-6 max-w-4xl">
+            <span className="block">Your Perfect Smile,</span>
+            <span className="block">Precisely</span>
+            <span className="block text-brand-primary">Designed.</span>
+          </h1>
 
-        {/* Subheading */}
-        <p className="relative z-10 text-fluid-lg md:text-fluid-xl text-neutral-muted text-center max-w-2xl mb-10">
-          Experience the future of orthodontic care in {location.cityServed}. Our advanced 3D imaging
-          and digital treatment planning deliver exceptional results with unprecedented comfort.
-        </p>
+          {/* Subheading with Elegant Style */}
+          <p className="text-base md:text-lg text-white/60 max-w-xl mb-10 leading-relaxed">
+            3D imaging, digital treatment planning, and personalized care. Experience orthodontics designed around your comfort and lasting results.
+          </p>
 
-        {/* Interactive Card Container */}
-        <div className="relative z-10 w-full max-w-xl">
-          <div className="bg-brand-canvas border border-neutral-border rounded-2xl shadow-xl p-8">
-            <h2 className="text-lg font-semibold text-brand-mainText mb-4 text-center">
-              Find Your Treatment
-            </h2>
+          {/* Rounded CTA Buttons */}
+          <div className="flex flex-wrap gap-4">
+            <a
+              href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
+            >
+              <span>Schedule Consultation</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300"
+            >
+              <span>{location.phoneGBP}</span>
+            </a>
+          </div>
 
-            {/* Treatment Selector */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-neutral-muted mb-2">
-                  Select Treatment Type
-                </label>
-                <select className="w-full px-4 py-3 rounded-lg border border-neutral-border focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all">
-                  <option>Invisalign Clear Aligners</option>
-                  <option>Traditional Metal Braces</option>
-                  <option>Ceramic Braces</option>
-                  <option>Teen Braces</option>
-                  <option>Early Intervention Treatment</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-neutral-muted mb-2">
-                  Your Zip Code
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter zip code"
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-border focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all"
-                />
-              </div>
-
-              <button className="w-full py-4 rounded-lg bg-brand-primary text-brand-canvas font-semibold hover:brightness-110 transition-all">
-                Check Availability
-              </button>
-            </div>
-
-            {/* Quick Contact */}
-            <div className="mt-6 pt-6 border-t border-neutral-border text-center">
-              <p className="text-sm text-neutral-muted mb-2">Or call us directly</p>
-              <a
-                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="text-xl font-semibold text-brand-primary hover:underline"
-              >
-                {location.phoneGBP}
-              </a>
+          {/* Patient-Focused Stats Bar */}
+          <div className="mt-16 pt-8 border-t border-white/10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { value: "99.2%", label: "Patient Satisfaction" },
+                { value: "3D", label: "Digital Planning" },
+                { value: "5,000+", label: "Smiles Created" },
+                { value: "15+", label: "Years Experience" },
+              ].map((stat, index) => (
+                <div key={index} className="group">
+                  <p className="text-3xl md:text-4xl font-semibold text-brand-primary tracking-tight mb-1">{stat.value}</p>
+                  <p className="text-[11px] tracking-[0.15em] text-white/50 uppercase">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Welcome Video - Tech Style */}
-      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          REFINED MARQUEE — ELEGANT SEPARATOR
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <div className="relative overflow-hidden border-y border-slate-800 bg-zinc-900/50 py-5">
+        <div className="animate-marquee whitespace-nowrap flex">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="flex items-center gap-16 mx-16">
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Invisalign</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">Traditional Braces</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Ceramic Braces</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">Early Treatment</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Teen Orthodontics</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">Retainers</span>
+              <span className="text-white/10">•</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          SERVICES GRID — SOPHISTICATED MEDICAL CARDS
+          Rounded corners, refined typography, patient-focused descriptions
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 relative">
+        {/* Subtle Grid Background */}
         <div
           className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
           }}
         />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-10">
-            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
-              Behind The Scenes
-            </p>
-            <h2 className="text-fluid-3xl lg:text-fluid-4xl font-bold text-white mb-4">
-              Meet Our Digital Orthodontics Team
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Section Header */}
+          <div className="mb-12">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Our Specialties
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+              Treatment Excellence
             </h2>
-            <p className="text-fluid-base text-gray-300 max-w-2xl mx-auto">
-              See the technology, meet the team, and hear from patients about their experience with our precision-driven approach to orthodontic care.
+            <p className="text-base text-white/50 max-w-lg">
+              Advanced digital treatments designed for optimal outcomes and lasting results.
             </p>
           </div>
-          <div className="group relative aspect-video rounded-2xl overflow-hidden border border-gray-600 shadow-premium-lg transition-all duration-500 hover:border-brand-primary/50 hover:shadow-[0_24px_64px_rgba(15,118,110,0.2)]">
+
+          {/* Refined Service Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                id: "01",
+                title: "Invisalign",
+                subtitle: "Clear Aligner Therapy",
+                description: "Discreet alignment with real-time progress tracking for your perfect smile.",
+                image: "/images/services/invisalign.jpg",
+              },
+              {
+                id: "02",
+                title: "Traditional Braces",
+                subtitle: "Precision Metal Brackets",
+                description: "Time-tested treatment with digital placement for reliable results.",
+                image: "/images/services/braces.jpg",
+              },
+              {
+                id: "03",
+                title: "Ceramic Braces",
+                subtitle: "Discreet Treatment",
+                description: "Tooth-colored brackets that blend naturally with your smile.",
+                image: "/images/services/full-mouth-smile.jpg",
+              },
+              {
+                id: "04",
+                title: "Early Treatment",
+                subtitle: "Phase 1 Orthodontics",
+                description: "Interceptive care to guide healthy jaw growth and development.",
+                image: "/images/services/full-mouth-shade.jpg",
+              },
+            ].map((service) => (
+              <div
+                key={service.id}
+                className="group relative aspect-[3/4] bg-slate-900 overflow-hidden rounded-2xl"
+              >
+                {/* Full-Bleed Background */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent z-10" />
+                <div className="absolute inset-0 bg-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+
+                {/* Numeric Counter */}
+                <div className="absolute top-5 left-5 z-20">
+                  <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                    <span className="text-[11px] font-medium text-white/70">{service.id}</span>
+                  </div>
+                </div>
+
+                {/* Lower Third Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                  <p className="text-[10px] tracking-[0.2em] text-brand-primary mb-2 uppercase font-medium">
+                    {service.subtitle}
+                  </p>
+                  <h3 className="text-xl font-semibold tracking-tight mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-white/60 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  {/* Hover Arrow */}
+                  <div className="mt-4 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                    <svg className="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Bottom Accent Line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20 rounded-b-2xl" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          SECOND MARQUEE — REVERSED
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <div className="relative overflow-hidden border-y border-slate-800 bg-zinc-900/50 py-5">
+        <div className="animate-marquee-reverse whitespace-nowrap flex">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="flex items-center gap-16 mx-16">
+              <span className="text-xs tracking-[0.2em] text-white/50">Precision</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Technology</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">Innovation</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Excellence</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">Digital</span>
+              <span className="text-white/10">•</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Advanced</span>
+              <span className="text-white/10">•</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          WELCOME VIDEO — REFINED PRESENTATION
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 relative">
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
+          }}
+        />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Section Header */}
+          <div className="mb-8">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Meet Our Team
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+              Practice Overview
+            </h2>
+            <p className="text-base text-white/50">
+              Step inside our state-of-the-art facility. See the technology in action.
+            </p>
+          </div>
+
+          {/* Video Container - Rounded */}
+          <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-800 group">
             <video
-              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              className="w-full h-full object-cover"
               controls
-              poster="/images/team/staff-photo.jpg"
+              poster="/images/team-ortho.jpeg"
             >
               <source src="/videos/hero-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            {/* Tech Corner Accent */}
-            <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-primary/90 text-white text-xs font-medium">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Practice Tour
+
+            {/* Refined Labels */}
+            <div className="absolute top-4 left-4 z-10 pointer-events-none">
+              <span className="text-[10px] tracking-[0.2em] text-white/70 bg-zinc-950/80 px-3 py-1.5 rounded-full">
+                Practice Tour
+              </span>
+            </div>
+            <div className="absolute top-4 right-4 z-10 flex items-center gap-2 pointer-events-none">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[10px] tracking-[0.2em] text-white/70 bg-zinc-950/80 px-3 py-1.5 rounded-full">
+                Live Preview
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Premium Services - Dark Tech Style */}
-      <section className="py-fluid-24 px-fluid bg-slate-900 relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.015] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: "80px 80px",
-          }}
-        />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
-              Digital Precision
-            </p>
-            <h2 className="text-fluid-3xl lg:text-fluid-4xl font-bold text-white mb-4">
-              Advanced Orthodontic Solutions
-            </h2>
-            <p className="text-fluid-base text-slate-400 max-w-2xl mx-auto">
-              Cutting-edge treatments powered by digital precision for optimal outcomes.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "Invisalign",
-                description: "AI-powered clear aligner therapy with real-time progress tracking.",
-icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
-              },
-              {
-                title: "Traditional Braces",
-                description: "Precision metal brackets with digital placement for faster results.",
-                icon: "M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z",
-              },
-              {
-                title: "Ceramic Braces",
-                description: "Discreet tooth-colored brackets that blend with your natural smile.",
-                icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
-              },
-              {
-                title: "Early Treatment",
-                description: "Phase 1 interceptive orthodontics for optimal jaw development.",
-                icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707",
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="group p-6 bg-slate-800/50 border border-slate-700 rounded-xl hover:border-brand-primary/50 hover:bg-slate-800 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_16px_48px_rgba(15,118,110,0.15)]"
-              >
-                <div className="w-12 h-12 rounded-lg bg-brand-primary/20 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
-                  <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
-                  </svg>
-                </div>
-                <h3 className="text-fluid-lg font-semibold text-white mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-fluid-sm text-slate-400 leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Stats Row */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { value: "99.2%", label: "Treatment Accuracy" },
-              { value: "3D", label: "Digital Scanning" },
-              { value: "5000+", label: "Smiles Created" },
-              { value: "15+", label: "Years Experience" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center group">
-                <p className="text-fluid-4xl font-bold text-brand-primary mb-1 transition-transform duration-300 group-hover:scale-105">{stat.value}</p>
-                <p className="text-fluid-sm text-slate-400">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technology Features */}
-      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          BEFORE/AFTER — CLINICAL RESULTS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 bg-zinc-900 relative">
         <div
           className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
           }}
         />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary text-center mb-3">
-            Our Technology
-          </p>
-          <h2 className="text-fluid-3xl font-bold text-white text-center mb-4">
-            Advanced Technology. Superior Results.
-          </h2>
-          <p className="text-fluid-base text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-            Our investment in cutting-edge orthodontic technology means better outcomes,
-            faster treatment, and a more comfortable experience for every patient.
-          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
-                title: "3D Digital Imaging",
-                description: "Precise diagnostics with iTero scanning for accurate treatment planning and visualization.",
-              },
-              {
-                icon: "M13 10V3L4 14h7v7l9-11h-7z",
-                title: "Accelerated Treatment",
-                description: "Advanced techniques that can reduce treatment time by up to 50%.",
-              },
-              {
-                icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
-                title: "Digital Workflow",
-                description: "Custom treatment plans with real-time progress tracking and virtual monitoring.",
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="group p-6 rounded-xl border border-gray-600 hover:border-brand-accent/50 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_16px_48px_rgba(56,189,248,0.1)]"
-              >
-                <div className="w-12 h-12 rounded-lg bg-brand-primary flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d={feature.icon}
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-fluid-lg font-semibold text-white mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-fluid-sm text-gray-300 leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Before/After - Tech Comparison View */}
-      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
-              Transformations
-            </p>
-            <h2 className="text-fluid-3xl font-bold text-brand-mainText mb-4">
-              Digital Precision. Real Results.
+          <div className="mb-8">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Case Studies
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+              Verified Results
             </h2>
-            <p className="text-fluid-base text-neutral-muted max-w-2xl mx-auto">
-              Our advanced imaging and treatment planning technology delivers predictable,
-              exceptional outcomes. See the difference digital orthodontics makes.
+            <p className="text-base text-white/50">
+              Real transformations. Precision outcomes. Documented success.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Before */}
-            <div className="group relative rounded-2xl overflow-hidden border border-neutral-border shadow-premium transition-all duration-500 hover:shadow-premium-lg hover:border-neutral-muted">
-              <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-mainText/90 rounded-lg">
-                <span className="text-sm font-semibold text-brand-canvas">BEFORE</span>
-              </div>
-              <div className="aspect-[4/3] relative overflow-hidden">
-                <Image
-                  src="/images/cases/smile-before-ortho.png"
-                  alt="Before orthodontic treatment"
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="p-4 bg-brand-primary/5">
-                <p className="text-fluid-sm text-neutral-muted">Initial digital scan and analysis</p>
-              </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="rounded-2xl border border-slate-800 overflow-hidden">
+              <BeforeAfterSlider
+                beforeUrl="/images/cases/smile-before-ortho.png"
+                afterUrl="/images/cases/smile-after-ortho.png"
+                altTag="Digital smile design transformation"
+                aspectRatio="4/3"
+              />
             </div>
-
-            {/* After */}
-            <div className="group relative rounded-2xl overflow-hidden border-2 border-brand-primary shadow-premium transition-all duration-500 hover:shadow-[0_24px_64px_rgba(15,118,110,0.2)]">
-              <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-brand-primary rounded-lg">
-                <span className="text-sm font-semibold text-brand-canvas">AFTER</span>
-              </div>
-              <div className="aspect-[4/3] relative overflow-hidden">
-                <Image
-                  src="/images/cases/smile-after-ortho.png"
-                  alt="After orthodontic treatment"
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="p-4 bg-brand-primary/10">
-                <p className="text-fluid-sm text-brand-primary font-medium">Precision-crafted result</p>
-              </div>
-            </div>
+            <p className="text-center text-sm text-white/40 mt-6">
+              Drag to compare before and after results
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Meet the Doctor - Tech Profile Card */}
-      <section className="py-fluid-24 px-fluid bg-gradient-to-br from-slate-800 to-slate-900 relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          DOCTOR PROFILE — REFINED MEDICAL PRESENTATION
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 relative">
         <div
-          className="absolute inset-0 opacity-[0.015] pointer-events-none"
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: "80px 80px",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
           }}
         />
+
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-            {/* Image */}
-            <div className="lg:col-span-2">
-              <div className="group relative aspect-square rounded-2xl overflow-hidden border-4 border-brand-primary/20 shadow-premium-lg transition-all duration-500 hover:border-brand-primary/40">
-                <Image
-                  src="/images/team/doctor-portrait.png"
-                  alt={`${primaryDoctor.name}, ${primaryDoctor.role}`}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                />
-                {/* Tech Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900 to-transparent p-6">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-sm text-gray-300">Board-Certified Orthodontist</span>
-                  </div>
+          <div className="mb-12">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Your Provider
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4">
+              Meet Your Orthodontist
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Image Panel */}
+            <div className="relative aspect-square lg:aspect-auto bg-zinc-900 overflow-hidden rounded-2xl group">
+              <Image
+                src="/images/team/doctor-portrait.png"
+                alt={`${primaryDoctor.name}, ${primaryDoctor.role}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+
+              {/* Refined Status */}
+              <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[11px] tracking-[0.15em] text-white/70">
+                    Board-Certified Orthodontist
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Bio */}
-            <div className="lg:col-span-3">
-              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
-                Meet Your Orthodontist
+            {/* Bio Panel */}
+            <div className="bg-zinc-900 p-8 md:p-12 flex flex-col justify-center rounded-2xl">
+              <p className="text-[11px] tracking-[0.2em] text-brand-primary mb-4 uppercase font-medium">
+                {primaryDoctor.role}
               </p>
-              <h2 className="text-fluid-3xl md:text-fluid-4xl font-bold text-white mb-2">
+              <h3 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6">
                 {primaryDoctor.name}
-              </h2>
-              <p className="text-brand-accent text-fluid-lg mb-6">{primaryDoctor.role}</p>
-              <p className="text-fluid-base text-gray-300 leading-relaxed mb-8">
+              </h3>
+              <p className="text-base text-white/60 leading-relaxed mb-8">
                 {primaryDoctor.biography}
               </p>
 
               {/* Credentials Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-2">
                 {primaryDoctor.credentials.map((credential, index) => (
-                  <div key={index} className="group/cred flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10 transition-all duration-300 hover:bg-white/10 hover:border-brand-primary/30">
-                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0 transition-transform duration-300 group-hover/cred:scale-110" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 py-3 px-4 bg-white/5 border border-slate-800 rounded-xl hover:border-brand-primary/30 transition-colors"
+                  >
+                    <svg className="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-fluid-sm text-gray-300">{credential}</span>
+                    <span className="text-sm text-white/70">{credential}</span>
                   </div>
                 ))}
               </div>
@@ -451,104 +444,294 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          TECHNOLOGY FEATURES — REFINED MEDICAL PANELS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 bg-zinc-900 relative">
         <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
           }}
         />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary text-center mb-3">
-            Our Services
-          </p>
-          <h2 className="text-fluid-3xl font-bold text-brand-mainText text-center mb-12">
-            Our Treatments in {location.cityServed}
-          </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {location.secondaryCategoriesGBP.map((category, index) => (
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="mb-12">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Our Technology
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+              Advanced Capabilities
+            </h2>
+            <p className="text-base text-white/50">
+              State-of-the-art technology for superior patient outcomes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              {
+                id: "01",
+                icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
+                title: "3D Imaging",
+                description: "iTero scanning for precise diagnostics and comprehensive treatment planning.",
+              },
+              {
+                id: "02",
+                icon: "M13 10V3L4 14h7v7l9-11h-7z",
+                title: "Accelerated Treatment",
+                description: "Advanced techniques that can reduce treatment time while improving comfort.",
+              },
+              {
+                id: "03",
+                icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+                title: "Digital Workflow",
+                description: "Virtual monitoring and real-time progress tracking throughout treatment.",
+              },
+            ].map((feature) => (
               <div
-                key={index}
-                className="group p-6 rounded-xl border border-neutral-border hover:border-brand-primary hover:shadow-premium-lg transition-all duration-300 cursor-pointer hover:translate-y-[-4px]"
+                key={feature.id}
+                className="group bg-zinc-950 p-8 rounded-2xl hover:bg-zinc-900/80 transition-colors duration-300 border border-slate-800"
               >
-                <h3 className="font-semibold text-brand-mainText group-hover:text-brand-primary transition-colors text-fluid-base">
-                  {category}
-                </h3>
-                <p className="text-fluid-sm text-neutral-muted mt-2">
-                  Advanced {category.toLowerCase()} using the latest digital technology.
-                </p>
-                <span className="inline-flex items-center gap-1 text-fluid-sm font-medium text-brand-primary mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:gap-2">
-                  Learn more
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-14 h-14 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center group-hover:bg-brand-primary/20 transition-colors">
+                    <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={feature.icon} />
+                    </svg>
+                  </div>
+                  <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                    <span className="text-[10px] font-medium text-white/40">{feature.id}</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold tracking-tight mb-3">{feature.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Come Visit Us Section - Tech Style */}
-      <section className="py-fluid-24 px-fluid bg-brand-canvas border-t border-neutral-border relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          SERVICES LIST — CLEAN GRID
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 relative">
         <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
-            backgroundSize: "80px 80px",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
           }}
         />
+
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left: Hours */}
-            <div>
-              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
-                Location & Hours
+          <div className="mb-12">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Full Service Menu
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+              Comprehensive Care
+            </h2>
+            <p className="text-base text-white/50">
+              Complete orthodontic services in {location.cityServed}.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {location.secondaryCategoriesGBP.map((category, index) => (
+              <div
+                key={index}
+                className="group bg-zinc-900 p-5 rounded-xl hover:bg-zinc-800 transition-colors duration-300 cursor-pointer border border-slate-800"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                    <span className="text-[9px] font-medium text-white/40">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <svg className="w-4 h-4 text-brand-primary opacity-0 group-hover:opacity-100 transform translate-x-1 group-hover:translate-x-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+                <h3 className="text-sm font-medium tracking-tight group-hover:text-brand-primary transition-colors">
+                  {category}
+                </h3>
+                <p className="text-[11px] text-white/40 mt-1.5">
+                  Digital precision care
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          PATIENT REVIEWS — REFINED TESTIMONIALS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 bg-zinc-900 relative">
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
+          }}
+        />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="mb-12">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Patient Experiences
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+              What Our Patients Say
+            </h2>
+            <p className="text-base text-white/50">
+              Real stories from real patients. Verified reviews.
+            </p>
+          </div>
+
+          {/* Review Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {sampleReviewsOrtho.slice(0, 3).map((review, index) => (
+              <div
+                key={index}
+                className="group relative bg-zinc-950 p-8 rounded-2xl overflow-hidden border border-slate-800"
+              >
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-brand-primary/5 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+
+                {/* Header */}
+                <div className="relative z-10 flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[11px] tracking-[0.15em] text-white/40">
+                      Verified Patient
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Review Content */}
+                <div className="relative z-10">
+                  <p className="text-base text-white/70 leading-relaxed mb-6">
+                    &ldquo;{review.reviewText}&rdquo;
+                  </p>
+
+                  {/* Author */}
+                  <div className="flex items-center gap-4 pt-4 border-t border-slate-800">
+                    <div className="w-10 h-10 bg-brand-primary/10 border border-brand-primary/20 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-semibold text-brand-primary">
+                        {review.reviewerName.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">{review.reviewerName}</p>
+                      <p className="text-[11px] text-white/40">Google Review</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Accent Line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-2xl" />
+              </div>
+            ))}
+          </div>
+
+          {/* Overall Rating Bar */}
+          <div className="mt-8 p-6 bg-zinc-950 border border-slate-800 rounded-2xl">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <span className="text-[11px] tracking-[0.2em] text-white/40 uppercase">Overall Rating</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl font-semibold text-brand-primary">5.0</span>
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <span className="text-sm text-white/40">200+ Verified Reviews on Google</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          LOCATION & HOURS — REFINED PANEL
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 relative">
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
+          }}
+        />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="mb-12">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Visit Us
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4">
+              Location & Hours
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {/* Hours Panel */}
+            <div className="bg-zinc-900 p-8 md:p-12 rounded-2xl border border-slate-800">
+              <p className="text-[11px] tracking-[0.2em] text-brand-primary mb-6 uppercase font-medium">
+                Office Hours
               </p>
-              <h2 className="text-fluid-3xl font-bold text-brand-mainText mb-8">
-                Visit Our Digital Orthodontics Center
-              </h2>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
-                  { day: "Monday", hours: "8:00 AM - 5:00 PM" },
-                  { day: "Tuesday", hours: "8:00 AM - 5:00 PM" },
-                  { day: "Wednesday", hours: "8:00 AM - 5:00 PM" },
-                  { day: "Thursday", hours: "8:00 AM - 5:00 PM" },
-                  { day: "Friday", hours: "8:00 AM - 2:00 PM" },
+                  { day: "Monday", hours: "8:00 AM — 5:00 PM" },
+                  { day: "Tuesday", hours: "8:00 AM — 5:00 PM" },
+                  { day: "Wednesday", hours: "8:00 AM — 5:00 PM" },
+                  { day: "Thursday", hours: "8:00 AM — 5:00 PM" },
+                  { day: "Friday", hours: "8:00 AM — 2:00 PM" },
                   { day: "Saturday", hours: "Closed" },
                   { day: "Sunday", hours: "Closed" },
                 ].map((schedule, index) => (
                   <div
                     key={index}
-                    className="group flex justify-between items-center py-3 px-4 rounded-lg bg-brand-primary/5 border border-brand-primary/10 hover:border-brand-primary/30 hover:bg-brand-primary/10 transition-all duration-300 cursor-default"
+                    className="flex items-center justify-between py-3 px-4 bg-white/5 border border-slate-800 rounded-xl hover:border-brand-primary/30 transition-colors"
                   >
-                    <span className="text-fluid-base text-brand-mainText font-medium">{schedule.day}</span>
-                    <span className={`text-fluid-base ${schedule.hours === "Closed" ? "text-neutral-muted" : "text-brand-primary font-semibold"}`}>
+                    <span className="text-sm text-white/70">{schedule.day}</span>
+                    <span className={`text-sm ${schedule.hours === "Closed" ? "text-white/30" : "text-brand-primary"}`}>
                       {schedule.hours}
                     </span>
                   </div>
                 ))}
               </div>
+
               <a
                 href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="btn-primary mt-8 gap-2"
+                className="inline-flex items-center gap-3 mt-8 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <span>Schedule Consultation</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                Schedule Consultation
               </a>
             </div>
 
-            {/* Right: Map */}
-            <div className="group relative rounded-2xl overflow-hidden shadow-premium-lg border border-neutral-border h-[450px] hover:shadow-[0_24px_60px_rgba(15,118,110,0.15)] transition-all duration-500">
+            {/* Map Panel */}
+            <div className="relative aspect-square lg:aspect-auto min-h-[400px] bg-zinc-900 rounded-2xl overflow-hidden border border-slate-800">
               <iframe
                 src={location.googleMapsEmbedUrl}
                 width="100%"
@@ -558,340 +741,152 @@ icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title={`Map to ${location.practiceNameGBP}`}
-                className="transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                className="absolute inset-0"
               />
+              {/* Refined Overlay */}
+              <div className="absolute top-4 left-4 z-10">
+                <span className="text-[10px] tracking-[0.2em] text-white/70 bg-zinc-950/90 px-3 py-1.5 rounded-full">
+                  {location.cityServed}, {location.stateServed}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Payment Plans - Tech Dashboard Style */}
-      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          PAYMENT PLANS — REFINED PRICING CARDS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-12 bg-zinc-900 relative">
         <div
           className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
           }}
         />
+
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
+          <div className="mb-12">
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
               Flexible Financing
-            </p>
-            <h2 className="text-fluid-3xl font-bold text-white mb-4">
-              Affordable Orthodontic Care
+            </span>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+              Affordable Care
             </h2>
-            <p className="text-fluid-base text-gray-300 max-w-2xl mx-auto">
-              We believe everyone deserves a beautiful smile. Flexible payment plans with
-              <span className="text-brand-primary font-bold"> 0% financing</span> available for up to 24 months.
+            <p className="text-base text-white/50">
+              Flexible payment plans with 0% financing available.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="group rounded-2xl bg-white/5 border border-white/10 p-8 hover:border-brand-primary/50 hover:bg-white/[0.08] transition-all duration-500 hover:translate-y-[-4px]">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-brand-primary group-hover:scale-125 transition-transform duration-300" />
-                <span className="text-fluid-xs font-semibold text-white uppercase tracking-wide">Basic Braces</span>
-              </div>
-              <div className="mb-6">
-                <span className="text-fluid-base text-gray-400">Starting at</span>
-                <div>
-                  <span className="text-fluid-5xl font-bold text-white">$99</span>
-                  <span className="text-fluid-base text-gray-400">/month</span>
-                </div>
-              </div>
-              <ul className="space-y-3 text-fluid-sm text-gray-300">
-                {["Metal or Ceramic Brackets", "All Adjustments Included", "Retainers Included", "24/7 Emergency Support", "Flexible Scheduling"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { tier: "Basic Braces", price: "99", code: "01" },
+              { tier: "Invisalign", price: "149", code: "02", popular: true },
+              { tier: "Teen Treatment", price: "89", code: "03" },
+            ].map((plan) => (
+              <div
+                key={plan.code}
+                className={`group relative bg-zinc-950 p-8 rounded-2xl border ${plan.popular ? "border-brand-primary" : "border-slate-800"}`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="text-[10px] tracking-[0.2em] text-brand-primary bg-brand-primary/10 px-4 py-1.5 rounded-full uppercase font-medium border border-brand-primary/30">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
 
-            <div className="group rounded-2xl bg-brand-primary/20 border border-brand-primary/30 p-8 relative hover:border-brand-primary/60 hover:bg-brand-primary/25 transition-all duration-500 hover:translate-y-[-4px] hover:shadow-[0_24px_60px_rgba(15,118,110,0.25)]">
-              <div className="absolute -top-3 right-4 px-3 py-1 bg-brand-primary rounded-full text-xs font-semibold text-white shadow-premium">
-                Most Popular
-              </div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-brand-primary group-hover:scale-125 transition-transform duration-300" />
-                <span className="text-fluid-xs font-semibold text-white uppercase tracking-wide">Invisalign</span>
-              </div>
-              <div className="mb-6">
-                <span className="text-fluid-base text-gray-400">Starting at</span>
-                <div>
-                  <span className="text-fluid-5xl font-bold text-white">$149</span>
-                  <span className="text-fluid-base text-gray-400">/month</span>
-                </div>
-              </div>
-              <ul className="space-y-3 text-fluid-sm text-gray-300">
-                {["Clear Aligner Treatment", "Virtual Progress Tracking", "All Refinements Included", "Retainers Included", "Whitening Treatment"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="group rounded-2xl bg-white/5 border border-white/10 p-8 hover:border-brand-primary/50 hover:bg-white/[0.08] transition-all duration-500 hover:translate-y-[-4px]">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-brand-primary group-hover:scale-125 transition-transform duration-300" />
-                <span className="text-fluid-xs font-semibold text-white uppercase tracking-wide">Teen Treatment</span>
-              </div>
-              <div className="mb-6">
-                <span className="text-fluid-base text-gray-400">Starting at</span>
-                <div>
-                  <span className="text-fluid-5xl font-bold text-white">$89</span>
-                  <span className="text-fluid-base text-gray-400">/month</span>
-                </div>
-              </div>
-              <ul className="space-y-3 text-fluid-sm text-gray-300">
-                {["Braces or Invisalign Teen", "Fun Bracket Colors", "Sports Mouthguard", "School-Friendly Scheduling", "Sibling Discounts Available"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Patient Testimonials - Tech Style */}
-      <section className="py-fluid-24 px-fluid bg-brand-canvas relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-            <div className="lg:col-span-1">
-              <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
-                Patient Feedback
-              </p>
-              <h2 className="text-fluid-3xl font-bold text-brand-mainText leading-tight mb-6">
-                5-Star Smile Experience
-              </h2>
-              <div className="flex items-center gap-1 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-fluid-sm text-neutral-muted">Based on 200+ verified reviews</p>
-            </div>
-
-            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {sampleReviewsOrtho.slice(0, 3).map((review, index) => (
-                <div key={index} className="group p-6 rounded-xl bg-brand-primary/5 border border-brand-primary/10 hover:border-brand-primary/30 hover:shadow-premium-lg transition-all duration-500 hover:translate-y-[-4px]">
-                  <p className="text-fluid-sm text-brand-mainText leading-relaxed mb-6">{review.reviewText}</p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-neutral-border">
-                    <div className="w-10 h-10 rounded-full bg-brand-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-sm font-semibold text-brand-primary">
-                        {review.reviewerName.charAt(0)}
-                      </span>
-                    </div>
-                    <p className="text-fluid-sm font-semibold text-brand-mainText">{review.reviewerName}</p>
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                    <span className="text-[10px] font-medium text-white/40">{plan.code}</span>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Free Consultations Banner - Tech Style */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden group">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/office-interior.jpg"
-            alt={`${clientMasterDataOrtho.globalPracticeName} office interior`}
-            fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60" />
-          {/* Architectural Grid Overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.015] pointer-events-none"
-            style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-              backgroundSize: "80px 80px",
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 w-full px-fluid py-fluid-20">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 text-brand-primary text-fluid-sm font-medium mb-6 backdrop-blur-sm">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                Now Accepting New Patients
-              </div>
-              <h2 className="text-fluid-4xl font-bold text-white mb-4">
-                Free Orthodontic Consultations
-              </h2>
-              <p className="text-fluid-xl text-gray-300 mb-2">
-                Braces, Invisalign & More
-              </p>
-              <p className="text-fluid-base text-gray-400">
-                Experience our 3D imaging and digital treatment planning at no cost.
-              </p>
-            </div>
-            <div className="flex justify-center lg:justify-end">
-              <a
-                href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="btn-primary px-10 py-5 text-lg gap-3 shadow-[0_8px_32px_rgba(15,118,110,0.4)]"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                Book Free Consultation
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us - Tech Grid */}
-      <section className="py-fluid-24 px-fluid bg-slate-800 relative overflow-hidden">
-        {/* Architectural Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-3">
-              Why Us
-            </p>
-            <h2 className="text-fluid-3xl font-bold text-white mb-4">
-              Why Choose Digital Orthodontics?
-            </h2>
-            <p className="text-fluid-base text-gray-300 max-w-2xl mx-auto">
-              Experience the precision and comfort of cutting-edge orthodontic technology.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
-                title: "Advanced Technology",
-                description: "3D imaging, digital treatment planning, and virtual monitoring for precise, comfortable treatment.",
-                cta: "View Technology",
-              },
-              {
-                icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z",
-                title: "Expert Team",
-                description: `${clientMasterDataOrtho.globalPracticeName} brings together board-certified orthodontists dedicated to your smile.`,
-                cta: "Meet the Team",
-              },
-              {
-                icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
-                title: "Faster Results",
-                description: "Advanced techniques and technology can reduce treatment time while improving outcomes.",
-                cta: "Learn More",
-              },
-            ].map((item, index) => (
-              <div key={index} className="group p-6 rounded-xl border border-gray-600 hover:border-brand-primary/50 hover:bg-white/[0.03] transition-all duration-500 hover:translate-y-[-4px]">
-                <div className="w-12 h-12 rounded-lg bg-brand-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
-                  </svg>
+                <p className="text-sm tracking-[0.2em] text-brand-primary mb-2 uppercase font-medium">{plan.tier}</p>
+                <div className="flex items-baseline gap-1 mb-6">
+                  <span className="text-5xl font-semibold">${plan.price}</span>
+                  <span className="text-sm text-white/40">/month</span>
                 </div>
-                <h3 className="text-fluid-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-fluid-sm text-gray-400 leading-relaxed mb-6">{item.description}</p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-brand-primary text-fluid-sm font-medium hover:gap-3 transition-all duration-300"
-                >
-                  {item.cta}
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+
+                <ul className="space-y-3 mb-8">
+                  {["All Adjustments Included", "Retainers Included", "24/7 Emergency Support", "Flexible Scheduling", "0% Financing Available"].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm text-white/60">
+                      <svg className="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* The Practice Difference CTA */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden group">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          FINAL CTA — REFINED BANNER
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/team-ortho.jpeg"
-            alt={`${clientMasterDataOrtho.globalPracticeName} team`}
+            src="/images/office-interior.jpg"
+            alt={`${clientMasterDataOrtho.globalPracticeName} office interior`}
             fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/70" />
-          {/* Architectural Grid Overlay */}
+          <div className="absolute inset-0 bg-zinc-950/90" />
+          {/* Subtle Grid Overlay */}
           <div
-            className="absolute inset-0 opacity-[0.015] pointer-events-none"
+            className="absolute inset-0 opacity-[0.03]"
             style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-              backgroundSize: "80px 80px",
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+              backgroundSize: "64px 64px",
             }}
           />
         </div>
 
-        <div className="relative z-10 w-full px-fluid py-fluid-24">
+        <div className="relative z-10 w-full px-6 md:px-12 py-24">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="uppercase tracking-widest text-fluid-xs font-semibold text-brand-primary mb-4">
-              Precision. Innovation. Results.
-            </p>
-            <h2 className="text-fluid-4xl md:text-fluid-5xl font-bold text-white mb-8">
-              The {clientMasterDataOrtho.globalPracticeName} Difference
+            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+              Start Your Journey
+            </span>
+            <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.01em] mt-6 mb-6">
+              Ready to Begin?
             </h2>
-            <p className="text-fluid-lg text-gray-300 leading-relaxed mb-10 max-w-2xl mx-auto">
-              Experience orthodontic care reimagined through digital precision. Our advanced technology
-              and expert team deliver exceptional outcomes with maximum comfort.
+            <p className="text-base text-white/50 mb-10 max-w-xl mx-auto">
+              Complimentary consultations for Braces, Invisalign, and all orthodontic treatments. Experience our 3D imaging technology at no cost.
             </p>
+
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
-                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-white text-brand-mainText font-semibold hover:bg-gray-100 hover:translate-y-[-2px] hover:shadow-premium-lg transition-all duration-300"
+                href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-3 px-10 py-5 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                <span>Schedule Consultation</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                Call {location.phoneGBP}
               </a>
-              {clientMasterDataOrtho.onlineBookingUrl !== "none" && (
-                <a
-                  href={clientMasterDataOrtho.onlineBookingUrl}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border-2 border-white text-white font-semibold hover:bg-white hover:text-brand-mainText hover:translate-y-[-2px] transition-all duration-300"
-                >
-                  Book Online
-                </a>
-              )}
+              <a
+                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-3 px-10 py-5 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300"
+              >
+                <span>{location.phoneGBP}</span>
+              </a>
+            </div>
+
+            {/* Bottom Status */}
+            <div className="mt-16 pt-8 border-t border-white/10 flex items-center justify-center gap-4">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-sm text-white/40">
+                Now Accepting New Patients in {location.cityServed}
+              </span>
             </div>
           </div>
         </div>
