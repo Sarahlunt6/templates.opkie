@@ -12,7 +12,6 @@ const templateArchitectures = {
       subtitle: "Classic Editorial // Heritage Grid",
       blueprint: "split",
       bestFor: ["High-End Cosmetic", "Legacy Multi-Doctor", "Reconstructive Authority"],
-      accentColor: "brand-primary",
     },
     {
       id: "t2",
@@ -20,7 +19,6 @@ const templateArchitectures = {
       subtitle: "Precision Grid // Modern Charcoal",
       blueprint: "dashboard",
       bestFor: ["Digital-First Practice", "Tech-Forward Specialists", "Modern Urban Clinics"],
-      accentColor: "teal",
     },
     {
       id: "t3",
@@ -28,7 +26,6 @@ const templateArchitectures = {
       subtitle: "Zen Minimalist // Luxury Airy",
       blueprint: "centered",
       bestFor: ["Boutique Practices", "Spa-Like Experiences", "Premium Patient Care"],
-      accentColor: "amber",
     },
   ],
   ortho: [
@@ -38,7 +35,6 @@ const templateArchitectures = {
       subtitle: "Classic Editorial // Heritage Grid",
       blueprint: "split",
       bestFor: ["Established Orthodontics", "Family-Focused Practice", "Multi-Generation Care"],
-      accentColor: "brand-primary",
     },
     {
       id: "t2-ortho",
@@ -46,7 +42,6 @@ const templateArchitectures = {
       subtitle: "Precision Grid // Modern Charcoal",
       blueprint: "dashboard",
       bestFor: ["Digital Orthodontics", "Invisalign Specialists", "Teen & Adult Focus"],
-      accentColor: "teal",
     },
     {
       id: "t3-ortho",
@@ -54,87 +49,108 @@ const templateArchitectures = {
       subtitle: "Zen Minimalist // Luxury Airy",
       blueprint: "centered",
       bestFor: ["Boutique Orthodontics", "Luxury Patient Experience", "Concierge Care"],
-      accentColor: "amber",
     },
   ],
 };
 
-// CSS Blueprint Wireframe Components
-function BlueprintSplit() {
+// Refined Minimalist Preview Components
+function PreviewSplit() {
   return (
-    <div className="w-full h-full p-4 flex gap-3">
+    <div className="w-full h-full p-6 flex gap-4">
       {/* Left Column - Text Blocks */}
-      <div className="flex-1 flex flex-col gap-2">
-        <div className="h-3 w-3/4 bg-slate-300/50 rounded-sm" />
-        <div className="h-2 w-full bg-slate-200/40 rounded-sm" />
-        <div className="h-2 w-5/6 bg-slate-200/40 rounded-sm" />
-        <div className="flex-1" />
-        <div className="h-6 w-20 bg-slate-300/60 rounded-sm" />
+      <div className="flex-1 flex flex-col justify-center gap-2.5">
+        <div className="h-2 w-12 bg-slate-200/70 rounded-full" />
+        <div className="h-3.5 w-4/5 bg-slate-300/60 rounded" />
+        <div className="h-3.5 w-3/5 bg-slate-300/60 rounded" />
+        <div className="h-1.5 w-full bg-slate-200/50 rounded-full mt-1" />
+        <div className="h-1.5 w-11/12 bg-slate-200/50 rounded-full" />
+        <div className="h-1.5 w-4/5 bg-slate-200/50 rounded-full" />
+        <div className="mt-3 h-7 w-20 bg-slate-300/50 rounded" />
       </div>
-      {/* Right Column - Portrait Frame */}
-      <div className="w-[45%] border border-slate-300/50 rounded-sm bg-gradient-to-br from-slate-100/30 to-slate-200/20 flex items-center justify-center">
-        <div className="w-8 h-10 border border-slate-300/40 rounded-sm" />
+      {/* Right Column - Image Frame */}
+      <div className="w-[42%] bg-slate-200/40 rounded flex items-center justify-center">
+        <div className="w-12 h-14 bg-slate-300/50 rounded" />
       </div>
     </div>
   );
 }
 
-function BlueprintDashboard() {
+function PreviewDashboard() {
   return (
-    <div className="w-full h-full p-4 flex flex-col gap-2">
-      {/* Top Bar */}
-      <div className="h-4 w-full flex gap-2">
-        <div className="h-full w-16 bg-slate-300/50 rounded-sm" />
+    <div className="w-full h-full p-5 flex flex-col gap-3">
+      {/* Top Nav */}
+      <div className="h-3 w-full flex items-center gap-2">
+        <div className="h-full w-14 bg-slate-300/60 rounded" />
         <div className="flex-1" />
-        <div className="h-full w-8 bg-slate-200/40 rounded-sm" />
-        <div className="h-full w-8 bg-slate-200/40 rounded-sm" />
+        <div className="h-2 w-6 bg-slate-200/50 rounded-full" />
+        <div className="h-2 w-6 bg-slate-200/50 rounded-full" />
+        <div className="h-2 w-6 bg-slate-200/50 rounded-full" />
       </div>
-      {/* Grid */}
-      <div className="flex-1 grid grid-cols-4 gap-1.5 mt-2">
+      {/* Hero Stats Row */}
+      <div className="flex gap-2 mt-1">
+        <div className="flex-1 h-10 bg-slate-200/40 rounded flex items-center justify-center">
+          <div className="w-6 h-3 bg-slate-300/50 rounded" />
+        </div>
+        <div className="flex-1 h-10 bg-slate-200/40 rounded flex items-center justify-center">
+          <div className="w-6 h-3 bg-slate-300/50 rounded" />
+        </div>
+        <div className="flex-1 h-10 bg-slate-200/40 rounded flex items-center justify-center">
+          <div className="w-6 h-3 bg-slate-300/50 rounded" />
+        </div>
+      </div>
+      {/* Content Grid */}
+      <div className="flex-1 grid grid-cols-4 gap-1.5">
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className={`border border-slate-300/40 rounded-sm ${
-              i % 3 === 0 ? "bg-slate-200/30" : "bg-transparent"
+            className={`rounded ${
+              i === 0 || i === 3 || i === 5
+                ? "bg-slate-300/40"
+                : "bg-slate-200/30"
             }`}
           />
         ))}
       </div>
-      {/* Bottom Stats */}
-      <div className="h-3 w-full flex gap-3 mt-1">
-        <div className="h-full w-12 bg-slate-300/40 rounded-sm" />
-        <div className="h-full w-12 bg-slate-300/40 rounded-sm" />
-        <div className="h-full w-12 bg-slate-300/40 rounded-sm" />
+      {/* Bottom Bar */}
+      <div className="h-2.5 w-full flex gap-4">
+        <div className="h-full w-16 bg-slate-300/40 rounded-full" />
+        <div className="h-full w-16 bg-slate-200/40 rounded-full" />
+        <div className="h-full w-16 bg-slate-200/40 rounded-full" />
       </div>
     </div>
   );
 }
 
-function BlueprintCentered() {
+function PreviewCentered() {
   return (
-    <div className="w-full h-full p-4 flex flex-col items-center justify-center gap-3">
-      {/* Centered Content */}
-      <div className="h-2 w-16 bg-slate-200/40 rounded-sm" />
-      <div className="h-4 w-32 bg-slate-300/50 rounded-sm" />
-      <div className="h-2 w-24 bg-slate-200/40 rounded-sm" />
-      <div className="h-px w-12 bg-slate-300/60 my-1" />
-      <div className="h-2 w-40 bg-slate-200/30 rounded-sm" />
-      <div className="h-2 w-36 bg-slate-200/30 rounded-sm" />
-      <div className="h-5 w-20 bg-slate-300/50 rounded-sm mt-2" />
+    <div className="w-full h-full p-6 flex flex-col items-center justify-center gap-2.5">
+      {/* Label */}
+      <div className="h-1.5 w-14 bg-slate-200/60 rounded-full" />
+      {/* Headline */}
+      <div className="h-4 w-36 bg-slate-300/60 rounded mt-1" />
+      <div className="h-4 w-28 bg-slate-300/60 rounded" />
+      {/* Divider */}
+      <div className="h-px w-10 bg-slate-300/70 my-2" />
+      {/* Body Text */}
+      <div className="h-1.5 w-44 bg-slate-200/50 rounded-full" />
+      <div className="h-1.5 w-40 bg-slate-200/50 rounded-full" />
+      <div className="h-1.5 w-36 bg-slate-200/50 rounded-full" />
+      {/* CTA */}
+      <div className="h-6 w-24 bg-slate-300/50 rounded mt-3" />
     </div>
   );
 }
 
-function BlueprintRenderer({ type }: { type: string }) {
+function PreviewRenderer({ type }: { type: string }) {
   switch (type) {
     case "split":
-      return <BlueprintSplit />;
+      return <PreviewSplit />;
     case "dashboard":
-      return <BlueprintDashboard />;
+      return <PreviewDashboard />;
     case "centered":
-      return <BlueprintCentered />;
+      return <PreviewCentered />;
     default:
-      return <BlueprintSplit />;
+      return <PreviewSplit />;
   }
 }
 
@@ -144,9 +160,9 @@ export default function HomePage() {
   const templates = templateArchitectures[practiceType];
 
   return (
-    <main className="min-h-screen bg-[#f8f9fa]">
+    <main className="min-h-screen bg-[#fafafa]">
       {/* Premium Header */}
-      <header className="bg-white border-b border-slate-200/80">
+      <header className="bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
@@ -161,13 +177,13 @@ export default function HomePage() {
               </p>
             </div>
             <div className="flex items-center gap-3 text-xs font-medium">
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200/60 rounded-full">
-                <span className="relative flex h-2 w-2">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50/80 border border-emerald-100 rounded-full">
+                <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                 </span>
-                <span className="text-emerald-700">
-                  System Status: {templates.length} Core Dynamic Architectures Compiled // Operational
+                <span className="text-emerald-700/80">
+                  {templates.length} Architectures Online
                 </span>
               </div>
             </div>
@@ -177,48 +193,38 @@ export default function HomePage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Premium Segmented Toggle */}
+        {/* Elegant Typographic Toggle */}
         <div className="flex justify-center mb-14">
-          <div className="relative inline-flex items-center bg-white rounded-2xl p-1.5 ring-1 ring-slate-200 shadow-sm">
+          <div className="relative inline-flex items-center bg-white rounded-full p-1 ring-1 ring-slate-200/80 shadow-sm">
             {/* Animated Background Slider */}
             <motion.div
-              className="absolute h-[calc(100%-12px)] top-1.5 bg-slate-900 rounded-xl shadow-lg"
+              className="absolute h-[calc(100%-8px)] top-1 bg-slate-900 rounded-full"
               initial={false}
               animate={{
-                x: practiceType === "dental" ? 6 : "calc(100% + 6px)",
-                width: practiceType === "dental" ? "calc(50% - 9px)" : "calc(50% - 9px)",
+                x: practiceType === "dental" ? 4 : "calc(100% + 4px)",
+                width: practiceType === "dental" ? "calc(50% - 6px)" : "calc(50% - 6px)",
               }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              transition={{ type: "spring", stiffness: 400, damping: 35 }}
             />
             <button
               onClick={() => setPracticeType("dental")}
-              className={`relative z-10 px-8 py-3 rounded-xl text-sm font-semibold transition-colors duration-200 ${
+              className={`relative z-10 px-7 py-2.5 rounded-full text-sm font-medium tracking-[-0.01em] transition-colors duration-200 ${
                 practiceType === "dental"
                   ? "text-white"
                   : "text-slate-500 hover:text-slate-700"
               }`}
             >
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                </svg>
-                Dental Practice
-              </span>
+              Dental Practice
             </button>
             <button
               onClick={() => setPracticeType("ortho")}
-              className={`relative z-10 px-8 py-3 rounded-xl text-sm font-semibold transition-colors duration-200 ${
+              className={`relative z-10 px-7 py-2.5 rounded-full text-sm font-medium tracking-[-0.01em] transition-colors duration-200 ${
                 practiceType === "ortho"
                   ? "text-white"
                   : "text-slate-500 hover:text-slate-700"
               }`}
             >
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Orthodontic Practice
-              </span>
+              Orthodontic Practice
             </button>
           </div>
         </div>
@@ -227,11 +233,11 @@ export default function HomePage() {
         <AnimatePresence mode="wait">
           <motion.div
             key={practiceType}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto"
           >
             {templates.map((template, index) => (
               <motion.a
@@ -239,108 +245,73 @@ export default function HomePage() {
                 href={`/${template.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="group relative bg-white rounded-2xl overflow-hidden ring-1 ring-slate-200/80 hover:ring-slate-300 hover:shadow-xl transition-all duration-500"
+                transition={{ delay: index * 0.08, duration: 0.35 }}
+                className="group relative bg-white rounded-2xl overflow-hidden ring-1 ring-slate-200/60 hover:ring-slate-300/80 hover:shadow-lg transition-all duration-400"
               >
-                {/* Blueprint Wireframe Container */}
-                <div className="aspect-[4/3] bg-gradient-to-br from-slate-50 to-slate-100 relative overflow-hidden">
-                  {/* Grid Pattern Overlay */}
-                  <div
-                    className="absolute inset-0 opacity-[0.4]"
-                    style={{
-                      backgroundImage: `linear-gradient(rgba(148,163,184,0.15) 1px, transparent 1px),
-                                        linear-gradient(90deg, rgba(148,163,184,0.15) 1px, transparent 1px)`,
-                      backgroundSize: "20px 20px",
-                    }}
-                  />
-
-                  {/* Blueprint Wireframe */}
-                  <div className="relative z-10 w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.05]">
-                    <BlueprintRenderer type={template.blueprint} />
+                {/* Minimalist Preview Container */}
+                <div className="aspect-[4/3] bg-slate-50 relative overflow-hidden">
+                  {/* Preview Wireframe */}
+                  <div className="relative z-10 w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.03]">
+                    <PreviewRenderer type={template.blueprint} />
                   </div>
 
                   {/* Hover Overlay with CTA */}
-                  <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center z-20">
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      whileHover={{ scale: 1.02 }}
-                      className="flex items-center gap-2 px-6 py-3 bg-white rounded-xl text-sm font-semibold text-slate-900 shadow-lg"
-                    >
-                      <span>Launch Interactive Live Preview</span>
-                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-0 bg-slate-900/85 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center z-20">
+                    <div className="flex items-center gap-2 px-5 py-2.5 bg-white rounded-full text-sm font-medium text-slate-900 shadow-lg">
+                      <span>Preview Template</span>
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
-                    </motion.div>
-                  </div>
-
-                  {/* Architecture Index Badge */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="w-8 h-8 rounded-lg bg-white/90 backdrop-blur-sm border border-slate-200/80 flex items-center justify-center shadow-sm">
-                      <span className="text-[11px] font-bold text-slate-500">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
                     </div>
                   </div>
 
-                  {/* Blueprint Type Label */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <div className="px-2.5 py-1 rounded-md bg-white/90 backdrop-blur-sm border border-slate-200/80 shadow-sm">
-                      <span className="text-[9px] uppercase tracking-[0.15em] font-semibold text-slate-400">
-                        {template.blueprint === "split" && "Editorial Layout"}
-                        {template.blueprint === "dashboard" && "Grid System"}
-                        {template.blueprint === "centered" && "Centered Flow"}
-                      </span>
-                    </div>
+                  {/* Subtle Index Badge */}
+                  <div className="absolute top-3.5 right-3.5 z-10">
+                    <span className="text-[10px] font-medium text-slate-300 tracking-wide">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </div>
                 </div>
 
                 {/* Template Info Panel */}
-                <div className="p-6">
+                <div className="px-5 py-5">
                   {/* Title & Subtitle */}
                   <div className="mb-4">
-                    <h2 className="text-lg font-semibold text-slate-900 tracking-tight mb-1">
+                    <h2 className="text-base font-semibold text-slate-800 tracking-[-0.01em] mb-0.5">
                       {template.title}
                     </h2>
-                    <p className="text-xs font-medium text-slate-400 tracking-wide">
+                    <p className="text-[11px] font-medium text-slate-400 tracking-wide">
                       {template.subtitle}
                     </p>
                   </div>
 
-                  {/* Divider */}
-                  <div className="h-px w-full bg-slate-100 mb-4" />
-
                   {/* Best For Tags */}
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-medium mb-2">
-                      Best For
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {template.bestFor.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 text-[10px] font-medium text-slate-500 bg-slate-100 rounded-md"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {template.bestFor.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 text-[10px] font-medium text-slate-500/80 bg-slate-100/80 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
                 {/* Bottom Action Bar */}
-                <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">
-                      Production Ready
+                <div className="px-5 py-3.5 bg-slate-50/50 border-t border-slate-100/80 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-1 h-1 rounded-full bg-emerald-500/70" />
+                    <span className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">
+                      Ready
                     </span>
                   </div>
                   <div className="flex items-center gap-1 text-slate-400 group-hover:text-slate-600 transition-colors">
-                    <span className="text-xs font-medium">View</span>
-                    <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    <span className="text-[11px] font-medium">View</span>
+                    <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
                 </div>
@@ -350,9 +321,9 @@ export default function HomePage() {
         </AnimatePresence>
 
         {/* Footer Attribution */}
-        <div className="mt-16 text-center">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-slate-300 font-medium">
-            Engineered by Opkie Design Systems // Zero Layout Shift Architecture
+        <div className="mt-14 text-center">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-slate-300 font-medium">
+            Opkie Design Systems
           </p>
         </div>
       </div>
