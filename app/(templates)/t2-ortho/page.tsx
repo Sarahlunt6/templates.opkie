@@ -208,13 +208,22 @@ export default function Template2OrthoPage() {
                 key={service.id}
                 className="group relative aspect-[3/4] bg-slate-900 overflow-hidden rounded-2xl"
               >
-                {/* Full-Bleed Background */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent z-10" />
+                {/* Background Image */}
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+
+                {/* Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-zinc-950/20 z-10" />
                 <div className="absolute inset-0 bg-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
                 {/* Numeric Counter */}
                 <div className="absolute top-5 left-5 z-20">
-                  <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
                     <span className="text-[11px] font-medium text-white/70">{service.id}</span>
                   </div>
                 </div>
