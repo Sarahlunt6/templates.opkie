@@ -404,19 +404,19 @@ export default function Template3Page() {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-brand-mainText/85" />
+          <div className="absolute inset-0 bg-slate-900/90" />
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto px-8 text-center">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-white/50 mb-8">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-white/70 mb-8">
             Complimentary
           </p>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-white mb-8 tracking-[0.05em]">
+          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-light text-white mb-8 tracking-[0.05em]">
             Begin Your Wellness Journey
           </h2>
 
-          <p className="text-white/60 font-light leading-relaxed tracking-wide mb-12 max-w-xl mx-auto">
+          <p className="text-white/80 font-light leading-relaxed tracking-wide mb-12 max-w-xl mx-auto">
             We offer complimentary consultations for new patients. A quiet conversation to understand your needs.
           </p>
 

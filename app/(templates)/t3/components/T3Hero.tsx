@@ -32,7 +32,7 @@ export default function T3Hero({
   return (
     <section
       ref={containerRef}
-      className="min-h-screen relative flex items-center justify-center overflow-hidden py-20"
+      className="min-h-[85vh] relative flex items-center justify-center overflow-hidden pt-8 pb-20"
     >
       {/* Asymmetric Floating Image Matrix */}
 

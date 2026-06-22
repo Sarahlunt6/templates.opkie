@@ -21,25 +21,24 @@ const services: Service[] = [
     title: "Dental Implants",
     description:
       "Biocompatible tooth restoration that honors your body's natural processes. Permanent, lasting, and indistinguishable from natural teeth.",
-    image: "/images/services/implants.jpg",
+    image: "/images/services/implant.jpg",
   },
   {
     title: "Holistic Restorations",
     description:
       "Mercury-free, metal-free dentistry using only the most biocompatible materials for your long-term health and wellness.",
-    image: "/images/services/restoration.jpg",
+    image: "/images/services/full-mouth-smile.jpg",
   },
   {
     title: "Cosmetic Enhancements",
     description:
       "Subtle, natural improvements that enhance rather than transform. Authentic beauty, refined with precision and artistry.",
-    image: "/images/services/veneers.jpg",
+    image: "/images/services/full-mouth-shade.jpg",
   },
 ];
 
 export default function T3ServiceAccordion() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section className="relative py-32 overflow-hidden border-t border-neutral-border/30">
@@ -55,45 +54,25 @@ export default function T3ServiceAccordion() {
         {/* Interactive Service Accordion */}
         <div className="relative">
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={index}
-              className="relative border-b border-brand-primary/10 cursor-pointer overflow-hidden"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className="border-b border-brand-primary/10 cursor-pointer"
               onClick={() => setActiveIndex(activeIndex === index ? null : index)}
             >
-              {/* Background Image Reveal on Hover */}
-              <AnimatePresence>
-                {hoveredIndex === index && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0 z-0"
-                  >
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover"
-                      sizes="100vw"
-                    />
-                    <div className="absolute inset-0 bg-brand-canvas/90" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
               {/* Service Row */}
-              <div className="relative z-10 py-8 flex items-center justify-between gap-8">
+              <motion.div
+                className="relative z-10 py-8 flex items-center justify-between gap-8"
+                whileHover={{ x: 8 }}
+                transition={{ duration: 0.3 }}
+              >
                 {/* Number */}
                 <motion.span
                   animate={{
-                    opacity: hoveredIndex === index ? 1 : 0.4,
-                    scale: hoveredIndex === index ? 1.1 : 1,
+                    opacity: activeIndex === index ? 1 : 0.4,
+                    color: activeIndex === index ? "var(--primary-brand)" : "var(--primary-brand)",
                   }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm font-light text-brand-primary tracking-wider w-8"
+                  className="text-sm font-light tracking-wider w-8"
                 >
                   0{index + 1}
                 </motion.span>
@@ -101,8 +80,8 @@ export default function T3ServiceAccordion() {
                 {/* Title with dynamic typography */}
                 <motion.h3
                   animate={{
-                    letterSpacing: hoveredIndex === index ? "0.12em" : "0.02em",
-                    color: hoveredIndex === index ? "var(--primary-brand)" : "var(--text-main)",
+                    letterSpacing: activeIndex === index ? "0.08em" : "0.02em",
+                    color: activeIndex === index ? "var(--primary-brand)" : "var(--text-main)",
                   }}
                   transition={{ duration: 0.4 }}
                   className="flex-1 text-xl md:text-2xl lg:text-3xl font-extralight"
@@ -114,10 +93,9 @@ export default function T3ServiceAccordion() {
                 <motion.div
                   animate={{
                     rotate: activeIndex === index ? 45 : 0,
-                    scale: hoveredIndex === index ? 1.2 : 1,
                   }}
                   transition={{ duration: 0.3 }}
-                  className="w-8 h-8 rounded-full border border-brand-primary/30 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full border border-brand-primary/30 flex items-center justify-center hover:border-brand-primary hover:bg-brand-primary/5 transition-colors"
                 >
                   <svg
                     className="w-4 h-4 text-brand-primary"
@@ -128,12 +106,12 @@ export default function T3ServiceAccordion() {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={1}
+                      strokeWidth={1.5}
                       d="M12 4v16m8-8H4"
                     />
                   </svg>
                 </motion.div>
-              </div>
+              </motion.div>
 
               {/* Expanded Content */}
               <AnimatePresence>
@@ -145,27 +123,38 @@ export default function T3ServiceAccordion() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="pb-8 pl-12 pr-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div className="pb-10 pl-10 pr-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
                       {/* Description */}
-                      <p className="text-neutral-muted font-light leading-relaxed tracking-wide">
-                        {service.description}
-                      </p>
+                      <div>
+                        <p className="text-neutral-muted font-light leading-relaxed tracking-wide mb-6">
+                          {service.description}
+                        </p>
+                        <a
+                          href="#"
+                          className="inline-flex items-center gap-2 text-sm text-brand-primary tracking-wide hover:gap-3 transition-all duration-300"
+                        >
+                          <span>Learn more</span>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </a>
+                      </div>
 
-                      {/* Small Image Preview */}
-                      <div className="relative aspect-[16/9] overflow-hidden border border-brand-primary/10">
+                      {/* Image Preview */}
+                      <div className="relative aspect-[4/3] overflow-hidden border border-brand-primary/10 bg-neutral-border/10">
                         <Image
                           src={service.image}
                           alt={service.title}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 50vw"
+                          sizes="(max-width: 768px) 100vw, 400px"
                         />
                       </div>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
