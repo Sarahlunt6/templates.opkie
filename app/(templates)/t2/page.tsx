@@ -899,32 +899,6 @@ export default function Template2Page() {
       </section>
 
       <T2Footer />
-
-      {/* Marquee Animation Styles */}
-      <style jsx>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-33.333%);
-          }
-        }
-        @keyframes marquee-reverse {
-          0% {
-            transform: translateX(-33.333%);
-          }
-          100% {
-            transform: translateX(0%);
-          }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-        .animate-marquee-reverse {
-          animation: marquee-reverse 30s linear infinite;
-        }
-      `}</style>
     </div>
   );
 }
