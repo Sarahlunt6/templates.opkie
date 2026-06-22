@@ -15,48 +15,56 @@ export default function T2Footer() {
   const { trustSignals } = clientMasterData;
 
   return (
-    <footer className="py-12 px-8 bg-slate-800">
+    <footer className="py-16 px-8 bg-zinc-900 border-t border-slate-800">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          {/* Brand Column */}
           <div className="md:col-span-2">
             <Image
               src="/images/logo-dental.png"
               alt={location.practiceNameGBP}
               width={180}
               height={40}
-              className="h-14 w-auto mb-4"
+              className="h-14 w-auto invert mb-6"
             />
-            <address className="not-italic text-gray-300 leading-relaxed">
+            <address className="not-italic text-white/50 leading-relaxed text-sm">
               <p>{location.addressGBP}</p>
               <p>{location.cityServed}, {location.stateServed}</p>
-              <p className="mt-2">
-                <a href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`} className="hover:text-brand-accent transition-colors">
+              <p className="mt-3">
+                <a href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`} className="text-brand-primary hover:text-brand-primary/80 transition-colors font-medium">
                   {location.phoneGBP}
                 </a>
               </p>
             </address>
-            <div className="flex gap-3 mt-4">
+            <div className="flex gap-4 mt-6">
               {footerLinks.map((link) => (
-                <a key={link.label} href={link.href} className="text-gray-400 hover:text-brand-accent text-sm transition-colors">
+                <a key={link.label} href={link.href} className="text-white/40 hover:text-brand-primary text-sm transition-colors">
                   {link.label}
                 </a>
               ))}
             </div>
           </div>
+
+          {/* Hours Column */}
           <div>
-            <h4 className="font-semibold text-white mb-3">Hours</h4>
-            <ul className="text-gray-300 text-sm space-y-1">
+            <h4 className="font-semibold text-white mb-4 text-sm tracking-wide">Office Hours</h4>
+            <ul className="text-white/50 text-sm space-y-2">
               {location.hoursOfOperation.map((h, i) => (
-                <li key={i}>{h.dayRange}: {h.structuralHours}</li>
+                <li key={i} className="flex justify-between">
+                  <span>{h.dayRange}</span>
+                  <span className="text-white/70">{h.structuralHours}</span>
+                </li>
               ))}
             </ul>
           </div>
+
+          {/* Insurance & CTA Column */}
           <div>
-            <h4 className="font-semibold text-white mb-3">Insurance</h4>
-            <p className="text-gray-300 text-sm">{trustSignals.insuranceAcceptedText}</p>
+            <h4 className="font-semibold text-white mb-4 text-sm tracking-wide">Insurance</h4>
+            <p className="text-white/50 text-sm leading-relaxed">{trustSignals.insuranceAcceptedText}</p>
             <a
               href={clientMasterData.onlineBookingUrl}
-              className="inline-block mt-4 px-5 py-2.5 rounded-lg bg-brand-primary text-white font-semibold text-sm hover:brightness-110 transition-all"
+              className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl bg-brand-primary text-white font-semibold text-sm hover:bg-brand-primary/90 transition-all"
             >
               Book Online
             </a>
@@ -64,13 +72,13 @@ export default function T2Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
+        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/30 text-sm">
             © {new Date().getFullYear()} {location.practiceNameGBP}. All rights reserved.
           </p>
-          <div className="flex gap-6 text-gray-500 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Accessibility</a>
+          <div className="flex gap-6 text-white/30 text-sm">
+            <a href="#" className="hover:text-white/60 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white/60 transition-colors">Accessibility</a>
           </div>
         </div>
       </div>
