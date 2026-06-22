@@ -21,17 +21,9 @@ export default function Template3Page() {
 
       {/* ═══════════════════════════════════════════════════════════════════════
           HERO SECTION — SPATIAL GALLERY SANCTUARY
-          Narrow editorial column, massive low-opacity background numerals,
-          ultra-lightweight sans-serif, dramatic letter-spacing
+          Narrow editorial column, deep whitespace, ultra-lightweight typography
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="min-h-screen relative flex items-center justify-center overflow-hidden">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <span className="text-[40vw] font-extralight text-brand-primary/[0.04] leading-none tracking-tighter">
-            01
-          </span>
-        </div>
-
         {/* Deep Whitespace Container - Narrow Editorial Column */}
         <div className="relative z-10 max-w-4xl mx-auto px-8 py-32 text-center">
           {/* Subtle Top Label */}
@@ -84,15 +76,8 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           WELCOME VIDEO — SPATIAL GALLERY STYLE
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden">
-          <span className="text-[35vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter -mr-[10vw]">
-            02
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden">
+        <div className="max-w-4xl mx-auto px-8">
           {/* Section Label */}
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Welcome
@@ -128,15 +113,8 @@ export default function Template3Page() {
           SERVICES — FLOATING TYPOGRAPHIC LIST
           Narrow column, numbered list, dramatic whitespace
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-start pointer-events-none select-none overflow-hidden">
-          <span className="text-[40vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter -ml-[15vw]">
-            03
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden border-t border-neutral-border/30">
+        <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Signature Services
           </p>
@@ -146,7 +124,7 @@ export default function Template3Page() {
           </h2>
 
           {/* Services List - Editorial Style */}
-          <div className="space-y-16">
+          <div className="space-y-12">
             {[
               {
                 title: "Invisalign",
@@ -167,11 +145,11 @@ export default function Template3Page() {
             ].map((service, index) => (
               <div
                 key={index}
-                className="group grid grid-cols-12 gap-8 items-baseline py-8 border-b border-neutral-border/50 hover:border-brand-primary/30 transition-colors duration-500"
+                className="group grid grid-cols-12 gap-6 items-baseline py-8 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500"
               >
                 {/* Number */}
                 <div className="col-span-2 md:col-span-1">
-                  <span className="text-5xl font-extralight text-brand-primary/30 group-hover:text-brand-primary/60 transition-colors duration-500">
+                  <span className="text-sm font-light text-brand-primary/40 tracking-wider">
                     0{index + 1}
                   </span>
                 </div>
@@ -194,26 +172,19 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           PHILOSOPHY — THREE PILLARS
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden bg-brand-primary/[0.02]">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <span className="text-[50vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter">
-            ∞
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-20 text-center">
+      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-4xl mx-auto px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
             {[
-              { number: "01", title: "Listen", description: "We begin every relationship by truly understanding your concerns, goals, and history." },
-              { number: "02", title: "Plan", description: "Together, we craft a comprehensive wellness strategy tailored to your unique needs." },
-              { number: "03", title: "Care", description: "Gentle, precise treatment delivered with respect for your time and comfort." },
+              { title: "Listen", description: "We begin every relationship by truly understanding your concerns, goals, and history." },
+              { title: "Plan", description: "Together, we craft a comprehensive wellness strategy tailored to your unique needs." },
+              { title: "Care", description: "Gentle, precise treatment delivered with respect for your time and comfort." },
             ].map((pillar, index) => (
               <div key={index} className="group">
-                <span className="text-6xl font-extralight text-brand-primary/20 group-hover:text-brand-primary/40 transition-colors duration-500">
-                  {pillar.number}
-                </span>
-                <h3 className="text-xl font-light tracking-[0.1em] mt-6 mb-4 group-hover:text-brand-primary transition-colors duration-500">
+                <div className="w-12 h-12 rounded-full border border-brand-primary/30 flex items-center justify-center mx-auto mb-6 group-hover:border-brand-primary group-hover:bg-brand-primary/5 transition-all duration-500">
+                  <span className="text-sm font-light text-brand-primary">0{index + 1}</span>
+                </div>
+                <h3 className="text-xl font-light tracking-[0.1em] mb-4 group-hover:text-brand-primary transition-colors duration-500">
                   {pillar.title}
                 </h3>
                 <p className="text-sm text-neutral-muted font-light leading-relaxed tracking-wide">
@@ -228,20 +199,13 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           BEFORE/AFTER — MINIMAL GALLERY
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden">
-          <span className="text-[35vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter -mr-[10vw]">
-            04
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden">
+        <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Transformations
           </p>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-20 tracking-[0.05em]">
+          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-16 tracking-[0.05em]">
             The Art of Subtle Enhancement
           </h2>
 
@@ -273,7 +237,7 @@ export default function Template3Page() {
             </div>
           </div>
 
-          <p className="text-center text-[11px] uppercase tracking-[0.3em] text-neutral-muted mt-12">
+          <p className="text-center text-[11px] uppercase tracking-[0.3em] text-neutral-muted mt-10">
             Natural enhancement through mindful treatment
           </p>
         </div>
@@ -282,20 +246,13 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           SERVICES LIST — FULL WIDTH MINIMAL
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden bg-brand-primary/[0.02]">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-start pointer-events-none select-none overflow-hidden">
-          <span className="text-[40vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter -ml-[15vw]">
-            05
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             What We Offer
           </p>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-20 tracking-[0.05em]">
+          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-16 tracking-[0.05em]">
             Our Services
           </h2>
 
@@ -303,13 +260,13 @@ export default function Template3Page() {
             {location.secondaryCategoriesGBP.map((category, index) => (
               <div
                 key={index}
-                className="group flex items-center justify-between py-8 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500 cursor-pointer"
+                className="group flex items-center justify-between py-6 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500 cursor-pointer"
               >
                 <div className="flex items-baseline gap-6">
-                  <span className="text-sm font-extralight text-neutral-muted/50 tracking-wider">
+                  <span className="text-xs font-light text-neutral-muted/50 tracking-wider">
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="text-lg md:text-xl font-light tracking-[0.02em] group-hover:text-brand-primary transition-colors duration-500">
+                  <h3 className="text-lg font-light tracking-[0.02em] group-hover:text-brand-primary transition-colors duration-500">
                     {category}
                   </h3>
                 </div>
@@ -330,16 +287,9 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           DOCTOR PROFILE — SPATIAL EDITORIAL
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden">
-          <span className="text-[35vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter -mr-[10vw]">
-            06
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <section className="relative py-32 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Portrait */}
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
@@ -387,25 +337,18 @@ export default function Template3Page() {
           TESTIMONIALS — FLOATING TYPOGRAPHIC REVIEWS
           Pure typographic statements floating on canvas, no cards/borders/avatars
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden bg-brand-primary/[0.02]">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <span className="text-[50vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter">
-            07
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Kind Words
           </p>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-24 tracking-[0.05em]">
+          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-20 tracking-[0.05em]">
             Voices of Wellness
           </h2>
 
           {/* Floating Typographic Reviews - No Cards, No Borders */}
-          <div className="space-y-32">
+          <div className="space-y-24">
             {sampleReviews.slice(0, 3).map((review, index) => (
               <div
                 key={index}
@@ -414,7 +357,7 @@ export default function Template3Page() {
                 }`}
               >
                 {/* Large Quote */}
-                <p className={`text-xl md:text-2xl lg:text-3xl font-extralight leading-relaxed tracking-wide text-brand-mainText/80 mb-8 ${
+                <p className={`text-xl md:text-2xl font-extralight leading-relaxed tracking-wide text-brand-mainText/80 mb-6 ${
                   index % 2 === 0 ? "max-w-2xl" : "max-w-2xl ml-auto"
                 }`}>
                   &ldquo;{review.reviewText}&rdquo;
@@ -429,7 +372,7 @@ export default function Template3Page() {
                 </div>
 
                 {/* Floating Stars - Subtle */}
-                <div className={`flex items-center gap-1 mt-4 ${index % 2 === 0 ? "" : "justify-end"}`}>
+                <div className={`flex items-center gap-1 mt-3 ${index % 2 === 0 ? "" : "justify-end"}`}>
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-3 h-3 text-brand-primary/40" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -441,8 +384,8 @@ export default function Template3Page() {
           </div>
 
           {/* Overall Rating */}
-          <div className="text-center mt-32">
-            <p className="text-6xl font-extralight text-brand-primary/60 mb-4">5.0</p>
+          <div className="text-center mt-24">
+            <p className="text-5xl font-extralight text-brand-primary/60 mb-3">5.0</p>
             <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted">
               200+ Verified Reviews
             </p>
@@ -453,31 +396,24 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           LOCATION & HOURS — SPATIAL GALLERY
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-start pointer-events-none select-none overflow-hidden">
-          <span className="text-[40vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter -ml-[15vw]">
-            08
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Visit Us
           </p>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-20 tracking-[0.05em]">
+          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-16 tracking-[0.05em]">
             Your Sanctuary Awaits
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Hours */}
             <div>
-              <p className="text-[11px] uppercase tracking-[0.4em] text-brand-primary mb-10">
+              <p className="text-[11px] uppercase tracking-[0.4em] text-brand-primary mb-8">
                 Hours of Wellness
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
                   { day: "Monday", hours: "8:00 AM — 5:00 PM" },
                   { day: "Tuesday", hours: "8:00 AM — 5:00 PM" },
@@ -489,7 +425,7 @@ export default function Template3Page() {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-between py-4 border-b border-neutral-border/30 hover:border-brand-primary/20 transition-colors duration-500"
+                    className="flex justify-between py-3 border-b border-neutral-border/30 hover:border-brand-primary/20 transition-colors duration-500"
                   >
                     <span className="text-neutral-muted font-light tracking-wide">{item.day}</span>
                     <span className="text-brand-mainText font-light tracking-wide">{item.hours}</span>
@@ -497,7 +433,7 @@ export default function Template3Page() {
                 ))}
               </div>
 
-              <div className="mt-12 pt-12 border-t border-neutral-border/30">
+              <div className="mt-10 pt-10 border-t border-neutral-border/30">
                 <p className="text-sm text-neutral-muted font-light tracking-wide mb-2">
                   {location.addressGBP}
                 </p>
@@ -539,15 +475,8 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           MEMBERSHIP — SPATIAL PRICING
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden bg-brand-primary/[0.02]">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden">
-          <span className="text-[35vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter -mr-[10vw]">
-            09
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Membership
           </p>
@@ -556,11 +485,11 @@ export default function Template3Page() {
             Wellness Plans
           </h2>
 
-          <p className="text-center text-neutral-muted font-light max-w-xl mx-auto mb-20 tracking-wide leading-relaxed">
+          <p className="text-center text-neutral-muted font-light max-w-xl mx-auto mb-16 tracking-wide leading-relaxed">
             Simple, transparent care for those who value ongoing wellness.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
               {
                 name: "Individual",
@@ -581,7 +510,7 @@ export default function Template3Page() {
             ].map((plan, index) => (
               <div
                 key={index}
-                className={`text-center ${plan.featured ? "lg:-mt-8 lg:mb-8" : ""}`}
+                className={`text-center ${plan.featured ? "lg:-mt-6 lg:mb-6" : ""}`}
               >
                 {plan.featured && (
                   <p className="text-[10px] uppercase tracking-[0.4em] text-brand-primary mb-6">
@@ -591,10 +520,10 @@ export default function Template3Page() {
 
                 <h3 className="text-lg font-light tracking-[0.15em] mb-6">{plan.name}</h3>
 
-                <p className="text-5xl font-extralight text-brand-primary mb-2">{plan.price}</p>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-neutral-muted mb-10">per year</p>
+                <p className="text-4xl font-extralight text-brand-primary mb-2">{plan.price}</p>
+                <p className="text-[11px] uppercase tracking-[0.3em] text-neutral-muted mb-8">per year</p>
 
-                <div className="space-y-4 mb-10">
+                <div className="space-y-3 mb-8">
                   {plan.features.map((feature, i) => (
                     <p key={i} className="text-sm text-neutral-muted font-light tracking-wide">
                       {feature}
@@ -621,7 +550,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           FREE CONSULTATION CTA — SPATIAL BANNER
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
+      <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/office-exterior.jpg"
@@ -661,24 +590,17 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           WHY CHOOSE US — FLOATING TYPOGRAPHY
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden bg-brand-primary/[0.02]">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <span className="text-[50vw] font-extralight text-brand-primary/[0.03] leading-none tracking-tighter">
-            10
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Our Philosophy
           </p>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-20 tracking-[0.05em]">
+          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-16 tracking-[0.05em]">
             The Mindful Difference
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
                 title: "Holistic Approach",
@@ -697,16 +619,11 @@ export default function Template3Page() {
                 description: "Your treatment plan is uniquely yours, crafted to honor your individual health journey.",
               },
             ].map((item, index) => (
-              <div key={index} className="group">
-                <div className="flex items-baseline gap-6 mb-4">
-                  <span className="text-4xl font-extralight text-brand-primary/30 group-hover:text-brand-primary/60 transition-colors duration-500">
-                    0{index + 1}
-                  </span>
-                  <h3 className="text-lg font-light tracking-[0.05em] group-hover:text-brand-primary transition-colors duration-500">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-neutral-muted font-light leading-relaxed tracking-wide pl-16">
+              <div key={index} className="group py-6 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500">
+                <h3 className="text-lg font-light tracking-[0.05em] mb-3 group-hover:text-brand-primary transition-colors duration-500">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-neutral-muted font-light leading-relaxed tracking-wide">
                   {item.description}
                 </p>
               </div>
@@ -718,15 +635,8 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           FINAL CTA — SPATIAL MINIMAL
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
-        {/* Massive Background Numeral */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <span className="text-[60vw] font-extralight text-brand-primary/[0.02] leading-none tracking-tighter">
-            ∞
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-3xl mx-auto px-8 text-center">
+      <section className="relative py-32 overflow-hidden">
+        <div className="max-w-3xl mx-auto px-8 text-center">
           <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight mb-8 tracking-[0.05em]">
             Where Wellness Meets Artistry
           </h2>
