@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function Template1OrthoPage() {
-  const { doctors, trustSignals } = clientMasterDataOrtho;
+  const { doctors } = clientMasterDataOrtho;
   const primaryDoctor = doctors[0];
 
   return (
@@ -44,11 +44,9 @@ export default function Template1OrthoPage() {
                 <span className="px-5 py-2.5 text-sm font-bold uppercase tracking-wider bg-brand-accent text-brand-mainText shadow-2xl transform -rotate-1">
                   Now Accepting Patients
                 </span>
-                {trustSignals.hasFreeCons && (
-                  <span className="px-5 py-2.5 text-sm font-bold uppercase tracking-wider bg-white text-brand-mainText shadow-2xl transform rotate-1 translate-y-2">
-                    Free Consultations
-                  </span>
-                )}
+                <span className="px-5 py-2.5 text-sm font-bold uppercase tracking-wider bg-white text-brand-mainText shadow-2xl transform rotate-1 translate-y-2">
+                  Free Consultations
+                </span>
               </div>
 
               {/* H1 - Massive Editorial Typography with Overlap */}
