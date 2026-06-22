@@ -3,6 +3,10 @@ import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import T3Nav from "./components/T3Nav";
 import T3Footer from "./components/T3Footer";
+import T3Hero from "./components/T3Hero";
+import T3ServiceAccordion from "./components/T3ServiceAccordion";
+import T3AmbientBackground from "./components/T3AmbientBackground";
+import T3ReviewCarousel from "./components/T3ReviewCarousel";
 
 const location = clientMasterData.locations[0];
 
@@ -16,69 +20,27 @@ export default function Template3Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sans bg-brand-canvas text-brand-mainText">
+    <div className="font-sans bg-brand-canvas text-brand-mainText relative">
+      {/* Kinetic Ambient Drifting Background */}
+      <T3AmbientBackground />
+
       <T3Nav />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          HERO SECTION — SPATIAL GALLERY SANCTUARY
-          Narrow editorial column, deep whitespace, ultra-lightweight typography
+          HERO — Asymmetric Multi-Layered Floating Image Matrix
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="min-h-screen relative flex items-center justify-center overflow-hidden">
-        {/* Deep Whitespace Container - Narrow Editorial Column */}
-        <div className="relative z-10 max-w-4xl mx-auto px-8 py-32 text-center">
-          {/* Subtle Top Label */}
-          <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-16">
-            {clientMasterData.globalPracticeName}
-          </p>
-
-          {/* Main Headline - Ultra Lightweight with Dramatic Spacing */}
-          <h1 className="text-[clamp(2rem,6vw,4.5rem)] font-extralight leading-[1.1] tracking-[0.02em] mb-8">
-            <span className="block">Oral Wellness,</span>
-            <span className="block text-brand-primary tracking-[0.08em]">Thoughtfully Designed</span>
-          </h1>
-
-          {/* Thin Decorative Line */}
-          <div className="w-16 h-px bg-brand-primary/30 mx-auto mb-10" />
-
-          {/* Philosophy Statement - Minimal */}
-          <p className="text-lg font-light text-neutral-muted leading-relaxed max-w-2xl mx-auto mb-16 tracking-wide">
-            We believe exceptional dental care extends beyond treatment. Our holistic approach
-            considers your complete wellbeing, creating a personalized path to lasting oral health
-            in {location.cityServed}.
-          </p>
-
-          {/* Minimal CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a
-              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-4 px-10 py-4 bg-brand-primary text-white text-sm uppercase tracking-[0.25em] font-light hover:bg-brand-primary/90 transition-colors duration-500"
-            >
-              <span>Schedule</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a
-              href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="text-sm tracking-[0.2em] text-neutral-muted hover:text-brand-primary transition-colors duration-500"
-            >
-              {location.phoneGBP}
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-brand-primary/30 to-brand-primary/10" />
-        </div>
-      </section>
+      <T3Hero
+        practiceName={clientMasterData.globalPracticeName}
+        cityServed={location.cityServed}
+        phoneGBP={location.phoneGBP}
+        bookingUrl={clientMasterData.onlineBookingUrl}
+      />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          WELCOME VIDEO — SPATIAL GALLERY STYLE
+          WELCOME VIDEO — Spatial Gallery Style
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden">
         <div className="max-w-4xl mx-auto px-8">
-          {/* Section Label */}
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Welcome
           </p>
@@ -91,8 +53,7 @@ export default function Template3Page() {
             Take a moment to meet our team. Discover the thoughtful care that defines our approach.
           </p>
 
-          {/* Video - Clean Minimal Frame */}
-          <div className="relative aspect-video overflow-hidden">
+          <div className="relative aspect-video overflow-hidden border border-brand-primary/10">
             <video
               className="w-full h-full object-cover"
               controls
@@ -110,67 +71,12 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SERVICES — FLOATING TYPOGRAPHIC LIST
-          Narrow column, numbered list, dramatic whitespace
+          SERVICES — Interactive Typographic Accordion
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden border-t border-neutral-border/30">
-        <div className="max-w-4xl mx-auto px-8">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
-            Signature Services
-          </p>
-
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-20 tracking-[0.05em]">
-            Thoughtful Care, Exceptional Results
-          </h2>
-
-          {/* Services List - Editorial Style */}
-          <div className="space-y-12">
-            {[
-              {
-                title: "Invisalign",
-                description: "Discreet alignment therapy that works with your lifestyle. Clear, comfortable, and precisely planned.",
-              },
-              {
-                title: "Dental Implants",
-                description: "Biocompatible tooth restoration that honors your body's natural processes. Permanent and lasting.",
-              },
-              {
-                title: "Holistic Restorations",
-                description: "Mercury-free, metal-free dentistry using only the most biocompatible materials for your health.",
-              },
-              {
-                title: "Cosmetic Enhancements",
-                description: "Subtle, natural improvements that enhance rather than transform. Authentic beauty, refined.",
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="group grid grid-cols-12 gap-6 items-baseline py-8 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500"
-              >
-                {/* Number */}
-                <div className="col-span-2 md:col-span-1">
-                  <span className="text-sm font-light text-brand-primary/40 tracking-wider">
-                    0{index + 1}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="col-span-10 md:col-span-11">
-                  <h3 className="text-xl md:text-2xl font-light tracking-[0.02em] mb-3 group-hover:text-brand-primary transition-colors duration-500">
-                    {service.title}
-                  </h3>
-                  <p className="text-neutral-muted font-light leading-relaxed tracking-wide max-w-xl">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <T3ServiceAccordion />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          PHILOSOPHY — THREE PILLARS
+          PHILOSOPHY — Three Pillars
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
@@ -197,7 +103,7 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          BEFORE/AFTER — MINIMAL GALLERY
+          BEFORE/AFTER — Minimal Gallery
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden">
         <div className="max-w-4xl mx-auto px-8">
@@ -209,9 +115,8 @@ export default function Template3Page() {
             The Art of Subtle Enhancement
           </h2>
 
-          {/* Side by Side - Minimal */}
           <div className="grid grid-cols-2 gap-px">
-            <div className="relative aspect-[4/3] overflow-hidden group">
+            <div className="relative aspect-[4/3] overflow-hidden group border border-brand-primary/10">
               <p className="absolute top-6 left-6 z-10 text-[11px] uppercase tracking-[0.3em] text-white/80">
                 Before
               </p>
@@ -223,7 +128,7 @@ export default function Template3Page() {
                 sizes="50vw"
               />
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden group">
+            <div className="relative aspect-[4/3] overflow-hidden group border border-brand-primary/10">
               <p className="absolute top-6 left-6 z-10 text-[11px] uppercase tracking-[0.3em] text-brand-primary">
                 After
               </p>
@@ -244,7 +149,7 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SERVICES LIST — FULL WIDTH MINIMAL
+          SERVICES LIST — Full Width Minimal
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
@@ -285,13 +190,12 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          DOCTOR PROFILE — SPATIAL EDITORIAL
+          DOCTOR PROFILE — Spatial Editorial
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden">
         <div className="max-w-5xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Portrait */}
-            <div className="relative aspect-[3/4] overflow-hidden">
+            <div className="relative aspect-[3/4] overflow-hidden border border-brand-primary/10">
               <Image
                 src="/images/team/doctor-portrait.png"
                 alt={`${primaryDoctor.name} at ${clientMasterData.globalPracticeName}`}
@@ -301,7 +205,6 @@ export default function Template3Page() {
               />
             </div>
 
-            {/* Bio */}
             <div>
               <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8">
                 Your Provider
@@ -319,7 +222,6 @@ export default function Template3Page() {
                 {primaryDoctor.biography}
               </p>
 
-              {/* Credentials - Minimal List */}
               <div className="space-y-3">
                 {primaryDoctor.credentials.map((credential, index) => (
                   <div key={index} className="flex items-center gap-4 text-sm text-neutral-muted font-light tracking-wide">
@@ -334,67 +236,12 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          TESTIMONIALS — FLOATING TYPOGRAPHIC REVIEWS
-          Pure typographic statements floating on canvas, no cards/borders/avatars
+          TESTIMONIALS — Interactive Horizontal Carousel with Magnetic Arrows
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
-        <div className="max-w-4xl mx-auto px-8">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
-            Kind Words
-          </p>
-
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-20 tracking-[0.05em]">
-            Voices of Wellness
-          </h2>
-
-          {/* Floating Typographic Reviews - No Cards, No Borders */}
-          <div className="space-y-24">
-            {sampleReviews.slice(0, 3).map((review, index) => (
-              <div
-                key={index}
-                className={`relative group ${
-                  index % 2 === 0 ? "text-left" : "text-right"
-                }`}
-              >
-                {/* Large Quote */}
-                <p className={`text-xl md:text-2xl font-extralight leading-relaxed tracking-wide text-brand-mainText/80 mb-6 ${
-                  index % 2 === 0 ? "max-w-2xl" : "max-w-2xl ml-auto"
-                }`}>
-                  &ldquo;{review.reviewText}&rdquo;
-                </p>
-
-                {/* Attribution - Minimal */}
-                <div className={`flex items-center gap-4 ${index % 2 === 0 ? "" : "justify-end"}`}>
-                  <div className="w-8 h-px bg-brand-primary/30" />
-                  <span className="text-[11px] uppercase tracking-[0.3em] text-neutral-muted">
-                    {review.reviewerName}
-                  </span>
-                </div>
-
-                {/* Floating Stars - Subtle */}
-                <div className={`flex items-center gap-1 mt-3 ${index % 2 === 0 ? "" : "justify-end"}`}>
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-3 h-3 text-brand-primary/40" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Overall Rating */}
-          <div className="text-center mt-24">
-            <p className="text-5xl font-extralight text-brand-primary/60 mb-3">5.0</p>
-            <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted">
-              200+ Verified Reviews
-            </p>
-          </div>
-        </div>
-      </section>
+      <T3ReviewCarousel reviews={sampleReviews} />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          LOCATION & HOURS — SPATIAL GALLERY
+          LOCATION & HOURS — Spatial Gallery
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden">
         <div className="max-w-5xl mx-auto px-8">
@@ -407,7 +254,6 @@ export default function Template3Page() {
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Hours */}
             <div>
               <p className="text-[11px] uppercase tracking-[0.4em] text-brand-primary mb-8">
                 Hours of Wellness
@@ -449,8 +295,7 @@ export default function Template3Page() {
               </div>
             </div>
 
-            {/* Map */}
-            <div className="aspect-square overflow-hidden">
+            <div className="aspect-square overflow-hidden border border-brand-primary/10">
               {location.googleMapsEmbedUrl ? (
                 <iframe
                   src={location.googleMapsEmbedUrl}
@@ -473,7 +318,7 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          MEMBERSHIP — SPATIAL PRICING
+          MEMBERSHIP — Spatial Pricing
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
@@ -548,7 +393,7 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          FREE CONSULTATION CTA — SPATIAL BANNER
+          FREE CONSULTATION CTA — Spatial Banner
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0">
@@ -588,7 +433,7 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          WHY CHOOSE US — FLOATING TYPOGRAPHY
+          WHY CHOOSE US — Floating Typography
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
@@ -633,7 +478,7 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          FINAL CTA — SPATIAL MINIMAL
+          FINAL CTA — Spatial Minimal
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden">
         <div className="max-w-3xl mx-auto px-8 text-center">
