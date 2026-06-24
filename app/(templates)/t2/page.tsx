@@ -21,128 +21,218 @@ export default function Template2Page() {
       <T2Nav />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          HERO SECTION — IMMERSIVE VIDEO WITH SPLIT-GRID ARCHITECTURE
-          Looping video background, premium sans-serif, glassmorphism metrics
+          HERO SECTION — ELITE MULTI-LAYERED PREMIUM MASTERPIECE
+          Depth-injected ambient canvas, overlapping structural framework,
+          glassmorphic UI elements, architectural crosshairs
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="min-h-screen relative overflow-hidden bg-zinc-950">
-        {/* Fullscreen Video Background */}
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            poster="/images/team/staff-photo.jpg"
-          >
-            <source src="/videos/hero-ambient-t2.mp4" type="video/mp4" />
-          </video>
-          {/* Dark overlay for text legibility */}
-          <div className="absolute inset-0 bg-zinc-950/60" />
-          {/* Gradient fade for depth */}
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-zinc-950/40 to-transparent" />
+        {/* ══════════════════════════════════════════════════════════════════
+            LAYER 0: Multi-Layered Ambient Canvas (Depth Injection)
+            Ultra-soft radial gradient glow elements with CSS animation
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Deep teal ambient glow - behind heading area */}
+          <div
+            className="absolute w-[600px] h-[600px] rounded-full blur-[160px] bg-teal-500/[0.04] animate-[drift_12s_ease-in-out_infinite]"
+            style={{ top: '15%', left: '10%' }}
+          />
+          {/* Soft slate ambient glow - behind clinician area */}
+          <div
+            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] bg-slate-400/[0.03] animate-[drift_12s_ease-in-out_infinite_reverse]"
+            style={{ top: '25%', right: '5%' }}
+          />
+          {/* Subtle brand accent glow - lower left */}
+          <div
+            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-brand-primary/[0.02] animate-[drift_15s_ease-in-out_infinite_2s]"
+            style={{ bottom: '10%', left: '20%' }}
+          />
         </div>
 
-        {/* Refined Corner Labels */}
-        <div className="absolute top-6 left-6 z-20">
-          <span className="text-[10px] tracking-[0.25em] text-white/40 uppercase font-medium">
+        {/* ══════════════════════════════════════════════════════════════════
+            LAYER 1: Refined Corner UI Tags (High-End Micro-Labels)
+            Sharp uppercase sans-serif with geometric design marks
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="absolute top-8 left-8 z-30 flex items-center gap-3">
+          {/* Geometric design mark - vertical line token */}
+          <div className="w-[2px] h-4 bg-brand-primary/60" />
+          <span className="text-[10px] tracking-[0.25em] text-white/50 uppercase font-medium">
             Advanced Dentistry
           </span>
         </div>
-        <div className="absolute top-6 right-6 z-20">
-          <span className="text-[10px] tracking-[0.25em] text-white/40">
-            {location.cityServed} • Now Accepting Patients
+        <div className="absolute top-8 right-8 z-30 flex items-center gap-3">
+          <span className="text-[10px] tracking-[0.25em] text-white/40 uppercase">
+            {location.cityServed}
+          </span>
+          {/* Geometric separator */}
+          <div className="w-1 h-1 bg-white/20 rotate-45" />
+          <span className="text-[10px] tracking-[0.25em] text-brand-primary/70 uppercase font-medium">
+            Now Accepting
           </span>
         </div>
 
-        {/* Architectural Crosshairs Overlay */}
+        {/* ══════════════════════════════════════════════════════════════════
+            LAYER 2: Architectural Crosshairs & Alignment Grid
+            Precise intersection indicators with + symbols
+        ══════════════════════════════════════════════════════════════════ */}
         <div className="absolute inset-0 z-10 pointer-events-none">
-          {/* Center crosshair */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="w-32 h-[1px] bg-white/[0.06] absolute top-1/2 left-1/2 -translate-x-1/2" />
-            <div className="h-32 w-[1px] bg-white/[0.06] absolute top-1/2 left-1/2 -translate-y-1/2" />
-          </div>
-          {/* Corner structural lines */}
-          <div className="absolute top-12 left-12 w-20 h-20 border-l border-t border-white/[0.06]" />
-          <div className="absolute top-12 right-12 w-20 h-20 border-r border-t border-white/[0.06]" />
-          <div className="absolute bottom-12 left-12 w-20 h-20 border-l border-b border-white/[0.06]" />
-          <div className="absolute bottom-12 right-12 w-20 h-20 border-r border-b border-white/[0.06]" />
-        </div>
+          {/* Corner structural frames */}
+          <div className="absolute top-16 left-16 w-24 h-24 border-l border-t border-white/[0.04]" />
+          <div className="absolute top-16 right-16 w-24 h-24 border-r border-t border-white/[0.04]" />
+          <div className="absolute bottom-32 left-16 w-24 h-24 border-l border-b border-white/[0.04]" />
+          <div className="absolute bottom-32 right-16 w-24 h-24 border-r border-b border-white/[0.04]" />
 
-        {/* Content Grid */}
-        <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 relative z-10">
-          {/* Left Column - Typography Stack */}
-          <div className="relative flex flex-col justify-center px-8 md:px-16 lg:px-20 py-32 lg:py-24">
-            {/* Category Label */}
-            <div className="mb-8">
-              <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-                Precision Digital Dentistry
-              </span>
-            </div>
+          {/* Intersection crosshair indicators */}
+          <span className="absolute top-16 left-16 -translate-x-1/2 -translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
+          <span className="absolute top-16 right-16 translate-x-1/2 -translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
+          <span className="absolute bottom-32 left-16 -translate-x-1/2 translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
+          <span className="absolute bottom-32 right-16 translate-x-1/2 translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
 
-            {/* Main Headline - Sharp premium sans-serif with hyper-tight tracking */}
-            <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-tight leading-[1.02] mb-8">
-              <span className="block">Advanced Care,</span>
-              <span className="block">Exceptional</span>
-              <span className="block text-brand-primary">Results.</span>
-            </h1>
-
-            {/* Subheading */}
-            <p className="text-base md:text-lg text-white/60 max-w-md mb-12 leading-relaxed">
-              3D imaging, laser technology, and same-day restorations. Experience modern dentistry designed around your comfort and lasting results.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
-              <a
-                href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
-              >
-                <span>Schedule Consultation</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-              <a
-                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex items-center gap-3 px-8 py-4 backdrop-blur-xl bg-white/[0.05] text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/20 hover:bg-white/[0.1] hover:border-white/40 transition-all duration-300"
-              >
-                <span>{location.phoneGBP}</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column - Empty for video visibility, with credential badge */}
-          <div className="relative hidden lg:flex items-end justify-start pb-24 pl-12">
-            {/* Provider credential badge */}
-            <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-5 py-2.5 flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] tracking-[0.15em] text-white/70">{primaryDoctor.role}</span>
-            </div>
+          {/* Center vertical alignment rule */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block">
+            <div className="w-[1px] h-40 bg-gradient-to-b from-transparent via-white/[0.04] to-transparent" />
           </div>
         </div>
 
-        {/* Floating Glassmorphism Metric Capsules */}
-        <div className="absolute bottom-8 left-8 right-8 z-20">
-          <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-            {[
-              { value: "99.2%", label: "Patient Satisfaction" },
-              { value: "Same-Day", label: "Restorations" },
-              { value: "3D", label: "Imaging" },
-              { value: "500+", label: "Transformations" },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="group backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-6 py-3 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-default"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-lg font-semibold text-brand-primary tracking-tight">{stat.value}</span>
-                  <span className="text-[10px] tracking-[0.12em] text-white/40 uppercase">{stat.label}</span>
+        {/* ══════════════════════════════════════════════════════════════════
+            LAYER 3: Primary Content Grid with Overlapping Framework
+            Text block overlaps clinician card boundary by 15-20%
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="min-h-screen relative z-20 px-8 md:px-12 lg:px-16 py-32 lg:py-24">
+          <div className="max-w-7xl mx-auto h-full flex items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center w-full">
+
+              {/* Left Column - Typography Stack (overlaps into col 7-8) */}
+              <div className="lg:col-span-7 relative z-20">
+                {/* Category Label - High-end UI tag */}
+                <div className="flex items-center gap-3 mb-8">
+                  {/* Crisp geometric square mark */}
+                  <div className="w-2 h-2 bg-brand-primary/80 rotate-45" />
+                  <span className="text-[10px] tracking-[0.25em] text-white/50 uppercase font-medium">
+                    Precision Digital Dentistry
+                  </span>
+                </div>
+
+                {/* Main Headline - Designed to overlap clinician card */}
+                <h1 className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-semibold tracking-tight leading-[1.02] mb-8 lg:pr-0">
+                  <span className="block">Advanced Care,</span>
+                  <span className="block">Exceptional</span>
+                  <span className="block text-brand-primary">Results.</span>
+                </h1>
+
+                {/* Subheading */}
+                <p className="text-base md:text-lg text-white/50 max-w-md mb-10 leading-relaxed">
+                  3D imaging, laser technology, and same-day restorations. Experience modern dentistry designed around your comfort and lasting results.
+                </p>
+
+                {/* CTA Buttons - Glassmorphic capsule styling */}
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                    className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 hover:shadow-lg hover:shadow-brand-primary/20 transition-all duration-300"
+                  >
+                    <span>Schedule Consultation</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                  <a
+                    href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                    className="group inline-flex items-center gap-3 px-8 py-4 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/15 hover:bg-white/[0.03] hover:backdrop-blur-md hover:border-white/25 transition-all duration-300"
+                  >
+                    <span>{location.phoneGBP}</span>
+                  </a>
                 </div>
               </div>
-            ))}
+
+              {/* Right Column - Refined Clinician Card Panel */}
+              <div className="lg:col-span-5 relative hidden lg:block">
+                {/* Negative margin pulls card left for text overlap effect */}
+                <div className="relative lg:-ml-20">
+                  {/* Clinician Card Container - Explicit refined panel */}
+                  <div className="relative aspect-[3/4] max-w-md ml-auto rounded-2xl border border-white/[0.05] bg-zinc-900/40 overflow-hidden shadow-2xl">
+                    {/* Clinician Image - No vignette fade */}
+                    <Image
+                      src="/images/team/doctor-portrait.png"
+                      alt={`${primaryDoctor.name}, ${primaryDoctor.role} at ${clientMasterData.globalPracticeName}`}
+                      fill
+                      className="object-cover object-[25%_top]"
+                      sizes="(max-width: 1024px) 100vw, 400px"
+                      priority
+                    />
+
+                    {/* Subtle bottom gradient only - no side fades */}
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950/60 to-transparent" />
+
+                    {/* Card corner architectural frames */}
+                    <div className="absolute top-4 left-4 w-8 h-8 border-l border-t border-white/[0.08]" />
+                    <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-white/[0.08]" />
+                    <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-white/[0.08]" />
+                    <div className="absolute bottom-4 right-4 w-8 h-8 border-r border-b border-white/[0.08]" />
+
+                    {/* Provider credential badge - inside card */}
+                    <div className="absolute bottom-6 left-6 right-6 z-10">
+                      <div className="backdrop-blur-xl bg-zinc-950/60 border border-white/[0.08] rounded-xl px-5 py-3 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="text-[11px] tracking-[0.15em] text-white/70 uppercase">{primaryDoctor.role}</span>
+                        </div>
+                        <span className="text-[10px] tracking-[0.2em] text-white/40">Accepting Patients</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Decorative offset frame behind card */}
+                  <div className="absolute -top-3 -right-3 w-full h-full rounded-2xl border border-white/[0.03] -z-10" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* ══════════════════════════════════════════════════════════════════
+            LAYER 4: Metrics Bar - Individual Micro-Panel Containers
+            Each data point in separate container with top border highlight
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-white/[0.04] bg-zinc-950/80 backdrop-blur-xl">
+          <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.04]">
+              {[
+                { value: "99.2%", label: "Patient Satisfaction" },
+                { value: "Same-Day", label: "Restorations" },
+                { value: "3D", label: "Imaging Technology" },
+                { value: "500+", label: "Transformations" },
+              ].map((stat, index) => (
+                <div
+                  key={index}
+                  className="group relative py-6 px-6 md:px-8 hover:bg-white/[0.02] transition-all duration-300 cursor-default"
+                >
+                  {/* Top border highlight rule */}
+                  <div className="absolute top-0 left-6 right-6 md:left-8 md:right-8 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent group-hover:via-brand-primary/20 transition-all duration-300" />
+
+                  {/* Metric content */}
+                  <div className="border-t border-white/[0.05] pt-4">
+                    <span className="block text-2xl md:text-3xl font-semibold text-brand-primary tracking-tight mb-1">
+                      {stat.value}
+                    </span>
+                    <span className="block text-[10px] tracking-[0.15em] text-white/40 uppercase">
+                      {stat.label}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CSS Animation Keyframes for ambient drift */}
+        <style jsx>{`
+          @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -15px); }
+            50% { transform: translate(-10px, 20px); }
+            75% { transform: translate(-20px, -10px); }
+          }
+        `}</style>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
