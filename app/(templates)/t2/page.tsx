@@ -161,44 +161,42 @@ export default function Template2Page() {
                 </div>
               </div>
 
-              {/* Right Column - Refined Clinician Card Panel */}
+              {/* Right Column - Team Photo Panel */}
               <div className="lg:col-span-5 relative hidden lg:block">
-                {/* Negative margin pulls card left for text overlap effect */}
-                <div className="relative lg:-ml-20">
-                  {/* Clinician Card Container - Explicit refined panel */}
-                  <div className="relative aspect-[3/4] max-w-md ml-auto rounded-2xl border border-white/[0.05] bg-zinc-900/40 overflow-hidden shadow-2xl">
-                    {/* Clinician Image - No vignette fade */}
+                <div className="relative lg:-ml-12">
+                  {/* Team Photo Container */}
+                  <div className="relative aspect-[4/3] max-w-lg ml-auto rounded-2xl border border-white/[0.05] bg-zinc-900/40 overflow-hidden shadow-2xl">
                     <Image
-                      src="/images/team/doctor-portrait.png"
-                      alt={`${primaryDoctor.name}, ${primaryDoctor.role} at ${clientMasterData.globalPracticeName}`}
+                      src="/images/team/staff-photo.jpg"
+                      alt={`The team at ${clientMasterData.globalPracticeName}`}
                       fill
-                      className="object-cover object-[25%_top]"
-                      sizes="(max-width: 1024px) 100vw, 400px"
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 500px"
                       priority
                     />
 
-                    {/* Subtle bottom gradient only - no side fades */}
-                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950/60 to-transparent" />
+                    {/* Subtle bottom gradient */}
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-zinc-950/50 to-transparent" />
 
-                    {/* Card corner architectural frames */}
+                    {/* Corner architectural frames */}
                     <div className="absolute top-4 left-4 w-8 h-8 border-l border-t border-white/[0.08]" />
                     <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-white/[0.08]" />
                     <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-white/[0.08]" />
                     <div className="absolute bottom-4 right-4 w-8 h-8 border-r border-b border-white/[0.08]" />
 
-                    {/* Provider credential badge - inside card */}
-                    <div className="absolute bottom-6 left-6 right-6 z-10">
+                    {/* Team badge */}
+                    <div className="absolute bottom-5 left-5 right-5 z-10">
                       <div className="backdrop-blur-xl bg-zinc-950/60 border border-white/[0.08] rounded-xl px-5 py-3 flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span className="text-[11px] tracking-[0.15em] text-white/70 uppercase">{primaryDoctor.role}</span>
+                          <span className="text-[11px] tracking-[0.15em] text-white/70 uppercase">Our Team</span>
                         </div>
-                        <span className="text-[10px] tracking-[0.2em] text-white/40">Accepting Patients</span>
+                        <span className="text-[10px] tracking-[0.2em] text-white/40">Now Accepting Patients</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Decorative offset frame behind card */}
+                  {/* Decorative offset frame */}
                   <div className="absolute -top-3 -right-3 w-full h-full rounded-2xl border border-white/[0.03] -z-10" />
                 </div>
               </div>
