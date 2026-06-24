@@ -21,31 +21,26 @@ export default function Template2Page() {
       <T2Nav />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          HERO SECTION — PRECISION MEDICAL
-          Clean grid overlay, sophisticated typography, patient-focused metrics
+          HERO SECTION — IMMERSIVE VIDEO WITH SPLIT-GRID ARCHITECTURE
+          Looping video background, premium sans-serif, glassmorphism metrics
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="min-h-screen relative overflow-hidden">
-        {/* Subtle Grid Overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "48px 48px",
-          }}
-        />
-
-        {/* Background Image - Full Bleed with Refined Overlay */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/team/staff-photo.jpg"
-            alt={`Our dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/60 to-zinc-950" />
+      <section className="min-h-screen relative overflow-hidden bg-zinc-950">
+        {/* Fullscreen Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="/images/team/staff-photo.jpg"
+          >
+            <source src="/videos/hero-ambient-t2.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for text legibility */}
+          <div className="absolute inset-0 bg-zinc-950/60" />
+          {/* Gradient fade for depth */}
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-zinc-950/40 to-transparent" />
         </div>
 
         {/* Refined Corner Labels */}
@@ -60,61 +55,92 @@ export default function Template2Page() {
           </span>
         </div>
 
-        {/* Main Content - Absolute Lower Third Positioning */}
-        <div className="relative z-10 min-h-screen flex flex-col justify-end px-6 md:px-12 pb-24">
-          {/* Category Label */}
-          <div className="mb-6">
-            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-              Precision Digital Dentistry
-            </span>
+        {/* Architectural Crosshairs Overlay */}
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          {/* Center crosshair */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="w-32 h-[1px] bg-white/[0.06] absolute top-1/2 left-1/2 -translate-x-1/2" />
+            <div className="h-32 w-[1px] bg-white/[0.06] absolute top-1/2 left-1/2 -translate-y-1/2" />
           </div>
+          {/* Corner structural lines */}
+          <div className="absolute top-12 left-12 w-20 h-20 border-l border-t border-white/[0.06]" />
+          <div className="absolute top-12 right-12 w-20 h-20 border-r border-t border-white/[0.06]" />
+          <div className="absolute bottom-12 left-12 w-20 h-20 border-l border-b border-white/[0.06]" />
+          <div className="absolute bottom-12 right-12 w-20 h-20 border-r border-b border-white/[0.06]" />
+        </div>
 
-          {/* Main Headline - Title Case, Refined Weight */}
-          <h1 className="text-[clamp(2.5rem,7vw,5rem)] font-semibold tracking-[-0.02em] leading-[1.05] mb-6 max-w-4xl">
-            <span className="block">Advanced Care,</span>
-            <span className="block">Exceptional</span>
-            <span className="block text-brand-primary">Results.</span>
-          </h1>
-
-          {/* Subheading with Elegant Style */}
-          <p className="text-base md:text-lg text-white/60 max-w-xl mb-10 leading-relaxed">
-            3D imaging, laser technology, and same-day restorations. Experience modern dentistry designed around your comfort and lasting results.
-          </p>
-
-          {/* Rounded CTA Buttons */}
-          <div className="flex flex-wrap gap-4">
-            <a
-              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
-            >
-              <span>Schedule Consultation</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a
-              href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300"
-            >
-              <span>{location.phoneGBP}</span>
-            </a>
-          </div>
-
-          {/* Patient-Focused Stats Bar */}
-          <div className="mt-16 pt-8 border-t border-white/10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { value: "99.2%", label: "Patient Satisfaction" },
-                { value: "Same-Day", label: "Digital Restorations" },
-                { value: "3D", label: "Precision Imaging" },
-                { value: "500+", label: "Smiles Transformed" },
-              ].map((stat, index) => (
-                <div key={index} className="group">
-                  <p className="text-3xl md:text-4xl font-semibold text-brand-primary tracking-tight mb-1">{stat.value}</p>
-                  <p className="text-[11px] tracking-[0.15em] text-white/50 uppercase">{stat.label}</p>
-                </div>
-              ))}
+        {/* Content Grid */}
+        <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 relative z-10">
+          {/* Left Column - Typography Stack */}
+          <div className="relative flex flex-col justify-center px-8 md:px-16 lg:px-20 py-32 lg:py-24">
+            {/* Category Label */}
+            <div className="mb-8">
+              <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+                Precision Digital Dentistry
+              </span>
             </div>
+
+            {/* Main Headline - Sharp premium sans-serif with hyper-tight tracking */}
+            <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-tight leading-[1.02] mb-8">
+              <span className="block">Advanced Care,</span>
+              <span className="block">Exceptional</span>
+              <span className="block text-brand-primary">Results.</span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="text-base md:text-lg text-white/60 max-w-md mb-12 leading-relaxed">
+              3D imaging, laser technology, and same-day restorations. Experience modern dentistry designed around your comfort and lasting results.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <a
+                href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
+              >
+                <span>Schedule Consultation</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a
+                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="inline-flex items-center gap-3 px-8 py-4 backdrop-blur-xl bg-white/[0.05] text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/20 hover:bg-white/[0.1] hover:border-white/40 transition-all duration-300"
+              >
+                <span>{location.phoneGBP}</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column - Empty for video visibility, with credential badge */}
+          <div className="relative hidden lg:flex items-end justify-start pb-24 pl-12">
+            {/* Provider credential badge */}
+            <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-5 py-2.5 flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[11px] tracking-[0.15em] text-white/70">{primaryDoctor.role}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Glassmorphism Metric Capsules */}
+        <div className="absolute bottom-8 left-8 right-8 z-20">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+            {[
+              { value: "99.2%", label: "Patient Satisfaction" },
+              { value: "Same-Day", label: "Restorations" },
+              { value: "3D", label: "Imaging" },
+              { value: "500+", label: "Transformations" },
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className="group backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-6 py-3 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-default"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-lg font-semibold text-brand-primary tracking-tight">{stat.value}</span>
+                  <span className="text-[10px] tracking-[0.12em] text-white/40 uppercase">{stat.label}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -144,27 +170,17 @@ export default function Template2Page() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SERVICES GRID — SOPHISTICATED MEDICAL CARDS
-          Rounded corners, refined typography, patient-focused descriptions
+          SERVICES — ASYMMETRIC SIDE-BY-SIDE PRESENTATION LAYOUT
+          Left: Minimal vertical typography stack | Right: Dynamic showcase window
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="py-24 px-6 md:px-12 relative">
-        {/* Subtle Grid Background */}
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-          }}
-        />
-
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Section Header */}
-          <div className="mb-12">
+          <div className="mb-16">
             <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
               Our Specialties
             </span>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mt-4 mb-3">
               Treatment Excellence
             </h2>
             <p className="text-base text-white/50 max-w-lg">
@@ -172,77 +188,116 @@ export default function Template2Page() {
             </p>
           </div>
 
-          {/* Refined Service Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              {
-                id: "01",
-                title: "Invisalign",
-                subtitle: "Clear Aligner Therapy",
-                description: "Discreet alignment with real-time progress tracking for your perfect smile.",
-                image: "/images/services/invisalign.jpg",
-              },
-              {
-                id: "02",
-                title: "Dental Implants",
-                subtitle: "3D-Guided Placement",
-                description: "Precision-placed implants with same-day digital crowns.",
-                image: "/images/services/implants.jpg",
-              },
-              {
-                id: "03",
-                title: "Full Restoration",
-                subtitle: "Complete Smile Design",
-                description: "Comprehensive treatment planning for transformative results.",
-                image: "/images/services/restoration.jpg",
-              },
-              {
-                id: "04",
-                title: "Veneers",
-                subtitle: "Porcelain Artistry",
-                description: "Custom-crafted veneers for natural, lasting aesthetics.",
-                image: "/images/services/veneers.jpg",
-              },
-            ].map((service) => (
-              <div
-                key={service.id}
-                className="group relative aspect-[3/4] bg-slate-900 overflow-hidden rounded-2xl"
-              >
-                {/* Full-Bleed Background */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent z-10" />
-                <div className="absolute inset-0 bg-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+          {/* Asymmetric Side-by-Side Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* Left Side - Minimal Vertical Typography Stack */}
+            <div className="lg:col-span-5 space-y-0">
+              {[
+                {
+                  id: "01",
+                  title: "Invisalign",
+                  subtitle: "Clear Aligner Therapy",
+                  description: "Discreet alignment with real-time progress tracking for your perfect smile.",
+                  image: "/images/services/invisalign.jpg",
+                },
+                {
+                  id: "02",
+                  title: "Dental Implants",
+                  subtitle: "3D-Guided Placement",
+                  description: "Precision-placed implants with same-day digital crowns.",
+                  image: "/images/services/implant.jpg",
+                },
+                {
+                  id: "03",
+                  title: "Full Restoration",
+                  subtitle: "Complete Smile Design",
+                  description: "Comprehensive treatment planning for transformative results.",
+                  image: "/images/services/full-mouth-smile.jpg",
+                },
+                {
+                  id: "04",
+                  title: "Veneers",
+                  subtitle: "Porcelain Artistry",
+                  description: "Custom-crafted veneers for natural, lasting aesthetics.",
+                  image: "/images/services/full-mouth-shade.jpg",
+                },
+              ].map((service, index) => (
+                <div
+                  key={service.id}
+                  className="group relative py-6 border-b border-white/[0.05] cursor-pointer hover:bg-white/[0.02] transition-all duration-300 -mx-4 px-4"
+                >
+                  <div className="flex items-start gap-6">
+                    {/* Numeric Tag */}
+                    <span className="text-[11px] tracking-[0.2em] text-white/30 font-medium pt-1 w-8 flex-shrink-0">
+                      {service.id}
+                    </span>
 
-                {/* Numeric Counter */}
-                <div className="absolute top-5 left-5 z-20">
-                  <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                    <span className="text-[11px] font-medium text-white/70">{service.id}</span>
+                    {/* Content */}
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-xl font-semibold tracking-tight group-hover:text-brand-primary transition-colors duration-300">
+                            {service.title}
+                          </h3>
+                          <p className="text-[10px] tracking-[0.2em] text-white/40 uppercase mt-1">
+                            {service.subtitle}
+                          </p>
+                        </div>
+                        {/* Hover Arrow */}
+                        <svg className="w-5 h-5 text-brand-primary opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                      <p className="text-sm text-white/50 leading-relaxed mt-3 max-w-sm">
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
+
+                  {/* Active indicator line */}
+                  <div className="absolute bottom-0 left-0 h-[1px] bg-brand-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left w-full" />
                 </div>
+              ))}
+            </div>
 
-                {/* Lower Third Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                  <p className="text-[10px] tracking-[0.2em] text-brand-primary mb-2 uppercase font-medium">
-                    {service.subtitle}
-                  </p>
-                  <h3 className="text-xl font-semibold tracking-tight mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-white/60 leading-relaxed">
-                    {service.description}
-                  </p>
+            {/* Right Side - Large Format Dynamic Showcase Window */}
+            <div className="lg:col-span-7 relative">
+              <div className="sticky top-24">
+                {/* Main Showcase Frame */}
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                  <Image
+                    src="/images/services/invisalign.jpg"
+                    alt="Featured dental service"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                  />
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
 
-                  {/* Hover Arrow */}
-                  <div className="mt-4 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                    <svg className="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                  {/* Floating info panel */}
+                  <div className="absolute bottom-6 left-6 right-6 z-10">
+                    <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-xl p-6">
+                      <p className="text-[10px] tracking-[0.25em] text-brand-primary uppercase font-medium mb-2">
+                        Featured Treatment
+                      </p>
+                      <h4 className="text-2xl font-semibold tracking-tight mb-2">
+                        Precision Care
+                      </h4>
+                      <p className="text-sm text-white/50">
+                        Experience the difference of digital dentistry with our advanced treatment protocols.
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                {/* Bottom Accent Line */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20 rounded-b-2xl" />
+                  {/* Corner architectural elements */}
+                  <div className="absolute top-4 left-4 w-8 h-8 border-l border-t border-white/[0.1]" />
+                  <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-white/[0.1]" />
+                  <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-white/[0.1] z-20" />
+                  <div className="absolute bottom-4 right-4 w-8 h-8 border-r border-b border-white/[0.1] z-20" />
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -272,54 +327,59 @@ export default function Template2Page() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          WELCOME VIDEO — REFINED PRESENTATION
+          WELCOME VIDEO — PRECISION FRAMING ON CANVAS
+          Direct canvas placement, widescreen frame, no boxed containers
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 md:px-12 relative">
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-          }}
-        />
+      <section className="py-32 px-6 md:px-12 relative">
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Asymmetric Grid: Video + Text */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Video Frame - Wide Widescreen */}
+            <div className="lg:col-span-8">
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  poster="/images/team/staff-photo.jpg"
+                >
+                  <source src="/videos/hero-video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          {/* Section Header */}
-          <div className="mb-8">
-            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-              Meet Our Team
-            </span>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
-              Practice Overview
-            </h2>
-            <p className="text-base text-white/50">
-              Step inside our state-of-the-art facility. See the technology in action.
-            </p>
-          </div>
+                {/* Corner architectural frames */}
+                <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-white/[0.1] pointer-events-none" />
+                <div className="absolute top-0 right-0 w-12 h-12 border-r-2 border-t-2 border-white/[0.1] pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-12 h-12 border-l-2 border-b-2 border-white/[0.1] pointer-events-none" />
+                <div className="absolute bottom-0 right-0 w-12 h-12 border-r-2 border-b-2 border-white/[0.1] pointer-events-none" />
 
-          {/* Video Container - Rounded */}
-          <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-800 group">
-            <video
-              className="w-full h-full object-cover"
-              controls
-              poster="/images/team/staff-photo.jpg"
-            >
-              <source src="/videos/hero-video.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-
-            {/* Refined Labels */}
-            <div className="absolute top-4 left-4 z-10 pointer-events-none">
-              <span className="text-[10px] tracking-[0.2em] text-white/70 bg-zinc-950/80 px-3 py-1.5 rounded-full">
-                Practice Tour
-              </span>
+                {/* Status indicators */}
+                <div className="absolute top-4 left-4 z-10 pointer-events-none">
+                  <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-4 py-2 flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[10px] tracking-[0.15em] text-white/60 uppercase">Practice Tour</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="absolute top-4 right-4 z-10 flex items-center gap-2 pointer-events-none">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] tracking-[0.2em] text-white/70 bg-zinc-950/80 px-3 py-1.5 rounded-full">
-                Live Preview
+
+            {/* Text Content - Narrow Offset */}
+            <div className="lg:col-span-4">
+              <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+                Meet Our Team
               </span>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mt-4 mb-4">
+                Practice Overview
+              </h2>
+              <p className="text-base text-white/50 leading-relaxed mb-6">
+                Step inside our state-of-the-art facility. See the technology in action.
+              </p>
+              {/* Thin separator */}
+              <div className="border-t border-white/[0.05] pt-6">
+                <div className="flex items-center gap-4">
+                  <span className="text-[10px] tracking-[0.2em] text-white/30 uppercase">Duration</span>
+                  <span className="text-sm text-white/60">3:45</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -368,74 +428,70 @@ export default function Template2Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          DOCTOR PROFILE — REFINED MEDICAL PRESENTATION
+          DOCTOR PROFILE — DIRECT CANVAS PRESENTATION
+          No heavy boxed cards, thin separators, elegant offset layout
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 md:px-12 relative">
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-          }}
-        />
+      <section className="py-32 px-6 md:px-12 relative">
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Asymmetric Grid Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            {/* Portrait - Direct on canvas */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative aspect-[3/4] overflow-hidden">
+                <Image
+                  src="/images/team/doctor-portrait.png"
+                  alt={`${primaryDoctor.name}, ${primaryDoctor.role}`}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                {/* Subtle gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent" />
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-12">
-            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-              Your Provider
-            </span>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4">
-              Meet Your Dentist
-            </h2>
-          </div>
+                {/* Corner frames */}
+                <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-white/[0.08]" />
+                <div className="absolute top-0 right-0 w-12 h-12 border-r-2 border-t-2 border-white/[0.08]" />
+                <div className="absolute bottom-0 left-0 w-12 h-12 border-l-2 border-b-2 border-white/[0.08]" />
+                <div className="absolute bottom-0 right-0 w-12 h-12 border-r-2 border-b-2 border-white/[0.08]" />
+              </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Image Panel */}
-            <div className="relative aspect-square lg:aspect-auto bg-zinc-900 overflow-hidden rounded-2xl group">
-              <Image
-                src="/images/team/doctor-portrait.png"
-                alt={`${primaryDoctor.name}, ${primaryDoctor.role}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
-
-              {/* Refined Status */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
+              {/* Status badge */}
+              <div className="absolute bottom-6 left-6 z-10">
+                <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-4 py-2 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[11px] tracking-[0.15em] text-white/70">
-                    Digital Dentistry Specialist
-                  </span>
+                  <span className="text-[10px] tracking-[0.15em] text-white/60 uppercase">Accepting Patients</span>
                 </div>
               </div>
             </div>
 
-            {/* Bio Panel */}
-            <div className="bg-zinc-900 p-8 md:p-12 flex flex-col justify-center rounded-2xl">
-              <p className="text-[11px] tracking-[0.2em] text-brand-primary mb-4 uppercase font-medium">
-                {primaryDoctor.role}
-              </p>
-              <h3 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6">
+            {/* Bio Content - Narrow offset text box */}
+            <div className="lg:col-span-7 lg:pt-12">
+              <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+                Your Provider
+              </span>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mt-4 mb-2">
                 {primaryDoctor.name}
-              </h3>
-              <p className="text-base text-white/60 leading-relaxed mb-8">
-                {primaryDoctor.biography}
-              </p>
+              </h2>
+              <p className="text-lg text-white/40 mb-8 italic">{primaryDoctor.role}</p>
 
-              {/* Credentials Grid */}
-              <div className="grid grid-cols-1 gap-2">
+              {/* Thin separator */}
+              <div className="border-t border-white/[0.05] pt-8 mb-8">
+                <p className="text-base text-white/60 leading-relaxed max-w-lg">
+                  {primaryDoctor.biography}
+                </p>
+              </div>
+
+              {/* Credentials - Thin underline frames */}
+              <div className="space-y-0">
                 {primaryDoctor.credentials.map((credential, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-3 py-3 px-4 bg-white/5 border border-slate-800 rounded-xl hover:border-brand-primary/30 transition-colors"
+                    className="flex items-center gap-4 py-4 border-b border-white/[0.05] group hover:border-white/[0.1] transition-colors"
                   >
-                    <svg className="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-sm text-white/70">{credential}</span>
+                    <span className="text-[10px] tracking-[0.2em] text-white/30 font-medium w-6">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors">{credential}</span>
                   </div>
                 ))}
               </div>
@@ -568,101 +624,149 @@ export default function Template2Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          PATIENT REVIEWS — REFINED TESTIMONIALS
+          PATIENT REVIEWS — ASYMMETRIC INTERACTIVE SLIDER FRAMEWORK
+          Primary testimonial floating over translucent background, secondary cards offset
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 md:px-12 bg-zinc-900 relative">
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-          }}
-        />
+      <section className="py-32 px-6 md:px-12 bg-zinc-900 relative overflow-hidden">
+        {/* Elegant translucent background layer */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[70%] h-[80%] bg-gradient-to-bl from-brand-primary/[0.03] via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 w-[50%] h-[60%] bg-gradient-to-tr from-white/[0.01] via-transparent to-transparent" />
+        </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-12">
-            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-              Patient Experiences
-            </span>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
-              What Our Patients Say
-            </h2>
-            <p className="text-base text-white/50">
-              Real stories from real patients. Verified reviews.
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Asymmetric Layout: Large Primary + Stacked Secondary */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* Left Side - Section Header + Secondary Reviews */}
+            <div className="lg:col-span-5 space-y-8">
+              {/* Header */}
+              <div>
+                <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
+                  Patient Experiences
+                </span>
+                <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mt-4 mb-3">
+                  Trusted Results
+                </h2>
+                <p className="text-base text-white/50">
+                  Real stories from verified patients.
+                </p>
+              </div>
 
-          {/* Review Cards Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {sampleReviews.slice(0, 3).map((review, index) => (
-              <div
-                key={index}
-                className="group relative bg-zinc-950 p-8 rounded-2xl overflow-hidden border border-slate-800"
-              >
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-brand-primary/5 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-
-                {/* Header */}
-                <div className="relative z-10 flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[11px] tracking-[0.15em] text-white/40">
-                      Verified Patient
-                    </span>
+              {/* Overall Rating Badge */}
+              <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
+                <div className="flex items-center gap-6">
+                  <div className="text-center">
+                    <span className="text-4xl font-semibold text-brand-primary block">5.0</span>
+                    <div className="flex items-center gap-0.5 mt-2 justify-center">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
+                  <div className="h-12 w-[1px] bg-white/[0.08]" />
+                  <div>
+                    <span className="text-2xl font-semibold block">200+</span>
+                    <span className="text-[10px] tracking-[0.15em] text-white/40 uppercase">Verified Reviews</span>
                   </div>
                 </div>
+              </div>
 
-                {/* Review Content */}
-                <div className="relative z-10">
-                  <p className="text-base text-white/70 leading-relaxed mb-6">
-                    &ldquo;{review.reviewText}&rdquo;
+              {/* Secondary Reviews - Compact Stack */}
+              <div className="space-y-3">
+                {sampleReviews.slice(1, 3).map((review, index) => (
+                  <div
+                    key={index}
+                    className="group relative py-5 px-6 border-l-2 border-white/[0.06] hover:border-brand-primary/50 bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300"
+                  >
+                    <p className="text-sm text-white/60 leading-relaxed line-clamp-2 mb-3">
+                      &ldquo;{review.reviewText}&rdquo;
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-7 h-7 bg-brand-primary/10 border border-brand-primary/20 rounded-full flex items-center justify-center">
+                          <span className="text-xs font-semibold text-brand-primary">
+                            {review.reviewerName.charAt(0)}
+                          </span>
+                        </div>
+                        <span className="text-sm text-white/70">{review.reviewerName}</span>
+                      </div>
+                      <div className="flex items-center gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-2.5 h-2.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Side - Large Primary Testimonial Floating Quote */}
+            <div className="lg:col-span-7 relative">
+              <div className="relative">
+                {/* Large quote mark */}
+                <div className="absolute -top-4 -left-4 text-[120px] leading-none text-brand-primary/[0.08] font-serif select-none pointer-events-none">
+                  &ldquo;
+                </div>
+
+                {/* Primary Testimonial Card - Glassmorphism */}
+                <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.06] rounded-3xl p-10 md:p-14">
+                  {/* Corner architectural elements */}
+                  <div className="absolute top-6 left-6 w-8 h-8 border-l border-t border-white/[0.08]" />
+                  <div className="absolute top-6 right-6 w-8 h-8 border-r border-t border-white/[0.08]" />
+                  <div className="absolute bottom-6 left-6 w-8 h-8 border-l border-b border-white/[0.08]" />
+                  <div className="absolute bottom-6 right-6 w-8 h-8 border-r border-b border-white/[0.08]" />
+
+                  {/* Verified Badge */}
+                  <div className="flex items-center gap-2 mb-8">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">Featured Review</span>
+                  </div>
+
+                  {/* Quote Text - Large Format */}
+                  <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-light mb-10">
+                    {sampleReviews[0].reviewText}
                   </p>
 
-                  {/* Author */}
-                  <div className="flex items-center gap-4 pt-4 border-t border-slate-800">
-                    <div className="w-10 h-10 bg-brand-primary/10 border border-brand-primary/20 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-semibold text-brand-primary">
-                        {review.reviewerName.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">{review.reviewerName}</p>
-                      <p className="text-[11px] text-white/40">Google Review</p>
+                  {/* Thin separator */}
+                  <div className="border-t border-white/[0.06] pt-8">
+                    <div className="flex items-center justify-between">
+                      {/* Author */}
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-brand-primary/10 border border-brand-primary/20 rounded-full flex items-center justify-center">
+                          <span className="text-lg font-semibold text-brand-primary">
+                            {sampleReviews[0].reviewerName.charAt(0)}
+                          </span>
+                        </div>
+                        <div>
+                          <p className="text-base font-medium">{sampleReviews[0].reviewerName}</p>
+                          <p className="text-[11px] text-white/40 tracking-wide">Verified Patient • Google</p>
+                        </div>
+                      </div>
+
+                      {/* Stars */}
+                      <div className="flex items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Accent Line */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-2xl" />
-              </div>
-            ))}
-          </div>
-
-          {/* Overall Rating Bar */}
-          <div className="mt-8 p-6 bg-zinc-950 border border-slate-800 rounded-2xl">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <span className="text-[11px] tracking-[0.2em] text-white/40 uppercase">Overall Rating</span>
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl font-semibold text-brand-primary">5.0</span>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
+                {/* Slider Navigation Dots */}
+                <div className="flex items-center justify-center gap-2 mt-8">
+                  <button className="w-8 h-1 rounded-full bg-brand-primary" aria-label="Review 1" />
+                  <button className="w-2 h-1 rounded-full bg-white/20 hover:bg-white/40 transition-colors" aria-label="Review 2" />
+                  <button className="w-2 h-1 rounded-full bg-white/20 hover:bg-white/40 transition-colors" aria-label="Review 3" />
                 </div>
               </div>
-              <span className="text-sm text-white/40">200+ Verified Reviews on Google</span>
             </div>
           </div>
         </div>
@@ -755,77 +859,124 @@ export default function Template2Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          MEMBERSHIP — REFINED PRICING CARDS
+          MEMBERSHIP — EXPANDABLE ROW MATRIX STACK
+          Clean responsive data rows, expandable details on selection
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 md:px-12 bg-zinc-900 relative">
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-          }}
-        />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-12">
+      <section className="py-32 px-6 md:px-12 bg-zinc-900 relative">
+        <div className="max-w-5xl mx-auto relative z-10">
+          {/* Header */}
+          <div className="mb-12 text-center">
             <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
               Membership Plans
             </span>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mt-4 mb-3">
               Wellness Membership
             </h2>
-            <p className="text-base text-white/50">
-              Comprehensive coverage with 25% off all procedures.
+            <p className="text-base text-white/50 max-w-lg mx-auto">
+              Comprehensive preventive care with 25% savings on all procedures.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { tier: "Individual", price: "335", code: "01" },
-              { tier: "Couple", price: "615", code: "02", popular: true },
-              { tier: "Family", price: "965", code: "03", extra: "+$95 per additional member" },
-            ].map((plan) => (
-              <div
-                key={plan.code}
-                className={`group relative bg-zinc-950 p-8 rounded-2xl border ${plan.popular ? "border-brand-primary" : "border-slate-800"}`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="text-[10px] tracking-[0.2em] text-brand-primary bg-brand-primary/10 px-4 py-1.5 rounded-full uppercase font-medium border border-brand-primary/30">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                    <span className="text-[10px] font-medium text-white/40">{plan.code}</span>
-                  </div>
-                </div>
-
-                <p className="text-sm tracking-[0.2em] text-brand-primary mb-2 uppercase font-medium">{plan.tier}</p>
-                <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-5xl font-semibold">${plan.price}</span>
-                  <span className="text-sm text-white/40">/year</span>
-                </div>
-
-                <ul className="space-y-3 mb-8">
-                  {["2 Cleanings", "2 Doctor Exams", "2 Oral Cancer Screening", "2 Fluoride Varnish", "2 Digital/3D X-ray", "25% off All Procedures"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-white/60">
-                      <svg className="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                  {plan.extra && (
-                    <li className="text-sm text-brand-primary pt-2 border-t border-slate-800">{plan.extra}</li>
-                  )}
-                </ul>
+          {/* Benefits Row - Compact Indicator */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
+            {["2 Cleanings", "2 Exams", "3D X-rays", "25% Off"].map((benefit, i) => (
+              <div key={i} className="flex items-center gap-2 px-4 py-2 backdrop-blur-xl bg-white/[0.02] border border-white/[0.06] rounded-full">
+                <svg className="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span className="text-xs tracking-wide text-white/60">{benefit}</span>
               </div>
             ))}
+          </div>
+
+          {/* Row Matrix Stack */}
+          <div className="space-y-2">
+            {[
+              { tier: "Individual", price: "335", code: "01", description: "Perfect for single patients seeking comprehensive preventive care coverage." },
+              { tier: "Couple", price: "615", code: "02", popular: true, description: "Ideal for partners. Both members receive full membership benefits." },
+              { tier: "Family", price: "965", code: "03", description: "Coverage for parents and children. Add additional members for $95/year each.", extra: "+$95 per additional member" },
+            ].map((plan) => (
+              <details
+                key={plan.code}
+                className="group"
+              >
+                <summary className={`flex items-center justify-between p-6 md:p-8 cursor-pointer list-none rounded-2xl transition-all duration-300 ${plan.popular ? "bg-brand-primary/[0.05] border border-brand-primary/20 hover:border-brand-primary/40" : "bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.03]"}`}>
+                  <div className="flex items-center gap-6">
+                    {/* Code Badge */}
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${plan.popular ? "bg-brand-primary/20 border border-brand-primary/30" : "bg-white/5 border border-white/10"}`}>
+                      <span className={`text-xs font-medium ${plan.popular ? "text-brand-primary" : "text-white/40"}`}>{plan.code}</span>
+                    </div>
+
+                    {/* Tier Name */}
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <h3 className="text-xl font-semibold tracking-tight">{plan.tier}</h3>
+                        {plan.popular && (
+                          <span className="text-[9px] tracking-[0.2em] text-brand-primary bg-brand-primary/10 px-3 py-1 rounded-full uppercase font-medium">
+                            Popular
+                          </span>
+                        )}
+                      </div>
+                      {plan.extra && (
+                        <p className="text-xs text-brand-primary/70 mt-1">{plan.extra}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Price + Expand Indicator */}
+                  <div className="flex items-center gap-6">
+                    <div className="text-right">
+                      <span className="text-3xl font-semibold">${plan.price}</span>
+                      <span className="text-sm text-white/40">/year</span>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-open:rotate-180 transition-transform duration-300">
+                      <svg className="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                </summary>
+
+                {/* Expandable Content */}
+                <div className="overflow-hidden">
+                  <div className={`p-6 md:p-8 mt-1 rounded-2xl ${plan.popular ? "bg-brand-primary/[0.03] border border-brand-primary/10" : "bg-white/[0.01] border border-white/[0.04]"}`}>
+                    <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-2xl">
+                      {plan.description}
+                    </p>
+
+                    {/* Benefits Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+                      {["2 Cleanings", "2 Doctor Exams", "2 Oral Cancer Screenings", "2 Fluoride Treatments", "2 Digital/3D X-rays", "25% off All Procedures"].map((item, i) => (
+                        <div key={i} className="flex items-center gap-2 py-2">
+                          <svg className="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          <span className="text-sm text-white/70">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Action Button */}
+                    <a
+                      href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
+                    >
+                      <span>Enroll Now</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </details>
+            ))}
+          </div>
+
+          {/* Bottom Note */}
+          <div className="mt-8 text-center">
+            <p className="text-xs text-white/40">
+              No insurance required. Membership benefits activate immediately upon enrollment.
+            </p>
           </div>
         </div>
       </section>
