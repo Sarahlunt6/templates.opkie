@@ -20,7 +20,7 @@ export default function Template3Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sans bg-brand-canvas text-brand-mainText relative">
+    <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative">
       {/* Kinetic Ambient Drifting Background */}
       <T3AmbientBackground />
 
@@ -76,26 +76,47 @@ export default function Template3Page() {
       <T3ServiceAccordion />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          PHILOSOPHY — Three Pillars
+          PHILOSOPHY — Three Pillars with Architectural Numeric Backgrounds
+          Large low-opacity numerics as clean architectural background layers
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
-        <div className="max-w-4xl mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+      <section className="relative py-40 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-5xl mx-auto px-8">
+          {/* Section Header */}
+          <div className="text-center mb-24">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-6 h-px bg-brand-primary/30" />
+              <p className="text-[10px] uppercase tracking-[0.35em] text-neutral-muted font-medium font-sanctuary">
+                Our Philosophy
+              </p>
+              <div className="w-6 h-px bg-brand-primary/30" />
+            </div>
+            <h2 className="font-sanctuary text-[clamp(1.6rem,4vw,2.8rem)] font-extralight tracking-[0.03em]">
+              Listen, Plan, Care
+            </h2>
+          </div>
+
+          {/* Three Pillars with Large Numeric Backgrounds */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
             {[
-              { title: "Listen", description: "We begin every relationship by truly understanding your concerns, goals, and history." },
-              { title: "Plan", description: "Together, we craft a comprehensive wellness strategy tailored to your unique needs." },
-              { title: "Care", description: "Gentle, precise treatment delivered with respect for your time and comfort." },
+              { title: "Listen", num: "01", description: "We begin every relationship by truly understanding your concerns, goals, and complete health history." },
+              { title: "Plan", num: "02", description: "Together, we craft a comprehensive wellness strategy tailored uniquely to your needs and lifestyle." },
+              { title: "Care", num: "03", description: "Gentle, precise treatment delivered with deep respect for your time, comfort, and wellbeing." },
             ].map((pillar, index) => (
-              <div key={index} className="group">
-                <div className="w-12 h-12 rounded-full border border-brand-primary/30 flex items-center justify-center mx-auto mb-6 group-hover:border-brand-primary group-hover:bg-brand-primary/5 transition-all duration-500">
-                  <span className="text-sm font-light text-brand-primary">0{index + 1}</span>
+              <div key={index} className="group relative text-center">
+                {/* Large Architectural Numeric Background */}
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-[120px] lg:text-[140px] font-extralight text-slate-100 select-none pointer-events-none font-sanctuary leading-none">
+                  {pillar.num}
+                </span>
+
+                {/* Content */}
+                <div className="relative z-10 pt-16">
+                  <h3 className="font-sanctuary text-2xl font-extralight tracking-[0.08em] mb-6 group-hover:text-brand-primary transition-colors duration-500">
+                    {pillar.title}
+                  </h3>
+                  <p className="font-sanctuary text-sm text-neutral-muted font-light leading-relaxed tracking-wide max-w-xs mx-auto">
+                    {pillar.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-light tracking-[0.1em] mb-4 group-hover:text-brand-primary transition-colors duration-500">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm text-neutral-muted font-light leading-relaxed tracking-wide">
-                  {pillar.description}
-                </p>
               </div>
             ))}
           </div>
@@ -190,42 +211,66 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          DOCTOR PROFILE — Spatial Editorial
+          DOCTOR PROFILE — Asymmetric 12-Column Editorial Grid
+          Image: 5 cols | Separator: 2 cols | Biography: 5 cols
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative aspect-[3/4] overflow-hidden border border-brand-primary/10">
-              <Image
-                src="/images/team/doctor-portrait.png"
-                alt={`${primaryDoctor.name} at ${clientMasterData.globalPracticeName}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8">
+      <section className="relative py-40 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-8">
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-6 h-px bg-brand-primary/30" />
+              <p className="text-[10px] uppercase tracking-[0.35em] text-neutral-muted font-medium font-sanctuary">
                 Your Provider
               </p>
+              <div className="w-6 h-px bg-brand-primary/30" />
+            </div>
+          </div>
 
-              <h2 className="text-3xl md:text-4xl font-extralight tracking-[0.02em] mb-2">
+          {/* Asymmetric 12-Column Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
+            {/* Image Column - 5 slots */}
+            <div className="lg:col-span-5">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-black/[0.03] shadow-sm">
+                <Image
+                  src="/images/team/doctor-portrait.png"
+                  alt={`${primaryDoctor.name} at ${clientMasterData.globalPracticeName}`}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 450px"
+                />
+                {/* Subtle warm overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-amber-50/5 via-transparent to-transparent" />
+              </div>
+            </div>
+
+            {/* Vertical Separator Line - 2 slots */}
+            <div className="hidden lg:flex lg:col-span-2 items-center justify-center h-full">
+              <div className="w-px h-3/4 bg-gradient-to-b from-transparent via-brand-primary/20 to-transparent" />
+            </div>
+
+            {/* Biography Column - 5 slots */}
+            <div className="lg:col-span-5">
+              <h2 className="font-sanctuary text-3xl md:text-4xl font-extralight tracking-[0.02em] mb-2">
                 {primaryDoctor.name}
               </h2>
 
-              <p className="text-brand-primary tracking-[0.1em] text-sm mb-10">
+              <p className="text-brand-primary tracking-[0.12em] text-[11px] uppercase font-medium mb-10">
                 {primaryDoctor.role}
               </p>
 
-              <p className="text-neutral-muted font-light leading-loose tracking-wide mb-12">
+              <p className="font-sanctuary text-neutral-muted font-light leading-loose tracking-wide mb-12 text-base">
                 {primaryDoctor.biography}
               </p>
 
-              <div className="space-y-3">
+              {/* Credentials with refined styling */}
+              <div className="space-y-4 border-t border-slate-100 pt-10">
+                <p className="text-[9px] uppercase tracking-[0.35em] text-neutral-muted/60 mb-4">
+                  Credentials
+                </p>
                 {primaryDoctor.credentials.map((credential, index) => (
-                  <div key={index} className="flex items-center gap-4 text-sm text-neutral-muted font-light tracking-wide">
-                    <div className="w-1 h-1 rounded-full bg-brand-primary/40" />
+                  <div key={index} className="flex items-center gap-4 text-sm text-neutral-muted font-light tracking-wide font-sanctuary">
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-primary/30" />
                     {credential}
                   </div>
                 ))}
