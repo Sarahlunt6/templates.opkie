@@ -20,19 +20,23 @@ export default function Template1Page() {
     <div className="font-serif antialiased bg-brand-canvas">
       <T1Nav />
 
-      {/* Hero Section - Editorial Asymmetric Layout */}
+      {/* Hero Section - Immersive Editorial with Ambient Video */}
       <section className="min-h-[90vh] relative overflow-hidden">
-        {/* Full-bleed background image */}
+        {/* Looping Ambient Video Background */}
         <div className="absolute inset-0">
-          <Image
-            src="/images/team/staff-photo.jpg"
-            alt={`Dental team at ${clientMasterData.globalPracticeName} in ${location.cityServed}`}
-            fill
-            className="object-cover object-top"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-mainText/95 via-brand-mainText/70 to-transparent" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="/images/team/staff-photo.jpg"
+          >
+            <source src="/videos/hero-ambient.mp4" type="video/mp4" />
+          </video>
+          {/* Dark-tinted overlay mask for text contrast */}
+          <div className="absolute inset-0 bg-slate-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/50 to-transparent" />
         </div>
 
         {/* Editorial Overlapping Content */}
@@ -89,21 +93,27 @@ export default function Template1Page() {
           </div>
         </div>
 
-        {/* Floating Stats - Asymmetric Position */}
-        <div className="absolute bottom-12 right-12 hidden lg:flex gap-8">
+        {/* Free-Standing Metric Accents - No background boxes */}
+        <div className="absolute bottom-12 right-12 hidden lg:flex gap-16">
           {[
-            { value: "15+", label: "Years" },
-            { value: "5.0", label: "Rating" },
-            { value: "5K+", label: "Patients" },
+            { value: "15+", label: "years" },
+            { value: "5.0", label: "rating" },
+            { value: "5K+", label: "patients" },
           ].map((stat, index) => (
             <div
               key={index}
-              className={`bg-white/10 backdrop-blur-md px-6 py-4 border border-white/20 ${
+              className={`text-center ${
                 index === 1 ? "-translate-y-4" : index === 2 ? "translate-y-2" : ""
               }`}
             >
-              <p className="text-3xl font-bold text-white">{stat.value}</p>
-              <p className="text-xs uppercase tracking-widest text-white/60">{stat.label}</p>
+              {/* Oversized elegant serif for numeric indicators */}
+              <p className="text-6xl lg:text-7xl font-serif font-light text-white tracking-tight leading-none">
+                {stat.value}
+              </p>
+              {/* Tracking-wide lowercase sans-serif description tokens */}
+              <p className="text-xs font-sans uppercase tracking-[0.35em] text-white/50 mt-2">
+                {stat.label}
+              </p>
             </div>
           ))}
         </div>
@@ -145,7 +155,7 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* Premium Services - Staggered Asymmetric Grid */}
+      {/* Premium Services - Staggered Asymmetric Mosaic Array */}
       <section className="py-32 px-8 bg-brand-canvas">
         <div className="max-w-7xl mx-auto">
           {/* Section Header - Editorial Offset */}
@@ -159,8 +169,8 @@ export default function Template1Page() {
             </h2>
           </div>
 
-          {/* Staggered Grid - Asymmetric Vertical Positions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Staggered Asymmetric Mosaic - Editorial Vertical Offsets */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 title: "Invisalign",
@@ -172,26 +182,27 @@ export default function Template1Page() {
                 title: "Dental Implants",
                 description: "Permanent tooth replacement that looks, feels, and functions like natural teeth.",
                 image: "/images/services/implant.jpg",
-                offset: "-translate-y-12",
+                offset: "translate-y-12",
               },
               {
                 title: "Full Mouth Restoration",
                 description: "Complete smile reconstruction combining multiple treatments for optimal results.",
                 image: "/images/services/full-mouth-smile.jpg",
-                offset: "translate-y-6",
+                offset: "-translate-y-6",
               },
               {
                 title: "Porcelain Veneers",
                 description: "Custom-crafted shells that create a flawless, natural-looking smile makeover.",
                 image: "/images/services/full-mouth-shade.jpg",
-                offset: "-translate-y-8",
+                offset: "translate-y-6",
               },
             ].map((service, index) => (
               <div
                 key={index}
                 className={`group ${service.offset}`}
               >
-                <div className="relative overflow-hidden shadow-2xl">
+                {/* Fine 1px architectural line border - no harsh backdrop */}
+                <div className="relative overflow-hidden border border-brand-primary/20">
                   <div className="aspect-[3/4] relative">
                     <Image
                       src={service.image}
@@ -202,7 +213,7 @@ export default function Template1Page() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-mainText via-brand-mainText/20 to-transparent" />
                   </div>
-                  {/* Text overlay with negative margin overlap */}
+                  {/* Text overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="text-2xl font-bold text-white mb-2 -ml-2 pl-2 border-l-4 border-brand-accent">
                       {service.title}
@@ -218,31 +229,36 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* Meet the Dentist - Editorial Split with Typography Overlap */}
+      {/* Meet the Dentist - Asymmetric Overlapping Collage Layout */}
       <section className="py-32 px-8 bg-slate-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch">
-            {/* Portrait - Full Height */}
-            <div className="relative min-h-[600px] lg:min-h-[800px] group">
-              <Image
-                src="/images/team/doctor-portrait.png"
-                alt={primaryDoctor.name}
-                fill
-                className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-900/90 hidden lg:block" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent lg:hidden" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
+            {/* Portrait - Refined Layout Frame Container */}
+            <div className="relative lg:col-span-6 min-h-[600px] lg:min-h-[750px]">
+              {/* Decorative frame accent */}
+              <div className="absolute top-8 left-8 right-8 bottom-8 border border-brand-accent/20 pointer-events-none" />
+              <div className="relative h-full group">
+                <Image
+                  src="/images/team/doctor-portrait.png"
+                  alt={primaryDoctor.name}
+                  fill
+                  className="object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                {/* Subtle gradient fade to content area - no harsh vertical cutoff */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-900/95 hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent lg:hidden" />
+              </div>
             </div>
 
-            {/* Bio Content - Overlapping */}
-            <div className="relative lg:-ml-24 flex items-center">
-              <div className="bg-slate-900 p-12 lg:p-16 w-full">
+            {/* Bio Content - Overlapping with negative margin into portrait */}
+            <div className="relative lg:col-span-6 lg:-ml-20 flex items-center z-10">
+              <div className="bg-slate-900/95 backdrop-blur-sm p-12 lg:p-16 w-full lg:mr-8">
                 <p className="text-brand-accent uppercase tracking-[0.3em] text-sm mb-4 font-medium">
                   Meet Your Dentist
                 </p>
                 {/* Name with dramatic overlap */}
-                <h2 className="text-4xl lg:text-5xl font-bold text-white leading-[0.95] mb-2 lg:-ml-32 lg:pl-32">
+                <h2 className="text-4xl lg:text-5xl font-bold text-white leading-[0.95] mb-2">
                   {primaryDoctor.name}
                 </h2>
                 <p className="text-brand-accent text-xl mb-8 italic">{primaryDoctor.role}</p>
@@ -250,12 +266,17 @@ export default function Template1Page() {
                   {primaryDoctor.biography}
                 </p>
 
-                {/* Credentials - Editorial List */}
-                <ul className="space-y-4 mb-12">
+                {/* Credentials - Thin low-opacity underline frames */}
+                <ul className="space-y-0 mb-12">
                   {primaryDoctor.credentials.map((credential, index) => (
-                    <li key={index} className="flex items-start gap-4 text-gray-300 group/item">
-                      <span className="text-brand-accent font-bold text-lg">0{index + 1}</span>
-                      <span className="border-b border-gray-700 pb-2 flex-1 group-hover/item:border-brand-accent transition-colors duration-300">
+                    <li
+                      key={index}
+                      className="flex items-center gap-6 text-gray-300 py-4 border-b border-white/10 group/item hover:border-white/20 transition-colors duration-300"
+                    >
+                      <span className="text-brand-accent/60 font-light text-sm tracking-widest w-8">
+                        0{index + 1}
+                      </span>
+                      <span className="flex-1 text-gray-300/90">
                         {credential}
                       </span>
                     </li>
@@ -263,15 +284,15 @@ export default function Template1Page() {
                 </ul>
 
                 {/* Stats Row */}
-                <div className="flex gap-12 pt-8 border-t border-gray-800">
+                <div className="flex gap-12 pt-8 border-t border-white/10">
                   {[
                     { value: "15+", label: "Years" },
                     { value: "5,000+", label: "Smiles" },
                     { value: "98%", label: "Satisfaction" },
                   ].map((stat, index) => (
                     <div key={index}>
-                      <p className="text-4xl font-bold text-brand-accent">{stat.value}</p>
-                      <p className="text-sm text-gray-500 uppercase tracking-wider">{stat.label}</p>
+                      <p className="text-4xl font-serif font-light text-white tracking-tight">{stat.value}</p>
+                      <p className="text-xs text-gray-500 uppercase tracking-[0.2em] mt-1">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -309,58 +330,64 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* Patient Testimonials - Editorial Lookbook Stack */}
-      <section className="py-32 px-8 bg-slate-900 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-16">
-            <p className="text-brand-accent uppercase tracking-[0.3em] text-sm mb-4 font-medium">
+      {/* Patient Testimonials - Large-Format Typographic Review Canvas */}
+      <section className="py-32 lg:py-40 px-8 bg-slate-900 relative overflow-hidden">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,255,255,0.1)_1px,_transparent_1px)] bg-[length:32px_32px]" />
+        </div>
+
+        <div className="max-w-5xl mx-auto relative">
+          {/* Section Label */}
+          <div className="text-center mb-20">
+            <p className="text-brand-accent uppercase tracking-[0.4em] text-sm mb-4 font-medium">
               Patient Stories
             </p>
-            <h2 className="text-5xl lg:text-6xl font-bold text-white leading-[0.95]">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-[0.95]">
               What They
               <span className="block text-brand-accent italic font-light">Say</span>
             </h2>
           </div>
 
-          {/* Lookbook Staggered Stack */}
+          {/* Featured Testimonial - Large Typographic Canvas */}
           <div className="relative">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {sampleReviews.slice(0, 3).map((review, index) => (
-                <div
-                  key={index}
-                  className={`relative group ${
-                    index === 0 ? "md:translate-y-0" : index === 1 ? "md:-translate-y-8" : "md:translate-y-4"
-                  }`}
-                >
-                  {/* Card with heavy editorial shadow */}
-                  <div className="bg-white p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_50px_100px_-25px_rgba(0,0,0,0.6)]">
-                    {/* Large decorative quote */}
-                    <span className="absolute -top-4 -left-2 text-8xl font-serif text-brand-accent/20 leading-none">
-                      "
-                    </span>
-                    {/* Stars */}
-                    <div className="flex gap-1 mb-6 relative z-10">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-5 h-5 text-brand-accent" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="text-brand-mainText leading-relaxed mb-8 text-lg italic relative z-10">
-                      "{review.reviewText}"
+            {sampleReviews.slice(0, 1).map((review, index) => (
+              <div key={index} className="text-center">
+                {/* Oversized elegant serif italic quote - directly on canvas */}
+                <blockquote className="relative">
+                  <p className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-white/95 leading-[1.3] tracking-tight max-w-4xl mx-auto">
+                    "{review.reviewText}"
+                  </p>
+                </blockquote>
+
+                {/* Fine tracking-wide patient identifier */}
+                <div className="mt-12 flex flex-col items-center gap-2">
+                  <p className="text-sm uppercase tracking-[0.3em] text-white/70 font-medium">
+                    {review.reviewerName}
+                  </p>
+                  <p className="text-xs uppercase tracking-[0.4em] text-white/40">
+                    Verified Patient
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Secondary Reviews - Minimal typographic treatment */}
+          <div className="mt-24 pt-16 border-t border-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+              {sampleReviews.slice(1, 3).map((review, index) => (
+                <div key={index} className="text-center">
+                  <p className="text-xl lg:text-2xl font-serif italic text-white/80 leading-relaxed mb-8">
+                    "{review.reviewText}"
+                  </p>
+                  <div className="flex flex-col items-center gap-1">
+                    <p className="text-xs uppercase tracking-[0.3em] text-white/60 font-medium">
+                      {review.reviewerName}
                     </p>
-                    {/* Author with rounded mask */}
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-full bg-brand-primary/10 flex items-center justify-center border-2 border-brand-primary/20">
-                        <span className="text-xl font-bold text-brand-primary">
-                          {review.reviewerName.charAt(0)}
-                        </span>
-                      </div>
-                      <div>
-                        <p className="font-bold text-brand-mainText">{review.reviewerName}</p>
-                        <p className="text-sm text-neutral-muted">Verified Patient</p>
-                      </div>
-                    </div>
+                    <p className="text-xs uppercase tracking-[0.4em] text-white/30">
+                      Verified Patient
+                    </p>
                   </div>
                 </div>
               ))}
