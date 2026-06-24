@@ -39,7 +39,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           WELCOME VIDEO — Spatial Gallery Style
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Welcome
@@ -79,10 +79,10 @@ export default function Template3Page() {
           PHILOSOPHY — Three Pillars with Architectural Numeric Backgrounds
           Large low-opacity numerics as clean architectural background layers
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden bg-brand-primary/[0.02]">
+      <section className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-5xl mx-auto px-8">
           {/* Section Header */}
-          <div className="text-center mb-24">
+          <div className="text-center mb-12 lg:mb-16">
             <div className="flex items-center justify-center gap-3 mb-8">
               <div className="w-6 h-px bg-brand-primary/30" />
               <p className="text-[10px] uppercase tracking-[0.35em] text-neutral-muted font-medium font-sanctuary">
@@ -126,7 +126,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           BEFORE/AFTER — Minimal Gallery
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Transformations
@@ -172,7 +172,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           SERVICES LIST — Full Width Minimal
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+      <section className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             What We Offer
@@ -214,10 +214,10 @@ export default function Template3Page() {
           DOCTOR PROFILE — Asymmetric 12-Column Editorial Grid
           Image: 5 cols | Separator: 2 cols | Biography: 5 cols
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="max-w-6xl mx-auto px-8">
           {/* Section Header */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-10 lg:mb-12">
             <div className="flex items-center justify-center gap-3 mb-8">
               <div className="w-6 h-px bg-brand-primary/30" />
               <p className="text-[10px] uppercase tracking-[0.35em] text-neutral-muted font-medium font-sanctuary">
@@ -288,7 +288,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           LOCATION & HOURS — Spatial Gallery
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="max-w-5xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Visit Us
@@ -365,7 +365,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           MEMBERSHIP — Spatial Pricing
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+      <section className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Membership
@@ -440,7 +440,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           FREE CONSULTATION CTA — Spatial Banner
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/office-exterior.jpg"
@@ -480,7 +480,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           WHY CHOOSE US — Floating Typography
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden bg-brand-primary/[0.02]">
+      <section className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
             Our Philosophy
@@ -525,7 +525,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           FINAL CTA — Spatial Minimal
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="max-w-3xl mx-auto px-8 text-center">
           <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight mb-8 tracking-[0.05em]">
             Where Wellness Meets Artistry

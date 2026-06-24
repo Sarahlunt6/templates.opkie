@@ -42,10 +42,10 @@ export default function T3ServiceAccordion() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative py-16 lg:py-20 overflow-hidden">
       <div className="max-w-5xl mx-auto px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 lg:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

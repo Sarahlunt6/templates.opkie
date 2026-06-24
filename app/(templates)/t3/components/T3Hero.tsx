@@ -32,28 +32,29 @@ export default function T3Hero({
   return (
     <section
       ref={containerRef}
-      className="min-h-screen relative flex items-center justify-center overflow-hidden pt-24 pb-32"
+      className="min-h-[85vh] relative flex items-center justify-center overflow-hidden pt-20 pb-16"
     >
       {/* ═══════════════════════════════════════════════════════════════════════
-          ASYMMETRIC EDITORIAL LOOKBOOK FRAMEWORK
-          Offset floating frames with parallax drift
+          SAFE EDITORIAL IMAGE FRAMEWORK
+          Images positioned far from text to ensure absolute legibility
+          All imagery constrained to side margins with safe clearance
       ═══════════════════════════════════════════════════════════════════════ */}
 
-      {/* Primary Tall Vertical Frame - Right of Typography */}
+      {/* Primary Tall Vertical Frame - Far Right Edge Only */}
       <motion.div
         style={{ y: primaryImageY }}
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-[8%] lg:right-[12%] top-1/2 -translate-y-1/2 z-0 hidden lg:block"
+        className="absolute right-4 lg:right-8 xl:right-12 top-1/2 -translate-y-1/2 z-0 hidden xl:block"
       >
-        <div className="relative aspect-[2/3] w-[280px] xl:w-[320px] rounded-2xl overflow-hidden shadow-sm border border-black/[0.03]">
+        <div className="relative aspect-[2/3] w-[200px] xl:w-[240px] rounded-2xl overflow-hidden shadow-sm border border-black/[0.03]">
           <Image
             src="/images/team/doctor-portrait.png"
             alt="Your wellness provider"
             fill
             className="object-cover object-top"
-            sizes="320px"
+            sizes="240px"
             priority
           />
           {/* Subtle cream overlay for warmth */}
@@ -64,7 +65,7 @@ export default function T3Hero({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4, duration: 0.8 }}
-          className="mt-4 text-center"
+          className="mt-3 text-center"
         >
           <p className="text-[9px] uppercase tracking-[0.35em] text-neutral-muted/50 font-light">
             Expertise
@@ -72,21 +73,21 @@ export default function T3Hero({
         </motion.div>
       </motion.div>
 
-      {/* Secondary Narrow Frame - Lower Left */}
+      {/* Secondary Narrow Frame - Far Left Edge Only */}
       <motion.div
         style={{ y: secondaryImageY }}
         initial={{ opacity: 0, x: -40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute left-[6%] lg:left-[10%] bottom-[15%] z-0 hidden md:block"
+        className="absolute left-4 lg:left-8 xl:left-12 bottom-[20%] z-0 hidden xl:block"
       >
-        <div className="relative aspect-[3/4] w-[180px] lg:w-[220px] rounded-2xl overflow-hidden shadow-sm border border-black/[0.03]">
+        <div className="relative aspect-[3/4] w-[160px] xl:w-[180px] rounded-2xl overflow-hidden shadow-sm border border-black/[0.03]">
           <Image
             src="/images/office-interior.jpg"
             alt="Serene sanctuary interior"
             fill
             className="object-cover"
-            sizes="220px"
+            sizes="180px"
           />
           {/* Soft teal tint overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-teal-50/5 to-transparent" />
@@ -96,7 +97,7 @@ export default function T3Hero({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.6, duration: 0.8 }}
-          className="mt-4 text-center"
+          className="mt-3 text-center"
         >
           <p className="text-[9px] uppercase tracking-[0.35em] text-neutral-muted/50 font-light">
             Sanctuary
@@ -104,39 +105,23 @@ export default function T3Hero({
         </motion.div>
       </motion.div>
 
-      {/* Accent Interior Frame - Upper Left */}
-      <motion.div
-        style={{ y: accentImageY }}
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 0.85, y: 0 }}
-        transition={{ duration: 1.2, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute left-[18%] lg:left-[22%] top-[18%] z-0 hidden lg:block"
-      >
-        <div className="relative aspect-square w-[120px] xl:w-[140px] rounded-xl overflow-hidden shadow-sm border border-black/[0.03]">
-          <Image
-            src="/images/cases/smile-after.png"
-            alt="Natural smile enhancement"
-            fill
-            className="object-cover"
-            sizes="140px"
-          />
-        </div>
-      </motion.div>
+      {/* REMOVED: Upper-left accent image that was overlapping with headline text */}
 
       {/* ═══════════════════════════════════════════════════════════════════════
           MAIN TYPOGRAPHY STACK
           Premium geometric sans-serif with light weights
+          Tight compositional balance with controlled spacing
       ═══════════════════════════════════════════════════════════════════════ */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-10 max-w-2xl lg:max-w-3xl mx-auto px-8 py-16 text-center"
+        className="relative z-10 max-w-2xl lg:max-w-3xl mx-auto px-8 py-8 text-center"
       >
         {/* Top Micro-Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex items-center justify-center gap-3 mb-12"
+          className="flex items-center justify-center gap-3 mb-6"
         >
           <div className="w-8 h-px bg-brand-primary/30" />
           <p className="text-[10px] uppercase tracking-[0.35em] text-neutral-muted font-medium font-sanctuary">
@@ -150,10 +135,10 @@ export default function T3Hero({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-sanctuary text-[clamp(2.2rem,5.5vw,4rem)] font-extralight leading-[1.08] tracking-[0.02em] mb-10"
+          className="font-sanctuary text-[clamp(2.2rem,5.5vw,4rem)] font-extralight leading-[1.08] tracking-[0.02em] mb-6"
         >
           <span className="block">Oral Wellness,</span>
-          <span className="block mt-2">
+          <span className="block mt-1">
             <span className="text-brand-primary tracking-[0.06em]">Thoughtfully</span>{" "}
             Designed
           </span>
@@ -164,7 +149,7 @@ export default function T3Hero({
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="w-12 h-px bg-brand-primary/40 mx-auto mb-10 origin-center"
+          className="w-12 h-px bg-brand-primary/40 mx-auto mb-6 origin-center"
         />
 
         {/* Philosophy Statement */}
@@ -172,7 +157,7 @@ export default function T3Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="font-sanctuary text-base lg:text-lg font-light text-neutral-muted leading-relaxed max-w-xl mx-auto mb-14 tracking-wide"
+          className="font-sanctuary text-base lg:text-lg font-light text-neutral-muted leading-relaxed max-w-xl mx-auto mb-8 tracking-wide"
         >
           We believe exceptional dental care extends beyond treatment. Our
           holistic approach considers your complete wellbeing, creating a
@@ -184,7 +169,7 @@ export default function T3Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5"
         >
           <a
             href={bookingUrl !== "none" ? bookingUrl : `tel:${phoneGBP.replace(/[^0-9+]/g, "")}`}
