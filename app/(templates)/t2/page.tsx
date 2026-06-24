@@ -27,21 +27,41 @@ export default function Template2Page() {
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="min-h-screen relative overflow-hidden bg-zinc-950">
         {/* ══════════════════════════════════════════════════════════════════
-            LAYER 0: Multi-Layered Ambient Canvas (Depth Injection)
+            LAYER 0: Fullscreen Video Background
+            Ambient cinematic video with dark overlay for text legibility
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/hero-ambient-t2.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for text contrast */}
+          <div className="absolute inset-0 bg-zinc-950/70" />
+          {/* Gradient fade at bottom for metrics bar transition */}
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-zinc-950 to-transparent" />
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════════
+            LAYER 0.5: Ambient Glow Overlay (Depth Injection)
             Ultra-soft radial gradient glow elements with CSS animation
         ══════════════════════════════════════════════════════════════════ */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 z-[1] pointer-events-none">
           {/* Deep teal ambient glow - behind heading area */}
           <div
-            className="absolute w-[600px] h-[600px] rounded-full blur-[160px] bg-teal-500/[0.04] animate-drift top-[15%] left-[10%]"
+            className="absolute w-[600px] h-[600px] rounded-full blur-[160px] bg-teal-500/[0.06] animate-drift top-[15%] left-[10%]"
           />
           {/* Soft slate ambient glow - behind clinician area */}
           <div
-            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] bg-slate-400/[0.03] animate-drift-reverse top-[25%] right-[5%]"
+            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] bg-slate-400/[0.04] animate-drift-reverse top-[25%] right-[5%]"
           />
           {/* Subtle brand accent glow - lower left */}
           <div
-            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-brand-primary/[0.02] animate-drift-slow bottom-[10%] left-[20%]"
+            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-brand-primary/[0.03] animate-drift-slow bottom-[10%] left-[20%]"
           />
         </div>
 
