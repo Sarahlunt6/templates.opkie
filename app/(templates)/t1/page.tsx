@@ -236,8 +236,8 @@ export default function Template1Page() {
             {/* Portrait - Refined Layout Frame Container */}
             <div className="relative lg:col-span-6 min-h-[600px] lg:min-h-[750px]">
               {/* Decorative frame accent */}
-              <div className="absolute top-8 left-8 right-8 bottom-8 border border-brand-accent/20 pointer-events-none" />
-              <div className="relative h-full group">
+              <div className="absolute top-8 left-8 right-8 bottom-8 border border-brand-accent/20 pointer-events-none z-10" />
+              <div className="absolute inset-0 group">
                 <Image
                   src="/images/team/doctor-portrait.png"
                   alt={primaryDoctor.name}
