@@ -70,6 +70,11 @@ module.exports = {
         "magnetic-hover": "magneticPulse 0.3s ease-out",
         "reveal-text": "revealText 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "spring-bounce": "springBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+        // Ambient drift animations for hero glow elements
+        "drift": "drift 12s ease-in-out infinite",
+        "drift-reverse": "drift 12s ease-in-out infinite reverse",
+        "drift-slow": "drift 15s ease-in-out infinite",
+        "marquee": "scroll 30s linear infinite",
       },
       keyframes: {
         slideIn: {
@@ -106,6 +111,12 @@ module.exports = {
           "40%": { transform: "scale(1.08)" },
           "60%": { transform: "scale(0.98)" },
           "100%": { transform: "scale(1)" },
+        },
+        drift: {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "25%": { transform: "translate(20px, -15px)" },
+          "50%": { transform: "translate(-10px, 20px)" },
+          "75%": { transform: "translate(-20px, -10px)" },
         },
       },
       transitionTimingFunction: {

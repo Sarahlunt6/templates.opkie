@@ -33,18 +33,15 @@ export default function Template2Page() {
         <div className="absolute inset-0 z-0 pointer-events-none">
           {/* Deep teal ambient glow - behind heading area */}
           <div
-            className="absolute w-[600px] h-[600px] rounded-full blur-[160px] bg-teal-500/[0.04] animate-[drift_12s_ease-in-out_infinite]"
-            style={{ top: '15%', left: '10%' }}
+            className="absolute w-[600px] h-[600px] rounded-full blur-[160px] bg-teal-500/[0.04] animate-drift top-[15%] left-[10%]"
           />
           {/* Soft slate ambient glow - behind clinician area */}
           <div
-            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] bg-slate-400/[0.03] animate-[drift_12s_ease-in-out_infinite_reverse]"
-            style={{ top: '25%', right: '5%' }}
+            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] bg-slate-400/[0.03] animate-drift-reverse top-[25%] right-[5%]"
           />
           {/* Subtle brand accent glow - lower left */}
           <div
-            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-brand-primary/[0.02] animate-[drift_15s_ease-in-out_infinite_2s]"
-            style={{ bottom: '10%', left: '20%' }}
+            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-brand-primary/[0.02] animate-drift-slow bottom-[10%] left-[20%]"
           />
         </div>
 
@@ -224,15 +221,6 @@ export default function Template2Page() {
           </div>
         </div>
 
-        {/* CSS Animation Keyframes for ambient drift */}
-        <style jsx>{`
-          @keyframes drift {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(20px, -15px); }
-            50% { transform: translate(-10px, 20px); }
-            75% { transform: translate(-20px, -10px); }
-          }
-        `}</style>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
