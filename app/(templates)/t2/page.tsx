@@ -131,14 +131,14 @@ export default function Template2Page() {
 
                 {/* Main Headline - Designed to overlap clinician card */}
                 <h1 className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-semibold tracking-tight leading-[1.02] mb-8 lg:pr-0">
-                  <span className="block">Advanced Care,</span>
-                  <span className="block">Exceptional</span>
-                  <span className="block text-brand-primary">Results.</span>
+                  <span className="block">Same-Day Crowns.</span>
+                  <span className="block">3D-Guided Implants.</span>
+                  <span className="block text-brand-primary">Zero Guesswork.</span>
                 </h1>
 
                 {/* Subheading */}
                 <p className="text-base md:text-lg text-white/50 max-w-md mb-10 leading-relaxed">
-                  3D imaging, laser technology, and same-day restorations. Experience modern dentistry designed around your comfort and lasting results.
+                  Our CEREC system mills your permanent crown while you wait. Our CBCT scanner plans your implant to the tenth of a millimeter. This is dentistry without second appointments.
                 </p>
 
                 {/* CTA Buttons - Glassmorphic capsule styling */}
@@ -212,10 +212,10 @@ export default function Template2Page() {
           <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.04]">
               {[
-                { value: "99.2%", label: "Patient Satisfaction" },
-                { value: "Same-Day", label: "Restorations" },
-                { value: "3D", label: "Imaging Technology" },
-                { value: "500+", label: "Transformations" },
+                { value: "4.9", label: "Google (287 reviews)" },
+                { value: "Same-Day", label: "CEREC Crowns" },
+                { value: "0.1mm", label: "CBCT Precision" },
+                { value: "2,400+", label: "Implants Placed" },
               ].map((stat, index) => (
                 <div
                   key={index}
@@ -248,17 +248,17 @@ export default function Template2Page() {
         <div className="animate-marquee whitespace-nowrap flex">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="flex items-center gap-16 mx-16">
-              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Invisalign</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Same-Day CEREC Crowns</span>
               <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-white/50">Dental Implants</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">3D-Guided Implants</span>
               <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Porcelain Veneers</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Solea Laser Dentistry</span>
               <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-white/50">Full Mouth Restoration</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">iTero Invisalign Scanning</span>
               <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Laser Dentistry</span>
+              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">CBCT 3D Imaging</span>
               <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-white/50">3D Imaging</span>
+              <span className="text-xs tracking-[0.2em] text-white/50">Digital Smile Design</span>
               <span className="text-white/10">•</span>
             </div>
           ))}
@@ -292,29 +292,29 @@ export default function Template2Page() {
                 {
                   id: "01",
                   title: "Invisalign",
-                  subtitle: "Clear Aligner Therapy",
-                  description: "Discreet alignment with real-time progress tracking for your perfect smile.",
+                  subtitle: "iTero Scanner + Diamond Provider",
+                  description: "See your final smile in 3D before you start. Our Diamond status means we've treated 500+ cases—so we finish faster.",
                   image: "/images/services/invisalign.jpg",
                 },
                 {
                   id: "02",
                   title: "Dental Implants",
-                  subtitle: "3D-Guided Placement",
-                  description: "Precision-placed implants with same-day digital crowns.",
+                  subtitle: "CBCT-Guided Surgery",
+                  description: "Your implant is planned to the tenth of a millimeter. Surgical guides mean shorter surgery, faster healing.",
                   image: "/images/services/implant.jpg",
                 },
                 {
                   id: "03",
                   title: "Full Restoration",
-                  subtitle: "Complete Smile Design",
-                  description: "Comprehensive treatment planning for transformative results.",
+                  subtitle: "Digital Smile Design",
+                  description: "We design your new smile on screen first. You approve before we start. No surprises, just results.",
                   image: "/images/services/full-mouth-smile.jpg",
                 },
                 {
                   id: "04",
                   title: "Veneers",
-                  subtitle: "Porcelain Artistry",
-                  description: "Custom-crafted veneers for natural, lasting aesthetics.",
+                  subtitle: "CEREC Same-Day Delivery",
+                  description: "Digital impressions mean perfect fit. Mill-cut ceramics mean you leave with your final veneers—not temporaries.",
                   image: "/images/services/full-mouth-shade.jpg",
                 },
               ].map((service, index) => (
@@ -627,20 +627,20 @@ export default function Template2Page() {
               {
                 id: "01",
                 icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
-                title: "3D Imaging",
-                description: "Cone beam CT scanning for precise diagnostics and comprehensive treatment planning.",
+                title: "Carestream CS 9600 CBCT",
+                description: "Full 3D jaw imaging at 0.1mm resolution. See bone density, nerve pathways, and sinus proximity before we touch a drill.",
               },
               {
                 id: "02",
                 icon: "M13 10V3L4 14h7v7l9-11h-7z",
-                title: "Laser Systems",
-                description: "Minimally invasive procedures with faster healing times and enhanced comfort.",
+                title: "Solea CO₂ Laser",
+                description: "Cuts soft tissue without bleeding. Most procedures need zero anesthesia. You'll feel pressure, not pain.",
               },
               {
                 id: "03",
                 icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
-                title: "CAD/CAM",
-                description: "Same-day crowns and restorations with digital precision workflow.",
+                title: "CEREC Primescan + Mill",
+                description: "Digital scan replaces goopy impressions. Mill carves your crown from solid ceramic in 12 minutes. Walk out same day.",
               },
             ].map((feature) => (
               <div
@@ -752,7 +752,7 @@ export default function Template2Page() {
               <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
                 <div className="flex items-center gap-6">
                   <div className="text-center">
-                    <span className="text-4xl font-semibold text-brand-primary block">5.0</span>
+                    <span className="text-4xl font-semibold text-brand-primary block">4.9</span>
                     <div className="flex items-center gap-0.5 mt-2 justify-center">
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
@@ -763,8 +763,8 @@ export default function Template2Page() {
                   </div>
                   <div className="h-12 w-[1px] bg-white/[0.08]" />
                   <div>
-                    <span className="text-2xl font-semibold block">200+</span>
-                    <span className="text-[10px] tracking-[0.15em] text-white/40 uppercase">Verified Reviews</span>
+                    <span className="text-2xl font-semibold block">287</span>
+                    <span className="text-[10px] tracking-[0.15em] text-white/40 uppercase">Google Reviews</span>
                   </div>
                 </div>
               </div>
@@ -966,16 +966,16 @@ export default function Template2Page() {
               Membership Plans
             </span>
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mt-4 mb-3">
-              Wellness Membership
+              Digital Care Membership
             </h2>
             <p className="text-base text-white/50 max-w-lg mx-auto">
-              Comprehensive preventive care with 25% savings on all procedures.
+              No insurance? No problem. Members get 2 cleanings, full CBCT scans, and 25% off every procedure—including same-day crowns.
             </p>
           </div>
 
           {/* Benefits Row - Compact Indicator */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
-            {["2 Cleanings", "2 Exams", "3D X-rays", "25% Off"].map((benefit, i) => (
+            {["2 Cleanings", "2 Exams", "CBCT 3D Scan", "25% Off Everything"].map((benefit, i) => (
               <div key={i} className="flex items-center gap-2 px-4 py-2 backdrop-blur-xl bg-white/[0.02] border border-white/[0.06] rounded-full">
                 <svg className="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />

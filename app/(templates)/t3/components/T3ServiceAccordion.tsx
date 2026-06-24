@@ -14,25 +14,25 @@ const services: Service[] = [
   {
     title: "Invisalign",
     description:
-      "Discreet alignment therapy that works with your lifestyle. Clear, comfortable, and precisely planned for optimal results.",
+      "Clear aligners you wear at home, with check-ins every 8 weeks instead of every 2. Fewer office visits. Same beautiful results. Perfect for patients who prefer minimal chair time.",
     image: "/images/services/invisalign.jpg",
   },
   {
-    title: "Dental Implants",
+    title: "Sedation Dentistry",
     description:
-      "Biocompatible tooth restoration that honors your body's natural processes. Permanent, lasting, and indistinguishable from natural teeth.",
+      "Oral sedation for anxious patients, IV sedation for complex procedures. You'll be relaxed and comfortable—some patients don't remember the appointment at all. Catch up on years of care in a single visit.",
     image: "/images/services/implant.jpg",
   },
   {
-    title: "Holistic Restorations",
+    title: "Mercury-Free Restorations",
     description:
-      "Mercury-free, metal-free dentistry using only the most biocompatible materials for your long-term health and wellness.",
+      "We removed the last amalgam filling from our practice in 2018. Every filling, crown, and restoration uses ceramic or biocompatible composite. Your body doesn't need metal—neither do your teeth.",
     image: "/images/services/full-mouth-smile.jpg",
   },
   {
-    title: "Cosmetic Enhancements",
+    title: "Gentle Cleanings",
     description:
-      "Subtle, natural improvements that enhance rather than transform. Authentic beauty, refined with precision and artistry.",
+      "Ultrasonic scalers instead of manual scraping. Warm water instead of cold. Breaks whenever you need them. Our hygienists are specifically trained to work with sensitive and anxious patients.",
     image: "/images/services/full-mouth-shade.jpg",
   },
 ];

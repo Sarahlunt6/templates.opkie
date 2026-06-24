@@ -157,11 +157,19 @@ export default function T3Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="font-sanctuary text-base lg:text-lg font-light text-neutral-muted leading-relaxed max-w-xl mx-auto mb-8 tracking-wide"
+          className="font-sanctuary text-base lg:text-lg font-light text-neutral-muted leading-relaxed max-w-xl mx-auto mb-6 tracking-wide"
         >
-          We believe exceptional dental care extends beyond treatment. Our
-          holistic approach considers your complete wellbeing, creating a
-          personalized path to lasting oral health in {cityServed}.
+          If you've put off dental care because the experience feels rushed, clinical, or stressful—we designed this practice for you. Longer appointments. Quieter rooms. A team that listens before they treat.
+        </motion.p>
+
+        {/* Trust Line */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="font-sanctuary text-sm text-neutral-muted/80 mb-8 tracking-wide"
+        >
+          4.9 ★ from 156 Google reviews • "Finally, a dentist who doesn't make me anxious"
         </motion.p>
 
         {/* CTAs with refined styling */}

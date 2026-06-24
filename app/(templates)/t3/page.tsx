@@ -98,9 +98,9 @@ export default function Template3Page() {
           {/* Three Pillars with Large Numeric Backgrounds */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
             {[
-              { title: "Listen", num: "01", description: "We begin every relationship by truly understanding your concerns, goals, and complete health history." },
-              { title: "Plan", num: "02", description: "Together, we craft a comprehensive wellness strategy tailored uniquely to your needs and lifestyle." },
-              { title: "Care", num: "03", description: "Gentle, precise treatment delivered with deep respect for your time, comfort, and wellbeing." },
+              { title: "Listen", num: "01", description: "Your first appointment is 90 minutes—twice the industry standard. We ask about your sleep, your stress, your past experiences. Treatment doesn't start until you feel heard." },
+              { title: "Plan", num: "02", description: "We show you every option on screen, explain the tradeoffs, and let you decide. No pressure, no upselling. Your treatment timeline works around your life, not ours." },
+              { title: "Care", num: "03", description: "Weighted blankets. Noise-canceling headphones. Breaks whenever you need them. We stop the moment you raise a hand. Your comfort isn't optional—it's the foundation." },
             ].map((pillar, index) => (
               <div key={index} className="group relative text-center">
                 {/* Large Architectural Numeric Background */}
@@ -255,25 +255,35 @@ export default function Template3Page() {
                 {primaryDoctor.name}
               </h2>
 
-              <p className="text-brand-primary tracking-[0.12em] text-[11px] uppercase font-medium mb-10">
+              <p className="text-brand-primary tracking-[0.12em] text-[11px] uppercase font-medium mb-8">
                 {primaryDoctor.role}
               </p>
 
-              <p className="font-sanctuary text-neutral-muted font-light leading-loose tracking-wide mb-12 text-base">
-                {primaryDoctor.biography}
+              {/* Pull Quote */}
+              <blockquote className="border-l-2 border-brand-primary/40 pl-6 mb-8">
+                <p className="font-sanctuary text-xl font-extralight text-brand-mainText/80 italic leading-relaxed tracking-wide">
+                  "The best dentistry is the kind you barely notice happening. My job is to make you forget you're at the dentist at all."
+                </p>
+              </blockquote>
+
+              <p className="font-sanctuary text-neutral-muted font-light leading-loose tracking-wide mb-6 text-base">
+                Dr. Roberts spent his first decade in traditional dentistry before realizing something was broken: patients were avoiding care not because of cost, but because of fear.
+              </p>
+              <p className="font-sanctuary text-neutral-muted font-light leading-loose tracking-wide mb-10 text-base">
+                He retrained in sedation dentistry, studied holistic approaches at the Kois Center, and built this practice from the ground up around one question: "What would make a nervous patient actually want to come back?"
               </p>
 
               {/* Credentials with refined styling */}
-              <div className="space-y-4 border-t border-slate-100 pt-10">
-                <p className="text-[9px] uppercase tracking-[0.35em] text-neutral-muted/60 mb-4">
-                  Credentials
-                </p>
-                {primaryDoctor.credentials.map((credential, index) => (
-                  <div key={index} className="flex items-center gap-4 text-sm text-neutral-muted font-light tracking-wide font-sanctuary">
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-primary/30" />
-                    {credential}
-                  </div>
-                ))}
+              <div className="flex flex-wrap gap-3">
+                <span className="px-4 py-2 bg-brand-primary/10 text-brand-primary text-xs tracking-wide rounded-sm">
+                  Certified Sedation Dentist
+                </span>
+                <span className="px-4 py-2 bg-slate-100 text-neutral-muted text-xs tracking-wide rounded-sm">
+                  Kois Center Graduate
+                </span>
+                <span className="px-4 py-2 bg-slate-100 text-neutral-muted text-xs tracking-wide rounded-sm">
+                  Holistic Dental Association
+                </span>
               </div>
             </div>
           </div>
@@ -493,20 +503,20 @@ export default function Template3Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
-                title: "Holistic Approach",
-                description: "We consider your complete wellbeing, not just your teeth. Mind, body, and oral health in harmony.",
+                title: "Extended Appointments",
+                description: "Standard cleanings are 60 minutes, not 30. First visits are 90 minutes. We'd rather run behind than rush you out.",
               },
               {
-                title: "Biocompatible Materials",
-                description: "Only the safest, most natural materials. Mercury-free, metal-free options for your health.",
+                title: "Comfort Menu",
+                description: "Choose your own adventure: weighted blanket, aromatherapy diffuser, noise-canceling AirPods, or Netflix on the ceiling. Yes, the ceiling.",
               },
               {
-                title: "Unhurried Care",
-                description: "We never rush. Each appointment is a sanctuary of calm, focused attention on your needs.",
+                title: "Signal System",
+                description: "Raise one finger to pause. Raise two to stop completely. We check in every few minutes. You're in control the entire time.",
               },
               {
-                title: "Personalized Wellness",
-                description: "Your treatment plan is uniquely yours, crafted to honor your individual health journey.",
+                title: "Mercury-Free Practice",
+                description: "No amalgam fillings. No metal crowns. Every material we use has been vetted for biocompatibility. Your body will thank you.",
               },
             ].map((item, index) => (
               <div key={index} className="group py-6 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500">

@@ -121,8 +121,8 @@ export const sampleReviews: ReviewData[] = [
     reviewerName: "Jennifer M.",
     rating: 5,
     reviewText:
-      "Dr. Mitchell completely transformed my smile with porcelain veneers. The entire process was comfortable and the results exceeded my expectations. I finally feel confident smiling in photos!",
-    procedureCategory: "Cosmetic Veneers",
+      "After 10 years of hiding my smile, Dr. Roberts gave me 8 porcelain veneers that look completely natural. The entire process took just two appointments over 3 weeks. I've already booked two photoshoots—something I never would have done before.",
+    procedureCategory: "Porcelain Veneers",
     verificationBadge: "google",
     datePosted: "2024-11-15",
     isVerifiedPatient: true,
@@ -132,7 +132,7 @@ export const sampleReviews: ReviewData[] = [
     reviewerName: "Michael R.",
     rating: 5,
     reviewText:
-      "Had a dental emergency on a Saturday and they got me in within an hour. The team was professional, caring, and resolved my pain immediately. Cannot recommend them enough.",
+      "Cracked my molar on a Saturday morning eating breakfast. Called at 9am, was in the chair by 10:30. Dr. Roberts saved the tooth with a same-day crown using their CEREC machine. No temporary, no second visit. Back to normal by dinner.",
     procedureCategory: "Emergency Care",
     verificationBadge: "google",
     datePosted: "2024-10-28",
@@ -143,8 +143,8 @@ export const sampleReviews: ReviewData[] = [
     reviewerName: "Amanda S.",
     rating: 5,
     reviewText:
-      "My kids actually look forward to their dental visits now! Dr. Chen is amazing with children and makes the whole experience fun and stress-free for the entire family.",
-    procedureCategory: "Family Dentistry",
+      "My 7-year-old used to cry in the parking lot before dental visits. Dr. Chen spent 15 minutes just talking to him about dinosaurs before even looking at his teeth. Now my son asks when his next appointment is. That's worth more than any treatment.",
+    procedureCategory: "Pediatric Dentistry",
     verificationBadge: "facebook",
     datePosted: "2024-11-02",
     isVerifiedPatient: true,
@@ -154,7 +154,7 @@ export const sampleReviews: ReviewData[] = [
     reviewerName: "David L.",
     rating: 5,
     reviewText:
-      "The Invisalign treatment here was seamless. Regular check-ins, clear communication, and my teeth are now perfectly aligned. Worth every penny.",
+      "Finished my Invisalign treatment in 14 months—3 months faster than originally estimated. Dr. Roberts checked my progress every 6 weeks and made adjustments along the way. My wife says it took 10 years off my face.",
     procedureCategory: "Invisalign",
     verificationBadge: "google",
     datePosted: "2024-09-20",
@@ -165,7 +165,7 @@ export const sampleReviews: ReviewData[] = [
     reviewerName: "Patricia H.",
     rating: 5,
     reviewText:
-      "I was terrified of dentists for 20 years. The sedation options here changed everything. I finally got the care I needed without any anxiety. Life-changing.",
+      "I avoided dentists for 22 years after a traumatic experience as a teenager. The sedation option here let me get a deep cleaning, 3 fillings, and a crown—all in one visit. I woke up and it was done. Finally caught up on two decades of care.",
     procedureCategory: "Sedation Dentistry",
     verificationBadge: "healthgrades",
     datePosted: "2024-11-08",
@@ -176,7 +176,7 @@ export const sampleReviews: ReviewData[] = [
     reviewerName: "Robert K.",
     rating: 5,
     reviewText:
-      "My dental implant looks and feels completely natural. Dr. Mitchell's attention to detail is remarkable. Three months later and I forget it's not my original tooth.",
+      "Lost my front tooth in a biking accident. Dr. Roberts placed the implant and attached the crown in a single procedure using guided surgery. 4 months later, even my dentist friends can't tell which tooth is the implant.",
     procedureCategory: "Dental Implants",
     verificationBadge: "yelp",
     datePosted: "2024-10-12",
