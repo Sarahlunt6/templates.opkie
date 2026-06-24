@@ -25,8 +25,13 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ["Playfair Display", "Georgia", "serif"],
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        // Default families
+        serif: ["var(--font-prestige)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        // Template-specific premium families
+        prestige: ["var(--font-prestige)", "Cormorant Garamond", "Georgia", "serif"],
+        innovator: ["var(--font-innovator)", "Space Grotesk", "ui-sans-serif", "sans-serif"],
+        sanctuary: ["var(--font-sanctuary)", "Outfit", "ui-sans-serif", "sans-serif"],
       },
       fontSize: {
         // Fluid typography using clamp()

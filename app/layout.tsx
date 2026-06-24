@@ -1,16 +1,36 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Cormorant_Garamond, Space_Grotesk, Outfit } from "next/font/google";
 import "./globals.css";
 
+// Universal Body Text - Highly legible clean paragraphs
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+// T1 Editorial - Elegant serif for luxury presence
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-serif",
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-prestige",
+  display: "swap",
+});
+
+// T2 Modern Innovator - Clean geometric sans for tech-forward aesthetics
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-innovator",
+  display: "swap",
+});
+
+// T3 Zen Sanctuary - Soft, calming sans for wellness focus
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["200", "300", "400"],
+  variable: "--font-sanctuary",
   display: "swap",
 });
 
@@ -26,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${spaceGrotesk.variable} ${outfit.variable}`}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
         {children}
       </body>

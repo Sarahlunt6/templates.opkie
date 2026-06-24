@@ -17,7 +17,7 @@ export default function Template2Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sans bg-zinc-950 text-white">
+    <div className="font-innovator bg-zinc-950 text-white">
       <T2Nav />
 
       {/* ═══════════════════════════════════════════════════════════════════════
