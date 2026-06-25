@@ -42,7 +42,7 @@ export default function Template1Page() {
             className="absolute inset-0 w-full h-full object-cover"
             poster="/images/team/staff-photo.jpg"
           >
-            <source src="/videos/hero-ambient.mp4" type="video/mp4" />
+            {/* Video source disabled for demo */}
           </video>
           {/* Dark-tinted overlay mask for text contrast */}
           <div className="absolute inset-0 bg-slate-950/40" />
@@ -165,7 +165,7 @@ export default function Template1Page() {
                   controls
                   poster="/images/team/staff-photo.jpg"
                 >
-                  <source src="/videos/hero-video.mp4" type="video/mp4" />
+                  {/* Video source disabled for demo */}
                   Your browser does not support the video tag.
                 </video>
               </div>
