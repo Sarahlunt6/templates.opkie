@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import Link from "next/link";
+import Image from "next/image";
 
 // Template data - clean, minimal metadata
 const templates = [
@@ -92,12 +93,13 @@ export default function DesignRegistryPage() {
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-7 h-7 border border-white/20 flex items-center justify-center">
-              <div className="w-2.5 h-2.5 bg-white/70" />
-            </div>
-            <span className="text-[11px] tracking-[0.3em] text-white/50 uppercase font-light">
-              Opkie Design Systems
-            </span>
+            <Image
+              src="/images/opkie-logo.svg"
+              alt="Opkie"
+              width={100}
+              height={37}
+              className="opacity-90 brightness-0 invert"
+            />
           </div>
 
           <span className="text-[11px] tracking-[0.25em] text-white/30 uppercase font-light">
@@ -245,9 +247,23 @@ export default function DesignRegistryPage() {
             </Link>
           </div>
 
-          <span className="text-[10px] tracking-[0.2em] text-white/20 font-light">
-            © 2026 Opkie
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] tracking-[0.2em] text-white/20 font-light">
+              © 2026
+            </span>
+            <span className="text-white/10">·</span>
+            <span className="text-[10px] tracking-[0.15em] text-white/25 font-light">
+              Designed by{" "}
+              <a
+                href="https://opkie.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/40 hover:text-white/70 transition-colors"
+              >
+                Opkie
+              </a>
+            </span>
+          </div>
         </div>
       </motion.footer>
     </main>

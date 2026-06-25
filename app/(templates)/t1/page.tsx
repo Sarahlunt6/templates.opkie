@@ -263,7 +263,7 @@ export default function Template1Page() {
                   src="/images/team/doctor-portrait.png"
                   alt={primaryDoctor.name}
                   fill
-                  className="object-cover object-[center_20%] transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
+                  className="object-cover object-right transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 100vw, 45vw"
                 />
                 {/* Subtle gradient fade to content area - softer blend */}
