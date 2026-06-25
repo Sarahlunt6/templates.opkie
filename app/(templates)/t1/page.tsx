@@ -524,7 +524,7 @@ export default function Template1Page() {
       {/* Hours + Map - Editorial Split */}
       <section className="py-32 px-8 bg-brand-canvas">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Hours - Staggered Layout */}
             <div>
               <p className="text-brand-primary uppercase tracking-[0.3em] text-sm mb-4 font-medium">
@@ -567,7 +567,7 @@ export default function Template1Page() {
             </div>
 
             {/* Map */}
-            <div className="relative h-[500px] shadow-2xl lg:translate-y-12">
+            <div className="relative h-[500px] shadow-2xl">
               <iframe
                 src={location.googleMapsEmbedUrl}
                 width="100%"
