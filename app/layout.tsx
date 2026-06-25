@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond, Space_Grotesk, Outfit } from "next/font/google";
 import "./globals.css";
+import PageTransition from "@/components/premium/PageTransition";
 
 // Universal Body Text - Highly legible clean paragraphs
 const inter = Inter({
@@ -48,7 +49,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${spaceGrotesk.variable} ${outfit.variable}`}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
       </body>
     </html>
   );

@@ -50,3 +50,10 @@ export {
   ComfortFeatureGrid,
   CalmingDivider,
 } from "./SanctuaryEffects";
+
+// Page Transition Engine
+export {
+  default as PageTransition,
+  getThemeForDestination,
+  destinationThemes,
+} from "./PageTransition";
