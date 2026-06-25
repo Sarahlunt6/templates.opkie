@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -57,60 +56,33 @@ const orthoTemplates = [
   },
 ];
 
-export default function DesignRegistryPage() {
+function DesignRegistryContent() {
   const searchParams = useSearchParams();
   const isOrtho = searchParams.get("type") === "ortho";
   const templates = isOrtho ? orthoTemplates : dentalTemplates;
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const columnsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const titlesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Initial page load animation
   useEffect(() => {
-    // Stagger animate titles on load
-    if (titlesRef.current.length > 0) {
-      gsap.fromTo(
-        titlesRef.current.filter(Boolean),
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.12,
-          ease: "power3.out",
-          delay: 0.3,
-        }
-      );
-    }
+    // Trigger entrance animation after mount
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Reset loaded state when switching template types
+  useEffect(() => {
+    setIsLoaded(false);
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, [isOrtho]);
 
-  // Handle column flex expansion on hover
-  useEffect(() => {
-    columnsRef.current.forEach((col, index) => {
-      if (!col) return;
-
-      if (hoveredIndex === null) {
-        gsap.to(col, {
-          flex: 1,
-          duration: 0.7,
-          ease: "power3.out",
-        });
-      } else if (hoveredIndex === index) {
-        gsap.to(col, {
-          flex: 1.6,
-          duration: 0.7,
-          ease: "power3.out",
-        });
-      } else {
-        gsap.to(col, {
-          flex: 0.7,
-          duration: 0.7,
-          ease: "power3.out",
-        });
-      }
-    });
-  }, [hoveredIndex]);
+  // Calculate flex values based on hover state
+  const getFlexValue = (index: number) => {
+    if (hoveredIndex === null) return 1;
+    if (hoveredIndex === index) return 1.5;
+    return 0.75;
+  };
 
   return (
     <main className="h-screen w-screen overflow-hidden bg-[#0C0C0C] text-white relative">
@@ -142,19 +114,22 @@ export default function DesignRegistryPage() {
       <div className="h-full w-full flex">
         {templates.map((template, index) => (
           <div
-            key={template.id}
-            ref={(el) => { columnsRef.current[index] = el; }}
-            className="relative h-full border-r border-white/[0.08] last:border-r-0 overflow-hidden cursor-pointer group"
-            style={{ flex: 1 }}
+            key={`${isOrtho ? 'ortho' : 'dental'}-${index}`}
+            className="relative h-full border-r border-white/[0.08] last:border-r-0 overflow-hidden cursor-pointer"
+            style={{
+              flex: getFlexValue(index),
+              transition: "flex 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             {/* Background Image - Elegant reveal on hover */}
             <div
-              className="absolute inset-0 transition-all duration-1000 ease-out"
+              className="absolute inset-0"
               style={{
                 opacity: hoveredIndex === index ? 1 : 0,
-                transform: hoveredIndex === index ? "scale(1)" : "scale(1.05)",
+                transform: hoveredIndex === index ? "scale(1)" : "scale(1.08)",
+                transition: "opacity 0.8s ease-out, transform 1s ease-out",
               }}
             >
               <div
@@ -168,8 +143,11 @@ export default function DesignRegistryPage() {
             {/* Subtle background number */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
               <span
-                className="text-[28vw] font-extralight text-white/[0.02] leading-none tracking-tight transition-opacity duration-700"
-                style={{ opacity: hoveredIndex === index ? 0 : 1 }}
+                className="text-[28vw] font-extralight text-white/[0.02] leading-none tracking-tight"
+                style={{
+                  opacity: hoveredIndex === index ? 0 : 1,
+                  transition: "opacity 0.6s ease-out",
+                }}
               >
                 {template.code}
               </span>
@@ -178,33 +156,41 @@ export default function DesignRegistryPage() {
             {/* Column Content */}
             <div className="relative z-10 h-full flex flex-col justify-between px-10 lg:px-14 py-32">
               {/* Top - Elegant number */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
+              <div
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+                  transition: `opacity 0.8s ease-out ${0.2 + index * 0.1}s, transform 0.8s ease-out ${0.2 + index * 0.1}s`,
+                }}
               >
                 <span className="text-[13px] tracking-[0.4em] text-white/25 font-light">
                   {template.code}
                 </span>
-              </motion.div>
+              </div>
 
               {/* Center - Title & Description */}
               <div
-                ref={(el) => { titlesRef.current[index] = el; }}
                 className="flex flex-col gap-5"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+                  transition: `opacity 0.8s ease-out ${0.3 + index * 0.1}s, transform 0.8s ease-out ${0.3 + index * 0.1}s`,
+                }}
               >
                 <h2
-                  className="text-[clamp(1.75rem,3.5vw,3rem)] font-light tracking-[-0.015em] leading-[1.15] transition-all duration-500"
+                  className="text-[clamp(1.75rem,3.5vw,3rem)] font-light tracking-[-0.015em] leading-[1.15]"
                   style={{
                     opacity: hoveredIndex === null || hoveredIndex === index ? 1 : 0.25,
+                    transition: "opacity 0.4s ease-out",
                   }}
                 >
                   {template.title}
                 </h2>
                 <p
-                  className="text-[13px] tracking-[0.04em] text-white/45 font-light leading-relaxed max-w-[280px] transition-all duration-500"
+                  className="text-[13px] tracking-[0.04em] text-white/45 font-light leading-relaxed max-w-[280px]"
                   style={{
                     opacity: hoveredIndex === null || hoveredIndex === index ? 1 : 0.25,
+                    transition: "opacity 0.4s ease-out",
                   }}
                 >
                   {template.description}
@@ -212,7 +198,13 @@ export default function DesignRegistryPage() {
               </div>
 
               {/* Bottom - Clean CTA */}
-              <div>
+              <div
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+                  transition: `opacity 0.8s ease-out ${0.4 + index * 0.1}s, transform 0.8s ease-out ${0.4 + index * 0.1}s`,
+                }}
+              >
                 <Link
                   href={`/${template.id}`}
                   target="_blank"
@@ -244,10 +236,11 @@ export default function DesignRegistryPage() {
             </div>
 
             {/* Subtle hover border glow */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none border border-white/0 transition-colors duration-700"
+            <div
+              className="absolute inset-0 pointer-events-none border"
               style={{
                 borderColor: hoveredIndex === index ? "rgba(255,255,255,0.06)" : "transparent",
+                transition: "border-color 0.5s ease-out",
               }}
             />
           </div>
@@ -301,5 +294,13 @@ export default function DesignRegistryPage() {
         </div>
       </motion.footer>
     </main>
+  );
+}
+
+export default function DesignRegistryPage() {
+  return (
+    <Suspense fallback={<div className="h-screen w-screen bg-[#0C0C0C]" />}>
+      <DesignRegistryContent />
+    </Suspense>
   );
 }
