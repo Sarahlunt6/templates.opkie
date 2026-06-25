@@ -804,13 +804,13 @@ export default function Template2Page() {
             {/* Right Side - Large Primary Testimonial Floating Quote */}
             <div className="lg:col-span-7 relative">
               <div className="relative">
-                {/* Large quote mark */}
-                <div className="absolute -top-4 -left-4 text-[120px] leading-none text-brand-primary/[0.08] font-serif select-none pointer-events-none">
+                {/* Large quote mark - positioned outside and above the card */}
+                <div className="absolute -top-16 -left-6 text-[140px] leading-none text-brand-primary/[0.15] font-serif select-none pointer-events-none z-0">
                   &ldquo;
                 </div>
 
                 {/* Primary Testimonial Card - Glassmorphism */}
-                <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.06] rounded-3xl p-10 md:p-14">
+                <div className="relative z-10 backdrop-blur-xl bg-white/[0.02] border border-white/[0.06] rounded-3xl p-10 md:p-14">
                   {/* Corner architectural elements */}
                   <div className="absolute top-6 left-6 w-8 h-8 border-l border-t border-white/[0.08]" />
                   <div className="absolute top-6 right-6 w-8 h-8 border-r border-t border-white/[0.08]" />
