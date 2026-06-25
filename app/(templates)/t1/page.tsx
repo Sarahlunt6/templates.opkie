@@ -260,10 +260,10 @@ export default function Template1Page() {
               <div className="absolute top-6 left-6 right-6 bottom-6 border border-brand-accent/20 pointer-events-none z-10" />
               <div className="absolute inset-0 group">
                 <Image
-                  src="/images/team/doctor-portrait.png"
+                  src="/images/team/doctor-portrait.jpeg"
                   alt={primaryDoctor.name}
                   fill
-                  className="object-cover object-right transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
+                  className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 100vw, 45vw"
                 />
                 {/* Subtle gradient fade to content area - softer blend */}
