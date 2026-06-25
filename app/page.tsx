@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 
-// Template data - clean, minimal metadata
-const templates = [
+// Dental template data
+const dentalTemplates = [
   {
     id: "t1",
     code: "01",
@@ -31,7 +32,36 @@ const templates = [
   },
 ];
 
+// Orthodontic template data
+const orthoTemplates = [
+  {
+    id: "o1",
+    code: "01",
+    title: "The Smile Architect",
+    description: "Premium Orthodontic & Invisalign Practices",
+    image: "/images/team/staff-photo.jpg",
+  },
+  {
+    id: "o2",
+    code: "02",
+    title: "The Digital Aligner",
+    description: "Tech-Forward Clear Aligner Specialists",
+    image: "/images/office-interior.jpg",
+  },
+  {
+    id: "o3",
+    code: "03",
+    title: "The Family Practice",
+    description: "Warm & Welcoming Orthodontic Care",
+    image: "/images/office-exterior.jpg",
+  },
+];
+
 export default function DesignRegistryPage() {
+  const searchParams = useSearchParams();
+  const isOrtho = searchParams.get("type") === "ortho";
+  const templates = isOrtho ? orthoTemplates : dentalTemplates;
+
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const columnsRef = useRef<(HTMLDivElement | null)[]>([]);
   const titlesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -53,7 +83,7 @@ export default function DesignRegistryPage() {
         }
       );
     }
-  }, []);
+  }, [isOrtho]);
 
   // Handle column flex expansion on hover
   useEffect(() => {
@@ -235,13 +265,17 @@ export default function DesignRegistryPage() {
           <div className="flex items-center gap-8">
             <Link
               href="/"
-              className="text-[11px] tracking-[0.2em] text-white/50 font-light hover:text-white/80 transition-colors uppercase"
+              className={`text-[11px] tracking-[0.2em] font-light transition-colors uppercase ${
+                !isOrtho ? "text-white/50 hover:text-white/80" : "text-white/30 hover:text-white/60"
+              }`}
             >
               Dental
             </Link>
             <Link
               href="/?type=ortho"
-              className="text-[11px] tracking-[0.2em] text-white/30 font-light hover:text-white/60 transition-colors uppercase"
+              className={`text-[11px] tracking-[0.2em] font-light transition-colors uppercase ${
+                isOrtho ? "text-white/50 hover:text-white/80" : "text-white/30 hover:text-white/60"
+              }`}
             >
               Orthodontic
             </Link>
