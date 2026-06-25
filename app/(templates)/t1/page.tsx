@@ -567,7 +567,7 @@ export default function Template1Page() {
             </div>
 
             {/* Map */}
-            <div className="relative h-[500px] shadow-2xl">
+            <div className="relative aspect-square lg:aspect-[4/5] w-full overflow-hidden shadow-2xl border border-neutral-border/30">
               <iframe
                 src={location.googleMapsEmbedUrl}
                 width="100%"
@@ -577,9 +577,8 @@ export default function Template1Page() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title={`Map to ${location.practiceNameGBP}`}
+                className="absolute inset-0"
               />
-              {/* Decorative frame */}
-              <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-brand-primary/20 -z-10" />
             </div>
           </div>
         </div>
