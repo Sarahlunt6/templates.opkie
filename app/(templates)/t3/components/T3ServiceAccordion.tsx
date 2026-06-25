@@ -106,7 +106,7 @@ export default function T3ServiceAccordion() {
                         className="object-cover blur-xl scale-110"
                         sizes="100vw"
                       />
-                      <div className="absolute inset-0 bg-brand-canvas/90" />
+                      <div className="absolute inset-0 bg-brand-canvas/95" />
                     </div>
                   </motion.div>
                 )}
@@ -183,12 +183,12 @@ export default function T3ServiceAccordion() {
                       <div className="pt-6 pb-4 pl-10 pr-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
                         {/* Description */}
                         <div>
-                          <p className="font-sanctuary text-neutral-muted font-light leading-relaxed tracking-wide mb-6 text-sm">
+                          <p className="font-sanctuary text-brand-mainText/80 font-light leading-relaxed tracking-wide mb-6 text-sm">
                             {service.description}
                           </p>
                           <a
                             href="#"
-                            className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-brand-primary font-light hover:gap-4 transition-all duration-300"
+                            className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-brand-primary font-medium hover:gap-4 transition-all duration-300"
                           >
                             <span>Learn more</span>
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
