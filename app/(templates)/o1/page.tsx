@@ -284,8 +284,8 @@ export default function OrthoTemplate1Page() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-neutral-muted leading-relaxed mb-6 italic">"{review.text}"</p>
-                <p className="font-bold text-brand-mainText">{review.author}</p>
+                <p className="text-neutral-muted leading-relaxed mb-6 italic">"{review.reviewText}"</p>
+                <p className="font-bold text-brand-mainText">{review.reviewerName}</p>
               </div>
             ))}
           </div>
