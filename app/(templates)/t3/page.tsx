@@ -29,7 +29,7 @@ export default function Template3Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative">
+    <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative overflow-x-hidden">
       {/* Mindful Scroll Progress Indicator */}
       <MindfulScrollProgress color="var(--primary-brand)" thickness={2} position="left" />
 
@@ -72,6 +72,8 @@ export default function Template3Page() {
             <video
               className="w-full h-full object-cover"
               controls
+              playsInline
+              webkit-playsinline="true"
               poster="/images/team/staff-photo.jpg"
             >
               {/* Video source disabled for demo */}

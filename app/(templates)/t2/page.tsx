@@ -1,4 +1,6 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import T2Nav from "./components/T2Nav";
@@ -12,21 +14,31 @@ import {
   MagneticElement,
 } from "@/components/premium";
 
-const location = clientMasterData.locations[0];
+// Hook to detect mobile viewport
+function useIsMobile(breakpoint = 1024) {
+  const [isMobile, setIsMobile] = useState(false);
 
-export const metadata: Metadata = {
-  title: `${location.primaryCategoryGBP} in ${location.cityServed}, ${location.stateServed} | ${location.practiceNameGBP}`,
-  description: `Advanced digital dentistry in ${location.cityServed}. Precision care with minimal treatment intervals using cutting-edge 3D imaging and laser technology.`,
-};
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < breakpoint);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
+const location = clientMasterData.locations[0];
 
 export default function Template2Page() {
   const { doctors } = clientMasterData;
   const primaryDoctor = doctors[0];
+  const isMobile = useIsMobile();
 
   return (
-    <div className="font-innovator bg-zinc-950 text-white relative">
-      {/* Cursor Tracking Glow Effect */}
-      <CursorGlow color="var(--primary-brand)" size={500} blur={120} opacity={0.12} />
+    <div className="font-innovator bg-zinc-950 text-white relative overflow-x-hidden">
+      {/* Cursor Tracking Glow Effect - Disabled on mobile */}
+      <CursorGlow color="var(--primary-brand)" size={500} blur={120} opacity={0.12} enabled={!isMobile} />
 
       <T2Nav />
 
@@ -46,6 +58,7 @@ export default function Template2Page() {
             muted
             loop
             playsInline
+            webkit-playsinline="true"
             className="absolute inset-0 w-full h-full object-cover"
           >
             {/* Video source disabled for demo */}
@@ -450,6 +463,8 @@ export default function Template2Page() {
                 <video
                   className="w-full h-full object-cover"
                   controls
+                  playsInline
+                  webkit-playsinline="true"
                   poster="/images/team/staff-photo.jpg"
                 >
                   {/* Video source disabled for demo */}

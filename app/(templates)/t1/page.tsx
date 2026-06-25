@@ -27,11 +27,11 @@ export default function Template1Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-serif antialiased bg-brand-canvas">
+    <div className="font-serif antialiased bg-brand-canvas overflow-x-hidden">
       <T1Nav />
 
       {/* Hero Section - Immersive Editorial with Ambient Video */}
-      <section className="min-h-[90vh] relative overflow-hidden">
+      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden">
         {/* Looping Ambient Video Background */}
         <div className="absolute inset-0">
           <video
@@ -39,54 +39,55 @@ export default function Template1Page() {
             muted
             loop
             playsInline
+            webkit-playsinline="true"
             className="absolute inset-0 w-full h-full object-cover"
             poster="/images/team/staff-photo.jpg"
           >
             <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
           {/* Dark-tinted overlay mask for text contrast */}
-          <div className="absolute inset-0 bg-slate-950/40" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/50 to-transparent" />
+          <div className="absolute inset-0 bg-slate-950/50 lg:bg-slate-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-slate-950/90 via-slate-950/60 to-transparent" />
         </div>
 
         {/* Editorial Overlapping Content */}
-        <div className="relative z-10 min-h-[90vh] flex items-center">
-          <div className="w-full max-w-7xl mx-auto px-8 lg:px-16 py-20">
+        <div className="relative z-10 min-h-[100svh] lg:min-h-[90vh] flex items-end lg:items-center pb-8 lg:pb-0">
+          <div className="w-full max-w-7xl mx-auto px-6 lg:px-16 py-12 lg:py-20">
             <div className="max-w-2xl">
               {/* Trust Badges - Staggered */}
-              <div className="flex flex-wrap gap-3 mb-8">
-                <span className="px-5 py-2.5 text-sm font-bold uppercase tracking-wider bg-brand-accent text-brand-mainText shadow-2xl transform -rotate-1">
+              <div className="flex flex-wrap gap-2 lg:gap-3 mb-6 lg:mb-8">
+                <span className="px-4 lg:px-5 py-2 lg:py-2.5 text-xs lg:text-sm font-bold uppercase tracking-wider bg-brand-accent text-brand-mainText shadow-2xl transform -rotate-1">
                   Now Accepting Patients
                 </span>
                 {trustSignals.hasSameDayEmergency && (
-                  <span className="px-5 py-2.5 text-sm font-bold uppercase tracking-wider bg-white text-brand-mainText shadow-2xl transform rotate-1 translate-y-2">
+                  <span className="px-4 lg:px-5 py-2 lg:py-2.5 text-xs lg:text-sm font-bold uppercase tracking-wider bg-white text-brand-mainText shadow-2xl transform rotate-1 translate-y-1 lg:translate-y-2">
                     Same-Day Emergency
                   </span>
                 )}
               </div>
 
-              {/* H1 - Massive Editorial Typography with Overlap + Text Reveal */}
-              <HeadlineReveal className="text-[clamp(3rem,8vw,6rem)] font-bold text-white leading-[0.9] tracking-tight mb-4 -ml-1">
-                <span className="block">{location.cityServed}'s Highest-Rated</span>
-                <span className="block text-brand-accent italic font-light text-[0.6em] ml-2">
+              {/* H1 - Fluid Typography with clamp() */}
+              <HeadlineReveal className="text-[clamp(2rem,7vw,6rem)] font-bold text-white leading-[0.95] tracking-tight mb-4 -ml-0.5 lg:-ml-1">
+                <span className="block">{location.cityServed}&apos;s Highest-Rated</span>
+                <span className="block text-brand-accent italic font-light text-[0.55em] lg:text-[0.6em] ml-1 lg:ml-2">
                   Cosmetic Dentist
                 </span>
               </HeadlineReveal>
 
               {/* Intro Copy - Offset + Subtle Reveal */}
-              <SubheadReveal className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg ml-4 border-l-2 border-brand-accent pl-6" delay={0.4}>
-                Nervous about dental work? You're not alone. Our sedation options and gentle approach
+              <SubheadReveal className="text-base lg:text-xl text-white/80 leading-relaxed mb-8 lg:mb-10 max-w-lg ml-2 lg:ml-4 border-l-2 border-brand-accent pl-4 lg:pl-6" delay={0.4}>
+                Nervous about dental work? You&apos;re not alone. Our sedation options and gentle approach
                 have helped thousands of anxious patients finally get the smile they deserve.
               </SubheadReveal>
 
-              {/* CTA Buttons - Editorial Stack with Magnetic Effect */}
-              <div id="hero-ctas" className="flex flex-col sm:flex-row gap-4 ml-4">
+              {/* CTA Buttons - Mobile: Full-width stack, Desktop: Side-by-side */}
+              <div id="hero-ctas" className="flex flex-col gap-3 lg:gap-4 ml-2 lg:ml-4">
                 <MagneticElement strength={0.2}>
                   <a
                     href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                    className="group inline-flex items-center gap-3 px-8 py-5 bg-white text-brand-mainText font-bold text-lg shadow-2xl hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1"
+                    className="group inline-flex items-center justify-center gap-3 w-full lg:w-auto px-6 lg:px-8 py-4 lg:py-5 bg-white text-brand-mainText font-bold text-base lg:text-lg shadow-2xl hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] min-h-[52px]"
                   >
-                    <svg className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 lg:w-6 lg:h-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg>
                     {location.phoneGBP}
@@ -96,7 +97,7 @@ export default function Template1Page() {
                   <MagneticElement strength={0.2}>
                     <a
                       href={clientMasterData.onlineBookingUrl}
-                      className="inline-flex items-center justify-center px-8 py-5 text-lg font-bold border-2 border-white text-white hover:bg-white hover:text-brand-mainText transition-all duration-500"
+                      className="inline-flex items-center justify-center w-full lg:w-auto px-6 lg:px-8 py-4 lg:py-5 text-base lg:text-lg font-bold border-2 border-white text-white hover:bg-white hover:text-brand-mainText transition-all duration-500 active:scale-[0.98] min-h-[52px]"
                     >
                       Book Online
                     </a>
@@ -107,11 +108,12 @@ export default function Template1Page() {
           </div>
         </div>
 
-        {/* Authority Metrics - Responsive flow layout, no absolute positioning */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-8 lg:px-16 pb-16">
+        {/* Authority Metrics - Mobile: Horizontal scroll, Desktop: Flow layout */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pb-8 lg:pb-16">
           <div
             id="hero-metrics"
-            className="flex flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-end gap-8 lg:gap-16"
+            className="flex overflow-x-auto lg:overflow-visible gap-8 lg:gap-16 pb-2 lg:pb-0 -mx-6 px-6 lg:mx-0 lg:px-0 lg:justify-end scrollbar-hide"
+            style={{ scrollSnapType: "x mandatory" }}
           >
             {[
               { value: 15, suffix: "+", label: "Years Experience" },
@@ -120,10 +122,11 @@ export default function Template1Page() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="text-center"
+                className="text-center flex-shrink-0"
+                style={{ scrollSnapAlign: "center" }}
               >
                 {/* Oversized elegant serif with animated counter */}
-                <p className="text-5xl md:text-6xl lg:text-7xl font-serif font-light text-white tracking-tight leading-none">
+                <p className="text-4xl md:text-6xl lg:text-7xl font-serif font-light text-white tracking-tight leading-none whitespace-nowrap">
                   {stat.isRating ? (
                     stat.value
                   ) : (
@@ -131,7 +134,7 @@ export default function Template1Page() {
                   )}
                 </p>
                 {/* Tracking-wide lowercase sans-serif description tokens */}
-                <p className="text-xs font-sans uppercase tracking-[0.35em] text-white/50 mt-2">
+                <p className="text-[10px] lg:text-xs font-sans uppercase tracking-[0.25em] lg:tracking-[0.35em] text-white/50 mt-2 whitespace-nowrap">
                   {stat.label}
                 </p>
               </div>
@@ -141,86 +144,89 @@ export default function Template1Page() {
       </section>
 
       {/* Welcome Video - Editorial Dark */}
-      <section className="py-32 px-8 bg-slate-900 relative overflow-hidden">
+      <section className="py-16 lg:py-32 px-6 lg:px-8 bg-slate-900 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Text Column - Offset */}
             <div className="lg:col-span-4 lg:-mr-12 relative z-10">
-              <p className="text-brand-accent uppercase tracking-[0.3em] text-sm mb-4 font-medium">
+              <p className="text-brand-accent uppercase tracking-[0.2em] lg:tracking-[0.3em] text-xs lg:text-sm mb-3 lg:mb-4 font-medium">
                 The Experience
               </p>
-              <h2 className="text-5xl lg:text-6xl font-bold text-white leading-[0.95] mb-6">
+              <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-white leading-[0.95] mb-4 lg:mb-6">
                 Welcome to
                 <span className="block text-brand-accent italic font-light">Our Practice</span>
               </h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
                 Get to know our team and see what makes our practice special.
               </p>
             </div>
             {/* Video - Overlapping */}
             <div className="lg:col-span-8 relative">
-              <div className="aspect-video rounded-none overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
+              <div className="aspect-video rounded-none overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.8)] lg:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
                 <video
                   className="w-full h-full object-cover"
                   controls
+                  playsInline
+                  webkit-playsinline="true"
                   poster="/images/team/staff-photo.jpg"
                 >
                   {/* Video source disabled for demo */}
                   Your browser does not support the video tag.
                 </video>
               </div>
-              {/* Decorative frame */}
-              <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-brand-accent/30 -z-10" />
+              {/* Decorative frame - hidden on mobile */}
+              <div className="hidden lg:block absolute -bottom-6 -right-6 w-full h-full border-2 border-brand-accent/30 -z-10" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Premium Services - Staggered Asymmetric Mosaic Array */}
-      <section className="py-32 px-8 bg-brand-canvas">
+      <section className="py-16 lg:py-32 px-6 lg:px-8 bg-brand-canvas">
         <div className="max-w-7xl mx-auto">
           {/* Section Header - Editorial Offset */}
-          <div className="max-w-xl mb-20">
-            <p className="text-brand-primary uppercase tracking-[0.3em] text-sm mb-4 font-medium">
+          <div className="max-w-xl mb-10 lg:mb-20">
+            <p className="text-brand-primary uppercase tracking-[0.2em] lg:tracking-[0.3em] text-xs lg:text-sm mb-3 lg:mb-4 font-medium">
               Our Expertise
             </p>
-            <h2 className="text-5xl lg:text-6xl font-bold text-brand-mainText leading-[0.95]">
+            <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-brand-mainText leading-[0.95]">
               Premium
               <span className="block text-brand-primary italic font-light">Services</span>
             </h2>
           </div>
 
-          {/* Staggered Asymmetric Mosaic - Editorial Vertical Offsets */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Mobile: Horizontal scroll carousel, Desktop: Staggered grid */}
+          <div className="flex lg:grid lg:grid-cols-4 gap-4 lg:gap-8 overflow-x-auto lg:overflow-visible -mx-6 px-6 lg:mx-0 lg:px-0 pb-4 lg:pb-0 scrollbar-hide" style={{ scrollSnapType: "x mandatory" }}>
             {[
               {
                 title: "Invisalign",
                 description: "Straighten your smile in 6-18 months without anyone knowing. Our Diamond Provider status means faster results with fewer office visits.",
                 image: "/images/services/invisalign.jpg",
-                offset: "translate-y-0",
+                offset: "lg:translate-y-0",
               },
               {
                 title: "Dental Implants",
                 description: "Eat, speak, and smile with complete confidence again. Our implants have a 98% success rate and last a lifetime with proper care.",
                 image: "/images/services/implant.jpg",
-                offset: "translate-y-12",
+                offset: "lg:translate-y-12",
               },
               {
                 title: "Full Mouth Restoration",
                 description: "Transform decades of dental problems into a healthy, beautiful smile. Most cases completed in just 4-6 visits over 3 months.",
                 image: "/images/services/full-mouth-smile.jpg",
-                offset: "-translate-y-6",
+                offset: "lg:-translate-y-6",
               },
               {
                 title: "Porcelain Veneers",
-                description: "Get the smile you've always wanted in just two appointments. Custom-matched to your natural tooth color for results that look real, not fake.",
+                description: "Get the smile you&apos;ve always wanted in just two appointments. Custom-matched to your natural tooth color for results that look real, not fake.",
                 image: "/images/services/full-mouth-shade.jpg",
-                offset: "translate-y-6",
+                offset: "lg:translate-y-6",
               },
             ].map((service, index) => (
               <div
                 key={index}
-                className={`group ${service.offset}`}
+                className={`group flex-shrink-0 w-[280px] lg:w-auto ${service.offset}`}
+                style={{ scrollSnapAlign: "center" }}
               >
                 {/* Fine 1px architectural line border - no harsh backdrop */}
                 <div className="relative overflow-hidden border border-brand-primary/20">
@@ -230,16 +236,16 @@ export default function Template1Page() {
                       alt={service.title}
                       fill
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, 25vw"
+                      sizes="(max-width: 768px) 280px, 25vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-mainText via-brand-mainText/20 to-transparent" />
                   </div>
                   {/* Text overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-2xl font-bold text-white mb-2 -ml-2 pl-2 border-l-4 border-brand-accent">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
+                    <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 -ml-2 pl-2 border-l-4 border-brand-accent">
                       {service.title}
                     </h3>
-                    <p className="text-sm text-white/70 leading-relaxed">
+                    <p className="text-xs lg:text-sm text-white/70 leading-relaxed line-clamp-3 lg:line-clamp-none">
                       {service.description}
                     </p>
                   </div>
@@ -251,13 +257,13 @@ export default function Template1Page() {
       </section>
 
       {/* Meet the Dentist - Asymmetric Overlapping Collage Layout */}
-      <section className="py-32 px-8 bg-slate-900 relative overflow-hidden">
+      <section className="py-16 lg:py-32 px-6 lg:px-8 bg-slate-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-0 items-stretch">
             {/* Portrait - Refined Layout Frame Container */}
-            <div className="relative lg:col-span-5 aspect-[3/4] lg:aspect-auto lg:min-h-[800px]">
-              {/* Decorative frame accent */}
-              <div className="absolute top-6 left-6 right-6 bottom-6 border border-brand-accent/20 pointer-events-none z-10" />
+            <div className="relative lg:col-span-5 aspect-[4/5] lg:aspect-auto lg:min-h-[800px]">
+              {/* Decorative frame accent - hidden on mobile */}
+              <div className="hidden lg:block absolute top-6 left-6 right-6 bottom-6 border border-brand-accent/20 pointer-events-none z-10" />
               <div className="absolute inset-0 group">
                 <Image
                   src="/images/team/doctor-portrait.jpeg"
@@ -274,54 +280,54 @@ export default function Template1Page() {
 
             {/* Bio Content - Overlapping with negative margin into portrait */}
             <div className="relative lg:col-span-7 lg:-ml-16 flex items-center z-10">
-              <div className="bg-slate-900/95 backdrop-blur-sm p-10 lg:p-14 w-full lg:mr-8">
-                <p className="text-brand-accent uppercase tracking-[0.3em] text-sm mb-4 font-medium">
+              <div className="bg-slate-900/95 backdrop-blur-sm p-6 lg:p-10 xl:p-14 w-full lg:mr-8">
+                <p className="text-brand-accent uppercase tracking-[0.2em] lg:tracking-[0.3em] text-xs lg:text-sm mb-3 lg:mb-4 font-medium">
                   Meet Your Dentist
                 </p>
                 {/* Name with dramatic overlap */}
-                <h2 className="text-4xl lg:text-5xl font-bold text-white leading-[0.95] mb-2">
+                <h2 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-white leading-[0.95] mb-2">
                   {primaryDoctor.name}
                 </h2>
-                <p className="text-brand-accent text-xl mb-8 italic">{primaryDoctor.role}</p>
+                <p className="text-brand-accent text-base lg:text-xl mb-6 lg:mb-8 italic">{primaryDoctor.role}</p>
 
                 {/* Pull Quote */}
-                <blockquote className="border-l-4 border-brand-accent pl-6 mb-8">
-                  <p className="text-2xl lg:text-3xl font-serif italic text-white/90 leading-relaxed">
-                    "I became a dentist because I saw how a confident smile changed my father's life after years of avoiding photos."
+                <blockquote className="border-l-4 border-brand-accent pl-4 lg:pl-6 mb-6 lg:mb-8">
+                  <p className="text-lg lg:text-2xl xl:text-3xl font-serif italic text-white/90 leading-relaxed">
+                    &ldquo;I became a dentist because I saw how a confident smile changed my father&apos;s life after years of avoiding photos.&rdquo;
                   </p>
                 </blockquote>
 
                 {/* Narrative Bio */}
-                <p className="text-gray-300 leading-relaxed mb-6 text-lg">
+                <p className="text-gray-300 leading-relaxed mb-4 lg:mb-6 text-sm lg:text-lg">
                   Dr. Roberts grew up watching his father hide his smile in every family photo. That experience drove him to pursue cosmetic dentistry at the University of Utah, where he graduated top of his class.
                 </p>
-                <p className="text-gray-300 leading-relaxed mb-10 text-lg">
-                  Today, he's transformed over 5,000 smiles across the Wasatch Front and earned the Invisalign Diamond Provider designation—given to fewer than 1% of providers nationwide. When he's not in the office, you'll find him skiing at Snowbird with his two kids.
+                <p className="text-gray-300 leading-relaxed mb-6 lg:mb-10 text-sm lg:text-lg">
+                  Today, he&apos;s transformed over 5,000 smiles across the Wasatch Front and earned the Invisalign Diamond Provider designation—given to fewer than 1% of providers nationwide. When he&apos;s not in the office, you&apos;ll find him skiing at Snowbird with his two kids.
                 </p>
 
                 {/* Credentials as badges */}
-                <div className="flex flex-wrap gap-3 mb-10">
-                  <span className="px-4 py-2 bg-brand-accent/20 text-brand-accent text-sm font-medium rounded-sm">
+                <div className="flex flex-wrap gap-2 lg:gap-3 mb-6 lg:mb-10">
+                  <span className="px-3 lg:px-4 py-1.5 lg:py-2 bg-brand-accent/20 text-brand-accent text-xs lg:text-sm font-medium rounded-sm">
                     Invisalign Diamond Provider
                   </span>
-                  <span className="px-4 py-2 bg-white/10 text-white/80 text-sm font-medium rounded-sm">
+                  <span className="px-3 lg:px-4 py-1.5 lg:py-2 bg-white/10 text-white/80 text-xs lg:text-sm font-medium rounded-sm">
                     AACD Fellow
                   </span>
-                  <span className="px-4 py-2 bg-white/10 text-white/80 text-sm font-medium rounded-sm">
+                  <span className="px-3 lg:px-4 py-1.5 lg:py-2 bg-white/10 text-white/80 text-xs lg:text-sm font-medium rounded-sm">
                     University of Utah DDS
                   </span>
                 </div>
 
                 {/* Stats Row */}
-                <div className="flex gap-12 pt-8 border-t border-white/10">
+                <div className="flex gap-6 lg:gap-12 pt-6 lg:pt-8 border-t border-white/10">
                   {[
                     { value: "15+", label: "Years" },
                     { value: "5,000+", label: "Smiles" },
                     { value: "98%", label: "Would Recommend" },
                   ].map((stat, index) => (
                     <div key={index}>
-                      <p className="text-4xl font-serif font-light text-white tracking-tight">{stat.value}</p>
-                      <p className="text-xs text-gray-500 uppercase tracking-[0.2em] mt-1">{stat.label}</p>
+                      <p className="text-2xl lg:text-4xl font-serif font-light text-white tracking-tight">{stat.value}</p>
+                      <p className="text-[10px] lg:text-xs text-gray-500 uppercase tracking-[0.15em] lg:tracking-[0.2em] mt-1">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -332,13 +338,13 @@ export default function Template1Page() {
       </section>
 
       {/* Before/After - Editorial Showcase */}
-      <section className="py-32 px-8 bg-brand-canvas">
+      <section className="py-16 lg:py-32 px-6 lg:px-8 bg-brand-canvas">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-brand-primary uppercase tracking-[0.3em] text-sm mb-4 font-medium">
+          <div className="text-center mb-10 lg:mb-16">
+            <p className="text-brand-primary uppercase tracking-[0.2em] lg:tracking-[0.3em] text-xs lg:text-sm mb-3 lg:mb-4 font-medium">
               Transformations
             </p>
-            <h2 className="text-5xl lg:text-6xl font-bold text-brand-mainText leading-[0.95]">
+            <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-brand-mainText leading-[0.95]">
               Real Results,
               <span className="block text-brand-primary italic font-light">Real Smiles</span>
             </h2>
@@ -353,17 +359,17 @@ export default function Template1Page() {
             />
           </div>
 
-          <p className="text-center text-neutral-muted mt-10 text-lg italic">
+          <p className="text-center text-neutral-muted mt-6 lg:mt-10 text-sm lg:text-lg italic">
             8 Porcelain Veneers • Patient age 34 • Completed in 2 visits over 3 weeks
           </p>
-          <p className="text-center text-sm text-neutral-muted/70 mt-2">
+          <p className="text-center text-xs lg:text-sm text-neutral-muted/70 mt-2">
             Treatment by Dr. Michael Roberts, DDS • Results may vary
           </p>
         </div>
       </section>
 
       {/* Patient Testimonials - Large-Format Typographic Review Canvas */}
-      <section className="py-32 lg:py-40 px-8 bg-slate-900 relative overflow-hidden">
+      <section className="py-16 lg:py-32 xl:py-40 px-6 lg:px-8 bg-slate-900 relative overflow-hidden">
         {/* Subtle background texture */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,255,255,0.1)_1px,_transparent_1px)] bg-[length:32px_32px]" />
