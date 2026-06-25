@@ -4,6 +4,16 @@ import { clientMasterData, sampleReviews } from "@/data/master";
 import T1Nav from "./components/T1Nav";
 import T1Footer from "./components/T1Footer";
 import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
+import {
+  HeadlineReveal,
+  SubheadReveal,
+  TextReveal,
+  StickyHorizontalCredentials,
+  MagneticElement,
+  ParallaxFrame,
+  EditorialDivider,
+  AnimatedCounter,
+} from "@/components/premium";
 
 const location = clientMasterData.locations[0];
 
@@ -55,50 +65,54 @@ export default function Template1Page() {
                 )}
               </div>
 
-              {/* H1 - Massive Editorial Typography with Overlap */}
-              <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold text-white leading-[0.9] tracking-tight mb-4 -ml-1">
+              {/* H1 - Massive Editorial Typography with Overlap + Text Reveal */}
+              <HeadlineReveal className="text-[clamp(3rem,8vw,6rem)] font-bold text-white leading-[0.9] tracking-tight mb-4 -ml-1">
                 <span className="block">{location.cityServed}'s Highest-Rated</span>
                 <span className="block text-brand-accent italic font-light text-[0.6em] ml-2">
                   Cosmetic Dentist
                 </span>
-              </h1>
+              </HeadlineReveal>
 
-              {/* Intro Copy - Offset */}
-              <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg ml-4 border-l-2 border-brand-accent pl-6">
+              {/* Intro Copy - Offset + Subtle Reveal */}
+              <SubheadReveal className="text-xl text-white/80 leading-relaxed mb-10 max-w-lg ml-4 border-l-2 border-brand-accent pl-6" delay={0.4}>
                 Nervous about dental work? You're not alone. Our sedation options and gentle approach
                 have helped thousands of anxious patients finally get the smile they deserve.
-              </p>
+              </SubheadReveal>
 
-              {/* CTA Buttons - Editorial Stack */}
+              {/* CTA Buttons - Editorial Stack with Magnetic Effect */}
               <div className="flex flex-col sm:flex-row gap-4 ml-4">
-                <a
-                  href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="group inline-flex items-center gap-3 px-8 py-5 bg-white text-brand-mainText font-bold text-lg shadow-2xl hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1"
-                >
-                  <svg className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                  </svg>
-                  {location.phoneGBP}
-                </a>
-                {clientMasterData.onlineBookingUrl !== "none" && (
+                <MagneticElement strength={0.2}>
                   <a
-                    href={clientMasterData.onlineBookingUrl}
-                    className="inline-flex items-center justify-center px-8 py-5 text-lg font-bold border-2 border-white text-white hover:bg-white hover:text-brand-mainText transition-all duration-500"
+                    href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                    className="group inline-flex items-center gap-3 px-8 py-5 bg-white text-brand-mainText font-bold text-lg shadow-2xl hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1"
                   >
-                    Book Online
+                    <svg className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                    {location.phoneGBP}
                   </a>
+                </MagneticElement>
+                {clientMasterData.onlineBookingUrl !== "none" && (
+                  <MagneticElement strength={0.2}>
+                    <a
+                      href={clientMasterData.onlineBookingUrl}
+                      className="inline-flex items-center justify-center px-8 py-5 text-lg font-bold border-2 border-white text-white hover:bg-white hover:text-brand-mainText transition-all duration-500"
+                    >
+                      Book Online
+                    </a>
+                  </MagneticElement>
                 )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Free-Standing Metric Accents - No background boxes */}
+        {/* Free-Standing Metric Accents with Animated Counters */}
         <div className="absolute bottom-12 right-12 hidden lg:flex gap-16">
           {[
-            { value: "15+", label: "Years Experience" },
-            { value: "5.0", label: "Google (312 reviews)" },
-            { value: "5,000+", label: "Smiles Transformed" },
+            { value: 15, suffix: "+", label: "Years Experience" },
+            { value: 5.0, suffix: "", label: "Google (312 reviews)", isRating: true },
+            { value: 5000, suffix: "+", label: "Smiles Transformed" },
           ].map((stat, index) => (
             <div
               key={index}
@@ -106,9 +120,13 @@ export default function Template1Page() {
                 index === 1 ? "-translate-y-4" : index === 2 ? "translate-y-2" : ""
               }`}
             >
-              {/* Oversized elegant serif for numeric indicators */}
+              {/* Oversized elegant serif with animated counter */}
               <p className="text-6xl lg:text-7xl font-serif font-light text-white tracking-tight leading-none">
-                {stat.value}
+                {stat.isRating ? (
+                  stat.value
+                ) : (
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2.5} />
+                )}
               </p>
               {/* Tracking-wide lowercase sans-serif description tokens */}
               <p className="text-xs font-sans uppercase tracking-[0.35em] text-white/50 mt-2">

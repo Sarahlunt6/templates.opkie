@@ -4,6 +4,13 @@ import { clientMasterData, sampleReviews } from "@/data/master";
 import T2Nav from "./components/T2Nav";
 import T2Footer from "./components/T2Footer";
 import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
+import {
+  TextReveal,
+  HeadlineReveal,
+  CursorGlow,
+  AnimatedCounter,
+  MagneticElement,
+} from "@/components/premium";
 
 const location = clientMasterData.locations[0];
 
@@ -17,7 +24,10 @@ export default function Template2Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-innovator bg-zinc-950 text-white">
+    <div className="font-innovator bg-zinc-950 text-white relative">
+      {/* Cursor Tracking Glow Effect */}
+      <CursorGlow color="var(--primary-brand)" size={500} blur={120} opacity={0.12} />
+
       <T2Nav />
 
       {/* ═══════════════════════════════════════════════════════════════════════
@@ -129,35 +139,39 @@ export default function Template2Page() {
                   </span>
                 </div>
 
-                {/* Main Headline - Designed to overlap clinician card */}
-                <h1 className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-semibold tracking-tight leading-[1.02] mb-8 lg:pr-0">
+                {/* Main Headline - Designed to overlap clinician card + Text Reveal */}
+                <HeadlineReveal className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-semibold tracking-tight leading-[1.02] mb-8 lg:pr-0">
                   <span className="block">Same-Day Crowns.</span>
                   <span className="block">3D-Guided Implants.</span>
                   <span className="block text-brand-primary">Zero Guesswork.</span>
-                </h1>
+                </HeadlineReveal>
 
                 {/* Subheading */}
                 <p className="text-base md:text-lg text-white/50 max-w-md mb-10 leading-relaxed">
                   Our CEREC system mills your permanent crown while you wait. Our CBCT scanner plans your implant to the tenth of a millimeter. This is dentistry without second appointments.
                 </p>
 
-                {/* CTA Buttons - Glassmorphic capsule styling */}
+                {/* CTA Buttons - Glassmorphic capsule styling with Magnetic Effect */}
                 <div className="flex flex-wrap gap-4">
-                  <a
-                    href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                    className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 hover:shadow-lg hover:shadow-brand-primary/20 transition-all duration-300"
-                  >
-                    <span>Schedule Consultation</span>
-                    <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
-                  <a
-                    href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                    className="group inline-flex items-center gap-3 px-8 py-4 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/15 hover:bg-white/[0.03] hover:backdrop-blur-md hover:border-white/25 transition-all duration-300"
-                  >
-                    <span>{location.phoneGBP}</span>
-                  </a>
+                  <MagneticElement strength={0.15}>
+                    <a
+                      href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                      className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 hover:shadow-lg hover:shadow-brand-primary/20 transition-all duration-300"
+                    >
+                      <span>Schedule Consultation</span>
+                      <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  </MagneticElement>
+                  <MagneticElement strength={0.15}>
+                    <a
+                      href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                      className="group inline-flex items-center gap-3 px-8 py-4 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/15 hover:bg-white/[0.03] hover:backdrop-blur-md hover:border-white/25 transition-all duration-300"
+                    >
+                      <span>{location.phoneGBP}</span>
+                    </a>
+                  </MagneticElement>
                 </div>
               </div>
 

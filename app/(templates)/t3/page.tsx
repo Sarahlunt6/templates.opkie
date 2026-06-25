@@ -7,6 +7,15 @@ import T3Hero from "./components/T3Hero";
 import T3ServiceAccordion from "./components/T3ServiceAccordion";
 import T3AmbientBackground from "./components/T3AmbientBackground";
 import T3ReviewCarousel from "./components/T3ReviewCarousel";
+import {
+  TextReveal,
+  ExpansiveSection,
+  AmbientLightNodes,
+  MindfulScrollProgress,
+  ZenQuote,
+  CalmingDivider,
+  FloatingElement,
+} from "@/components/premium";
 
 const location = clientMasterData.locations[0];
 
@@ -21,8 +30,14 @@ export default function Template3Page() {
 
   return (
     <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative">
+      {/* Mindful Scroll Progress Indicator */}
+      <MindfulScrollProgress color="var(--primary-brand)" thickness={2} position="left" />
+
       {/* Kinetic Ambient Drifting Background */}
       <T3AmbientBackground />
+
+      {/* Additional Ambient Light Nodes for premium depth */}
+      <AmbientLightNodes count={3} colors={["var(--primary-brand)", "#A8D5BA", "#E8D5C4"]} />
 
       <T3Nav />
 

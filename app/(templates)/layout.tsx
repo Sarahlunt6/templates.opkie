@@ -1,6 +1,7 @@
 "use client";
 
 import { clientMasterData } from "@/data/master";
+import SmoothScrollProvider from "@/components/premium/SmoothScrollProvider";
 
 export default function TemplateShellLayout({
   children,
@@ -10,16 +11,18 @@ export default function TemplateShellLayout({
   const { theme } = clientMasterData;
 
   return (
-    <div
-      style={{
-        ["--primary-brand" as string]: theme.primaryBrandHex,
-        ["--secondary-accent" as string]: theme.secondaryAccentHex,
-        ["--text-main" as string]: theme.textMainHex,
-        ["--bg-canvas" as string]: theme.bgCanvasHex,
-      }}
-    >
-      {/* Template Content */}
-      <main>{children}</main>
-    </div>
+    <SmoothScrollProvider>
+      <div
+        style={{
+          ["--primary-brand" as string]: theme.primaryBrandHex,
+          ["--secondary-accent" as string]: theme.secondaryAccentHex,
+          ["--text-main" as string]: theme.textMainHex,
+          ["--bg-canvas" as string]: theme.bgCanvasHex,
+        }}
+      >
+        {/* Template Content */}
+        <main>{children}</main>
+      </div>
+    </SmoothScrollProvider>
   );
 }
