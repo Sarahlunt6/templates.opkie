@@ -72,7 +72,7 @@ export default function Template4Page() {
               controls
               poster="/images/team/staff-photo.jpg"
             >
-              <source src="/videos/hero-video.mp4" type="video/mp4" />
+              {/* Video source disabled for demo */}
               Your browser does not support the video tag.
             </video>
             {/* Elegant Play Overlay Accent */}
