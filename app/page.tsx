@@ -183,6 +183,8 @@ export default function DesignRegistryPage() {
               <div>
                 <Link
                   href={`/${template.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group/cta inline-flex items-center gap-3"
                 >
                   <span className="relative text-[12px] tracking-[0.15em] text-white/60 font-light transition-colors duration-300 group-hover/cta:text-white">

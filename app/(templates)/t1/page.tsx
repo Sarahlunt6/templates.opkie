@@ -253,28 +253,28 @@ export default function Template1Page() {
       {/* Meet the Dentist - Asymmetric Overlapping Collage Layout */}
       <section className="py-32 px-8 bg-slate-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-stretch">
             {/* Portrait - Refined Layout Frame Container */}
-            <div className="relative lg:col-span-6 min-h-[600px] lg:min-h-[750px]">
+            <div className="relative lg:col-span-5 aspect-[3/4] lg:aspect-auto lg:min-h-[800px]">
               {/* Decorative frame accent */}
-              <div className="absolute top-8 left-8 right-8 bottom-8 border border-brand-accent/20 pointer-events-none z-10" />
+              <div className="absolute top-6 left-6 right-6 bottom-6 border border-brand-accent/20 pointer-events-none z-10" />
               <div className="absolute inset-0 group">
                 <Image
                   src="/images/team/doctor-portrait.png"
                   alt={primaryDoctor.name}
                   fill
-                  className="object-cover object-[25%_top] transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-[center_20%] transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 45vw"
                 />
-                {/* Subtle gradient fade to content area - no harsh vertical cutoff */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-900/95 hidden lg:block" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent lg:hidden" />
+                {/* Subtle gradient fade to content area - softer blend */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-900/80 hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent lg:hidden" />
               </div>
             </div>
 
             {/* Bio Content - Overlapping with negative margin into portrait */}
-            <div className="relative lg:col-span-6 lg:-ml-20 flex items-center z-10">
-              <div className="bg-slate-900/95 backdrop-blur-sm p-12 lg:p-16 w-full lg:mr-8">
+            <div className="relative lg:col-span-7 lg:-ml-16 flex items-center z-10">
+              <div className="bg-slate-900/95 backdrop-blur-sm p-10 lg:p-14 w-full lg:mr-8">
                 <p className="text-brand-accent uppercase tracking-[0.3em] text-sm mb-4 font-medium">
                   Meet Your Dentist
                 </p>
