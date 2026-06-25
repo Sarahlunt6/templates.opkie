@@ -80,7 +80,7 @@ export default function Template1Page() {
               </SubheadReveal>
 
               {/* CTA Buttons - Editorial Stack with Magnetic Effect */}
-              <div className="flex flex-col sm:flex-row gap-4 ml-4">
+              <div id="hero-ctas" className="flex flex-col sm:flex-row gap-4 ml-4">
                 <MagneticElement strength={0.2}>
                   <a
                     href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
@@ -107,33 +107,36 @@ export default function Template1Page() {
           </div>
         </div>
 
-        {/* Free-Standing Metric Accents with Animated Counters */}
-        <div className="absolute bottom-12 right-12 hidden lg:flex gap-16">
-          {[
-            { value: 15, suffix: "+", label: "Years Experience" },
-            { value: 5.0, suffix: "", label: "Google (312 reviews)", isRating: true },
-            { value: 5000, suffix: "+", label: "Smiles Transformed" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className={`text-center ${
-                index === 1 ? "-translate-y-4" : index === 2 ? "translate-y-2" : ""
-              }`}
-            >
-              {/* Oversized elegant serif with animated counter */}
-              <p className="text-6xl lg:text-7xl font-serif font-light text-white tracking-tight leading-none">
-                {stat.isRating ? (
-                  stat.value
-                ) : (
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2.5} />
-                )}
-              </p>
-              {/* Tracking-wide lowercase sans-serif description tokens */}
-              <p className="text-xs font-sans uppercase tracking-[0.35em] text-white/50 mt-2">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+        {/* Authority Metrics - Responsive flow layout, no absolute positioning */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-8 lg:px-16 pb-16">
+          <div
+            id="hero-metrics"
+            className="flex flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-end gap-8 lg:gap-16"
+          >
+            {[
+              { value: 15, suffix: "+", label: "Years Experience" },
+              { value: 5.0, suffix: "", label: "Google (312 reviews)", isRating: true },
+              { value: 5000, suffix: "+", label: "Smiles Transformed" },
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className="text-center"
+              >
+                {/* Oversized elegant serif with animated counter */}
+                <p className="text-5xl md:text-6xl lg:text-7xl font-serif font-light text-white tracking-tight leading-none">
+                  {stat.isRating ? (
+                    stat.value
+                  ) : (
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2.5} />
+                  )}
+                </p>
+                {/* Tracking-wide lowercase sans-serif description tokens */}
+                <p className="text-xs font-sans uppercase tracking-[0.35em] text-white/50 mt-2">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
