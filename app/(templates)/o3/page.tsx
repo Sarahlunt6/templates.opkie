@@ -203,8 +203,53 @@ export default function OrthoTemplate3Page() {
         </div>
       </section>
 
-      {/* Meet Your Orthodontist */}
+      {/* Before/After - Minimal Gallery */}
       <section className="py-24 px-8 bg-brand-primary/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-brand-primary font-medium mb-4">
+              Transformations
+            </p>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-extralight tracking-[0.02em]">
+              Smile Journeys
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-1">
+            <div className="relative aspect-[4/3] overflow-hidden group">
+              <p className="absolute top-6 left-6 z-10 text-[11px] uppercase tracking-[0.3em] text-white/80 font-medium">
+                Before
+              </p>
+              <Image
+                src="/images/cases/smile-before-ortho.png"
+                alt="Before orthodontic treatment"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                sizes="50vw"
+              />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden group">
+              <p className="absolute top-6 left-6 z-10 text-[11px] uppercase tracking-[0.3em] text-brand-primary font-medium">
+                After
+              </p>
+              <Image
+                src="/images/cases/smile-after-ortho.png"
+                alt="After orthodontic treatment"
+                fill
+                className="object-cover"
+                sizes="50vw"
+              />
+            </div>
+          </div>
+
+          <p className="text-center text-[11px] uppercase tracking-[0.3em] text-neutral-muted mt-10">
+            A journey to confidence
+          </p>
+        </div>
+      </section>
+
+      {/* Meet Your Orthodontist */}
+      <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
