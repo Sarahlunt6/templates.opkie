@@ -42,7 +42,7 @@ export default function Template1Page() {
             className="absolute inset-0 w-full h-full object-cover"
             poster="/images/team/staff-photo.jpg"
           >
-            {/* Video source disabled for demo */}
+            <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
           {/* Dark-tinted overlay mask for text contrast */}
           <div className="absolute inset-0 bg-slate-950/40" />
