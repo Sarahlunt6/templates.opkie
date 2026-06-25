@@ -524,9 +524,9 @@ export default function Template2Page() {
           <div className="max-w-4xl mx-auto">
             <div className="rounded-2xl border border-slate-800 overflow-hidden">
               <BeforeAfterSlider
-                beforeUrl="/images/cases/smile-before.png"
-                afterUrl="/images/cases/smile-after.png"
-                altTag="Digital smile design transformation"
+                beforeUrl="/images/cases/smile-before-ortho.png"
+                afterUrl="/images/cases/smile-after-ortho.png"
+                altTag="Invisalign clear aligner transformation"
                 aspectRatio="4/3"
               />
             </div>
