@@ -55,7 +55,7 @@ module.exports = {
         "fluid-5xl": "clamp(3rem, 2rem + 5vw, 4rem)",
         "fluid-6xl": "clamp(3.75rem, 2.5rem + 6.25vw, 5rem)",
         // T2 Cinematic Display Scale - Editorial Impact
-        "t2-hero": ["clamp(3.5rem, 3rem + 6vw, 7rem)", { lineHeight: "0.95", letterSpacing: "-0.03em", fontWeight: "500" }],
+        "t2-hero": ["clamp(2.5rem, 2rem + 4vw, 5rem)", { lineHeight: "0.95", letterSpacing: "-0.03em", fontWeight: "500" }],
         "t2-display": ["clamp(2.5rem, 2rem + 4vw, 5rem)", { lineHeight: "1.0", letterSpacing: "-0.02em", fontWeight: "500" }],
         "t2-headline": ["clamp(1.75rem, 1.5rem + 2vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.01em", fontWeight: "600" }],
         "t2-subhead": ["clamp(1.125rem, 1rem + 0.5vw, 1.375rem)", { lineHeight: "1.4", letterSpacing: "0.01em", fontWeight: "500" }],
