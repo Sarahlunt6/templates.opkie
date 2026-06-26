@@ -32,6 +32,487 @@ function useIsMobile(breakpoint = 1024) {
 
 const location = clientMasterData.locations[0];
 
+// ═══════════════════════════════════════════════════════════════════════
+// TECHNOLOGY SECTION — Interactive Animated Panels
+// ═══════════════════════════════════════════════════════════════════════
+function TechnologySection() {
+  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
+  const technologies = [
+    {
+      id: "01",
+      icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
+      title: "Carestream CS 9600 CBCT",
+      description: "Full 3D jaw imaging at 0.1mm resolution. See bone density, nerve pathways, and sinus proximity before we touch a drill.",
+      stat: "0.1mm",
+      statLabel: "Resolution",
+    },
+    {
+      id: "02",
+      icon: "M13 10V3L4 14h7v7l9-11h-7z",
+      title: "Solea CO₂ Laser",
+      description: "Cuts soft tissue without bleeding. Most procedures need zero anesthesia. You'll feel pressure, not pain.",
+      stat: "95%",
+      statLabel: "No Anesthesia",
+    },
+    {
+      id: "03",
+      icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+      title: "CEREC Primescan + Mill",
+      description: "Digital scan replaces goopy impressions. Mill carves your crown from solid ceramic in 12 minutes. Walk out same day.",
+      stat: "12min",
+      statLabel: "Mill Time",
+    },
+  ];
+
+  return (
+    <section ref={sectionRef} className="py-24 px-6 md:px-12 bg-zinc-900 relative overflow-hidden">
+      {/* Animated background grid */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isInView ? 0.02 : 0 }}
+        transition={{ duration: 1 }}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: "64px 64px",
+        }}
+      />
+
+      {/* Ambient glow that follows active card */}
+      <motion.div
+        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
+        animate={{
+          opacity: activeCard ? 0.15 : 0,
+          x: activeCard === "01" ? "10%" : activeCard === "02" ? "40%" : "70%",
+          y: "20%",
+        }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        style={{
+          background: `radial-gradient(circle, var(--primary-brand) 0%, transparent 70%)`,
+          filter: "blur(80px)",
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header with staggered animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium"
+          >
+            Our Technology
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3"
+          >
+            Advanced Capabilities
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-base text-white/50"
+          >
+            State-of-the-art technology for superior patient outcomes.
+          </motion.p>
+        </motion.div>
+
+        {/* Interactive cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {technologies.map((feature, index) => (
+            <motion.div
+              key={feature.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              onMouseEnter={() => setActiveCard(feature.id)}
+              onMouseLeave={() => setActiveCard(null)}
+              className="group relative bg-zinc-950 p-8 rounded-2xl border border-slate-800 cursor-pointer overflow-hidden"
+            >
+              {/* Hover gradient overlay */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 via-transparent to-transparent"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === feature.id ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+              />
+
+              {/* Animated border glow */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: activeCard === feature.id ? 1 : 0,
+                  boxShadow: activeCard === feature.id
+                    ? "inset 0 0 0 1px rgba(var(--primary-brand-rgb), 0.3), 0 0 30px rgba(var(--primary-brand-rgb), 0.1)"
+                    : "none"
+                }}
+                transition={{ duration: 0.3 }}
+              />
+
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  {/* Animated icon container */}
+                  <motion.div
+                    className="w-14 h-14 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center"
+                    animate={{
+                      scale: activeCard === feature.id ? 1.1 : 1,
+                      backgroundColor: activeCard === feature.id ? "rgba(var(--primary-brand-rgb), 0.2)" : "rgba(var(--primary-brand-rgb), 0.1)",
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.svg
+                      className="w-6 h-6 text-brand-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      animate={{ rotate: activeCard === feature.id ? 5 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={feature.icon} />
+                    </motion.svg>
+                  </motion.div>
+
+                  {/* Number badge with pulse */}
+                  <motion.div
+                    className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
+                    animate={{
+                      scale: activeCard === feature.id ? [1, 1.2, 1] : 1,
+                      borderColor: activeCard === feature.id ? "rgba(var(--primary-brand-rgb), 0.3)" : "rgba(255,255,255,0.1)",
+                    }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <span className={`text-[10px] font-medium transition-colors duration-300 ${activeCard === feature.id ? "text-brand-primary" : "text-white/40"}`}>
+                      {feature.id}
+                    </span>
+                  </motion.div>
+                </div>
+
+                <motion.h3
+                  className="text-xl font-semibold tracking-tight mb-3"
+                  animate={{ x: activeCard === feature.id ? 4 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {feature.title}
+                </motion.h3>
+
+                <motion.p
+                  className="text-sm text-white/50 leading-relaxed mb-6"
+                  animate={{ opacity: activeCard === feature.id ? 0.8 : 0.5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {feature.description}
+                </motion.p>
+
+                {/* Stat reveal on hover */}
+                <motion.div
+                  className="flex items-center gap-3 pt-4 border-t border-white/[0.05]"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{
+                    opacity: activeCard === feature.id ? 1 : 0.5,
+                    y: activeCard === feature.id ? 0 : 5,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <span className="text-2xl font-semibold text-brand-primary">{feature.stat}</span>
+                  <span className="text-xs text-white/40 uppercase tracking-wider">{feature.statLabel}</span>
+                </motion.div>
+              </div>
+
+              {/* Corner accents that animate in */}
+              <motion.div
+                className="absolute top-3 left-3 w-6 h-6 border-l border-t border-brand-primary/30"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{
+                  opacity: activeCard === feature.id ? 1 : 0,
+                  scale: activeCard === feature.id ? 1 : 0.5,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.div
+                className="absolute bottom-3 right-3 w-6 h-6 border-r border-b border-brand-primary/30"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{
+                  opacity: activeCard === feature.id ? 1 : 0,
+                  scale: activeCard === feature.id ? 1 : 0.5,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// SERVICES GRID SECTION — Animated Interactive Grid
+// ═══════════════════════════════════════════════════════════════════════
+function ServicesGridSection({ location }: { location: typeof clientMasterData.locations[0] }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  // Service icons mapping
+  const serviceIcons: Record<string, string> = {
+    "Cosmetic Dentist": "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+    "Dental Implants": "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+    "Teeth Whitening": "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
+    "Orthodontist": "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z",
+    "Emergency Dental Service": "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    "Dentures": "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    "Root Canal Treatment": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "Pediatric Dentist": "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+    default: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+  };
+
+  const getIcon = (category: string) => {
+    return serviceIcons[category] || serviceIcons.default;
+  };
+
+  return (
+    <section ref={sectionRef} className="py-24 px-6 md:px-12 relative overflow-hidden">
+      {/* Animated background */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isInView ? 0.02 : 0 }}
+        transition={{ duration: 1 }}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: "64px 64px",
+        }}
+      />
+
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-brand-primary/20 rounded-full"
+            initial={{ opacity: 0 }}
+            animate={isInView ? {
+              opacity: [0, 0.5, 0],
+              y: [0, -100],
+              x: [0, (i % 2 === 0 ? 20 : -20)],
+            } : {}}
+            transition={{
+              duration: 4,
+              delay: i * 0.8,
+              repeat: Infinity,
+              ease: "easeOut",
+            }}
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${60 + (i % 3) * 10}%`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium"
+          >
+            Full Service Menu
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3"
+          >
+            Comprehensive Care
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-base text-white/50"
+          >
+            Complete dental services in {location.cityServed}.
+          </motion.p>
+        </motion.div>
+
+        {/* Animated grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {location.secondaryCategoriesGBP.map((category, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                duration: 0.5,
+                delay: 0.1 + index * 0.05,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="group relative bg-zinc-900 p-5 rounded-xl cursor-pointer overflow-hidden"
+            >
+              {/* Animated background gradient */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 via-brand-primary/5 to-transparent"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{
+                  opacity: hoveredIndex === index ? 1 : 0,
+                  scale: hoveredIndex === index ? 1 : 0.8,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+
+              {/* Animated border */}
+              <motion.div
+                className="absolute inset-0 rounded-xl border border-slate-800"
+                animate={{
+                  borderColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.4)" : "rgba(51, 65, 85, 1)",
+                }}
+                transition={{ duration: 0.3 }}
+              />
+
+              {/* Shimmer effect on hover */}
+              <motion.div
+                className="absolute inset-0 opacity-0"
+                animate={{
+                  opacity: hoveredIndex === index ? [0, 0.1, 0] : 0,
+                  backgroundPosition: hoveredIndex === index ? ["200% 0", "-200% 0"] : "200% 0",
+                }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                style={{
+                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)",
+                  backgroundSize: "200% 100%",
+                }}
+              />
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-3">
+                  {/* Animated number badge with icon */}
+                  <motion.div
+                    className="flex items-center gap-2"
+                    animate={{ x: hoveredIndex === index ? 4 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.div
+                      className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center"
+                      animate={{
+                        backgroundColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.15)" : "rgba(255,255,255,0.05)",
+                        borderColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.3)" : "rgba(255,255,255,0.1)",
+                        scale: hoveredIndex === index ? 1.05 : 1,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        animate={{
+                          color: hoveredIndex === index ? "var(--primary-brand)" : "rgba(255,255,255,0.4)",
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={getIcon(category)} />
+                      </motion.svg>
+                    </motion.div>
+                    <span className={`text-[9px] font-medium transition-colors duration-300 ${hoveredIndex === index ? "text-brand-primary" : "text-white/40"}`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </motion.div>
+
+                  {/* Arrow with spring animation */}
+                  <motion.svg
+                    className="w-4 h-4 text-brand-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{
+                      opacity: hoveredIndex === index ? 1 : 0,
+                      x: hoveredIndex === index ? 0 : -10,
+                      rotate: hoveredIndex === index ? 0 : -45,
+                    }}
+                    transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </motion.svg>
+                </div>
+
+                <motion.h3
+                  className="text-sm font-medium tracking-tight transition-colors duration-300"
+                  animate={{
+                    color: hoveredIndex === index ? "var(--primary-brand)" : "rgba(255,255,255,0.9)",
+                    x: hoveredIndex === index ? 2 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {category}
+                </motion.h3>
+
+                <motion.p
+                  className="text-[11px] text-white/40 mt-1.5"
+                  animate={{
+                    opacity: hoveredIndex === index ? 0.7 : 0.4,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  Digital precision care
+                </motion.p>
+
+                {/* Decorative line that animates in */}
+                <motion.div
+                  className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-primary to-brand-primary/30"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: hoveredIndex === index ? 1 : 0 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ originX: 0 }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom CTA hint */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-8 text-center"
+        >
+          <p className="text-xs text-white/30">
+            Hover to explore our services
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function Template2Page() {
   const { doctors } = clientMasterData;
   const primaryDoctor = doctors[0];
@@ -412,127 +893,14 @@ export default function Template2Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          TECHNOLOGY FEATURES — REFINED MEDICAL PANELS
+          TECHNOLOGY FEATURES — INTERACTIVE ANIMATED PANELS
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 md:px-12 bg-zinc-900 relative">
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-          }}
-        />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-12">
-            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-              Our Technology
-            </span>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
-              Advanced Capabilities
-            </h2>
-            <p className="text-base text-white/50">
-              State-of-the-art technology for superior patient outcomes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              {
-                id: "01",
-                icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
-                title: "Carestream CS 9600 CBCT",
-                description: "Full 3D jaw imaging at 0.1mm resolution. See bone density, nerve pathways, and sinus proximity before we touch a drill.",
-              },
-              {
-                id: "02",
-                icon: "M13 10V3L4 14h7v7l9-11h-7z",
-                title: "Solea CO₂ Laser",
-                description: "Cuts soft tissue without bleeding. Most procedures need zero anesthesia. You'll feel pressure, not pain.",
-              },
-              {
-                id: "03",
-                icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
-                title: "CEREC Primescan + Mill",
-                description: "Digital scan replaces goopy impressions. Mill carves your crown from solid ceramic in 12 minutes. Walk out same day.",
-              },
-            ].map((feature) => (
-              <div
-                key={feature.id}
-                className="group bg-zinc-950 p-8 rounded-2xl hover:bg-zinc-900/80 transition-colors duration-300 border border-slate-800"
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-14 h-14 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center group-hover:bg-brand-primary/20 transition-colors">
-                    <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={feature.icon} />
-                    </svg>
-                  </div>
-                  <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                    <span className="text-[10px] font-medium text-white/40">{feature.id}</span>
-                  </div>
-                </div>
-                <h3 className="text-xl font-semibold tracking-tight mb-3">{feature.title}</h3>
-                <p className="text-sm text-white/50 leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TechnologySection />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SERVICES LIST — CLEAN GRID
+          SERVICES LIST — ANIMATED INTERACTIVE GRID
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 md:px-12 relative">
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-          }}
-        />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-12">
-            <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-              Full Service Menu
-            </span>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.01em] mt-4 mb-3">
-              Comprehensive Care
-            </h2>
-            <p className="text-base text-white/50">
-              Complete dental services in {location.cityServed}.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {location.secondaryCategoriesGBP.map((category, index) => (
-              <div
-                key={index}
-                className="group bg-zinc-900 p-5 rounded-xl hover:bg-zinc-800 transition-colors duration-300 cursor-pointer border border-slate-800"
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                    <span className="text-[9px] font-medium text-white/40">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-                  <svg className="w-4 h-4 text-brand-primary opacity-0 group-hover:opacity-100 transform translate-x-1 group-hover:translate-x-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-                <h3 className="text-sm font-medium tracking-tight group-hover:text-brand-primary transition-colors">
-                  {category}
-                </h3>
-                <p className="text-[11px] text-white/40 mt-1.5">
-                  Digital precision care
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesGridSection location={location} />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           PATIENT REVIEWS — ASYMMETRIC INTERACTIVE SLIDER FRAMEWORK

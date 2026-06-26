@@ -4,17 +4,13 @@ import { clientMasterData, sampleReviews } from "@/data/master";
 import T3Nav from "./components/T3Nav";
 import T3Footer from "./components/T3Footer";
 import T3Hero from "./components/T3Hero";
-import T3ServiceAccordion from "./components/T3ServiceAccordion";
-import T3AmbientBackground from "./components/T3AmbientBackground";
+import T3BentoServices from "./components/T3BentoServices";
+import T3PremiumCanvas from "./components/T3PremiumCanvas";
+import PremiumVideoPlayer from "./components/PremiumVideoPlayer";
 import T3ReviewCarousel from "./components/T3ReviewCarousel";
 import {
-  TextReveal,
-  ExpansiveSection,
   AmbientLightNodes,
   MindfulScrollProgress,
-  ZenQuote,
-  CalmingDivider,
-  FloatingElement,
 } from "@/components/premium";
 
 const location = clientMasterData.locations[0];
@@ -33,8 +29,8 @@ export default function Template3Page() {
       {/* Mindful Scroll Progress Indicator */}
       <MindfulScrollProgress color="var(--primary-brand)" thickness={2} position="left" />
 
-      {/* Kinetic Ambient Drifting Background */}
-      <T3AmbientBackground />
+      {/* Premium Canvas Background with Mouse-Reactive Particles */}
+      <T3PremiumCanvas particleCount={40} orbCount={5} colorPalette="sanctuary" />
 
       {/* Additional Ambient Light Nodes for premium depth */}
       <AmbientLightNodes count={3} colors={["var(--primary-brand)", "#A8D5BA", "#E8D5C4"]} />
@@ -52,45 +48,51 @@ export default function Template3Page() {
       />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          WELCOME VIDEO — Spatial Gallery Style
+          WELCOME VIDEO — Cinematic Testimonial Player
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-16 lg:py-20 overflow-hidden">
-        <div className="max-w-4xl mx-auto px-8">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
-            Welcome
-          </p>
+      <section className="relative py-20 lg:py-28 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-8 h-px bg-brand-primary/30" />
+              <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-muted font-medium">
+                Welcome
+              </p>
+              <div className="w-8 h-px bg-brand-primary/30" />
+            </div>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-6 tracking-[0.05em]">
-            Our Practice, Our People
-          </h2>
+            <h2 className="font-sanctuary text-[clamp(1.8rem,4vw,3rem)] font-extralight text-center mb-6 tracking-[0.02em]">
+              Our Practice, Our People
+            </h2>
 
-          <p className="text-center text-neutral-muted font-light max-w-xl mx-auto mb-16 tracking-wide leading-relaxed">
-            Take a moment to meet our team. Discover the thoughtful care that defines our approach.
-          </p>
-
-          <div className="relative aspect-video overflow-hidden border border-brand-primary/10">
-            <video
-              className="w-full h-full object-cover"
-              controls
-              playsInline
-              webkit-playsinline="true"
-              poster="/images/team/staff-photo.jpg"
-            >
-              {/* Video source disabled for demo */}
-              Your browser does not support the video tag.
-            </video>
+            <p className="text-center text-neutral-muted font-light max-w-xl mx-auto tracking-wide leading-relaxed">
+              Take a moment to meet our team. Discover the thoughtful care that defines our approach.
+            </p>
           </div>
 
-          <p className="text-center text-[11px] uppercase tracking-[0.3em] text-neutral-muted mt-8">
-            A glimpse into mindful wellness
+          {/* Premium Video Player */}
+          <div className="rounded-2xl overflow-hidden shadow-2xl shadow-black/10 border border-white/50">
+            <PremiumVideoPlayer
+              poster="/images/team/staff-photo.jpg"
+              title="Meet Our Team"
+              subtitle="A glimpse into mindful wellness"
+              autoPlay={false}
+              muted={true}
+              loop={true}
+              aspectRatio="video"
+            />
+          </div>
+
+          <p className="text-center text-[11px] uppercase tracking-[0.3em] text-neutral-muted mt-10">
+            Experience the sanctuary difference
           </p>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SERVICES — Interactive Typographic Accordion
+          SERVICES — Interactive Bento Grid with Micro-Interactions
       ═══════════════════════════════════════════════════════════════════════ */}
-      <T3ServiceAccordion />
+      <T3BentoServices />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           PHILOSOPHY — Three Pillars with Architectural Numeric Backgrounds
