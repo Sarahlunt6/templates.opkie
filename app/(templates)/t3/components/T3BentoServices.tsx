@@ -38,8 +38,8 @@ const services: BentoService[] = [
     image: "/images/services/full-mouth-smile.jpg",
     icon: <Sparkles className="w-5 h-5" />,
     gridArea: "cosmetic",
-    accentFrom: "from-amber-900/70",
-    accentTo: "to-amber-800/40",
+    accentFrom: "from-slate-900/80",
+    accentTo: "to-slate-800/50",
   },
   {
     id: "preventive",
@@ -58,8 +58,8 @@ const services: BentoService[] = [
     image: "/images/office-interior.jpg",
     icon: <Shield className="w-5 h-5" />,
     gridArea: "preventive",
-    accentFrom: "from-teal-900/70",
-    accentTo: "to-teal-800/40",
+    accentFrom: "from-slate-900/80",
+    accentTo: "to-slate-800/50",
   },
   {
     id: "restorative",
@@ -78,8 +78,8 @@ const services: BentoService[] = [
     image: "/images/services/implant.jpg",
     icon: <Heart className="w-5 h-5" />,
     gridArea: "restorative",
-    accentFrom: "from-rose-900/70",
-    accentTo: "to-rose-800/40",
+    accentFrom: "from-slate-900/80",
+    accentTo: "to-slate-800/50",
   },
   {
     id: "orthodontics",
@@ -98,8 +98,8 @@ const services: BentoService[] = [
     image: "/images/services/invisalign.jpg",
     icon: <Smile className="w-5 h-5" />,
     gridArea: "orthodontics",
-    accentFrom: "from-sky-900/70",
-    accentTo: "to-sky-800/40",
+    accentFrom: "from-slate-900/80",
+    accentTo: "to-slate-800/50",
   },
   {
     id: "sedation",
@@ -118,8 +118,8 @@ const services: BentoService[] = [
     image: "/images/team/staff-photo.jpg",
     icon: <Clock className="w-5 h-5" />,
     gridArea: "sedation",
-    accentFrom: "from-violet-900/70",
-    accentTo: "to-violet-800/40",
+    accentFrom: "from-slate-900/80",
+    accentTo: "to-slate-800/50",
   },
   {
     id: "holistic",
@@ -138,8 +138,8 @@ const services: BentoService[] = [
     image: "/images/services/full-mouth-shade.jpg",
     icon: <Leaf className="w-5 h-5" />,
     gridArea: "holistic",
-    accentFrom: "from-emerald-900/70",
-    accentTo: "to-emerald-800/40",
+    accentFrom: "from-slate-900/80",
+    accentTo: "to-slate-800/50",
   },
 ];
 
