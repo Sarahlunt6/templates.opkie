@@ -15,8 +15,9 @@ interface BentoService {
   price?: string;
   image: string;
   icon: React.ReactNode;
-  size: "large" | "tall" | "wide" | "standard";
-  accent: string;
+  gridArea: string;
+  accentFrom: string;
+  accentTo: string;
 }
 
 const services: BentoService[] = [
@@ -34,10 +35,11 @@ const services: BentoService[] = [
     ],
     duration: "60-90 min",
     price: "From $450",
-    image: "/images/services/cosmetic.jpg",
+    image: "/images/services/full-mouth-smile.jpg",
     icon: <Sparkles className="w-5 h-5" />,
-    size: "large",
-    accent: "from-amber-100/80 to-amber-50/40",
+    gridArea: "cosmetic",
+    accentFrom: "from-amber-900/70",
+    accentTo: "to-amber-800/40",
   },
   {
     id: "preventive",
@@ -53,10 +55,11 @@ const services: BentoService[] = [
     ],
     duration: "60 min",
     price: "From $185",
-    image: "/images/services/preventive.jpg",
+    image: "/images/office-interior.jpg",
     icon: <Shield className="w-5 h-5" />,
-    size: "tall",
-    accent: "from-teal-100/80 to-teal-50/40",
+    gridArea: "preventive",
+    accentFrom: "from-teal-900/70",
+    accentTo: "to-teal-800/40",
   },
   {
     id: "restorative",
@@ -72,10 +75,11 @@ const services: BentoService[] = [
     ],
     duration: "Varies",
     price: "Custom quote",
-    image: "/images/services/restorative.jpg",
+    image: "/images/services/implant.jpg",
     icon: <Heart className="w-5 h-5" />,
-    size: "wide",
-    accent: "from-rose-100/80 to-rose-50/40",
+    gridArea: "restorative",
+    accentFrom: "from-rose-900/70",
+    accentTo: "to-rose-800/40",
   },
   {
     id: "orthodontics",
@@ -91,10 +95,11 @@ const services: BentoService[] = [
     ],
     duration: "6-18 months",
     price: "From $3,500",
-    image: "/images/services/aligners.jpg",
+    image: "/images/services/invisalign.jpg",
     icon: <Smile className="w-5 h-5" />,
-    size: "standard",
-    accent: "from-sky-100/80 to-sky-50/40",
+    gridArea: "orthodontics",
+    accentFrom: "from-sky-900/70",
+    accentTo: "to-sky-800/40",
   },
   {
     id: "sedation",
@@ -110,10 +115,11 @@ const services: BentoService[] = [
     ],
     duration: "Consultation first",
     price: "From $200",
-    image: "/images/services/sedation.jpg",
+    image: "/images/team/staff-photo.jpg",
     icon: <Clock className="w-5 h-5" />,
-    size: "standard",
-    accent: "from-violet-100/80 to-violet-50/40",
+    gridArea: "sedation",
+    accentFrom: "from-violet-900/70",
+    accentTo: "to-violet-800/40",
   },
   {
     id: "holistic",
@@ -129,20 +135,13 @@ const services: BentoService[] = [
     ],
     duration: "90 min initial",
     price: "Included",
-    image: "/images/services/holistic.jpg",
+    image: "/images/services/full-mouth-shade.jpg",
     icon: <Leaf className="w-5 h-5" />,
-    size: "tall",
-    accent: "from-emerald-100/80 to-emerald-50/40",
+    gridArea: "holistic",
+    accentFrom: "from-emerald-900/70",
+    accentTo: "to-emerald-800/40",
   },
 ];
-
-// Grid layout classes based on size
-const sizeClasses: Record<BentoService["size"], string> = {
-  large: "md:col-span-2 md:row-span-2",
-  tall: "md:row-span-2",
-  wide: "md:col-span-2",
-  standard: "",
-};
 
 interface BentoCardProps {
   service: BentoService;
@@ -154,14 +153,14 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.div
+    <motion.article
       layout
       layoutId={service.id}
       className={`
         relative overflow-hidden rounded-2xl cursor-pointer
-        ${sizeClasses[service.size]}
-        ${isExpanded ? "fixed inset-4 md:inset-8 z-50 m-auto max-w-4xl max-h-[90vh]" : ""}
+        ${isExpanded ? "fixed inset-4 md:inset-8 z-50 m-auto max-w-4xl max-h-[90vh]" : "h-full"}
       `}
+      style={{ gridArea: isExpanded ? undefined : service.gridArea }}
       onClick={onToggle}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -182,19 +181,19 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
           fill
           className={`
             object-cover transition-transform duration-700 ease-out
-            ${isHovered && !isExpanded ? "scale-105" : "scale-100"}
+            ${isHovered && !isExpanded ? "scale-110" : "scale-100"}
           `}
-          sizes={service.size === "large" ? "50vw" : "25vw"}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority={service.id === "cosmetic"}
         />
+        {/* Gradient overlay for text readability */}
         <div
           className={`
-            absolute inset-0 bg-gradient-to-t ${service.accent}
+            absolute inset-0 bg-gradient-to-t ${service.accentFrom} ${service.accentTo}
             transition-opacity duration-500
-            ${isExpanded ? "opacity-95" : "opacity-90"}
           `}
         />
-        {/* Premium gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       </div>
 
       {/* Border Illumination Effect */}
@@ -202,14 +201,14 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
         className="absolute inset-0 rounded-2xl pointer-events-none"
         animate={{
           boxShadow: isHovered && !isExpanded
-            ? "inset 0 0 0 1px rgba(255,255,255,0.3), 0 0 40px -10px rgba(0,0,0,0.15)"
-            : "inset 0 0 0 1px rgba(255,255,255,0.1), 0 0 0px 0px rgba(0,0,0,0)",
+            ? "inset 0 0 0 2px rgba(255,255,255,0.4), 0 8px 32px -8px rgba(0,0,0,0.3)"
+            : "inset 0 0 0 1px rgba(255,255,255,0.1), 0 4px 16px -4px rgba(0,0,0,0.1)",
         }}
         transition={{ duration: 0.4 }}
       />
 
       {/* Content */}
-      <div className={`relative z-10 h-full flex flex-col justify-end p-6 ${isExpanded ? "p-8 md:p-12" : ""}`}>
+      <div className={`relative z-10 h-full flex flex-col justify-end p-5 md:p-6 ${isExpanded ? "p-8 md:p-12" : ""}`}>
         <AnimatePresence mode="wait">
           {!isExpanded ? (
             <motion.div
@@ -221,7 +220,7 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
             >
               {/* Icon */}
               <motion.div
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 text-brand-primary mb-4 backdrop-blur-sm"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/95 text-brand-primary mb-3 shadow-lg"
                 animate={{
                   scale: isHovered ? 1.1 : 1,
                   rotate: isHovered ? 5 : 0,
@@ -232,18 +231,18 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
               </motion.div>
 
               {/* Title */}
-              <h3 className="text-xl md:text-2xl font-light text-white mb-2 tracking-wide">
+              <h3 className="text-lg md:text-xl font-light text-white mb-1.5 tracking-wide drop-shadow-md">
                 {service.title}
               </h3>
 
               {/* Short Description */}
-              <p className="text-white/80 text-sm font-light tracking-wide leading-relaxed">
+              <p className="text-white/90 text-sm font-light tracking-wide leading-relaxed drop-shadow-sm">
                 {service.shortDescription}
               </p>
 
               {/* Hover Indicator */}
               <motion.div
-                className="flex items-center gap-2 mt-4 text-white/60 text-xs uppercase tracking-widest"
+                className="flex items-center gap-2 mt-3 text-white/80 text-xs uppercase tracking-widest"
                 animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
                 transition={{ duration: 0.3 }}
               >
@@ -264,30 +263,30 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
               {/* Close Button */}
               <button
                 onClick={onToggle}
-                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors z-10"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
 
               {/* Expanded Content */}
-              <div className="grid md:grid-cols-2 gap-8 h-full items-center">
+              <div className="grid md:grid-cols-2 gap-8 h-full items-center pt-8 md:pt-0">
                 {/* Left Column - Info */}
                 <div className="space-y-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/90 text-brand-primary backdrop-blur-sm">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/95 text-brand-primary shadow-lg">
                     {service.icon}
                   </div>
 
                   <div>
-                    <p className="text-white/60 text-xs uppercase tracking-[0.3em] mb-2">
+                    <p className="text-white/70 text-xs uppercase tracking-[0.3em] mb-2">
                       Service
                     </p>
-                    <h2 className="text-3xl md:text-4xl font-extralight text-white tracking-wide">
+                    <h2 className="text-3xl md:text-4xl font-extralight text-white tracking-wide drop-shadow-lg">
                       {service.title}
                     </h2>
                   </div>
 
-                  <p className="text-white/90 font-light leading-relaxed">
+                  <p className="text-white/95 font-light leading-relaxed drop-shadow-sm">
                     {service.fullDescription}
                   </p>
 
@@ -295,26 +294,26 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
                   <div className="flex gap-6 pt-2">
                     {service.duration && (
                       <div>
-                        <p className="text-white/50 text-xs uppercase tracking-wider mb-1">
+                        <p className="text-white/60 text-xs uppercase tracking-wider mb-1">
                           Duration
                         </p>
-                        <p className="text-white font-light">{service.duration}</p>
+                        <p className="text-white font-light drop-shadow-sm">{service.duration}</p>
                       </div>
                     )}
                     {service.price && (
                       <div>
-                        <p className="text-white/50 text-xs uppercase tracking-wider mb-1">
+                        <p className="text-white/60 text-xs uppercase tracking-wider mb-1">
                           Starting
                         </p>
-                        <p className="text-white font-light">{service.price}</p>
+                        <p className="text-white font-light drop-shadow-sm">{service.price}</p>
                       </div>
                     )}
                   </div>
                 </div>
 
                 {/* Right Column - Benefits */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8">
-                  <p className="text-white/60 text-xs uppercase tracking-[0.3em] mb-6">
+                <div className="bg-white/15 backdrop-blur-md rounded-xl p-6 md:p-8 border border-white/20">
+                  <p className="text-white/70 text-xs uppercase tracking-[0.3em] mb-6">
                     What&apos;s Included
                   </p>
 
@@ -325,9 +324,9 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 + index * 0.1 }}
-                        className="flex items-start gap-3 text-white/90"
+                        className="flex items-start gap-3 text-white/95"
                       >
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/60 mt-2 flex-shrink-0" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-white/80 mt-2 flex-shrink-0" />
                         <span className="font-light tracking-wide">{benefit}</span>
                       </motion.li>
                     ))}
@@ -337,7 +336,7 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className="mt-8 w-full py-4 bg-white text-brand-primary text-sm uppercase tracking-[0.2em] font-light rounded-lg hover:bg-white/90 transition-colors"
+                    className="mt-8 w-full py-4 bg-white text-brand-primary text-sm uppercase tracking-[0.2em] font-medium rounded-lg hover:bg-white/90 transition-colors shadow-lg"
                     onClick={(e) => e.stopPropagation()}
                   >
                     Schedule Consultation
@@ -348,7 +347,7 @@ function BentoCard({ service, isExpanded, onToggle }: BentoCardProps) {
           )}
         </AnimatePresence>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
 
@@ -382,9 +381,20 @@ export default function T3BentoServices() {
           </p>
         </div>
 
-        {/* Bento Grid */}
+        {/* Bento Grid with CSS Grid Template */}
         <LayoutGroup>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[220px]">
+          <div
+            className="grid gap-4"
+            style={{
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gridTemplateRows: "repeat(3, minmax(180px, 220px))",
+              gridTemplateAreas: `
+                "cosmetic cosmetic preventive preventive"
+                "restorative restorative orthodontics sedation"
+                "restorative restorative holistic holistic"
+              `,
+            }}
+          >
             {services.map((service) => (
               <BentoCard
                 key={service.id}
@@ -394,6 +404,23 @@ export default function T3BentoServices() {
               />
             ))}
           </div>
+
+          {/* Mobile Grid - Single Column */}
+          <style jsx>{`
+            @media (max-width: 768px) {
+              div[style*="gridTemplateAreas"] {
+                grid-template-columns: 1fr !important;
+                grid-template-rows: repeat(6, 200px) !important;
+                grid-template-areas:
+                  "cosmetic"
+                  "preventive"
+                  "restorative"
+                  "orthodontics"
+                  "sedation"
+                  "holistic" !important;
+              }
+            }
+          `}</style>
         </LayoutGroup>
 
         {/* Overlay for expanded state */}
@@ -404,7 +431,7 @@ export default function T3BentoServices() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
               onClick={() => setExpandedId(null)}
             />
           )}
