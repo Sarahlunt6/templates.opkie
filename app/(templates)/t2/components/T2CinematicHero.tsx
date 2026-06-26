@@ -371,7 +371,7 @@ export default function T2CinematicHero({
                 {/* Team Photo Container */}
                 <div className="relative aspect-[4/3] max-w-lg ml-auto rounded-2xl border border-white/[0.05] bg-zinc-900/40 overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/team/staff-photo.jpg"
+                    src="/images/team-ortho.jpeg"
                     alt={`The team at ${clientMasterData.globalPracticeName}`}
                     fill
                     className="object-cover"
