@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import T2Nav from "./components/T2Nav";
 import T2Footer from "./components/T2Footer";
+import T2CinematicHero from "./components/T2CinematicHero";
 import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
 import {
   TextReveal,
@@ -43,230 +45,14 @@ export default function Template2Page() {
       <T2Nav />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          HERO SECTION — ELITE MULTI-LAYERED PREMIUM MASTERPIECE
-          Depth-injected ambient canvas, overlapping structural framework,
-          glassmorphic UI elements, architectural crosshairs
+          HERO SECTION — CINEMATIC COMPONENT
+          Full-screen video hero with Framer Motion animations
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="min-h-screen relative overflow-hidden bg-zinc-950">
-        {/* ══════════════════════════════════════════════════════════════════
-            LAYER 0: Fullscreen Video Background
-            Ambient cinematic video with dark overlay for text legibility
-        ══════════════════════════════════════════════════════════════════ */}
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            webkit-playsinline="true"
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            {/* Video source disabled for demo */}
-          </video>
-          {/* Dark overlay for text contrast */}
-          <div className="absolute inset-0 bg-zinc-950/70" />
-          {/* Gradient fade at bottom for metrics bar transition */}
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-zinc-950 to-transparent" />
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════
-            LAYER 0.5: Ambient Glow Overlay (Depth Injection)
-            Ultra-soft radial gradient glow elements with CSS animation
-        ══════════════════════════════════════════════════════════════════ */}
-        <div className="absolute inset-0 z-[1] pointer-events-none">
-          {/* Deep teal ambient glow - behind heading area */}
-          <div
-            className="absolute w-[600px] h-[600px] rounded-full blur-[160px] bg-teal-500/[0.06] animate-drift top-[15%] left-[10%]"
-          />
-          {/* Soft slate ambient glow - behind clinician area */}
-          <div
-            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] bg-slate-400/[0.04] animate-drift-reverse top-[25%] right-[5%]"
-          />
-          {/* Subtle brand accent glow - lower left */}
-          <div
-            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-brand-primary/[0.03] animate-drift-slow bottom-[10%] left-[20%]"
-          />
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════
-            LAYER 1: Refined Corner UI Tags (High-End Micro-Labels)
-            Sharp uppercase sans-serif with geometric design marks
-        ══════════════════════════════════════════════════════════════════ */}
-        <div className="absolute top-8 left-8 z-30 flex items-center gap-3">
-          {/* Geometric design mark - vertical line token */}
-          <div className="w-[2px] h-4 bg-brand-primary/60" />
-          <span className="text-[10px] tracking-[0.25em] text-white/50 uppercase font-medium">
-            Advanced Dentistry
-          </span>
-        </div>
-        <div className="absolute top-8 right-8 z-30 flex items-center gap-3">
-          <span className="text-[10px] tracking-[0.25em] text-white/40 uppercase">
-            {location.cityServed}
-          </span>
-          {/* Geometric separator */}
-          <div className="w-1 h-1 bg-white/20 rotate-45" />
-          <span className="text-[10px] tracking-[0.25em] text-brand-primary/70 uppercase font-medium">
-            Now Accepting
-          </span>
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════
-            LAYER 2: Architectural Crosshairs & Alignment Grid
-            Precise intersection indicators with + symbols
-        ══════════════════════════════════════════════════════════════════ */}
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          {/* Corner structural frames */}
-          <div className="absolute top-16 left-16 w-24 h-24 border-l border-t border-white/[0.04]" />
-          <div className="absolute top-16 right-16 w-24 h-24 border-r border-t border-white/[0.04]" />
-          <div className="absolute bottom-32 left-16 w-24 h-24 border-l border-b border-white/[0.04]" />
-          <div className="absolute bottom-32 right-16 w-24 h-24 border-r border-b border-white/[0.04]" />
-
-          {/* Intersection crosshair indicators */}
-          <span className="absolute top-16 left-16 -translate-x-1/2 -translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
-          <span className="absolute top-16 right-16 translate-x-1/2 -translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
-          <span className="absolute bottom-32 left-16 -translate-x-1/2 translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
-          <span className="absolute bottom-32 right-16 translate-x-1/2 translate-y-1/2 text-white/20 text-xs font-light select-none">+</span>
-
-          {/* Center vertical alignment rule */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block">
-            <div className="w-[1px] h-40 bg-gradient-to-b from-transparent via-white/[0.04] to-transparent" />
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════
-            LAYER 3: Primary Content Grid with Overlapping Framework
-            Text block overlaps clinician card boundary by 15-20%
-        ══════════════════════════════════════════════════════════════════ */}
-        <div className="min-h-screen relative z-20 px-8 md:px-12 lg:px-16 py-32 lg:py-24">
-          <div className="max-w-7xl mx-auto h-full flex items-center">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center w-full">
-
-              {/* Left Column - Typography Stack (overlaps into col 7-8) */}
-              <div className="lg:col-span-7 relative z-20">
-                {/* Category Label - High-end UI tag */}
-                <div className="flex items-center gap-3 mb-8">
-                  {/* Crisp geometric square mark */}
-                  <div className="w-2 h-2 bg-brand-primary/80 rotate-45" />
-                  <span className="text-[10px] tracking-[0.25em] text-white/50 uppercase font-medium">
-                    Precision Digital Dentistry
-                  </span>
-                </div>
-
-                {/* Main Headline - Designed to overlap clinician card + Text Reveal */}
-                <HeadlineReveal className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-semibold tracking-tight leading-[1.02] mb-8 lg:pr-0">
-                  <span className="block">Same-Day Crowns.</span>
-                  <span className="block">3D-Guided Implants.</span>
-                  <span className="block text-brand-primary">Zero Guesswork.</span>
-                </HeadlineReveal>
-
-                {/* Subheading */}
-                <p className="text-base md:text-lg text-white/50 max-w-md mb-10 leading-relaxed">
-                  Our CEREC system mills your permanent crown while you wait. Our CBCT scanner plans your implant to the tenth of a millimeter. This is dentistry without second appointments.
-                </p>
-
-                {/* CTA Buttons - Glassmorphic capsule styling with Magnetic Effect */}
-                <div className="flex flex-wrap gap-4">
-                  <MagneticElement strength={0.15}>
-                    <a
-                      href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                      className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 hover:shadow-lg hover:shadow-brand-primary/20 transition-all duration-300"
-                    >
-                      <span>Schedule Consultation</span>
-                      <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </a>
-                  </MagneticElement>
-                  <MagneticElement strength={0.15}>
-                    <a
-                      href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                      className="group inline-flex items-center gap-3 px-8 py-4 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/15 hover:bg-white/[0.03] hover:backdrop-blur-md hover:border-white/25 transition-all duration-300"
-                    >
-                      <span>{location.phoneGBP}</span>
-                    </a>
-                  </MagneticElement>
-                </div>
-              </div>
-
-              {/* Right Column - Team Photo Panel */}
-              <div className="lg:col-span-5 relative hidden lg:block">
-                <div className="relative lg:-ml-12">
-                  {/* Team Photo Container */}
-                  <div className="relative aspect-[4/3] max-w-lg ml-auto rounded-2xl border border-white/[0.05] bg-zinc-900/40 overflow-hidden shadow-2xl">
-                    <Image
-                      src="/images/team/staff-photo.jpg"
-                      alt={`The team at ${clientMasterData.globalPracticeName}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 500px"
-                      priority
-                    />
-
-                    {/* Subtle bottom gradient */}
-                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-zinc-950/50 to-transparent" />
-
-                    {/* Corner architectural frames */}
-                    <div className="absolute top-4 left-4 w-8 h-8 border-l border-t border-white/[0.08]" />
-                    <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-white/[0.08]" />
-                    <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-white/[0.08]" />
-                    <div className="absolute bottom-4 right-4 w-8 h-8 border-r border-b border-white/[0.08]" />
-
-                    {/* Team badge */}
-                    <div className="absolute bottom-5 left-5 right-5 z-10">
-                      <div className="backdrop-blur-xl bg-zinc-950/60 border border-white/[0.08] rounded-xl px-5 py-3 flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span className="text-[11px] tracking-[0.15em] text-white/70 uppercase">Our Team</span>
-                        </div>
-                        <span className="text-[10px] tracking-[0.2em] text-white/40">Now Accepting Patients</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Decorative offset frame */}
-                  <div className="absolute -top-3 -right-3 w-full h-full rounded-2xl border border-white/[0.03] -z-10" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════
-            LAYER 4: Metrics Bar - Individual Micro-Panel Containers
-            Each data point in separate container with top border highlight
-        ══════════════════════════════════════════════════════════════════ */}
-        <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-white/[0.04] bg-zinc-950/80 backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16">
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.04]">
-              {[
-                { value: "4.9", label: "Google (287 reviews)" },
-                { value: "Same-Day", label: "CEREC Crowns" },
-                { value: "0.1mm", label: "CBCT Precision" },
-                { value: "2,400+", label: "Implants Placed" },
-              ].map((stat, index) => (
-                <div
-                  key={index}
-                  className="group relative py-6 px-6 md:px-8 hover:bg-white/[0.02] transition-all duration-300 cursor-default"
-                >
-                  {/* Top border highlight rule */}
-                  <div className="absolute top-0 left-6 right-6 md:left-8 md:right-8 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent group-hover:via-brand-primary/20 transition-all duration-300" />
-
-                  {/* Metric content */}
-                  <div className="border-t border-white/[0.05] pt-4">
-                    <span className="block text-2xl md:text-3xl font-semibold text-brand-primary tracking-tight mb-1">
-                      {stat.value}
-                    </span>
-                    <span className="block text-[10px] tracking-[0.15em] text-white/40 uppercase">
-                      {stat.label}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-      </section>
+      <T2CinematicHero
+        videoSrc="/videos/hero-ambient.mp4"
+        posterSrc="/images/team/staff-photo.jpg"
+        isMobile={isMobile}
+      />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           REFINED MARQUEE — ELEGANT SEPARATOR

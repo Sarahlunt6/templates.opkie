@@ -32,6 +32,15 @@ module.exports = {
         prestige: ["var(--font-prestige)", "Cormorant Garamond", "Georgia", "serif"],
         innovator: ["var(--font-innovator)", "Space Grotesk", "ui-sans-serif", "sans-serif"],
         sanctuary: ["var(--font-sanctuary)", "Outfit", "ui-sans-serif", "sans-serif"],
+        // T2 Premium Cinematic Typography System
+        // Display: Elegant serif for headlines - editorial gravitas
+        "t2-display": ["var(--font-t2-display)", "Playfair Display", "Georgia", "serif"],
+        // Heading: Modern geometric sans for subheadings - tech precision
+        "t2-heading": ["var(--font-t2-heading)", "Inter", "ui-sans-serif", "sans-serif"],
+        // Body: Highly readable geometric sans for body copy
+        "t2-body": ["var(--font-t2-body)", "Inter", "ui-sans-serif", "sans-serif"],
+        // Mono: Technical data and UI labels
+        "t2-mono": ["var(--font-t2-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
       },
       fontSize: {
         // Fluid typography using clamp()
@@ -45,6 +54,14 @@ module.exports = {
         "fluid-4xl": "clamp(2.25rem, 1.75rem + 2.5vw, 3rem)",
         "fluid-5xl": "clamp(3rem, 2rem + 5vw, 4rem)",
         "fluid-6xl": "clamp(3.75rem, 2.5rem + 6.25vw, 5rem)",
+        // T2 Cinematic Display Scale - Editorial Impact
+        "t2-hero": ["clamp(3.5rem, 3rem + 6vw, 7rem)", { lineHeight: "0.95", letterSpacing: "-0.03em", fontWeight: "500" }],
+        "t2-display": ["clamp(2.5rem, 2rem + 4vw, 5rem)", { lineHeight: "1.0", letterSpacing: "-0.02em", fontWeight: "500" }],
+        "t2-headline": ["clamp(1.75rem, 1.5rem + 2vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "t2-subhead": ["clamp(1.125rem, 1rem + 0.5vw, 1.375rem)", { lineHeight: "1.4", letterSpacing: "0.01em", fontWeight: "500" }],
+        "t2-body-lg": ["clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem)", { lineHeight: "1.7", letterSpacing: "0" }],
+        "t2-caption": ["0.8125rem", { lineHeight: "1.5", letterSpacing: "0.04em", fontWeight: "500" }],
+        "t2-micro": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.08em", fontWeight: "600" }],
       },
       spacing: {
         // Fluid spacing
@@ -75,6 +92,15 @@ module.exports = {
         "drift-reverse": "drift 12s ease-in-out infinite reverse",
         "drift-slow": "drift 15s ease-in-out infinite",
         "marquee": "scroll 30s linear infinite",
+        // T2 Cinematic Animations
+        "t2-fade-up": "t2FadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "t2-fade-up-stagger": "t2FadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--stagger-delay, 0s) forwards",
+        "t2-scale-reveal": "t2ScaleReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "t2-line-expand": "t2LineExpand 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "t2-glow-pulse": "t2GlowPulse 4s ease-in-out infinite",
+        "t2-gradient-shift": "t2GradientShift 8s ease-in-out infinite",
+        "t2-text-shimmer": "t2TextShimmer 3s ease-in-out infinite",
+        "t2-video-zoom": "t2VideoZoom 20s ease-in-out infinite",
       },
       keyframes: {
         slideIn: {
@@ -117,6 +143,35 @@ module.exports = {
           "25%": { transform: "translate(20px, -15px)" },
           "50%": { transform: "translate(-10px, 20px)" },
           "75%": { transform: "translate(-20px, -10px)" },
+        },
+        // T2 Cinematic Keyframes
+        t2FadeUp: {
+          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        t2ScaleReveal: {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        t2LineExpand: {
+          "0%": { transform: "scaleX(0)", transformOrigin: "left" },
+          "100%": { transform: "scaleX(1)", transformOrigin: "left" },
+        },
+        t2GlowPulse: {
+          "0%, 100%": { opacity: "0.4", filter: "blur(100px)" },
+          "50%": { opacity: "0.6", filter: "blur(120px)" },
+        },
+        t2GradientShift: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        t2TextShimmer: {
+          "0%, 100%": { backgroundPosition: "-200% center" },
+          "50%": { backgroundPosition: "200% center" },
+        },
+        t2VideoZoom: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
         },
       },
       transitionTimingFunction: {
