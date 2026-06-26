@@ -530,7 +530,7 @@ export default function Template2Page() {
           Full-screen video hero with Framer Motion animations
       ═══════════════════════════════════════════════════════════════════════ */}
       <T2CinematicHero
-        videoSrc="/videos/hero-ambient.mp4"
+        videoSrc="/videos/hero-background.mp4"
         posterSrc="/images/team/staff-photo.jpg"
         isMobile={isMobile}
       />
