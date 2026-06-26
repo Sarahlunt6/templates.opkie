@@ -261,28 +261,39 @@ function TechnologySection() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// SERVICES GRID SECTION — Animated Interactive Grid
+// SERVICES GRID SECTION — Animated Interactive Grid with Images
 // ═══════════════════════════════════════════════════════════════════════
 function ServicesGridSection({ location }: { location: typeof clientMasterData.locations[0] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Service icons mapping
-  const serviceIcons: Record<string, string> = {
-    "Cosmetic Dentist": "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
-    "Dental Implants": "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
-    "Teeth Whitening": "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
-    "Orthodontist": "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z",
-    "Emergency Dental Service": "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-    "Dentures": "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-    "Root Canal Treatment": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
-    "Pediatric Dentist": "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
-    default: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+  // Service images and icons mapping
+  const serviceData: Record<string, { image: string; icon: string }> = {
+    "Cosmetic Dentist": {
+      image: "/images/services/full-mouth-smile.jpg",
+      icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+    },
+    "Dental Implants Provider": {
+      image: "/images/services/implant.jpg",
+      icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+    },
+    "Teeth Whitening Service": {
+      image: "/images/services/full-mouth-shade.jpg",
+      icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
+    },
+    "Emergency Dental Service": {
+      image: "/images/services/braces.jpg",
+      icon: "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    },
+    default: {
+      image: "/images/services/invisalign.jpg",
+      icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+    },
   };
 
-  const getIcon = (category: string) => {
-    return serviceIcons[category] || serviceIcons.default;
+  const getServiceData = (category: string) => {
+    return serviceData[category] || serviceData.default;
   };
 
   return (
@@ -299,32 +310,6 @@ function ServicesGridSection({ location }: { location: typeof clientMasterData.l
           backgroundSize: "64px 64px",
         }}
       />
-
-      {/* Floating particles effect */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-brand-primary/20 rounded-full"
-            initial={{ opacity: 0 }}
-            animate={isInView ? {
-              opacity: [0, 0.5, 0],
-              y: [0, -100],
-              x: [0, (i % 2 === 0 ? 20 : -20)],
-            } : {}}
-            transition={{
-              duration: 4,
-              delay: i * 0.8,
-              repeat: Infinity,
-              ease: "easeOut",
-            }}
-            style={{
-              left: `${15 + i * 15}%`,
-              top: `${60 + (i % 3) * 10}%`,
-            }}
-          />
-        ))}
-      </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
@@ -360,154 +345,162 @@ function ServicesGridSection({ location }: { location: typeof clientMasterData.l
           </motion.p>
         </motion.div>
 
-        {/* Animated grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {location.secondaryCategoriesGBP.map((category, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{
-                duration: 0.5,
-                delay: 0.1 + index * 0.05,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="group relative bg-zinc-900 p-5 rounded-xl cursor-pointer overflow-hidden"
-            >
-              {/* Animated background gradient */}
+        {/* Animated grid with images */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {location.secondaryCategoriesGBP.map((category, index) => {
+            const data = getServiceData(category);
+            return (
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 via-brand-primary/5 to-transparent"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{
-                  opacity: hoveredIndex === index ? 1 : 0,
-                  scale: hoveredIndex === index ? 1 : 0.8,
+                key={index}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.1 + index * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
                 }}
-                transition={{ duration: 0.3 }}
-              />
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="group relative rounded-2xl cursor-pointer overflow-hidden aspect-[4/5]"
+              >
+                {/* Background Image */}
+                <motion.div
+                  className="absolute inset-0"
+                  animate={{
+                    scale: hoveredIndex === index ? 1.08 : 1,
+                  }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Image
+                    src={data.image}
+                    alt={category}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </motion.div>
 
-              {/* Animated border */}
-              <motion.div
-                className="absolute inset-0 rounded-xl border border-slate-800"
-                animate={{
-                  borderColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.4)" : "rgba(51, 65, 85, 1)",
-                }}
-                transition={{ duration: 0.3 }}
-              />
+                {/* Gradient Overlay */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"
+                  animate={{
+                    opacity: hoveredIndex === index ? 0.95 : 0.85,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
 
-              {/* Shimmer effect on hover */}
-              <motion.div
-                className="absolute inset-0 opacity-0"
-                animate={{
-                  opacity: hoveredIndex === index ? [0, 0.1, 0] : 0,
-                  backgroundPosition: hoveredIndex === index ? ["200% 0", "-200% 0"] : "200% 0",
-                }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                style={{
-                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)",
-                  backgroundSize: "200% 100%",
-                }}
-              />
+                {/* Brand color overlay on hover */}
+                <motion.div
+                  className="absolute inset-0 bg-brand-primary/20"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: hoveredIndex === index ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-3">
-                  {/* Animated number badge with icon */}
-                  <motion.div
-                    className="flex items-center gap-2"
-                    animate={{ x: hoveredIndex === index ? 4 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                {/* Border */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl border border-white/10"
+                  animate={{
+                    borderColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.5)" : "rgba(255,255,255,0.1)",
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+
+                {/* Content */}
+                <div className="absolute inset-0 p-5 flex flex-col justify-between z-10">
+                  {/* Top Row - Icon and Number */}
+                  <div className="flex items-center justify-between">
                     <motion.div
-                      className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center"
+                      className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
                       animate={{
-                        backgroundColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.15)" : "rgba(255,255,255,0.05)",
-                        borderColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.3)" : "rgba(255,255,255,0.1)",
-                        scale: hoveredIndex === index ? 1.05 : 1,
+                        backgroundColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.3)" : "rgba(255,255,255,0.1)",
+                        borderColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.5)" : "rgba(255,255,255,0.2)",
+                        scale: hoveredIndex === index ? 1.1 : 1,
                       }}
                       transition={{ duration: 0.3 }}
                     >
                       <motion.svg
-                        className="w-4 h-4"
+                        className="w-5 h-5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                         animate={{
-                          color: hoveredIndex === index ? "var(--primary-brand)" : "rgba(255,255,255,0.4)",
+                          color: hoveredIndex === index ? "var(--primary-brand)" : "rgba(255,255,255,0.8)",
                         }}
                         transition={{ duration: 0.3 }}
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={getIcon(category)} />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={data.icon} />
                       </motion.svg>
                     </motion.div>
-                    <span className={`text-[9px] font-medium transition-colors duration-300 ${hoveredIndex === index ? "text-brand-primary" : "text-white/40"}`}>
+
+                    <span className={`text-[10px] font-semibold transition-colors duration-300 ${hoveredIndex === index ? "text-brand-primary" : "text-white/50"}`}>
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                  </motion.div>
+                  </div>
 
-                  {/* Arrow with spring animation */}
-                  <motion.svg
-                    className="w-4 h-4 text-brand-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{
-                      opacity: hoveredIndex === index ? 1 : 0,
-                      x: hoveredIndex === index ? 0 : -10,
-                      rotate: hoveredIndex === index ? 0 : -45,
-                    }}
-                    transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </motion.svg>
+                  {/* Bottom Row - Title and Description */}
+                  <div>
+                    <motion.h3
+                      className="text-lg font-semibold tracking-tight mb-2"
+                      animate={{
+                        color: hoveredIndex === index ? "var(--primary-brand)" : "rgba(255,255,255,0.95)",
+                        y: hoveredIndex === index ? -4 : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {category}
+                    </motion.h3>
+
+                    <motion.p
+                      className="text-xs text-white/50 leading-relaxed"
+                      animate={{
+                        opacity: hoveredIndex === index ? 1 : 0.6,
+                        y: hoveredIndex === index ? -2 : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      Digital precision care
+                    </motion.p>
+
+                    {/* Arrow indicator */}
+                    <motion.div
+                      className="flex items-center gap-2 mt-3"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{
+                        opacity: hoveredIndex === index ? 1 : 0,
+                        x: hoveredIndex === index ? 0 : -10,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-brand-primary font-medium">
+                        Learn More
+                      </span>
+                      <svg
+                        className="w-4 h-4 text-brand-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </motion.div>
+                  </div>
                 </div>
 
-                <motion.h3
-                  className="text-sm font-medium tracking-tight transition-colors duration-300"
-                  animate={{
-                    color: hoveredIndex === index ? "var(--primary-brand)" : "rgba(255,255,255,0.9)",
-                    x: hoveredIndex === index ? 2 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {category}
-                </motion.h3>
-
-                <motion.p
-                  className="text-[11px] text-white/40 mt-1.5"
-                  animate={{
-                    opacity: hoveredIndex === index ? 0.7 : 0.4,
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Digital precision care
-                </motion.p>
-
-                {/* Decorative line that animates in */}
+                {/* Bottom accent line */}
                 <motion.div
-                  className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-primary to-brand-primary/30"
+                  className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-primary via-brand-primary to-brand-primary/50"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: hoveredIndex === index ? 1 : 0 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   style={{ originX: 0 }}
                 />
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
-
-        {/* Bottom CTA hint */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-8 text-center"
-        >
-          <p className="text-xs text-white/30">
-            Hover to explore our services
-          </p>
-        </motion.div>
       </div>
     </section>
   );
