@@ -18,6 +18,12 @@ interface MediaCardProps {
   aspectRatio?: string;
 }
 
+interface VideoCardProps {
+  videoSrc: string;
+  caption: string;
+  aspectRatio?: string;
+}
+
 function MediaCard({ imageSrc, imageAlt, caption, aspectRatio = "aspect-[3/4]" }: MediaCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -43,6 +49,50 @@ function MediaCard({ imageSrc, imageAlt, caption, aspectRatio = "aspect-[3/4]" }
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 33vw"
           />
+        </motion.div>
+        {/* Subtle warm overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-stone-50/5 pointer-events-none" />
+      </div>
+      {/* Caption */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="mt-5 text-[10px] uppercase tracking-[0.3em] text-stone-400 font-medium text-center"
+      >
+        {caption}
+      </motion.p>
+    </motion.div>
+  );
+}
+
+function VideoCard({ videoSrc, caption, aspectRatio = "aspect-[3/4]" }: VideoCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col items-center"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className={`relative ${aspectRatio} w-full rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl shadow-black/[0.08] border border-black/[0.04]`}>
+        <motion.div
+          animate={{ scale: isHovered ? 1.05 : 1 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0"
+        >
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
         </motion.div>
         {/* Subtle warm overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-stone-50/5 pointer-events-none" />
@@ -156,15 +206,14 @@ export default function T3Hero({
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-8 lg:gap-6 xl:gap-10 w-full items-center">
 
           {/* ═══════════════════════════════════════════════════════════════════
-              LEFT COLUMN - Sanctuary Media Card
+              LEFT COLUMN - Sanctuary Video Card
           ═══════════════════════════════════════════════════════════════════ */}
           <motion.div
             style={{ y: leftColumnY }}
             className="hidden lg:block"
           >
-            <MediaCard
-              imageSrc="/images/office-interior.jpg"
-              imageAlt="Serene dental sanctuary interior"
+            <VideoCard
+              videoSrc="/videos/hero-background.mp4"
               caption="Explore the Sanctuary"
               aspectRatio="aspect-[3/4]"
             />
@@ -303,9 +352,8 @@ export default function T3Hero({
       <div className="lg:hidden px-6 pb-12">
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
           <div className="flex-shrink-0 w-[260px] snap-center">
-            <MediaCard
-              imageSrc="/images/office-interior.jpg"
-              imageAlt="Serene dental sanctuary interior"
+            <VideoCard
+              videoSrc="/videos/hero-background.mp4"
               caption="Explore the Sanctuary"
               aspectRatio="aspect-[4/5]"
             />
