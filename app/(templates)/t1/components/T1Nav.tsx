@@ -51,7 +51,7 @@ export default function T1Nav() {
 
       {/* Floating Capsule "Navigation Island" */}
       <nav
-        className="fixed top-14 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/40 backdrop-blur-2xl saturate-150 border border-white/50 rounded-full shadow-[0_24px_50px_-12px_rgba(15,90,83,0.08)]"
+        className="fixed top-14 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/90 backdrop-blur-2xl saturate-150 border border-white/60 rounded-full shadow-[0_24px_50px_-12px_rgba(15,90,83,0.12)]"
         role="navigation"
         aria-label="Primary navigation"
       >
@@ -63,7 +63,7 @@ export default function T1Nav() {
               alt={location.practiceNameGBP}
               width={140}
               height={32}
-              className="h-9 w-auto"
+              className="h-9 w-auto brightness-0"
               priority
             />
           </Link>
@@ -74,7 +74,7 @@ export default function T1Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-800 hover:text-black transition-colors"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-900 hover:text-black transition-colors"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -159,7 +159,7 @@ export default function T1Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-800 hover:text-black transition-colors"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-900 hover:text-black transition-colors"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -187,9 +187,9 @@ export default function T1Nav() {
             {/* Phone Text with Icon */}
             <a
               href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="flex items-center gap-2 text-[11px] font-medium text-slate-800 tracking-wide hover:text-[#0f5a53] transition-colors group"
+              className="flex items-center gap-2 text-[11px] font-semibold text-slate-900 tracking-wide hover:text-[#0f5a53] transition-colors group"
             >
-              <svg className="w-3.5 h-3.5 text-slate-700 group-hover:text-[#0f5a53] transition-colors" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3.5 h-3.5 text-slate-900 group-hover:text-[#0f5a53] transition-colors" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
               <span>{location.phoneGBP}</span>

@@ -207,7 +207,7 @@ export default function T2CinematicHero({
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="absolute top-24 left-8 md:top-28 md:left-8 z-30 flex items-center gap-3"
+        className="absolute top-32 left-8 md:top-36 md:left-12 z-30 flex items-center gap-3"
       >
         <div className="w-[2px] h-4 bg-brand-primary/60" />
         <span className="text-t2-micro text-[var(--t2-text-muted)] uppercase">
@@ -219,7 +219,7 @@ export default function T2CinematicHero({
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 1.1 }}
-        className="absolute top-24 right-8 md:top-28 md:right-8 z-30 flex items-center gap-3"
+        className="absolute top-32 right-8 md:top-36 md:right-12 z-30 flex items-center gap-3"
       >
         <span className="text-t2-micro text-[var(--t2-text-muted)] uppercase">
           {location.cityServed}
@@ -260,7 +260,7 @@ export default function T2CinematicHero({
       ══════════════════════════════════════════════════════════════════ */}
       <motion.div
         style={{ y: isMobile ? 0 : contentY }}
-        className="min-h-screen relative z-20 px-6 md:px-12 lg:px-16 pt-32 pb-24 lg:pt-28 lg:pb-20"
+        className="min-h-screen relative z-20 px-6 md:px-12 lg:px-16 pt-40 pb-24 lg:pt-44 lg:pb-20"
       >
         <div className="max-w-7xl mx-auto h-full flex items-center">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center w-full">
