@@ -26,26 +26,27 @@ export default function T3Nav() {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-canvas/95 backdrop-blur-md border-b border-neutral-border/50">
-      <div className="max-w-5xl mx-auto px-8">
-        <div className="flex items-center justify-between h-20">
+    <>
+      {/* Architectural "Segmented Glass Dock" */}
+      <nav className="fixed top-6 left-6 right-6 lg:left-1/2 lg:-translate-x-1/2 lg:w-[90%] max-w-7xl z-50 bg-white/80 backdrop-blur-md border border-slate-200/40 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-3">
+        <div className="flex items-center justify-between px-6 w-full">
           {/* Logo - Asymmetric placement */}
           <Link href="/t3" className="flex items-center relative">
             <Image
               src="/images/logo-dental.png"
               alt={clientMasterData.globalPracticeName}
-              width={180}
-              height={40}
-              className="h-11 w-auto invert"
+              width={160}
+              height={36}
+              className="h-9 w-auto invert"
               priority
             />
           </Link>
 
-          {/* Desktop Navigation - Boutique Typography with Mindful Spacing */}
-          <nav className="hidden md:flex items-center gap-10" role="navigation" aria-label="Primary navigation">
+          {/* Desktop Navigation - Segmented Link Layout */}
+          <div className="hidden md:flex items-center gap-8">
             <motion.a
               href="#"
-              className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500"
+              className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-700 hover:text-black transition-colors"
               onMouseEnter={() => setHoveredLink("Home")}
               onMouseLeave={() => setHoveredLink(null)}
             >
@@ -53,7 +54,7 @@ export default function T3Nav() {
               {hoveredLink === "Home" && (
                 <motion.div
                   layoutId="nav-underline-t3"
-                  className="absolute -bottom-1 left-0 right-0 h-px bg-brand-primary/50"
+                  className="absolute -bottom-1 left-0 right-0 h-px bg-black"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -64,7 +65,7 @@ export default function T3Nav() {
 
             <motion.a
               href="#"
-              className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500"
+              className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-700 hover:text-black transition-colors"
               onMouseEnter={() => setHoveredLink("Philosophy")}
               onMouseLeave={() => setHoveredLink(null)}
             >
@@ -72,7 +73,7 @@ export default function T3Nav() {
               {hoveredLink === "Philosophy" && (
                 <motion.div
                   layoutId="nav-underline-t3"
-                  className="absolute -bottom-1 left-0 right-0 h-px bg-brand-primary/50"
+                  className="absolute -bottom-1 left-0 right-0 h-px bg-black"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -84,18 +85,18 @@ export default function T3Nav() {
             {/* Services Dropdown - Mindful Hover Panel */}
             <div className="relative group">
               <button
-                className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500 flex items-center gap-2"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-700 hover:text-black transition-colors flex items-center gap-2"
                 onMouseEnter={() => setHoveredLink("Services")}
                 onMouseLeave={() => setHoveredLink(null)}
               >
                 Services
-                <svg className="w-3 h-3 transition-transform group-hover:rotate-180 duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                <svg className="w-3 h-3 transition-transform group-hover:rotate-180 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
                 {hoveredLink === "Services" && (
                   <motion.div
                     layoutId="nav-underline-t3"
-                    className="absolute -bottom-1 left-0 right-8 h-px bg-brand-primary/50"
+                    className="absolute -bottom-1 left-0 right-8 h-px bg-black"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -125,7 +126,7 @@ export default function T3Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-700 hover:text-black transition-colors"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -133,7 +134,7 @@ export default function T3Nav() {
                 {hoveredLink === link.label && (
                   <motion.div
                     layoutId="nav-underline-t3"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-brand-primary/50"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-black"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -142,26 +143,30 @@ export default function T3Nav() {
                 )}
               </motion.a>
             ))}
-          </nav>
 
-          {/* Mindful CTA - Subtle Arrow Interaction */}
+            {/* Internal Structural Divider */}
+            <div className="w-px h-6 bg-slate-200/80 mx-2" />
+          </div>
+
+          {/* High-Contrast Matte CTA Block */}
           <motion.a
             href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="hidden md:inline-flex items-center gap-3 text-brand-primary text-xs uppercase tracking-[0.25em] font-light hover:gap-5 transition-all duration-500"
-            whileHover={{ x: 2 }}
-            transition={{ duration: 0.3 }}
+            className="hidden md:inline-flex items-center gap-2 bg-neutral-900 text-white text-[11px] uppercase tracking-[0.18em] font-medium px-6 py-3 rounded-xl hover:bg-black transition-all duration-300 shadow-sm"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <span>Begin</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <span>Book Now</span>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </motion.a>
 
           {/* Mobile Menu */}
           <MobileMenu />
         </div>
-      </div>
-    </header>
+      </nav>
+    </>
   );
 }
 
