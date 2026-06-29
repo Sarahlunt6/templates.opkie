@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { clientMasterData } from "@/data/master";
 
 const navLinks = [
@@ -21,56 +23,98 @@ const serviceLinks = [
 
 export default function T3Nav() {
   const location = clientMasterData.locations[0];
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
-      <div className="max-w-4xl mx-auto px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/t3" className="flex items-center">
+    <header className="sticky top-0 z-50 bg-brand-canvas/95 backdrop-blur-md border-b border-neutral-border/50">
+      <div className="max-w-5xl mx-auto px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo - Asymmetric placement */}
+          <Link href="/t3" className="flex items-center relative">
             <Image
               src="/images/logo-dental.png"
               alt={clientMasterData.globalPracticeName}
               width={180}
               height={40}
-              className="h-12 w-auto invert"
+              className="h-11 w-auto invert"
               priority
             />
           </Link>
 
-          {/* Desktop Navigation - Minimal */}
-          <nav className="hidden md:flex items-center gap-6">
-            <a
+          {/* Desktop Navigation - Boutique Typography with Mindful Spacing */}
+          <nav className="hidden md:flex items-center gap-10" role="navigation" aria-label="Primary navigation">
+            <motion.a
               href="#"
-              className="text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+              className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500"
+              onMouseEnter={() => setHoveredLink("Home")}
+              onMouseLeave={() => setHoveredLink(null)}
             >
               Home
-            </a>
-            <a
+              {hoveredLink === "Home" && (
+                <motion.div
+                  layoutId="nav-underline-t3"
+                  className="absolute -bottom-1 left-0 right-0 h-px bg-brand-primary/50"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </motion.a>
+
+            <motion.a
               href="#"
-              className="text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+              className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500"
+              onMouseEnter={() => setHoveredLink("Philosophy")}
+              onMouseLeave={() => setHoveredLink(null)}
             >
               Philosophy
-            </a>
+              {hoveredLink === "Philosophy" && (
+                <motion.div
+                  layoutId="nav-underline-t3"
+                  className="absolute -bottom-1 left-0 right-0 h-px bg-brand-primary/50"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </motion.a>
 
-            {/* Services Dropdown */}
+            {/* Services Dropdown - Mindful Hover Panel */}
             <div className="relative group">
-              <button className="flex items-center gap-1 text-sm text-neutral-muted hover:text-brand-primary transition-colors">
+              <button
+                className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500 flex items-center gap-2"
+                onMouseEnter={() => setHoveredLink("Services")}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
                 Services
-                <svg className="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <svg className="w-3 h-3 transition-transform group-hover:rotate-180 duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                 </svg>
+                {hoveredLink === "Services" && (
+                  <motion.div
+                    layoutId="nav-underline-t3"
+                    className="absolute -bottom-1 left-0 right-8 h-px bg-brand-primary/50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
               </button>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <div className="w-64 bg-brand-canvas shadow-xl border border-neutral-border py-2">
+
+              {/* Serene Dropdown Panel */}
+              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 ease-out">
+                <div className="w-72 bg-brand-canvas/98 backdrop-blur-xl border border-neutral-border/50 shadow-2xl py-2">
                   {serviceLinks.map((service) => (
                     <a
                       key={service.label}
                       href={service.href}
-                      className="block px-4 py-3 hover:bg-brand-primary/5 transition-colors"
+                      className="block px-6 py-4 hover:bg-brand-primary/5 transition-colors duration-300"
                     >
-                      <span className="block text-sm font-medium text-brand-mainText">{service.label}</span>
-                      <span className="block text-xs text-neutral-muted mt-0.5">{service.description}</span>
+                      <span className="block text-sm font-light text-brand-mainText tracking-wide mb-1">{service.label}</span>
+                      <span className="block text-[11px] text-neutral-muted tracking-wide">{service.description}</span>
                     </a>
                   ))}
                 </div>
@@ -78,26 +122,40 @@ export default function T3Nav() {
             </div>
 
             {navLinks.slice(2).map((link) => (
-              <a
+              <motion.a
                 key={link.label}
                 href={link.href}
-                className="text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+                className="relative text-xs uppercase tracking-[0.25em] font-light text-neutral-muted hover:text-brand-primary transition-colors duration-500"
+                onMouseEnter={() => setHoveredLink(link.label)}
+                onMouseLeave={() => setHoveredLink(null)}
               >
                 {link.label}
-              </a>
+                {hoveredLink === link.label && (
+                  <motion.div
+                    layoutId="nav-underline-t3"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-brand-primary/50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+              </motion.a>
             ))}
           </nav>
 
-          {/* CTA - Minimal */}
-          <a
+          {/* Mindful CTA - Subtle Arrow Interaction */}
+          <motion.a
             href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="hidden md:inline-flex items-center gap-2 text-brand-primary text-sm font-medium hover:gap-3 transition-all"
+            className="hidden md:inline-flex items-center gap-3 text-brand-primary text-xs uppercase tracking-[0.25em] font-light hover:gap-5 transition-all duration-500"
+            whileHover={{ x: 2 }}
+            transition={{ duration: 0.3 }}
           >
-            <span>Book</span>
+            <span>Begin</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
+          </motion.a>
 
           {/* Mobile Menu */}
           <MobileMenu />
@@ -109,64 +167,138 @@ export default function T3Nav() {
 
 function MobileMenu() {
   const location = clientMasterData.locations[0];
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   return (
     <div className="md:hidden">
-      <details className="relative">
-        <summary className="list-none cursor-pointer p-3 -mr-3 rounded-lg hover:bg-brand-primary/10 active:bg-brand-primary/15 min-h-[48px] min-w-[48px] flex items-center justify-center">
-          <svg className="w-5 h-5 text-brand-mainText" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </summary>
-        <div className="absolute right-0 top-full mt-2 w-72 bg-brand-canvas shadow-xl border border-neutral-border py-3 z-50">
-          <a href="#" className="block px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[48px] flex items-center">
-            Home
-          </a>
-          <a href="#" className="block px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[48px] flex items-center">
-            Philosophy
-          </a>
-          <details className="group">
-            <summary className="list-none cursor-pointer px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors flex items-center justify-between min-h-[48px]">
-              Services
-              <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </summary>
-            <div className="bg-brand-primary/5 py-2">
-              {serviceLinks.map((service) => (
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="p-3 -mr-3 hover:bg-brand-primary/10 active:bg-brand-primary/15 min-h-[48px] min-w-[48px] flex items-center justify-center transition-colors duration-300"
+        aria-label="Toggle menu"
+        aria-expanded={isOpen}
+      >
+        <svg className="w-5 h-5 text-brand-mainText" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+            d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+          />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-neutral-900/30 backdrop-blur-sm z-40"
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* Mindful Drawer Menu */}
+          <div className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-brand-canvas shadow-2xl z-50 overflow-y-auto border-l border-neutral-border">
+            <div className="p-6">
+              {/* Close Button */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-6 right-6 p-2 hover:bg-brand-primary/10 active:bg-brand-primary/15 min-h-[48px] min-w-[48px] flex items-center justify-center transition-colors duration-300"
+                aria-label="Close menu"
+              >
+                <svg className="w-5 h-5 text-brand-mainText" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Logo */}
+              <Link href="/t3" className="block mb-12" onClick={() => setIsOpen(false)}>
+                <Image
+                  src="/images/logo-dental.png"
+                  alt={location.practiceNameGBP}
+                  width={140}
+                  height={32}
+                  className="h-10 w-auto invert"
+                />
+              </Link>
+
+              {/* Navigation Links */}
+              <nav className="space-y-1">
                 <a
-                  key={service.label}
-                  href={service.href}
-                  className="block px-7 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[44px] flex items-center"
+                  href="#"
+                  className="block px-4 py-3.5 text-sm font-light text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors duration-300 min-h-[48px] flex items-center"
+                  onClick={() => setIsOpen(false)}
                 >
-                  {service.label}
+                  Home
                 </a>
-              ))}
+                <a
+                  href="#"
+                  className="block px-4 py-3.5 text-sm font-light text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors duration-300 min-h-[48px] flex items-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Philosophy
+                </a>
+
+                {/* Services Accordion */}
+                <details className="group">
+                  <summary className="list-none cursor-pointer px-4 py-3.5 text-sm font-light text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors duration-300 flex items-center justify-between min-h-[48px]">
+                    Services
+                    <svg className="w-4 h-4 transition-transform group-open:rotate-180 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="mt-1 ml-4 space-y-1">
+                    {serviceLinks.map((service) => (
+                      <a
+                        key={service.label}
+                        href={service.href}
+                        className="block px-4 py-3 text-sm font-light text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors duration-300 min-h-[44px] flex items-center"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {service.label}
+                      </a>
+                    ))}
+                  </div>
+                </details>
+
+                {navLinks.slice(2).map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="block px-4 py-3.5 text-sm font-light text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors duration-300 min-h-[48px] flex items-center"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+
+              {/* Mobile CTA Section */}
+              <div className="mt-8 pt-8 border-t border-neutral-border/50">
+                <a
+                  href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                  className="flex items-center justify-center gap-3 w-full px-5 py-4 text-sm font-light text-brand-primary border border-brand-primary/30 active:bg-brand-primary/10 active:scale-[0.98] transition-all duration-300 min-h-[52px] uppercase tracking-[0.2em]"
+                >
+                  Begin Your Journey
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
             </div>
-          </details>
-          {navLinks.slice(2).map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="block px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[48px] flex items-center"
-            >
-              {link.label}
-            </a>
-          ))}
-          <div className="mx-4 my-3 h-px bg-neutral-border" />
-          <div className="px-4">
-            <a
-              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm text-brand-primary font-medium border border-brand-primary/30 rounded-lg active:bg-brand-primary/10 active:scale-[0.98] transition-all min-h-[48px]"
-            >
-              Schedule Consultation
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
           </div>
-        </div>
-      </details>
+        </>
+      )}
     </div>
   );
 }

@@ -38,18 +38,7 @@ const serviceCategories = [
 
 export default function T1Nav() {
   const location = clientMasterData.locations[0];
-  const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-
-  // Intelligent scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <>
@@ -58,28 +47,27 @@ export default function T1Nav() {
         Now Accepting New Patients  •  Same-Day Emergency Appointments Available
       </div>
 
-      {/* Main Navigation Bar */}
-      <header
-        className={`fixed left-0 right-0 z-50 bg-white/70 backdrop-blur-md border-b border-slate-100/60 transition-all duration-500 ease-out ${
-          scrolled ? "top-8 py-3" : "top-8 py-5"
-        }`}
+      {/* Floating Capsule "Navigation Island" */}
+      <nav
+        className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/70 backdrop-blur-xl border border-slate-200/50 rounded-full shadow-[0_12px_40px_rgba(15,90,83,0.04)]"
+        role="navigation"
+        aria-label="Primary navigation"
       >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-8 h-full">
           {/* Logo */}
           <Link href="/t1" className="flex items-center relative z-10">
             <Image
               src="/images/logo-dental.png"
               alt={location.practiceNameGBP}
-              width={160}
-              height={36}
-              className={`w-auto transition-all duration-500 ${scrolled ? "h-10" : "h-12"}`}
+              width={140}
+              height={32}
+              className="h-9 w-auto"
               priority
             />
           </Link>
 
-          {/* Desktop Navigation - Editorial Typography */}
-          <nav className="hidden lg:flex items-center gap-8" role="navigation" aria-label="Primary navigation">
+          {/* Desktop Navigation Links - Elegant Soft Typography */}
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.slice(0, 1).map((link) => (
               <motion.a
                 key={link.label}
@@ -91,7 +79,7 @@ export default function T1Nav() {
                 {link.label}
                 {hoveredLink === link.label && (
                   <motion.div
-                    layoutId="nav-underline"
+                    layoutId="nav-island-underline"
                     className="absolute -bottom-1 left-0 right-0 h-px bg-slate-900"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -106,7 +94,7 @@ export default function T1Nav() {
               </motion.a>
             ))}
 
-            {/* Bento Services Dropdown */}
+            {/* Services Dropdown */}
             <div className="relative group">
               <button
                 className="relative text-xs uppercase tracking-[0.18em] font-medium text-slate-700 hover:text-slate-900 transition-colors flex items-center gap-1.5"
@@ -119,7 +107,7 @@ export default function T1Nav() {
                 </svg>
                 {hoveredLink === "Services" && (
                   <motion.div
-                    layoutId="nav-underline"
+                    layoutId="nav-island-underline"
                     className="absolute -bottom-1 left-0 right-8 h-px bg-slate-900"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -133,7 +121,7 @@ export default function T1Nav() {
                 )}
               </button>
 
-              {/* Elegant Multi-Column Bento Dropdown */}
+              {/* Elegant Dropdown Panel */}
               <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out">
                 <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-100 p-6 w-[520px]">
                   <div className="grid grid-cols-2 gap-6">
@@ -176,7 +164,7 @@ export default function T1Nav() {
                 {link.label}
                 {hoveredLink === link.label && (
                   <motion.div
-                    layoutId="nav-underline"
+                    layoutId="nav-island-underline"
                     className="absolute -bottom-1 left-0 right-0 h-px bg-slate-900"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -190,45 +178,37 @@ export default function T1Nav() {
                 )}
               </motion.a>
             ))}
-          </nav>
+          </div>
 
-          {/* Premium Action Block - Split CTA */}
+          {/* CTA Systems - Phone + Button */}
           <div className="hidden lg:flex items-center gap-6">
             {/* Phone Text with Icon */}
             <a
               href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="flex items-center gap-2 text-sm font-medium text-slate-800 tracking-wide hover:text-[#0f5a53] transition-colors group"
+              className="flex items-center gap-2 text-xs font-medium text-slate-700 tracking-wide hover:text-[#0f5a53] transition-colors group"
             >
-              <svg className="w-4 h-4 text-slate-600 group-hover:text-[#0f5a53] transition-colors" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3.5 h-3.5 text-slate-600 group-hover:text-[#0f5a53] transition-colors" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
               <span>{location.phoneGBP}</span>
             </a>
 
-            {/* High-Ticket CTA Button */}
+            {/* Primary CTA Button - Perfect Pill Shape */}
             <motion.a
               href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="relative px-6 py-3 bg-[#0f5a53] text-white text-xs uppercase tracking-[0.15em] font-bold rounded-lg overflow-hidden group"
+              className="rounded-full bg-[#0f5a53] text-white text-[11px] uppercase tracking-[0.15em] font-semibold px-6 py-3 hover:bg-[#0c4842] transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <span className="relative z-10">Reserve Consultation</span>
-              {/* Shimmer Effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%" }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-              />
+              Reserve Consultation
             </motion.a>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Toggle */}
           <MobileMenu />
         </div>
-      </div>
-    </header>
+      </nav>
     </>
   );
 }
@@ -253,11 +233,11 @@ function MobileMenu() {
     <div className="lg:hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-3 -mr-3 rounded-lg hover:bg-slate-100 active:bg-slate-200 min-h-[48px] min-w-[48px] flex items-center justify-center transition-colors"
+        className="p-2.5 rounded-full hover:bg-slate-100 active:bg-slate-200 min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors"
         aria-label="Toggle menu"
         aria-expanded={isOpen}
       >
-        <svg className="w-6 h-6 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -280,7 +260,7 @@ function MobileMenu() {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Mobile Drawer */}
+            {/* Elegant Drawer Menu */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -292,10 +272,10 @@ function MobileMenu() {
                 {/* Close Button */}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="absolute top-6 right-6 p-2 rounded-lg hover:bg-slate-100 active:bg-slate-200 min-h-[48px] min-w-[48px] flex items-center justify-center"
+                  className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 active:bg-slate-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
                   aria-label="Close menu"
                 >
-                  <svg className="w-6 h-6 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -307,7 +287,7 @@ function MobileMenu() {
                     alt={location.practiceNameGBP}
                     width={140}
                     height={32}
-                    className="h-10 w-auto"
+                    className="h-9 w-auto"
                   />
                 </Link>
 
@@ -315,7 +295,7 @@ function MobileMenu() {
                 <nav className="space-y-1">
                   <a
                     href="#"
-                    className="block px-4 py-3.5 text-sm font-medium text-slate-800 hover:bg-slate-50 active:bg-slate-100 rounded-lg transition-colors min-h-[48px] flex items-center"
+                    className="block px-4 py-3.5 text-sm font-medium text-slate-800 hover:bg-slate-50 active:bg-slate-100 rounded-xl transition-colors min-h-[48px] flex items-center"
                     onClick={() => setIsOpen(false)}
                   >
                     Home
@@ -323,7 +303,7 @@ function MobileMenu() {
 
                   {/* Services Accordion */}
                   <details className="group">
-                    <summary className="list-none cursor-pointer px-4 py-3.5 text-sm font-medium text-slate-800 hover:bg-slate-50 active:bg-slate-100 rounded-lg transition-colors flex items-center justify-between min-h-[48px]">
+                    <summary className="list-none cursor-pointer px-4 py-3.5 text-sm font-medium text-slate-800 hover:bg-slate-50 active:bg-slate-100 rounded-xl transition-colors flex items-center justify-between min-h-[48px]">
                       Services
                       <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -334,7 +314,7 @@ function MobileMenu() {
                         <a
                           key={service.label}
                           href={service.href}
-                          className="block px-4 py-3 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 active:bg-slate-100 rounded-lg transition-colors min-h-[44px] flex items-center"
+                          className="block px-4 py-3 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 active:bg-slate-100 rounded-xl transition-colors min-h-[44px] flex items-center"
                           onClick={() => setIsOpen(false)}
                         >
                           {service.label}
@@ -347,7 +327,7 @@ function MobileMenu() {
                     <a
                       key={link.label}
                       href={link.href}
-                      className="block px-4 py-3.5 text-sm font-medium text-slate-800 hover:bg-slate-50 active:bg-slate-100 rounded-lg transition-colors min-h-[48px] flex items-center"
+                      className="block px-4 py-3.5 text-sm font-medium text-slate-800 hover:bg-slate-50 active:bg-slate-100 rounded-xl transition-colors min-h-[48px] flex items-center"
                       onClick={() => setIsOpen(false)}
                     >
                       {link.label}
@@ -359,7 +339,7 @@ function MobileMenu() {
                 <div className="mt-8 pt-8 border-t border-slate-100 space-y-3">
                   <a
                     href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                    className="flex items-center justify-center gap-2 w-full px-5 py-4 text-sm font-medium text-slate-800 border-2 border-slate-200 rounded-lg hover:bg-slate-50 active:bg-slate-100 transition-colors min-h-[52px]"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-4 text-sm font-medium text-slate-800 border-2 border-slate-200 rounded-full hover:bg-slate-50 active:bg-slate-100 transition-colors min-h-[52px]"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
@@ -368,7 +348,7 @@ function MobileMenu() {
                   </a>
                   <a
                     href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                    className="flex items-center justify-center w-full px-5 py-4 bg-[#0f5a53] text-white text-sm font-bold uppercase tracking-wider rounded-lg active:scale-[0.98] transition-transform min-h-[52px]"
+                    className="flex items-center justify-center w-full px-5 py-4 bg-[#0f5a53] text-white text-sm font-bold uppercase tracking-wider rounded-full active:scale-[0.98] transition-transform min-h-[52px]"
                   >
                     Reserve Consultation
                   </a>
