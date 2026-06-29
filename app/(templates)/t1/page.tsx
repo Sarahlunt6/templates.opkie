@@ -31,7 +31,7 @@ export default function Template1Page() {
       <T1Nav />
 
       {/* Hero Section - Immersive Editorial with Ambient Video */}
-      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden">
+      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-8">
         {/* Looping Ambient Video Background */}
         <div className="absolute inset-0">
           <video
@@ -54,18 +54,6 @@ export default function Template1Page() {
         <div className="relative z-10 min-h-[100svh] lg:min-h-[90vh] flex items-end lg:items-center pb-8 lg:pb-0">
           <div className="w-full max-w-7xl mx-auto px-6 lg:px-16 py-12 lg:py-20">
             <div className="max-w-2xl">
-              {/* Trust Badges - Staggered */}
-              <div className="flex flex-wrap gap-2 lg:gap-3 mb-6 lg:mb-8">
-                <span className="px-4 lg:px-5 py-2 lg:py-2.5 text-xs lg:text-sm font-bold uppercase tracking-wider bg-brand-accent text-brand-mainText shadow-2xl transform -rotate-1">
-                  Now Accepting Patients
-                </span>
-                {trustSignals.hasSameDayEmergency && (
-                  <span className="px-4 lg:px-5 py-2 lg:py-2.5 text-xs lg:text-sm font-bold uppercase tracking-wider bg-white text-brand-mainText shadow-2xl transform rotate-1 translate-y-1 lg:translate-y-2">
-                    Same-Day Emergency
-                  </span>
-                )}
-              </div>
-
               {/* H1 - Fluid Typography with clamp() */}
               <HeadlineReveal className="text-[clamp(2rem,7vw,6rem)] font-bold text-white leading-[0.95] tracking-tight mb-4 -ml-0.5 lg:-ml-1">
                 <span className="block">{location.cityServed}&apos;s Highest-Rated</span>
