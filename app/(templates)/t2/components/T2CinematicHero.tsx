@@ -207,7 +207,7 @@ export default function T2CinematicHero({
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="absolute top-8 left-8 z-30 flex items-center gap-3"
+        className="absolute top-32 left-8 md:top-40 md:left-8 z-30 flex items-center gap-3"
       >
         <div className="w-[2px] h-4 bg-brand-primary/60" />
         <span className="text-t2-micro text-[var(--t2-text-muted)] uppercase">
@@ -219,7 +219,7 @@ export default function T2CinematicHero({
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 1.1 }}
-        className="absolute top-8 right-8 z-30 flex items-center gap-3"
+        className="absolute top-32 right-8 md:top-40 md:right-8 z-30 flex items-center gap-3"
       >
         <span className="text-t2-micro text-[var(--t2-text-muted)] uppercase">
           {location.cityServed}

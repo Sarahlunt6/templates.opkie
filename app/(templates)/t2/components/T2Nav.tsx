@@ -38,29 +38,17 @@ const serviceCategories = [
 
 export default function T2Nav() {
   const location = clientMasterData.locations[0];
-  const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
-  // Dynamic scroll detection for advanced container mechanics
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header
-      className={`sticky top-0 z-50 border-b border-white/5 transition-all duration-700 ease-out ${
-        scrolled
-          ? "bg-neutral-950/80 backdrop-blur-md py-3"
-          : "bg-neutral-950/40 backdrop-blur-md py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between">
+    <>
+      {/* Floating "Smoked Obsidian" Capsule Island */}
+      <nav
+        className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl h-16 z-50 bg-neutral-950/40 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.5)]"
+        role="navigation"
+        aria-label="Primary navigation"
+      >
+        <div className="flex items-center justify-between px-6 h-full">
           {/* Logo */}
           <Link href="/t2" className="flex items-center relative z-10">
             <Image
@@ -68,18 +56,18 @@ export default function T2Nav() {
               alt={location.practiceNameGBP}
               width={160}
               height={36}
-              className={`w-auto transition-all duration-700 ${scrolled ? "h-9" : "h-11"} invert`}
+              className="h-8 w-auto invert"
               priority
             />
           </Link>
 
-          {/* Desktop Navigation - High-Tech Editorial Typography */}
-          <nav className="hidden lg:flex items-center gap-8" role="navigation" aria-label="Primary navigation">
+          {/* Desktop Navigation - High-Precision Digital Typography */}
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.slice(0, 2).map((link) => (
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-[11px] uppercase tracking-[0.22em] font-medium text-neutral-300 hover:text-white transition-colors duration-300"
+                className="relative text-[10px] uppercase tracking-[0.25em] font-semibold text-neutral-300 hover:text-white transition-colors duration-300"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -87,13 +75,13 @@ export default function T2Nav() {
                 {hoveredLink === link.label && (
                   <motion.div
                     layoutId="nav-underline-t2"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-white"
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    exit={{ opacity: 0, scaleX: 0 }}
                     transition={{
                       type: "spring",
-                      stiffness: 380,
+                      stiffness: 400,
                       damping: 30,
                     }}
                   />
@@ -104,7 +92,7 @@ export default function T2Nav() {
             {/* Services Dropdown - Sleek Glassmorphic Panel */}
             <div className="relative group">
               <button
-                className="relative text-[11px] uppercase tracking-[0.22em] font-medium text-neutral-300 hover:text-white transition-colors duration-300 flex items-center gap-1.5"
+                className="relative text-[10px] uppercase tracking-[0.25em] font-semibold text-neutral-300 hover:text-white transition-colors duration-300 flex items-center gap-1.5"
                 onMouseEnter={() => setHoveredLink("Services")}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -115,18 +103,18 @@ export default function T2Nav() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
                 {hoveredLink === "Services" && (
                   <motion.div
                     layoutId="nav-underline-t2"
-                    className="absolute -bottom-1 left-0 right-8 h-px bg-gradient-to-r from-transparent via-white to-transparent"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    className="absolute -bottom-1 left-0 right-8 h-px bg-white"
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    exit={{ opacity: 0, scaleX: 0 }}
                     transition={{
                       type: "spring",
-                      stiffness: 380,
+                      stiffness: 400,
                       damping: 30,
                     }}
                   />
@@ -169,7 +157,7 @@ export default function T2Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-[11px] uppercase tracking-[0.22em] font-medium text-neutral-300 hover:text-white transition-colors duration-300"
+                className="relative text-[10px] uppercase tracking-[0.25em] font-semibold text-neutral-300 hover:text-white transition-colors duration-300"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -177,53 +165,37 @@ export default function T2Nav() {
                 {hoveredLink === link.label && (
                   <motion.div
                     layoutId="nav-underline-t2"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-white"
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    exit={{ opacity: 0, scaleX: 0 }}
                     transition={{
                       type: "spring",
-                      stiffness: 380,
+                      stiffness: 400,
                       damping: 30,
                     }}
                   />
                 )}
               </motion.a>
             ))}
-          </nav>
-
-          {/* Premium "Book Online" CTA - Refined Luxury Action Element */}
-          <div className="hidden lg:block">
-            <motion.a
-              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="relative px-6 py-2.5 bg-[#0f5a53] text-white text-[11px] uppercase tracking-[0.18em] font-semibold rounded-full overflow-hidden group"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <span className="relative z-10">Book Online</span>
-              {/* Boundary Glow Effect */}
-              <motion.div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  boxShadow: "0 0 20px rgba(15, 90, 83, 0.6), inset 0 0 20px rgba(15, 90, 83, 0.2)",
-                }}
-              />
-              {/* Subtle Background Scale */}
-              <motion.div
-                className="absolute inset-0 bg-[#0d4a46] rounded-full"
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
           </div>
+
+          {/* High-Ticket Cyber Pill CTA */}
+          <motion.a
+            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+            className="hidden lg:inline-flex items-center text-[10px] uppercase tracking-[0.2em] font-semibold text-white bg-white/5 border border-white/10 rounded-full px-5 py-2.5 hover:bg-white/10 hover:border-teal-500/50 transition-all duration-300 shadow-[0_0_15px_rgba(20,184,166,0.15)]"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            Book Online
+          </motion.a>
 
           {/* Mobile Menu */}
           <MobileMenu />
         </div>
-      </div>
-    </header>
+      </nav>
+    </>
   );
 }
 
