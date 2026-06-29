@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, Suspense, useRef } from "react";
-import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,8 +19,8 @@ function useIsMobile(breakpoint = 1024) {
   return isMobile;
 }
 
-// Dental template data
-const dentalTemplates = [
+// Template data
+const templates = [
   {
     id: "t1",
     code: "01",
@@ -45,35 +44,7 @@ const dentalTemplates = [
   },
 ];
 
-// Orthodontic template data
-const orthoTemplates = [
-  {
-    id: "o1",
-    code: "01",
-    title: "The Smile Architect",
-    description: "Premium Orthodontic & Invisalign Practices",
-    image: "/images/team/staff-photo.jpg",
-  },
-  {
-    id: "o2",
-    code: "02",
-    title: "The Digital Aligner",
-    description: "Tech-Forward Clear Aligner Specialists",
-    image: "/images/office-interior.jpg",
-  },
-  {
-    id: "o3",
-    code: "03",
-    title: "The Family Practice",
-    description: "Warm & Welcoming Orthodontic Care",
-    image: "/images/office-exterior.jpg",
-  },
-];
-
 function DesignRegistryContent() {
-  const searchParams = useSearchParams();
-  const isOrtho = searchParams.get("type") === "ortho";
-  const templates = isOrtho ? orthoTemplates : dentalTemplates;
   const isMobile = useIsMobile();
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -86,12 +57,6 @@ function DesignRegistryContent() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Reset loaded state when switching template types
-  useEffect(() => {
-    setIsLoaded(false);
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, [isOrtho]);
 
   // Calculate flex values based on hover state (desktop only)
   const getFlexValue = (index: number) => {
@@ -138,7 +103,7 @@ function DesignRegistryContent() {
         <div className="h-full w-full flex">
           {templates.map((template, index) => (
             <div
-              key={`${isOrtho ? 'ortho' : 'dental'}-${index}`}
+              key={`template-${index}`}
               className="relative h-full border-r border-white/[0.08] last:border-r-0 overflow-hidden cursor-pointer"
               style={{
                 flex: getFlexValue(index),
@@ -279,7 +244,7 @@ function DesignRegistryContent() {
             const isActive = activeCardIndex === index;
             return (
               <motion.div
-                key={`${isOrtho ? 'ortho' : 'dental'}-mobile-${index}`}
+                key={`template-mobile-${index}`}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{
                   opacity: isLoaded ? 1 : 0,
@@ -414,22 +379,9 @@ function DesignRegistryContent() {
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6 lg:gap-8">
-            <Link
-              href="/"
-              className={`text-[11px] tracking-[0.2em] font-light transition-colors uppercase min-h-[48px] flex items-center ${
-                !isOrtho ? "text-white/50 hover:text-white/80 active:text-white" : "text-white/30 hover:text-white/60 active:text-white/80"
-              }`}
-            >
-              Dental
-            </Link>
-            <Link
-              href="/?type=ortho"
-              className={`text-[11px] tracking-[0.2em] font-light transition-colors uppercase min-h-[48px] flex items-center ${
-                isOrtho ? "text-white/50 hover:text-white/80 active:text-white" : "text-white/30 hover:text-white/60 active:text-white/80"
-              }`}
-            >
-              Orthodontic
-            </Link>
+            <span className="text-[11px] tracking-[0.2em] font-light text-white/50 uppercase">
+              Dental Templates
+            </span>
           </div>
 
           <div className="hidden sm:flex items-center gap-3">
