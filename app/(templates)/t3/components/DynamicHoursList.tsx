@@ -30,35 +30,37 @@ export default function DynamicHoursList() {
   }, []);
 
   return (
-    <div className="space-y-1">
+    <div className="space-y-0">
       {hoursData.map((item, index) => {
         const isToday = currentDayIndex === index;
 
         return (
           <div
             key={index}
-            className={`flex justify-between py-3.5 px-4 rounded-xl transition-all duration-500 ${
+            className={`relative py-3 px-4 rounded-lg transition-all duration-500 ${
               isToday
-                ? "bg-gradient-to-r from-brand-primary/5 via-brand-primary/[0.03] to-transparent"
-                : "hover:bg-slate-50/50"
+                ? "bg-gradient-to-r from-brand-primary/8 via-brand-primary/5 to-brand-primary/[0.02] shadow-sm"
+                : ""
             }`}
           >
-            <span
-              className={`font-light tracking-wide transition-colors duration-300 ${
-                isToday
-                  ? "text-brand-mainText font-medium"
-                  : "text-neutral-muted"
-              }`}
-            >
-              {item.day}
-            </span>
-            <span
-              className={`font-light tracking-wide transition-colors duration-300 ${
-                isToday ? "text-brand-primary font-medium" : "text-brand-mainText"
-              }`}
-            >
-              {item.hours}
-            </span>
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100/80">
+              <span
+                className={`text-[13px] font-light tracking-wide transition-colors duration-300 ${
+                  isToday
+                    ? "text-brand-mainText font-medium"
+                    : "text-slate-600"
+                }`}
+              >
+                {item.day}
+              </span>
+              <span
+                className={`text-[13px] font-light tracking-wide transition-colors duration-300 ${
+                  isToday ? "text-brand-primary font-medium" : "text-brand-mainText"
+                }`}
+              >
+                {item.hours}
+              </span>
+            </div>
           </div>
         );
       })}

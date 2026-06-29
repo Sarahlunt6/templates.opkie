@@ -114,22 +114,22 @@ export default function LiveStatusIndicator() {
   };
 
   return (
-    <div className="mb-6 inline-flex items-center gap-2.5 px-4 py-2.5 bg-gradient-to-br from-slate-50 to-white border border-slate-200/50 rounded-full shadow-sm">
+    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200/60 rounded-full shadow-sm">
       {/* Pulsing Status Indicator */}
       <div className="relative flex items-center justify-center">
         {status.isOpen ? (
           <>
-            <div className="absolute w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping opacity-75" />
-            <div className="relative w-2.5 h-2.5 bg-emerald-500 rounded-full" />
+            <div className="absolute w-2 h-2 bg-emerald-500 rounded-full animate-ping opacity-75" />
+            <div className="relative w-2 h-2 bg-emerald-500 rounded-full" />
           </>
         ) : (
-          <div className="w-2.5 h-2.5 bg-slate-400 rounded-full border border-slate-300" />
+          <div className="w-2 h-2 bg-slate-400 rounded-full border border-slate-300" />
         )}
       </div>
 
       {/* Status Text */}
       <span
-        className={`text-xs font-medium tracking-[0.05em] ${
+        className={`text-[10px] font-medium tracking-[0.08em] ${
           status.isOpen ? "text-emerald-700" : "text-slate-600"
         }`}
       >
