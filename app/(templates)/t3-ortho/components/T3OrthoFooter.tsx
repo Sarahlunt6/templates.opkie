@@ -5,7 +5,7 @@ import { clientMasterDataOrtho } from "@/data/master-ortho";
 const footerLinks = [
   { href: "#", label: "Home" },
   { href: "#", label: "Philosophy" },
-  { href: "#", label: "Treatments" },
+  { href: "#", label: "Services" },
   { href: "#", label: "Your Provider" },
   { href: "#", label: "Contact" },
 ];

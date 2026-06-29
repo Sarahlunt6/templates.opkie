@@ -81,6 +81,7 @@ export default function T3OrthoReviewCarousel({ reviews }: T3OrthoReviewCarousel
   const containerRef = useRef<HTMLDivElement>(null);
 
   const progress = useMotionValue(0);
+  const progressSpring = useSpring(progress, { damping: 30, stiffness: 200 });
 
   const handlePrev = () => {
     if (currentIndex > 0) {

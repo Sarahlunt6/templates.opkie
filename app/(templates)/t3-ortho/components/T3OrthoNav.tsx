@@ -12,14 +12,14 @@ const navLinks = [
 ];
 
 const serviceLinks = [
-  { href: "#", label: "Invisalign", description: "Clear aligner therapy" },
-  { href: "#", label: "Traditional Braces", description: "Time-tested solutions" },
-  { href: "#", label: "Ceramic Braces", description: "Discreet tooth-colored options" },
-  { href: "#", label: "Early Treatment", description: "Phase 1 interceptive care" },
-  { href: "#", label: "Adult Orthodontics", description: "It's never too late" },
+  { href: "#", label: "Invisalign®", description: "Clear aligner therapy" },
+  { href: "#", label: "Self-Ligating Braces", description: "Advanced metal & ceramic" },
+  { href: "#", label: "Phase 1 Treatment", description: "Early interceptive care" },
+  { href: "#", label: "Airway Orthodontics", description: "Functional breathing focus" },
+  { href: "#", label: "Surgical Orthodontics", description: "Comprehensive jaw alignment" },
 ];
 
-export default function T3OrthoNav() {
+export default function T3Nav() {
   const location = clientMasterDataOrtho.locations[0];
 
   return (
@@ -113,31 +113,31 @@ function MobileMenu() {
   return (
     <div className="md:hidden">
       <details className="relative">
-        <summary className="list-none cursor-pointer p-2">
+        <summary className="list-none cursor-pointer p-3 -mr-3 rounded-lg hover:bg-brand-primary/10 active:bg-brand-primary/15 min-h-[48px] min-w-[48px] flex items-center justify-center">
           <svg className="w-5 h-5 text-brand-mainText" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </summary>
-        <div className="absolute right-0 top-full mt-2 w-64 bg-brand-canvas shadow-xl border border-neutral-border py-4 z-50">
-          <a href="#" className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors">
+        <div className="absolute right-0 top-full mt-2 w-72 bg-brand-canvas shadow-xl border border-neutral-border py-3 z-50">
+          <a href="#" className="block px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[48px] flex items-center">
             Home
           </a>
-          <a href="#" className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors">
+          <a href="#" className="block px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[48px] flex items-center">
             Philosophy
           </a>
           <details className="group">
-            <summary className="list-none cursor-pointer px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors flex items-center justify-between">
+            <summary className="list-none cursor-pointer px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors flex items-center justify-between min-h-[48px]">
               Treatments
               <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <div className="bg-brand-primary/5 py-1">
+            <div className="bg-brand-primary/5 py-2">
               {serviceLinks.map((service) => (
                 <a
                   key={service.label}
                   href={service.href}
-                  className="block px-8 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+                  className="block px-7 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[44px] flex items-center"
                 >
                   {service.label}
                 </a>
@@ -148,18 +148,23 @@ function MobileMenu() {
             <a
               key={link.label}
               href={link.href}
-              className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+              className="block px-5 py-3 text-sm text-neutral-muted hover:text-brand-primary active:bg-brand-primary/10 transition-colors min-h-[48px] flex items-center"
             >
               {link.label}
             </a>
           ))}
-          <div className="mx-6 my-3 h-px bg-neutral-border" />
-          <a
-            href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="block px-6 py-2 text-sm text-brand-primary font-medium"
-          >
-            Schedule Consultation
-          </a>
+          <div className="mx-4 my-3 h-px bg-neutral-border" />
+          <div className="px-4">
+            <a
+              href={clientMasterDataOrtho.onlineBookingUrl !== "none" ? clientMasterDataOrtho.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+              className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm text-brand-primary font-medium border border-brand-primary/30 rounded-lg active:bg-brand-primary/10 active:scale-[0.98] transition-all min-h-[48px]"
+            >
+              Schedule Consultation
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
         </div>
       </details>
     </div>
