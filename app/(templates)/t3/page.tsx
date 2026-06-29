@@ -8,6 +8,7 @@ import T3BentoServices from "./components/T3BentoServices";
 import T3PremiumCanvas from "./components/T3PremiumCanvas";
 import PremiumVideoPlayer from "./components/PremiumVideoPlayer";
 import T3ReviewCarousel from "./components/T3ReviewCarousel";
+import T3ContactHours from "./components/T3ContactHours";
 import {
   AmbientLightNodes,
   MindfulScrollProgress,
@@ -315,7 +316,7 @@ export default function Template3Page() {
       <T3ReviewCarousel reviews={sampleReviews} />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          LOCATION & HOURS — Spatial Gallery
+          LOCATION & HOURS — Elite Boutique Layout with Live Status
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-16 lg:py-20 overflow-hidden">
         <div className="max-w-5xl mx-auto px-8">
@@ -327,67 +328,13 @@ export default function Template3Page() {
             Your Sanctuary Awaits
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.4em] text-brand-primary mb-8">
-                Hours of Wellness
-              </p>
-
-              <div className="space-y-3">
-                {[
-                  { day: "Monday", hours: "8:00 AM — 5:00 PM" },
-                  { day: "Tuesday", hours: "8:00 AM — 5:00 PM" },
-                  { day: "Wednesday", hours: "8:00 AM — 5:00 PM" },
-                  { day: "Thursday", hours: "8:00 AM — 5:00 PM" },
-                  { day: "Friday", hours: "8:00 AM — 3:00 PM" },
-                  { day: "Saturday", hours: "By Appointment" },
-                  { day: "Sunday", hours: "Closed" },
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between py-3 border-b border-neutral-border/30 hover:border-brand-primary/20 transition-colors duration-500"
-                  >
-                    <span className="text-neutral-muted font-light tracking-wide">{item.day}</span>
-                    <span className="text-brand-mainText font-light tracking-wide">{item.hours}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10 pt-10 border-t border-neutral-border/30">
-                <p className="text-sm text-neutral-muted font-light tracking-wide mb-2">
-                  {location.addressGBP}
-                </p>
-                <p className="text-sm text-neutral-muted font-light tracking-wide mb-6">
-                  {location.cityServed}, {location.stateServed}
-                </p>
-                <a
-                  href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="text-brand-primary tracking-[0.1em] hover:tracking-[0.15em] transition-all duration-500"
-                >
-                  {location.phoneGBP}
-                </a>
-              </div>
-            </div>
-
-            <div className="aspect-square overflow-hidden border border-brand-primary/10">
-              {location.googleMapsEmbedUrl ? (
-                <iframe
-                  src={location.googleMapsEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Practice Location"
-                />
-              ) : (
-                <div className="w-full h-full bg-neutral-border/10 flex items-center justify-center text-neutral-muted font-light tracking-widest">
-                  Map
-                </div>
-              )}
-            </div>
-          </div>
+          <T3ContactHours
+            addressGBP={location.addressGBP}
+            cityServed={location.cityServed}
+            stateServed={location.stateServed}
+            phoneGBP={location.phoneGBP}
+            googleMapsEmbedUrl={location.googleMapsEmbedUrl}
+          />
         </div>
       </section>
 
