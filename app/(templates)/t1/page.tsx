@@ -31,7 +31,7 @@ export default function Template1Page() {
       <T1Nav />
 
       {/* Hero Section - Immersive Editorial with Ambient Video */}
-      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-8">
+      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-36 md:pt-44 lg:pt-48">
         {/* Looping Ambient Video Background */}
         <div className="absolute inset-0">
           <video

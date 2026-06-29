@@ -49,7 +49,7 @@ export default function T1Nav() {
 
       {/* Floating Capsule "Navigation Island" */}
       <nav
-        className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/70 backdrop-blur-xl border border-slate-200/50 rounded-full shadow-[0_12px_40px_rgba(15,90,83,0.04)]"
+        className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/40 backdrop-blur-2xl saturate-150 border border-white/50 rounded-full shadow-[0_24px_50px_-12px_rgba(15,90,83,0.08)]"
         role="navigation"
         aria-label="Primary navigation"
       >
@@ -72,7 +72,7 @@ export default function T1Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-xs uppercase tracking-[0.18em] font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-800 hover:text-black transition-colors"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -80,7 +80,7 @@ export default function T1Nav() {
                 {hoveredLink === link.label && (
                   <motion.div
                     layoutId="nav-island-underline"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-slate-900"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-black"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -97,7 +97,7 @@ export default function T1Nav() {
             {/* Services Dropdown */}
             <div className="relative group">
               <button
-                className="relative text-xs uppercase tracking-[0.18em] font-medium text-slate-700 hover:text-slate-900 transition-colors flex items-center gap-1.5"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-800 hover:text-black transition-colors flex items-center gap-1.5"
                 onMouseEnter={() => setHoveredLink("Services")}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -108,7 +108,7 @@ export default function T1Nav() {
                 {hoveredLink === "Services" && (
                   <motion.div
                     layoutId="nav-island-underline"
-                    className="absolute -bottom-1 left-0 right-8 h-px bg-slate-900"
+                    className="absolute -bottom-1 left-0 right-8 h-px bg-black"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -157,7 +157,7 @@ export default function T1Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-xs uppercase tracking-[0.18em] font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-800 hover:text-black transition-colors"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -165,7 +165,7 @@ export default function T1Nav() {
                 {hoveredLink === link.label && (
                   <motion.div
                     layoutId="nav-island-underline"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-slate-900"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-black"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -185,9 +185,9 @@ export default function T1Nav() {
             {/* Phone Text with Icon */}
             <a
               href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="flex items-center gap-2 text-xs font-medium text-slate-700 tracking-wide hover:text-[#0f5a53] transition-colors group"
+              className="flex items-center gap-2 text-[11px] font-medium text-slate-800 tracking-wide hover:text-[#0f5a53] transition-colors group"
             >
-              <svg className="w-3.5 h-3.5 text-slate-600 group-hover:text-[#0f5a53] transition-colors" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3.5 h-3.5 text-slate-700 group-hover:text-[#0f5a53] transition-colors" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
               <span>{location.phoneGBP}</span>
@@ -196,7 +196,7 @@ export default function T1Nav() {
             {/* Primary CTA Button - Perfect Pill Shape */}
             <motion.a
               href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="rounded-full bg-[#0f5a53] text-white text-[11px] uppercase tracking-[0.15em] font-semibold px-6 py-3 hover:bg-[#0c4842] transition-colors"
+              className="rounded-full bg-[#0f5a53] text-white text-[11px] uppercase tracking-[0.2em] font-semibold px-6 py-3 hover:bg-[#0c4842] transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
