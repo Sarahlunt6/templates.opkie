@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond, Space_Grotesk, Outfit } from "next/font/google";
 import "./globals.css";
 import PageTransition from "@/components/premium/PageTransition";
+import ChatConcierge from "@/components/interactive/ChatConcierge";
 
 // Universal Body Text - Highly legible clean paragraphs
 const inter = Inter({
@@ -52,6 +53,7 @@ export default function RootLayout({
         <PageTransition>
           {children}
         </PageTransition>
+        <ChatConcierge />
       </body>
     </html>
   );
