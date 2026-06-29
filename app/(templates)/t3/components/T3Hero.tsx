@@ -161,7 +161,7 @@ export default function T3Hero({
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[92vh] overflow-hidden pt-32 lg:pt-40"
+      className="relative min-h-[92vh] overflow-hidden pt-24 lg:pt-28"
     >
       {/* ═══════════════════════════════════════════════════════════════════════
           AMBIENT LUXURY CANVAS BACKGROUND
