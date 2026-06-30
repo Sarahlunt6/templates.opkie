@@ -27,7 +27,7 @@ export default function Template3Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative overflow-x-hidden">
+    <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative overflow-x-hidden pt-20 lg:pt-24">
       {/* Mindful Scroll Progress Indicator */}
       <MindfulScrollProgress color="var(--primary-brand)" thickness={2} position="left" />
 
