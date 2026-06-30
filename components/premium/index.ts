@@ -30,6 +30,9 @@ export {
   EditorialDivider,
 } from "./EditorialGrid";
 
+// T1 Aqua-Sonic Cursor Effect
+export { default as AquaSonicCursor } from "./AquaSonicCursor";
+
 // T2 Tech/Innovator Components
 export {
   default as CursorGlow,

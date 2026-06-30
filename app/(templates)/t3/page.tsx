@@ -5,6 +5,7 @@ import T3Nav from "./components/T3Nav";
 import T3Footer from "./components/T3Footer";
 import T3Hero from "./components/T3Hero";
 import T3SplitPaneNavigator from "./components/T3SplitPaneNavigator";
+import T3InvisalignMorph from "./components/T3InvisalignMorph";
 import T3PremiumCanvas from "./components/T3PremiumCanvas";
 import PremiumVideoPlayer from "./components/PremiumVideoPlayer";
 import T3ReviewCarousel from "./components/T3ReviewCarousel";
@@ -144,50 +145,10 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          BEFORE/AFTER — Minimal Gallery
+          INVISALIGN TRANSFORMATION — Asymmetric Smile Alignment Morphing
+          Chaotic scattered cards morph into harmonious Bento grid on scroll
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-16 lg:py-20 overflow-hidden">
-        <div className="max-w-4xl mx-auto px-8">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
-            Transformations
-          </p>
-
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-16 tracking-[0.05em]">
-            The Art of Subtle Enhancement
-          </h2>
-
-          <div className="grid grid-cols-2 gap-px">
-            <div className="relative aspect-[4/3] overflow-hidden group border border-brand-primary/10">
-              <p className="absolute top-6 left-6 z-10 text-[11px] uppercase tracking-[0.3em] text-white/80">
-                Before
-              </p>
-              <Image
-                src="/images/cases/smile-before.png"
-                alt="Before holistic dental treatment"
-                fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                sizes="50vw"
-              />
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden group border border-brand-primary/10">
-              <p className="absolute top-6 left-6 z-10 text-[11px] uppercase tracking-[0.3em] text-brand-primary">
-                After
-              </p>
-              <Image
-                src="/images/cases/smile-after.png"
-                alt="After holistic dental treatment"
-                fill
-                className="object-cover"
-                sizes="50vw"
-              />
-            </div>
-          </div>
-
-          <p className="text-center text-[11px] uppercase tracking-[0.3em] text-neutral-muted mt-10">
-            Natural enhancement through mindful treatment
-          </p>
-        </div>
-      </section>
+      <T3InvisalignMorph />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           SERVICES LIST — Full Width Minimal
