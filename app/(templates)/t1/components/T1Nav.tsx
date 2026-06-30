@@ -42,16 +42,9 @@ export default function T1Nav() {
 
   return (
     <>
-      {/* Floating Pill Announcement Bar */}
-      <div className="fixed top-3 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-8 rounded-full bg-[#0f5a53] flex items-center justify-center z-50 shadow-sm">
-        <span className="text-[10px] tracking-[0.18em] uppercase font-medium text-white">
-          Now Accepting New Patients  •  Same-Day Emergency Appointments Available
-        </span>
-      </div>
-
       {/* Floating Capsule "Navigation Island" */}
       <nav
-        className="fixed top-14 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/90 backdrop-blur-2xl saturate-150 border border-white/60 rounded-full shadow-[0_24px_50px_-12px_rgba(15,90,83,0.12)]"
+        className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/90 backdrop-blur-2xl saturate-150 border border-white/60 rounded-full shadow-[0_24px_50px_-12px_rgba(15,90,83,0.12)]"
         role="navigation"
         aria-label="Primary navigation"
       >
