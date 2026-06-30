@@ -7,6 +7,10 @@ import { clientMasterData, sampleReviews } from "@/data/master";
 import T2Nav from "./components/T2Nav";
 import T2Footer from "./components/T2Footer";
 import T2CinematicHero from "./components/T2CinematicHero";
+import T2MagneticButton from "./components/T2MagneticButton";
+import T2TelemetryCounter from "./components/T2TelemetryCounter";
+import T2AnimatedGrid from "./components/T2AnimatedGrid";
+import T2TreatmentDashboard from "./components/T2TreatmentDashboard";
 import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
 import {
   TextReveal,
@@ -529,98 +533,39 @@ export default function Template2Page() {
       />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SYSTEM TELEMETRY DATA HUB — CYBER-GRID METRICS
-          Three-column precision telemetry display with micro-tracked typography
+          SYSTEM TELEMETRY DATA HUB — PREMIUM COUNTERS WITH GLITCH EFFECTS
+          Three-column precision telemetry display with animated odometer counters
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-12 px-6 md:px-12 bg-zinc-950 border-y border-white/5">
-        <div className="max-w-5xl mx-auto">
+        {/* Animated circuit grid background */}
+        <T2AnimatedGrid pattern="circuit" opacity={0.06} animationDuration={3} />
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {/* Metric 1: Satisfaction Rate */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-center relative group"
-            >
-              <div className="relative">
-                <motion.div
-                  className="text-5xl md:text-6xl font-bold tracking-tight mb-2 bg-gradient-to-br from-white via-white to-neutral-400 bg-clip-text text-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <AnimatedCounter value={98} duration={2} suffix="%" />
-                </motion.div>
-                <div className="absolute -top-2 -right-2 w-2 h-2 rounded-full bg-emerald-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-semibold mt-3">
-                Satisfaction Rate
-              </p>
-              <div className="mt-4 h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
-            </motion.div>
-
-            {/* Metric 2: Smiles Transformed */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-center relative group"
-            >
-              <div className="relative">
-                <motion.div
-                  className="text-5xl md:text-6xl font-bold tracking-tight mb-2 bg-gradient-to-br from-brand-primary via-brand-primary to-emerald-600 bg-clip-text text-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <AnimatedCounter value={5000} duration={2.5} suffix="+" />
-                </motion.div>
-                <div className="absolute -top-2 -right-2 w-2 h-2 rounded-full bg-brand-primary animate-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-semibold mt-3">
-                Smiles Transformed
-              </p>
-              <div className="mt-4 h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-brand-primary/30 to-transparent" />
-            </motion.div>
-
-            {/* Metric 3: Star Rating */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-center relative group"
-            >
-              <div className="relative">
-                <motion.div
-                  className="text-5xl md:text-6xl font-bold tracking-tight mb-2 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 bg-clip-text text-transparent flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  4.9
-                  <svg className="w-8 h-8 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </motion.div>
-                <div className="absolute -top-2 -right-2 w-2 h-2 rounded-full bg-amber-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-semibold mt-3">
-                Average Rating
-              </p>
-              <div className="mt-4 h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-amber-600/30 to-transparent" />
-            </motion.div>
+            <T2TelemetryCounter
+              value={98}
+              suffix="%"
+              duration={2.5}
+              label="Satisfaction Rate"
+              glitchEffect={true}
+            />
+            <T2TelemetryCounter
+              value={5000}
+              suffix="+"
+              duration={3}
+              label="Smiles Transformed"
+              glitchEffect={true}
+            />
+            <T2TelemetryCounter
+              value={4.9}
+              suffix=""
+              duration={2}
+              decimals={1}
+              label="Average Rating"
+              glitchEffect={true}
+            />
           </div>
         </div>
-
-        {/* Subtle grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.015] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "32px 32px",
-          }}
-        />
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
@@ -1385,21 +1330,25 @@ export default function Template2Page() {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a
+              <T2MagneticButton
                 href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
                 className="inline-flex items-center gap-3 px-10 py-5 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-brand-primary hover:bg-brand-primary/90 transition-all duration-300"
+                magneticRadius={120}
+                magneticStrength={0.5}
               >
                 <span>Schedule Consultation</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
-              <a
+              </T2MagneticButton>
+              <T2MagneticButton
                 href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
                 className="inline-flex items-center gap-3 px-10 py-5 bg-transparent text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300"
+                magneticRadius={100}
+                magneticStrength={0.4}
               >
                 <span>{location.phoneGBP}</span>
-              </a>
+              </T2MagneticButton>
             </div>
 
             {/* Bottom Status */}
@@ -1412,6 +1361,70 @@ export default function Template2Page() {
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          TREATMENT BLUEPRINT DASHBOARD — INTERACTIVE PHASES
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <T2TreatmentDashboard
+        phases={[
+          {
+            id: "diagnosis",
+            title: "Diagnosis & 3D Imaging",
+            subtitle: "Phase 01 • Foundation",
+            description: "Complete digital diagnostic workup using CBCT 3D imaging, intraoral scanning, and comprehensive clinical examination. We map every detail before treatment begins.",
+            duration: "30-45 minutes",
+            image: "/images/services/implant.jpg",
+            details: [
+              "Full CBCT 3D scan at 0.1mm resolution for precise bone and nerve mapping",
+              "Intraoral digital impressions using iTero scanner (no goop)",
+              "Comprehensive clinical examination and treatment planning consultation",
+              "Digital photos and baseline documentation for progress tracking",
+            ],
+          },
+          {
+            id: "planning",
+            title: "3D Digital Planning",
+            subtitle: "Phase 02 • Design",
+            description: "Treatment is designed virtually in our planning software. You'll see your final result before we begin, with the ability to make changes and approve the final design.",
+            duration: "5-7 business days",
+            image: "/images/services/full-mouth-smile.jpg",
+            details: [
+              "Digital Smile Design (DSD) mockup showing your predicted outcome",
+              "Virtual implant placement with surgical guide design",
+              "Crown/restoration design using CAD/CAM software",
+              "Review appointment to approve plan and make any adjustments",
+            ],
+          },
+          {
+            id: "execution",
+            title: "Guided Execution",
+            subtitle: "Phase 03 • Treatment",
+            description: "Treatment is performed using 3D-printed surgical guides and computer-aided precision. Most procedures completed in a single visit with immediate results.",
+            duration: "1-3 hours",
+            image: "/images/services/invisalign.jpg",
+            details: [
+              "Guided surgery using 3D-printed templates for submillimeter accuracy",
+              "Same-day crown milling using CEREC technology (when applicable)",
+              "Real-time verification scans to ensure precision fit",
+              "Immediate temporary or final restoration placement",
+            ],
+          },
+          {
+            id: "followup",
+            title: "Digital Follow-Up",
+            subtitle: "Phase 04 • Verification",
+            description: "Post-treatment verification imaging and progress monitoring. We document healing and ensure optimal integration of your restoration.",
+            duration: "3-6 months",
+            image: "/images/services/full-mouth-shade.jpg",
+            details: [
+              "Follow-up CBCT scans to verify healing and osseointegration",
+              "Digital progress photos to track aesthetic outcomes",
+              "Remote monitoring option using patient portal app",
+              "Final verification appointment with adjustment if needed",
+            ],
+          },
+        ]}
+      />
 
       <T2Footer />
     </div>
