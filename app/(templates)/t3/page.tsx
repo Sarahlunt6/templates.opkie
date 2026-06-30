@@ -4,7 +4,7 @@ import { clientMasterData, sampleReviews } from "@/data/master";
 import T3Nav from "./components/T3Nav";
 import T3Footer from "./components/T3Footer";
 import T3Hero from "./components/T3Hero";
-import T3BentoServices from "./components/T3BentoServices";
+import T3SplitPaneNavigator from "./components/T3SplitPaneNavigator";
 import T3PremiumCanvas from "./components/T3PremiumCanvas";
 import PremiumVideoPlayer from "./components/PremiumVideoPlayer";
 import T3ReviewCarousel from "./components/T3ReviewCarousel";
@@ -91,9 +91,9 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SERVICES — Interactive Bento Grid with Micro-Interactions
+          SERVICES — Interactive Split-Pane Navigator with Dynamic Content
       ═══════════════════════════════════════════════════════════════════════ */}
-      <T3BentoServices />
+      <T3SplitPaneNavigator />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           PHILOSOPHY — Three Pillars with Architectural Numeric Backgrounds

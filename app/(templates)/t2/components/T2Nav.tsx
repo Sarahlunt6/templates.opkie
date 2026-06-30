@@ -9,6 +9,7 @@ import { clientMasterData } from "@/data/master";
 const navLinks = [
   { href: "#", label: "Home" },
   { href: "#technology", label: "Technology" },
+  { href: "#services", label: "Services" },
   { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ];
@@ -39,12 +40,34 @@ const serviceCategories = [
 export default function T2Nav() {
   const location = clientMasterData.locations[0];
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Scroll detection hook
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
       {/* Floating "Smoked Obsidian" Capsule Island */}
-      <nav
-        className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl h-16 z-50 bg-neutral-950/40 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.5)]"
+      <motion.nav
+        className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl h-16 z-50 rounded-full transition-all duration-500"
+        style={{
+          backgroundColor: scrolled ? "rgba(10,10,10,0.80)" : "rgba(10,10,10,0.40)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          border: "1px solid rgba(255,255,255,0.10)",
+          boxShadow: scrolled
+            ? "0 20px 60px rgba(0,0,0,0.6), 0 0 1px rgba(255,255,255,0.1) inset"
+            : "0 12px 40px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.08) inset",
+        }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         role="navigation"
         aria-label="Primary navigation"
       >
@@ -62,117 +85,29 @@ export default function T2Nav() {
           </Link>
 
           {/* Desktop Navigation - High-Precision Digital Typography */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.slice(0, 2).map((link) => (
+          <div className="hidden lg:flex items-center gap-10">
+            {navLinks.map((link) => (
               <motion.a
                 key={link.label}
                 href={link.href}
                 className="relative text-[10px] uppercase tracking-[0.25em] font-semibold text-neutral-300 hover:text-white transition-colors duration-300"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
               >
                 {link.label}
                 {hoveredLink === link.label && (
                   <motion.div
                     layoutId="nav-underline-t2"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-white"
+                    className="absolute -bottom-1 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent"
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
                     exit={{ opacity: 0, scaleX: 0 }}
                     transition={{
                       type: "spring",
-                      stiffness: 400,
-                      damping: 30,
-                    }}
-                  />
-                )}
-              </motion.a>
-            ))}
-
-            {/* Services Dropdown - Sleek Glassmorphic Panel */}
-            <div className="relative group">
-              <button
-                className="relative text-[10px] uppercase tracking-[0.25em] font-semibold text-neutral-300 hover:text-white transition-colors duration-300 flex items-center gap-1.5"
-                onMouseEnter={() => setHoveredLink("Services")}
-                onMouseLeave={() => setHoveredLink(null)}
-              >
-                Services
-                <svg
-                  className="w-3 h-3 transition-transform group-hover:rotate-180 duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-                {hoveredLink === "Services" && (
-                  <motion.div
-                    layoutId="nav-underline-t2"
-                    className="absolute -bottom-1 left-0 right-8 h-px bg-white"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    exit={{ opacity: 0, scaleX: 0 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 30,
-                    }}
-                  />
-                )}
-              </button>
-
-              {/* Glassmorphic Structured Grid Dropdown */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out">
-                <div className="bg-neutral-950/95 backdrop-blur-xl rounded-2xl border border-white/10 p-6 w-[520px] shadow-[0_20px_80px_-15px_rgba(0,0,0,0.8)]">
-                  <div className="grid grid-cols-2 gap-6">
-                    {serviceCategories.map((category, idx) => (
-                      <div key={category.category} className={idx === 2 ? "col-span-2" : ""}>
-                        <h3 className="text-[9px] uppercase tracking-[0.25em] font-bold text-neutral-500 mb-3">
-                          {category.category}
-                        </h3>
-                        <div className="space-y-1">
-                          {category.services.map((service) => (
-                            <a
-                              key={service.label}
-                              href={service.href}
-                              className="group/item block px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors"
-                            >
-                              <span className="block text-sm font-semibold text-neutral-200 group-hover/item:text-[#0f5a53] transition-colors">
-                                {service.label}
-                              </span>
-                              <span className="block text-xs text-neutral-500 mt-0.5">
-                                {service.description}
-                              </span>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {navLinks.slice(2).map((link) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                className="relative text-[10px] uppercase tracking-[0.25em] font-semibold text-neutral-300 hover:text-white transition-colors duration-300"
-                onMouseEnter={() => setHoveredLink(link.label)}
-                onMouseLeave={() => setHoveredLink(null)}
-              >
-                {link.label}
-                {hoveredLink === link.label && (
-                  <motion.div
-                    layoutId="nav-underline-t2"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-white"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    exit={{ opacity: 0, scaleX: 0 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 30,
+                      stiffness: 500,
+                      damping: 35,
                     }}
                   />
                 )}
@@ -183,8 +118,14 @@ export default function T2Nav() {
           {/* High-Ticket Cyber Pill CTA */}
           <motion.a
             href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="hidden lg:inline-flex items-center text-[10px] uppercase tracking-[0.2em] font-semibold text-white bg-white/5 border border-white/10 rounded-full px-5 py-2.5 hover:bg-white/10 hover:border-teal-500/50 transition-all duration-300 shadow-[0_0_15px_rgba(20,184,166,0.15)]"
-            whileHover={{ scale: 1.02 }}
+            className="hidden lg:inline-flex items-center text-[10px] uppercase tracking-[0.2em] font-semibold text-white bg-white/5 border border-white/10 rounded-full px-5 py-2.5 hover:bg-white/10 hover:border-teal-500/50 transition-all duration-300 shadow-[0_0_15px_rgba(20,184,166,0.15)] backdrop-blur-sm"
+            style={{
+              textShadow: "0 0 10px rgba(255,255,255,0.1)",
+            }}
+            whileHover={{
+              scale: 1.03,
+              boxShadow: "0 0 20px rgba(20,184,166,0.3), inset 0 0 20px rgba(20,184,166,0.05)"
+            }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
@@ -204,7 +145,7 @@ export default function T2Nav() {
             <MobileMenu />
           </div>
         </div>
-      </nav>
+      </motion.nav>
     </>
   );
 }

@@ -529,6 +529,101 @@ export default function Template2Page() {
       />
 
       {/* ═══════════════════════════════════════════════════════════════════════
+          SYSTEM TELEMETRY DATA HUB — CYBER-GRID METRICS
+          Three-column precision telemetry display with micro-tracked typography
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="relative py-12 px-6 md:px-12 bg-zinc-950 border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {/* Metric 1: Satisfaction Rate */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-center relative group"
+            >
+              <div className="relative">
+                <motion.div
+                  className="text-5xl md:text-6xl font-bold tracking-tight mb-2 bg-gradient-to-br from-white via-white to-neutral-400 bg-clip-text text-transparent"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <AnimatedCounter value={98} duration={2} suffix="%" />
+                </motion.div>
+                <div className="absolute -top-2 -right-2 w-2 h-2 rounded-full bg-emerald-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-semibold mt-3">
+                Satisfaction Rate
+              </p>
+              <div className="mt-4 h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
+            </motion.div>
+
+            {/* Metric 2: Smiles Transformed */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-center relative group"
+            >
+              <div className="relative">
+                <motion.div
+                  className="text-5xl md:text-6xl font-bold tracking-tight mb-2 bg-gradient-to-br from-brand-primary via-brand-primary to-emerald-600 bg-clip-text text-transparent"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <AnimatedCounter value={5000} duration={2.5} suffix="+" />
+                </motion.div>
+                <div className="absolute -top-2 -right-2 w-2 h-2 rounded-full bg-brand-primary animate-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-semibold mt-3">
+                Smiles Transformed
+              </p>
+              <div className="mt-4 h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-brand-primary/30 to-transparent" />
+            </motion.div>
+
+            {/* Metric 3: Star Rating */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-center relative group"
+            >
+              <div className="relative">
+                <motion.div
+                  className="text-5xl md:text-6xl font-bold tracking-tight mb-2 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 bg-clip-text text-transparent flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  4.9
+                  <svg className="w-8 h-8 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </motion.div>
+                <div className="absolute -top-2 -right-2 w-2 h-2 rounded-full bg-amber-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-neutral-400 font-semibold mt-3">
+                Average Rating
+              </p>
+              <div className="mt-4 h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-amber-600/30 to-transparent" />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Subtle grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.015] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "32px 32px",
+          }}
+        />
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
           REFINED MARQUEE — ELEGANT SEPARATOR
       ═══════════════════════════════════════════════════════════════════════ */}
       <div className="relative overflow-hidden border-y border-slate-800 bg-zinc-900/50 py-5">

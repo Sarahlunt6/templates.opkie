@@ -236,15 +236,15 @@ export default function T3Hero({
               </p>
             </motion.div>
 
-            {/* Main Headline - Premium Display Typography */}
+            {/* Main Headline - Premium Display Typography with Editorial Accent */}
             <motion.h1
               variants={itemVariants}
               className="font-sanctuary text-[clamp(2rem,5vw,3.5rem)] font-extralight leading-[1.1] tracking-tight mb-8"
             >
-              <span className="block text-stone-800">Oral Wellness,</span>
+              <span className="block text-stone-800">The </span>
               <span className="block mt-1">
-                <span className="text-[#0f5a53] tracking-[0.02em]">Thoughtfully</span>{" "}
-                <span className="text-stone-800">Designed</span>
+                <span className="italic font-serif text-[#0f5a53] tracking-[0.02em]">Sanctuary</span>{" "}
+                <span className="text-stone-800">Experience</span>
               </span>
             </motion.h1>
 

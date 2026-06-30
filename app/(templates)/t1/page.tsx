@@ -31,7 +31,7 @@ export default function Template1Page() {
       <T1Nav />
 
       {/* Hero Section - Immersive Editorial with Ambient Video */}
-      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-32 md:pt-36 lg:pt-40">
+      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-36 md:pt-44 lg:pt-48">
         {/* Looping Ambient Video Background */}
         <div className="absolute inset-0">
           <video
@@ -56,7 +56,10 @@ export default function Template1Page() {
             <div className="max-w-2xl">
               {/* H1 - Fluid Typography with clamp() */}
               <HeadlineReveal className="text-[clamp(2rem,7vw,6rem)] font-bold text-white leading-[0.95] tracking-tight mb-4 -ml-0.5 lg:-ml-1">
-                <span className="block">{location.cityServed}&apos;s Highest-Rated</span>
+                <span className="block">
+                  {location.cityServed}&apos;s{" "}
+                  <span className="font-serif italic font-light">Highest-Rated</span>
+                </span>
                 <span className="block text-brand-accent italic font-light text-[0.55em] lg:text-[0.6em] ml-1 lg:ml-2">
                   Cosmetic Dentist
                 </span>

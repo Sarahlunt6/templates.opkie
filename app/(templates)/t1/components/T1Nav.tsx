@@ -44,7 +44,7 @@ export default function T1Nav() {
     <>
       {/* Floating Capsule "Navigation Island" */}
       <nav
-        className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/90 backdrop-blur-2xl saturate-150 border border-white/60 rounded-full shadow-[0_24px_50px_-12px_rgba(15,90,83,0.12)]"
+        className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-20 z-40 bg-white/40 backdrop-blur-2xl saturate-150 border border-white/50 rounded-full shadow-[0_24px_50px_-12px_rgba(15,90,83,0.08)]"
         role="navigation"
         aria-label="Primary navigation"
       >
@@ -67,7 +67,7 @@ export default function T1Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-900 hover:text-black transition-colors"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-800 hover:text-black transition-colors"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
@@ -152,7 +152,7 @@ export default function T1Nav() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="relative text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-900 hover:text-black transition-colors"
+                className="relative text-[11px] uppercase tracking-[0.2em] font-medium text-slate-800 hover:text-black transition-colors"
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
               >

@@ -236,12 +236,14 @@ export function AnimatedCounter({
   suffix = "",
   prefix = "",
   duration = 2,
+  decimals = 0,
   className = "",
 }: {
   value: number;
   suffix?: string;
   prefix?: string;
   duration?: number;
+  decimals?: number;
   className?: string;
 }) {
   const [count, setCount] = useState(0);
@@ -259,7 +261,8 @@ export function AnimatedCounter({
             const progress = Math.min(elapsed / duration, 1);
             // Ease out quad
             const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * value));
+            const currentValue = eased * value;
+            setCount(decimals > 0 ? Number(currentValue.toFixed(decimals)) : Math.floor(currentValue));
 
             if (progress < 1) {
               requestAnimationFrame(animate);
@@ -273,12 +276,12 @@ export function AnimatedCounter({
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [value, duration, hasAnimated]);
+  }, [value, duration, decimals, hasAnimated]);
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {count.toLocaleString()}
+      {decimals > 0 ? count.toFixed(decimals) : count.toLocaleString()}
       {suffix}
     </span>
   );
