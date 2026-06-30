@@ -78,18 +78,18 @@ export default function AquaSonicCursor() {
         time: performance.now()
       });
 
-      // Generate bubbles on movement
-      if (Math.random() > 0.7) {
+      // Generate subtle bubbles on movement (reduced frequency)
+      if (Math.random() > 0.92) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 0.3 + Math.random() * 0.7;
+        const speed = 0.2 + Math.random() * 0.4;
 
         bubblesRef.current.push({
-          x: e.clientX + (Math.random() - 0.5) * 20,
-          y: e.clientY + (Math.random() - 0.5) * 20,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 0.5, // Float upward
-          size: 2 + Math.random() * 4,
-          opacity: 0.3 + Math.random() * 0.4,
+          x: e.clientX + (Math.random() - 0.5) * 15,
+          y: e.clientY + (Math.random() - 0.5) * 15,
+          vx: Math.cos(angle) * speed * 0.5,
+          vy: Math.sin(angle) * speed - 0.3, // Slower float upward
+          size: 1.5 + Math.random() * 2.5,
+          opacity: 0.15 + Math.random() * 0.2, // More subtle
           life: 1
         });
       }
@@ -134,75 +134,125 @@ export default function AquaSonicCursor() {
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw hydrostatic wave trail
+      // Draw realistic water ripples with wave physics
       wavePointsRef.current = wavePointsRef.current.filter((point) => {
         const age = currentTime - point.time;
-        const maxAge = 1500; // 1.5 seconds
+        const maxAge = 2000; // 2 seconds for more visible ripples
 
         if (age > maxAge) return false;
 
         const progress = age / maxAge;
-        const radius = 20 + progress * 80; // Expanding ripple
-        const opacity = (1 - progress) * 0.15;
+        const frequency = 0.08; // Wave frequency
+        const waveCount = 4; // Number of concentric ripples
 
-        // Outer wave ring - translucent aqua
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(20, 184, 166, ${opacity})`; // Teal
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        // Draw multiple concentric ripple waves
+        for (let i = 0; i < waveCount; i++) {
+          const waveOffset = i * 25; // Spacing between waves
+          const baseRadius = 10 + progress * 120 + waveOffset;
 
-        // Inner glow
-        const gradient = ctx.createRadialGradient(
-          point.x, point.y, 0,
-          point.x, point.y, radius * 0.6
-        );
-        gradient.addColorStop(0, `rgba(165, 243, 252, ${opacity * 0.3})`); // Light cyan
-        gradient.addColorStop(1, `rgba(20, 184, 166, 0)`);
-        ctx.fillStyle = gradient;
-        ctx.fill();
+          // Calculate wave amplitude with decay
+          const amplitude = 8 * (1 - progress) * Math.sin((progress * 15) - (i * 0.5));
+
+          // Create organic water ripple using quadratic curves
+          ctx.beginPath();
+          const segments = 32; // Number of segments for smooth circle
+
+          for (let j = 0; j <= segments; j++) {
+            const angle = (j / segments) * Math.PI * 2;
+
+            // Add wave distortion to radius for organic water movement
+            const waveDistortion = amplitude * Math.sin(angle * 6 + progress * 10);
+            const currentRadius = baseRadius + waveDistortion;
+
+            const x = point.x + Math.cos(angle) * currentRadius;
+            const y = point.y + Math.sin(angle) * currentRadius;
+
+            if (j === 0) {
+              ctx.moveTo(x, y);
+            } else {
+              ctx.lineTo(x, y);
+            }
+          }
+          ctx.closePath();
+
+          // Calculate opacity with wave-based variation
+          const waveOpacity = (1 - progress) * (0.18 - i * 0.03) *
+                             (0.8 + 0.4 * Math.sin((progress * 20) - (i * 0.8)));
+
+          // Gradient stroke for depth
+          const gradient = ctx.createRadialGradient(
+            point.x, point.y, baseRadius * 0.3,
+            point.x, point.y, baseRadius
+          );
+          gradient.addColorStop(0, `rgba(165, 243, 252, ${waveOpacity * 1.2})`);
+          gradient.addColorStop(0.5, `rgba(20, 184, 166, ${waveOpacity})`);
+          gradient.addColorStop(1, `rgba(20, 184, 166, ${waveOpacity * 0.6})`);
+
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 2.5 - (i * 0.3) - (progress * 1.5);
+          ctx.stroke();
+
+          // Add subtle fill for wave crest with caustic-like effect
+          if (i % 2 === 0 && amplitude > 2) {
+            const fillGradient = ctx.createRadialGradient(
+              point.x, point.y, baseRadius * 0.6,
+              point.x, point.y, baseRadius
+            );
+            fillGradient.addColorStop(0, `rgba(165, 243, 252, ${waveOpacity * 0.15})`);
+            fillGradient.addColorStop(1, `rgba(20, 184, 166, 0)`);
+            ctx.fillStyle = fillGradient;
+            ctx.fill();
+          }
+        }
+
+        // Add interference pattern at wave center
+        if (progress < 0.3) {
+          const centerGradient = ctx.createRadialGradient(
+            point.x, point.y, 0,
+            point.x, point.y, 15
+          );
+          centerGradient.addColorStop(0, `rgba(165, 243, 252, ${(1 - progress * 3) * 0.4})`);
+          centerGradient.addColorStop(1, `rgba(20, 184, 166, 0)`);
+          ctx.fillStyle = centerGradient;
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, 15, 0, Math.PI * 2);
+          ctx.fill();
+        }
 
         return true;
       });
 
-      // Update and draw microscopic bubbles
+      // Update and draw subtle microscopic bubbles
       bubblesRef.current = bubblesRef.current.filter((bubble) => {
         // Update position
         bubble.x += bubble.vx;
         bubble.y += bubble.vy;
-        bubble.life -= 0.01;
+        bubble.life -= 0.012;
 
         if (bubble.life <= 0) return false;
 
-        // Draw bubble with pearlescent effect
+        // Draw subtle bubble with soft glow
         const bubbleOpacity = bubble.opacity * bubble.life;
 
-        // Outer bubble shell
-        ctx.beginPath();
-        ctx.arc(bubble.x, bubble.y, bubble.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${bubbleOpacity * 0.6})`;
-        ctx.fill();
-
-        // Light diffraction highlight
-        const highlightGradient = ctx.createRadialGradient(
-          bubble.x - bubble.size * 0.3,
-          bubble.y - bubble.size * 0.3,
-          0,
-          bubble.x,
-          bubble.y,
-          bubble.size
+        // Soft bubble glow (more subtle)
+        const bubbleGradient = ctx.createRadialGradient(
+          bubble.x, bubble.y, 0,
+          bubble.x, bubble.y, bubble.size * 1.5
         );
-        highlightGradient.addColorStop(0, `rgba(165, 243, 252, ${bubbleOpacity * 0.8})`);
-        highlightGradient.addColorStop(0.5, `rgba(20, 184, 166, ${bubbleOpacity * 0.3})`);
-        highlightGradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+        bubbleGradient.addColorStop(0, `rgba(165, 243, 252, ${bubbleOpacity * 0.5})`);
+        bubbleGradient.addColorStop(0.5, `rgba(20, 184, 166, ${bubbleOpacity * 0.25})`);
+        bubbleGradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
 
-        ctx.fillStyle = highlightGradient;
+        ctx.fillStyle = bubbleGradient;
+        ctx.beginPath();
+        ctx.arc(bubble.x, bubble.y, bubble.size * 1.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Subtle rim
-        ctx.strokeStyle = `rgba(255, 255, 255, ${bubbleOpacity * 0.4})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
+        // Tiny core
+        ctx.beginPath();
+        ctx.arc(bubble.x, bubble.y, bubble.size * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${bubbleOpacity * 0.3})`;
+        ctx.fill();
 
         return true;
       });
