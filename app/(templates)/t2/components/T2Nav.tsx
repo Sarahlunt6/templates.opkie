@@ -191,8 +191,18 @@ export default function T2Nav() {
             Book Online
           </motion.a>
 
-          {/* Mobile Menu */}
-          <MobileMenu />
+          {/* Mobile CTA + Menu */}
+          <div className="lg:hidden flex items-center gap-2">
+            <motion.a
+              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+              className="inline-flex items-center text-[9px] uppercase tracking-[0.18em] font-semibold text-white bg-white/5 border border-white/10 rounded-full px-4 py-2 hover:bg-white/10 transition-all min-h-[40px]"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Book
+            </motion.a>
+            <MobileMenu />
+          </div>
         </div>
       </nav>
     </>

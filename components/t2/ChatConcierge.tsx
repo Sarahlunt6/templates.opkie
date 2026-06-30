@@ -140,7 +140,7 @@ export default function T2ChatConcierge() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
-            className="fixed bottom-22 right-6 z-50 w-80 md:w-[22rem] h-[500px] max-h-[82vh] bg-neutral-950/60 backdrop-blur-2xl border border-white/10 rounded-[24px] shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-20 right-4 md:right-6 z-50 w-[calc(100vw-32px)] sm:w-80 md:w-[22rem] h-[min(500px,70vh)] md:h-[500px] md:max-h-[82vh] bg-neutral-950/60 backdrop-blur-2xl border border-white/10 rounded-[24px] shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header Panel - Flat Black Razor-Sharp */}
             <div className="bg-neutral-950/80 border-b border-white/5 p-4">

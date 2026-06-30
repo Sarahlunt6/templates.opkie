@@ -137,7 +137,7 @@ export default function T1ChatConcierge() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.94 }}
             transition={{ type: "spring", stiffness: 280, damping: 26 }}
-            className="fixed bottom-24 right-6 z-50 w-80 md:w-96 h-[480px] max-h-[80vh] bg-white/70 backdrop-blur-xl border border-white/60 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-24 right-4 md:right-6 z-50 w-[calc(100vw-32px)] sm:w-80 md:w-96 h-[min(480px,70vh)] md:h-[480px] md:max-h-[80vh] bg-white/70 backdrop-blur-xl border border-white/60 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header Panel - Warm Gradient */}
             <div className="bg-gradient-to-br from-[#0f5a53] via-[#0d4f49] to-[#0b4541] text-white px-6 py-5">

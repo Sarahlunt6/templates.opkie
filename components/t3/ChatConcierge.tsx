@@ -137,7 +137,7 @@ export default function T3ChatConcierge() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 16 }}
             transition={{ type: "spring", stiffness: 320, damping: 30 }}
-            className="fixed bottom-22 right-6 z-50 w-84 md:w-96 h-[520px] max-h-[84vh] bg-white border border-slate-100 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.08)] flex flex-col overflow-hidden p-2"
+            className="fixed bottom-20 right-4 md:right-6 z-50 w-[calc(100vw-32px)] sm:w-84 md:w-96 h-[min(520px,70vh)] md:h-[520px] md:max-h-[84vh] bg-white border border-slate-100 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.08)] flex flex-col overflow-hidden p-2"
           >
             {/* Header Panel - Stark Editorial Minimalism */}
             <div className="bg-slate-50 rounded-xl p-4 flex items-center justify-between mb-2">

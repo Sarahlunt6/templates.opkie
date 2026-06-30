@@ -100,7 +100,7 @@ export default function Template1Page() {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pb-8 lg:pb-16">
           <div
             id="hero-metrics"
-            className="flex overflow-x-auto lg:overflow-visible gap-8 lg:gap-16 pb-2 lg:pb-0 -mx-6 px-6 lg:mx-0 lg:px-0 lg:justify-end scrollbar-hide"
+            className="flex overflow-x-auto lg:overflow-visible gap-6 lg:gap-16 pb-2 lg:pb-0 lg:justify-end scrollbar-hide"
             style={{ scrollSnapType: "x mandatory" }}
           >
             {[
@@ -110,11 +110,11 @@ export default function Template1Page() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="text-center flex-shrink-0"
+                className="text-center flex-shrink-0 min-w-[140px]"
                 style={{ scrollSnapAlign: "center" }}
               >
                 {/* Oversized elegant serif with animated counter */}
-                <p className="text-4xl md:text-6xl lg:text-7xl font-serif font-light text-white tracking-tight leading-none whitespace-nowrap">
+                <p className="text-[clamp(2rem,8vw,5rem)] lg:text-7xl font-serif font-light text-white tracking-tight leading-none whitespace-nowrap">
                   {stat.isRating ? (
                     stat.value
                   ) : (
@@ -184,7 +184,7 @@ export default function Template1Page() {
           </div>
 
           {/* Mobile: Horizontal scroll carousel, Desktop: Staggered grid */}
-          <div className="flex lg:grid lg:grid-cols-4 gap-4 lg:gap-8 overflow-x-auto lg:overflow-visible -mx-6 px-6 lg:mx-0 lg:px-0 pb-4 lg:pb-0 scrollbar-hide" style={{ scrollSnapType: "x mandatory" }}>
+          <div className="flex lg:grid lg:grid-cols-4 gap-4 lg:gap-8 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 scrollbar-hide" style={{ scrollSnapType: "x mandatory" }}>
             {[
               {
                 title: "Invisalign",
@@ -213,7 +213,7 @@ export default function Template1Page() {
             ].map((service, index) => (
               <div
                 key={index}
-                className={`group flex-shrink-0 w-[280px] lg:w-auto ${service.offset}`}
+                className={`group flex-shrink-0 w-[min(280px,calc(100vw-64px))] lg:w-auto ${service.offset}`}
                 style={{ scrollSnapAlign: "center" }}
               >
                 {/* Fine 1px architectural line border - no harsh backdrop */}
@@ -381,7 +381,7 @@ export default function Template1Page() {
               <div key={index} className="text-center">
                 {/* Oversized elegant serif italic quote - directly on canvas */}
                 <blockquote className="relative">
-                  <p className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-white/95 leading-[1.3] tracking-tight max-w-4xl mx-auto">
+                  <p className="text-[clamp(1.5rem,5vw,3rem)] lg:text-5xl font-serif italic text-white/95 leading-[1.3] tracking-tight max-w-4xl mx-auto">
                     "{review.reviewText}"
                   </p>
                 </blockquote>
@@ -404,7 +404,7 @@ export default function Template1Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
               {sampleReviews.slice(1, 3).map((review, index) => (
                 <div key={index} className="text-center">
-                  <p className="text-xl lg:text-2xl font-serif italic text-white/80 leading-relaxed mb-8">
+                  <p className="text-[clamp(1.125rem,3vw,1.5rem)] lg:text-2xl font-serif italic text-white/80 leading-relaxed mb-8">
                     "{review.reviewText}"
                   </p>
                   <div className="flex flex-col items-center gap-1">
