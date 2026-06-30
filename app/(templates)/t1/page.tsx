@@ -3,10 +3,10 @@ import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import T1Nav from "./components/T1Nav";
 import T1Footer from "./components/T1Footer";
+import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
 import T1SmoothScrollWrapper from "./components/T1SmoothScrollWrapper";
 import T1PremiumHero from "./components/T1PremiumHero";
 import T1EditorialServices from "./components/T1EditorialServices";
-import T1MouseRevealBeforeAfter from "./components/T1MouseRevealBeforeAfter";
 import {
   HeadlineReveal,
   SubheadReveal,
@@ -293,7 +293,7 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* Before/After - Premium Mouse-Reveal Interaction */}
+      {/* Before/After - Editorial Showcase */}
       <section className="py-16 lg:py-32 px-6 lg:px-8 bg-brand-canvas">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10 lg:mb-16">
@@ -307,7 +307,7 @@ export default function Template1Page() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <T1MouseRevealBeforeAfter
+            <BeforeAfterSlider
               beforeUrl="/images/cases/smile-before.png"
               afterUrl="/images/cases/smile-after.png"
               altTag="Smile transformation with porcelain veneers"
