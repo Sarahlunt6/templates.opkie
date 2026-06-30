@@ -109,12 +109,9 @@ export default function Template3Page() {
               </p>
               <div className="w-6 h-px bg-brand-primary/30" />
             </div>
-            <T3BloomingText
-              as="h2"
-              className="font-sanctuary text-[clamp(1.6rem,4vw,2.8rem)] font-extralight tracking-[0.03em]"
-            >
+            <h2 className="font-sanctuary text-[clamp(1.6rem,4vw,2.8rem)] font-extralight tracking-[0.03em]">
               Listen, Plan, Care
-            </T3BloomingText>
+            </h2>
           </div>
 
           {/* Three Pillars with Large Numeric Backgrounds */}
@@ -170,14 +167,9 @@ export default function Template3Page() {
                 key={index}
                 className="group flex items-center justify-between py-6 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500 cursor-pointer"
               >
-                <div className="flex items-baseline gap-6">
-                  <span className="text-xs font-light text-neutral-muted/50 tracking-wider">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="text-lg font-light tracking-[0.02em] group-hover:text-brand-primary transition-colors duration-500">
-                    {category}
-                  </h3>
-                </div>
+                <h3 className="text-lg font-light tracking-[0.02em] group-hover:text-brand-primary transition-colors duration-500">
+                  {category}
+                </h3>
                 <svg
                   className="w-5 h-5 text-neutral-muted/30 group-hover:text-brand-primary group-hover:translate-x-2 transition-all duration-500"
                   fill="none"
@@ -425,20 +417,20 @@ export default function Template3Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
-                title: "Extended Appointments",
-                description: "Standard cleanings are 60 minutes, not 30. First visits are 90 minutes. We'd rather run behind than rush you out.",
+                title: "90-Minute First Visits",
+                description: "You'll spend 30 minutes just talking. No drill touches your mouth until we've discussed your history, fears, and goals. Treatment doesn't start until you feel heard.",
               },
               {
-                title: "Comfort Menu",
-                description: "Choose your own adventure: weighted blanket, aromatherapy diffuser, noise-canceling AirPods, or Netflix on the ceiling. Yes, the ceiling.",
+                title: "The Hand-Raise Rule",
+                description: "One finger = pause. Two fingers = stop. We check in every 3-5 minutes. You control the pace, always. Your comfort trumps our schedule.",
               },
               {
-                title: "Signal System",
-                description: "Raise one finger to pause. Raise two to stop completely. We check in every few minutes. You're in control the entire time.",
+                title: "Weighted Blankets & Netflix",
+                description: "Ceiling-mounted screens. Noise-canceling headphones. Aromatherapy diffusers. Weighted blankets for grounding. Choose what helps you relax.",
               },
               {
-                title: "Mercury-Free Practice",
-                description: "No amalgam fillings. No metal crowns. Every material we use has been vetted for biocompatibility. Your body will thank you.",
+                title: "Mercury-Free Since Day One",
+                description: "No amalgam fillings. No metal crowns. BPA-free composites only. Every material tested for biocompatibility before we use it on you.",
               },
             ].map((item, index) => (
               <div key={index} className="group py-6 border-b border-neutral-border/30 hover:border-brand-primary/30 transition-colors duration-500">
