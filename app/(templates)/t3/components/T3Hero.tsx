@@ -202,7 +202,7 @@ export default function T3Hero({
           THREE-COLUMN GRID LAYOUT
           Asymmetric editorial framework with floating media blocks
       ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-8 py-16 lg:py-20 min-h-[92vh] flex items-center">
+      <div className="relative z-0 max-w-[1400px] mx-auto px-6 lg:px-8 py-16 lg:py-20 min-h-[92vh] flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-8 lg:gap-6 xl:gap-10 w-full items-center">
 
           {/* ═══════════════════════════════════════════════════════════════════
