@@ -3,7 +3,10 @@ import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import T1Nav from "./components/T1Nav";
 import T1Footer from "./components/T1Footer";
-import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
+import T1SmoothScrollWrapper from "./components/T1SmoothScrollWrapper";
+import T1PremiumHero from "./components/T1PremiumHero";
+import T1EditorialServices from "./components/T1EditorialServices";
+import T1MouseRevealBeforeAfter from "./components/T1MouseRevealBeforeAfter";
 import {
   HeadlineReveal,
   SubheadReveal,
@@ -27,13 +30,45 @@ export default function Template1Page() {
   const { doctors, trustSignals } = clientMasterData;
   const primaryDoctor = doctors[0];
 
-  return (
-    <div className="font-serif antialiased bg-brand-canvas overflow-x-hidden">
-      <AquaSonicCursor />
-      <T1Nav />
+  // Premium services data for editorial layout
+  const premiumServices = [
+    {
+      title: "Invisalign",
+      description: "Straighten your smile in 6-18 months without anyone knowing. Our Diamond Provider status means faster results with fewer office visits.",
+      image: "/images/services/invisalign.jpg",
+    },
+    {
+      title: "Dental Implants",
+      description: "Eat, speak, and smile with complete confidence again. Our implants have a 98% success rate and last a lifetime with proper care.",
+      image: "/images/services/implant.jpg",
+    },
+    {
+      title: "Full Mouth Restoration",
+      description: "Transform decades of dental problems into a healthy, beautiful smile. Most cases completed in just 4-6 visits over 3 months.",
+      image: "/images/services/full-mouth-smile.jpg",
+    },
+    {
+      title: "Porcelain Veneers",
+      description: "Get the smile you've always wanted in just two appointments. Custom-matched to your natural tooth color for results that look real, not fake.",
+      image: "/images/services/full-mouth-shade.jpg",
+    },
+  ];
 
-      {/* Hero Section - Immersive Editorial with Ambient Video */}
-      <section className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-36 md:pt-44 lg:pt-48">
+  return (
+    <T1SmoothScrollWrapper>
+      <div className="font-serif antialiased bg-brand-canvas overflow-x-hidden">
+        <AquaSonicCursor />
+        <T1Nav />
+
+        {/* Hero Section - Premium with Split-Text & Scale Animation */}
+        <T1PremiumHero
+          cityServed={location.cityServed}
+          phoneNumber={location.phoneGBP}
+          onlineBookingUrl={clientMasterData.onlineBookingUrl}
+        />
+
+        {/* LEGACY HERO - REMOVE THIS SECTION */}
+        <section className="hidden min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-36 md:pt-44 lg:pt-48">
         {/* Looping Ambient Video Background */}
         <div className="absolute inset-0">
           <video
@@ -174,80 +209,8 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* Premium Services - Staggered Asymmetric Mosaic Array */}
-      <section className="py-16 lg:py-32 px-6 lg:px-8 bg-brand-canvas">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header - Editorial Offset */}
-          <div className="max-w-xl mb-10 lg:mb-20">
-            <p className="text-brand-primary uppercase tracking-[0.2em] lg:tracking-[0.3em] text-xs lg:text-sm mb-3 lg:mb-4 font-medium">
-              Our Expertise
-            </p>
-            <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-brand-mainText leading-[0.95]">
-              Premium
-              <span className="block text-brand-primary italic font-light">Services</span>
-            </h2>
-          </div>
-
-          {/* Mobile: Horizontal scroll carousel, Desktop: Staggered grid */}
-          <div className="flex lg:grid lg:grid-cols-4 gap-4 lg:gap-8 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 scrollbar-hide" style={{ scrollSnapType: "x mandatory" }}>
-            {[
-              {
-                title: "Invisalign",
-                description: "Straighten your smile in 6-18 months without anyone knowing. Our Diamond Provider status means faster results with fewer office visits.",
-                image: "/images/services/invisalign.jpg",
-                offset: "lg:translate-y-0",
-              },
-              {
-                title: "Dental Implants",
-                description: "Eat, speak, and smile with complete confidence again. Our implants have a 98% success rate and last a lifetime with proper care.",
-                image: "/images/services/implant.jpg",
-                offset: "lg:translate-y-12",
-              },
-              {
-                title: "Full Mouth Restoration",
-                description: "Transform decades of dental problems into a healthy, beautiful smile. Most cases completed in just 4-6 visits over 3 months.",
-                image: "/images/services/full-mouth-smile.jpg",
-                offset: "lg:-translate-y-6",
-              },
-              {
-                title: "Porcelain Veneers",
-                description: "Get the smile you&apos;ve always wanted in just two appointments. Custom-matched to your natural tooth color for results that look real, not fake.",
-                image: "/images/services/full-mouth-shade.jpg",
-                offset: "lg:translate-y-6",
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className={`group flex-shrink-0 w-[min(280px,calc(100vw-64px))] lg:w-auto ${service.offset}`}
-                style={{ scrollSnapAlign: "center" }}
-              >
-                {/* Fine 1px architectural line border - no harsh backdrop */}
-                <div className="relative overflow-hidden border border-brand-primary/20">
-                  <div className="aspect-[3/4] relative">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                      sizes="(max-width: 768px) 280px, 25vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-mainText via-brand-mainText/20 to-transparent" />
-                  </div>
-                  {/* Text overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
-                    <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 -ml-2 pl-2 border-l-4 border-brand-accent">
-                      {service.title}
-                    </h3>
-                    <p className="text-xs lg:text-sm text-white/70 leading-relaxed line-clamp-3 lg:line-clamp-none">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Premium Services - Editorial Parallax Scroll */}
+      <T1EditorialServices services={premiumServices} />
 
       {/* Meet the Dentist - Asymmetric Overlapping Collage Layout */}
       <section className="py-16 lg:py-32 px-6 lg:px-8 bg-slate-900 relative overflow-hidden">
@@ -330,7 +293,7 @@ export default function Template1Page() {
         </div>
       </section>
 
-      {/* Before/After - Editorial Showcase */}
+      {/* Before/After - Premium Mouse-Reveal Interaction */}
       <section className="py-16 lg:py-32 px-6 lg:px-8 bg-brand-canvas">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10 lg:mb-16">
@@ -344,7 +307,7 @@ export default function Template1Page() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <BeforeAfterSlider
+            <T1MouseRevealBeforeAfter
               beforeUrl="/images/cases/smile-before.png"
               afterUrl="/images/cases/smile-after.png"
               altTag="Smile transformation with porcelain veneers"
@@ -724,6 +687,7 @@ export default function Template1Page() {
       </section>
 
       <T1Footer />
-    </div>
+      </div>
+    </T1SmoothScrollWrapper>
   );
 }

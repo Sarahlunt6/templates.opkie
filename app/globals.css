@@ -430,4 +430,39 @@
       0 8px 16px rgba(0, 0, 0, 0.04),
       0 24px 48px rgba(0, 0, 0, 0.08);
   }
+
+  /* T1 Premium Animation: Subtle pulse for cursor badge */
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.02);
+    }
+  }
+
+  /* Accessibility: Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .animate-pulse-subtle,
+    .animate-marquee,
+    .animate-marquee-reverse,
+    .animate-ping {
+      animation: none !important;
+    }
+  }
 }
