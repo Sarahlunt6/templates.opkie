@@ -149,15 +149,19 @@ export default function T2TreatmentDashboard({ phases }: T2TreatmentDashboardPro
               <motion.div
                 key={activePhase}
                 custom={direction}
-                variants={prefersReducedMotion ? {} : slideVariants}
-                initial={prefersReducedMotion ? false : "enter"}
+                variants={slideVariants}
+                initial={prefersReducedMotion ? "center" : "enter"}
                 animate="center"
-                exit={prefersReducedMotion ? false : "exit"}
-                transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 },
-                  scale: { duration: 0.2 },
-                }}
+                exit={prefersReducedMotion ? "center" : "exit"}
+                transition={
+                  prefersReducedMotion
+                    ? { duration: 0 }
+                    : {
+                        x: { type: "spring", stiffness: 300, damping: 30 },
+                        opacity: { duration: 0.2 },
+                        scale: { duration: 0.2 },
+                      }
+                }
                 className="p-8 md:p-12"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
