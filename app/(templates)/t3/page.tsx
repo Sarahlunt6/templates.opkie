@@ -15,7 +15,6 @@ import T3SmoothScrollWrapper from "./components/T3SmoothScrollWrapper";
 import T3BloomingText from "./components/T3BloomingText";
 import T3OrganicBlobs from "./components/T3OrganicBlobs";
 import T3AtmosphericParallax from "./components/T3AtmosphericParallax";
-import T3SensoryCheckIn from "./components/T3SensoryCheckIn";
 import {
   AmbientLightNodes,
   MindfulScrollProgress,
@@ -394,62 +393,36 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          FREE CONSULTATION CTA — Spatial Banner with Sensory Check-In
+          FREE CONSULTATION CTA — Simple Call-to-Action Banner
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-28 lg:py-40 overflow-hidden bg-slate-900">
-        {/* Background Image with Fixed Position */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/office-exterior.jpg"
-            alt="Our serene practice environment"
-            fill
-            className="object-cover opacity-40"
-            sizes="100vw"
-            priority
-          />
-          {/* Gradient overlays for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/80" />
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-8 text-center">
-          {/* Label */}
-          <p className="text-xs uppercase tracking-[0.3em] text-white/60 mb-8 font-light">
-            Complimentary
-          </p>
-
-          {/* Heading - Clean and stable */}
-          <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extralight text-white mb-8 tracking-tight leading-[1.1]">
-            Begin Your Wellness Journey
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
+          {/* Heading */}
+          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-extralight text-brand-mainText mb-6 tracking-tight leading-[1.2]">
+            Ready to Experience the Difference?
           </h2>
 
           {/* Description */}
-          <p className="text-white/90 font-light leading-relaxed text-xl mb-16 max-w-3xl mx-auto">
-            We offer complimentary consultations for new patients. A quiet conversation to understand your needs.
+          <p className="text-neutral-muted font-light leading-relaxed text-base mb-12 max-w-2xl mx-auto">
+            Complimentary consultations for new patients. No pressure. No sales pitch.
+            Just a thoughtful conversation about your wellness goals.
           </p>
 
-          {/* Buttons with consistent spacing */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
-            <a
-              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-4 px-14 py-6 bg-white text-slate-900 text-sm uppercase tracking-[0.2em] font-semibold hover:bg-white/90 transition-colors duration-300 shadow-xl"
-            >
-              <span>Schedule</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+          {/* Single CTA */}
+          <a
+            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+            className="inline-flex items-center gap-4 px-10 py-5 bg-brand-primary text-white text-sm uppercase tracking-[0.2em] font-medium hover:bg-brand-primary/90 transition-colors duration-300 shadow-lg"
+          >
+            <span>Schedule Your Visit</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
 
-            {/* Sensory Check-In Interactive Modal */}
-            <T3SensoryCheckIn onComplete={(selections) => console.log("Patient comfort preferences:", selections)} />
-          </div>
-
-          {/* Trust message with elegant separator */}
-          <div className="max-w-2xl mx-auto">
-            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8" />
-            <p className="text-white/70 text-base font-light leading-relaxed">
-              No pressure. No sales pitch. Just a thoughtful conversation about your dental wellness goals.
-            </p>
-          </div>
+          {/* Trust message */}
+          <p className="text-neutral-muted/70 text-sm mt-8 font-light">
+            Same-week appointments • Most insurance accepted • Serving {location.cityServed}
+          </p>
         </div>
       </section>
 

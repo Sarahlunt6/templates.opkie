@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import T3SensoryCheckIn from "./T3SensoryCheckIn";
 
 interface T3HeroProps {
   practiceName: string;
@@ -259,73 +260,60 @@ export default function T3Hero({
               variants={itemVariants}
               className="text-stone-600 max-w-lg mx-auto leading-relaxed text-sm lg:text-base mb-10 font-light"
             >
-              If you've put off dental care because the experience feels rushed,
-              clinical, or stressful—we designed this practice for your absolute comfort.
-              Longer appointments. Quieter rooms. A team that listens before they treat.
+              Most dentists ask what hurts. We ask what makes you comfortable.
+              Customize every detail of your visit before you arrive.
             </motion.p>
 
             {/* ═══════════════════════════════════════════════════════════════════
-                FLOATING SOCIAL PROOF CARD - Glassmorphic Trust Badge
+                SIGNATURE ELEMENT - Sensory Check-In (Thesis of the Page)
             ═══════════════════════════════════════════════════════════════════ */}
             <motion.div
               variants={itemVariants}
-              className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl shadow-black/[0.04] border border-stone-100 p-6 max-w-md mx-auto mb-10"
+              className="mb-8"
             >
-              {/* Rating Header */}
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <span className="text-lg font-semibold text-stone-800 tracking-tight">4.9 Rating</span>
-              </div>
-              <p className="text-xs text-stone-500 mb-4 tracking-wide">
-                based on 156+ Verified Google Reviews
-              </p>
-              {/* Testimonial Quote */}
-              <p className="text-sm text-stone-600 italic font-light leading-relaxed">
-                "Finally, a gentle, personalized approach to oral wellness."
-              </p>
+              <T3SensoryCheckIn
+                onComplete={(selections) => {
+                  console.log("Patient comfort preferences:", selections);
+                  // In production, send to backend or store in state
+                }}
+              />
             </motion.div>
 
-            {/* ═══════════════════════════════════════════════════════════════════
-                CTA SYSTEM - Primary Action & Secondary Contact
-            ═══════════════════════════════════════════════════════════════════ */}
+            {/* Secondary Action & Contact */}
             <motion.div
               variants={itemVariants}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
             >
-              {/* Primary CTA Button */}
+              {/* Direct Phone Link */}
               <a
-                href={bookingUrl !== "none" ? bookingUrl : `tel:${phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-[#0f5a53] text-white text-[11px] uppercase tracking-[0.18em] font-medium rounded-sm hover:bg-[#0d4f49] transition-all duration-500 shadow-lg shadow-[#0f5a53]/20"
+                href={`tel:${phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="group inline-flex items-center gap-3 text-[12px] tracking-[0.15em] text-stone-500 hover:text-[#0f5a53] transition-colors duration-500 font-medium"
               >
-                <span>Schedule Online</span>
-                <svg
-                  className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
+                <span>Call {phoneGBP}</span>
               </a>
 
               {/* Divider */}
               <div className="hidden sm:block w-px h-6 bg-stone-300" />
 
-              {/* Secondary Phone Link */}
+              {/* Or Book Directly */}
               <a
-                href={`tel:${phoneGBP.replace(/[^0-9+]/g, "")}`}
+                href={bookingUrl !== "none" ? bookingUrl : `tel:${phoneGBP.replace(/[^0-9+]/g, "")}`}
                 className="text-[12px] tracking-[0.12em] text-stone-500 hover:text-[#0f5a53] transition-colors duration-500 font-medium"
               >
-                {phoneGBP}
+                Book without customizing
               </a>
             </motion.div>
+
+            {/* Trust Message Below */}
+            <motion.p
+              variants={itemVariants}
+              className="text-xs text-stone-400 mt-8 max-w-md mx-auto leading-relaxed"
+            >
+              Serving {cityServed} • Most insurance accepted • Same-week appointments available
+            </motion.p>
           </motion.div>
 
           {/* ═══════════════════════════════════════════════════════════════════
