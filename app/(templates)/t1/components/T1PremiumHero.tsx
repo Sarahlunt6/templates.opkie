@@ -212,8 +212,8 @@ export default function T1PremiumHero({
               ref={subheadRef}
               className="text-base lg:text-xl text-white/80 leading-relaxed mb-8 lg:mb-10 max-w-lg ml-2 lg:ml-4 border-l-2 border-brand-accent pl-4 lg:pl-6"
             >
-              Nervous about dental work? You&apos;re not alone. Our sedation options and gentle
-              approach have helped thousands of anxious patients finally get the smile they deserve.
+              We sedate 60% of our patients. Not because procedures hurt—because anxiety
+              shouldn&apos;t stop you from getting care. Most veneers take 2 weeks. Ours take 90 minutes.
             </div>
 
             {/* CTA Buttons - Editorial Sharp Design */}
@@ -278,9 +278,9 @@ export default function T1PremiumHero({
           style={{ scrollSnapType: "x mandatory" }}
         >
           {[
-            { value: 15, suffix: "+", label: "Years Experience" },
-            { value: 5.0, suffix: "", label: "Google (312 reviews)", isRating: true },
-            { value: 5000, suffix: "+", label: "Smiles Transformed" },
+            { value: 312, suffix: "", label: "Five-Star Reviews" },
+            { value: 98, suffix: "%", label: "Would Refer a Friend" },
+            { value: 3, suffix: " Days", label: "Avg Wait for Appointment", isCompact: true },
           ].map((stat, index) => (
             <div
               key={index}
@@ -288,11 +288,7 @@ export default function T1PremiumHero({
               style={{ scrollSnapAlign: "center" }}
             >
               <p className="text-[clamp(2rem,8vw,5rem)] lg:text-7xl font-serif font-light text-white tracking-tight leading-none whitespace-nowrap">
-                {stat.isRating ? (
-                  stat.value
-                ) : (
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2.5} />
-                )}
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2.5} />
               </p>
               <p className="text-[10px] lg:text-xs font-sans uppercase tracking-[0.25em] lg:tracking-[0.35em] text-white/50 mt-2 whitespace-nowrap">
                 {stat.label}

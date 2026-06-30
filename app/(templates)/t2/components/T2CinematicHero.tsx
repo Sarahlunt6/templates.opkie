@@ -382,12 +382,6 @@ export default function T2CinematicHero({
                   {/* Subtle bottom gradient */}
                   <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-zinc-950/50 to-transparent" />
 
-                  {/* Corner architectural frames */}
-                  <div className="absolute top-4 left-4 w-8 h-8 border-l border-t border-white/[0.08]" />
-                  <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-white/[0.08]" />
-                  <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-white/[0.08]" />
-                  <div className="absolute bottom-4 right-4 w-8 h-8 border-r border-b border-white/[0.08]" />
-
                   {/* Team badge */}
                   <div className="absolute bottom-5 left-5 right-5 z-10">
                     <div className="backdrop-blur-xl bg-zinc-950/60 border border-white/[0.08] rounded-xl px-5 py-3 flex items-center justify-between">
