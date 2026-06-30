@@ -533,8 +533,8 @@ export default function Template2Page() {
       />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SYSTEM TELEMETRY DATA HUB — PREMIUM COUNTERS WITH GLITCH EFFECTS
-          Three-column precision telemetry display with animated odometer counters
+          PRECISION METRICS — DENTAL-SPECIFIC MEASUREMENTS
+          Three-column precision display showing actual dental capabilities
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-12 px-6 md:px-12 bg-zinc-950 border-y border-white/5">
         {/* Animated circuit grid background */}
@@ -542,28 +542,43 @@ export default function Template2Page() {
 
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            <T2TelemetryCounter
-              value={98}
-              suffix="%"
-              duration={2.5}
-              label="Satisfaction Rate"
-              glitchEffect={true}
-            />
-            <T2TelemetryCounter
-              value={5000}
-              suffix="+"
-              duration={3}
-              label="Smiles Transformed"
-              glitchEffect={true}
-            />
-            <T2TelemetryCounter
-              value={4.9}
-              suffix=""
-              duration={2}
-              decimals={1}
-              label="Average Rating"
-              glitchEffect={true}
-            />
+            <div className="text-center">
+              <T2TelemetryCounter
+                value={0.1}
+                suffix="mm"
+                duration={2.5}
+                decimals={1}
+                label="CBCT Scan Resolution"
+                glitchEffect={true}
+              />
+              <p className="text-xs text-white/40 mt-3 tracking-wide">
+                Sees what X-rays miss
+              </p>
+            </div>
+            <div className="text-center">
+              <T2TelemetryCounter
+                value={12}
+                suffix="min"
+                duration={3}
+                label="Crown Mill Time"
+                glitchEffect={true}
+              />
+              <p className="text-xs text-white/40 mt-3 tracking-wide">
+                Same day, not two weeks
+              </p>
+            </div>
+            <div className="text-center">
+              <T2TelemetryCounter
+                value={95}
+                suffix="%"
+                duration={2}
+                label="No Anesthesia Needed"
+                glitchEffect={true}
+              />
+              <p className="text-xs text-white/40 mt-3 tracking-wide">
+                With Solea laser procedures
+              </p>
+            </div>
           </div>
         </div>
       </section>
