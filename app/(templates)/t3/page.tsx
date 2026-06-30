@@ -396,46 +396,46 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           FREE CONSULTATION CTA — Spatial Banner with Sensory Check-In
       ═══════════════════════════════════════════════════════════════════════ */}
-      <T3AtmosphericParallax
-        imageSrc="/images/office-exterior.jpg"
-        className="relative py-24 lg:py-32 overflow-hidden"
-        intensity={0.04}
-      >
-        {/* Enhanced dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900/95 z-0" />
+      <section className="relative py-28 lg:py-40 overflow-hidden bg-slate-900">
+        {/* Background Image with Fixed Position */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/office-exterior.jpg"
+            alt="Our serene practice environment"
+            fill
+            className="object-cover opacity-40"
+            sizes="100vw"
+            priority
+          />
+          {/* Gradient overlays for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/80" />
+        </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-8 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-8 text-center">
           {/* Label */}
-          <p className="text-[11px] uppercase tracking-[0.4em] text-white/70 mb-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-white/60 mb-8 font-light">
             Complimentary
           </p>
 
-          {/* Heading - Larger and more prominent */}
-          <T3BloomingText
-            as="h2"
-            className="text-[clamp(2rem,5vw,3.5rem)] font-extralight text-white mb-10 tracking-[0.02em] leading-tight"
-          >
+          {/* Heading - Clean and stable */}
+          <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extralight text-white mb-8 tracking-tight leading-[1.1]">
             Begin Your Wellness Journey
-          </T3BloomingText>
+          </h2>
 
-          {/* Description - Larger text */}
-          <T3BloomingText
-            as="p"
-            className="text-white/80 font-light leading-relaxed tracking-wide text-lg mb-16 max-w-2xl mx-auto"
-            delay={0.3}
-          >
+          {/* Description */}
+          <p className="text-white/90 font-light leading-relaxed text-xl mb-16 max-w-3xl mx-auto">
             We offer complimentary consultations for new patients. A quiet conversation to understand your needs.
-          </T3BloomingText>
+          </p>
 
-          {/* Buttons with better spacing */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-20">
+          {/* Buttons with consistent spacing */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
             <a
               href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-4 px-12 py-5 border-2 border-white/40 text-white text-sm uppercase tracking-[0.25em] font-light hover:bg-white hover:text-brand-mainText hover:border-white transition-all duration-500 rounded-sm"
+              className="inline-flex items-center gap-4 px-14 py-6 bg-white text-slate-900 text-sm uppercase tracking-[0.2em] font-semibold hover:bg-white/90 transition-colors duration-300 shadow-xl"
             >
               <span>Schedule</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
 
@@ -443,14 +443,15 @@ export default function Template3Page() {
             <T3SensoryCheckIn onComplete={(selections) => console.log("Patient comfort preferences:", selections)} />
           </div>
 
-          {/* Additional trust signal with top border */}
-          <div className="border-t border-white/10 pt-8 max-w-lg mx-auto">
-            <p className="text-white/60 text-sm font-light tracking-wide">
+          {/* Trust message with elegant separator */}
+          <div className="max-w-2xl mx-auto">
+            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8" />
+            <p className="text-white/70 text-base font-light leading-relaxed">
               No pressure. No sales pitch. Just a thoughtful conversation about your dental wellness goals.
             </p>
           </div>
         </div>
-      </T3AtmosphericParallax>
+      </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           WHY CHOOSE US — Floating Typography
