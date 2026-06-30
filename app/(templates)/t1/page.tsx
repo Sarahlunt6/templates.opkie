@@ -16,7 +16,6 @@ import {
   ParallaxFrame,
   EditorialDivider,
   AnimatedCounter,
-  AquaSonicCursor,
 } from "@/components/premium";
 
 const location = clientMasterData.locations[0];
@@ -57,7 +56,6 @@ export default function Template1Page() {
   return (
     <T1SmoothScrollWrapper>
       <div className="font-serif antialiased bg-brand-canvas overflow-x-hidden">
-        <AquaSonicCursor />
         <T1Nav />
 
         {/* Hero Section - Premium with Split-Text & Scale Animation */}

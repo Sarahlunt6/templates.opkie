@@ -158,7 +158,7 @@ export default function T1PremiumHero({
   return (
     <section
       ref={heroRef}
-      className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-36 md:pt-44 lg:pt-48"
+      className="min-h-[100svh] lg:min-h-[90vh] relative overflow-hidden pt-28 md:pt-32 lg:pt-36"
     >
       {/* Background Video with Transform Animation */}
       <div className="absolute inset-0">
@@ -194,7 +194,7 @@ export default function T1PremiumHero({
             </div>
             <div
               ref={subtitleRef}
-              className="text-[clamp(2rem,7vw,6rem)] font-bold text-brand-accent italic font-light leading-[0.95] tracking-tight mb-4 ml-1 lg:ml-2 text-[0.55em] lg:text-[0.6em]"
+              className="text-[clamp(2.5rem,8vw,7rem)] font-bold text-brand-accent italic font-light leading-[0.95] tracking-tight mb-4 ml-1 lg:ml-2"
             >
               Cosmetic Dentist
             </div>
