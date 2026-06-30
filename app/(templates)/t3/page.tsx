@@ -12,11 +12,8 @@ import PremiumVideoPlayer from "./components/PremiumVideoPlayer";
 import T3ReviewCarousel from "./components/T3ReviewCarousel";
 import T3ContactHours from "./components/T3ContactHours";
 import T3SmoothScrollWrapper from "./components/T3SmoothScrollWrapper";
-import T3BloomingText from "./components/T3BloomingText";
-import T3OrganicBlobs from "./components/T3OrganicBlobs";
 import T3AtmosphericParallax from "./components/T3AtmosphericParallax";
 import {
-  AmbientLightNodes,
   MindfulScrollProgress,
 } from "@/components/premium";
 
@@ -34,12 +31,6 @@ export default function Template3Page() {
 
         {/* Premium Canvas Background with Mouse-Reactive Particles */}
         <T3PremiumCanvas particleCount={40} orbCount={5} colorPalette="sanctuary" />
-
-        {/* Organic Morphing Background Blobs */}
-        <T3OrganicBlobs count={3} opacity={0.6} />
-
-        {/* Additional Ambient Light Nodes for premium depth */}
-        <AmbientLightNodes count={3} colors={["var(--primary-brand)", "#A8D5BA", "#E8D5C4"]} />
 
         <T3Nav />
 
@@ -67,21 +58,13 @@ export default function Template3Page() {
               <div className="w-8 h-px bg-brand-primary/30" />
             </div>
 
-            <T3BloomingText
-              as="h2"
-              className="font-sanctuary text-[clamp(1.8rem,4vw,3rem)] font-extralight text-center mb-6 tracking-[0.02em]"
-              delay={0.2}
-            >
+            <h2 className="font-sanctuary text-[clamp(1.8rem,4vw,3rem)] font-extralight text-center mb-6 tracking-[0.02em]">
               Our Practice, Our People
-            </T3BloomingText>
+            </h2>
 
-            <T3BloomingText
-              as="p"
-              className="text-center text-neutral-muted font-light max-w-xl mx-auto tracking-wide leading-relaxed"
-              delay={0.4}
-            >
+            <p className="text-center text-neutral-muted font-light max-w-xl mx-auto tracking-wide leading-relaxed">
               Take a moment to meet our team. Discover the thoughtful care that defines our approach.
-            </T3BloomingText>
+            </p>
           </div>
 
           {/* Premium Video Player */}
