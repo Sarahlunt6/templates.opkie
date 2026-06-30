@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import T3Nav from "./components/T3Nav";
@@ -10,6 +11,11 @@ import T3PremiumCanvas from "./components/T3PremiumCanvas";
 import PremiumVideoPlayer from "./components/PremiumVideoPlayer";
 import T3ReviewCarousel from "./components/T3ReviewCarousel";
 import T3ContactHours from "./components/T3ContactHours";
+import T3SmoothScrollWrapper from "./components/T3SmoothScrollWrapper";
+import T3BloomingText from "./components/T3BloomingText";
+import T3OrganicBlobs from "./components/T3OrganicBlobs";
+import T3AtmosphericParallax from "./components/T3AtmosphericParallax";
+import T3SensoryCheckIn from "./components/T3SensoryCheckIn";
 import {
   AmbientLightNodes,
   MindfulScrollProgress,
@@ -17,27 +23,26 @@ import {
 
 const location = clientMasterData.locations[0];
 
-export const metadata: Metadata = {
-  title: `${location.primaryCategoryGBP} in ${location.cityServed}, ${location.stateServed} | ${location.practiceNameGBP}`,
-  description: `Holistic, patient-centered dental wellness in ${location.cityServed}. Experience personalized care in a serene, spa-like environment focused on your complete oral health.`,
-};
-
 export default function Template3Page() {
   const { doctors } = clientMasterData;
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative overflow-x-hidden pt-20 lg:pt-24">
-      {/* Mindful Scroll Progress Indicator */}
-      <MindfulScrollProgress color="var(--primary-brand)" thickness={2} position="left" />
+    <T3SmoothScrollWrapper>
+      <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative overflow-x-hidden pt-20 lg:pt-24">
+        {/* Mindful Scroll Progress Indicator */}
+        <MindfulScrollProgress color="var(--primary-brand)" thickness={2} position="left" />
 
-      {/* Premium Canvas Background with Mouse-Reactive Particles */}
-      <T3PremiumCanvas particleCount={40} orbCount={5} colorPalette="sanctuary" />
+        {/* Premium Canvas Background with Mouse-Reactive Particles */}
+        <T3PremiumCanvas particleCount={40} orbCount={5} colorPalette="sanctuary" />
 
-      {/* Additional Ambient Light Nodes for premium depth */}
-      <AmbientLightNodes count={3} colors={["var(--primary-brand)", "#A8D5BA", "#E8D5C4"]} />
+        {/* Organic Morphing Background Blobs */}
+        <T3OrganicBlobs count={3} opacity={0.6} />
 
-      <T3Nav />
+        {/* Additional Ambient Light Nodes for premium depth */}
+        <AmbientLightNodes count={3} colors={["var(--primary-brand)", "#A8D5BA", "#E8D5C4"]} />
+
+        <T3Nav />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           HERO — Asymmetric Multi-Layered Floating Image Matrix
@@ -52,7 +57,7 @@ export default function Template3Page() {
       {/* ═══════════════════════════════════════════════════════════════════════
           WELCOME VIDEO — Cinematic Testimonial Player
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-20 lg:py-28 overflow-hidden">
+      <T3AtmosphericParallax className="relative py-20 lg:py-28 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12 lg:mb-16">
             <div className="flex items-center justify-center gap-3 mb-8">
@@ -63,13 +68,21 @@ export default function Template3Page() {
               <div className="w-8 h-px bg-brand-primary/30" />
             </div>
 
-            <h2 className="font-sanctuary text-[clamp(1.8rem,4vw,3rem)] font-extralight text-center mb-6 tracking-[0.02em]">
+            <T3BloomingText
+              as="h2"
+              className="font-sanctuary text-[clamp(1.8rem,4vw,3rem)] font-extralight text-center mb-6 tracking-[0.02em]"
+              delay={0.2}
+            >
               Our Practice, Our People
-            </h2>
+            </T3BloomingText>
 
-            <p className="text-center text-neutral-muted font-light max-w-xl mx-auto tracking-wide leading-relaxed">
+            <T3BloomingText
+              as="p"
+              className="text-center text-neutral-muted font-light max-w-xl mx-auto tracking-wide leading-relaxed"
+              delay={0.4}
+            >
               Take a moment to meet our team. Discover the thoughtful care that defines our approach.
-            </p>
+            </T3BloomingText>
           </div>
 
           {/* Premium Video Player */}
@@ -89,7 +102,7 @@ export default function Template3Page() {
             Experience the sanctuary difference
           </p>
         </div>
-      </section>
+      </T3AtmosphericParallax>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           SERVICES — Interactive Split-Pane Navigator with Dynamic Content
@@ -100,7 +113,10 @@ export default function Template3Page() {
           PHILOSOPHY — Three Pillars with Architectural Numeric Backgrounds
           Large low-opacity numerics as clean architectural background layers
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]">
+      <T3AtmosphericParallax
+        className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]"
+        intensity={0.02}
+      >
         <div className="max-w-5xl mx-auto px-8">
           {/* Section Header */}
           <div className="text-center mb-12 lg:mb-16">
@@ -111,9 +127,12 @@ export default function Template3Page() {
               </p>
               <div className="w-6 h-px bg-brand-primary/30" />
             </div>
-            <h2 className="font-sanctuary text-[clamp(1.6rem,4vw,2.8rem)] font-extralight tracking-[0.03em]">
+            <T3BloomingText
+              as="h2"
+              className="font-sanctuary text-[clamp(1.6rem,4vw,2.8rem)] font-extralight tracking-[0.03em]"
+            >
               Listen, Plan, Care
-            </h2>
+            </T3BloomingText>
           </div>
 
           {/* Three Pillars with Large Numeric Backgrounds */}
@@ -142,7 +161,7 @@ export default function Template3Page() {
             ))}
           </div>
         </div>
-      </section>
+      </T3AtmosphericParallax>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           INVISALIGN TRANSFORMATION — Asymmetric Smile Alignment Morphing
@@ -375,44 +394,51 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          FREE CONSULTATION CTA — Spatial Banner
+          FREE CONSULTATION CTA — Spatial Banner with Sensory Check-In
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-16 lg:py-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/office-exterior.jpg"
-            alt="Our serene practice"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-slate-900/90" />
-        </div>
+      <T3AtmosphericParallax
+        imageSrc="/images/office-exterior.jpg"
+        className="relative py-16 lg:py-20 overflow-hidden"
+        intensity={0.04}
+      >
+        <div className="absolute inset-0 bg-slate-900/90 z-0" />
 
         <div className="relative z-10 max-w-3xl mx-auto px-8 text-center">
           <p className="text-[11px] uppercase tracking-[0.4em] text-white/70 mb-8">
             Complimentary
           </p>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-light text-white mb-8 tracking-[0.05em]">
-            Begin Your Wellness Journey
-          </h2>
-
-          <p className="text-white/80 font-light leading-relaxed tracking-wide mb-12 max-w-xl mx-auto">
-            We offer complimentary consultations for new patients. A quiet conversation to understand your needs.
-          </p>
-
-          <a
-            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="inline-flex items-center gap-4 px-10 py-4 border border-white/30 text-white text-sm uppercase tracking-[0.25em] font-light hover:bg-white hover:text-brand-mainText transition-all duration-500"
+          <T3BloomingText
+            as="h2"
+            className="text-[clamp(1.5rem,4vw,2.5rem)] font-light text-white mb-8 tracking-[0.05em]"
           >
-            <span>Schedule</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+            Begin Your Wellness Journey
+          </T3BloomingText>
+
+          <T3BloomingText
+            as="p"
+            className="text-white/80 font-light leading-relaxed tracking-wide mb-12 max-w-xl mx-auto"
+            delay={0.3}
+          >
+            We offer complimentary consultations for new patients. A quiet conversation to understand your needs.
+          </T3BloomingText>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+              className="inline-flex items-center gap-4 px-10 py-4 border border-white/30 text-white text-sm uppercase tracking-[0.25em] font-light hover:bg-white hover:text-brand-mainText transition-all duration-500"
+            >
+              <span>Schedule</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+
+            {/* Sensory Check-In Interactive Modal */}
+            <T3SensoryCheckIn onComplete={(selections) => console.log("Patient comfort preferences:", selections)} />
+          </div>
         </div>
-      </section>
+      </T3AtmosphericParallax>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           WHY CHOOSE US — Floating Typography
@@ -484,7 +510,8 @@ export default function Template3Page() {
         </div>
       </section>
 
-      <T3Footer />
-    </div>
+        <T3Footer />
+      </div>
+    </T3SmoothScrollWrapper>
   );
 }
