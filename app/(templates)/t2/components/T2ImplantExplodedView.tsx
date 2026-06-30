@@ -42,14 +42,11 @@ function ImplantModel({ scrollProgress }: { scrollProgress: number }) {
   const screwRef = useRef<THREE.Mesh>(null);
   const threadsRef = useRef<THREE.Group>(null);
 
-  // Smooth interpolation for exploded positions with easing
-  const easeOutCubic = (x: number) => 1 - Math.pow(1 - x, 3);
-  const easedProgress = useMemo(() => easeOutCubic(scrollProgress), [scrollProgress]);
-
-  const crownY = useMemo(() => easedProgress * 3.5, [easedProgress]);
-  const abutmentY = useMemo(() => easedProgress * 1.8, [easedProgress]);
-  const screwScale = useMemo(() => 1 + easedProgress * 0.25, [easedProgress]);
-  const threadExpansion = useMemo(() => easedProgress * 1.8, [easedProgress]);
+  // Smooth interpolation for exploded positions
+  const crownY = useMemo(() => scrollProgress * 3, [scrollProgress]);
+  const abutmentY = useMemo(() => scrollProgress * 1.5, [scrollProgress]);
+  const screwScale = useMemo(() => 1 + scrollProgress * 0.3, [scrollProgress]);
+  const threadExpansion = useMemo(() => scrollProgress * 2, [scrollProgress]);
 
   if (useFrame) {
     useFrame(() => {
@@ -86,20 +83,17 @@ function ImplantModel({ scrollProgress }: { scrollProgress: number }) {
 
   return (
     <group>
-      {/* Crown - Premium Porcelain with Realistic Translucency */}
-      <mesh ref={crownRef} position={[0, 1, 0]} castShadow receiveShadow>
-        <coneGeometry args={[0.7, 1.4, 64]} />
+      {/* Crown - Porcelain White with Translucency */}
+      <mesh ref={crownRef} position={[0, 1, 0]} castShadow>
+        <coneGeometry args={[0.6, 1.2, 32]} />
         <meshPhysicalMaterial
-          color="#faf9f7"
-          metalness={0.05}
-          roughness={0.15}
-          transmission={0.2}
-          thickness={0.8}
-          clearcoat={1.5}
-          clearcoatRoughness={0.05}
-          ior={1.5}
-          reflectivity={0.5}
-          envMapIntensity={1.2}
+          color="#f8f8f8"
+          metalness={0.1}
+          roughness={0.2}
+          transmission={0.1}
+          thickness={0.5}
+          clearcoat={1}
+          clearcoatRoughness={0.1}
         />
         {scrollProgress > 0.2 && (
           <Html position={[1.2, 0, 0]} center distanceFactor={8}>
@@ -135,17 +129,15 @@ function ImplantModel({ scrollProgress }: { scrollProgress: number }) {
         )}
       </mesh>
 
-      {/* Abutment Post - Premium Titanium Connector */}
-      <mesh ref={abutmentRef} position={[0, 0, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.35, 0.45, 1, 64]} />
-        <meshPhysicalMaterial
-          color="#d4d4d8"
-          metalness={1}
-          roughness={0.12}
-          clearcoat={0.8}
-          clearcoatRoughness={0.1}
-          reflectivity={0.9}
-          envMapIntensity={1.5}
+      {/* Abutment Post - Metallic Connector */}
+      <mesh ref={abutmentRef} position={[0, 0, 0]} castShadow>
+        <cylinderGeometry args={[0.3, 0.4, 0.8, 32]} />
+        <meshStandardMaterial
+          color="#c0c0c0"
+          metalness={0.9}
+          roughness={0.2}
+          emissive="#14b8a6"
+          emissiveIntensity={0.1}
         />
         {scrollProgress > 0.4 && (
           <Html position={[-1.5, 0, 0]} center distanceFactor={8}>
@@ -182,17 +174,15 @@ function ImplantModel({ scrollProgress }: { scrollProgress: number }) {
         )}
       </mesh>
 
-      {/* Titanium Screw - Medical-Grade Body */}
+      {/* Titanium Screw - Main Body */}
       <mesh ref={screwRef} position={[0, -1, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.28, 0.18, 2.2, 64]} />
-        <meshPhysicalMaterial
-          color="#a1a1aa"
-          metalness={1}
-          roughness={0.08}
-          clearcoat={1}
-          clearcoatRoughness={0.05}
-          reflectivity={1}
-          envMapIntensity={2}
+        <cylinderGeometry args={[0.25, 0.15, 2, 32]} />
+        <meshStandardMaterial
+          color="#8a8a8a"
+          metalness={0.95}
+          roughness={0.15}
+          emissive="#14b8a6"
+          emissiveIntensity={0.15}
         />
         {scrollProgress > 0.6 && (
           <Html position={[1.8, 0, 0]} center distanceFactor={8}>
@@ -229,18 +219,17 @@ function ImplantModel({ scrollProgress }: { scrollProgress: number }) {
         )}
       </mesh>
 
-      {/* Micro-Threads - Precision-Engineered Detail */}
+      {/* Micro-Threads - Expanding Detail */}
       <group ref={threadsRef}>
         {threads.map((thread) => (
-          <mesh key={thread.key} position={thread.position} castShadow receiveShadow>
-            <torusGeometry args={[0.18, 0.025, 16, 32]} />
-            <meshPhysicalMaterial
-              color="#94a3b8"
+          <mesh key={thread.key} position={thread.position} castShadow>
+            <torusGeometry args={[0.15, 0.02, 8, 16]} />
+            <meshStandardMaterial
+              color="#707070"
               metalness={1}
-              roughness={0.08}
-              clearcoat={0.6}
-              clearcoatRoughness={0.1}
-              reflectivity={0.8}
+              roughness={0.1}
+              emissive="#0ea5e9"
+              emissiveIntensity={scrollProgress > 0.7 ? 0.3 : 0.1}
             />
           </mesh>
         ))}
@@ -281,43 +270,24 @@ function ImplantModel({ scrollProgress }: { scrollProgress: number }) {
         </Html>
       )}
 
-      {/* Professional Studio Lighting Setup */}
-      <ambientLight intensity={0.3} />
-
-      {/* Key Light - Main illumination from top-right */}
-      <directionalLight
-        position={[8, 12, 8]}
-        intensity={1.5}
-        castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-        shadow-camera-far={50}
-        shadow-camera-left={-10}
-        shadow-camera-right={10}
-        shadow-camera-top={10}
-        shadow-camera-bottom={-10}
-        color="#ffffff"
-      />
-
-      {/* Fill Light - Soften shadows from left */}
-      <directionalLight
-        position={[-6, 8, -4]}
-        intensity={0.6}
-        color="#f0f9ff"
-      />
-
-      {/* Rim Light - Edge definition from behind */}
+      {/* Ambient Lighting */}
+      <ambientLight intensity={0.4} />
       <spotLight
-        position={[0, 5, -8]}
-        angle={0.4}
+        position={[10, 10, 10]}
+        angle={0.3}
         penumbra={1}
-        intensity={1.2}
-        color="#e0f2fe"
+        intensity={1}
+        castShadow
+        color="#14b8a6"
       />
-
-      {/* Accent Lights - Subtle cyan glow */}
-      <pointLight position={[4, 0, 4]} intensity={0.4} color="#06b6d4" distance={8} decay={2} />
-      <pointLight position={[-4, 0, 4]} intensity={0.4} color="#0ea5e9" distance={8} decay={2} />
+      <spotLight
+        position={[-10, -10, -10]}
+        angle={0.3}
+        penumbra={1}
+        intensity={0.5}
+        color="#06b6d4"
+      />
+      <pointLight position={[0, 5, 5]} intensity={0.5} color="#0ea5e9" />
     </group>
   );
 }
