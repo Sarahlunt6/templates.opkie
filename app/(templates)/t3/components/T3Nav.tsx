@@ -28,7 +28,7 @@ export default function T3Nav() {
   return (
     <>
       {/* Architectural "Segmented Glass Dock" */}
-      <nav className="fixed top-6 left-6 right-6 lg:left-1/2 lg:-translate-x-1/2 lg:w-[90%] max-w-7xl z-50 bg-white/80 backdrop-blur-md border border-slate-200/40 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-3">
+      <nav className="fixed top-4 left-4 right-4 lg:top-6 lg:left-1/2 lg:-translate-x-1/2 lg:w-[90%] max-w-7xl z-[100] bg-white/80 backdrop-blur-md border border-slate-200/40 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.04)] p-3">
         <div className="flex items-center justify-between px-6 w-full">
           {/* Logo - Asymmetric placement */}
           <Link href="/t3" className="flex items-center relative">
