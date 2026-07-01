@@ -291,13 +291,32 @@ function createProjectStructure(
     }
   }
 
-  // Copy shared directories
-  const sharedDirs = ['components', 'data', 'hooks', 'lib', 'public', 'types'];
+  // Copy shared directories (excluding ortho-specific files)
+  const sharedDirs = ['components', 'hooks', 'lib', 'public', 'types'];
   for (const dir of sharedDirs) {
     const src = path.join(templatesRoot, dir);
     const dest = path.join(clientRoot, dir);
     if (fs.existsSync(src)) {
       copyRecursive(src, dest);
+    }
+  }
+
+  // Copy data directory but exclude ortho files
+  const dataDir = path.join(templatesRoot, 'data');
+  if (fs.existsSync(dataDir)) {
+    const dataDest = path.join(clientRoot, 'data');
+    fs.mkdirSync(dataDest, { recursive: true });
+
+    const dataFiles = fs.readdirSync(dataDir);
+    for (const file of dataFiles) {
+      // Skip ortho-specific files unless needed
+      if (file.includes('ortho')) continue;
+
+      const src = path.join(dataDir, file);
+      const dest = path.join(dataDest, file);
+      if (fs.statSync(src).isFile()) {
+        fs.copyFileSync(src, dest);
+      }
     }
   }
 }
