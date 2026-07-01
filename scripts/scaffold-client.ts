@@ -130,9 +130,13 @@ async function main() {
   console.log('📦 Creating standalone project structure...');
   createProjectStructure(clientRoot, templateSource, templatesRoot);
 
-  // 5. Find and replace placeholder data
-  console.log('🔄 Replacing placeholder data with client info...');
+  // 5. Generate master.ts data file from intake
+  console.log('📝 Generating data/master.ts from intake...');
   const missingFields: MissingField[] = [];
+  generateMasterDataFile(clientRoot, intakeData, missingFields);
+
+  // 6. Find and replace remaining placeholder data
+  console.log('🔄 Replacing placeholder data with client info...');
   await replaceAllPlaceholders(clientRoot, intakeData, missingFields);
 
   // 6. Update brand colors if provided
@@ -312,6 +316,136 @@ function copyRecursive(src: string, dest: string) {
   } else {
     fs.copyFileSync(src, dest);
   }
+}
+
+function generateMasterDataFile(
+  clientRoot: string,
+  intake: ClientIntake,
+  missingFields: MissingField[]
+) {
+  const masterDataPath = path.join(clientRoot, 'data', 'master.ts');
+
+  // Generate Google Maps embed URL
+  const mapsQuery = encodeURIComponent(`${intake.practice.address.street}, ${intake.practice.address.city}, ${intake.practice.address.state} ${intake.practice.address.zip}`);
+  const googleMapsEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${mapsQuery}`;
+
+  // Format hours of operation
+  const hoursOfOperation = [
+    { dayRange: 'Monday', structuralHours: intake.practice.hours.monday },
+    { dayRange: 'Tuesday', structuralHours: intake.practice.hours.tuesday },
+    { dayRange: 'Wednesday', structuralHours: intake.practice.hours.wednesday },
+    { dayRange: 'Thursday', structuralHours: intake.practice.hours.thursday },
+    { dayRange: 'Friday', structuralHours: intake.practice.hours.friday },
+    { dayRange: 'Saturday', structuralHours: intake.practice.hours.saturday },
+    { dayRange: 'Sunday', structuralHours: intake.practice.hours.sunday },
+  ].filter(day => day.structuralHours && day.structuralHours !== '');
+
+  // Build credentials array
+  const credentials = intake.doctor.credentials.filter(c => c && c !== '');
+
+  const masterDataContent = `import type {
+  MasterDentalPracticeSchema,
+  ReviewData,
+  BeforeAfterCase,
+} from "@/types/dentist";
+
+export const clientMasterData: MasterDentalPracticeSchema = {
+  globalPracticeName: "${intake.practice.name}",
+  practiceNiche: "dental",
+  brandingLogoUrl: "${intake.brand.logo_path || '/images/logo-placeholder.svg'}",
+  onlineBookingUrl: "${intake.booking_link}",
+
+  locations: [
+    {
+      id: "loc-001",
+      officeLabel: "Main Office",
+      practiceNameGBP: "${intake.practice.name}",
+      primaryCategoryGBP: "Dentist",
+      secondaryCategoriesGBP: [
+        "Cosmetic Dentist",
+        "Emergency Dental Service",
+        "Teeth Whitening Service",
+        "Dental Implants Provider",
+      ],
+      addressGBP: "${intake.practice.address.street}",
+      cityServed: "${intake.practice.address.city}",
+      stateServed: "${intake.practice.address.state}",
+      phoneGBP: "${intake.practice.phone}",
+      googleMapsEmbedUrl: "${googleMapsEmbedUrl}",
+      hoursOfOperation: ${JSON.stringify(hoursOfOperation, null, 8).replace(/"([^"]+)":/g, '$1:')},
+      localizedNeighborhoods: [
+        // TODO: Add local neighborhood names for ${intake.practice.address.city}
+      ],
+    },
+  ],
+
+  doctors: [
+    {
+      name: "${intake.doctor.name}",
+      role: "${intake.doctor.title}",
+      credentials: ${JSON.stringify(credentials, null, 8)},
+      biography: "${intake.doctor.bio_short || 'Dedicated to providing exceptional dental care to our community.'}",
+      portraitUrl: "/images/team/doctor-portrait.png",
+    },
+  ],
+
+  theme: {
+    primaryBrandHex: "${intake.brand.accent_color || '#0f766e'}",
+    secondaryAccentHex: "#38bdf8",
+    textMainHex: "#1e293b",
+    bgCanvasHex: "#ffffff",
+  },
+
+  trustSignals: {
+    insuranceAcceptedText:
+      "We accept most major dental insurance plans including Delta Dental, Cigna, Aetna, and United Healthcare. Contact us to verify your coverage.",
+    membershipPlanSummary:
+      "No insurance? Join our ${intake.practice.name} Savings Plan for $${intake.membership.no_insurance_savings_plan_price || 299}/year and receive 2 free cleanings, exams, and 20% off all treatments.",
+    hasSameDayEmergency: true,
+    hasSedationAnxietyCare: true,
+  },
+};
+
+export const sampleReviews: ReviewData[] = [
+  // TODO: Replace with real client testimonials — do not launch with placeholder reviews
+  // Remove this comment and add actual verified patient reviews
+];
+
+export const sampleBeforeAfterCases: BeforeAfterCase[] = [
+  {
+    id: "case-001",
+    beforeUrl: "/images/cases/smile-before.png",
+    afterUrl: "/images/cases/smile-after.png",
+    procedureType: "Porcelain Veneers",
+    altTag: "Porcelain veneers smile transformation",
+  },
+  {
+    id: "case-002",
+    beforeUrl: "/images/cases/smile-before.png",
+    afterUrl: "/images/cases/smile-after.png",
+    procedureType: "Professional Whitening",
+    altTag: "Professional teeth whitening results",
+  },
+  {
+    id: "case-003",
+    beforeUrl: "/images/cases/smile-before.png",
+    afterUrl: "/images/cases/smile-after.png",
+    procedureType: "Invisalign Treatment",
+    altTag: "Invisalign orthodontic alignment results",
+  },
+];
+
+export default clientMasterData;
+`;
+
+  fs.writeFileSync(masterDataPath, masterDataContent, 'utf-8');
+
+  // Track missing neighborhoods
+  missingFields.push({
+    path: masterDataPath,
+    fieldName: 'localizedNeighborhoods',
+    context: 'Local neighborhood names for SEO and local relevance'
+  });
 }
 
 async function replaceAllPlaceholders(
