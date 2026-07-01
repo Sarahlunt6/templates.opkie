@@ -1,67 +1,67 @@
 {
-  "_instructions": "Fill in every field below before running the scaffold prompt. Leave a field as an empty string (\"\") or null ONLY if that data truly doesn't exist yet — Claude Code will flag those as TODOs in MISSING_DATA.md rather than invent values. Do not run the standalone scaffold prompt until client_slug, template, practice.name, and booking_link are filled in at minimum.",
-  "_scaffold_command": "To scaffold a new client site, run: npx tsx scripts/scaffold-client.ts",
+  "_instructions": "This is an example client intake file. Copy this to client-intake.json and fill in with real client data. Leave fields as null or empty string (\"\") if data doesn't exist yet.",
+  "_scaffold_command": "npm run scaffold",
 
-  "client_slug": "",
-  "template": "",
+  "client_slug": "johndoe-dental",
+  "template": "t1",
 
   "practice": {
-    "name": "",
+    "name": "John Doe Family Dentistry",
     "tagline_override": null,
-    "phone": "",
-    "phone_link": "",
+    "phone": "(555) 123-4567",
+    "phone_link": "tel:+15551234567",
     "address": {
-      "street": "",
-      "city": "",
-      "state": "",
-      "zip": ""
+      "street": "123 Main Street, Suite 200",
+      "city": "Portland",
+      "state": "OR",
+      "zip": "97201"
     },
     "hours": {
-      "monday": "",
-      "tuesday": "",
-      "wednesday": "",
-      "thursday": "",
-      "friday": "",
-      "saturday": "",
-      "sunday": ""
+      "monday": "8:00 AM - 5:00 PM",
+      "tuesday": "8:00 AM - 5:00 PM",
+      "wednesday": "8:00 AM - 5:00 PM",
+      "thursday": "8:00 AM - 5:00 PM",
+      "friday": "8:00 AM - 12:00 PM",
+      "saturday": "Closed",
+      "sunday": "Closed"
     }
   },
 
   "doctor": {
-    "name": "",
-    "title": "",
-    "years_experience": null,
+    "name": "Dr. John Doe, DDS",
+    "title": "General & Family Dentist",
+    "years_experience": 12,
     "credentials": [
-      "",
-      "",
-      ""
+      "Doctor of Dental Surgery, OHSU School of Dentistry",
+      "American Dental Association Member",
+      "Portland Dental Society"
     ],
-    "bio_short": null
+    "bio_short": "Dr. Doe has been serving Portland families for over a decade with compassionate, comprehensive dental care. He specializes in cosmetic dentistry and anxiety-free treatment for patients of all ages."
   },
 
-  "booking_link": "",
+  "booking_link": "https://calendly.com/johndoe-dental",
 
   "brand": {
-    "accent_color": null,
-    "logo_path": null
+    "accent_color": "#2563eb",
+    "logo_path": "/images/logo-johndoe.svg"
   },
 
   "membership": {
-    "individual_price": null,
-    "couple_price": null,
-    "family_price": null,
-    "no_insurance_savings_plan_price": null
+    "individual_price": 299,
+    "couple_price": 549,
+    "family_price": 899,
+    "no_insurance_savings_plan_price": 249
   },
 
   "stats": {
-    "google_rating": null,
-    "review_count": null,
-    "patients_served": null,
-    "satisfaction_rate": null
+    "google_rating": 4.9,
+    "review_count": 142,
+    "patients_served": 3200,
+    "satisfaction_rate": 97
   },
 
   "vercel": {
-    "project_name": "",
-    "domain": null
+    "project_name": "johndoe-dental",
+    "domain": "johndoedental.com"
   }
 }

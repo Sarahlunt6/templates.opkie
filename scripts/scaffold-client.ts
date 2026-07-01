@@ -225,8 +225,48 @@ function createProjectStructure(
   // Create client directory
   fs.mkdirSync(clientRoot, { recursive: true });
 
-  // Copy template files
-  copyRecursive(templateSource, path.join(clientRoot, 'app'));
+  // Create app directory
+  const appDir = path.join(clientRoot, 'app');
+  fs.mkdirSync(appDir, { recursive: true });
+
+  // Copy root layout.tsx from app directory
+  const rootLayout = path.join(templatesRoot, 'app', 'layout.tsx');
+  if (fs.existsSync(rootLayout)) {
+    fs.copyFileSync(rootLayout, path.join(appDir, 'layout.tsx'));
+  }
+
+  // Copy globals.css if it exists
+  const globalsCss = path.join(templatesRoot, 'app', 'globals.css');
+  if (fs.existsSync(globalsCss)) {
+    fs.copyFileSync(globalsCss, path.join(appDir, 'globals.css'));
+  }
+
+  // Copy template page.tsx and components to app root
+  const templatePageSrc = path.join(templateSource, 'page.tsx');
+  const templatePageDest = path.join(appDir, 'page.tsx');
+  if (fs.existsSync(templatePageSrc)) {
+    fs.copyFileSync(templatePageSrc, templatePageDest);
+  }
+
+  // Copy template components directory
+  const templateComponentsSrc = path.join(templateSource, 'components');
+  const templateComponentsDest = path.join(appDir, 'components');
+  if (fs.existsSync(templateComponentsSrc)) {
+    copyRecursive(templateComponentsSrc, templateComponentsDest);
+  }
+
+  // Copy any other template-specific files (like PREMIUM_MOTION_DESIGN.md)
+  const templateFiles = fs.readdirSync(templateSource);
+  for (const file of templateFiles) {
+    if (file !== 'page.tsx' && file !== 'components') {
+      const src = path.join(templateSource, file);
+      const dest = path.join(appDir, file);
+      const stat = fs.statSync(src);
+      if (stat.isFile()) {
+        fs.copyFileSync(src, dest);
+      }
+    }
+  }
 
   // Copy essential root files from templates project
   const rootFiles = [
@@ -248,7 +288,7 @@ function createProjectStructure(
   }
 
   // Copy shared directories
-  const sharedDirs = ['components', 'data', 'lib', 'public', 'types'];
+  const sharedDirs = ['components', 'data', 'hooks', 'lib', 'public', 'types'];
   for (const dir of sharedDirs) {
     const src = path.join(templatesRoot, dir);
     const dest = path.join(clientRoot, dir);
