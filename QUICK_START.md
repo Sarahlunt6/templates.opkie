@@ -33,6 +33,16 @@ vercel --prod
 
 Your site is live at `https://[client-slug].vercel.app`
 
+## ✅ SEO Optimizations (Automatic)
+
+Every scaffolded site automatically includes:
+- ✅ Schema.org structured data (LocalBusiness/Dentist)
+- ✅ Meta description with CTA ("Call [phone] to schedule...")
+- ✅ Google Maps embed with NAP details
+- ✅ SEO checklist for remaining manual tasks
+
+See [SEO_AUTOMATION_COMPLETE.md](SEO_AUTOMATION_COMPLETE.md) for details.
+
 ## Next Steps
 
 1. **Add to GitHub:**

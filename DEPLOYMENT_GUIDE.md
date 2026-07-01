@@ -9,6 +9,7 @@ The scaffold system creates **fully standalone** client websites from T1, T2, or
 - ✅ Ready for its own GitHub repository
 - ✅ Deployable to Vercel in minutes
 - ✅ Customized with client branding and data
+- ✅ **SEO-optimized automatically** (schema, maps, CTAs) per TAPS/SEO SOP
 
 ---
 
@@ -109,8 +110,13 @@ The script will:
 3. ✅ Generate customized `data/master.ts`
 4. ✅ Replace all placeholders with client data
 5. ✅ Apply brand colors
-6. ✅ Initialize git repository
-7. ✅ Run build verification
+6. ✅ **Inject SEO components automatically**:
+   - Schema.org markup in layout.tsx
+   - Meta description CTA in page.tsx
+   - Google Maps embed before Footer
+   - SEO checklist (SEO_CHECKLIST.md)
+7. ✅ Initialize git repository
+8. ✅ Run build verification
 
 ### 2.2 Verify Output
 

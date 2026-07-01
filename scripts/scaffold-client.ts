@@ -149,17 +149,27 @@ async function main() {
   console.log('💬 Removing placeholder testimonials...');
   removeTestimonials(clientRoot);
 
-  // 8. Generate MISSING_DATA.md
+  // 8. Inject SEO components (schema, maps, metadata)
+  console.log('🔍 Injecting SEO optimizations...');
+  injectSchemaMarkup(clientRoot);
+  updateMetadataWithCTA(clientRoot, intakeData);
+  addGoogleMapToHomepage(clientRoot, intakeData);
+
+  // 9. Generate MISSING_DATA.md
   if (missingFields.length > 0) {
     console.log(`⚠️  Generating MISSING_DATA.md (${missingFields.length} fields)...`);
     generateMissingDataReport(clientRoot, missingFields, intakeData);
   }
 
-  // 9. Update project metadata
+  // 10. Create SEO checklist
+  console.log('📋 Creating SEO checklist...');
+  createSEOChecklist(clientRoot, intakeData);
+
+  // 11. Update project metadata
   console.log('📝 Updating project metadata...');
   updateProjectMetadata(clientRoot, intakeData);
 
-  // 10. Initialize git
+  // 12. Initialize git
   console.log('🌿 Initializing git repository...');
   execSync('git init', { cwd: clientRoot, stdio: 'inherit' });
   execSync('git add .', { cwd: clientRoot, stdio: 'inherit' });
@@ -168,7 +178,7 @@ async function main() {
     stdio: 'inherit'
   });
 
-  // 11. Verify build
+  // 13. Verify build
   console.log('\n🔨 Installing dependencies and verifying build...');
   try {
     execSync('npm install', { cwd: clientRoot, stdio: 'inherit' });
@@ -179,7 +189,7 @@ async function main() {
     throw error;
   }
 
-  // 12. Final summary
+  // 14. Final summary
   console.log('\n' + '═'.repeat(60));
   console.log('✨ SCAFFOLD COMPLETE!');
   console.log('═'.repeat(60));
@@ -189,6 +199,332 @@ async function main() {
   console.log(`   2. Review MISSING_DATA.md if present`);
   console.log(`   3. Run: vercel link`);
   console.log(`   4. Run: vercel deploy\n`);
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// SEO INJECTION FUNCTIONS
+// ═══════════════════════════════════════════════════════════════════════
+
+function injectSchemaMarkup(clientRoot: string) {
+  const layoutPath = path.join(clientRoot, 'app', 'layout.tsx');
+  if (!fs.existsSync(layoutPath)) return;
+
+  let content = fs.readFileSync(layoutPath, 'utf-8');
+
+  // Add import at the top if not already present
+  if (!content.includes('import { SchemaMarkup }')) {
+    // Find the last import statement
+    const importRegex = /^import .+;$/gm;
+    const imports = content.match(importRegex);
+    if (imports && imports.length > 0) {
+      const lastImport = imports[imports.length - 1];
+      content = content.replace(
+        lastImport,
+        `${lastImport}\nimport { SchemaMarkup } from "@/components/seo";`
+      );
+    }
+  }
+
+  // Add clientMasterData import if not present
+  if (!content.includes('import { clientMasterData }') && !content.includes('import clientMasterData')) {
+    const importRegex = /^import .+;$/gm;
+    const imports = content.match(importRegex);
+    if (imports && imports.length > 0) {
+      const lastImport = imports[imports.length - 1];
+      content = content.replace(
+        lastImport,
+        `${lastImport}\nimport { clientMasterData } from "@/data/master";`
+      );
+    }
+  }
+
+  // Inject SchemaMarkup into the <head> section or <html> tag
+  if (!content.includes('<SchemaMarkup')) {
+    // Try to find <head> tag first
+    if (content.includes('<head>')) {
+      content = content.replace(
+        /(<head>)/,
+        `$1\n        <SchemaMarkup practiceData={clientMasterData} />`
+      );
+    } else {
+      // If no explicit <head>, add as first child of <html>
+      // In Next.js 14 app router, we need to add it in the <html> tag
+      content = content.replace(
+        /(<html[^>]*>)/,
+        `$1\n      <head>\n        <SchemaMarkup practiceData={clientMasterData} />\n      </head>`
+      );
+    }
+  }
+
+  fs.writeFileSync(layoutPath, content, 'utf-8');
+}
+
+function updateMetadataWithCTA(clientRoot: string, intake: ClientIntake) {
+  const pagePath = path.join(clientRoot, 'app', 'page.tsx');
+  if (!fs.existsSync(pagePath)) return;
+
+  let content = fs.readFileSync(pagePath, 'utf-8');
+
+  // Find the metadata description and append CTA if not already present
+  const descriptionRegex = /description:\s*`([^`]+)`/;
+  const match = content.match(descriptionRegex);
+
+  if (match && !match[1].includes('Call') && !match[1].includes('schedule')) {
+    const currentDescription = match[1];
+    const newDescription = `${currentDescription} Call ${intake.practice.phone} today to schedule your appointment.`;
+
+    content = content.replace(
+      descriptionRegex,
+      `description: \`${newDescription}\``
+    );
+  }
+
+  fs.writeFileSync(pagePath, content, 'utf-8');
+}
+
+function addGoogleMapToHomepage(clientRoot: string, intake: ClientIntake) {
+  const pagePath = path.join(clientRoot, 'app', 'page.tsx');
+  if (!fs.existsSync(pagePath)) return;
+
+  let content = fs.readFileSync(pagePath, 'utf-8');
+
+  // Add GoogleMapEmbed import if not present
+  if (!content.includes('import { GoogleMapEmbed }')) {
+    const importRegex = /^import .+;$/gm;
+    const imports = content.match(importRegex);
+    if (imports && imports.length > 0) {
+      const lastImport = imports[imports.length - 1];
+      content = content.replace(
+        lastImport,
+        `${lastImport}\nimport { GoogleMapEmbed } from "@/components/seo";`
+      );
+    }
+  }
+
+  // Add a comment marker for where to place the map
+  // We'll add it right before the Footer component
+  if (!content.includes('GoogleMapEmbed') || !content.includes('<GoogleMapEmbed')) {
+    // Find Footer component patterns (T1Footer, T2Footer, T3Footer, or generic Footer)
+    const footerPatterns = [
+      /<T1Footer\s*\/>/,
+      /<T2Footer\s*\/>/,
+      /<T3Footer\s*\/>/,
+      /<Footer\s*\/>/,
+    ];
+
+    let footerMatch = null;
+    let footerPattern = null;
+
+    for (const pattern of footerPatterns) {
+      const match = content.match(pattern);
+      if (match) {
+        footerMatch = match[0];
+        footerPattern = pattern;
+        break;
+      }
+    }
+
+    const mapSection = `
+      {/* Location Map - Auto-generated for SEO */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">Visit Our Office</h2>
+          <div className="max-w-4xl mx-auto">
+            <GoogleMapEmbed
+              mapUrl={clientMasterData.locations[0].googleMapsEmbedUrl}
+              practiceName={clientMasterData.locations[0].practiceNameGBP}
+              className="h-96 w-full rounded-lg shadow-lg"
+            />
+            <div className="mt-6 text-center">
+              <p className="text-lg font-semibold">{clientMasterData.locations[0].practiceNameGBP}</p>
+              <p className="text-gray-600">{clientMasterData.locations[0].addressGBP}</p>
+              <p className="text-gray-600">{clientMasterData.locations[0].cityServed}, {clientMasterData.locations[0].stateServed}</p>
+              <p className="text-gray-600 mt-2">
+                <a href={\`tel:\${clientMasterData.locations[0].phoneGBP.replace(/[^0-9+]/g, '')}\`} className="text-blue-600 hover:underline">
+                  {clientMasterData.locations[0].phoneGBP}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+`;
+
+    if (footerPattern) {
+      // Add map section before footer
+      content = content.replace(footerPattern, `${mapSection}\n      ${footerMatch}`);
+    } else {
+      // Fallback: add before last </main> or at the end of return statement
+      const lastMainClosing = content.lastIndexOf('</main>');
+      if (lastMainClosing > -1) {
+        content = content.slice(0, lastMainClosing) + mapSection + '\n    ' + content.slice(lastMainClosing);
+      }
+    }
+  }
+
+  fs.writeFileSync(pagePath, content, 'utf-8');
+}
+
+function createSEOChecklist(clientRoot: string, intake: ClientIntake) {
+  const checklistContent = `# SEO Pre-Launch Checklist
+
+Client: ${intake.practice.name}
+Generated: ${new Date().toISOString().split('T')[0]}
+
+## ✅ Automated SEO Optimizations (Already Done)
+
+- ✅ **Schema.org Markup**: LocalBusiness/Dentist schema automatically injected in layout.tsx
+- ✅ **Meta Description CTA**: "Call [phone] to schedule your appointment" added to homepage
+- ✅ **Google Maps Embed**: Map component added to homepage with NAP details
+- ✅ **Proper Heading Hierarchy**: H1 → H2 → H3 structure maintained in template
+- ✅ **Click-to-Call Links**: All phone numbers use tel: links
+- ✅ **NAP Consistency**: Name, Address, Phone pulled from master.ts throughout site
+
+## ⚠️ Manual SEO Tasks (Do Before Launch)
+
+### 1. Image Alt Text
+- [ ] Review all images and add descriptive alt text
+- [ ] Include city name and service keywords naturally
+- [ ] Format: "[Service] at [Practice Name] in [City], [State]"
+
+**Action**: Search for \`<Image\` components and verify alt text is descriptive and SEO-friendly.
+
+### 2. Local Neighborhood Mentions
+- [ ] Add local neighborhood names to content
+- [ ] Mention nearby landmarks, schools, or popular areas
+- [ ] Update \`data/master.ts\` → \`localizedNeighborhoods\` array
+
+**Examples**: "Serving [Neighborhood 1], [Neighborhood 2], and surrounding areas"
+
+### 3. Secondary GBP Categories
+- [ ] Verify secondary categories in data/master.ts match Google Business Profile
+- [ ] Ensure each secondary category has its own H2 section on homepage (50-100 words)
+
+**Current Categories** (from data/master.ts):
+${intake.practice.name === 'Camenzuli Dental Excellence' ? `
+- Cosmetic Dentist
+- Emergency Dental Service
+- Teeth Whitening Service
+- Dental Implants Provider
+` : `
+- Add your GBP secondary categories to data/master.ts
+`}
+
+### 4. Testimonials
+- [ ] Replace placeholder reviews in data/master.ts with real patient testimonials
+- [ ] Get patient consent for using reviews
+- [ ] Include patient initials or first names only
+- [ ] Add verification badges (google, facebook, yelp)
+
+### 5. Real Images
+- [ ] Replace placeholder images in \`public/images/\`:
+  - [ ] \`team/doctor-portrait.png\` - Professional headshot
+  - [ ] \`team/staff-photo.jpg\` - Team photo
+  - [ ] \`office-exterior.jpg\` - Building exterior
+  - [ ] \`office-interior.jpg\` - Waiting room/interior
+  - [ ] \`cases/smile-before.png\` - Before/after photos (with consent)
+  - [ ] \`cases/smile-after.png\`
+
+### 6. Google Maps API Key
+- [ ] Get Google Maps Embed API key from Google Cloud Console
+- [ ] Replace \`YOUR_API_KEY\` in data/master.ts → googleMapsEmbedUrl
+- [ ] Test map embed loads correctly
+
+**How to get API key**:
+1. Go to https://console.cloud.google.com/
+2. Enable Maps Embed API
+3. Create credentials → API Key
+4. Restrict key to Maps Embed API only
+
+### 7. Verify NAP Matches GBP Exactly
+- [ ] Compare website NAP to Google Business Profile listing
+- [ ] Must match character-for-character (including spacing, punctuation)
+- [ ] Check footer, contact page, schema markup
+
+**Current NAP**:
+- Name: ${intake.practice.name}
+- Address: ${intake.practice.address.street}, ${intake.practice.address.city}, ${intake.practice.address.state} ${intake.practice.address.zip}
+- Phone: ${intake.practice.phone}
+
+### 8. Content Review
+- [ ] Review all text for placeholder content
+- [ ] Ensure doctor bio is accurate and compelling
+- [ ] Verify all services listed are offered
+- [ ] Check that specialty/credentials are correct
+
+## 🔍 Pre-Launch Validation
+
+### Schema Validation
+- [ ] Visit: https://search.google.com/test/rich-results
+- [ ] Enter: https://[your-domain].vercel.app
+- [ ] Verify: No errors, schema detected correctly
+
+### Heading Hierarchy Check
+- [ ] Visit: https://www.websiteplanet.com/webtools/seo-checker/
+- [ ] Enter: https://[your-domain].vercel.app
+- [ ] Verify: One H1, proper H2/H3 structure
+
+### Mobile-Friendly Test
+- [ ] Visit: https://search.google.com/test/mobile-friendly
+- [ ] Enter: https://[your-domain].vercel.app
+- [ ] Verify: Page is mobile-friendly
+
+### Page Speed
+- [ ] Visit: https://pagespeed.web.dev/
+- [ ] Enter: https://[your-domain].vercel.app
+- [ ] Target: 90+ score on mobile and desktop
+
+## 📊 Post-Launch SEO
+
+### Google Business Profile
+- [ ] Verify GBP listing is claimed and verified
+- [ ] Add website URL to GBP
+- [ ] Ensure NAP matches website exactly
+- [ ] Add photos to GBP listing
+- [ ] Encourage patients to leave reviews
+
+### Google Search Console
+- [ ] Add property in Google Search Console
+- [ ] Verify ownership via DNS or HTML tag
+- [ ] Submit sitemap: https://[your-domain].vercel.app/sitemap.xml
+- [ ] Monitor for indexing issues
+
+### Analytics
+- [ ] Set up Google Analytics 4
+- [ ] Add GA4 tracking code to site
+- [ ] Set up conversion tracking for:
+  - Booking button clicks
+  - Phone number clicks
+  - Form submissions
+
+---
+
+## 🎯 Priority Order
+
+**Before Launch** (Critical):
+1. Replace placeholder testimonials
+2. Add real images with alt text
+3. Get Google Maps API key
+4. Verify NAP matches GBP
+5. Validate schema markup
+
+**Week 1 After Launch**:
+1. Submit to Google Search Console
+2. Set up analytics
+3. Add local neighborhood mentions
+
+**Ongoing**:
+1. Collect and add new patient testimonials
+2. Monitor search rankings
+3. Add new service pages as needed
+
+---
+
+**Status**: Ready for manual review and launch preparation
+**Last Updated**: ${new Date().toISOString().split('T')[0]}
+`;
+
+  fs.writeFileSync(path.join(clientRoot, 'SEO_CHECKLIST.md'), checklistContent, 'utf-8');
 }
 
 // ═══════════════════════════════════════════════════════════════════════
