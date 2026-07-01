@@ -26,7 +26,7 @@ export default function T2CinematicHero({
     line2: "3D-Guided Implants.",
     accent: "Zero Guesswork.",
   },
-  subheadline = "Our CEREC system mills your permanent crown while you wait. Our CBCT scanner plans your implant to the tenth of a millimeter. This is dentistry without second appointments.",
+  subheadline = "12-minute crown milling. 0.1mm 3D imaging precision. Same-day restorations. This is dentistry without second appointments.",
   isMobile = false,
 }: T2CinematicHeroProps) {
   const location = clientMasterData.locations[0];

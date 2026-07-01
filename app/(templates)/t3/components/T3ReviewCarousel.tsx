@@ -190,10 +190,10 @@ export default function T3ReviewCarousel({ reviews }: T3ReviewCarouselProps) {
         {/* Overall Rating */}
         <div className="text-center mt-16">
           <p className="text-4xl font-extralight text-brand-primary/60 mb-2">
-            5.0
+            5.0 ★
           </p>
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted">
-            200+ Verified Reviews
+            Google Rating · 200+ Verified Reviews
           </p>
         </div>
       </div>

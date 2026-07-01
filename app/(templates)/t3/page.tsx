@@ -118,7 +118,7 @@ export default function Template3Page() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
             {[
               { title: "Listen", num: "01", description: "Your first appointment is 90 minutes—twice the industry standard. We ask about your sleep, your stress, your past experiences. Treatment doesn't start until you feel heard." },
-              { title: "Plan", num: "02", description: "We show you every option on screen, explain the tradeoffs, and let you decide. No pressure, no upselling. Your treatment timeline works around your life, not ours." },
+              { title: "Plan", num: "02", description: "We show you every option on screen, explain the tradeoffs, and let you decide. No pressure, no upselling. Your treatment timeline works around your life, not ours. Wellness membership plans available—see Membership below." },
               { title: "Care", num: "03", description: "Weighted blankets. Noise-canceling headphones. Breaks whenever you need them. We stop the moment you raise a hand. Your comfort isn't optional—it's the foundation." },
             ].map((pillar, index) => (
               <div key={index} className="group relative text-center">

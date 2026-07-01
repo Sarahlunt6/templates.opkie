@@ -345,7 +345,7 @@ function ServicesGridSection({ location }: { location: typeof clientMasterData.l
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-base text-white/50"
           >
-            Complete dental services in {location.cityServed}.
+            Complete dental services in {location.cityServed}. New patients save with membership—no insurance required.
           </motion.p>
         </motion.div>
 

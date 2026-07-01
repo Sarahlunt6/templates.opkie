@@ -602,7 +602,7 @@ export default function Template1Page() {
               },
               {
                 title: "Patient-First Care",
-                description: "We prioritize your comfort and well-being with personalized treatment plans designed around your needs.",
+                description: "We prioritize your comfort and well-being with personalized treatment plans designed around your needs. No insurance? Ask about membership savings on every visit.",
                 cta: "Meet the Doctor",
               },
               {

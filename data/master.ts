@@ -93,7 +93,7 @@ export const clientMasterData: MasterDentalPracticeSchema = {
         "Certified in Pediatric Sedation Dentistry",
       ],
       biography:
-        "Dr. Chen specializes in creating comfortable dental experiences for patients of all ages. His gentle approach and expertise in anxiety-free dentistry make him a favorite among families and nervous patients alike.",
+        "Dr. Chen specializes in creating comfortable dental experiences for patients of all ages. A gentle approach and expertise in anxiety-free dentistry make Dr. Chen a favorite among families and nervous patients alike.",
       portraitUrl: "/images/doctors/dr-chen-placeholder.jpg",
     },
   ],
@@ -143,7 +143,7 @@ export const sampleReviews: ReviewData[] = [
     reviewerName: "Amanda S.",
     rating: 5,
     reviewText:
-      "My 7-year-old used to cry in the parking lot before dental visits. Dr. Chen spent 15 minutes just talking to him about dinosaurs before even looking at his teeth. Now my son asks when his next appointment is. That's worth more than any treatment.",
+      "My 7-year-old used to cry in the parking lot before dental visits. Dr. Roberts spent 15 minutes just talking to him about dinosaurs before even looking at his teeth. Now my son asks when his next appointment is. That's worth more than any treatment.",
     procedureCategory: "Pediatric Dentistry",
     verificationBadge: "facebook",
     datePosted: "2024-11-02",

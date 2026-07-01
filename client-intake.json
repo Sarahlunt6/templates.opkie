@@ -1,0 +1,67 @@
+{
+  "_instructions": "Fill in every field below before running the scaffold prompt. Leave a field as an empty string (\"\") or null ONLY if that data truly doesn't exist yet — Claude Code will flag those as TODOs in MISSING_DATA.md rather than invent values. Do not run the standalone scaffold prompt until client_slug, template, practice.name, and booking_link are filled in at minimum.",
+  "_scaffold_command": "To scaffold a new client site, run: npx tsx scripts/scaffold-client.ts",
+
+  "client_slug": "",
+  "template": "",
+
+  "practice": {
+    "name": "",
+    "tagline_override": null,
+    "phone": "",
+    "phone_link": "",
+    "address": {
+      "street": "",
+      "city": "",
+      "state": "",
+      "zip": ""
+    },
+    "hours": {
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
+      "saturday": "",
+      "sunday": ""
+    }
+  },
+
+  "doctor": {
+    "name": "",
+    "title": "",
+    "years_experience": null,
+    "credentials": [
+      "",
+      "",
+      ""
+    ],
+    "bio_short": null
+  },
+
+  "booking_link": "",
+
+  "brand": {
+    "accent_color": null,
+    "logo_path": null
+  },
+
+  "membership": {
+    "individual_price": null,
+    "couple_price": null,
+    "family_price": null,
+    "no_insurance_savings_plan_price": null
+  },
+
+  "stats": {
+    "google_rating": null,
+    "review_count": null,
+    "patients_served": null,
+    "satisfaction_rate": null
+  },
+
+  "vercel": {
+    "project_name": "",
+    "domain": null
+  }
+}

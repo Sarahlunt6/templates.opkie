@@ -212,8 +212,7 @@ export default function T1PremiumHero({
               ref={subheadRef}
               className="text-base lg:text-xl text-white/80 leading-relaxed mb-8 lg:mb-10 max-w-lg ml-2 lg:ml-4 border-l-2 border-brand-accent pl-4 lg:pl-6"
             >
-              We sedate 60% of our patients. Not because procedures hurt—because anxiety
-              shouldn&apos;t stop you from getting care. Most veneers take 2 weeks. Ours take 90 minutes.
+              5,000+ smile transformations. 98% patient satisfaction. We sedate 60% of our patients—not because procedures hurt, but because anxiety shouldn&apos;t stop you from getting care.
             </div>
 
             {/* CTA Buttons - Editorial Sharp Design */}

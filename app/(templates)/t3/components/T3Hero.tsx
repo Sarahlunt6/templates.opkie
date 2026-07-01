@@ -260,7 +260,7 @@ export default function T3Hero({
               variants={itemVariants}
               className="text-stone-600 max-w-lg mx-auto leading-relaxed text-sm lg:text-base mb-10 font-light"
             >
-              Most dentists ask what hurts. We ask what makes you comfortable.
+              Unhurried 90-minute appointments. Sedation options available. Care built around your comfort.
               Customize every detail of your visit before you arrive.
             </motion.p>
 

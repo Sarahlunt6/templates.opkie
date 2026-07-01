@@ -1,0 +1,67 @@
+{
+  "_instructions": "This is an example client intake file. Copy this to client-intake.json and fill in with real client data. Leave fields as null or empty string (\"\") if data doesn't exist yet.",
+  "_scaffold_command": "npm run scaffold",
+
+  "client_slug": "johndoe-dental",
+  "template": "t1",
+
+  "practice": {
+    "name": "John Doe Family Dentistry",
+    "tagline_override": null,
+    "phone": "(555) 123-4567",
+    "phone_link": "tel:+15551234567",
+    "address": {
+      "street": "123 Main Street, Suite 200",
+      "city": "Portland",
+      "state": "OR",
+      "zip": "97201"
+    },
+    "hours": {
+      "monday": "8:00 AM - 5:00 PM",
+      "tuesday": "8:00 AM - 5:00 PM",
+      "wednesday": "8:00 AM - 5:00 PM",
+      "thursday": "8:00 AM - 5:00 PM",
+      "friday": "8:00 AM - 12:00 PM",
+      "saturday": "Closed",
+      "sunday": "Closed"
+    }
+  },
+
+  "doctor": {
+    "name": "Dr. John Doe, DDS",
+    "title": "General & Family Dentist",
+    "years_experience": 12,
+    "credentials": [
+      "Doctor of Dental Surgery, OHSU School of Dentistry",
+      "American Dental Association Member",
+      "Portland Dental Society"
+    ],
+    "bio_short": "Dr. Doe has been serving Portland families for over a decade with compassionate, comprehensive dental care. He specializes in cosmetic dentistry and anxiety-free treatment for patients of all ages."
+  },
+
+  "booking_link": "https://calendly.com/johndoe-dental",
+
+  "brand": {
+    "accent_color": "#2563eb",
+    "logo_path": "/images/logo-johndoe.svg"
+  },
+
+  "membership": {
+    "individual_price": 299,
+    "couple_price": 549,
+    "family_price": 899,
+    "no_insurance_savings_plan_price": 249
+  },
+
+  "stats": {
+    "google_rating": 4.9,
+    "review_count": 142,
+    "patients_served": 3200,
+    "satisfaction_rate": 97
+  },
+
+  "vercel": {
+    "project_name": "johndoe-dental",
+    "domain": "johndoedental.com"
+  }
+}
