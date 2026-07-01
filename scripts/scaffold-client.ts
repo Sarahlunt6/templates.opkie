@@ -420,16 +420,17 @@ function generateMissingDataReport(
     '',
   ];
 
-  // Group by field name
-  const grouped = new Map<string, MissingField[]>();
+  // Group by field name using a plain object
+  const grouped: Record<string, MissingField[]> = {};
   for (const field of missingFields) {
-    if (!grouped.has(field.fieldName)) {
-      grouped.set(field.fieldName, []);
+    if (!grouped[field.fieldName]) {
+      grouped[field.fieldName] = [];
     }
-    grouped.get(field.fieldName)!.push(field);
+    grouped[field.fieldName].push(field);
   }
 
-  for (const [fieldName, instances] of grouped) {
+  // Iterate using Object.entries
+  Object.entries(grouped).forEach(([fieldName, instances]) => {
     lines.push(`### \`${fieldName}\``);
     lines.push(`**Used in:** ${instances.length} location(s)`);
     lines.push('');
@@ -438,7 +439,7 @@ function generateMissingDataReport(
       lines.push(`  Context: ${instance.context}`);
     }
     lines.push('');
-  }
+  });
 
   lines.push('## Instructions');
   lines.push('');
