@@ -1,0 +1,64 @@
+{
+  "client_slug": "test-t2-dental",
+  "template": "t2",
+  
+  "practice": {
+    "name": "Tech Dental Innovation",
+    "tagline_override": null,
+    "phone": "(555) 222-3333",
+    "phone_link": "tel:+15552223333",
+    "address": {
+      "street": "456 Tech Avenue",
+      "city": "Seattle",
+      "state": "WA",
+      "zip": "98101"
+    },
+    "hours": {
+      "monday": "9:00 AM - 6:00 PM",
+      "tuesday": "9:00 AM - 6:00 PM",
+      "wednesday": "9:00 AM - 6:00 PM",
+      "thursday": "9:00 AM - 6:00 PM",
+      "friday": "9:00 AM - 3:00 PM",
+      "saturday": "Closed",
+      "sunday": "Closed"
+    }
+  },
+  
+  "doctor": {
+    "name": "Dr. Sarah Tech, DDS",
+    "title": "Advanced Implant Specialist",
+    "years_experience": 15,
+    "credentials": [
+      "Doctor of Dental Surgery, UW",
+      "American Dental Association Member",
+      "Board Certified Implantologist"
+    ],
+    "bio_short": "Dr. Tech specializes in cutting-edge dental technology and digital dentistry."
+  },
+  
+  "booking_link": "https://calendly.com/test-t2-dental",
+  
+  "brand": {
+    "accent_color": "#06b6d4",
+    "logo_path": "/images/logo-t2.svg"
+  },
+  
+  "membership": {
+    "individual_price": 349,
+    "couple_price": 599,
+    "family_price": 949,
+    "no_insurance_savings_plan_price": 279
+  },
+  
+  "stats": {
+    "google_rating": 5.0,
+    "review_count": 89,
+    "patients_served": 2500,
+    "satisfaction_rate": 99
+  },
+  
+  "vercel": {
+    "project_name": "test-t2-dental",
+    "domain": "testt2dental.com"
+  }
+}

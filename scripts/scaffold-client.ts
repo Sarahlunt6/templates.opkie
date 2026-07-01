@@ -276,8 +276,11 @@ function createProjectStructure(
   const rootFiles = [
     'package.json',
     'tsconfig.json',
+    'tailwind.config.js',
     'tailwind.config.ts',
+    'postcss.config.js',
     'postcss.config.mjs',
+    'next.config.js',
     'next.config.ts',
     '.gitignore',
     '.eslintrc.json',
@@ -563,18 +566,28 @@ function getAllFiles(dir: string, extensions: string[]): string[] {
 }
 
 function updateBrandColors(clientRoot: string, accentColor: string) {
-  const tailwindConfig = path.join(clientRoot, 'tailwind.config.ts');
-  if (!fs.existsSync(tailwindConfig)) return;
+  // Update tailwind config (try both .js and .ts)
+  const tailwindConfigs = ['tailwind.config.js', 'tailwind.config.ts'];
+  for (const configFile of tailwindConfigs) {
+    const tailwindConfig = path.join(clientRoot, configFile);
+    if (fs.existsSync(tailwindConfig)) {
+      let content = fs.readFileSync(tailwindConfig, 'utf-8');
+      content = content.replace(/#0f766e/g, accentColor);
+      fs.writeFileSync(tailwindConfig, content, 'utf-8');
+    }
+  }
 
-  let content = fs.readFileSync(tailwindConfig, 'utf-8');
-
-  // Replace primary brand color
-  content = content.replace(
-    /#0f766e/g,
-    accentColor
-  );
-
-  fs.writeFileSync(tailwindConfig, content, 'utf-8');
+  // Update globals.css CSS variables
+  const globalsCss = path.join(clientRoot, 'app', 'globals.css');
+  if (fs.existsSync(globalsCss)) {
+    let content = fs.readFileSync(globalsCss, 'utf-8');
+    // Replace the primary brand color in CSS variables
+    content = content.replace(
+      /--primary-brand:\s*#[0-9a-fA-F]{6};/g,
+      `--primary-brand: ${accentColor};`
+    );
+    fs.writeFileSync(globalsCss, content, 'utf-8');
+  }
 }
 
 function removeTestimonials(clientRoot: string) {
@@ -583,12 +596,41 @@ function removeTestimonials(clientRoot: string) {
 
   let content = fs.readFileSync(masterDataPath, 'utf-8');
 
-  // Replace sampleReviews array with TODO
+  // Replace sampleReviews array with generic placeholders (keep structure intact for templates)
   content = content.replace(
     /export const sampleReviews: ReviewData\[\] = \[[\s\S]*?\];/,
     `export const sampleReviews: ReviewData[] = [
   // TODO: Replace with real client testimonials — do not launch with placeholder reviews
-  // Remove this comment and add actual verified patient reviews
+  {
+    id: "placeholder-001",
+    reviewerName: "[Patient Name]",
+    rating: 5,
+    reviewText: "Add real patient testimonial here. This is a placeholder review that should be replaced with actual verified patient feedback before launch.",
+    procedureCategory: "General Dentistry",
+    verificationBadge: "google",
+    datePosted: new Date().toISOString().split('T')[0],
+    isVerifiedPatient: true,
+  },
+  {
+    id: "placeholder-002",
+    reviewerName: "[Patient Name]",
+    rating: 5,
+    reviewText: "Add real patient testimonial here. This is a placeholder review that should be replaced with actual verified patient feedback before launch.",
+    procedureCategory: "Cosmetic Dentistry",
+    verificationBadge: "facebook",
+    datePosted: new Date().toISOString().split('T')[0],
+    isVerifiedPatient: true,
+  },
+  {
+    id: "placeholder-003",
+    reviewerName: "[Patient Name]",
+    rating: 5,
+    reviewText: "Add real patient testimonial here. This is a placeholder review that should be replaced with actual verified patient feedback before launch.",
+    procedureCategory: "Dental Implants",
+    verificationBadge: "google",
+    datePosted: new Date().toISOString().split('T')[0],
+    isVerifiedPatient: true,
+  },
 ];`
   );
 

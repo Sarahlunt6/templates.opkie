@@ -1,0 +1,64 @@
+{
+  "client_slug": "test-t3-dental",
+  "template": "t3",
+  
+  "practice": {
+    "name": "Serenity Dental Sanctuary",
+    "tagline_override": null,
+    "phone": "(555) 333-4444",
+    "phone_link": "tel:+15553334444",
+    "address": {
+      "street": "789 Peaceful Lane",
+      "city": "Austin",
+      "state": "TX",
+      "zip": "78701"
+    },
+    "hours": {
+      "monday": "8:00 AM - 4:00 PM",
+      "tuesday": "8:00 AM - 4:00 PM",
+      "wednesday": "8:00 AM - 4:00 PM",
+      "thursday": "8:00 AM - 4:00 PM",
+      "friday": "8:00 AM - 2:00 PM",
+      "saturday": "Closed",
+      "sunday": "Closed"
+    }
+  },
+  
+  "doctor": {
+    "name": "Dr. Maria Calm, DDS",
+    "title": "Holistic Family Dentist",
+    "years_experience": 10,
+    "credentials": [
+      "Doctor of Dental Surgery, UT Austin",
+      "American Dental Association Member",
+      "Certified Sedation Dentist"
+    ],
+    "bio_short": "Dr. Calm focuses on creating anxiety-free dental experiences with a gentle, patient-centered approach."
+  },
+  
+  "booking_link": "https://calendly.com/test-t3-dental",
+  
+  "brand": {
+    "accent_color": "#10b981",
+    "logo_path": "/images/logo-t3.svg"
+  },
+  
+  "membership": {
+    "individual_price": 279,
+    "couple_price": 499,
+    "family_price": 799,
+    "no_insurance_savings_plan_price": 229
+  },
+  
+  "stats": {
+    "google_rating": 4.9,
+    "review_count": 156,
+    "patients_served": 4100,
+    "satisfaction_rate": 98
+  },
+  
+  "vercel": {
+    "project_name": "test-t3-dental",
+    "domain": "testt3dental.com"
+  }
+}
