@@ -10,7 +10,6 @@ import T2CinematicHero from "./components/T2CinematicHero";
 import T2MagneticButton from "./components/T2MagneticButton";
 import T2TelemetryCounter from "./components/T2TelemetryCounter";
 import T2AnimatedGrid from "./components/T2AnimatedGrid";
-import T2TreatmentDashboard from "./components/T2TreatmentDashboard";
 import BeforeAfterSlider from "@/components/dental/BeforeAfterSlider";
 import {
   TextReveal,
@@ -40,13 +39,12 @@ const location = clientMasterData.locations[0];
 // TECHNOLOGY SECTION — Interactive Animated Panels
 // ═══════════════════════════════════════════════════════════════════════
 function TechnologySection() {
-  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   const technologies = [
     {
-      id: "01",
       icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
       title: "Carestream CS 9600 CBCT",
       description: "Full 3D jaw imaging at 0.1mm resolution. See bone density, nerve pathways, and sinus proximity before we touch a drill.",
@@ -54,7 +52,6 @@ function TechnologySection() {
       statLabel: "Resolution",
     },
     {
-      id: "02",
       icon: "M13 10V3L4 14h7v7l9-11h-7z",
       title: "Solea CO₂ Laser",
       description: "Cuts soft tissue without bleeding. Most procedures need zero anesthesia. You'll feel pressure, not pain.",
@@ -62,7 +59,6 @@ function TechnologySection() {
       statLabel: "No Anesthesia",
     },
     {
-      id: "03",
       icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
       title: "CEREC Primescan + Mill",
       description: "Digital scan replaces goopy impressions. Mill carves your crown from solid ceramic in 12 minutes. Walk out same day.",
@@ -90,8 +86,8 @@ function TechnologySection() {
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
         animate={{
-          opacity: activeCard ? 0.15 : 0,
-          x: activeCard === "01" ? "10%" : activeCard === "02" ? "40%" : "70%",
+          opacity: activeCard !== null ? 0.15 : 0,
+          x: activeCard === 0 ? "10%" : activeCard === 1 ? "40%" : "70%",
           y: "20%",
         }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -139,11 +135,11 @@ function TechnologySection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {technologies.map((feature, index) => (
             <motion.div
-              key={feature.id}
+              key={index}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              onMouseEnter={() => setActiveCard(feature.id)}
+              onMouseEnter={() => setActiveCard(index)}
               onMouseLeave={() => setActiveCard(null)}
               className="group relative bg-zinc-950 p-8 rounded-2xl border border-slate-800 cursor-pointer overflow-hidden"
             >
@@ -151,7 +147,7 @@ function TechnologySection() {
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 via-transparent to-transparent"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: activeCard === feature.id ? 1 : 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
               />
 
@@ -160,8 +156,8 @@ function TechnologySection() {
                 className="absolute inset-0 rounded-2xl"
                 initial={{ opacity: 0 }}
                 animate={{
-                  opacity: activeCard === feature.id ? 1 : 0,
-                  boxShadow: activeCard === feature.id
+                  opacity: activeCard === index ? 1 : 0,
+                  boxShadow: activeCard === index
                     ? "inset 0 0 0 1px rgba(var(--primary-brand-rgb), 0.3), 0 0 30px rgba(var(--primary-brand-rgb), 0.1)"
                     : "none"
                 }}
@@ -169,46 +165,30 @@ function TechnologySection() {
               />
 
               <div className="relative z-10">
-                <div className="flex items-start justify-between mb-6">
-                  {/* Animated icon container */}
-                  <motion.div
-                    className="w-14 h-14 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center"
-                    animate={{
-                      scale: activeCard === feature.id ? 1.1 : 1,
-                      backgroundColor: activeCard === feature.id ? "rgba(var(--primary-brand-rgb), 0.2)" : "rgba(var(--primary-brand-rgb), 0.1)",
-                    }}
+                {/* Animated icon container - now full width header */}
+                <motion.div
+                  className="w-14 h-14 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center mb-6"
+                  animate={{
+                    scale: activeCard === index ? 1.1 : 1,
+                    backgroundColor: activeCard === index ? "rgba(var(--primary-brand-rgb), 0.2)" : "rgba(var(--primary-brand-rgb), 0.1)",
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.svg
+                    className="w-6 h-6 text-brand-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: activeCard === index ? 5 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <motion.svg
-                      className="w-6 h-6 text-brand-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      animate={{ rotate: activeCard === feature.id ? 5 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={feature.icon} />
-                    </motion.svg>
-                  </motion.div>
-
-                  {/* Number badge with pulse */}
-                  <motion.div
-                    className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
-                    animate={{
-                      scale: activeCard === feature.id ? [1, 1.2, 1] : 1,
-                      borderColor: activeCard === feature.id ? "rgba(var(--primary-brand-rgb), 0.3)" : "rgba(255,255,255,0.1)",
-                    }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <span className={`text-[10px] font-medium transition-colors duration-300 ${activeCard === feature.id ? "text-brand-primary" : "text-white/40"}`}>
-                      {feature.id}
-                    </span>
-                  </motion.div>
-                </div>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={feature.icon} />
+                  </motion.svg>
+                </motion.div>
 
                 <motion.h3
                   className="text-xl font-semibold tracking-tight mb-3"
-                  animate={{ x: activeCard === feature.id ? 4 : 0 }}
+                  animate={{ x: activeCard === index ? 4 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
                   {feature.title}
@@ -216,7 +196,7 @@ function TechnologySection() {
 
                 <motion.p
                   className="text-sm text-white/50 leading-relaxed mb-6"
-                  animate={{ opacity: activeCard === feature.id ? 0.8 : 0.5 }}
+                  animate={{ opacity: activeCard === index ? 0.8 : 0.5 }}
                   transition={{ duration: 0.3 }}
                 >
                   {feature.description}
@@ -227,8 +207,8 @@ function TechnologySection() {
                   className="flex items-center gap-3 pt-4 border-t border-white/[0.05]"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{
-                    opacity: activeCard === feature.id ? 1 : 0.5,
-                    y: activeCard === feature.id ? 0 : 5,
+                    opacity: activeCard === index ? 1 : 0.5,
+                    y: activeCard === index ? 0 : 5,
                   }}
                   transition={{ duration: 0.3 }}
                 >
@@ -242,8 +222,8 @@ function TechnologySection() {
                 className="absolute top-3 left-3 w-6 h-6 border-l border-t border-brand-primary/30"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{
-                  opacity: activeCard === feature.id ? 1 : 0,
-                  scale: activeCard === feature.id ? 1 : 0.5,
+                  opacity: activeCard === index ? 1 : 0,
+                  scale: activeCard === index ? 1 : 0.5,
                 }}
                 transition={{ duration: 0.3 }}
               />
@@ -251,8 +231,8 @@ function TechnologySection() {
                 className="absolute bottom-3 right-3 w-6 h-6 border-r border-b border-brand-primary/30"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{
-                  opacity: activeCard === feature.id ? 1 : 0,
-                  scale: activeCard === feature.id ? 1 : 0.5,
+                  opacity: activeCard === index ? 1 : 0,
+                  scale: activeCard === index ? 1 : 0.5,
                 }}
                 transition={{ duration: 0.3 }}
               />
@@ -417,7 +397,7 @@ function ServicesGridSection({ location }: { location: typeof clientMasterData.l
                   {/* Top Row - Icon and Number */}
                   <div className="flex items-center justify-between">
                     <motion.div
-                      className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                      className="w-10 h-10 rounded-xl bg-zinc-800/80 border border-white/10 flex items-center justify-center"
                       animate={{
                         backgroundColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.3)" : "rgba(255,255,255,0.1)",
                         borderColor: hoveredIndex === index ? "rgba(var(--primary-brand-rgb), 0.5)" : "rgba(255,255,255,0.2)",
@@ -439,9 +419,7 @@ function ServicesGridSection({ location }: { location: typeof clientMasterData.l
                       </motion.svg>
                     </motion.div>
 
-                    <span className={`text-[10px] font-semibold transition-colors duration-300 ${hoveredIndex === index ? "text-brand-primary" : "text-white/50"}`}>
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                    {/* Removed numeric badge - icon is sufficient */}
                   </div>
 
                   {/* Bottom Row - Title and Description */}
@@ -468,21 +446,17 @@ function ServicesGridSection({ location }: { location: typeof clientMasterData.l
                       Digital precision care
                     </motion.p>
 
-                    {/* Arrow indicator */}
+                    {/* Hover indicator - subtle arrow */}
                     <motion.div
-                      className="flex items-center gap-2 mt-3"
-                      initial={{ opacity: 0, x: -10 }}
+                      className="mt-3"
+                      initial={{ opacity: 0 }}
                       animate={{
                         opacity: hoveredIndex === index ? 1 : 0,
-                        x: hoveredIndex === index ? 0 : -10,
                       }}
                       transition={{ duration: 0.3 }}
                     >
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-brand-primary font-medium">
-                        Learn More
-                      </span>
                       <svg
-                        className="w-4 h-4 text-brand-primary"
+                        className="w-5 h-5 text-brand-primary"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -632,28 +606,24 @@ export default function Template2Page() {
             <div className="lg:col-span-5 space-y-0">
               {[
                 {
-                  id: "01",
                   title: "Invisalign",
                   subtitle: "iTero Scanner + Diamond Provider",
                   description: "See your final smile in 3D before you start. Our Diamond status means we've treated 500+ cases—so we finish faster.",
                   image: "/images/services/invisalign.jpg",
                 },
                 {
-                  id: "02",
                   title: "Dental Implants",
                   subtitle: "CBCT-Guided Surgery",
                   description: "Your implant is planned to the tenth of a millimeter. Surgical guides mean shorter surgery, faster healing.",
                   image: "/images/services/implant.jpg",
                 },
                 {
-                  id: "03",
                   title: "Full Restoration",
                   subtitle: "Digital Smile Design",
                   description: "We design your new smile on screen first. You approve before we start. No surprises, just results.",
                   image: "/images/services/full-mouth-smile.jpg",
                 },
                 {
-                  id: "04",
                   title: "Veneers",
                   subtitle: "CEREC Same-Day Delivery",
                   description: "Digital impressions mean perfect fit. Mill-cut ceramics mean you leave with your final veneers—not temporaries.",
@@ -661,14 +631,12 @@ export default function Template2Page() {
                 },
               ].map((service, index) => (
                 <div
-                  key={service.id}
+                  key={index}
                   className="group relative py-6 border-b border-white/[0.05] cursor-pointer hover:bg-white/[0.02] transition-all duration-300 -mx-4 px-4"
                 >
-                  <div className="flex items-start gap-6">
-                    {/* Numeric Tag */}
-                    <span className="text-[11px] tracking-[0.2em] text-white/30 font-medium pt-1 w-8 flex-shrink-0">
-                      {service.id}
-                    </span>
+                  <div className="flex items-start gap-4">
+                    {/* Accent bar instead of number */}
+                    <div className="w-0.5 h-full min-h-[60px] bg-white/10 group-hover:bg-brand-primary transition-colors duration-300 flex-shrink-0 rounded-full" />
 
                     {/* Content */}
                     <div className="flex-1">
@@ -715,7 +683,7 @@ export default function Template2Page() {
 
                   {/* Floating info panel */}
                   <div className="absolute bottom-6 left-6 right-6 z-10">
-                    <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-xl p-6">
+                    <div className="bg-zinc-950/90 border border-white/[0.08] rounded-xl p-6">
                       <p className="text-[10px] tracking-[0.25em] text-brand-primary uppercase font-medium mb-2">
                         Featured Treatment
                       </p>
@@ -733,91 +701,6 @@ export default function Template2Page() {
                   <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-white/[0.1]" />
                   <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-white/[0.1] z-20" />
                   <div className="absolute bottom-4 right-4 w-8 h-8 border-r border-b border-white/[0.1] z-20" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          SECOND MARQUEE — REVERSED
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="relative overflow-hidden border-y border-slate-800 bg-zinc-900/50 py-5">
-        <div className="animate-marquee-reverse whitespace-nowrap flex">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="flex items-center gap-16 mx-16">
-              <span className="text-xs tracking-[0.2em] text-white/50">Precision</span>
-              <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Technology</span>
-              <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-white/50">Innovation</span>
-              <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Excellence</span>
-              <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-white/50">Digital</span>
-              <span className="text-white/10">•</span>
-              <span className="text-xs tracking-[0.2em] text-brand-primary font-medium">Advanced</span>
-              <span className="text-white/10">•</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          WELCOME VIDEO — PRECISION FRAMING ON CANVAS
-          Direct canvas placement, widescreen frame, no boxed containers
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-32 px-6 md:px-12 relative">
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Asymmetric Grid: Video + Text */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Video Frame - Wide Widescreen */}
-            <div className="lg:col-span-8">
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  webkit-playsinline="true"
-                  poster="/images/team/staff-photo.jpg"
-                >
-                  {/* Video source disabled for demo */}
-                  Your browser does not support the video tag.
-                </video>
-
-                {/* Corner architectural frames */}
-                <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-white/[0.1] pointer-events-none" />
-                <div className="absolute top-0 right-0 w-12 h-12 border-r-2 border-t-2 border-white/[0.1] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-12 h-12 border-l-2 border-b-2 border-white/[0.1] pointer-events-none" />
-                <div className="absolute bottom-0 right-0 w-12 h-12 border-r-2 border-b-2 border-white/[0.1] pointer-events-none" />
-
-                {/* Status indicators */}
-                <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                  <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-4 py-2 flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[10px] tracking-[0.15em] text-white/60 uppercase">Practice Tour</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Text Content - Narrow Offset */}
-            <div className="lg:col-span-4">
-              <span className="text-[11px] tracking-[0.3em] text-brand-primary uppercase font-medium">
-                Meet Our Team
-              </span>
-              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mt-4 mb-4">
-                Practice Overview
-              </h2>
-              <p className="text-base text-white/50 leading-relaxed mb-6">
-                Step inside our state-of-the-art facility. See the technology in action.
-              </p>
-              {/* Thin separator */}
-              <div className="border-t border-white/[0.05] pt-6">
-                <div className="flex items-center gap-4">
-                  <span className="text-[10px] tracking-[0.2em] text-white/30 uppercase">Duration</span>
-                  <span className="text-sm text-white/60">3:45</span>
                 </div>
               </div>
             </div>
@@ -852,13 +735,17 @@ export default function Template2Page() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="rounded-2xl border border-slate-800 overflow-hidden">
-              <BeforeAfterSlider
-                beforeUrl="/images/cases/smile-before-ortho.png"
-                afterUrl="/images/cases/smile-after-ortho.png"
-                altTag="Invisalign clear aligner transformation"
-                aspectRatio="4/3"
-              />
+            {/* Bold accent border on one side - color risk */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 bottom-0 w-1 bg-brand-primary rounded-full" />
+              <div className="rounded-2xl border border-slate-800 overflow-hidden">
+                <BeforeAfterSlider
+                  beforeUrl="/images/cases/smile-before-ortho.png"
+                  afterUrl="/images/cases/smile-after-ortho.png"
+                  altTag="Invisalign clear aligner transformation"
+                  aspectRatio="4/3"
+                />
+              </div>
             </div>
             <p className="text-center text-sm text-white/40 mt-6">
               Drag to compare before and after results
@@ -897,7 +784,7 @@ export default function Template2Page() {
 
               {/* Status badge */}
               <div className="absolute bottom-6 left-6 z-10">
-                <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-full px-4 py-2 flex items-center gap-2">
+                <div className="bg-zinc-900/90 border border-white/[0.08] rounded-full px-4 py-2 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-[10px] tracking-[0.15em] text-white/60 uppercase">Accepting Patients</span>
                 </div>
@@ -921,18 +808,15 @@ export default function Template2Page() {
                 </p>
               </div>
 
-              {/* Credentials - Thin underline frames */}
-              <div className="space-y-0">
+              {/* Credentials - Clean list without numbers */}
+              <div className="flex flex-wrap gap-2">
                 {primaryDoctor.credentials.map((credential, index) => (
-                  <div
+                  <span
                     key={index}
-                    className="flex items-center gap-4 py-4 border-b border-white/[0.05] group hover:border-white/[0.1] transition-colors"
+                    className="px-4 py-2 bg-white/[0.03] border border-white/[0.08] rounded-lg text-sm text-white/60 hover:text-white/80 hover:border-brand-primary/30 transition-all duration-300"
                   >
-                    <span className="text-[10px] tracking-[0.2em] text-white/30 font-medium w-6">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors">{credential}</span>
-                  </div>
+                    {credential}
+                  </span>
                 ))}
               </div>
             </div>
@@ -980,7 +864,7 @@ export default function Template2Page() {
               </div>
 
               {/* Overall Rating Badge */}
-              <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
+              <div className="bg-zinc-900/80 border border-white/[0.08] rounded-2xl p-6">
                 <div className="flex items-center gap-6">
                   <div className="text-center">
                     <span className="text-4xl font-semibold text-brand-primary block">4.9</span>
@@ -1207,7 +1091,7 @@ export default function Template2Page() {
           {/* Benefits Row - Compact Indicator */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
             {["2 Cleanings", "2 Exams", "CBCT 3D Scan", "25% Off Everything"].map((benefit, i) => (
-              <div key={i} className="flex items-center gap-2 px-4 py-2 backdrop-blur-xl bg-white/[0.02] border border-white/[0.06] rounded-full">
+              <div key={i} className="flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-white/[0.06] rounded-full">
                 <svg className="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -1219,19 +1103,21 @@ export default function Template2Page() {
           {/* Row Matrix Stack */}
           <div className="space-y-2">
             {[
-              { tier: "Individual", price: "335", code: "01", description: "Perfect for single patients seeking comprehensive preventive care coverage." },
-              { tier: "Couple", price: "615", code: "02", popular: true, description: "Ideal for partners. Both members receive full membership benefits." },
-              { tier: "Family", price: "965", code: "03", description: "Coverage for parents and children. Add additional members for $95/year each.", extra: "+$95 per additional member" },
-            ].map((plan) => (
+              { tier: "Individual", price: "335", icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z", description: "Perfect for single patients seeking comprehensive preventive care coverage." },
+              { tier: "Couple", price: "615", icon: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z", popular: true, description: "Ideal for partners. Both members receive full membership benefits." },
+              { tier: "Family", price: "965", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z", description: "Coverage for parents and children. Add additional members for $95/year each.", extra: "+$95 per additional member" },
+            ].map((plan, index) => (
               <details
-                key={plan.code}
+                key={index}
                 className="group"
               >
                 <summary className={`flex items-center justify-between p-6 md:p-8 cursor-pointer list-none rounded-2xl transition-all duration-300 ${plan.popular ? "bg-brand-primary/[0.05] border border-brand-primary/20 hover:border-brand-primary/40" : "bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.03]"}`}>
                   <div className="flex items-center gap-6">
-                    {/* Code Badge */}
+                    {/* Icon Badge instead of code number */}
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center ${plan.popular ? "bg-brand-primary/20 border border-brand-primary/30" : "bg-white/5 border border-white/10"}`}>
-                      <span className={`text-xs font-medium ${plan.popular ? "text-brand-primary" : "text-white/40"}`}>{plan.code}</span>
+                      <svg className={`w-5 h-5 ${plan.popular ? "text-brand-primary" : "text-white/40"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={plan.icon} />
+                      </svg>
                     </div>
 
                     {/* Tier Name */}
@@ -1376,70 +1262,6 @@ export default function Template2Page() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          TREATMENT BLUEPRINT DASHBOARD — INTERACTIVE PHASES
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <T2TreatmentDashboard
-        phases={[
-          {
-            id: "diagnosis",
-            title: "Diagnosis & 3D Imaging",
-            subtitle: "Phase 01 • Foundation",
-            description: "Complete digital diagnostic workup using CBCT 3D imaging, intraoral scanning, and comprehensive clinical examination. We map every detail before treatment begins.",
-            duration: "30-45 minutes",
-            image: "/images/services/implant.jpg",
-            details: [
-              "Full CBCT 3D scan at 0.1mm resolution for precise bone and nerve mapping",
-              "Intraoral digital impressions using iTero scanner (no goop)",
-              "Comprehensive clinical examination and treatment planning consultation",
-              "Digital photos and baseline documentation for progress tracking",
-            ],
-          },
-          {
-            id: "planning",
-            title: "3D Digital Planning",
-            subtitle: "Phase 02 • Design",
-            description: "Treatment is designed virtually in our planning software. You'll see your final result before we begin, with the ability to make changes and approve the final design.",
-            duration: "5-7 business days",
-            image: "/images/services/full-mouth-smile.jpg",
-            details: [
-              "Digital Smile Design (DSD) mockup showing your predicted outcome",
-              "Virtual implant placement with surgical guide design",
-              "Crown/restoration design using CAD/CAM software",
-              "Review appointment to approve plan and make any adjustments",
-            ],
-          },
-          {
-            id: "execution",
-            title: "Guided Execution",
-            subtitle: "Phase 03 • Treatment",
-            description: "Treatment is performed using 3D-printed surgical guides and computer-aided precision. Most procedures completed in a single visit with immediate results.",
-            duration: "1-3 hours",
-            image: "/images/services/invisalign.jpg",
-            details: [
-              "Guided surgery using 3D-printed templates for submillimeter accuracy",
-              "Same-day crown milling using CEREC technology (when applicable)",
-              "Real-time verification scans to ensure precision fit",
-              "Immediate temporary or final restoration placement",
-            ],
-          },
-          {
-            id: "followup",
-            title: "Digital Follow-Up",
-            subtitle: "Phase 04 • Verification",
-            description: "Post-treatment verification imaging and progress monitoring. We document healing and ensure optimal integration of your restoration.",
-            duration: "3-6 months",
-            image: "/images/services/full-mouth-shade.jpg",
-            details: [
-              "Follow-up CBCT scans to verify healing and osseointegration",
-              "Digital progress photos to track aesthetic outcomes",
-              "Remote monitoring option using patient portal app",
-              "Final verification appointment with adjustment if needed",
-            ],
-          },
-        ]}
-      />
 
       <T2Footer />
     </div>

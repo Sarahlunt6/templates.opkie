@@ -270,30 +270,32 @@ export default function T1PremiumHero({
         </div>
       </div>
 
-      {/* Authority Metrics */}
+      {/* Trust Signal - Single Dramatic Stat (avoids AI-default grid) */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pb-8 lg:pb-16">
-        <div
-          className="flex overflow-x-auto lg:overflow-visible gap-6 lg:gap-16 pb-2 lg:pb-0 lg:justify-end scrollbar-hide"
-          style={{ scrollSnapType: "x mandatory" }}
-        >
-          {[
-            { value: 312, suffix: "", label: "Five-Star Reviews" },
-            { value: 98, suffix: "%", label: "Would Refer a Friend" },
-            { value: 3, suffix: " Days", label: "Avg Wait for Appointment", isCompact: true },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="text-center flex-shrink-0 min-w-[140px]"
-              style={{ scrollSnapAlign: "center" }}
-            >
-              <p className="text-[clamp(2rem,8vw,5rem)] lg:text-7xl font-serif font-light text-white tracking-tight leading-none whitespace-nowrap">
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2.5} />
-              </p>
-              <p className="text-[10px] lg:text-xs font-sans uppercase tracking-[0.25em] lg:tracking-[0.35em] text-white/50 mt-2 whitespace-nowrap">
-                {stat.label}
-              </p>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-end gap-4 lg:gap-8">
+          {/* Primary dramatic metric */}
+          <div className="flex items-baseline gap-3">
+            <p className="text-[clamp(3rem,12vw,8rem)] font-serif font-light text-brand-accent tracking-tight leading-none">
+              <AnimatedCounter value={312} suffix="" duration={2.5} />
+            </p>
+            <div className="flex flex-col">
+              <span className="text-white text-lg lg:text-xl font-medium">Five-Star</span>
+              <span className="text-white/60 text-sm">Google Reviews</span>
             </div>
-          ))}
+          </div>
+
+          {/* Secondary inline stats - editorial marginalia style */}
+          <div className="flex items-center gap-6 lg:gap-8 lg:pb-4 border-l-2 border-white/20 pl-4 lg:pl-6">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl lg:text-3xl font-serif font-light text-white">98%</span>
+              <span className="text-[10px] uppercase tracking-widest text-white/40">referrals</span>
+            </div>
+            <div className="w-px h-6 bg-white/20" />
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl lg:text-3xl font-serif font-light text-white">3</span>
+              <span className="text-[10px] uppercase tracking-widest text-white/40">day wait</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

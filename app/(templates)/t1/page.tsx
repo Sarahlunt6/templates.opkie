@@ -405,12 +405,11 @@ export default function Template1Page() {
             {location.secondaryCategoriesGBP.map((category, index) => (
               <article
                 key={index}
-                className="group border-b border-neutral-border py-10 flex items-center justify-between hover:pl-6 transition-all duration-500"
+                className="group border-b border-neutral-border py-8 flex items-center justify-between hover:pl-4 transition-all duration-500"
               >
-                <div className="flex items-center gap-8">
-                  <span className="text-5xl font-light text-brand-primary/30 group-hover:text-brand-primary transition-colors duration-500">
-                    0{index + 1}
-                  </span>
+                <div className="flex items-center gap-6">
+                  {/* Accent bar instead of number */}
+                  <div className="w-1 h-12 bg-brand-primary/20 group-hover:bg-brand-primary group-hover:h-14 transition-all duration-500 rounded-full" />
                   <div>
                     <h3 className="text-2xl font-bold text-brand-mainText group-hover:text-brand-primary transition-colors duration-300">
                       {category}
@@ -421,7 +420,7 @@ export default function Template1Page() {
                   </div>
                 </div>
                 <svg
-                  className="w-8 h-8 text-brand-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500"
+                  className="w-6 h-6 text-brand-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -581,6 +580,9 @@ export default function Template1Page() {
         </div>
       </section>
 
+      {/* Bold Accent Stripe - Full Bleed Color Risk */}
+      <div className="h-2 bg-brand-accent" />
+
       {/* Why Choose Us - Editorial Border Layout */}
       <section className="py-32 px-8 bg-slate-900">
         <div className="max-w-6xl mx-auto">
@@ -598,37 +600,33 @@ export default function Template1Page() {
               {
                 title: "Experienced Team",
                 description: `Our ${clientMasterData.globalPracticeName} team brings decades of combined experience to your care.`,
-                cta: "Meet the Team",
+                icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
               },
               {
                 title: "Patient-First Care",
                 description: "We prioritize your comfort and well-being with personalized treatment plans designed around your needs. No insurance? Ask about membership savings on every visit.",
-                cta: "Meet the Doctor",
+                icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
               },
               {
                 title: "Comfortable Office",
                 description: "Our modern facility offers amenities including blankets, TVs, headsets, and sedation options for your comfort.",
-                cta: "Office Tour",
+                icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
               },
             ].map((item, index) => (
               <div
                 key={index}
                 className="border-l-2 border-brand-accent/30 pl-8 py-8 group hover:border-brand-accent hover:bg-white/5 transition-all duration-500"
               >
-                <span className="text-6xl font-light text-brand-accent/20 mb-4 block">0{index + 1}</span>
+                {/* Icon instead of number */}
+                <div className="w-12 h-12 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 group-hover:border-brand-accent/40 transition-all duration-500">
+                  <svg className="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                  </svg>
+                </div>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors duration-300">
                   {item.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed mb-8">{item.description}</p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/30 text-white font-medium hover:bg-white hover:text-brand-mainText transition-all duration-300 group/btn"
-                >
-                  {item.cta}
-                  <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
+                <p className="text-gray-400 leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>

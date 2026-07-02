@@ -59,11 +59,11 @@ export default function Template3Page() {
             </div>
 
             <h2 className="font-sanctuary text-[clamp(1.8rem,4vw,3rem)] font-extralight text-center mb-6 tracking-[0.02em]">
-              Our Practice, Our People
+              The Hand-Raise Rule
             </h2>
 
             <p className="text-center text-neutral-muted font-light max-w-xl mx-auto tracking-wide leading-relaxed">
-              Take a moment to meet our team. Discover the thoughtful care that defines our approach.
+              We stop the moment you signal. No explanations needed. Your comfort drives every decision we make.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export default function Template3Page() {
           </div>
 
           <p className="text-center text-[11px] uppercase tracking-[0.3em] text-neutral-muted mt-10">
-            Experience the sanctuary difference
+            90-minute appointments · Sedation available · Breaks whenever you need
           </p>
         </div>
       </T3AtmosphericParallax>
@@ -114,21 +114,25 @@ export default function Template3Page() {
             </h2>
           </div>
 
-          {/* Three Pillars with Large Numeric Backgrounds */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
+          {/* Three Pillars - Process Flow (semantically justified as a sequence) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
             {[
-              { title: "Listen", num: "01", description: "Your first appointment is 90 minutes—twice the industry standard. We ask about your sleep, your stress, your past experiences. Treatment doesn't start until you feel heard." },
-              { title: "Plan", num: "02", description: "We show you every option on screen, explain the tradeoffs, and let you decide. No pressure, no upselling. Your treatment timeline works around your life, not ours. Wellness membership plans available—see Membership below." },
-              { title: "Care", num: "03", description: "Weighted blankets. Noise-canceling headphones. Breaks whenever you need them. We stop the moment you raise a hand. Your comfort isn't optional—it's the foundation." },
+              { title: "Listen", description: "Your first appointment is 90 minutes—twice the industry standard. We ask about your sleep, your stress, your past experiences. Treatment doesn't start until you feel heard." },
+              { title: "Plan", description: "We show you every option on screen, explain the tradeoffs, and let you decide. No pressure, no upselling. Your treatment timeline works around your life, not ours. Wellness membership plans available—see Membership below." },
+              { title: "Care", description: "Weighted blankets. Noise-canceling headphones. Breaks whenever you need them. We stop the moment you raise a hand. Your comfort isn't optional—it's the foundation." },
             ].map((pillar, index) => (
               <div key={index} className="group relative text-center">
-                {/* Large Architectural Numeric Background */}
-                <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-[120px] lg:text-[140px] font-extralight text-slate-100 select-none pointer-events-none font-sanctuary leading-none">
-                  {pillar.num}
-                </span>
+                {/* Subtle connecting line between pillars */}
+                {index < 2 && (
+                  <div className="hidden md:block absolute top-8 -right-8 lg:-right-10 w-16 lg:w-20 h-px bg-gradient-to-r from-brand-primary/30 to-transparent" />
+                )}
 
                 {/* Content */}
-                <div className="relative z-10 pt-16">
+                <div className="relative z-10">
+                  {/* Small step indicator - justified as this IS a process */}
+                  <span className="inline-block text-[10px] tracking-[0.3em] text-brand-primary/60 uppercase mb-4 font-medium">
+                    Step {index + 1}
+                  </span>
                   <h3 className="font-sanctuary text-2xl font-extralight tracking-[0.08em] mb-6 group-hover:text-brand-primary transition-colors duration-500">
                     {pillar.title}
                   </h3>
@@ -293,74 +297,92 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          MEMBERSHIP — Spatial Pricing
+          MEMBERSHIP — Asymmetric Editorial Table Layout (breaks centered pattern)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]">
-        <div className="max-w-4xl mx-auto px-8">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
-            Membership
-          </p>
+      <section className="relative py-16 lg:py-24 overflow-hidden bg-brand-primary/[0.02]">
+        <div className="max-w-5xl mx-auto px-8">
+          {/* Asymmetric Header - Left Aligned */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+            <div className="lg:col-span-5">
+              <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-4">
+                Membership
+              </p>
+              <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight tracking-[0.05em]">
+                Wellness Plans
+              </h2>
+            </div>
+            <div className="lg:col-span-7 lg:flex lg:items-end">
+              <p className="text-neutral-muted font-light tracking-wide leading-relaxed text-sm lg:text-base lg:border-l lg:border-brand-primary/20 lg:pl-8">
+                Simple, transparent care for those who value ongoing wellness. No insurance required. No hidden fees. Cancel anytime.
+              </p>
+            </div>
+          </div>
 
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-6 tracking-[0.05em]">
-            Wellness Plans
-          </h2>
-
-          <p className="text-center text-neutral-muted font-light max-w-xl mx-auto mb-16 tracking-wide leading-relaxed">
-            Simple, transparent care for those who value ongoing wellness.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Horizontal Table Layout - Editorial Rows */}
+          <div className="space-y-0">
             {[
               {
                 name: "Individual",
                 price: "$335",
-                features: ["Two wellness visits", "Complete examinations", "Digital X-rays", "15% off treatments"],
+                desc: "Personal wellness",
+                features: ["2 visits", "X-rays", "15% off"],
               },
               {
                 name: "Couple",
                 price: "$615",
-                features: ["All Individual benefits", "Coverage for two", "Priority scheduling", "20% off treatments"],
+                desc: "Partner coverage",
+                features: ["2 members", "Priority", "20% off"],
                 featured: true,
               },
               {
                 name: "Family",
                 price: "$965",
-                features: ["All Couple benefits", "Up to 4 members", "Children's care included", "25% off treatments"],
+                desc: "Complete household",
+                features: ["Up to 4", "Children", "25% off"],
               },
             ].map((plan, index) => (
               <div
                 key={index}
-                className={`text-center ${plan.featured ? "lg:-mt-6 lg:mb-6" : ""}`}
+                className={`group grid grid-cols-12 gap-4 py-8 border-b border-brand-primary/10 items-center transition-all duration-500 hover:bg-brand-primary/[0.02] ${
+                  plan.featured ? "bg-brand-primary/[0.03]" : ""
+                }`}
               >
-                {plan.featured && (
-                  <p className="text-[10px] uppercase tracking-[0.4em] text-brand-primary mb-6">
-                    Recommended
-                  </p>
-                )}
+                {/* Plan Name - 3 cols */}
+                <div className="col-span-12 sm:col-span-3 flex items-center gap-3">
+                  <h3 className="text-lg font-light tracking-[0.1em]">{plan.name}</h3>
+                  {plan.featured && (
+                    <span className="text-[8px] uppercase tracking-[0.3em] text-brand-primary bg-brand-primary/10 px-2 py-1 rounded-sm">
+                      Popular
+                    </span>
+                  )}
+                </div>
 
-                <h3 className="text-lg font-light tracking-[0.15em] mb-6">{plan.name}</h3>
+                {/* Description - 2 cols */}
+                <div className="col-span-6 sm:col-span-2">
+                  <p className="text-xs text-neutral-muted tracking-wide">{plan.desc}</p>
+                </div>
 
-                <p className="text-4xl font-extralight text-brand-primary mb-2">{plan.price}</p>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-neutral-muted mb-8">per year</p>
-
-                <div className="space-y-3 mb-8">
+                {/* Features - 4 cols */}
+                <div className="col-span-6 sm:col-span-4 flex flex-wrap gap-2">
                   {plan.features.map((feature, i) => (
-                    <p key={i} className="text-sm text-neutral-muted font-light tracking-wide">
-                      {feature}
-                    </p>
+                    <span key={i} className="text-[11px] text-neutral-muted/70 tracking-wide">
+                      {feature}{i < plan.features.length - 1 ? " ·" : ""}
+                    </span>
                   ))}
                 </div>
 
-                <a
-                  href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className={`inline-block px-8 py-3 text-sm uppercase tracking-[0.2em] font-light transition-all duration-500 ${
-                    plan.featured
-                      ? "bg-brand-primary text-white hover:bg-brand-primary/90"
-                      : "border border-brand-primary/30 text-brand-primary hover:bg-brand-primary hover:text-white"
-                  }`}
-                >
-                  Begin
-                </a>
+                {/* Price + CTA - 3 cols */}
+                <div className="col-span-12 sm:col-span-3 flex items-center justify-between sm:justify-end gap-6 mt-4 sm:mt-0">
+                  <p className="text-2xl font-extralight text-brand-primary">
+                    {plan.price}<span className="text-xs text-neutral-muted/60">/yr</span>
+                  </p>
+                  <a
+                    href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                    className="px-5 py-2 text-xs uppercase tracking-[0.2em] font-light border border-brand-primary/30 text-brand-primary hover:bg-brand-primary hover:text-white transition-all duration-500"
+                  >
+                    Select
+                  </a>
+                </div>
               </div>
             ))}
           </div>
@@ -368,25 +390,24 @@ export default function Template3Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          FREE CONSULTATION CTA — Simple Call-to-Action Banner
+          FREE CONSULTATION CTA — Bold Color Risk
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-20 lg:py-28 overflow-hidden bg-brand-primary/[0.02]">
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-brand-primary">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-          {/* Heading */}
-          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-extralight text-brand-mainText mb-6 tracking-tight leading-[1.2]">
-            Ready to Experience the Difference?
-          </h2>
+          {/* Heading - Inverted on accent */}
+          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-extralight text-white mb-6 tracking-tight leading-[1.2]">
+            Your First Visit is on Us</h2>
 
           {/* Description */}
-          <p className="text-neutral-muted font-light leading-relaxed text-base mb-12 max-w-2xl mx-auto">
+          <p className="text-white/80 font-light leading-relaxed text-base mb-12 max-w-2xl mx-auto">
             Complimentary consultations for new patients. No pressure. No sales pitch.
             Just a thoughtful conversation about your wellness goals.
           </p>
 
-          {/* Single CTA */}
+          {/* Single CTA - Inverted */}
           <a
             href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="inline-flex items-center gap-4 px-10 py-5 bg-brand-primary text-white text-sm uppercase tracking-[0.2em] font-medium hover:bg-brand-primary/90 transition-colors duration-300 shadow-lg"
+            className="inline-flex items-center gap-4 px-10 py-5 bg-white text-brand-primary text-sm uppercase tracking-[0.2em] font-medium hover:bg-white/90 transition-colors duration-300 shadow-lg"
           >
             <span>Schedule Your Visit</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -395,7 +416,7 @@ export default function Template3Page() {
           </a>
 
           {/* Trust message */}
-          <p className="text-neutral-muted/70 text-sm mt-8 font-light">
+          <p className="text-white/60 text-sm mt-8 font-light">
             Same-week appointments • Most insurance accepted • Serving {location.cityServed}
           </p>
         </div>
@@ -407,11 +428,11 @@ export default function Template3Page() {
       <section className="relative py-16 lg:py-20 overflow-hidden bg-brand-primary/[0.02]">
         <div className="max-w-4xl mx-auto px-8">
           <p className="text-[11px] uppercase tracking-[0.4em] text-neutral-muted mb-8 text-center">
-            Our Philosophy
+            Why Patients Stay
           </p>
 
           <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extralight text-center mb-16 tracking-[0.05em]">
-            The Mindful Difference
+            We Treat Anxiety, Not Just Teeth
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
