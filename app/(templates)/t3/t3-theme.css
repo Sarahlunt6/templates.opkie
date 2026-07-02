@@ -1,0 +1,209 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   T3 HAVEN — template-scoped theme
+   Light organic wellness: Mist / Moss / Eucalyptus / Clay / Sand
+   All rules are scoped under .t3-haven so nothing leaks to other templates.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.t3-haven {
+  /* palette */
+  --t3-mist: #f4f6f1;
+  --t3-moss: #2e3b34;
+  --t3-euc: #6d8b7d;
+  --t3-euc-deep: #566e61; /* AA-safe on mist for small text & button fills */
+  --t3-clay: #c97e5d;
+  --t3-clay-deep: #a85a34; /* AA-safe on mist for small text */
+  --t3-sand: #e7e0d2;
+
+  /* derived */
+  --t3-moss-soft: rgba(46, 59, 52, 0.68);
+  --t3-moss-faint: rgba(46, 59, 52, 0.45);
+  --t3-line: rgba(109, 139, 125, 0.28);
+  --t3-shadow-soft: 0 18px 48px -20px rgba(46, 59, 52, 0.22);
+  --t3-shadow-bloom: 0 30px 70px -24px rgba(46, 59, 52, 0.3);
+
+  /* scoped overrides so shared primitives inherit the Haven accent */
+  --primary-brand: #566e61;
+  --bg-canvas: #f4f6f1;
+  --text-main: #2e3b34;
+
+  background-color: var(--t3-mist);
+  color: var(--t3-moss);
+  font-kerning: normal;
+}
+
+.t3-haven ::selection {
+  background-color: rgba(109, 139, 125, 0.3);
+  color: var(--t3-moss);
+}
+
+/* visible, calm keyboard focus */
+.t3-haven :focus-visible {
+  outline: 2px solid var(--t3-euc-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── two-voice typography ─────────────────────────────────────────────── */
+.t3-serif {
+  font-family: var(--font-t3-serif), "Newsreader", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* ── section marker: breathing-dot + lowercase serif word ─────────────── */
+.t3-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.t3-marker::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: var(--t3-euc);
+  flex-shrink: 0;
+}
+
+/* ── buttons ──────────────────────────────────────────────────────────── */
+.t3-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 9999px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition:
+    background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t3-btn:hover {
+  transform: scale(1.015);
+}
+.t3-btn-primary {
+  background-color: var(--t3-euc-deep);
+  color: var(--t3-mist);
+  box-shadow: var(--t3-shadow-soft);
+}
+.t3-btn-primary:hover {
+  background-color: #4a6154;
+  box-shadow: var(--t3-shadow-bloom);
+}
+.t3-btn-quiet {
+  background-color: transparent;
+  color: var(--t3-moss);
+  border: 1px solid var(--t3-line);
+}
+.t3-btn-quiet:hover {
+  border-color: var(--t3-euc);
+  background-color: rgba(109, 139, 125, 0.08);
+}
+
+/* ── organic image frames ─────────────────────────────────────────────── */
+.t3-blob {
+  border-radius: 58% 42% 55% 45% / 52% 48% 42% 58%;
+}
+.t3-blob-b {
+  border-radius: 44% 56% 48% 52% / 58% 44% 56% 42%;
+}
+
+/* ── ambient background drift (replaces the old Three.js canvas) ──────── */
+@keyframes t3-drift-a {
+  0% {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(5%, 4%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+  }
+}
+@keyframes t3-drift-b {
+  0% {
+    transform: translate3d(3%, 2%, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-4%, -4%, 0) scale(0.97);
+  }
+  100% {
+    transform: translate3d(3%, 2%, 0) scale(1.05);
+  }
+}
+.t3-drift-a {
+  animation: t3-drift-a 90s ease-in-out infinite;
+}
+.t3-drift-b {
+  animation: t3-drift-b 110s ease-in-out infinite;
+}
+
+/* ── slow drifting review carousel ────────────────────────────────────── */
+@keyframes t3-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.t3-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
+}
+.t3-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: t3-marquee 85s linear infinite;
+}
+.t3-marquee:hover .t3-marquee-track,
+.t3-marquee:focus-within .t3-marquee-track {
+  animation-play-state: paused;
+}
+
+/* ── gentle floating drift for layered hero imagery ───────────────────── */
+@keyframes t3-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+.t3-float {
+  animation: t3-float 14s ease-in-out infinite;
+}
+
+/* ── reduced motion: everything settles, nothing loops ────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .t3-drift-a,
+  .t3-drift-b,
+  .t3-float {
+    animation: none;
+  }
+  .t3-marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+    overflow-x: auto;
+  }
+  .t3-marquee-track {
+    animation: none;
+  }
+}

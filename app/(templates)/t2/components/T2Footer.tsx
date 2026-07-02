@@ -1,85 +1,80 @@
-import Link from "next/link";
-import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+"use client";
 
-const footerLinks = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Technology" },
-  { href: "#", label: "Services" },
-  { href: "#", label: "About" },
-  { href: "#", label: "Contact" },
-];
+import { practice, location, telHref, bookingHref } from "./t2-lib";
 
 export default function T2Footer() {
-  const location = clientMasterData.locations[0];
-  const { trustSignals } = clientMasterData;
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="py-16 px-8 bg-zinc-900 border-t border-slate-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Brand Column */}
-          <div className="md:col-span-2">
-            <Image
-              src="/images/logo-dental.png"
-              alt={location.practiceNameGBP}
-              width={180}
-              height={40}
-              className="h-14 w-auto invert mb-6"
-            />
-            <address className="not-italic text-white/50 leading-relaxed text-sm">
-              <p>{location.addressGBP}</p>
-              <p>{location.cityServed}, {location.stateServed}</p>
-              <p className="mt-3">
-                <a href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`} className="text-brand-primary hover:text-brand-primary/80 transition-colors font-medium">
-                  {location.phoneGBP}
-                </a>
-              </p>
+    <footer className="border-t border-[var(--t2p-line)] bg-[var(--t2p-bg)]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+          {/* Identity */}
+          <div className="md:col-span-5">
+            <p className="font-innovator text-lg font-medium tracking-tight text-[var(--t2p-text)]">
+              {practice.globalPracticeName}
+            </p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[var(--t2p-text-70)]">
+              Digital dentistry in {location.cityServed} — 3D imaging, same-day
+              ceramic crowns, and guide-planned implants under one roof.
+            </p>
+          </div>
+
+          {/* Contact */}
+          <div className="md:col-span-4">
+            <p className="t2p-label mb-4">Contact</p>
+            <address className="not-italic text-sm leading-relaxed text-[var(--t2p-text-70)]">
+              {location.addressGBP}
+              <br />
+              {location.cityServed}, {location.stateServed}
             </address>
-            <div className="flex gap-4 mt-6">
-              {footerLinks.map((link) => (
-                <a key={link.label} href={link.href} className="text-white/40 hover:text-brand-primary text-sm transition-colors">
-                  {link.label}
+            <a
+              href={telHref}
+              className="t2p-mono mt-3 inline-block text-sm text-[var(--t2p-text)] hover:text-[var(--t2p-ice)] transition-colors"
+            >
+              {location.phoneGBP}
+            </a>
+          </div>
+
+          {/* Index */}
+          <div className="md:col-span-3">
+            <p className="t2p-label mb-4">Index</p>
+            <nav className="flex flex-col gap-2.5" aria-label="Footer">
+              {[
+                ["01", "Technology", "#technology"],
+                ["02", "Services", "#services"],
+                ["03", "Results", "#results"],
+                ["04", "Doctors", "#doctors"],
+                ["07", "Visit", "#visit"],
+              ].map(([idx, label, href]) => (
+                <a
+                  key={href}
+                  href={href}
+                  className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors"
+                >
+                  <span className="mr-2 text-[var(--t2p-ice)]/60 group-hover:text-[var(--t2p-ice)] transition-colors">
+                    {idx}
+                  </span>
+                  {label}
                 </a>
               ))}
-            </div>
-          </div>
-
-          {/* Hours Column */}
-          <div>
-            <h4 className="font-semibold text-white mb-4 text-sm tracking-wide">Office Hours</h4>
-            <ul className="text-white/50 text-sm space-y-2">
-              {location.hoursOfOperation.map((h, i) => (
-                <li key={i} className="flex justify-between">
-                  <span>{h.dayRange}</span>
-                  <span className="text-white/70">{h.structuralHours}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Insurance & CTA Column */}
-          <div>
-            <h4 className="font-semibold text-white mb-4 text-sm tracking-wide">Insurance</h4>
-            <p className="text-white/50 text-sm leading-relaxed">{trustSignals.insuranceAcceptedText}</p>
-            <a
-              href={clientMasterData.onlineBookingUrl}
-              className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl bg-brand-primary text-white font-semibold text-sm hover:bg-brand-primary/90 transition-all"
-            >
-              Book Online
-            </a>
+              <a
+                href={bookingHref}
+                className="t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-ice)]"
+              >
+                <span className="mr-2">08</span>Book a visit
+              </a>
+            </nav>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/30 text-sm">
-            © {new Date().getFullYear()} {location.practiceNameGBP}. All rights reserved.
+        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-[var(--t2p-line)] pt-6 pb-16 lg:pb-0">
+          <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+            © {year} {practice.globalPracticeName}
           </p>
-          <div className="flex gap-6 text-white/30 text-sm">
-            <a href="#" className="hover:text-white/60 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white/60 transition-colors">Accessibility</a>
-          </div>
+          <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+            {location.cityServed} / {location.stateServed} — digital dentistry
+          </p>
         </div>
       </div>
     </footer>

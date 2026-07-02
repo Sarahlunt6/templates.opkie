@@ -1,8 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { clientMasterData } from "@/data/master";
+import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { bookingHref, telHref, location, EASE } from "./t2-lib";
+
+/* ────────────────────────────────────────────────────────────────
+   Financing calculator — a payment instrument panel. Sliders with
+   diamond thumbs, mono readouts, live payment telemetry.
+   ──────────────────────────────────────────────────────────────── */
 
 interface FinancingOption {
   id: string;
@@ -16,440 +21,327 @@ interface FinancingOption {
 const FINANCING_OPTIONS: FinancingOption[] = [
   {
     id: "0-apr",
-    name: "0% APR Financing",
+    name: "0% APR",
     apr: 0,
     minMonths: 6,
     maxMonths: 24,
-    description: "No interest if paid in full within promotional period",
+    description: "No interest when paid in full within the promotional period.",
   },
   {
     id: "low-apr",
-    name: "Low APR Extended",
+    name: "Extended term",
     apr: 9.99,
     minMonths: 24,
     maxMonths: 60,
-    description: "Lower monthly payments with competitive interest rate",
+    description: "Lower monthly payments over a longer horizon.",
   },
 ];
 
 const TREATMENT_PRESETS = [
   { label: "Invisalign", minPrice: 3500, maxPrice: 7000, avgPrice: 5000 },
-  { label: "Single Implant", minPrice: 3000, maxPrice: 5000, avgPrice: 4000 },
-  { label: "Full Mouth Implants", minPrice: 20000, maxPrice: 40000, avgPrice: 28000 },
+  { label: "Single implant", minPrice: 3000, maxPrice: 5000, avgPrice: 4000 },
+  { label: "Full-mouth implants", minPrice: 20000, maxPrice: 40000, avgPrice: 28000 },
   { label: "Veneers (6)", minPrice: 6000, maxPrice: 12000, avgPrice: 9000 },
-  { label: "Custom Amount", minPrice: 500, maxPrice: 50000, avgPrice: 5000 },
+  { label: "Custom", minPrice: 500, maxPrice: 50000, avgPrice: 5000 },
 ];
 
+const fmt = (v: number) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(v);
+
+function Slider({
+  label,
+  value,
+  display,
+  min,
+  max,
+  step,
+  onChange,
+  minLabel,
+  maxLabel,
+}: {
+  label: string;
+  value: number;
+  display: string;
+  min: number;
+  max: number;
+  step: number;
+  onChange: (v: number) => void;
+  minLabel: string;
+  maxLabel: string;
+}) {
+  const fill = max > min ? ((value - min) / (max - min)) * 100 : 0;
+  return (
+    <div>
+      <div className="flex items-baseline justify-between mb-4">
+        <label className="t2p-mono text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
+          {label}
+        </label>
+        <span className="t2p-mono text-lg text-[var(--t2p-text)]">{display}</span>
+      </div>
+      <input
+        type="range"
+        className="t2p-range"
+        style={{ ["--fill" as string]: `${fill}%` }}
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        aria-label={label}
+      />
+      <div className="t2p-mono mt-2.5 flex justify-between text-[0.5625rem] uppercase tracking-[0.14em] text-[var(--t2p-text-50)]">
+        <span>{minLabel}</span>
+        <span>{maxLabel}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function T2FinancingCalculator() {
-  const [selectedTreatment, setSelectedTreatment] = useState(TREATMENT_PRESETS[0]);
-  const [treatmentCost, setTreatmentCost] = useState(5000);
-  const [downPayment, setDownPayment] = useState(0);
-  const [selectedPlan, setSelectedPlan] = useState<FinancingOption>(FINANCING_OPTIONS[0]);
-  const [termMonths, setTermMonths] = useState(12);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [treatment, setTreatment] = useState(TREATMENT_PRESETS[0]);
+  const [cost, setCost] = useState(TREATMENT_PRESETS[0].avgPrice);
+  const [down, setDown] = useState(0);
+  const [plan, setPlan] = useState(FINANCING_OPTIONS[0]);
+  const [months, setMonths] = useState(12);
+  const [expanded, setExpanded] = useState(false);
+  const reduced = useReducedMotion();
 
-  const location = clientMasterData.locations[0];
-
-  // Calculate financing details
-  const financingDetails = useMemo(() => {
-    const amountFinanced = treatmentCost - downPayment;
-    const monthlyRate = selectedPlan.apr / 100 / 12;
-
-    let monthlyPayment: number;
-    let totalInterest: number;
-    let totalCost: number;
-
-    if (selectedPlan.apr === 0) {
-      monthlyPayment = amountFinanced / termMonths;
-      totalInterest = 0;
-      totalCost = treatmentCost;
-    } else {
-      // Standard loan calculation with interest
-      if (monthlyRate === 0) {
-        monthlyPayment = amountFinanced / termMonths;
-      } else {
-        monthlyPayment =
-          (amountFinanced * monthlyRate * Math.pow(1 + monthlyRate, termMonths)) /
-          (Math.pow(1 + monthlyRate, termMonths) - 1);
-      }
-      totalCost = monthlyPayment * termMonths + downPayment;
-      totalInterest = totalCost - treatmentCost;
-    }
-
+  const result = useMemo(() => {
+    const financed = Math.max(0, cost - down);
+    const r = plan.apr / 100 / 12;
+    const payment =
+      r === 0
+        ? financed / months
+        : (financed * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+    const total = payment * months + down;
     return {
-      amountFinanced,
-      monthlyPayment: Math.round(monthlyPayment * 100) / 100,
-      totalInterest: Math.round(totalInterest * 100) / 100,
-      totalCost: Math.round(totalCost * 100) / 100,
+      financed,
+      payment,
+      interest: Math.max(0, total - cost),
+      total,
     };
-  }, [treatmentCost, downPayment, selectedPlan, termMonths]);
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(value);
-  };
+  }, [cost, down, plan, months]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.08] rounded-2xl overflow-hidden"
-    >
+    <div className="t2p-tick relative border border-[var(--t2p-line-strong)] bg-[var(--t2p-bg)]">
       {/* Header */}
-      <div className="p-6 md:p-8 border-b border-white/[0.06]">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <span className="text-t2-micro text-brand-primary uppercase tracking-widest block mb-1">
-              Payment Calculator
-            </span>
-            <h3 className="text-t2-headline font-t2-display text-white">
-              Flexible Financing Options
-            </h3>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center">
-            <svg
-              className="w-6 h-6 text-brand-primary"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-              />
-            </svg>
-          </div>
+      <div className="border-b border-[var(--t2p-line)] px-6 md:px-9 py-6 flex items-center justify-between gap-4">
+        <div>
+          <p className="t2p-label mb-2">Payment instrument</p>
+          <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
+            Model your monthly payment
+          </h3>
         </div>
-        <p className="text-sm text-white/50">
-          Estimate your monthly payments with our flexible payment plans.
-          Subject to credit approval.
-        </p>
+        <span className="t2p-mono hidden sm:block text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
+          EST-01
+        </span>
       </div>
 
-      {/* Calculator Body */}
-      <div className="p-6 md:p-8 space-y-8">
-        {/* Treatment Selection */}
-        <div>
-          <label className="block text-xs text-white/40 uppercase tracking-widest mb-3">
-            Select Treatment
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {TREATMENT_PRESETS.map((treatment) => (
-              <button
-                key={treatment.label}
-                onClick={() => {
-                  setSelectedTreatment(treatment);
-                  setTreatmentCost(treatment.avgPrice);
-                }}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  selectedTreatment.label === treatment.label
-                    ? "bg-brand-primary/20 border border-brand-primary/50 text-white"
-                    : "bg-white/5 border border-white/10 text-white/60 hover:border-white/20"
-                }`}
-              >
-                {treatment.label}
-              </button>
-            ))}
+      <div className="grid grid-cols-1 lg:grid-cols-5">
+        {/* Inputs */}
+        <div className="lg:col-span-3 px-6 md:px-9 py-8 space-y-9 lg:border-r border-[var(--t2p-line)]">
+          {/* Treatment presets */}
+          <div>
+            <p className="t2p-mono mb-3.5 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
+              Treatment
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {TREATMENT_PRESETS.map((t) => (
+                <button
+                  key={t.label}
+                  onClick={() => {
+                    setTreatment(t);
+                    setCost(t.avgPrice);
+                    setDown(0);
+                  }}
+                  className={`t2p-mono px-3.5 py-2 text-[0.6875rem] uppercase tracking-[0.12em] border transition-colors duration-300 ${
+                    treatment.label === t.label
+                      ? "border-[var(--t2p-ice)] text-[var(--t2p-ice)] bg-[rgba(103,232,249,0.06)]"
+                      : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-ice-dim)]"
+                  }`}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Treatment Cost Slider */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <label className="text-xs text-white/40 uppercase tracking-widest">
-              Treatment Cost
-            </label>
-            <span className="text-2xl font-semibold text-white">
-              {formatCurrency(treatmentCost)}
-            </span>
-          </div>
-          <input
-            type="range"
-            min={selectedTreatment.minPrice}
-            max={selectedTreatment.maxPrice}
+          <Slider
+            label="Treatment cost"
+            value={cost}
+            display={fmt(cost)}
+            min={treatment.minPrice}
+            max={treatment.maxPrice}
             step={100}
-            value={treatmentCost}
-            onChange={(e) => setTreatmentCost(Number(e.target.value))}
-            className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand-primary [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white/30 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg"
+            onChange={(v) => {
+              setCost(v);
+              setDown((d) => Math.min(d, Math.floor(v * 0.5)));
+            }}
+            minLabel={fmt(treatment.minPrice)}
+            maxLabel={fmt(treatment.maxPrice)}
           />
-          <div className="flex justify-between mt-2 text-xs text-white/30">
-            <span>{formatCurrency(selectedTreatment.minPrice)}</span>
-            <span>{formatCurrency(selectedTreatment.maxPrice)}</span>
-          </div>
-        </div>
 
-        {/* Down Payment Slider */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <label className="text-xs text-white/40 uppercase tracking-widest">
-              Down Payment
-            </label>
-            <span className="text-lg font-medium text-white/70">
-              {formatCurrency(downPayment)}
-            </span>
-          </div>
-          <input
-            type="range"
+          <Slider
+            label="Down payment"
+            value={down}
+            display={fmt(down)}
             min={0}
-            max={treatmentCost * 0.5}
+            max={Math.floor(cost * 0.5)}
             step={100}
-            value={downPayment}
-            onChange={(e) => setDownPayment(Number(e.target.value))}
-            className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white/30 [&::-webkit-slider-thumb]:cursor-pointer"
+            onChange={setDown}
+            minLabel="$0"
+            maxLabel={fmt(Math.floor(cost * 0.5))}
           />
-          <div className="flex justify-between mt-2 text-xs text-white/30">
-            <span>$0</span>
-            <span>{formatCurrency(treatmentCost * 0.5)}</span>
-          </div>
-        </div>
 
-        {/* Financing Plan Selection */}
-        <div>
-          <label className="block text-xs text-white/40 uppercase tracking-widest mb-3">
-            Financing Plan
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {FINANCING_OPTIONS.map((option) => (
-              <button
-                key={option.id}
-                onClick={() => {
-                  setSelectedPlan(option);
-                  setTermMonths(
-                    Math.min(
-                      Math.max(termMonths, option.minMonths),
-                      option.maxMonths
-                    )
-                  );
-                }}
-                className={`p-4 rounded-xl text-left transition-all ${
-                  selectedPlan.id === option.id
-                    ? "bg-brand-primary/10 border-2 border-brand-primary/50"
-                    : "bg-white/[0.03] border border-white/[0.08] hover:border-white/20"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-white">
-                    {option.name}
+          {/* Plan */}
+          <div>
+            <p className="t2p-mono mb-3.5 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
+              Plan
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {FINANCING_OPTIONS.map((o) => (
+                <button
+                  key={o.id}
+                  onClick={() => {
+                    setPlan(o);
+                    setMonths(Math.min(Math.max(months, o.minMonths), o.maxMonths));
+                  }}
+                  className={`p-4 text-left border transition-colors duration-300 ${
+                    plan.id === o.id
+                      ? "border-[var(--t2p-ice)] bg-[rgba(103,232,249,0.05)]"
+                      : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-ice-dim)]"
+                  }`}
+                >
+                  <span className="flex items-baseline justify-between gap-2">
+                    <span className="text-sm font-medium text-[var(--t2p-text)]">
+                      {o.name}
+                    </span>
+                    <span className="t2p-mono text-[0.6875rem] text-[var(--t2p-ice)]">
+                      {o.apr}% APR
+                    </span>
                   </span>
-                  <span
-                    className={`text-lg font-bold ${
-                      option.apr === 0 ? "text-emerald-400" : "text-brand-primary"
-                    }`}
-                  >
-                    {option.apr}% APR
+                  <span className="mt-1.5 block text-xs leading-relaxed text-[var(--t2p-text-50)]">
+                    {o.description} {o.minMonths}–{o.maxMonths} months.
                   </span>
-                </div>
-                <p className="text-xs text-white/40">{option.description}</p>
-                <p className="text-xs text-white/30 mt-1">
-                  {option.minMonths}-{option.maxMonths} months
-                </p>
-              </button>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Term Months Slider */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <label className="text-xs text-white/40 uppercase tracking-widest">
-              Payment Term
-            </label>
-            <span className="text-lg font-medium text-white/70">
-              {termMonths} months
-            </span>
-          </div>
-          <input
-            type="range"
-            min={selectedPlan.minMonths}
-            max={selectedPlan.maxMonths}
+          <Slider
+            label="Term"
+            value={months}
+            display={`${months} mo`}
+            min={plan.minMonths}
+            max={plan.maxMonths}
             step={6}
-            value={termMonths}
-            onChange={(e) => setTermMonths(Number(e.target.value))}
-            className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand-primary [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white/30 [&::-webkit-slider-thumb]:cursor-pointer"
+            onChange={setMonths}
+            minLabel={`${plan.minMonths} mo`}
+            maxLabel={`${plan.maxMonths} mo`}
           />
-          <div className="flex justify-between mt-2 text-xs text-white/30">
-            <span>{selectedPlan.minMonths} mo</span>
-            <span>{selectedPlan.maxMonths} mo</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Results Panel */}
-      <div className="bg-brand-primary/5 border-t border-white/[0.06] p-6 md:p-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
-          {/* Monthly Payment - Highlighted */}
-          <div className="col-span-2 md:col-span-1">
-            <span className="text-xs text-white/40 uppercase tracking-widest block mb-1">
-              Monthly Payment
-            </span>
-            <motion.span
-              key={financingDetails.monthlyPayment}
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              className="text-3xl md:text-4xl font-bold text-brand-primary block"
-            >
-              {formatCurrency(financingDetails.monthlyPayment)}
-            </motion.span>
-          </div>
-
-          {/* Amount Financed */}
-          <div>
-            <span className="text-xs text-white/40 uppercase tracking-widest block mb-1">
-              Amount Financed
-            </span>
-            <span className="text-xl font-semibold text-white">
-              {formatCurrency(financingDetails.amountFinanced)}
-            </span>
-          </div>
-
-          {/* Total Interest */}
-          <div>
-            <span className="text-xs text-white/40 uppercase tracking-widest block mb-1">
-              Total Interest
-            </span>
-            <span
-              className={`text-xl font-semibold ${
-                financingDetails.totalInterest === 0
-                  ? "text-emerald-400"
-                  : "text-white/70"
-              }`}
-            >
-              {financingDetails.totalInterest === 0
-                ? "$0"
-                : formatCurrency(financingDetails.totalInterest)}
-            </span>
-          </div>
-
-          {/* Total Cost */}
-          <div>
-            <span className="text-xs text-white/40 uppercase tracking-widest block mb-1">
-              Total Cost
-            </span>
-            <span className="text-xl font-semibold text-white">
-              {formatCurrency(financingDetails.totalCost)}
-            </span>
-          </div>
         </div>
 
-        {/* Expandable Details */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="w-full flex items-center justify-between py-3 text-sm text-white/50 hover:text-white/70 transition-colors"
-        >
-          <span>View payment schedule</span>
-          <motion.svg
-            animate={{ rotate: isExpanded ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </motion.svg>
-        </button>
-
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
+        {/* Readout */}
+        <div className="lg:col-span-2 flex flex-col justify-between px-6 md:px-9 py-8 bg-[var(--t2p-surface)] border-t lg:border-t-0 border-[var(--t2p-line)]">
+          <div>
+            <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
+              Estimated monthly
+            </p>
+            <motion.p
+              key={Math.round(result.payment)}
+              initial={reduced ? false : { opacity: 0.4 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.35, ease: EASE }}
+              className="t2p-mono mt-2 text-5xl md:text-6xl text-[var(--t2p-ice)] tracking-tight"
             >
-              <div className="pt-4 border-t border-white/[0.06] space-y-3">
-                {[...Array(Math.min(6, termMonths))].map((_, i) => {
-                  const remaining =
-                    financingDetails.amountFinanced -
-                    financingDetails.monthlyPayment * i;
-                  return (
+              {fmt(result.payment)}
+            </motion.p>
+            <p className="t2p-mono mt-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+              per month × {months}
+            </p>
+
+            <div className="mt-8 border-t border-[var(--t2p-line)]">
+              {[
+                ["Amount financed", fmt(result.financed)],
+                [
+                  "Total interest",
+                  result.interest === 0 ? "$0" : fmt(result.interest),
+                ],
+                ["Total cost", fmt(result.total)],
+              ].map(([k, v]) => (
+                <div
+                  key={k}
+                  className="flex items-baseline justify-between py-3 border-b border-[var(--t2p-line)]"
+                >
+                  <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
+                    {k}
+                  </span>
+                  <span className="t2p-mono text-sm text-[var(--t2p-text)]">{v}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Schedule preview */}
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="t2p-mono mt-4 flex w-full items-center justify-between py-2 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-ice)] transition-colors"
+              aria-expanded={expanded}
+            >
+              <span>Payment schedule</span>
+              <span aria-hidden="true">{expanded ? "−" : "+"}</span>
+            </button>
+            <AnimatePresence initial={false}>
+              {expanded && (
+                <motion.div
+                  initial={reduced ? false : { height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: EASE }}
+                  className="overflow-hidden"
+                >
+                  {[...Array(Math.min(6, months))].map((_, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between text-sm"
+                      className="t2p-mono flex justify-between py-1.5 text-[0.6875rem] text-[var(--t2p-text-70)]"
                     >
-                      <span className="text-white/40">Month {i + 1}</span>
-                      <div className="flex items-center gap-8">
-                        <span className="text-white/60">
-                          Payment: {formatCurrency(financingDetails.monthlyPayment)}
-                        </span>
-                        <span className="text-white/40">
-                          Balance: {formatCurrency(Math.max(0, remaining))}
-                        </span>
-                      </div>
+                      <span>M{String(i + 1).padStart(2, "0")}</span>
+                      <span>{fmt(result.payment)}</span>
+                      <span className="text-[var(--t2p-text-50)]">
+                        bal {fmt(Math.max(0, result.financed - result.payment * (i + 1)))}
+                      </span>
                     </div>
-                  );
-                })}
-                {termMonths > 6 && (
-                  <div className="text-center text-xs text-white/30 pt-2">
-                    ... and {termMonths - 6} more payments
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  ))}
+                  {months > 6 && (
+                    <p className="t2p-mono py-1.5 text-[0.625rem] text-[var(--t2p-text-50)]">
+                      + {months - 6} further payments
+                    </p>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
-        {/* CTA */}
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
-          <a
-            href={
-              clientMasterData.onlineBookingUrl !== "none"
-                ? clientMasterData.onlineBookingUrl
-                : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`
-            }
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-brand-primary text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl hover:bg-brand-primary/90 transition-all"
-          >
-            <span>Apply Now</span>
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </a>
-          <a
-            href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-white/5 border border-white/10 text-white font-semibold text-sm uppercase tracking-[0.15em] rounded-xl hover:bg-white/10 transition-all"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-            </svg>
-            <span>Call to Discuss</span>
-          </a>
+          <div className="mt-8">
+            <div className="flex flex-col gap-2.5">
+              <a href={bookingHref} className="t2p-btn t2p-btn-primary w-full">
+                Start an application
+              </a>
+              <a href={telHref} className="t2p-btn t2p-btn-ghost w-full">
+                Call {location.phoneGBP}
+              </a>
+            </div>
+            <p className="mt-4 text-[0.6875rem] leading-relaxed text-[var(--t2p-text-50)]">
+              Estimates for illustration only. Actual rates and terms depend on
+              credit approval — our coordinators will confirm your numbers
+              before anything begins.
+            </p>
+          </div>
         </div>
-
-        {/* Disclaimer */}
-        <p className="text-[10px] text-white/30 mt-4 text-center">
-          *Estimated payment amounts are for illustrative purposes only. Actual
-          rates and terms may vary based on credit approval. Contact our office
-          for personalized financing options.
-        </p>
       </div>
-    </motion.div>
+    </div>
   );
 }

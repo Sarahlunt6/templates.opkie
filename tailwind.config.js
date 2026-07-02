@@ -41,6 +41,10 @@ module.exports = {
         "t2-body": ["var(--font-t2-body)", "Inter", "ui-sans-serif", "sans-serif"],
         // Mono: Technical data and UI labels
         "t2-mono": ["var(--font-t2-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
+        // T1 Editorial Display: Characterful optical serif (Fraunces)
+        "t1-display": ["var(--font-t1-display)", "Fraunces", "Georgia", "serif"],
+        // T3 Serif Accent: Soft italic serif for quotes (Newsreader)
+        "t3-serif": ["var(--font-t3-serif)", "Newsreader", "Georgia", "serif"],
       },
       fontSize: {
         // Fluid typography using clamp()

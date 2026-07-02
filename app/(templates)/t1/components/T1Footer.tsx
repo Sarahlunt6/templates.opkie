@@ -1,96 +1,103 @@
-import Link from "next/link";
-import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+interface HoursEntry {
+  dayRange: string;
+  structuralHours: string;
+}
 
-const footerLinks = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Services" },
-  { href: "#", label: "About Us" },
-  { href: "#", label: "Reviews" },
-  { href: "#", label: "Contact" },
-];
+interface T1FooterProps {
+  practiceName: string;
+  address: string;
+  city: string;
+  state: string;
+  phone: string;
+  bookingUrl: string;
+  hours: HoursEntry[];
+}
 
-export default function T1Footer() {
-  const location = clientMasterData.locations[0];
-  const { trustSignals } = clientMasterData;
+export default function T1Footer({
+  practiceName,
+  address,
+  city,
+  state,
+  phone,
+  bookingUrl,
+  hours,
+}: T1FooterProps) {
+  const tel = `tel:${phone.replace(/[^0-9+]/g, "")}`;
+  const hasBooking = bookingUrl !== "none";
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="py-16 px-8 lg:px-16 bg-slate-800 text-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Location NAP */}
-          <div>
-            <Image
-              src="/images/logo-dental.png"
-              alt={location.practiceNameGBP}
-              width={180}
-              height={40}
-              className="h-14 w-auto mb-4"
-            />
-            <address className="not-italic text-gray-300 leading-relaxed">
-              <p>{location.addressGBP}</p>
-              <p>{location.cityServed}, {location.stateServed}</p>
-              <p className="mt-2">
-                <a
-                  href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="hover:text-sky-400 transition-colors"
-                >
-                  {location.phoneGBP}
-                </a>
-              </p>
-            </address>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-gray-300 hover:text-sky-400 text-sm transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Hours */}
-          <div>
-            <h4 className="font-semibold mb-4">Office Hours</h4>
-            <ul className="text-gray-300 space-y-2">
-              {location.hoursOfOperation.map((hours, index) => (
-                <li key={index} className="flex justify-between text-sm">
-                  <span>{hours.dayRange}</span>
-                  <span>{hours.structuralHours}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Insurance */}
-          <div>
-            <h4 className="font-semibold mb-4">Insurance & Payment</h4>
-            <p className="text-gray-300 leading-relaxed text-sm">
-              {trustSignals.insuranceAcceptedText}
+    <footer className="bg-[#16130F] px-6 pb-28 pt-16 text-[#F7F5F0] md:px-10 lg:pb-16 xl:px-16">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid grid-cols-1 gap-12 border-t border-[#F7F5F0]/20 pt-12 md:grid-cols-12 md:gap-8">
+          {/* Masthead repeat */}
+          <div className="md:col-span-5">
+            <p className="font-t1-display text-3xl font-light tracking-tight md:text-4xl">
+              {practiceName}
             </p>
-            {trustSignals.membershipPlanSummary && (
-              <p className="text-gray-300 leading-relaxed mt-4 text-sm">
-                {trustSignals.membershipPlanSummary}
-              </p>
-            )}
+            <address className="mt-5 font-sans text-sm not-italic leading-relaxed text-[#F7F5F0]/60">
+              {address}
+              <br />
+              {city}, {state}
+            </address>
+            <a
+              href={tel}
+              className="mt-4 inline-block font-t1-display text-xl text-[#F7F5F0] underline decoration-[#9C7E46] decoration-1 underline-offset-4 transition-colors duration-500 hover:text-[#9C7E46]"
+            >
+              {phone}
+            </a>
+          </div>
+
+          {/* Hours, condensed */}
+          <div className="md:col-span-4">
+            <h3 className="t1-eyebrow">Hours</h3>
+            <ul className="mt-4 space-y-2">
+              {hours.map((entry) => (
+                <li
+                  key={entry.dayRange}
+                  className="flex items-baseline justify-between gap-6 font-sans text-sm text-[#F7F5F0]/60"
+                >
+                  <span>{entry.dayRange}</span>
+                  <span
+                    className={
+                      /closed/i.test(entry.structuralHours)
+                        ? "italic text-[#F7F5F0]/35"
+                        : "text-[#F7F5F0]/80"
+                    }
+                  >
+                    {entry.structuralHours}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Appointments */}
+          <div className="md:col-span-3">
+            <h3 className="t1-eyebrow">Appointments</h3>
+            <p className="mt-4 font-sans text-sm leading-relaxed text-[#F7F5F0]/60">
+              New patients are welcomed by reservation.
+            </p>
+            <a
+              href={hasBooking ? bookingUrl : tel}
+              {...(hasBooking
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="t1-btn t1-btn-ghost-light mt-6 !min-h-0 !px-5 !py-3 text-[10px]"
+            >
+              Reserve a consultation
+            </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} {location.practiceNameGBP}. All rights reserved.
+        {/* Colophon */}
+        <div className="mt-14 flex flex-col gap-2 border-t border-[#F7F5F0]/20 pt-6 sm:flex-row sm:items-baseline sm:justify-between">
+          <p className="font-sans text-xs text-[#F7F5F0]/45">
+            © {year} {practiceName}. All rights reserved.
           </p>
-          <div className="flex gap-6 text-gray-500 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Accessibility</a>
-          </div>
+          <p className="font-sans text-xs italic text-[#F7F5F0]/35">
+            Vol. I — The Smile Issue · Set in Fraunces &amp; Inter
+          </p>
         </div>
       </div>
     </footer>

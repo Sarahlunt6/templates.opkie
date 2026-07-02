@@ -1,0 +1,204 @@
+/* ------------------------------------------------------------------ */
+/*  T1 "Maison" — editorial luxury theme tokens & typographic details  */
+/*  Scoped to .t1-root so nothing leaks into sibling templates.        */
+/* ------------------------------------------------------------------ */
+
+.t1-root {
+  --t1-porcelain: #f7f5f0;
+  --t1-porcelain-deep: #efeae0;
+  --t1-ink: #16130f;
+  --t1-brass: #9c7e46;
+  --t1-oxblood: #5e2a2b;
+  --t1-stone: #6b675e;
+  --t1-hairline: rgba(22, 19, 15, 0.16);
+  --t1-hairline-soft: rgba(22, 19, 15, 0.09);
+  --t1-hairline-light: rgba(247, 245, 240, 0.2);
+
+  background-color: var(--t1-porcelain);
+  color: var(--t1-ink);
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.t1-root ::selection {
+  background-color: var(--t1-brass);
+  color: var(--t1-porcelain);
+}
+
+/* Visible, elegant keyboard focus */
+.t1-root a:focus-visible,
+.t1-root button:focus-visible,
+.t1-root input:focus-visible,
+.t1-root [tabindex]:focus-visible {
+  outline: 2px solid var(--t1-brass);
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+
+/* ---- Recurring editorial atoms ---- */
+
+/* Small-caps eyebrow label */
+.t1-eyebrow {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--t1-brass);
+}
+
+/* Hairline rules */
+.t1-rule {
+  border: 0;
+  border-top: 1px solid var(--t1-hairline);
+}
+.t1-rule-brass {
+  border: 0;
+  border-top: 1px solid var(--t1-brass);
+}
+
+/* Long-form drop cap (applied to the first paragraph of a chapter) */
+.t1-dropcap::first-letter {
+  font-family: var(--font-t1-display), Georgia, serif;
+  font-weight: 300;
+  font-size: 4.6em;
+  line-height: 0.78;
+  float: left;
+  padding-right: 0.14em;
+  padding-top: 0.06em;
+  color: var(--t1-brass);
+}
+
+/* Outlined chapter numerals */
+.t1-numeral-outline {
+  font-family: var(--font-t1-display), Georgia, serif;
+  font-weight: 300;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--t1-brass);
+  user-select: none;
+}
+
+/* SplitType line masking for headline reveals */
+.t1-root .t1-mask-line {
+  overflow: hidden;
+  display: block;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Editorial text link — brass underline, oxblood on hover */
+.t1-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--t1-brass);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    text-decoration-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t1-link:hover {
+  color: var(--t1-oxblood);
+  text-decoration-color: var(--t1-oxblood);
+}
+
+/* Solid & outline CTAs */
+.t1-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 52px;
+  padding: 0.95rem 2.2rem;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t1-btn-ink {
+  background-color: var(--t1-ink);
+  color: var(--t1-porcelain);
+  border: 1px solid var(--t1-ink);
+}
+.t1-btn-ink:hover {
+  background-color: var(--t1-oxblood);
+  border-color: var(--t1-oxblood);
+}
+.t1-btn-ghost {
+  background-color: transparent;
+  color: var(--t1-ink);
+  border: 1px solid var(--t1-hairline);
+}
+.t1-btn-ghost:hover {
+  border-color: var(--t1-brass);
+  color: var(--t1-oxblood);
+}
+.t1-btn-porcelain {
+  background-color: var(--t1-porcelain);
+  color: var(--t1-ink);
+  border: 1px solid var(--t1-porcelain);
+}
+.t1-btn-porcelain:hover {
+  background-color: var(--t1-brass);
+  border-color: var(--t1-brass);
+  color: var(--t1-porcelain);
+}
+.t1-btn-ghost-light {
+  background-color: transparent;
+  color: var(--t1-porcelain);
+  border: 1px solid var(--t1-hairline-light);
+}
+.t1-btn-ghost-light:hover {
+  border-color: var(--t1-brass);
+  color: var(--t1-brass);
+}
+
+/* The Reveal — range slider that drives the page-turn wipe */
+.t1-wipe-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: ew-resize;
+}
+.t1-wipe-range::-webkit-slider-runnable-track {
+  height: 1px;
+  background: var(--t1-hairline);
+}
+.t1-wipe-range::-moz-range-track {
+  height: 1px;
+  background: var(--t1-hairline);
+}
+.t1-wipe-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -6.5px;
+  border-radius: 50%;
+  background: var(--t1-porcelain);
+  border: 1px solid var(--t1-brass);
+}
+.t1-wipe-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--t1-porcelain);
+  border: 1px solid var(--t1-brass);
+}
+
+/* Reduced motion: strip every nonessential animation & transition */
+@media (prefers-reduced-motion: reduce) {
+  .t1-root *,
+  .t1-root *::before,
+  .t1-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
