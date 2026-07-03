@@ -8,16 +8,17 @@ import T1Hero from "./components/T1Hero";
 import T1ChapterRail from "./components/T1ChapterRail";
 import T1ChapterHeading from "./components/T1ChapterHeading";
 import T1DoctorFeature from "./components/T1DoctorFeature";
-import T1ServicesIndex, {
+import T1ServicesGallery, {
   type ServiceEntry,
-} from "./components/T1ServicesIndex";
+} from "./components/T1ServicesGallery";
 import T1Craft from "./components/T1Craft";
 import T1PageTurnReveal from "./components/T1PageTurnReveal";
-import T1PullQuotes from "./components/T1PullQuotes";
+import T1PatientLetters from "./components/T1PatientLetters";
 import T1Practicalities from "./components/T1Practicalities";
 import T1Footer from "./components/T1Footer";
 import T1UtilityBar from "./components/T1UtilityBar";
-import { Fade, Magnetic } from "./components/T1Motion";
+import T1CursorProvider from "./components/T1Cursor";
+import { Fade, Magnetic, Drift } from "./components/T1Motion";
 
 const location = clientMasterData.locations[0];
 
@@ -70,7 +71,7 @@ export default function Template1Page() {
     biography: d.biography,
   }));
 
-  const quotes = sampleReviews.map((r) => ({
+  const letters = sampleReviews.map((r) => ({
     id: r.id,
     reviewerName: r.reviewerName,
     reviewText: r.reviewText,
@@ -79,12 +80,16 @@ export default function Template1Page() {
 
   return (
     <div className="t1-root font-sans antialiased overflow-x-clip">
+      <T1CursorProvider>
       <a
         href="#consultation"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[#16130F] focus:px-4 focus:py-2 focus:text-[#F7F5F0]"
       >
         Skip to content
       </a>
+
+      {/* Near-invisible paper grain across the whole issue */}
+      <div aria-hidden="true" className="t1-grain" />
 
       <T1Masthead
         practiceName={globalPracticeName}
@@ -130,16 +135,21 @@ export default function Template1Page() {
         <section
           id="design"
           aria-label="Chapter two: the design"
-          className="scroll-mt-24 px-6 pt-28 md:px-10 md:pt-36 xl:px-16"
+          className="scroll-mt-24 pt-28 md:pt-36"
         >
-          <div className="mx-auto max-w-[1400px]">
-            <T1ChapterHeading
-              numeral="II"
-              kicker="Chapter two"
-              title="The design"
-              deck="Every smile here is drawn before it is done — planned on screen, previewed in the mirror, and agreed upon before an instrument is lifted."
-            />
-            <T1ServicesIndex
+          <div className="px-6 md:px-10 xl:px-16">
+            <div className="mx-auto max-w-[1400px]">
+              <T1ChapterHeading
+                numeral="II"
+                kicker="Chapter two"
+                title="The design"
+                deck="Every smile here is drawn before it is done — planned on screen, previewed in the mirror, and agreed upon before an instrument is lifted."
+              />
+            </div>
+          </div>
+          {/* Full-bleed horizontal portfolio — pinned and scrubbed by scroll */}
+          <div className="mt-14 lg:mt-4">
+            <T1ServicesGallery
               services={SERVICES}
               alsoPracticed={location.secondaryCategoriesGBP}
             />
@@ -198,16 +208,16 @@ export default function Template1Page() {
             </div>
           </div>
 
-          {/* Patient voices */}
+          {/* Letters from patients */}
           <div className="mx-auto max-w-[1400px] px-6 pt-24 md:px-10 md:pt-32 xl:px-16">
             <div className="mx-auto max-w-3xl">
               <Fade>
                 <p className="t1-eyebrow text-center">
-                  In their words — verified patient stories
+                  Letters from patients — verified stories
                 </p>
               </Fade>
               <div className="mt-14">
-                <T1PullQuotes quotes={quotes} />
+                <T1PatientLetters letters={letters} />
               </div>
             </div>
           </div>
@@ -250,12 +260,14 @@ export default function Template1Page() {
         >
           <div className="mx-auto max-w-[1400px]">
             <div className="flex items-end gap-6 md:gap-10">
-              <span
-                aria-hidden="true"
-                className="t1-numeral-outline text-[4.5rem] leading-[0.8] md:text-[7rem]"
-              >
-                V
-              </span>
+              <Drift range={20}>
+                <span
+                  aria-hidden="true"
+                  className="t1-numeral-outline block text-[4.5rem] leading-[0.8] md:text-[7rem]"
+                >
+                  V
+                </span>
+              </Drift>
               <div className="h-px flex-1 bg-[#F7F5F0]/20" />
               <p className="t1-eyebrow pb-1 text-right">
                 Chapter five — yours to write
@@ -319,6 +331,7 @@ export default function Template1Page() {
       />
 
       <T1UtilityBar phone={location.phoneGBP} bookingUrl={onlineBookingUrl} />
+      </T1CursorProvider>
     </div>
   );
 }

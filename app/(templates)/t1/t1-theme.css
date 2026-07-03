@@ -86,19 +86,22 @@
   margin-bottom: -0.08em;
 }
 
-/* Editorial text link — brass underline, oxblood on hover */
+/* Editorial text link — brass underline; oxblood draws in from the left */
 .t1-link {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--t1-brass);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    text-decoration-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+  padding-bottom: 2px;
+  background-image: linear-gradient(var(--t1-oxblood), var(--t1-oxblood)),
+    linear-gradient(var(--t1-brass), var(--t1-brass));
+  background-size: 0% 1px, 100% 1px;
+  background-position: bottom left, bottom left;
+  background-repeat: no-repeat;
+  transition: background-size 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .t1-link:hover {
   color: var(--t1-oxblood);
-  text-decoration-color: var(--t1-oxblood);
+  background-size: 100% 1px, 100% 1px;
 }
 
 /* Solid & outline CTAs */
@@ -189,6 +192,119 @@
   border-radius: 50%;
   background: var(--t1-porcelain);
   border: 1px solid var(--t1-brass);
+}
+
+/* ---- Editorial cursor ---- */
+
+/* Native cursor retires wherever the editorial cursor is active… */
+.t1-cursor-zone,
+.t1-cursor-zone * {
+  cursor: none !important;
+}
+/* …but never where a caret or native affordance is needed */
+.t1-cursor-zone input:not([type="range"]),
+.t1-cursor-zone textarea,
+.t1-cursor-zone select {
+  cursor: auto !important;
+}
+
+.t1-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+.t1-cursor-core {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+}
+.t1-cursor-label {
+  font-family: var(--font-t1-display), Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--t1-ink);
+  user-select: none;
+}
+
+/* ---- Masthead type-window: video living inside the letterforms ---- */
+
+.t1-video-word {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+.t1-video-word-media {
+  position: absolute;
+  top: 0;
+  bottom: -0.08em;
+  left: -0.06em;
+  right: -0.06em;
+  overflow: hidden;
+  pointer-events: none;
+}
+.t1-video-word-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) contrast(1.05);
+}
+/* white field + black word; lighten keeps the field, fills the word with film */
+.t1-video-word-knockout {
+  position: absolute;
+  inset: 0;
+  padding-left: 0.06em;
+  background: #fff;
+  color: #000;
+  mix-blend-mode: lighten;
+  white-space: nowrap;
+}
+/* multiply the white field back down to porcelain so it vanishes into the page */
+.t1-video-word-tint {
+  position: absolute;
+  inset: 0;
+  background: var(--t1-porcelain);
+  mix-blend-mode: multiply;
+}
+
+/* ---- Print tactility ---- */
+
+/* Near-invisible paper grain across the whole page */
+.t1-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Letters from patients — heavy paper */
+.t1-letter {
+  position: relative;
+  background-color: #fdfcfa;
+  border: 1px solid rgba(22, 19, 15, 0.09);
+  box-shadow: 0 1px 2px rgba(22, 19, 15, 0.06),
+    0 18px 40px -18px rgba(22, 19, 15, 0.3);
+}
+.t1-letter::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 /* Reduced motion: strip every nonessential animation & transition */
