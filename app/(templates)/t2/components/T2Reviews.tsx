@@ -6,27 +6,22 @@ import { SectionHeader } from "./T2Kit";
 import { EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
-   Reviews as case telemetry — each report carries a mono procedure
-   tag, a rating readout, and the patient's words in clean body type.
+   Patient stories — mono type stays on the metadata (procedure tag,
+   verification), while the person's words and stars stay human.
    All review content interpolates from data.
    ──────────────────────────────────────────────────────────────── */
 
-function RatingBars({ rating }: { rating: number }) {
+function RatingStars({ rating }: { rating: number }) {
   return (
     <span
-      className="flex items-end gap-[3px]"
+      className="text-[0.8125rem] tracking-[0.15em] text-[var(--t2p-ice)]"
       role="img"
       aria-label={`Rated ${rating} out of 5`}
     >
-      {[...Array(5)].map((_, i) => (
-        <span
-          key={i}
-          className={`w-[3px] ${
-            i < rating ? "bg-[var(--t2p-ice)]" : "bg-[var(--t2p-line-strong)]"
-          }`}
-          style={{ height: `${8 + i * 2}px` }}
-        />
-      ))}
+      {"★".repeat(rating)}
+      <span className="text-[var(--t2p-line-strong)]">
+        {"★".repeat(5 - rating)}
+      </span>
     </span>
   );
 }
@@ -39,13 +34,13 @@ export default function T2Reviews() {
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           index="06"
-          label="Case telemetry"
+          label="Patient stories"
           title={
             <>
-              Signal from <span className="t2p-duotext">the chair.</span>
+              In their <span className="t2p-duotext">own words.</span>
             </>
           }
-          lede="Unedited reports from verified patients, tagged by procedure."
+          lede="Unedited reviews from verified patients."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -56,14 +51,13 @@ export default function T2Reviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease: EASE }}
-              className="t2p-tick relative flex flex-col border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7"
+              className="relative flex flex-col border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7"
             >
-              {/* Telemetry header */}
               <div className="flex items-center justify-between gap-3 border-b border-[var(--t2p-line)] pb-4">
-                <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-ice)]">
+                <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
                   {review.procedureCategory}
                 </span>
-                <RatingBars rating={review.rating} />
+                <RatingStars rating={review.rating} />
               </div>
 
               <blockquote className="flex-1 py-5">

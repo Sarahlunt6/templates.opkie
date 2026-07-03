@@ -269,10 +269,12 @@
     brightness(0.9) contrast(0.92);
 }
 
-/* ── Doctor portrait: scan duotone ──────────────────────────────── */
+/* ── Doctor portrait: kept warm on purpose ──────────────────────────
+   People don't get the machine duotone — a barely-there cool cast
+   ties the photo to the palette without making the human feel scanned. */
 
 .t2p .t2p-portrait img {
-  filter: grayscale(1) contrast(1.06) brightness(0.94);
+  filter: grayscale(0.15) contrast(1.02);
 }
 .t2p .t2p-portrait::after {
   content: "";
@@ -280,9 +282,9 @@
   inset: 0;
   background: linear-gradient(
     150deg,
-    rgba(103, 232, 249, 0.16),
+    rgba(103, 232, 249, 0.05),
     rgba(10, 12, 16, 0) 45%,
-    rgba(167, 139, 250, 0.14)
+    rgba(167, 139, 250, 0.04)
   );
   mix-blend-mode: screen;
   pointer-events: none;

@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { SectionHeader, SpecRow } from "./T2Kit";
+import { SectionHeader } from "./T2Kit";
 import { practice, location, EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
-   Operator profiles — the clinicians treated like the systems they
-   run: duotone-scanned portrait, credentials as a mono spec list,
-   biography in clean body type. All facts from practice data.
+   The clinicians — deliberately the warmest section on the page.
+   Mono type is reserved for machines and numbers; people get real
+   portraits and human typography. All facts from practice data.
    ──────────────────────────────────────────────────────────────── */
 
 export default function T2Doctors() {
@@ -20,7 +20,7 @@ export default function T2Doctors() {
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           index="04"
-          label="Operators"
+          label="Your doctors"
           title={
             <>
               The hands behind <span className="t2p-duotext">the hardware.</span>
@@ -39,7 +39,7 @@ export default function T2Doctors() {
             transition={{ duration: 0.6, ease: EASE }}
             className="lg:col-span-5"
           >
-            <div className="t2p-tick t2p-portrait relative aspect-[3/4] overflow-hidden border border-[var(--t2p-line-strong)]">
+            <div className="t2p-portrait relative aspect-[3/4] overflow-hidden border border-[var(--t2p-line-strong)]">
               <Image
                 src="/images/team/doctor-portrait.jpeg"
                 alt={`Portrait of ${lead.name}, ${lead.role}`}
@@ -48,15 +48,11 @@ export default function T2Doctors() {
                 className="object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
-              <div className="t2p-wireframe absolute inset-0 opacity-[0.1]" aria-hidden="true" />
-              <span className="t2p-mono absolute top-4 left-4 z-10 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-70)] bg-[#0A0C10]/70 px-2 py-1">
-                OP-01
-              </span>
             </div>
             <div className="mt-4 flex items-center gap-2.5">
               <span className="t2p-dot rounded-full" aria-hidden="true" />
-              <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)]">
-                Accepting patients — {location.cityServed}
+              <span className="text-sm text-[var(--t2p-text-70)]">
+                Accepting new patients in {location.cityServed}
               </span>
             </div>
           </motion.div>
@@ -72,7 +68,7 @@ export default function T2Doctors() {
             <h3 className="font-innovator text-3xl md:text-4xl font-medium tracking-tight text-[var(--t2p-text)]">
               {lead.name}
             </h3>
-            <p className="t2p-mono mt-2.5 text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--t2p-ice)]">
+            <p className="mt-2.5 text-base text-[var(--t2p-ice)]">
               {lead.role}
             </p>
 
@@ -80,14 +76,20 @@ export default function T2Doctors() {
               {lead.biography}
             </p>
 
-            <div className="mt-10 max-w-xl">
-              <p className="t2p-mono mb-2 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
-                Credentials
-              </p>
-              {lead.credentials.map((c, i) => (
-                <SpecRow key={c} k={`0${i + 1}`} v={c} />
+            <ul className="mt-10 max-w-xl">
+              {lead.credentials.map((c) => (
+                <li
+                  key={c}
+                  className="flex items-baseline gap-3 border-b border-[var(--t2p-line)] py-3 last:border-b-0 text-sm md:text-[0.9375rem] text-[var(--t2p-text-70)]"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-ice)]"
+                  />
+                  {c}
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
         </div>
 
@@ -101,27 +103,31 @@ export default function T2Doctors() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
-                className="t2p-tick relative bg-[var(--t2p-bg)] border border-[var(--t2p-line)] p-8 md:p-10"
+                className="relative bg-[var(--t2p-bg)] border border-[var(--t2p-line)] p-8 md:p-10"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
-                    OP-{String(i + 2).padStart(2, "0")}
-                  </span>
-                  <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-ice)]">
-                    {doc.role}
-                  </span>
-                </div>
                 <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
                   {doc.name}
                 </h3>
-                <p className="mt-4 text-sm md:text-[0.9375rem] leading-relaxed text-[var(--t2p-text-70)]">
+                <p className="mt-2 text-[0.9375rem] text-[var(--t2p-ice)]">
+                  {doc.role}
+                </p>
+                <p className="mt-5 text-sm md:text-[0.9375rem] leading-relaxed text-[var(--t2p-text-70)]">
                   {doc.biography}
                 </p>
-                <div className="mt-6">
-                  {doc.credentials.map((c, j) => (
-                    <SpecRow key={c} k={`0${j + 1}`} v={c} />
+                <ul className="mt-6">
+                  {doc.credentials.map((c) => (
+                    <li
+                      key={c}
+                      className="flex items-baseline gap-3 border-b border-[var(--t2p-line)] py-2.5 last:border-b-0 text-sm text-[var(--t2p-text-70)]"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-ice)]"
+                      />
+                      {c}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </motion.article>
             ))}
           </div>

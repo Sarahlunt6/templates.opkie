@@ -4,6 +4,7 @@ import "./t2-theme.css";
 
 import T2Nav from "./components/T2Nav";
 import T2Hero from "./components/T2Hero";
+import T2CareBand from "./components/T2CareBand";
 import T2TechTriptych from "./components/T2TechTriptych";
 import T2Services from "./components/T2Services";
 import T2ScanCompare from "./components/T2ScanCompare";
@@ -33,6 +34,9 @@ export default function Template2Page() {
       <main>
         {/* 00 — Cinematic hero: parallax video + scanline reveal */}
         <T2Hero />
+
+        {/* 00.5 — The human beat before the hardware */}
+        <T2CareBand />
 
         {/* 01 — Instrumentation */}
         <T2TechTriptych />
