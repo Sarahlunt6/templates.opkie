@@ -251,28 +251,27 @@
 }
 .t1-video-word-media video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  /* 1px inside the knockout field so no unblended video row can peek
+     out at the box edges when the blend layer rasterizes off-pixel */
+  inset: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
   object-fit: cover;
-  filter: saturate(0.85) contrast(1.05);
+  /* kept safely below porcelain brightness so the lighten-knockout
+     field never lets highlights bleed outside the letterforms */
+  filter: saturate(0.8) contrast(1.02) brightness(0.72) sepia(0.12);
 }
-/* white field + black word; lighten keeps the field, fills the word with film */
+/* porcelain field + black word over the film; lighten keeps the field
+   indistinguishable from the page and fills only the letterforms with
+   video (per-channel max: porcelain beats the film, the film beats ink) */
 .t1-video-word-knockout {
   position: absolute;
   inset: 0;
   padding-left: 0.06em;
-  background: #fff;
+  background: var(--t1-porcelain);
   color: #000;
   mix-blend-mode: lighten;
   white-space: nowrap;
-}
-/* multiply the white field back down to porcelain so it vanishes into the page */
-.t1-video-word-tint {
-  position: absolute;
-  inset: 0;
-  background: var(--t1-porcelain);
-  mix-blend-mode: multiply;
 }
 
 /* ---- Print tactility ---- */
@@ -289,9 +288,10 @@
   background-size: 180px 180px;
 }
 
-/* Letters from patients — heavy paper */
+/* Letters from patients — heavy paper.
+   NB: no position here — the component decides (cards are absolute,
+   the sizing ghost is relative). */
 .t1-letter {
-  position: relative;
   background-color: #fdfcfa;
   border: 1px solid rgba(22, 19, 15, 0.09);
   box-shadow: 0 1px 2px rgba(22, 19, 15, 0.06),

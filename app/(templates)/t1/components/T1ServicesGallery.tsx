@@ -137,7 +137,7 @@ export default function T1ServicesGallery({
       {/* ------- Desktop, motion-safe: pinned horizontal scrub ------- */}
       <div
         ref={sectionRef}
-        className="hidden lg:motion-safe:block"
+        className="relative hidden lg:motion-safe:block"
         style={{ height: `${120 + services.length * 55}vh` }}
       >
         <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">

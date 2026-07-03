@@ -138,7 +138,7 @@ export default function T1PatientLetters({ letters }: T1PatientLettersProps) {
         className="relative mx-auto max-w-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#9C7E46]"
       >
         {/* invisible sizer — the longest letter sets the stack height */}
-        <article className="t1-letter invisible" aria-hidden="true">
+        <article className="t1-letter invisible relative" aria-hidden="true">
           <LetterBody letter={longest} index={0} total={count} />
         </article>
 

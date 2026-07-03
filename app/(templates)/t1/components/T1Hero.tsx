@@ -78,7 +78,6 @@ function VideoWord({ word }: { word: string }) {
             onError={() => setFailed(true)}
           />
           <em className="t1-video-word-knockout font-light italic">{word}</em>
-          <span className="t1-video-word-tint" />
         </motion.span>
       )}
     </span>
@@ -101,21 +100,40 @@ function TypedLine({
     return <span className={className}>{text}</span>;
   }
 
+  // Words stay unbreakable inside, but the line wraps at spaces —
+  // important at 375px where the metadata runs long.
+  const words = text.split(" ");
+  let charCursor = 0;
+
   return (
     <span className={className}>
       <span className="sr-only">{text}</span>
       <span aria-hidden="true">
-        {text.split("").map((ch, i) => (
-          <motion.span
-            key={i}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.01, delay: delay + i * 0.016 }}
-            style={{ whiteSpace: "pre" }}
-          >
-            {ch}
-          </motion.span>
-        ))}
+        {words.map((word, wi) => {
+          const start = charCursor;
+          charCursor += word.length + 1;
+          return (
+            <span key={wi}>
+              <span className="inline-block whitespace-nowrap">
+                {word.split("").map((ch, ci) => (
+                  <motion.span
+                    key={ci}
+                    className="inline-block"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 0.01,
+                      delay: delay + (start + ci) * 0.016,
+                    }}
+                  >
+                    {ch}
+                  </motion.span>
+                ))}
+              </span>
+              {wi < words.length - 1 ? " " : ""}
+            </span>
+          );
+        })}
       </span>
     </span>
   );

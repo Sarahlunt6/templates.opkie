@@ -220,7 +220,7 @@ export function Drift({
   return (
     <motion.div
       ref={ref}
-      className={className}
+      className={`relative ${className}`}
       style={reduced ? undefined : { y }}
     >
       {children}
