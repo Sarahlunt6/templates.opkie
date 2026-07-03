@@ -4,6 +4,11 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { HAVEN_EASE } from "./T3Reveal";
 import { telHref } from "./hours";
+import { sampleReviews } from "@/data/master";
+
+const AVG_RATING = (
+  sampleReviews.reduce((sum, r) => sum + r.rating, 0) / sampleReviews.length
+).toFixed(1);
 
 interface T3HavenHeroProps {
   practiceName: string;
@@ -97,6 +102,23 @@ export default function T3HavenHero({
               appointments that never feel rushed&ensp;·&ensp;breaks whenever
               you need them
             </p>
+            <p className="mt-4 flex flex-wrap items-center gap-x-2 text-sm font-light text-[var(--t3-moss-soft)]">
+              <span
+                className="text-[var(--t3-euc-deep)]"
+                role="img"
+                aria-label={`Rated ${AVG_RATING} out of 5 by patients`}
+              >
+                ★ {AVG_RATING}
+              </span>
+              <span>
+                from{" "}
+                <em className="t3-serif">
+                  people who were nervous too
+                </em>
+                &ensp;·&ensp;new patients welcome&ensp;·&ensp;insurance
+                accepted
+              </span>
+            </p>
           </motion.div>
         </div>
 
@@ -121,8 +143,8 @@ export default function T3HavenHero({
             {/* primary organic-framed photo */}
             <div className="t3-blob relative aspect-[5/6] w-[86%] overflow-hidden shadow-[var(--t3-shadow-bloom)]">
               <Image
-                src="/images/office-interior.jpg"
-                alt={`The calm, light-filled treatment room at ${practiceName}`}
+                src="/images/team/staff-photo.jpg"
+                alt={`The team at ${practiceName} — the people who will take care of you`}
                 fill
                 priority
                 className="object-cover"

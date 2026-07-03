@@ -13,6 +13,7 @@ interface T1HeroProps {
   bookingUrl: string;
   avgRating: string;
   reviewCount: number;
+  hasSameDayEmergency: boolean;
 }
 
 const CONTENTS = [
@@ -148,6 +149,7 @@ export default function T1Hero({
   bookingUrl,
   avgRating,
   reviewCount,
+  hasSameDayEmergency,
 }: T1HeroProps) {
   const reduced = useReducedMotion();
   const tel = `tel:${phone.replace(/[^0-9+]/g, "")}`;
@@ -243,6 +245,39 @@ export default function T1Hero({
                 or call {phone}
               </a>
             </div>
+
+            {/* The dental essentials, set like a colophon line */}
+            <motion.div
+              initial={reduced ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.0, ease: T1_EASE }}
+              className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-sans text-[11px] uppercase tracking-[0.16em] text-[#6B675E]"
+            >
+              <span
+                className="tracking-[0.1em] text-[#9C7E46]"
+                role="img"
+                aria-label={`Rated ${avgRating} out of 5 by patients`}
+              >
+                ★★★★★
+              </span>
+              <span>{avgRating} patient rating</span>
+              <span aria-hidden="true" className="text-[#16130F]/25">
+                ·
+              </span>
+              <span>New patients welcome</span>
+              <span aria-hidden="true" className="text-[#16130F]/25">
+                ·
+              </span>
+              <span>Insurance accepted</span>
+              {hasSameDayEmergency && (
+                <>
+                  <span aria-hidden="true" className="text-[#16130F]/25">
+                    ·
+                  </span>
+                  <span>Same-day emergency care</span>
+                </>
+              )}
+            </motion.div>
 
             {/* In this issue */}
             <nav aria-label="In this issue" className="mt-14">

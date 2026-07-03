@@ -5,7 +5,6 @@ import "./t1-theme.css";
 
 import T1Masthead from "./components/T1Masthead";
 import T1Hero from "./components/T1Hero";
-import T1ChapterRail from "./components/T1ChapterRail";
 import T1ChapterHeading from "./components/T1ChapterHeading";
 import T1DoctorFeature from "./components/T1DoctorFeature";
 import T1ServicesGallery, {
@@ -96,7 +95,6 @@ export default function Template1Page() {
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}
       />
-      <T1ChapterRail />
 
       {/* Cover */}
       <T1Hero
@@ -108,6 +106,7 @@ export default function Template1Page() {
         bookingUrl={onlineBookingUrl}
         avgRating={avgRatingText}
         reviewCount={sampleReviews.length}
+        hasSameDayEmergency={trustSignals.hasSameDayEmergency}
       />
 
       <main id="main">

@@ -12,6 +12,11 @@ import {
 import { AnimatedCounter } from "@/components/premium";
 import T2MagneticButton from "./T2MagneticButton";
 import { practice, location, bookingHref, telHref, EASE } from "./t2-lib";
+import { sampleReviews } from "@/data/master";
+
+const AVG_RATING = (
+  sampleReviews.reduce((sum, r) => sum + r.rating, 0) / sampleReviews.length
+).toFixed(1);
 
 /* ────────────────────────────────────────────────────────────────
    T2 Hero — cinematic parallax video with the signature scanline.
@@ -195,6 +200,27 @@ export default function T2Hero() {
               <span>{location.phoneGBP}</span>
             </T2MagneticButton>
           </motion.div>
+
+          {/* Patient-trust readout — the dental essentials in one line */}
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.8, ease: EASE }}
+            className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-t2-mono text-[11px] uppercase tracking-[0.12em] text-[var(--t2p-text-70)]"
+          >
+            <span
+              className="text-[#67E8F9]"
+              role="img"
+              aria-label={`Rated ${AVG_RATING} out of 5 by patients`}
+            >
+              ★ {AVG_RATING}
+            </span>
+            <span>{sampleReviews.length} verified patient reviews</span>
+            <span aria-hidden="true" className="opacity-40">
+              /
+            </span>
+            <span>Insurance accepted</span>
+          </motion.p>
         </div>
       </motion.div>
 
