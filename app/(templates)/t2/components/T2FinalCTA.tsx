@@ -31,7 +31,7 @@ export default function T2FinalCTA() {
           className="object-cover saturate-[0.4]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[#0A0C10]/88" />
+        <div className="absolute inset-0 bg-[#0A0C10]/90" />
         <div className="t2p-wireframe absolute inset-0 opacity-[0.08]" />
       </div>
 

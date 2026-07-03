@@ -33,7 +33,7 @@ export default function T2Nav() {
         transition={{ duration: 0.6, ease: EASE }}
         className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-500 ${
           scrolled
-            ? "bg-[#0A0C10]/88 backdrop-blur-md border-[var(--t2p-line)]"
+            ? "bg-[#0A0C10]/90 backdrop-blur-md border-[var(--t2p-line)]"
             : "bg-transparent border-transparent"
         }`}
       >
@@ -112,7 +112,7 @@ export default function T2Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="fixed inset-0 z-40 bg-[#0A0C10]/97 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-[#0A0C10]/95 backdrop-blur-sm lg:hidden"
           >
             <div className="t2p-blueprint absolute inset-0" aria-hidden="true" />
             <nav

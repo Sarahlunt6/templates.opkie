@@ -84,7 +84,7 @@ export default function T1Hero({
             {city}, {state}
           </p>
           <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#6B675E]">
-            Rated {avgRating} across {reviewCount} patient accounts
+            Rated {avgRating} across {reviewCount} patient stories
           </p>
         </motion.div>
 

@@ -186,14 +186,16 @@ export default function Template1Page() {
             />
           </div>
 
-          {/* Signature moment — full-bleed page-turn before/after */}
+          {/* Signature moment — the page-turn before/after, matted like a plate in a fine book */}
           <div className="mt-14 lg:mt-20">
-            <T1PageTurnReveal
-              beforeUrl={featuredCase.beforeUrl}
-              afterUrl={featuredCase.afterUrl}
-              altTag={featuredCase.altTag}
-              procedureType={featuredCase.procedureType}
-            />
+            <div className="mx-auto max-w-5xl px-6 md:px-10">
+              <T1PageTurnReveal
+                beforeUrl={featuredCase.beforeUrl}
+                afterUrl={featuredCase.afterUrl}
+                altTag={featuredCase.altTag}
+                procedureType={featuredCase.procedureType}
+              />
+            </div>
           </div>
 
           {/* Patient voices */}
@@ -201,7 +203,7 @@ export default function Template1Page() {
             <div className="mx-auto max-w-3xl">
               <Fade>
                 <p className="t1-eyebrow text-center">
-                  In their words — verified patient accounts
+                  In their words — verified patient stories
                 </p>
               </Fade>
               <div className="mt-14">

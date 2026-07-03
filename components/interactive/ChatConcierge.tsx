@@ -102,7 +102,7 @@ export default function ChatConcierge() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#0f5a53] text-white rounded-full shadow-[0_8px_30px_rgba(15,90,83,0.3)] hover:shadow-[0_12px_40px_rgba(15,90,83,0.4)] flex items-center justify-center transition-all duration-300"
+        className="fixed bottom-[104px] right-4 md:bottom-6 md:right-6 z-40 w-14 h-14 md:w-16 md:h-16 bg-[#0f5a53] text-white rounded-full shadow-[0_8px_30px_rgba(15,90,83,0.3)] hover:shadow-[0_12px_40px_rgba(15,90,83,0.4)] flex items-center justify-center transition-all duration-300"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -138,7 +138,7 @@ export default function ChatConcierge() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-24 right-6 z-50 w-80 md:w-96 h-[500px] max-h-[80vh] bg-white/95 backdrop-blur-xl border border-slate-200/50 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-[172px] right-4 md:bottom-24 md:right-6 z-40 w-80 md:w-96 h-[500px] max-h-[60vh] md:max-h-[80vh] bg-white/95 backdrop-blur-xl border border-slate-200/50 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header Block */}
             <div className="bg-gradient-to-r from-[#0f5a53] to-[#0d4f49] text-white px-6 py-4">

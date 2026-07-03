@@ -85,8 +85,8 @@ export default function T2Hero() {
           playsInline
         />
         {/* Grade: cool, dark, precise */}
-        <div className="absolute inset-0 bg-[#0A0C10]/72" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C10] via-transparent to-[#0A0C10]/70" />
+        <div className="absolute inset-0 bg-[#0A0C10]/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C10] via-[#0A0C10]/40 to-[#0A0C10]/75" />
       </motion.div>
 
       {/* ── Scan overlay: wireframe revealed around the beam ── */}

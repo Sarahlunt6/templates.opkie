@@ -7,7 +7,7 @@ import { location, bookingHref, telHref } from "./t2-lib";
 
 export default function T2MobileBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden border-t border-[var(--t2p-line-strong)] bg-[#0A0C10]/94 backdrop-blur-md pb-[env(safe-area-inset-bottom)]">
+    <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden border-t border-[var(--t2p-line-strong)] bg-[#0A0C10]/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)]">
       <div className="grid grid-cols-2">
         <a
           href={telHref}

@@ -91,7 +91,7 @@ export default function T1PullQuotes({ quotes }: T1PullQuotesProps) {
             <button
               type="button"
               onClick={() => setIndex((i) => (i - 1 + count) % count)}
-              aria-label="Previous patient account"
+              aria-label="Previous patient story"
               className="flex h-11 w-11 items-center justify-center border border-[#16130F]/15 font-t1-display italic text-[#16130F] transition-colors duration-500 hover:border-[#9C7E46] hover:text-[#5E2A2B]"
             >
               ←
@@ -99,7 +99,7 @@ export default function T1PullQuotes({ quotes }: T1PullQuotesProps) {
             <button
               type="button"
               onClick={() => setIndex((i) => (i + 1) % count)}
-              aria-label="Next patient account"
+              aria-label="Next patient story"
               className="flex h-11 w-11 items-center justify-center border border-[#16130F]/15 font-t1-display italic text-[#16130F] transition-colors duration-500 hover:border-[#9C7E46] hover:text-[#5E2A2B]"
             >
               →

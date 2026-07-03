@@ -98,7 +98,7 @@ export default function T1Craft({
         <dl className="mt-16 grid grid-cols-1 gap-y-10 border-t border-[#16130F]/15 pt-10 sm:grid-cols-3 sm:gap-x-8 lg:mt-24">
           <div className="flex flex-col-reverse gap-3">
             <dt className="t1-eyebrow max-w-[16rem]">
-              Average of {reviewCount} published patient accounts
+              Average of {reviewCount} published patient stories
             </dt>
             <dd className="font-t1-display text-6xl font-light text-[#9C7E46] md:text-7xl">
               <BrassCounter value={avgRating} decimals={1} />

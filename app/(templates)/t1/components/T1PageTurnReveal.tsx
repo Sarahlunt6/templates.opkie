@@ -99,6 +99,8 @@ export default function T1PageTurnReveal({
 
   return (
     <figure className="w-full">
+      {/* Matted like a plate in a fine book — keeps the clinical photograph contained */}
+      <div className="border border-[#16130F]/10 bg-[#FDFCFA] p-3 shadow-[0_24px_60px_-30px_rgba(22,19,15,0.3)] md:p-5">
       <div
         ref={containerRef}
         onPointerMove={onPointerMove}
@@ -106,7 +108,7 @@ export default function T1PageTurnReveal({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onPointerLeave={endDrag}
-        className="relative w-full cursor-ew-resize select-none overflow-hidden touch-pan-y"
+        className="relative w-full cursor-ew-resize select-none overflow-hidden border border-[#9C7E46]/35 touch-pan-y"
       >
         <div className="relative aspect-[4/3] w-full md:aspect-[21/10]">
           {/* Before — the base page */}
@@ -164,6 +166,7 @@ export default function T1PageTurnReveal({
             After
           </span>
         </div>
+      </div>
       </div>
 
       {/* Keyboard-accessible control */}
