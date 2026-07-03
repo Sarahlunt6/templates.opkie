@@ -71,9 +71,9 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Dental Template Hub | Professional Practice Layouts",
+  title: "The Opkie Collection — Three Website Concepts for Your Practice",
   description:
-    "Evaluate 5 conversion-optimized dental website templates. Review structure, hierarchy, and conversion pathways before customizing with your practice branding.",
+    "Three complete, working dental website concepts — editorial luxury, cinematic technology, and organic calm. Choose the one that feels like your practice; Opkie tailors every detail to you.",
 };
 
 export default function RootLayout({

@@ -1,344 +1,474 @@
 "use client";
 
-import { useState, useEffect, Suspense, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, Suspense } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-// Hook to detect mobile viewport
+/* ────────────────────────────────────────────────────────────────
+   The Opkie Collection — hub page.
+   Each column is rendered in its template's own design language,
+   and each hover effect demos that template's signature moment.
+   ──────────────────────────────────────────────────────────────── */
+
 function useIsMobile(breakpoint = 1024) {
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < breakpoint);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, [breakpoint]);
-
   return isMobile;
 }
 
-// Template data
-const templates = [
+type Concept = {
+  id: string;
+  numeral: string;
+  name: string;
+  discipline: string;
+  audience: string;
+  pullLine: string;
+  signatures: string[];
+  palette: { hex: string; name: string }[];
+  /* visual identity */
+  bg: string;
+  text: string;
+  muted: string;
+  accent: string;
+  line: string;
+  nameFont: string;
+  nameClass: string;
+  eyebrowFont: string;
+  pullFont: string;
+  ctaLabel: string;
+};
+
+const concepts: Concept[] = [
   {
     id: "t1",
-    code: "01",
-    title: "The Prestige Leader",
-    description: "Elite Cosmetic & Reconstructive Practices",
-    image: "/images/team/staff-photo.jpg",
+    numeral: "I",
+    name: "Maison",
+    discipline: "Editorial luxury",
+    audience: "For the practice that feels like a private atelier.",
+    pullLine: "A magazine feature, not a brochure.",
+    signatures: [
+      "The patient journey told in four chapters",
+      "A page-turn before & after reveal",
+      "Masthead typography, brass rules, matted plates",
+    ],
+    palette: [
+      { hex: "#F7F5F0", name: "Porcelain" },
+      { hex: "#16130F", name: "Ink" },
+      { hex: "#9C7E46", name: "Brass" },
+      { hex: "#5E2A2B", name: "Oxblood" },
+    ],
+    bg: "#F7F5F0",
+    text: "#16130F",
+    muted: "#6B675E",
+    accent: "#9C7E46",
+    line: "rgba(22,19,15,0.14)",
+    nameFont: "font-t1-display",
+    nameClass: "font-light tracking-[-0.01em]",
+    eyebrowFont: "font-sans",
+    pullFont: "font-t1-display italic",
+    ctaLabel: "Enter the concept",
   },
   {
     id: "t2",
-    code: "02",
-    title: "The Clinical Innovator",
-    description: "Technology-Forward Modern Practices",
-    image: "/images/office-interior.jpg",
+    numeral: "II",
+    name: "Precision",
+    discipline: "Cinematic technology",
+    audience: "For the practice that leads with what it can measure.",
+    pullLine: "Scanned. Designed. Delivered under one roof.",
+    signatures: [
+      "A scanner beam that sweeps the hero film",
+      "Live financing calculator & smile assessment",
+      "Telemetry stats and a scan-comparison gallery",
+    ],
+    palette: [
+      { hex: "#0A0C10", name: "Obsidian" },
+      { hex: "#F4F6F8", name: "Signal white" },
+      { hex: "#67E8F9", name: "Ice" },
+      { hex: "#A78BFA", name: "Violet" },
+    ],
+    bg: "#0A0C10",
+    text: "#F4F6F8",
+    muted: "rgba(244,246,248,0.55)",
+    accent: "#67E8F9",
+    line: "rgba(244,246,248,0.14)",
+    nameFont: "font-innovator",
+    nameClass: "font-medium tracking-[-0.02em]",
+    eyebrowFont: "font-t2-mono",
+    pullFont: "font-t2-mono",
+    ctaLabel: "Enter the concept",
   },
   {
     id: "t3",
-    code: "03",
-    title: "The Spatial Sanctuary",
-    description: "Boutique Wellness & Comfort-Focused",
-    image: "/images/office-exterior.jpg",
+    numeral: "III",
+    name: "Haven",
+    discipline: "Organic calm",
+    audience: "For the patients who dread the dentist — until they visit.",
+    pullLine: "walk in nervous. leave lighter.",
+    signatures: [
+      "A guided-breath moment for anxious patients",
+      "A comfort menu — sedation, blankets, breaks",
+      "Live open-now status and blob-framed photography",
+    ],
+    palette: [
+      { hex: "#F4F6F1", name: "Mist" },
+      { hex: "#2E3B34", name: "Moss" },
+      { hex: "#6D8B7D", name: "Eucalyptus" },
+      { hex: "#C97E5D", name: "Clay" },
+    ],
+    bg: "#F4F6F1",
+    text: "#2E3B34",
+    muted: "#5F6E65",
+    accent: "#566E61",
+    line: "rgba(46,59,52,0.14)",
+    nameFont: "font-sanctuary",
+    nameClass: "font-extralight lowercase tracking-[0.01em]",
+    eyebrowFont: "font-sanctuary",
+    pullFont: "font-t3-serif italic",
+    ctaLabel: "Enter the concept",
   },
 ];
 
-function DesignRegistryContent() {
-  const isMobile = useIsMobile();
+/* ── Per-concept ambient hover effects ─────────────────────────── */
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+function MaisonEffect({ active }: { active: boolean }) {
+  return (
+    <>
+      {/* Brass hairlines draw in from the edges */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute left-10 right-10 top-[26%] h-px origin-left"
+        style={{ backgroundColor: "#9C7E46" }}
+        animate={{ scaleX: active ? 1 : 0, opacity: active ? 0.55 : 0 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute left-10 right-10 bottom-[30%] h-px origin-right"
+        style={{ backgroundColor: "#9C7E46" }}
+        animate={{ scaleX: active ? 1 : 0, opacity: active ? 0.55 : 0 }}
+        transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+      />
+      {/* Oversized roman numeral, like a chapter plate */}
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 select-none font-t1-display text-[16rem] leading-none"
+        style={{ color: "rgba(156,126,70,0.10)" }}
+        animate={{ opacity: active ? 1 : 0, x: active ? 0 : 24 }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      >
+        I
+      </motion.span>
+    </>
+  );
+}
+
+function PrecisionEffect({ active }: { active: boolean }) {
+  const reduced = useReducedMotion();
+  return (
+    <>
+      {/* Faint engineering grid */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(244,246,248,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(244,246,248,0.05) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+        animate={{ opacity: active ? 1 : 0 }}
+        transition={{ duration: 0.6 }}
+      />
+      {/* Scanner beam sweep */}
+      {active && !reduced && (
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, #67E8F9 30%, #A78BFA 70%, transparent)",
+            boxShadow: "0 0 18px rgba(103,232,249,0.5)",
+          }}
+          initial={{ top: "0%" }}
+          animate={{ top: ["0%", "100%"] }}
+          transition={{ duration: 2.6, repeat: Infinity, ease: "linear" }}
+        />
+      )}
+    </>
+  );
+}
+
+function HavenEffect({ active }: { active: boolean }) {
+  const reduced = useReducedMotion();
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full"
+      style={{
+        background:
+          "radial-gradient(circle, rgba(109,139,125,0.22) 0%, rgba(109,139,125,0.08) 45%, transparent 70%)",
+      }}
+      animate={
+        active
+          ? reduced
+            ? { opacity: 1, scale: 1 }
+            : { opacity: 1, scale: [1, 1.16, 1] }
+          : { opacity: 0, scale: 0.9 }
+      }
+      transition={
+        active && !reduced
+          ? { opacity: { duration: 0.8 }, scale: { duration: 9, repeat: Infinity, ease: "easeInOut" } }
+          : { duration: 0.6 }
+      }
+    />
+  );
+}
+
+function ConceptAmbient({ id, active }: { id: string; active: boolean }) {
+  if (id === "t1") return <MaisonEffect active={active} />;
+  if (id === "t2") return <PrecisionEffect active={active} />;
+  return <HavenEffect active={active} />;
+}
+
+/* ── Shared bits ───────────────────────────────────────────────── */
+
+function PaletteChips({ concept }: { concept: Concept }) {
+  return (
+    <div className="flex items-center gap-2.5">
+      {concept.palette.map((c) => (
+        <span
+          key={c.hex}
+          title={c.name}
+          className="h-3.5 w-3.5 rounded-full"
+          style={{
+            backgroundColor: c.hex,
+            boxShadow: `inset 0 0 0 1px ${concept.line}`,
+          }}
+        />
+      ))}
+      <span
+        className={`ml-1 text-[10px] uppercase tracking-[0.22em] ${concept.eyebrowFont}`}
+        style={{ color: concept.muted }}
+      >
+        {concept.palette.map((c) => c.name).join(" · ")}
+      </span>
+    </div>
+  );
+}
+
+function SignatureList({
+  concept,
+  visible,
+}: {
+  concept: Concept;
+  visible: boolean;
+}) {
+  return (
+    <ul className="flex flex-col gap-2.5" aria-hidden={!visible}>
+      {concept.signatures.map((s, i) => (
+          <motion.li
+            key={s}
+            className="flex items-start gap-3 text-[13px] leading-relaxed"
+            style={{ color: concept.muted }}
+            animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 10 }}
+            transition={{
+              duration: 0.5,
+              delay: visible ? 0.12 + i * 0.08 : 0,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <span
+              aria-hidden
+              className="mt-[0.55em] h-px w-4 shrink-0"
+              style={{ backgroundColor: concept.accent }}
+            />
+            {s}
+          </motion.li>
+      ))}
+    </ul>
+  );
+}
+
+/* ── Page ──────────────────────────────────────────────────────── */
+
+function CollectionContent() {
+  const isMobile = useIsMobile();
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // Trigger entrance animation after mount
-    const timer = setTimeout(() => setIsLoaded(true), 100);
+    const timer = setTimeout(() => setLoaded(true), 80);
     return () => clearTimeout(timer);
   }, []);
 
-
-  // Calculate flex values based on hover state (desktop only)
-  const getFlexValue = (index: number) => {
-    if (hoveredIndex === null) return 1;
-    if (hoveredIndex === index) return 1.5;
-    return 0.75;
-  };
-
-  // Handle mobile card tap
-  const handleCardTap = (index: number) => {
-    if (isMobile) {
-      setActiveCardIndex(activeCardIndex === index ? null : index);
-    }
+  const flexFor = (index: number) => {
+    if (hovered === null) return 1;
+    return hovered === index ? 1.6 : 0.78;
   };
 
   return (
-    <main className="min-h-screen lg:h-screen w-screen overflow-x-hidden overflow-y-auto lg:overflow-hidden bg-[#0C0C0C] text-white relative">
-      {/* Minimal Header */}
+    <main className="min-h-screen w-full overflow-x-clip bg-[#0C0C0C] text-white lg:flex lg:h-screen lg:flex-col lg:overflow-hidden">
+      {/* ── Header: the pitch ── */}
       <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.1 }}
-        className="fixed top-0 left-0 right-0 z-50 px-6 lg:px-10 py-6 lg:py-8"
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-20 border-b border-white/10 bg-[#0C0C0C] px-6 py-8 lg:px-12 lg:py-9"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Image
-              src="/images/opkie-logo.svg"
-              alt="Opkie"
-              width={80}
-              height={30}
-              className="opacity-90 brightness-0 invert lg:w-[100px]"
-            />
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+          <div className="max-w-2xl">
+            <div className="mb-5 flex items-center gap-4">
+              <Image
+                src="/images/opkie-logo.svg"
+                alt="Opkie"
+                width={92}
+                height={34}
+                className="brightness-0 invert"
+                priority
+              />
+              <span className="hidden h-4 w-px bg-white/20 sm:block" />
+              <span className="hidden text-[10px] font-light uppercase tracking-[0.3em] text-white/40 sm:block">
+                The collection
+              </span>
+            </div>
+            <h1 className="text-[clamp(1.6rem,2.6vw,2.4rem)] font-light leading-[1.12] tracking-[-0.01em] [text-wrap:balance]">
+              One practice. Three ways to meet it.
+            </h1>
+            <p className="mt-3 max-w-xl text-[13.5px] font-light leading-relaxed text-white/55">
+              Each concept below is a complete, working website with its own
+              typography, palette, and interactive signature — not a theme with
+              swapped colors. Choose the one that feels like your practice; we
+              tailor every word, photograph, and detail to you.
+            </p>
           </div>
 
-          <span className="text-[10px] lg:text-[11px] tracking-[0.2em] lg:tracking-[0.25em] text-white/30 uppercase font-light hidden sm:block">
-            Template Collection
-          </span>
+          <div className="hidden flex-col items-end gap-1.5 text-right md:flex">
+            <span className="text-[10px] uppercase tracking-[0.28em] text-white/35">
+              Prepared for your practice
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.28em] text-white/35">
+              Three concepts · No. I — III
+            </span>
+          </div>
         </div>
       </motion.header>
 
-      {/* Desktop: 3-Column Flex Layout */}
+      {/* ── Desktop: the triptych ── */}
       {!isMobile && (
-        <div className="h-full w-full flex">
-          {templates.map((template, index) => (
-            <div
-              key={`template-${index}`}
-              className="relative h-full border-r border-white/[0.08] last:border-r-0 overflow-hidden cursor-pointer"
-              style={{
-                flex: getFlexValue(index),
-                transition: "flex 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {/* Background Image - Elegant reveal on hover */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  opacity: hoveredIndex === index ? 1 : 0,
-                  transform: hoveredIndex === index ? "scale(1)" : "scale(1.08)",
-                  transition: "opacity 0.8s ease-out, transform 1s ease-out",
-                }}
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${template.image})` }}
-                />
-                {/* Soft gradient overlay for readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/60 to-[#0C0C0C]/40" />
-              </div>
-
-              {/* Subtle background number */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
-                <span
-                  className="text-[28vw] font-extralight text-white/[0.02] leading-none tracking-tight"
-                  style={{
-                    opacity: hoveredIndex === index ? 0 : 1,
-                    transition: "opacity 0.6s ease-out",
-                  }}
-                >
-                  {template.code}
-                </span>
-              </div>
-
-              {/* Column Content */}
-              <div className="relative z-10 h-full flex flex-col justify-between px-10 lg:px-14 py-32">
-                {/* Top - Elegant number */}
-                <div
-                  style={{
-                    opacity: isLoaded ? 1 : 0,
-                    transform: isLoaded ? "translateY(0)" : "translateY(20px)",
-                    transition: `opacity 0.8s ease-out ${0.2 + index * 0.1}s, transform 0.8s ease-out ${0.2 + index * 0.1}s`,
-                  }}
-                >
-                  <span className="text-[13px] tracking-[0.4em] text-white/25 font-light">
-                    {template.code}
-                  </span>
-                </div>
-
-                {/* Center - Title & Description */}
-                <div
-                  className="flex flex-col gap-5"
-                  style={{
-                    opacity: isLoaded ? 1 : 0,
-                    transform: isLoaded ? "translateY(0)" : "translateY(30px)",
-                    transition: `opacity 0.8s ease-out ${0.3 + index * 0.1}s, transform 0.8s ease-out ${0.3 + index * 0.1}s`,
-                  }}
-                >
-                  <h2
-                    className="text-[clamp(1.75rem,3.5vw,3rem)] font-light tracking-[-0.015em] leading-[1.15]"
-                    style={{
-                      opacity: hoveredIndex === null || hoveredIndex === index ? 1 : 0.25,
-                      transition: "opacity 0.4s ease-out",
-                    }}
-                  >
-                    {template.title}
-                  </h2>
-                  <p
-                    className="text-[13px] tracking-[0.04em] text-white/45 font-light leading-relaxed max-w-[280px]"
-                    style={{
-                      opacity: hoveredIndex === null || hoveredIndex === index ? 1 : 0.25,
-                      transition: "opacity 0.4s ease-out",
-                    }}
-                  >
-                    {template.description}
-                  </p>
-                </div>
-
-                {/* Bottom - Clean CTA */}
-                <div
-                  style={{
-                    opacity: isLoaded ? 1 : 0,
-                    transform: isLoaded ? "translateY(0)" : "translateY(20px)",
-                    transition: `opacity 0.8s ease-out ${0.4 + index * 0.1}s, transform 0.8s ease-out ${0.4 + index * 0.1}s`,
-                  }}
-                >
-                  <Link
-                    href={`/${template.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/cta inline-flex items-center gap-3"
-                  >
-                    <span className="relative text-[12px] tracking-[0.15em] text-white/60 font-light transition-colors duration-300 group-hover/cta:text-white">
-                      Explore Template
-                      {/* Minimal underline animation */}
-                      <span className="absolute -bottom-1 left-0 w-full h-px bg-white/20">
-                        <span className="absolute inset-0 bg-white/70 origin-left scale-x-0 group-hover/cta:scale-x-100 transition-transform duration-500 ease-out" />
-                      </span>
-                    </span>
-                    <svg
-                      className="w-4 h-4 text-white/40 group-hover/cta:text-white/80 group-hover/cta:translate-x-1 transition-all duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Subtle hover border glow */}
-              <div
-                className="absolute inset-0 pointer-events-none border"
-                style={{
-                  borderColor: hoveredIndex === index ? "rgba(255,255,255,0.06)" : "transparent",
-                  transition: "border-color 0.5s ease-out",
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Mobile: Vertical Card Stack */}
-      {isMobile && (
-        <div className="flex flex-col pt-24 pb-24 px-6 gap-4">
-          {templates.map((template, index) => {
-            const isActive = activeCardIndex === index;
+        <div className="flex min-h-0 flex-1">
+          {concepts.map((c, index) => {
+            const active = hovered === index;
+            const dimmed = hovered !== null && !active;
             return (
               <motion.div
-                key={`template-mobile-${index}`}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{
-                  opacity: isLoaded ? 1 : 0,
-                  y: isLoaded ? 0 : 30,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.1 + index * 0.1,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-                className="relative overflow-hidden rounded-xl border border-white/[0.08] cursor-pointer"
+                key={c.id}
+                className="relative h-full overflow-hidden"
                 style={{
-                  height: isActive ? "45vh" : "28vh",
-                  minHeight: isActive ? "320px" : "180px",
-                  transition: "height 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+                  flex: flexFor(index),
+                  backgroundColor: c.bg,
+                  transition: "flex 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
+                  borderRight: index < concepts.length - 1 ? "1px solid rgba(12,12,12,0.35)" : "none",
                 }}
-                onClick={() => handleCardTap(index)}
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 28 }}
+                transition={{
+                  duration: 0.9,
+                  delay: 0.15 + index * 0.12,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               >
-                {/* Background Image - Always visible on mobile */}
-                <div className="absolute inset-0">
-                  <Image
-                    src={template.image}
-                    alt={template.title}
-                    fill
-                    className="object-cover"
-                    style={{
-                      transform: isActive ? "scale(1)" : "scale(1.05)",
-                      transition: "transform 0.8s ease-out",
-                    }}
-                    sizes="100vw"
-                    priority={index === 0}
-                  />
-                  {/* Gradient overlay */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/50 to-transparent"
-                    style={{
-                      opacity: isActive ? 0.9 : 0.75,
-                      transition: "opacity 0.5s ease-out",
-                    }}
-                  />
-                </div>
+                <ConceptAmbient id={c.id} active={active} />
 
-                {/* Card Content */}
-                <div className="relative z-10 h-full flex flex-col justify-end p-6">
-                  {/* Template Number */}
-                  <span
-                    className="text-[11px] tracking-[0.4em] text-white/40 font-light mb-2"
-                    style={{
-                      opacity: isActive ? 1 : 0.6,
-                      transition: "opacity 0.4s ease-out",
-                    }}
-                  >
-                    {template.code}
-                  </span>
+                {/* Dim veil when a sibling is hovered */}
+                <div
+                  className="pointer-events-none absolute inset-0 z-10"
+                  style={{
+                    backgroundColor: c.bg,
+                    opacity: dimmed ? 0.45 : 0,
+                    transition: "opacity 0.5s ease-out",
+                  }}
+                />
 
-                  {/* Title */}
-                  <h2 className="text-[clamp(1.5rem,6vw,2rem)] font-light tracking-[-0.01em] leading-[1.15] mb-2">
-                    {template.title}
-                  </h2>
-
-                  {/* Description - Only show when active */}
-                  <p
-                    className="text-[13px] tracking-[0.02em] text-white/60 font-light leading-relaxed mb-4 max-w-[320px]"
-                    style={{
-                      opacity: isActive ? 1 : 0,
-                      height: isActive ? "auto" : 0,
-                      overflow: "hidden",
-                      transition: "opacity 0.4s ease-out",
-                    }}
-                  >
-                    {template.description}
-                  </p>
-
-                  {/* CTA - Only show when active */}
-                  <div
-                    style={{
-                      opacity: isActive ? 1 : 0,
-                      transform: isActive ? "translateY(0)" : "translateY(10px)",
-                      pointerEvents: isActive ? "auto" : "none",
-                      transition: "opacity 0.4s ease-out, transform 0.4s ease-out",
-                    }}
-                  >
-                    <Link
-                      href={`/${template.id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 px-6 py-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg active:bg-white/20 transition-colors"
-                      onClick={(e) => e.stopPropagation()}
+                <Link
+                  href={`/${c.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-20 flex h-full flex-col justify-between px-10 py-10 outline-none focus-visible:ring-2 focus-visible:ring-inset xl:px-14"
+                  style={{ color: c.text }}
+                  onFocus={() => setHovered(index)}
+                  onBlur={() => setHovered(null)}
+                >
+                  {/* Top: numeral + discipline */}
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`text-[11px] uppercase tracking-[0.32em] ${c.eyebrowFont}`}
+                      style={{ color: c.accent }}
                     >
-                      <span className="text-[12px] tracking-[0.12em] text-white font-medium uppercase">
-                        View Template
+                      No. {c.numeral}
+                    </span>
+                    <span
+                      className={`text-[11px] uppercase tracking-[0.26em] ${c.eyebrowFont}`}
+                      style={{ color: c.muted }}
+                    >
+                      {c.discipline}
+                    </span>
+                  </div>
+
+                  {/* Middle: the specimen */}
+                  <div className="flex flex-col gap-6">
+                    <h2
+                      className={`${c.nameFont} ${c.nameClass} text-[clamp(2.6rem,4.6vw,4.4rem)] leading-none`}
+                    >
+                      {c.name}
+                    </h2>
+
+                    <p
+                      className={`${c.pullFont} text-[15px] leading-snug`}
+                      style={{ color: c.id === "t1" ? "#5E2A2B" : c.accent }}
+                    >
+                      {c.pullLine}
+                    </p>
+
+                    <p
+                      className="max-w-[300px] text-[13.5px] font-light leading-relaxed"
+                      style={{ color: c.muted }}
+                    >
+                      {c.audience}
+                    </p>
+
+                    <SignatureList concept={c} visible={active} />
+                  </div>
+
+                  {/* Bottom: palette + CTA */}
+                  <div className="flex flex-col gap-6">
+                    <PaletteChips concept={c} />
+                    <span className="group/cta inline-flex items-center gap-3">
+                      <span
+                        className={`relative text-[12px] uppercase tracking-[0.18em] ${c.eyebrowFont}`}
+                        style={{ color: c.text }}
+                      >
+                        {c.ctaLabel}
+                        <span
+                          className="absolute -bottom-1.5 left-0 h-px w-full origin-left transition-transform duration-500 ease-out"
+                          style={{
+                            backgroundColor: c.accent,
+                            transform: active ? "scaleX(1)" : "scaleX(0.35)",
+                          }}
+                        />
                       </span>
                       <svg
-                        className="w-4 h-4 text-white/80"
+                        className="h-4 w-4 transition-transform duration-300"
+                        style={{
+                          color: c.accent,
+                          transform: active ? "translateX(4px)" : "none",
+                        }}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -346,71 +476,144 @@ function DesignRegistryContent() {
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          strokeWidth={1.5}
+                          strokeWidth={1.25}
                           d="M17 8l4 4m0 0l-4 4m4-4H3"
                         />
                       </svg>
-                    </Link>
+                    </span>
                   </div>
-                </div>
-
-                {/* Tap indicator for inactive cards */}
-                {!isActive && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-                )}
+                </Link>
               </motion.div>
             );
           })}
         </div>
       )}
 
-      {/* Minimal Footer */}
+      {/* ── Mobile: identity cards ── */}
+      {isMobile && (
+        <div className="flex flex-col gap-5 px-5 py-8">
+          {concepts.map((c, index) => (
+            <motion.div
+              key={c.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 24 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.1 + index * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="relative overflow-hidden rounded-2xl"
+              style={{ backgroundColor: c.bg, color: c.text }}
+            >
+              <ConceptAmbient id={c.id} active />
+
+              <div className="relative z-10 flex flex-col gap-5 p-7">
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`text-[10px] uppercase tracking-[0.3em] ${c.eyebrowFont}`}
+                    style={{ color: c.accent }}
+                  >
+                    No. {c.numeral}
+                  </span>
+                  <span
+                    className={`text-[10px] uppercase tracking-[0.24em] ${c.eyebrowFont}`}
+                    style={{ color: c.muted }}
+                  >
+                    {c.discipline}
+                  </span>
+                </div>
+
+                <h2 className={`${c.nameFont} ${c.nameClass} text-[2.6rem] leading-none`}>
+                  {c.name}
+                </h2>
+
+                <p
+                  className={`${c.pullFont} text-[15px] leading-snug`}
+                  style={{ color: c.id === "t1" ? "#5E2A2B" : c.accent }}
+                >
+                  {c.pullLine}
+                </p>
+
+                <p className="text-[13.5px] font-light leading-relaxed" style={{ color: c.muted }}>
+                  {c.audience}
+                </p>
+
+                <SignatureList concept={c} visible />
+
+                <PaletteChips concept={c} />
+
+                <Link
+                  href={`/${c.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-flex w-fit items-center gap-3 rounded-full px-6 py-3.5"
+                  style={{
+                    backgroundColor: c.id === "t2" ? "#67E8F9" : c.text,
+                    color: c.id === "t2" ? "#0A0C10" : c.bg,
+                  }}
+                >
+                  <span className={`text-[12px] uppercase tracking-[0.16em] ${c.eyebrowFont}`}>
+                    {c.ctaLabel}
+                  </span>
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* ── Footer: the process, quietly ── */}
       <motion.footer
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className={`${isMobile ? "relative" : "fixed bottom-0 left-0 right-0"} z-50 px-6 lg:px-10 py-5 lg:py-6 bg-[#0C0C0C]/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none`}
+        transition={{ duration: 1, delay: 0.6 }}
+        className="relative z-20 border-t border-white/10 bg-[#0C0C0C] px-6 py-5 lg:px-12"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6 lg:gap-8">
-            <span className="text-[11px] tracking-[0.2em] font-light text-white/50 uppercase">
-              Dental Templates
+        <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-1.5 text-[10.5px] font-light uppercase tracking-[0.2em] text-white/45">
+            <span>
+              <span className="text-white/70">01</span> Choose a concept
+            </span>
+            <span aria-hidden className="hidden h-3 w-px bg-white/15 sm:block" />
+            <span>
+              <span className="text-white/70">02</span> We tailor it to your practice
+            </span>
+            <span aria-hidden className="hidden h-3 w-px bg-white/15 sm:block" />
+            <span>
+              <span className="text-white/70">03</span> Launch
             </span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-3">
-            <span className="text-[10px] tracking-[0.2em] text-white/20 font-light">
-              © 2026
-            </span>
-            <span className="text-white/10">·</span>
-            <span className="text-[10px] tracking-[0.15em] text-white/25 font-light">
-              Designed by{" "}
-              <a
-                href="https://opkie.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/40 hover:text-white/70 transition-colors"
-              >
-                Opkie
-              </a>
-            </span>
-          </div>
+          <span className="text-[10px] font-light uppercase tracking-[0.2em] text-white/30">
+            Designed & engineered by{" "}
+            <a
+              href="https://opkie.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/55 transition-colors hover:text-white"
+            >
+              Opkie
+            </a>{" "}
+            · © 2026
+          </span>
         </div>
       </motion.footer>
     </main>
   );
 }
 
-export default function DesignRegistryPage() {
+export default function CollectionPage() {
   return (
     <Suspense fallback={<div className="h-screen w-screen bg-[#0C0C0C]" />}>
-      <DesignRegistryContent />
+      <CollectionContent />
     </Suspense>
   );
 }
