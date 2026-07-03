@@ -30,13 +30,11 @@ type Concept = {
   audience: string;
   pullLine: string;
   signatures: string[];
-  palette: { hex: string; name: string }[];
   /* visual identity */
   bg: string;
   text: string;
   muted: string;
   accent: string;
-  line: string;
   nameFont: string;
   nameClass: string;
   eyebrowFont: string;
@@ -57,17 +55,10 @@ const concepts: Concept[] = [
       "A page-turn before & after reveal",
       "Masthead typography, brass rules, matted plates",
     ],
-    palette: [
-      { hex: "#F7F5F0", name: "Porcelain" },
-      { hex: "#16130F", name: "Ink" },
-      { hex: "#9C7E46", name: "Brass" },
-      { hex: "#5E2A2B", name: "Oxblood" },
-    ],
     bg: "#F7F5F0",
     text: "#16130F",
     muted: "#6B675E",
     accent: "#9C7E46",
-    line: "rgba(22,19,15,0.14)",
     nameFont: "font-t1-display",
     nameClass: "font-light tracking-[-0.01em]",
     eyebrowFont: "font-sans",
@@ -86,17 +77,10 @@ const concepts: Concept[] = [
       "Live financing calculator & smile assessment",
       "Telemetry stats and a scan-comparison gallery",
     ],
-    palette: [
-      { hex: "#0A0C10", name: "Obsidian" },
-      { hex: "#F4F6F8", name: "Signal white" },
-      { hex: "#67E8F9", name: "Ice" },
-      { hex: "#A78BFA", name: "Violet" },
-    ],
     bg: "#0A0C10",
     text: "#F4F6F8",
     muted: "rgba(244,246,248,0.55)",
     accent: "#67E8F9",
-    line: "rgba(244,246,248,0.14)",
     nameFont: "font-innovator",
     nameClass: "font-medium tracking-[-0.02em]",
     eyebrowFont: "font-t2-mono",
@@ -115,17 +99,10 @@ const concepts: Concept[] = [
       "A comfort menu — sedation, blankets, breaks",
       "Live open-now status and blob-framed photography",
     ],
-    palette: [
-      { hex: "#F4F6F1", name: "Mist" },
-      { hex: "#2E3B34", name: "Moss" },
-      { hex: "#6D8B7D", name: "Eucalyptus" },
-      { hex: "#C97E5D", name: "Clay" },
-    ],
     bg: "#F4F6F1",
     text: "#2E3B34",
     muted: "#5F6E65",
     accent: "#566E61",
-    line: "rgba(46,59,52,0.14)",
     nameFont: "font-sanctuary",
     nameClass: "font-extralight lowercase tracking-[0.01em]",
     eyebrowFont: "font-sanctuary",
@@ -237,30 +214,6 @@ function ConceptAmbient({ id, active }: { id: string; active: boolean }) {
 
 /* ── Shared bits ───────────────────────────────────────────────── */
 
-function PaletteChips({ concept }: { concept: Concept }) {
-  return (
-    <div className="flex items-center gap-2.5">
-      {concept.palette.map((c) => (
-        <span
-          key={c.hex}
-          title={c.name}
-          className="h-3.5 w-3.5 rounded-full"
-          style={{
-            backgroundColor: c.hex,
-            boxShadow: `inset 0 0 0 1px ${concept.line}`,
-          }}
-        />
-      ))}
-      <span
-        className={`ml-1 text-[10px] uppercase tracking-[0.22em] ${concept.eyebrowFont}`}
-        style={{ color: concept.muted }}
-      >
-        {concept.palette.map((c) => c.name).join(" · ")}
-      </span>
-    </div>
-  );
-}
-
 function SignatureList({
   concept,
   visible,
@@ -340,10 +293,10 @@ function CollectionContent() {
               One practice. Three ways to meet it.
             </h1>
             <p className="mt-3 max-w-xl text-[13.5px] font-light leading-relaxed text-white/55">
-              Each concept below is a complete, working website with its own
-              typography, palette, and interactive signature — not a theme with
-              swapped colors. Choose the one that feels like your practice; we
-              tailor every word, photograph, and detail to you.
+              Each concept below is a homepage design with its own typography,
+              personality, and interactive signature. Choose the one that feels
+              like your practice — we tailor every word, photograph, color, and
+              detail to your practice.
             </p>
           </div>
 
@@ -446,9 +399,8 @@ function CollectionContent() {
                     <SignatureList concept={c} visible={active} />
                   </div>
 
-                  {/* Bottom: palette + CTA */}
+                  {/* Bottom: CTA */}
                   <div className="flex flex-col gap-6">
-                    <PaletteChips concept={c} />
                     <span className="group/cta inline-flex items-center gap-3">
                       <span
                         className={`relative text-[12px] uppercase tracking-[0.18em] ${c.eyebrowFont}`}
@@ -539,8 +491,6 @@ function CollectionContent() {
                 </p>
 
                 <SignatureList concept={c} visible />
-
-                <PaletteChips concept={c} />
 
                 <Link
                   href={`/${c.id}`}

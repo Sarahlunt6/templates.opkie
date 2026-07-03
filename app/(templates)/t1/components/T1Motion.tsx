@@ -146,6 +146,7 @@ export function ParallaxImage({
   sizes = "100vw",
   priority = false,
   drift = 6,
+  reveal = true,
 }: {
   src: string;
   alt: string;
@@ -155,6 +156,8 @@ export function ParallaxImage({
   priority?: boolean;
   /** total drift, in % of frame height */
   drift?: number;
+  /** unmask the frame with a clip-path reveal as it scrolls into view */
+  reveal?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -163,9 +166,17 @@ export function ParallaxImage({
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [`-${drift}%`, `${drift}%`]);
+  const unmask = reveal && !reduced;
 
   return (
-    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+    <motion.div
+      ref={ref}
+      className={`relative overflow-hidden ${className}`}
+      initial={unmask ? { clipPath: "inset(0 0 100% 0)" } : false}
+      whileInView={unmask ? { clipPath: "inset(0 0 0% 0)" } : undefined}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 1.05, ease: T1_EASE }}
+    >
       <motion.div
         className="absolute -inset-x-0 -inset-y-[8%]"
         style={reduced ? undefined : { y }}
@@ -180,7 +191,40 @@ export function ParallaxImage({
           className={`object-cover ${imgClassName}`}
         />
       </motion.div>
-    </div>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Drift — subtle scroll parallax for ornaments (chapter numerals)    */
+/* ------------------------------------------------------------------ */
+
+export function Drift({
+  children,
+  className = "",
+  range = 20,
+}: {
+  children: ReactNode;
+  className?: string;
+  /** total vertical travel in px (±range/2 around rest) */
+  range?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [range, -range]);
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      style={reduced ? undefined : { y }}
+    >
+      {children}
+    </motion.div>
   );
 }
 
@@ -238,7 +282,7 @@ export function BrassCounter({
   decimals = 0,
   suffix = "",
   className = "",
-  duration = 1.8,
+  duration = 2.4,
 }: {
   value: number;
   decimals?: number;
@@ -267,7 +311,9 @@ export function BrassCounter({
         const startTime = performance.now();
         const tick = (now: number) => {
           const progress = Math.min((now - startTime) / (duration * 1000), 1);
-          const eased = 1 - Math.pow(1 - progress, 4); // quart out
+          // press-counter feel: fast spin-up, long settle (expo out)
+          const eased =
+            progress === 1 ? 1 : 1 - Math.pow(2, -9.5 * progress);
           setDisplay(eased * value);
           if (progress < 1) requestAnimationFrame(tick);
         };

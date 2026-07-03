@@ -73,7 +73,7 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "The Opkie Collection — Three Website Concepts for Your Practice",
   description:
-    "Three complete, working dental website concepts — editorial luxury, cinematic technology, and organic calm. Choose the one that feels like your practice; Opkie tailors every detail to you.",
+    "Three dental homepage concepts — editorial luxury, cinematic technology, and organic calm. Choose the one that feels like your practice; Opkie tailors every word, photograph, color, and detail to your practice.",
 };
 
 export default function RootLayout({
