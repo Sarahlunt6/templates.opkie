@@ -108,6 +108,7 @@ export default function T1PageTurnReveal({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onPointerLeave={endDrag}
+        data-cursor="turn"
         className="relative w-full cursor-ew-resize select-none overflow-hidden border border-[#9C7E46]/35 touch-pan-y"
       >
         <div className="relative aspect-[4/3] w-full md:aspect-[21/10]">

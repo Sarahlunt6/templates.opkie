@@ -1,4 +1,4 @@
-import { LineReveal, Fade } from "./T1Motion";
+import { LineReveal, Fade, Drift } from "./T1Motion";
 
 interface T1ChapterHeadingProps {
   numeral: string;
@@ -23,12 +23,14 @@ export default function T1ChapterHeading({
   return (
     <header className="relative">
       <div className="flex items-end gap-6 md:gap-10">
-        <span
-          aria-hidden="true"
-          className="t1-numeral-outline text-[4.5rem] leading-[0.8] md:text-[7rem]"
-        >
-          {numeral}
-        </span>
+        <Drift range={20}>
+          <span
+            aria-hidden="true"
+            className="t1-numeral-outline block text-[4.5rem] leading-[0.8] md:text-[7rem]"
+          >
+            {numeral}
+          </span>
+        </Drift>
         <div className={`h-px flex-1 ${dark ? "bg-[#F7F5F0]/20" : "bg-[#16130F]/15"}`} />
         <p className="t1-eyebrow pb-1 text-right">{kicker}</p>
       </div>
