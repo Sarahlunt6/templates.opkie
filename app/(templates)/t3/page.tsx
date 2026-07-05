@@ -4,10 +4,13 @@
  * ═══════════════════════════════════════════════════════════════════════
  * T3 HAVEN — a restorative ritual for people who dread the dentist
  *
- * Light organic wellness: Mist canvas, Moss type, Eucalyptus accent,
- * one Clay moment per screen. Two-voice typography (Outfit extralight +
- * Newsreader italic). The signature is the guided-breath moment right
- * after the hero. All practice facts interpolate from @/data/master.
+ * Sage sanctuary: pale sage-green canvas, immersive photography with
+ * floating glassmorphic annotation chips, numbered first-visit process
+ * cards, a mission + stats band, and a photo-testimonial masonry.
+ * Oversized two-voice typography (Outfit extralight + Newsreader italic);
+ * Moss type, Eucalyptus accent, one Clay moment per screen. The signature
+ * is still the guided-breath moment right after the hero. All practice
+ * facts interpolate from @/data/master.
  * ═══════════════════════════════════════════════════════════════════════
  */
 
@@ -24,6 +27,7 @@ import T3HavenNav from "./components/T3HavenNav";
 import T3HavenHero from "./components/T3HavenHero";
 import T3BreathGuide from "./components/T3BreathGuide";
 import T3FirstVisit from "./components/T3FirstVisit";
+import T3MissionStats from "./components/T3MissionStats";
 import T3HavenServices from "./components/T3HavenServices";
 import T3HavenDoctors from "./components/T3HavenDoctors";
 import T3Transformations from "./components/T3Transformations";
@@ -61,8 +65,14 @@ export default function Template3Page() {
         {/* signature: the guided breath, flowing into the comfort story */}
         <T3BreathGuide hasSedation={trustSignals.hasSedationAnxietyCare} />
 
-        {/* philosophy — how a first visit actually unfolds */}
+        {/* philosophy — a first visit as four numbered, honest steps */}
         <T3FirstVisit />
+
+        {/* mission sentence, insurance text-marks, and calm stats */}
+        <T3MissionStats
+          insuranceAcceptedText={trustSignals.insuranceAcceptedText}
+          locations={clientMasterData.locations}
+        />
 
         {/* services — soft organic bento with expanding detail + clay emergency card */}
         <T3HavenServices

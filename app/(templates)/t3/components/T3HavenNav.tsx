@@ -43,10 +43,10 @@ export default function T3HavenNav({
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-700 ${
+      className={`fixed inset-x-0 top-0 z-40 backdrop-blur-md transition-all duration-700 ${
         scrolled
-          ? "border-b border-[var(--t3-line)] bg-[#f4f6f1e6] backdrop-blur-md"
-          : "bg-transparent"
+          ? "border-b border-[var(--t3-glass-border)] bg-[rgba(255,255,255,0.55)] shadow-[var(--t3-glass-shadow)]"
+          : "border-b border-transparent bg-[rgba(255,255,255,0.25)]"
       }`}
     >
       <nav
@@ -75,7 +75,7 @@ export default function T3HavenNav({
               key={link.href}
               href={link.href}
               onClick={(e) => handleAnchor(e, link.href)}
-              className="text-sm font-light text-[var(--t3-moss-soft)] transition-colors duration-500 hover:text-[var(--t3-euc-deep)]"
+              className="text-sm font-light text-[var(--t3-moss-soft)] transition-colors duration-500 hover:text-[var(--t3-euc-ink)]"
             >
               {link.label}
             </a>
@@ -86,7 +86,7 @@ export default function T3HavenNav({
         <div className="flex items-center gap-5">
           <a
             href={telHref(phone)}
-            className="hidden text-sm font-light text-[var(--t3-moss)] transition-colors duration-500 hover:text-[var(--t3-euc-deep)] lg:block"
+            className="hidden text-sm font-light text-[var(--t3-moss)] transition-colors duration-500 hover:text-[var(--t3-euc-ink)] lg:block"
           >
             {phone}
           </a>
@@ -96,7 +96,7 @@ export default function T3HavenNav({
             rel={hasBooking ? "noopener noreferrer" : undefined}
             className="t3-btn t3-btn-primary px-5 py-2.5 text-sm"
           >
-            Reserve a visit
+            Book a visit
           </a>
         </div>
       </nav>

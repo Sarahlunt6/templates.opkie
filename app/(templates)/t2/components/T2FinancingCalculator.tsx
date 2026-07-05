@@ -2,11 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Check } from "lucide-react";
 import { bookingHref, telHref, location, EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
-   Financing calculator — a payment instrument panel. Sliders with
-   diamond thumbs, mono readouts, live payment telemetry.
+   Treatment configurator — build your plan like a flagship spec
+   sheet: selectable option rows with mono pricing, precision
+   sliders, a live payment readout, and a running total anchored
+   bottom-right above a full-width pill CTA.
    ──────────────────────────────────────────────────────────────── */
 
 interface FinancingOption {
@@ -101,6 +104,61 @@ function Slider({
   );
 }
 
+/** Configurator option row — name left, mono price right, volt check when selected. */
+function OptionRow({
+  selected,
+  onSelect,
+  name,
+  detail,
+  price,
+}: {
+  selected: boolean;
+  onSelect: () => void;
+  name: string;
+  detail?: string;
+  price: string;
+}) {
+  return (
+    <button
+      onClick={onSelect}
+      aria-pressed={selected}
+      className={`flex w-full items-center gap-4 rounded-xl border px-4 py-3.5 text-left transition-colors duration-300 ${
+        selected
+          ? "border-[var(--t2p-volt)] bg-[rgba(126,224,75,0.06)]"
+          : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-volt-dim)]"
+      }`}
+    >
+      <span
+        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+          selected
+            ? "border-[var(--t2p-volt)] bg-[var(--t2p-volt)] text-[#061007]"
+            : "border-[var(--t2p-line-strong)] text-transparent"
+        }`}
+        aria-hidden="true"
+      >
+        <Check className="h-3 w-3" strokeWidth={3} />
+      </span>
+      <span className="flex-1 min-w-0">
+        <span className="block text-sm font-medium text-[var(--t2p-text)]">
+          {name}
+        </span>
+        {detail && (
+          <span className="mt-0.5 block text-xs leading-relaxed text-[var(--t2p-text-50)]">
+            {detail}
+          </span>
+        )}
+      </span>
+      <span
+        className={`t2p-mono shrink-0 text-[0.75rem] ${
+          selected ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text-50)]"
+        }`}
+      >
+        {price}
+      </span>
+    </button>
+  );
+}
+
 export default function T2FinancingCalculator() {
   const [treatment, setTreatment] = useState(TREATMENT_PRESETS[0]);
   const [cost, setCost] = useState(TREATMENT_PRESETS[0].avgPrice);
@@ -127,13 +185,13 @@ export default function T2FinancingCalculator() {
   }, [cost, down, plan, months]);
 
   return (
-    <div className="t2p-tick relative border border-[var(--t2p-line-strong)] bg-[var(--t2p-bg)]">
+    <div className="relative overflow-hidden rounded-2xl border border-[var(--t2p-line-strong)] bg-[var(--t2p-bg)]">
       {/* Header */}
       <div className="border-b border-[var(--t2p-line)] px-6 md:px-9 py-6 flex items-center justify-between gap-4">
         <div>
-          <p className="t2p-label mb-2">Payment instrument</p>
+          <p className="t2p-label mb-2">Configurator</p>
           <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
-            Model your monthly payment
+            Build your treatment plan
           </h3>
         </div>
         <span className="t2p-mono hidden sm:block text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
@@ -144,28 +202,24 @@ export default function T2FinancingCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-5">
         {/* Inputs */}
         <div className="lg:col-span-3 px-6 md:px-9 py-8 space-y-9 lg:border-r border-[var(--t2p-line)]">
-          {/* Treatment presets */}
+          {/* Treatment option rows */}
           <div>
             <p className="t2p-mono mb-3.5 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
-              Treatment
+              01 / Treatment
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div className="space-y-2">
               {TREATMENT_PRESETS.map((t) => (
-                <button
+                <OptionRow
                   key={t.label}
-                  onClick={() => {
+                  selected={treatment.label === t.label}
+                  onSelect={() => {
                     setTreatment(t);
                     setCost(t.avgPrice);
                     setDown(0);
                   }}
-                  className={`t2p-mono px-3.5 py-2 text-[0.6875rem] uppercase tracking-[0.12em] border transition-colors duration-300 ${
-                    treatment.label === t.label
-                      ? "border-[var(--t2p-ice)] text-[var(--t2p-ice)] bg-[rgba(103,232,249,0.06)]"
-                      : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-ice-dim)]"
-                  }`}
-                >
-                  {t.label}
-                </button>
+                  name={t.label}
+                  price={`from ${fmt(t.minPrice)}`}
+                />
               ))}
             </div>
           </div>
@@ -197,37 +251,24 @@ export default function T2FinancingCalculator() {
             maxLabel={fmt(Math.floor(cost * 0.5))}
           />
 
-          {/* Plan */}
+          {/* Plan option rows */}
           <div>
             <p className="t2p-mono mb-3.5 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
-              Plan
+              02 / Financing
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="space-y-2">
               {FINANCING_OPTIONS.map((o) => (
-                <button
+                <OptionRow
                   key={o.id}
-                  onClick={() => {
+                  selected={plan.id === o.id}
+                  onSelect={() => {
                     setPlan(o);
                     setMonths(Math.min(Math.max(months, o.minMonths), o.maxMonths));
                   }}
-                  className={`p-4 text-left border transition-colors duration-300 ${
-                    plan.id === o.id
-                      ? "border-[var(--t2p-ice)] bg-[rgba(103,232,249,0.05)]"
-                      : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-ice-dim)]"
-                  }`}
-                >
-                  <span className="flex items-baseline justify-between gap-2">
-                    <span className="text-sm font-medium text-[var(--t2p-text)]">
-                      {o.name}
-                    </span>
-                    <span className="t2p-mono text-[0.6875rem] text-[var(--t2p-ice)]">
-                      {o.apr}% APR
-                    </span>
-                  </span>
-                  <span className="mt-1.5 block text-xs leading-relaxed text-[var(--t2p-text-50)]">
-                    {o.description} {o.minMonths}–{o.maxMonths} months.
-                  </span>
-                </button>
+                  name={o.name}
+                  detail={`${o.description} ${o.minMonths}–${o.maxMonths} months.`}
+                  price={o.apr === 0 ? "+$0 interest" : `+${o.apr}% APR`}
+                />
               ))}
             </div>
           </div>
@@ -246,8 +287,8 @@ export default function T2FinancingCalculator() {
         </div>
 
         {/* Readout */}
-        <div className="lg:col-span-2 flex flex-col justify-between px-6 md:px-9 py-8 bg-[var(--t2p-surface)] border-t lg:border-t-0 border-[var(--t2p-line)]">
-          <div>
+        <div className="lg:col-span-2 flex flex-col px-6 md:px-9 py-8 bg-[var(--t2p-surface)] border-t lg:border-t-0 border-[var(--t2p-line)]">
+          <div className="flex-1">
             <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
               Estimated monthly
             </p>
@@ -256,7 +297,7 @@ export default function T2FinancingCalculator() {
               initial={reduced ? false : { opacity: 0.4 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.35, ease: EASE }}
-              className="t2p-mono mt-2 text-5xl md:text-6xl text-[var(--t2p-ice)] tracking-tight"
+              className="t2p-mono mt-2 text-5xl md:text-6xl text-[var(--t2p-volt)] tracking-tight"
             >
               {fmt(result.payment)}
             </motion.p>
@@ -271,7 +312,6 @@ export default function T2FinancingCalculator() {
                   "Total interest",
                   result.interest === 0 ? "$0" : fmt(result.interest),
                 ],
-                ["Total cost", fmt(result.total)],
               ].map(([k, v]) => (
                 <div
                   key={k}
@@ -288,7 +328,7 @@ export default function T2FinancingCalculator() {
             {/* Schedule preview */}
             <button
               onClick={() => setExpanded(!expanded)}
-              className="t2p-mono mt-4 flex w-full items-center justify-between py-2 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-ice)] transition-colors"
+              className="t2p-mono mt-4 flex w-full items-center justify-between py-2 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-volt)] transition-colors"
               aria-expanded={expanded}
             >
               <span>Payment schedule</span>
@@ -325,8 +365,23 @@ export default function T2FinancingCalculator() {
             </AnimatePresence>
           </div>
 
+          {/* Running total — anchored bottom-right */}
           <div className="mt-8">
-            <div className="flex flex-col gap-2.5">
+            <div className="flex items-end justify-between gap-4 border-t border-[var(--t2p-line)] pt-5">
+              <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
+                Est. total
+              </span>
+              <motion.span
+                key={Math.round(result.total)}
+                initial={reduced ? false : { opacity: 0.4 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.35, ease: EASE }}
+                className="t2p-mono text-right text-2xl md:text-3xl tracking-tight text-[var(--t2p-text)]"
+              >
+                {fmt(result.total)}
+              </motion.span>
+            </div>
+            <div className="mt-5 flex flex-col gap-2.5">
               <a href={bookingHref} className="t2p-btn t2p-btn-primary w-full">
                 Start an application
               </a>

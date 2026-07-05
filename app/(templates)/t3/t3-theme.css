@@ -1,32 +1,41 @@
 /* ═══════════════════════════════════════════════════════════════════════
    T3 HAVEN — template-scoped theme
-   Light organic wellness: Mist / Moss / Eucalyptus / Clay / Sand
-   All rules are scoped under .t3-haven so nothing leaks to other templates.
+   Sage sanctuary: a pale sage-green canvas, immersive photography with
+   floating glassmorphic annotation chips, oversized two-voice editorial
+   type (Outfit extralight + Newsreader italic), one clay moment per
+   screen. All rules are scoped under .t3-haven so nothing leaks.
    ═══════════════════════════════════════════════════════════════════════ */
 
 .t3-haven {
   /* palette */
-  --t3-mist: #f4f6f1;
-  --t3-moss: #2e3b34;
-  --t3-euc: #6d8b7d;
-  --t3-euc-deep: #566e61; /* AA-safe on mist for small text & button fills */
-  --t3-clay: #c97e5d;
-  --t3-clay-deep: #a85a34; /* AA-safe on mist for small text */
-  --t3-sand: #e7e0d2;
+  --t3-sage: #e8efe3; /* main canvas — pale sage green */
+  --t3-sage-light: #f2f6ee; /* alternating lighter sections */
+  --t3-moss: #2e3b34; /* text ground */
+  --t3-euc: #6d8b7d; /* eucalyptus accent */
+  --t3-euc-deep: #566e61; /* button fills, large accent phrases */
+  --t3-euc-ink: #47594f; /* AA-safe on sage & sand for small text */
+  --t3-clay: #c97e5d; /* the ONE warm clay moment per screen */
+  --t3-clay-deep: #9a4e28; /* AA-safe clay for small text on sage */
+  --t3-sand: #e7e0d2; /* one warm section */
 
   /* derived */
-  --t3-moss-soft: rgba(46, 59, 52, 0.68);
-  --t3-moss-faint: rgba(46, 59, 52, 0.45);
-  --t3-line: rgba(109, 139, 125, 0.28);
+  --t3-moss-soft: rgba(46, 59, 52, 0.74);
+  --t3-moss-faint: rgba(46, 59, 52, 0.5); /* decorative / large only */
+  --t3-line: rgba(109, 139, 125, 0.3);
   --t3-shadow-soft: 0 18px 48px -20px rgba(46, 59, 52, 0.22);
   --t3-shadow-bloom: 0 30px 70px -24px rgba(46, 59, 52, 0.3);
 
+  /* glassmorphic chips floating over imagery */
+  --t3-glass-bg: rgba(255, 255, 255, 0.55);
+  --t3-glass-border: rgba(255, 255, 255, 0.7);
+  --t3-glass-shadow: 0 12px 32px -12px rgba(46, 59, 52, 0.25);
+
   /* scoped overrides so shared primitives inherit the Haven accent */
   --primary-brand: #566e61;
-  --bg-canvas: #f4f6f1;
+  --bg-canvas: #e8efe3;
   --text-main: #2e3b34;
 
-  background-color: var(--t3-mist);
+  background-color: var(--t3-sage);
   color: var(--t3-moss);
   font-kerning: normal;
 }
@@ -38,7 +47,7 @@
 
 /* visible, calm keyboard focus */
 .t3-haven :focus-visible {
-  outline: 2px solid var(--t3-euc-deep);
+  outline: 2px solid var(--t3-euc-ink);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -49,6 +58,30 @@
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0;
+}
+
+/* oversized editorial display scale */
+.t3-display-hero {
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-weight: 200;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+.t3-display {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 200;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+}
+
+/* mono-ish process index — "0.01" */
+.t3-index {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--t3-euc-ink);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── section marker: breathing-dot + lowercase serif word ─────────────── */
@@ -64,6 +97,27 @@
   border-radius: 9999px;
   background-color: var(--t3-euc);
   flex-shrink: 0;
+}
+
+/* ── glassmorphic annotation chips over imagery ───────────────────────── */
+.t3-glass-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 9999px;
+  background-color: var(--t3-glass-bg);
+  border: 1px solid var(--t3-glass-border);
+  box-shadow: var(--t3-glass-shadow);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.t3-glass-card {
+  border-radius: 1.5rem;
+  background-color: var(--t3-glass-bg);
+  border: 1px solid var(--t3-glass-border);
+  box-shadow: var(--t3-glass-shadow);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 /* ── buttons ──────────────────────────────────────────────────────────── */
@@ -86,7 +140,7 @@
 }
 .t3-btn-primary {
   background-color: var(--t3-euc-deep);
-  color: var(--t3-mist);
+  color: var(--t3-sage-light);
   box-shadow: var(--t3-shadow-soft);
 }
 .t3-btn-primary:hover {
@@ -111,7 +165,7 @@
   border-radius: 44% 56% 48% 52% / 58% 44% 56% 42%;
 }
 
-/* ── ambient background drift (replaces the old Three.js canvas) ──────── */
+/* ── ambient background drift ─────────────────────────────────────────── */
 @keyframes t3-drift-a {
   0% {
     transform: translate3d(-4%, -2%, 0) scale(1);
@@ -141,43 +195,7 @@
   animation: t3-drift-b 110s ease-in-out infinite;
 }
 
-/* ── slow drifting review carousel ────────────────────────────────────── */
-@keyframes t3-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.t3-marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 7%,
-    black 93%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 7%,
-    black 93%,
-    transparent
-  );
-}
-.t3-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: t3-marquee 85s linear infinite;
-}
-.t3-marquee:hover .t3-marquee-track,
-.t3-marquee:focus-within .t3-marquee-track {
-  animation-play-state: paused;
-}
-
-/* ── gentle floating drift for layered hero imagery ───────────────────── */
+/* ── gentle floating drift for glass chips over imagery ───────────────── */
 @keyframes t3-float {
   0%,
   100% {
@@ -190,20 +208,17 @@
 .t3-float {
   animation: t3-float 14s ease-in-out infinite;
 }
+.t3-float-slow {
+  animation: t3-float 18s ease-in-out infinite;
+  animation-delay: -6s;
+}
 
 /* ── reduced motion: everything settles, nothing loops ────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .t3-drift-a,
   .t3-drift-b,
-  .t3-float {
-    animation: none;
-  }
-  .t3-marquee {
-    -webkit-mask-image: none;
-    mask-image: none;
-    overflow-x: auto;
-  }
-  .t3-marquee-track {
+  .t3-float,
+  .t3-float-slow {
     animation: none;
   }
 }

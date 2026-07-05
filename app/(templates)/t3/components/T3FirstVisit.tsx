@@ -1,64 +1,115 @@
 "use client";
 
+import { useSmoothScroll } from "@/components/premium/SmoothScrollProvider";
 import T3Reveal from "./T3Reveal";
 
 /**
- * Philosophy as an actual sequence — how a first visit unfolds.
- * Markers are quiet serif time-words ("first / then / throughout")
- * rather than numbers or badges.
+ * How a first visit unfolds — four numbered process cards in the wellness
+ * register. The mono-ish "0.01 … 0.04" indexes are honest here: a first
+ * visit really is a sequence, and each card ends with a quiet text link
+ * deeper into the page.
  */
 const STEPS = [
   {
-    marker: "first",
-    title: "we just talk",
-    body: "You sit in a regular chair, not the dental one, and tell us what has kept you away. Your history, your worries, what a good visit would look like. Nothing happens until you say you're ready.",
+    index: "0.01",
+    title: "Tell us what you need",
+    body: "A short conversation in a regular chair, not the dental one. What has kept you away, what a good visit looks like for you.",
+    linkHref: "#comfort",
+    linkLabel: "Learn more",
   },
   {
-    marker: "then",
-    title: "you set the pace",
-    body: "Every step gets explained before it happens, not after. A raised hand means we pause — mid-sentence, mid-anything. You can stop the whole visit and come back another day. That offer never expires.",
+    index: "0.02",
+    title: "Meet your dentist",
+    body: "Unhurried introductions before anything clinical. Every step gets explained before it happens — never after.",
+    linkHref: "#doctors",
+    linkLabel: "Learn more",
   },
   {
-    marker: "throughout",
-    title: "comfort stays the default",
-    body: "Numbing that starts slow and gets checked twice. A blanket if you want one. Your playlist in the headphones. Breaks that are treated as part of the appointment, never an inconvenience.",
+    index: "0.03",
+    title: "Begin gentle care",
+    body: "Numbing that starts slow and gets checked twice. A raised hand means we pause, mid-anything, no explanation needed.",
+    linkHref: "#services",
+    linkLabel: "Learn more",
+  },
+  {
+    index: "0.04",
+    title: "Care that grows with you",
+    body: "A plan paced to your comfort and your budget, revisited together. Years of postponed care, caught up calmly.",
+    linkHref: "#visit",
+    linkLabel: "Learn more",
   },
 ];
 
+function SproutGlyph() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.4}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6"
+    >
+      <path d="M12 21v-8" />
+      <path d="M12 13c0-4 2.5-6.5 7-6.5 0 4.5-2.5 6.5-7 6.5Z" />
+      <path d="M12 10C12 7 10 5 6 5c0 3.5 2 5 6 5Z" />
+    </svg>
+  );
+}
+
 export default function T3FirstVisit() {
+  const { scrollTo } = useSmoothScroll();
+
   return (
     <section
       aria-labelledby="first-visit-heading"
       className="relative py-24 sm:py-32 lg:py-40"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <T3Reveal className="mb-16 max-w-2xl sm:mb-24">
+        <T3Reveal className="mb-14 max-w-3xl sm:mb-20">
           <p className="t3-marker mb-6 text-sm font-light text-[var(--t3-moss-soft)]">
             how a first visit goes
           </p>
           <h2
             id="first-visit-heading"
-            className="text-[clamp(1.9rem,4.5vw,3.2rem)] font-extralight leading-[1.12] text-[var(--t3-moss)]"
+            className="t3-display text-[var(--t3-moss)]"
           >
-            your first visit,{" "}
+            Your first visit,{" "}
             <em className="t3-serif text-[var(--t3-euc-deep)]">unhurried</em>
           </h2>
         </T3Reveal>
 
-        <ol className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-10">
+        <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {STEPS.map((step, i) => (
-            <li key={step.marker} className="h-full">
-              <T3Reveal delay={i * 0.15} className="h-full">
-                <div className="mb-7 h-px w-12 bg-[var(--t3-euc)] opacity-60" />
-                <p className="t3-serif mb-3 text-xl text-[var(--t3-euc-deep)]">
-                  {step.marker}
-                </p>
-                <h3 className="mb-4 text-xl font-light text-[var(--t3-moss)]">
-                  {step.title}
-                </h3>
-                <p className="text-[15px] font-light leading-relaxed text-[var(--t3-moss-soft)]">
-                  {step.body}
-                </p>
+            <li key={step.index} className="h-full">
+              <T3Reveal delay={i * 0.12} className="h-full">
+                <article className="flex h-full flex-col rounded-[1.5rem] bg-[var(--t3-sage-light)] p-7 shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 hover:shadow-[var(--t3-shadow-bloom)] sm:p-8">
+                  <div className="mb-8 flex items-start justify-between">
+                    <span className="t3-index">{step.index}</span>
+                    <span className="text-[var(--t3-euc)]" aria-hidden="true">
+                      <SproutGlyph />
+                    </span>
+                  </div>
+                  <h3 className="mb-3 text-xl font-light leading-snug text-[var(--t3-moss)]">
+                    {step.title}
+                  </h3>
+                  <p className="mb-6 text-[15px] font-light leading-relaxed text-[var(--t3-moss-soft)]">
+                    {step.body}
+                  </p>
+                  <a
+                    href={step.linkHref}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollTo(step.linkHref, { offset: -88, duration: 1.6 });
+                    }}
+                    className="mt-auto inline-flex items-center gap-1.5 self-start text-sm font-normal text-[var(--t3-euc-ink)] transition-colors duration-500 hover:text-[var(--t3-moss)]"
+                  >
+                    {step.linkLabel}
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </article>
               </T3Reveal>
             </li>
           ))}

@@ -8,6 +8,7 @@ import T2CareBand from "./components/T2CareBand";
 import T2TechTriptych from "./components/T2TechTriptych";
 import T2Services from "./components/T2Services";
 import T2ScanCompare from "./components/T2ScanCompare";
+import T2Compare from "./components/T2Compare";
 import T2Doctors from "./components/T2Doctors";
 import T2FinancingCalculator from "./components/T2FinancingCalculator";
 import T2SmileAssessment from "./components/T2SmileAssessment";
@@ -20,10 +21,12 @@ import { SectionHeader, ScanDivider, Reveal } from "./components/T2Kit";
 import { practice } from "./components/t2-lib";
 
 /* ═══════════════════════════════════════════════════════════════════
-   T2 PRECISION — dark cinematic digital dentistry
-   The practice as a precision imaging lab. One motif — the scan —
-   runs the whole page: it reveals the hero, divides the sections,
-   and drives the before/after comparison.
+   T2 PRECISION — dark hardware-launch digital dentistry
+   The practice presented like a flagship product: near-black canvas
+   with a volt-green scan accent, pill CTAs, mono spec readouts, and
+   HUD calibration dots. One motif — the scan — still runs the page:
+   it reveals the hero, divides the sections, and drives the
+   before/after comparison. Numbers do the persuading.
    ═══════════════════════════════════════════════════════════════════ */
 
 export default function Template2Page() {
@@ -32,18 +35,18 @@ export default function Template2Page() {
       <T2Nav />
 
       <main>
-        {/* 00 — Cinematic hero: parallax video + scanline reveal */}
+        {/* 00 — Product-launch hero: parallax video + scanline reveal */}
         <T2Hero />
 
         {/* 00.5 — The human beat before the hardware */}
         <T2CareBand />
 
-        {/* 01 — Instrumentation */}
+        {/* 01 — Engineered for precision (bento) */}
         <T2TechTriptych />
 
         <ScanDivider />
 
-        {/* 02 — Services grid */}
+        {/* 02 — Technical specifications (services) */}
         <T2Services />
 
         <ScanDivider />
@@ -53,17 +56,22 @@ export default function Template2Page() {
 
         <ScanDivider />
 
-        {/* 04 — Operator profiles */}
+        {/* 04 — Summit digital vs. the old way */}
+        <T2Compare />
+
+        <ScanDivider />
+
+        {/* 05 — Operator profiles */}
         <T2Doctors />
 
         <ScanDivider />
 
-        {/* 05 — Planning tools: financing + smile assessment */}
+        {/* 06 — Planning tools: configurator + smile assessment */}
         <section id="tools" className="relative py-24 md:py-32 px-6 md:px-12 scroll-mt-20">
           <div className="t2p-blueprint absolute inset-0 pointer-events-none" aria-hidden="true" />
           <div className="relative max-w-7xl mx-auto">
             <SectionHeader
-              index="05"
+              index="06"
               label="Planning tools"
               title={
                 <>
@@ -78,7 +86,7 @@ export default function Template2Page() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="mt-5 flex flex-col md:flex-row md:items-center justify-between gap-6 border border-[var(--t2p-line)] bg-[var(--t2p-surface)] px-7 md:px-9 py-7">
+              <div className="mt-5 flex flex-col md:flex-row md:items-center justify-between gap-6 rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-surface)] px-7 md:px-9 py-7">
                 <div className="max-w-xl">
                   <p className="t2p-label mb-2.5">Intake scan</p>
                   <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
@@ -100,15 +108,15 @@ export default function Template2Page() {
 
         <ScanDivider />
 
-        {/* 06 — Case telemetry (reviews) */}
+        {/* 07 — Case telemetry (reviews) */}
         <T2Reviews />
 
         <ScanDivider />
 
-        {/* 07 — Coordinates: hours, map, insurance, emergency */}
+        {/* 08 — Coordinates: hours, map, insurance, emergency */}
         <T2Visit />
 
-        {/* 08 — Begin your scan */}
+        {/* 09 — Begin your scan */}
         <T2FinalCTA />
       </main>
 

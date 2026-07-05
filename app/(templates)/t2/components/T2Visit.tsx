@@ -44,7 +44,7 @@ export default function T2Visit() {
       <div className="t2p-blueprint absolute inset-0 pointer-events-none" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto">
         <SectionHeader
-          index="07"
+          index="08"
           label="Coordinates"
           title={
             <>
@@ -61,16 +61,16 @@ export default function T2Visit() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="group mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-[var(--t2p-ice-dim)] bg-[rgba(103,232,249,0.05)] px-6 md:px-8 py-5 hover:bg-[rgba(103,232,249,0.09)] transition-colors duration-300"
+            className="group mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-[var(--t2p-volt-dim)] bg-[rgba(126,224,75,0.05)] px-6 md:px-8 py-5 hover:bg-[rgba(126,224,75,0.09)] transition-colors duration-300"
           >
             <span className="flex items-center gap-4">
               <PhoneCall
-                className="h-5 w-5 text-[var(--t2p-ice)]"
+                className="h-5 w-5 text-[var(--t2p-volt)]"
                 strokeWidth={1.5}
                 aria-hidden="true"
               />
               <span>
-                <span className="t2p-mono block text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-ice)]">
+                <span className="t2p-mono block text-[0.625rem] uppercase tracking-[0.2em] text-[var(--t2p-volt)]">
                   Dental emergency
                 </span>
                 <span className="mt-1 block text-sm md:text-base text-[var(--t2p-text)]">
@@ -78,7 +78,7 @@ export default function T2Visit() {
                 </span>
               </span>
             </span>
-            <span className="t2p-mono text-lg md:text-xl text-[var(--t2p-ice)] tracking-tight">
+            <span className="t2p-mono text-lg md:text-xl text-[var(--t2p-volt)] tracking-tight">
               {location.phoneGBP}
             </span>
           </motion.a>
@@ -91,7 +91,7 @@ export default function T2Visit() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, ease: EASE }}
-            className="t2p-tick relative border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-9"
+            className="relative rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-9"
           >
             <div className="flex items-center justify-between mb-7">
               <p className="t2p-label">Hours of operation</p>
@@ -103,7 +103,7 @@ export default function T2Visit() {
                   />
                   <span
                     className={`t2p-mono text-[0.625rem] uppercase tracking-[0.18em] ${
-                      status.open ? "text-[var(--t2p-ice)]" : "text-[var(--t2p-text-50)]"
+                      status.open ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text-50)]"
                     }`}
                   >
                     {status.open ? "Open now" : "Closed now"}
@@ -119,12 +119,12 @@ export default function T2Visit() {
                   <div
                     key={d.day}
                     className={`flex items-baseline justify-between gap-4 py-2.5 border-b border-[var(--t2p-line)] last:border-b-0 ${
-                      isToday ? "bg-[rgba(103,232,249,0.04)] -mx-3 px-3" : ""
+                      isToday ? "bg-[rgba(126,224,75,0.04)] -mx-3 px-3" : ""
                     }`}
                   >
                     <span
                       className={`t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] ${
-                        isToday ? "text-[var(--t2p-ice)]" : "text-[var(--t2p-text-50)]"
+                        isToday ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text-50)]"
                       }`}
                     >
                       {d.day}
@@ -162,7 +162,7 @@ export default function T2Visit() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
-            className="t2p-tick t2p-map relative min-h-[380px] border border-[var(--t2p-line)] overflow-hidden"
+            className="t2p-map relative min-h-[380px] rounded-2xl border border-[var(--t2p-line)] overflow-hidden"
           >
             <iframe
               src={location.googleMapsEmbedUrl}
@@ -173,7 +173,7 @@ export default function T2Visit() {
               referrerPolicy="no-referrer-when-downgrade"
               title={`Map to ${location.practiceNameGBP}`}
             />
-            <span className="t2p-mono pointer-events-none absolute top-4 left-4 bg-[#0A0C10]/85 px-2.5 py-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)]">
+            <span className="t2p-mono pointer-events-none absolute top-4 left-4 bg-[#060806]/85 px-2.5 py-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)]">
               {location.cityServed}, {location.stateServed}
             </span>
           </motion.div>
@@ -186,7 +186,7 @@ export default function T2Visit() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-8"
+            className="rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-8"
           >
             <p className="t2p-label mb-3.5">Insurance</p>
             <p className="text-sm leading-relaxed text-[var(--t2p-text-70)]">
@@ -198,7 +198,7 @@ export default function T2Visit() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.08, ease: EASE }}
-            className="border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-8"
+            className="rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-8"
           >
             <p className="t2p-label mb-3.5">No insurance?</p>
             <p className="text-sm leading-relaxed text-[var(--t2p-text-70)]">

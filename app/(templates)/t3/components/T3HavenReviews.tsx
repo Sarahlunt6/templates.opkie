@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { ReviewData } from "@/types/dentist";
 import T3Reveal from "./T3Reveal";
 
@@ -7,15 +8,54 @@ interface T3HavenReviewsProps {
   reviews: ReviewData[];
 }
 
-function ReviewCard({ review }: { review: ReviewData }) {
+/**
+ * Reviews as a photo-testimonial masonry — a staggered 1/2/3-column grid
+ * mixing white quote cards (reviewer, procedure, rating) with soft imagery
+ * cards carrying a small glassmorphic name-chip. Local practice photos
+ * only; the chip pairs each photo with a real review from sampleReviews.
+ */
+
+/* reviews rendered as image cards, matched to a local photo by procedure */
+const IMAGE_CARD_MAP: Record<string, { src: string; alt: string }> = {
+  "rev-005": {
+    src: "/images/office-interior.jpg",
+    alt: "The calm, light-filled treatment room where sedation visits happen",
+  },
+  "rev-004": {
+    src: "/images/services/invisalign.jpg",
+    alt: "A clear Invisalign aligner tray held up to the light",
+  },
+};
+
+function RatingDots({ rating }: { rating: number }) {
   return (
-    <figure className="flex w-[320px] flex-shrink-0 flex-col justify-between rounded-[2rem] bg-[var(--t3-sand)] p-7 shadow-[var(--t3-shadow-soft)] sm:w-[420px] sm:p-9">
+    <div
+      className="flex gap-1.5"
+      role="img"
+      aria-label={`Rated ${rating} out of 5`}
+    >
+      {Array.from({ length: 5 }).map((_, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className={`h-1.5 w-1.5 rounded-full ${
+            i < rating ? "bg-[var(--t3-euc)]" : "bg-[var(--t3-line)]"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function QuoteCard({ review }: { review: ReviewData }) {
+  return (
+    <figure className="mb-5 break-inside-avoid rounded-[1.5rem] bg-white p-7 shadow-[var(--t3-shadow-soft)] sm:mb-6 sm:p-8">
       <blockquote>
-        <p className="t3-serif text-[17px] leading-relaxed text-[var(--t3-moss)] sm:text-[19px]">
+        <p className="t3-serif text-[17px] leading-relaxed text-[var(--t3-moss)]">
           &ldquo;{review.reviewText}&rdquo;
         </p>
       </blockquote>
-      <figcaption className="mt-7 flex items-end justify-between gap-4">
+      <figcaption className="mt-6 flex items-end justify-between gap-4">
         <div>
           <p className="text-sm font-normal text-[var(--t3-moss)]">
             {review.reviewerName}
@@ -25,79 +65,91 @@ function ReviewCard({ review }: { review: ReviewData }) {
             {review.isVerifiedPatient ? " · verified patient" : ""}
           </p>
         </div>
-        <div
-          className="flex gap-1.5 pb-0.5"
-          role="img"
-          aria-label={`Rated ${review.rating} out of 5`}
-        >
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span
-              key={i}
-              aria-hidden="true"
-              className={`h-1.5 w-1.5 rounded-full ${
-                i < review.rating
-                  ? "bg-[var(--t3-euc)]"
-                  : "bg-[var(--t3-line)]"
-              }`}
-            />
-          ))}
+        <div className="pb-0.5">
+          <RatingDots rating={review.rating} />
         </div>
       </figcaption>
     </figure>
   );
 }
 
-/**
- * Reviews as a slow drifting carousel — a continuous, pausable CSS drift
- * (85s per loop) with review text set in Newsreader italic. Under
- * prefers-reduced-motion it becomes a plain horizontally scrollable row.
- */
+function ImageCard({
+  review,
+  image,
+}: {
+  review: ReviewData;
+  image: { src: string; alt: string };
+}) {
+  return (
+    <figure className="relative mb-5 break-inside-avoid overflow-hidden rounded-[1.5rem] shadow-[var(--t3-shadow-soft)] sm:mb-6">
+      <div className="relative aspect-[4/5]">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          loading="lazy"
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(46,59,52,0.28), transparent 45%)",
+          }}
+        />
+      </div>
+      <figcaption className="absolute inset-x-4 bottom-4">
+        <div className="t3-glass-chip w-auto max-w-full px-4 py-2.5">
+          <div className="min-w-0">
+            <p className="truncate text-[13px] font-normal text-[var(--t3-moss)]">
+              {review.reviewerName}{" "}
+              <span className="font-light text-[var(--t3-moss-soft)]">
+                · {review.procedureCategory.toLowerCase()}
+              </span>
+            </p>
+          </div>
+          <RatingDots rating={review.rating} />
+        </div>
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function T3HavenReviews({ reviews }: T3HavenReviewsProps) {
   return (
     <section
       aria-labelledby="reviews-heading"
-      className="relative overflow-hidden py-24 sm:py-32 lg:py-40"
+      className="relative bg-[var(--t3-sage-light)] py-24 sm:py-32 lg:py-40"
     >
-      <div className="mx-auto mb-14 max-w-7xl px-5 sm:mb-20 sm:px-8">
-        <T3Reveal className="max-w-2xl">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <T3Reveal className="mb-14 max-w-2xl sm:mb-20">
           <p className="t3-marker mb-6 text-sm font-light text-[var(--t3-moss-soft)]">
             in their words
           </p>
           <h2
             id="reviews-heading"
-            className="text-[clamp(1.9rem,4.5vw,3.2rem)] font-extralight leading-[1.12] text-[var(--t3-moss)]"
+            className="t3-display text-[var(--t3-moss)]"
           >
             what patients{" "}
             <em className="t3-serif text-[var(--t3-euc-deep)]">tell us</em>
           </h2>
         </T3Reveal>
-      </div>
 
-      <T3Reveal delay={0.15}>
-        <div
-          className="t3-marquee"
-          role="region"
-          aria-label="Patient reviews, drifting slowly"
-        >
-          <div className="t3-marquee-track">
-            <div className="flex gap-6 pr-6 sm:gap-8 sm:pr-8">
-              {reviews.map((review) => (
-                <ReviewCard key={review.id} review={review} />
-              ))}
-            </div>
-            {/* duplicate strip for the seamless loop — hidden from AT */}
-            <div className="flex gap-6 pr-6 sm:gap-8 sm:pr-8" aria-hidden="true">
-              {reviews.map((review) => (
-                <ReviewCard key={`${review.id}-dup`} review={review} />
-              ))}
-            </div>
+        <T3Reveal delay={0.15}>
+          <div className="columns-1 gap-5 sm:columns-2 sm:gap-6 lg:columns-3">
+            {reviews.map((review) => {
+              const image = IMAGE_CARD_MAP[review.id];
+              return image ? (
+                <ImageCard key={review.id} review={review} image={image} />
+              ) : (
+                <QuoteCard key={review.id} review={review} />
+              );
+            })}
           </div>
-        </div>
-      </T3Reveal>
-
-      <p className="mt-12 px-5 text-center text-sm font-light text-[var(--t3-moss-faint)] sm:px-8">
-        drift pauses when you hover
-      </p>
+        </T3Reveal>
+      </div>
     </section>
   );
 }

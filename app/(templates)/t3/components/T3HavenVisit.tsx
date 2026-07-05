@@ -57,7 +57,6 @@ export default function T3HavenVisit({
       id="visit"
       aria-labelledby="visit-heading"
       className="relative py-24 sm:py-32 lg:py-40"
-      style={{ backgroundColor: "rgba(231,224,210,0.4)" }}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <T3Reveal className="mb-16 max-w-2xl sm:mb-20">
@@ -66,7 +65,7 @@ export default function T3HavenVisit({
           </p>
           <h2
             id="visit-heading"
-            className="text-[clamp(1.9rem,4.5vw,3.2rem)] font-extralight leading-[1.12] text-[var(--t3-moss)]"
+            className="t3-display text-[var(--t3-moss)]"
           >
             the practical part,{" "}
             <em className="t3-serif text-[var(--t3-euc-deep)]">
@@ -79,7 +78,7 @@ export default function T3HavenVisit({
           {/* ── hours + contact ─────────────────────────────── */}
           <T3Reveal delay={0.1} className="lg:col-span-5">
             {/* live status */}
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[var(--t3-line)] bg-[var(--t3-mist)] px-4 py-2">
+            <div className="t3-glass-chip mb-8 px-4 py-2">
               <span
                 aria-hidden="true"
                 className={`h-2 w-2 rounded-full ${
@@ -110,7 +109,7 @@ export default function T3HavenVisit({
                     <span>
                       {day.day.toLowerCase()}
                       {isToday && (
-                        <em className="t3-serif ml-2 text-[var(--t3-euc-deep)]">
+                        <em className="t3-serif ml-2 text-[var(--t3-euc-ink)]">
                           today
                         </em>
                       )}
@@ -131,7 +130,7 @@ export default function T3HavenVisit({
               <p className="pt-2">
                 <a
                   href={telHref(location.phoneGBP)}
-                  className="text-base font-normal text-[var(--t3-euc-deep)] transition-colors duration-500 hover:text-[var(--t3-moss)]"
+                  className="text-base font-normal text-[var(--t3-euc-ink)] transition-colors duration-500 hover:text-[var(--t3-moss)]"
                 >
                   {location.phoneGBP}
                 </a>
@@ -144,14 +143,14 @@ export default function T3HavenVisit({
               rel={hasBooking ? "noopener noreferrer" : undefined}
               className="t3-btn t3-btn-primary px-7 py-3.5 text-[15px]"
             >
-              Reserve a visit
+              Book a visit
             </a>
           </T3Reveal>
 
           {/* ── map + reassurances ──────────────────────────── */}
           <div className="lg:col-span-7">
             <T3Reveal delay={0.2}>
-              <div className="relative mb-10 aspect-[16/10] overflow-hidden rounded-[2.5rem] border-4 border-[var(--t3-mist)] shadow-[var(--t3-shadow-bloom)]">
+              <div className="relative mb-10 aspect-[16/10] overflow-hidden rounded-[2.5rem] border-4 border-[var(--t3-sage-light)] shadow-[var(--t3-shadow-bloom)]">
                 <GoogleMapEmbed
                   mapUrl={location.googleMapsEmbedUrl}
                   practiceName={practiceName}
@@ -161,7 +160,7 @@ export default function T3HavenVisit({
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               <T3Reveal delay={0.25}>
-                <h3 className="t3-serif mb-3 text-lg text-[var(--t3-euc-deep)]">
+                <h3 className="t3-serif mb-3 text-lg text-[var(--t3-euc-ink)]">
                   insurance, handled
                 </h3>
                 <p className="text-sm font-light leading-relaxed text-[var(--t3-moss-soft)]">
@@ -171,7 +170,7 @@ export default function T3HavenVisit({
 
               {trustSignals.membershipPlanSummary && (
                 <T3Reveal delay={0.3}>
-                  <h3 className="t3-serif mb-3 text-lg text-[var(--t3-euc-deep)]">
+                  <h3 className="t3-serif mb-3 text-lg text-[var(--t3-euc-ink)]">
                     no insurance? no problem
                   </h3>
                   <p className="text-sm font-light leading-relaxed text-[var(--t3-moss-soft)]">

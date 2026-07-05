@@ -109,10 +109,10 @@ export default function T2ScanCompare() {
               role="tab"
               aria-selected={i === caseIdx}
               onClick={() => setCaseIdx(i)}
-              className={`t2p-mono px-4 py-2 text-[0.6875rem] uppercase tracking-[0.14em] border transition-colors duration-300 ${
+              className={`t2p-mono rounded-full px-4 py-2 text-[0.6875rem] uppercase tracking-[0.14em] border transition-colors duration-300 ${
                 i === caseIdx
-                  ? "border-[var(--t2p-ice)] text-[var(--t2p-ice)] bg-[rgba(103,232,249,0.06)]"
-                  : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-ice-dim)]"
+                  ? "border-[var(--t2p-volt)] text-[var(--t2p-volt)] bg-[rgba(126,224,75,0.06)]"
+                  : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-volt-dim)]"
               }`}
             >
               {String(i + 1).padStart(2, "0")} · {c.procedureType}
@@ -178,22 +178,22 @@ export default function T2ScanCompare() {
               style={{ left: `${pos}%` }}
             >
               <span className="t2p-beam-v h-full w-[2px]" aria-hidden="true" />
-              {/* Diamond handle */}
+              {/* HUD marker handle */}
               <span
-                className="absolute top-1/2 -translate-y-1/2 h-4 w-4 rotate-45 border border-[var(--t2p-ice)] bg-[#0A0C10] shadow-[0_0_14px_rgba(103,232,249,0.6)]"
+                className="absolute top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-[var(--t2p-volt)] bg-[#060806] shadow-[0_0_14px_rgba(126,224,75,0.6)]"
                 aria-hidden="true"
               />
             </div>
 
             {/* Mono readouts */}
-            <span className="t2p-mono absolute top-3 left-3 md:top-4 md:left-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] bg-[#0A0C10]/70 px-2 py-1">
+            <span className="t2p-mono absolute top-3 left-3 md:top-4 md:left-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] bg-[#060806]/70 px-2 py-1">
               01 / source
             </span>
-            <span className="t2p-mono absolute top-3 right-3 md:top-4 md:right-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-ice)] bg-[#0A0C10]/70 px-2 py-1">
+            <span className="t2p-mono absolute top-3 right-3 md:top-4 md:right-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-volt)] bg-[#060806]/70 px-2 py-1">
               02 / result
             </span>
             <span
-              className="t2p-mono absolute bottom-3 left-1/2 -translate-x-1/2 text-[0.625rem] tracking-[0.14em] text-[var(--t2p-text-70)] bg-[#0A0C10]/70 px-2.5 py-1"
+              className="t2p-mono absolute bottom-3 left-1/2 -translate-x-1/2 text-[0.625rem] tracking-[0.14em] text-[var(--t2p-text-70)] bg-[#060806]/70 px-2.5 py-1"
               aria-hidden="true"
             >
               scan {Math.round(pos)}%

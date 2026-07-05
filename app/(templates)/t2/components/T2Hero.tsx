@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 import { AnimatedCounter } from "@/components/premium";
 import T2MagneticButton from "./T2MagneticButton";
-import { practice, location, bookingHref, telHref, EASE } from "./t2-lib";
+import { practice, location, bookingHref, EASE } from "./t2-lib";
 import { sampleReviews } from "@/data/master";
 
 const AVG_RATING = (
@@ -19,16 +19,39 @@ const AVG_RATING = (
 ).toFixed(1);
 
 /* ────────────────────────────────────────────────────────────────
-   T2 Hero — cinematic parallax video with the signature scanline.
-   A thin Ice beam sweeps the frame; a wireframe/data overlay is
-   revealed only in a band around the beam, as if the scanner is
-   reading the room.
+   T2 Hero — flagship product launch for a dental practice.
+   Pill eyebrow, huge Space Grotesk headline with a volt→emerald
+   gradient payoff, pill CTAs, and an ArcLight-style stat readout.
+   The signature scanline still sweeps the frame; HUD calibration
+   dots sit on the imagery like alignment markers on a scan.
    ──────────────────────────────────────────────────────────────── */
 
-const TELEMETRY = [
-  { value: 0.1, decimals: 1, suffix: " mm", label: "scan resolution" },
-  { value: 12, decimals: 0, suffix: " min", label: "crown mill time" },
-  { value: 1, decimals: 0, suffix: " visit", label: "most crowns, start to seat" },
+const READOUT = [
+  {
+    value: 0.02,
+    decimals: 2,
+    suffix: " mm",
+    label: "scan accuracy",
+  },
+  {
+    value: 1,
+    decimals: 0,
+    suffix: " visit",
+    label: "same-day crowns",
+  },
+  {
+    value: Number(AVG_RATING),
+    decimals: 1,
+    suffix: "★",
+    label: "patient rating",
+  },
+];
+
+/* HUD calibration markers, placed over the plate like scan targets */
+const HUD_MARKERS = [
+  { top: "22%", left: "72%" },
+  { top: "58%", left: "86%" },
+  { top: "74%", left: "64%" },
 ];
 
 export default function T2Hero() {
@@ -89,17 +112,23 @@ export default function T2Hero() {
           loop
           playsInline
         />
-        {/* Grade: cool, dark, precise */}
-        <div className="absolute inset-0 bg-[#0A0C10]/80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C10] via-[#0A0C10]/40 to-[#0A0C10]/75" />
+        {/* Grade: near-black, precise, faint green undertone */}
+        <div className="absolute inset-0 bg-[#060806]/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060806] via-[#060806]/45 to-[#060806]/75" />
       </motion.div>
+
+      {/* Radial volt glow from the top-right corner */}
+      <div
+        className="t2p-corner-glow absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+      />
 
       {/* ── Scan overlay: wireframe revealed around the beam ── */}
       {!reduced ? (
         <>
           <motion.div
             className="t2p-wireframe absolute inset-0 pointer-events-none"
-            style={{ clipPath: overlayClip, opacity: 0.5 }}
+            style={{ clipPath: overlayClip, opacity: 0.45 }}
             aria-hidden="true"
           />
           <motion.div
@@ -110,10 +139,27 @@ export default function T2Hero() {
         </>
       ) : (
         <div
-          className="t2p-wireframe absolute inset-0 opacity-[0.12] pointer-events-none"
+          className="t2p-wireframe absolute inset-0 opacity-[0.1] pointer-events-none"
           aria-hidden="true"
         />
       )}
+
+      {/* ── HUD calibration markers on the plate ── */}
+      <div
+        className="absolute inset-0 hidden md:block pointer-events-none"
+        aria-hidden="true"
+      >
+        {HUD_MARKERS.map((m, i) => (
+          <motion.span
+            key={i}
+            className="t2p-hud-dot absolute"
+            style={{ top: m.top, left: m.left }}
+            initial={reduced ? false : { opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 + i * 0.25, ease: EASE }}
+          />
+        ))}
+      </div>
 
       {/* ── Top coordinate strip ── */}
       <div className="relative z-10 pt-24 md:pt-28 px-6 md:px-12">
@@ -128,7 +174,7 @@ export default function T2Hero() {
             </span>
           </span>
           <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
-            Digital dentistry
+            {practice.globalPracticeName}
           </span>
         </div>
       </div>
@@ -138,49 +184,49 @@ export default function T2Hero() {
         className="relative z-10 flex-1 flex items-center px-6 md:px-12"
         style={reduced ? undefined : { opacity: contentOpacity }}
       >
-        <div className="max-w-7xl mx-auto w-full py-16">
+        <div className="max-w-7xl mx-auto w-full py-14 md:py-16">
+          {/* Pill eyebrow */}
           <motion.p
             initial={reduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.15, ease: EASE }}
-            className="t2p-label mb-6"
+            className="t2p-mono inline-flex items-center gap-2.5 rounded-full border border-[var(--t2p-line-strong)] bg-[rgba(126,224,75,0.06)] px-4 py-2 text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--t2p-volt)]"
           >
-            {practice.globalPracticeName}
+            <span aria-hidden="true">●</span>
+            Digital dentistry 2.0
           </motion.p>
 
-          <h1 className="font-innovator font-medium tracking-[-0.03em] leading-[0.98] text-[clamp(2.4rem,1.4rem+5.5vw,5.6rem)] max-w-5xl">
-            {["Dentistry, measured", "to a tenth of a millimeter."].map(
-              (line, i) => (
-                <span key={line} className="block overflow-hidden">
-                  <motion.span
-                    className="block"
-                    initial={reduced ? false : { y: "110%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.25 + i * 0.12, ease: EASE }}
-                  >
-                    {i === 1 ? <span className="t2p-duotext">{line}</span> : line}
-                  </motion.span>
-                </span>
-              ),
-            )}
+          <h1 className="font-innovator mt-7 font-medium tracking-[-0.03em] leading-[0.98] text-[clamp(2.6rem,1.4rem+5.8vw,5.8rem)] max-w-5xl">
+            {["Precision", "you can feel."].map((line, i) => (
+              <span key={line} className="block overflow-hidden">
+                <motion.span
+                  className="block"
+                  initial={reduced ? false : { y: "110%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.25 + i * 0.12, ease: EASE }}
+                >
+                  {i === 1 ? <span className="t2p-duotext">{line}</span> : line}
+                </motion.span>
+              </span>
+            ))}
           </h1>
 
           <motion.p
             initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.55, ease: EASE }}
-            className="mt-7 text-base md:text-lg text-[var(--t2p-text-70)] max-w-xl leading-relaxed"
+            className="mt-6 text-base md:text-lg text-[var(--t2p-text-70)] max-w-xl leading-relaxed"
           >
             3D imaging, same-day ceramic crowns, and guide-planned implants —
-            in {location.cityServed}. Scanned, designed, and delivered under
-            one roof.
+            scanned, designed, and delivered under one roof in{" "}
+            {location.cityServed}.
           </motion.p>
 
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.68, ease: EASE }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-9 flex flex-wrap items-center gap-4"
           >
             <T2MagneticButton
               href={bookingHref}
@@ -192,73 +238,55 @@ export default function T2Hero() {
               <span aria-hidden="true">→</span>
             </T2MagneticButton>
             <T2MagneticButton
-              href={telHref}
+              href="#technology"
               className="t2p-btn t2p-btn-ghost"
               magneticRadius={90}
               magneticStrength={0.3}
             >
-              <span>{location.phoneGBP}</span>
+              <span aria-hidden="true" className="text-[0.625rem]">
+                ▶
+              </span>
+              <span>Watch how it works</span>
             </T2MagneticButton>
           </motion.div>
 
-          {/* Patient-trust readout — the dental essentials in one line */}
-          <motion.p
-            initial={reduced ? false : { opacity: 0, y: 14 }}
+          {/* ── Stat readout strip ── */}
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.8, ease: EASE }}
-            className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-t2-mono text-[11px] uppercase tracking-[0.12em] text-[var(--t2p-text-70)]"
+            transition={{ duration: 0.6, delay: 0.82, ease: EASE }}
+            className="mt-12 max-w-2xl grid grid-cols-3 divide-x divide-[var(--t2p-line)] border-y border-[var(--t2p-line)]"
           >
-            <span
-              className="text-[#67E8F9]"
-              role="img"
-              aria-label={`Rated ${AVG_RATING} out of 5 by patients`}
+            {READOUT.map((s, i) => (
+              <div key={s.label} className={i === 0 ? "py-5 pr-4" : "py-5 px-4 md:px-6"}>
+                <p className="t2p-mono text-xl md:text-3xl text-[var(--t2p-text)] tracking-tight">
+                  <AnimatedCounter
+                    value={s.value}
+                    decimals={s.decimals}
+                    suffix={s.suffix}
+                    duration={1.6}
+                  />
+                </p>
+                <p className="t2p-mono mt-1.5 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+
+          {practice.trustSignals.hasSameDayEmergency && (
+            <motion.p
+              initial={reduced ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1, ease: EASE }}
+              className="t2p-mono mt-5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]"
             >
-              ★ {AVG_RATING}
-            </span>
-            <span>{sampleReviews.length} verified patient reviews</span>
-            <span aria-hidden="true" className="opacity-40">
-              /
-            </span>
-            <span>Insurance accepted</span>
-          </motion.p>
+              <span className="text-[var(--t2p-volt)]">＋</span> Same-day
+              emergency appointments held daily
+            </motion.p>
+          )}
         </div>
       </motion.div>
-
-      {/* ── Bottom telemetry strip ── */}
-      <div className="relative z-10 px-6 md:px-12 pb-8">
-        <motion.div
-          initial={reduced ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.85, ease: EASE }}
-          className="max-w-7xl mx-auto border-t border-[var(--t2p-line)] pt-6 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6"
-        >
-          {TELEMETRY.map((t) => (
-            <div key={t.label}>
-              <p className="t2p-mono text-2xl md:text-3xl text-[var(--t2p-text)]">
-                <AnimatedCounter
-                  value={t.value}
-                  decimals={t.decimals}
-                  suffix={t.suffix}
-                  duration={1.6}
-                />
-              </p>
-              <p className="t2p-mono mt-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
-                {t.label}
-              </p>
-            </div>
-          ))}
-          {practice.trustSignals.hasSameDayEmergency && (
-            <div>
-              <p className="t2p-mono text-2xl md:text-3xl text-[var(--t2p-ice)]">
-                Same day
-              </p>
-              <p className="t2p-mono mt-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
-                emergency appointments
-              </p>
-            </div>
-          )}
-        </motion.div>
-      </div>
     </section>
   );
 }

@@ -31,8 +31,9 @@ export default function T2FinalCTA() {
           className="object-cover saturate-[0.4]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[#0A0C10]/90" />
+        <div className="absolute inset-0 bg-[#060806]/90" />
         <div className="t2p-wireframe absolute inset-0 opacity-[0.08]" />
+        <div className="t2p-corner-glow absolute inset-0" />
       </div>
 
       {/* Closing beam sweep */}
@@ -54,7 +55,7 @@ export default function T2FinalCTA() {
             transition={{ duration: 0.5, ease: EASE }}
             className="t2p-label"
           >
-            08 — Intake
+            09 — Intake
           </motion.p>
 
           <motion.h2

@@ -34,7 +34,7 @@ export default function T3Transformations({ cases }: T3TransformationsProps) {
               </p>
               <h2
                 id="smiles-heading"
-                className="mb-6 text-[clamp(1.9rem,4.5vw,3.2rem)] font-extralight leading-[1.12] text-[var(--t3-moss)]"
+                className="t3-display mb-6 text-[var(--t3-moss)]"
               >
                 quiet{" "}
                 <em className="t3-serif text-[var(--t3-euc-deep)]">
@@ -62,7 +62,7 @@ export default function T3Transformations({ cases }: T3TransformationsProps) {
                       onClick={() => setActiveId(c.id)}
                       className={`rounded-full px-5 py-2.5 text-sm font-light transition-all duration-700 ${
                         active
-                          ? "bg-[var(--t3-euc-deep)] text-[var(--t3-mist)] shadow-[var(--t3-shadow-soft)]"
+                          ? "bg-[var(--t3-euc-deep)] text-[var(--t3-sage-light)] shadow-[var(--t3-shadow-soft)]"
                           : "border border-[var(--t3-line)] text-[var(--t3-moss-soft)] hover:border-[var(--t3-euc)] hover:text-[var(--t3-moss)]"
                       }`}
                     >

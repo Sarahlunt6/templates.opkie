@@ -101,7 +101,7 @@ function ServiceTile({ service, delay }: { service: ServiceCard; delay: number }
 
   return (
     <T3Reveal delay={delay} className={`col-span-1 ${service.span}`}>
-      <article className="group flex h-full flex-col overflow-hidden rounded-[2rem] bg-[var(--t3-sand)] shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 hover:shadow-[var(--t3-shadow-bloom)]">
+      <article className="group flex h-full flex-col overflow-hidden rounded-[2rem] bg-[var(--t3-sage-light)] shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 hover:shadow-[var(--t3-shadow-bloom)]">
         <div
           className={`relative w-full overflow-hidden ${
             service.tall ? "aspect-[16/10] md:aspect-[16/9]" : "aspect-[16/10]"
@@ -120,7 +120,7 @@ function ServiceTile({ service, delay }: { service: ServiceCard; delay: number }
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to top, rgba(231,224,210,0.35), transparent 40%)",
+                "linear-gradient(to top, rgba(242,246,238,0.35), transparent 40%)",
             }}
           />
         </div>
@@ -150,7 +150,7 @@ function ServiceTile({ service, delay }: { service: ServiceCard; delay: number }
                 <p className="mb-3 text-sm font-light leading-relaxed text-[var(--t3-moss-soft)]">
                   {service.detail}
                 </p>
-                <p className="t3-serif mb-4 text-[15px] text-[var(--t3-euc-deep)]">
+                <p className="t3-serif mb-4 text-[15px] text-[var(--t3-euc-ink)]">
                   how it feels: {service.feels}
                 </p>
               </motion.div>
@@ -161,7 +161,7 @@ function ServiceTile({ service, delay }: { service: ServiceCard; delay: number }
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
-            className="mt-auto inline-flex items-center gap-2 self-start text-sm font-normal text-[var(--t3-euc-deep)] transition-colors duration-500 hover:text-[var(--t3-moss)]"
+            className="mt-auto inline-flex items-center gap-2 self-start text-sm font-normal text-[var(--t3-euc-ink)] transition-colors duration-500 hover:text-[var(--t3-moss)]"
           >
             <Plus
               aria-hidden="true"
@@ -200,10 +200,12 @@ export default function T3HavenServices({
             </p>
             <h2
               id="services-heading"
-              className="text-[clamp(1.9rem,4.5vw,3.2rem)] font-extralight leading-[1.12] text-[var(--t3-moss)]"
+              className="t3-display text-[var(--t3-moss)]"
             >
-              everything a mouth needs,{" "}
-              <em className="t3-serif text-[var(--t3-euc-deep)]">gently</em>
+              Care for{" "}
+              <em className="t3-serif text-[var(--t3-euc-deep)]">
+                whatever brought you here
+              </em>
             </h2>
           </T3Reveal>
           <T3Reveal delay={0.15} className="lg:col-span-4 lg:col-start-9 lg:self-end">

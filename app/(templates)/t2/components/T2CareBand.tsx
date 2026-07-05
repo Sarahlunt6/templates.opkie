@@ -26,9 +26,10 @@ export default function T2CareBand() {
           transition={{ duration: 0.6, ease: EASE }}
           className="lg:col-span-5"
         >
-          <div className="t2p-portrait relative aspect-[16/11] overflow-hidden border border-[var(--t2p-line-strong)]">
+          <div className="t2p-portrait relative aspect-[16/11] overflow-hidden rounded-2xl border border-[var(--t2p-line-strong)]">
+            <span className="t2p-hud-dot absolute top-4 right-4 z-10" aria-hidden="true" />
             <Image
-              src="/images/team/staff-photo.jpg"
+              src="/images/team-ortho.jpeg"
               alt={`The team at ${practice.globalPracticeName}`}
               fill
               loading="lazy"
@@ -56,7 +57,7 @@ export default function T2CareBand() {
           </p>
           <a
             href="#doctors"
-            className="t2p-mono mt-7 inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-ice)] transition-opacity duration-300 hover:opacity-75"
+            className="t2p-mono mt-7 inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-volt)] transition-opacity duration-300 hover:opacity-75"
           >
             Meet your doctors <span aria-hidden="true">→</span>
           </a>

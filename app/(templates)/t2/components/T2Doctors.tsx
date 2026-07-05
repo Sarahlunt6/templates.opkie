@@ -19,8 +19,8 @@ export default function T2Doctors() {
     <section id="doctors" className="relative py-24 md:py-32 px-6 md:px-12 bg-[var(--t2p-surface)] scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          index="04"
-          label="Your doctors"
+          index="05"
+          label="Operators"
           title={
             <>
               The hands behind <span className="t2p-duotext">the hardware.</span>
@@ -39,7 +39,8 @@ export default function T2Doctors() {
             transition={{ duration: 0.6, ease: EASE }}
             className="lg:col-span-5"
           >
-            <div className="t2p-portrait relative aspect-[3/4] overflow-hidden border border-[var(--t2p-line-strong)]">
+            <div className="t2p-portrait relative aspect-[3/4] overflow-hidden rounded-2xl border border-[var(--t2p-line-strong)]">
+              <span className="t2p-hud-dot absolute top-4 right-4 z-10" aria-hidden="true" />
               <Image
                 src="/images/team/doctor-portrait.jpeg"
                 alt={`Portrait of ${lead.name}, ${lead.role}`}
@@ -68,7 +69,7 @@ export default function T2Doctors() {
             <h3 className="font-innovator text-3xl md:text-4xl font-medium tracking-tight text-[var(--t2p-text)]">
               {lead.name}
             </h3>
-            <p className="mt-2.5 text-base text-[var(--t2p-ice)]">
+            <p className="mt-2.5 text-base text-[var(--t2p-volt)]">
               {lead.role}
             </p>
 
@@ -80,11 +81,11 @@ export default function T2Doctors() {
               {lead.credentials.map((c) => (
                 <li
                   key={c}
-                  className="flex items-baseline gap-3 border-b border-[var(--t2p-line)] py-3 last:border-b-0 text-sm md:text-[0.9375rem] text-[var(--t2p-text-70)]"
+                  className="t2p-mono flex items-baseline gap-3 border-b border-[var(--t2p-line)] py-3 last:border-b-0 text-[0.75rem] md:text-[0.8125rem] tracking-[0.02em] text-[var(--t2p-text-70)]"
                 >
                   <span
                     aria-hidden="true"
-                    className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-ice)]"
+                    className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt)]"
                   />
                   {c}
                 </li>
@@ -103,12 +104,12 @@ export default function T2Doctors() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
-                className="relative bg-[var(--t2p-bg)] border border-[var(--t2p-line)] p-8 md:p-10"
+                className="relative rounded-2xl bg-[var(--t2p-bg)] border border-[var(--t2p-line)] p-8 md:p-10"
               >
                 <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
                   {doc.name}
                 </h3>
-                <p className="mt-2 text-[0.9375rem] text-[var(--t2p-ice)]">
+                <p className="mt-2 text-[0.9375rem] text-[var(--t2p-volt)]">
                   {doc.role}
                 </p>
                 <p className="mt-5 text-sm md:text-[0.9375rem] leading-relaxed text-[var(--t2p-text-70)]">
@@ -118,11 +119,11 @@ export default function T2Doctors() {
                   {doc.credentials.map((c) => (
                     <li
                       key={c}
-                      className="flex items-baseline gap-3 border-b border-[var(--t2p-line)] py-2.5 last:border-b-0 text-sm text-[var(--t2p-text-70)]"
+                      className="t2p-mono flex items-baseline gap-3 border-b border-[var(--t2p-line)] py-2.5 last:border-b-0 text-[0.75rem] tracking-[0.02em] text-[var(--t2p-text-70)]"
                     >
                       <span
                         aria-hidden="true"
-                        className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-ice)]"
+                        className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt)]"
                       />
                       {c}
                     </li>

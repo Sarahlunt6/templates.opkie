@@ -30,7 +30,7 @@ export default function T2Footer() {
             </address>
             <a
               href={telHref}
-              className="t2p-mono mt-3 inline-block text-sm text-[var(--t2p-text)] hover:text-[var(--t2p-ice)] transition-colors"
+              className="t2p-mono mt-3 inline-block text-sm text-[var(--t2p-text)] hover:text-[var(--t2p-volt)] transition-colors"
             >
               {location.phoneGBP}
             </a>
@@ -44,15 +44,16 @@ export default function T2Footer() {
                 ["01", "Technology", "#technology"],
                 ["02", "Services", "#services"],
                 ["03", "Results", "#results"],
-                ["04", "Doctors", "#doctors"],
-                ["07", "Visit", "#visit"],
+                ["04", "Compare", "#compare"],
+                ["05", "Doctors", "#doctors"],
+                ["08", "Visit", "#visit"],
               ].map(([idx, label, href]) => (
                 <a
                   key={href}
                   href={href}
                   className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors"
                 >
-                  <span className="mr-2 text-[var(--t2p-ice)]/60 group-hover:text-[var(--t2p-ice)] transition-colors">
+                  <span className="mr-2 text-[var(--t2p-volt)]/60 group-hover:text-[var(--t2p-volt)] transition-colors">
                     {idx}
                   </span>
                   {label}
@@ -60,9 +61,9 @@ export default function T2Footer() {
               ))}
               <a
                 href={bookingHref}
-                className="t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-ice)]"
+                className="t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-volt)]"
               >
-                <span className="mr-2">08</span>Book a visit
+                <span className="mr-2">09</span>Book a visit
               </a>
             </nav>
           </div>

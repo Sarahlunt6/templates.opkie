@@ -70,7 +70,7 @@ export default function T3BreathGuide({ hasSedation }: T3BreathGuideProps) {
           <T3Reveal>
             <p className="t3-marker mb-14 text-sm font-light text-[var(--t3-moss-soft)]">
               before anything else,{" "}
-              <em className="t3-serif text-[var(--t3-euc-deep)]">breathe</em>
+              <em className="t3-serif text-[var(--t3-euc-ink)]">breathe</em>
             </p>
           </T3Reveal>
 
@@ -146,7 +146,7 @@ export default function T3BreathGuide({ hasSedation }: T3BreathGuideProps) {
           <T3Reveal className="lg:col-span-5">
             <h2
               id="comfort-heading"
-              className="mb-6 text-[clamp(1.9rem,4vw,2.9rem)] font-extralight leading-[1.15] text-[var(--t3-moss)]"
+              className="t3-display mb-6 text-[var(--t3-moss)]"
             >
               dental anxiety is common.
               <br />

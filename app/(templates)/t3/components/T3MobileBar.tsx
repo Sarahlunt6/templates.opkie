@@ -17,7 +17,7 @@ export default function T3MobileBar({ phone, bookingUrl }: T3MobileBarProps) {
 
   return (
     <>
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--t3-line)] bg-[#f4f6f1f2] backdrop-blur-md lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--t3-glass-border)] bg-[rgba(255,255,255,0.6)] backdrop-blur-md lg:hidden">
         <div className="flex items-stretch gap-3 px-4 py-3">
           <a
             href={telHref(phone)}
@@ -33,7 +33,7 @@ export default function T3MobileBar({ phone, bookingUrl }: T3MobileBarProps) {
             className="t3-btn t3-btn-primary flex-1 py-3.5 text-[15px]"
           >
             <CalendarDays aria-hidden="true" className="h-4 w-4" />
-            Reserve a visit
+            Book a visit
           </a>
         </div>
         <div className="h-[env(safe-area-inset-bottom)]" aria-hidden="true" />

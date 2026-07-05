@@ -9,8 +9,9 @@ const NAV_LINKS = [
   { href: "#technology", label: "Technology", index: "01" },
   { href: "#services", label: "Services", index: "02" },
   { href: "#results", label: "Results", index: "03" },
-  { href: "#doctors", label: "Doctors", index: "04" },
-  { href: "#visit", label: "Visit", index: "07" },
+  { href: "#compare", label: "Compare", index: "04" },
+  { href: "#doctors", label: "Doctors", index: "05" },
+  { href: "#visit", label: "Visit", index: "08" },
 ];
 
 export default function T2Nav() {
@@ -33,7 +34,7 @@ export default function T2Nav() {
         transition={{ duration: 0.6, ease: EASE }}
         className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-500 ${
           scrolled
-            ? "bg-[#0A0C10]/90 backdrop-blur-md border-[var(--t2p-line)]"
+            ? "bg-[#060806]/85 backdrop-blur-xl border-[var(--t2p-line)]"
             : "bg-transparent border-transparent"
         }`}
       >
@@ -44,7 +45,7 @@ export default function T2Nav() {
               <span className="font-innovator text-base md:text-lg font-medium tracking-tight text-[var(--t2p-text)]">
                 {practice.globalPracticeName}
               </span>
-              <span className="t2p-mono hidden md:inline text-[0.5625rem] uppercase tracking-[0.22em] text-[var(--t2p-text-50)] group-hover:text-[var(--t2p-ice)] transition-colors duration-300">
+              <span className="t2p-mono hidden md:inline text-[0.5625rem] uppercase tracking-[0.22em] text-[var(--t2p-text-50)] group-hover:text-[var(--t2p-volt)] transition-colors duration-300">
                 {location.cityServed} / {location.stateServed}
               </span>
             </Link>
@@ -57,7 +58,7 @@ export default function T2Nav() {
                   href={link.href}
                   className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors duration-300"
                 >
-                  <span className="text-[var(--t2p-ice)]/60 mr-1.5 group-hover:text-[var(--t2p-ice)] transition-colors duration-300">
+                  <span className="text-[var(--t2p-volt)]/60 mr-1.5 group-hover:text-[var(--t2p-volt)] transition-colors duration-300">
                     {link.index}
                   </span>
                   {link.label}
@@ -68,7 +69,7 @@ export default function T2Nav() {
             <div className="flex items-center gap-3">
               <a
                 href={telHref}
-                className="t2p-mono hidden xl:inline-block text-[0.6875rem] tracking-[0.12em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-ice)] transition-colors duration-300"
+                className="t2p-mono hidden xl:inline-block text-[0.6875rem] tracking-[0.12em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-volt)] transition-colors duration-300"
               >
                 {location.phoneGBP}
               </a>
@@ -76,13 +77,13 @@ export default function T2Nav() {
                 href={bookingHref}
                 className="t2p-btn t2p-btn-primary hidden md:inline-flex !px-5 !py-2.5"
               >
-                Book a visit
+                Book now
               </a>
 
               {/* Mobile toggle */}
               <button
                 onClick={() => setOpen(!open)}
-                className="lg:hidden flex h-10 w-10 items-center justify-center border border-[var(--t2p-line-strong)]"
+                className="lg:hidden flex h-10 w-10 items-center justify-center rounded-full border border-[var(--t2p-line-strong)]"
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
               >
@@ -112,7 +113,7 @@ export default function T2Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="fixed inset-0 z-40 bg-[#0A0C10]/95 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-[#060806]/95 backdrop-blur-sm lg:hidden"
           >
             <div className="t2p-blueprint absolute inset-0" aria-hidden="true" />
             <nav
@@ -129,7 +130,7 @@ export default function T2Nav() {
                   transition={{ duration: 0.4, delay: 0.06 * i, ease: EASE }}
                   className="flex items-baseline gap-4 py-4 border-b border-[var(--t2p-line)]"
                 >
-                  <span className="t2p-mono text-[0.6875rem] text-[var(--t2p-ice)]">
+                  <span className="t2p-mono text-[0.6875rem] text-[var(--t2p-volt)]">
                     {link.index}
                   </span>
                   <span className="font-innovator text-2xl font-medium tracking-tight text-[var(--t2p-text)]">

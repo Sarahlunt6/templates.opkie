@@ -36,7 +36,7 @@ export default function T3HavenDoctors({
           </p>
           <h2
             id="doctors-heading"
-            className="text-[clamp(1.9rem,4.5vw,3.2rem)] font-extralight leading-[1.12] text-[var(--t3-moss)]"
+            className="t3-display text-[var(--t3-moss)]"
           >
             the people who&rsquo;ll{" "}
             <em className="t3-serif text-[var(--t3-euc-deep)]">
@@ -71,11 +71,7 @@ export default function T3HavenDoctors({
                           "radial-gradient(circle at 50% 40%, rgba(109,139,125,0.18), transparent 70%)",
                       }}
                     />
-                    <div
-                      className={`relative aspect-[4/5] overflow-hidden shadow-[var(--t3-shadow-bloom)] ${
-                        flipped ? "t3-blob-b" : "t3-blob"
-                      }`}
-                    >
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[var(--t3-shadow-bloom)] sm:rounded-[2.5rem]">
                       <Image
                         src={PORTRAITS[i % PORTRAITS.length]}
                         alt={`${doctor.name}, ${doctor.role} at ${practiceName}`}
@@ -89,7 +85,7 @@ export default function T3HavenDoctors({
                         className="absolute inset-0"
                         style={{
                           background:
-                            "linear-gradient(165deg, rgba(244,246,241,0.18), transparent 40%)",
+                            "linear-gradient(165deg, rgba(242,246,238,0.18), transparent 40%)",
                         }}
                       />
                     </div>
@@ -106,7 +102,7 @@ export default function T3HavenDoctors({
                   <h3 className="mb-2 text-[clamp(1.6rem,3vw,2.2rem)] font-extralight text-[var(--t3-moss)]">
                     {doctor.name}
                   </h3>
-                  <p className="t3-serif mb-7 text-lg text-[var(--t3-euc-deep)]">
+                  <p className="t3-serif mb-7 text-lg text-[var(--t3-euc-ink)]">
                     {doctor.role.toLowerCase()}
                   </p>
                   <p className="mb-8 max-w-lg text-base font-light leading-loose text-[var(--t3-moss-soft)]">

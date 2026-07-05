@@ -7,18 +7,18 @@ import { location, bookingHref, telHref } from "./t2-lib";
 
 export default function T2MobileBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden border-t border-[var(--t2p-line-strong)] bg-[#0A0C10]/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)]">
+    <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden border-t border-[var(--t2p-line-strong)] bg-[#060806]/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)]">
       <div className="grid grid-cols-2">
         <a
           href={telHref}
           className="t2p-mono flex items-center justify-center gap-2.5 py-4 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-[var(--t2p-text)] border-r border-[var(--t2p-line)]"
         >
-          <Phone className="h-4 w-4 text-[var(--t2p-ice)]" strokeWidth={1.5} aria-hidden="true" />
+          <Phone className="h-4 w-4 text-[var(--t2p-volt)]" strokeWidth={1.5} aria-hidden="true" />
           <span>Call {location.phoneGBP}</span>
         </a>
         <a
           href={bookingHref}
-          className="t2p-mono flex items-center justify-center gap-2.5 py-4 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] bg-[var(--t2p-ice)] text-[#06181d]"
+          className="t2p-mono flex items-center justify-center gap-2.5 py-4 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] bg-[var(--t2p-volt)] text-[#061007]"
         >
           <Calendar className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
           <span>Book a visit</span>

@@ -14,7 +14,7 @@ import { EASE } from "./t2-lib";
 function RatingStars({ rating }: { rating: number }) {
   return (
     <span
-      className="text-[0.8125rem] tracking-[0.15em] text-[var(--t2p-ice)]"
+      className="text-[0.8125rem] tracking-[0.15em] text-[var(--t2p-volt)]"
       role="img"
       aria-label={`Rated ${rating} out of 5`}
     >
@@ -33,8 +33,8 @@ export default function T2Reviews() {
     <section id="reviews" className="relative py-24 md:py-32 px-6 md:px-12 bg-[var(--t2p-surface)] scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          index="06"
-          label="Patient stories"
+          index="07"
+          label="Patient telemetry"
           title={
             <>
               In their <span className="t2p-duotext">own words.</span>
@@ -51,7 +51,7 @@ export default function T2Reviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease: EASE }}
-              className="relative flex flex-col border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7"
+              className="relative flex flex-col rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7"
             >
               <div className="flex items-center justify-between gap-3 border-b border-[var(--t2p-line)] pb-4">
                 <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">

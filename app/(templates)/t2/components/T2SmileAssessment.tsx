@@ -125,7 +125,7 @@ export default function T2SmileAssessment() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="t2p fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#05070a]/85 backdrop-blur-sm"
+            className="t2p fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#040603]/85 backdrop-blur-sm"
             onClick={(e) => {
               if (e.target === e.currentTarget) close();
             }}
@@ -138,7 +138,7 @@ export default function T2SmileAssessment() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={reduced ? undefined : { opacity: 0, y: 28, scale: 0.98 }}
               transition={{ duration: 0.35, ease: EASE }}
-              className="t2p-tick relative w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-[var(--t2p-line-strong)] bg-[var(--t2p-bg)]"
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-[var(--t2p-line-strong)] bg-[var(--t2p-bg)]"
             >
               {/* Console header */}
               <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[var(--t2p-line)] bg-[var(--t2p-bg)] px-6 py-4">
@@ -151,7 +151,7 @@ export default function T2SmileAssessment() {
                   )}
                   <button
                     onClick={close}
-                    className="flex h-9 w-9 items-center justify-center border border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:text-[var(--t2p-ice)] hover:border-[var(--t2p-ice-dim)] transition-colors"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:text-[var(--t2p-volt)] hover:border-[var(--t2p-volt-dim)] transition-colors"
                     aria-label="Close assessment"
                   >
                     <X className="h-4 w-4" strokeWidth={1.5} />
@@ -189,15 +189,15 @@ export default function T2SmileAssessment() {
                               key={c.id}
                               onClick={() => toggle(c.id)}
                               aria-pressed={on}
-                              className={`relative flex items-start gap-3.5 p-4 text-left border transition-colors duration-300 ${
+                              className={`relative flex items-start gap-3.5 rounded-xl p-4 text-left border transition-colors duration-300 ${
                                 on
-                                  ? "border-[var(--t2p-ice)] bg-[rgba(103,232,249,0.06)]"
-                                  : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-ice-dim)]"
+                                  ? "border-[var(--t2p-volt)] bg-[rgba(126,224,75,0.06)]"
+                                  : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-volt-dim)]"
                               }`}
                             >
                               <c.Icon
                                 className={`mt-0.5 h-5 w-5 shrink-0 ${
-                                  on ? "text-[var(--t2p-ice)]" : "text-[var(--t2p-text-50)]"
+                                  on ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text-50)]"
                                 }`}
                                 strokeWidth={1.25}
                                 aria-hidden="true"
@@ -212,7 +212,7 @@ export default function T2SmileAssessment() {
                               </span>
                               {on && (
                                 <Check
-                                  className="absolute top-3 right-3 h-3.5 w-3.5 text-[var(--t2p-ice)]"
+                                  className="absolute top-3 right-3 h-3.5 w-3.5 text-[var(--t2p-volt)]"
                                   strokeWidth={2}
                                   aria-hidden="true"
                                 />
@@ -243,10 +243,10 @@ export default function T2SmileAssessment() {
 
                       <button
                         onClick={() => fileRef.current?.click()}
-                        className={`mt-7 w-full border border-dashed p-8 text-center transition-colors duration-300 ${
+                        className={`mt-7 w-full rounded-xl border border-dashed p-8 text-center transition-colors duration-300 ${
                           photo
-                            ? "border-[var(--t2p-ice-dim)] bg-[rgba(103,232,249,0.04)]"
-                            : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-ice-dim)]"
+                            ? "border-[var(--t2p-volt-dim)] bg-[rgba(126,224,75,0.04)]"
+                            : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-volt-dim)]"
                         }`}
                       >
                         {photo ? (
@@ -286,7 +286,7 @@ export default function T2SmileAssessment() {
                       {photo && (
                         <button
                           onClick={() => setPhoto(null)}
-                          className="t2p-mono mt-3 text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)] hover:text-[var(--t2p-ice)] transition-colors"
+                          className="t2p-mono mt-3 text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)] hover:text-[var(--t2p-volt)] transition-colors"
                         >
                           Remove photo
                         </button>
@@ -395,9 +395,9 @@ export default function T2SmileAssessment() {
 
                   {step === "complete" && (
                     <motion.div key="complete" {...fade} className="py-6 text-center">
-                      <span className="mx-auto flex h-16 w-16 items-center justify-center border border-[var(--t2p-ice-dim)]">
+                      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[var(--t2p-volt-dim)] bg-[rgba(126,224,75,0.08)]">
                         <Check
-                          className="h-7 w-7 text-[var(--t2p-ice)]"
+                          className="h-7 w-7 text-[var(--t2p-volt)]"
                           strokeWidth={1.5}
                           aria-hidden="true"
                         />
@@ -415,7 +415,7 @@ export default function T2SmileAssessment() {
                         </a>
                         <button
                           onClick={close}
-                          className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)] hover:text-[var(--t2p-ice)] transition-colors"
+                          className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)] hover:text-[var(--t2p-volt)] transition-colors"
                         >
                           Close
                         </button>

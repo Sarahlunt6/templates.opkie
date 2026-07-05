@@ -71,7 +71,7 @@ export default function T3QuietSlider({
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 640px"
         />
-        <span className="absolute bottom-4 right-4 rounded-full bg-[#f4f6f1e6] px-3.5 py-1.5 text-xs font-light text-[var(--t3-moss)] backdrop-blur-sm">
+        <span className="absolute bottom-4 right-4 t3-glass-chip px-3.5 py-1.5 text-xs font-light text-[var(--t3-moss)]">
           after
         </span>
       </div>
@@ -89,7 +89,7 @@ export default function T3QuietSlider({
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 640px"
         />
-        <span className="absolute bottom-4 left-4 rounded-full bg-[#f4f6f1e6] px-3.5 py-1.5 text-xs font-light text-[var(--t3-moss)] backdrop-blur-sm">
+        <span className="absolute bottom-4 left-4 t3-glass-chip px-3.5 py-1.5 text-xs font-light text-[var(--t3-moss)]">
           before
         </span>
       </div>
@@ -97,7 +97,7 @@ export default function T3QuietSlider({
       {/* divider + handle */}
       <div
         aria-hidden="true"
-        className="absolute inset-y-0 w-px bg-[#f4f6f1]"
+        className="absolute inset-y-0 w-px bg-[rgba(255,255,255,0.85)]"
         style={{ left: `${position}%` }}
       />
       <div
@@ -108,7 +108,7 @@ export default function T3QuietSlider({
         style={{ left: `${position}%` }}
       >
         <svg
-          className="h-5 w-5 text-[var(--t3-mist)]"
+          className="h-5 w-5 text-[var(--t3-sage-light)]"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
