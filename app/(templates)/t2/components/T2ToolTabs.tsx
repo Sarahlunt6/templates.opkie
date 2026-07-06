@@ -1,9 +1,10 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import T2FinancingCalculator from "./T2FinancingCalculator";
 import T2SmileAssessment from "./T2SmileAssessment";
-import { practice } from "./t2-lib";
+import { practice, EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
    Tool tabs — one instrument panel, two instruments. The financing
@@ -22,6 +23,7 @@ type TabId = (typeof TABS)[number]["id"];
 
 export default function T2ToolTabs() {
   const [active, setActive] = useState<TabId>("financing");
+  const reduced = useReducedMotion();
   const baseId = useId();
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -66,7 +68,7 @@ export default function T2ToolTabs() {
               role="tab"
               id={`${baseId}-tab-${tab.id}`}
               aria-selected={selected}
-              aria-controls={`${baseId}-panel-${tab.id}`}
+              aria-controls={`${baseId}-panel`}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(tab.id)}
               onKeyDown={(e) => onKeyDown(e, i)}
@@ -95,42 +97,44 @@ export default function T2ToolTabs() {
         })}
       </div>
 
-      {/* Panels — one instrument at a time */}
+      {/* Panel — one instrument at a time, cross-cut on change */}
       <div
         role="tabpanel"
-        id={`${baseId}-panel-financing`}
-        aria-labelledby={`${baseId}-tab-financing`}
+        id={`${baseId}-panel`}
+        aria-labelledby={`${baseId}-tab-${active}`}
         tabIndex={0}
-        hidden={active !== "financing"}
         className="pt-6"
       >
-        <T2FinancingCalculator />
-      </div>
-
-      <div
-        role="tabpanel"
-        id={`${baseId}-panel-smile-check`}
-        aria-labelledby={`${baseId}-tab-smile-check`}
-        tabIndex={0}
-        hidden={active !== "smile-check"}
-        className="pt-6"
-      >
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-surface)] px-7 md:px-9 py-7">
-          <div className="max-w-xl">
-            <p className="t2p-label mb-2.5">Intake scan</p>
-            <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
-              Not sure where to start?
-            </h3>
-            <p className="mt-2.5 text-sm leading-relaxed text-[var(--t2p-text-70)]">
-              Three questions and an optional photo. A coordinator at{" "}
-              {practice.globalPracticeName} reads every submission and replies
-              within one business day.
-            </p>
-          </div>
-          <div className="shrink-0">
-            <T2SmileAssessment />
-          </div>
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={reduced ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduced ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: EASE }}
+          >
+            {active === "financing" ? (
+              <T2FinancingCalculator />
+            ) : (
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-surface)] px-7 md:px-9 py-7">
+                <div className="max-w-xl">
+                  <p className="t2p-label mb-2.5">Intake scan</p>
+                  <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
+                    Not sure where to start?
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--t2p-text-70)]">
+                    Three questions and an optional photo. A coordinator at{" "}
+                    {practice.globalPracticeName} reads every submission and
+                    replies within one business day.
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  <T2SmileAssessment />
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

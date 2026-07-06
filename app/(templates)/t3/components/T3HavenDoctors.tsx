@@ -14,8 +14,8 @@ interface T3HavenDoctorsProps {
  * paths are placeholders); at client-swap time these map to real headshots.
  */
 const PORTRAITS = [
-  "/images/team/doctor-portrait.png",
   "/images/team/doctor-portrait.jpeg",
+  "/images/team/staff-photo.jpg",
 ];
 
 export default function T3HavenDoctors({
@@ -60,10 +60,10 @@ export default function T3HavenDoctors({
                     flipped ? "lg:order-2 lg:col-start-8" : ""
                   }`}
                 >
-                  <div className="relative mx-auto max-w-[420px]">
+                  <div className="group relative mx-auto max-w-[420px]">
                     <div
                       aria-hidden="true"
-                      className={`absolute -inset-6 opacity-60 ${
+                      className={`absolute -inset-6 opacity-60 transition-opacity duration-700 group-hover:opacity-100 ${
                         flipped ? "t3-blob-b" : "t3-blob"
                       }`}
                       style={{
@@ -71,13 +71,13 @@ export default function T3HavenDoctors({
                           "radial-gradient(circle at 50% 40%, rgba(109,139,125,0.18), transparent 70%)",
                       }}
                     />
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[var(--t3-shadow-bloom)] sm:rounded-[2.5rem]">
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 group-hover:shadow-[var(--t3-shadow-bloom)] sm:rounded-[2.5rem]">
                       <Image
                         src={PORTRAITS[i % PORTRAITS.length]}
                         alt={`${doctor.name}, ${doctor.role} at ${practiceName}`}
                         fill
                         loading="lazy"
-                        className="object-cover object-top"
+                        className="object-cover object-top transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
                         sizes="(max-width: 1024px) 90vw, 420px"
                       />
                       <div

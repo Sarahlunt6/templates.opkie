@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { sampleReviews } from "@/data/master";
 import type { ReviewData } from "@/types/dentist";
 import { SectionHeader } from "./T2Kit";
@@ -60,6 +61,8 @@ function RatingStars({
 
 export default function T2Reviews() {
   const reduced = useReducedMotion();
+  // "all" or a procedureCategory string
+  const [filter, setFilter] = useState<string>("all");
 
   // no reviews on file yet — publish nothing rather than an empty section
   if (sampleReviews.length === 0) return null;
@@ -86,6 +89,26 @@ export default function T2Reviews() {
     .filter((s) => s.count > 0)
     .sort((a, b) => b.count - a.count);
   const maxSource = Math.max(1, ...sources.map((s) => s.count));
+
+  // Procedure categories, in first-seen order, each with a count — the
+  // filter chips derive straight from the review data.
+  const categoryCounts = sampleReviews.reduce<Record<string, number>>(
+    (acc, r) => {
+      acc[r.procedureCategory] = (acc[r.procedureCategory] ?? 0) + 1;
+      return acc;
+    },
+    {},
+  );
+  const categories = Array.from(new Set(sampleReviews.map((r) => r.procedureCategory)));
+  const filtered =
+    filter === "all"
+      ? sampleReviews
+      : sampleReviews.filter((r) => r.procedureCategory === filter);
+
+  const chips = [
+    { key: "all", label: "All", count: total },
+    ...categories.map((c) => ({ key: c, label: c, count: categoryCounts[c] })),
+  ];
 
   return (
     <section id="reviews" className="relative py-24 md:py-32 px-6 md:px-12 bg-[var(--t2p-surface)] scroll-mt-20">
@@ -215,15 +238,57 @@ export default function T2Reviews() {
           </div>
         </motion.div>
 
-        {/* ── The reviews — 6 tiles, balanced 3×2 / 2×3 at every breakpoint ── */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {sampleReviews.map((review, i) => (
+        {/* ── Filter bar — chips derived from the review data ── */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="mb-6 flex flex-wrap items-center gap-2.5"
+        >
+          {chips.map((chip) => {
+            const active = filter === chip.key;
+            return (
+              <button
+                key={chip.key}
+                type="button"
+                onClick={() => setFilter(chip.key)}
+                aria-pressed={active}
+                className={`t2p-mono inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[0.625rem] uppercase tracking-[0.14em] transition-colors duration-300 ${
+                  active
+                    ? "border-[var(--t2p-blue)] bg-[rgba(3,105,161,0.08)] text-[var(--t2p-blue)]"
+                    : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-blue)] hover:text-[var(--t2p-text)]"
+                }`}
+              >
+                {active && (
+                  <span
+                    className="h-1 w-1 rounded-full bg-[var(--t2p-scan)]"
+                    aria-hidden="true"
+                  />
+                )}
+                {chip.label}
+                <span className={active ? "text-[var(--t2p-blue)]/60" : "text-[var(--t2p-text-50)]"}>
+                  {chip.count}
+                </span>
+              </button>
+            );
+          })}
+          <span className="t2p-mono ml-auto hidden text-[0.5625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)] sm:inline">
+            [ {filtered.length} / {total} shown ]
+          </span>
+        </motion.div>
+
+        {/* ── The reviews — tiles re-flow as the filter changes ── */}
+        <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+          {filtered.map((review, i) => (
             <motion.figure
               key={review.id}
+              layout
               initial={reduced ? false : { opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease: EASE }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? undefined : { opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.4, delay: (i % 3) * 0.06, ease: EASE }}
               className="t2p-respond group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-8"
             >
               {/* Scan-light edge — ignites when the card powers on */}
@@ -276,7 +341,8 @@ export default function T2Reviews() {
               </figcaption>
             </motion.figure>
           ))}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

@@ -151,9 +151,22 @@ export default function T2Visit() {
                 <br />
                 {location.cityServed}, {location.stateServed}
               </address>
-              <a href={bookingHref} className="t2p-btn t2p-btn-primary mt-6">
-                Book a visit
-              </a>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <a href={bookingHref} className="t2p-btn t2p-btn-primary">
+                  Book a visit
+                </a>
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                    `${location.addressGBP}, ${location.cityServed}, ${location.stateServed}`,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="t2p-btn t2p-btn-ghost"
+                >
+                  <span aria-hidden="true">↗</span>
+                  Get directions
+                </a>
+              </div>
             </div>
           </motion.div>
 

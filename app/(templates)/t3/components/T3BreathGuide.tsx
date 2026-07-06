@@ -38,15 +38,17 @@ const COMFORT_MENU = [
 export default function T3BreathGuide({ hasSedation }: T3BreathGuideProps) {
   const reduceMotion = useReducedMotion();
   const [phase, setPhase] = useState<"in" | "out">("in");
+  // Patients can pause the pace and breathe on their own — anxiety-friendly.
+  const [running, setRunning] = useState(true);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !running) return;
     const id = setInterval(
       () => setPhase((p) => (p === "in" ? "out" : "in")),
       5000
     );
     return () => clearInterval(id);
-  }, [reduceMotion]);
+  }, [reduceMotion, running]);
 
   return (
     <section
@@ -133,6 +135,18 @@ export default function T3BreathGuide({ hasSedation }: T3BreathGuideProps) {
               )}
             </div>
           </div>
+
+          {/* Let patients set their own pace */}
+          {!reduceMotion && (
+            <button
+              type="button"
+              onClick={() => setRunning((r) => !r)}
+              aria-pressed={!running}
+              className="mt-10 rounded-full border border-[var(--t3-line)] px-5 py-2 text-[13px] font-light lowercase text-[var(--t3-moss-soft)] transition-colors duration-500 hover:border-[var(--t3-euc)] hover:text-[var(--t3-moss)]"
+            >
+              {running ? "pause" : "breathe with me"}
+            </button>
+          )}
 
           <T3Reveal delay={0.1}>
             <p className="mt-12 text-base font-light leading-relaxed text-[var(--t3-moss-soft)]">

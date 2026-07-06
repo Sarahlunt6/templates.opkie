@@ -140,8 +140,22 @@ export default function T2Services() {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={reduced ? undefined : { height: 0, opacity: 0 }}
                       transition={{ duration: 0.4, ease: EASE }}
-                      className="overflow-hidden"
+                      className="relative overflow-hidden"
                     >
+                      {/* Scan beam — sweeps once as the panel powers on */}
+                      {!reduced && (
+                        <motion.span
+                          aria-hidden="true"
+                          className="pointer-events-none absolute top-0 bottom-0 z-10 w-px"
+                          style={{
+                            background: "var(--t2p-scan)",
+                            boxShadow: "0 0 12px rgba(56, 189, 248, 0.6)",
+                          }}
+                          initial={{ left: "0%", opacity: 0 }}
+                          animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
+                          transition={{ duration: 0.6, ease: EASE, delay: 0.08 }}
+                        />
+                      )}
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-5 md:px-8 pb-7 md:pb-8 md:pl-[4.5rem]">
                         <div className="md:col-span-7">
                           <p className="text-sm md:text-[0.9375rem] leading-relaxed text-[var(--t2p-text-70)]">

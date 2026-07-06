@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { ReviewData } from "@/types/dentist";
-import T3Reveal from "./T3Reveal";
+import T3Reveal, { HAVEN_EASE } from "./T3Reveal";
 
 interface T3HavenReviewsProps {
   reviews: ReviewData[];
@@ -118,8 +120,27 @@ function ImageCard({
 }
 
 export default function T3HavenReviews({ reviews }: T3HavenReviewsProps) {
+  const reduced = useReducedMotion();
+  const [filter, setFilter] = useState<string>("all");
+
   // no reviews on file yet — publish nothing rather than an empty section
   if (reviews.length === 0) return null;
+
+  // Gentle reassurance figures, drawn from the reviews themselves
+  const total = reviews.length;
+  const avgRating = reviews.reduce((s, r) => s + r.rating, 0) / total;
+  const verifiedCount = reviews.filter((r) => r.isVerifiedPatient).length;
+  const recommendPct = Math.round(
+    (reviews.filter((r) => r.rating >= 4).length / total) * 100,
+  );
+
+  // Filter pills, derived from the procedures patients actually mention
+  const categories = Array.from(new Set(reviews.map((r) => r.procedureCategory)));
+  const chips = ["all", ...categories];
+  const filtered =
+    filter === "all"
+      ? reviews
+      : reviews.filter((r) => r.procedureCategory === filter);
 
   return (
     <section
@@ -140,17 +161,83 @@ export default function T3HavenReviews({ reviews }: T3HavenReviewsProps) {
           </h2>
         </T3Reveal>
 
+        {/* Quiet reassurance strip — the figures the reviews add up to */}
+        <T3Reveal delay={0.1}>
+          <div className="mb-12 flex flex-wrap items-center gap-x-12 gap-y-6 border-y border-[var(--t3-line)] py-7 sm:mb-14">
+            <div className="flex items-center gap-4">
+              <span className="text-4xl font-light text-[var(--t3-moss)] sm:text-5xl">
+                {avgRating.toFixed(1)}
+              </span>
+              <div className="pb-1">
+                <RatingDots rating={Math.round(avgRating)} />
+                <p className="mt-2 text-xs font-light lowercase text-[var(--t3-moss-soft)]">
+                  average rating
+                </p>
+              </div>
+            </div>
+            <div>
+              <p className="text-4xl font-light text-[var(--t3-moss)] sm:text-5xl">
+                {verifiedCount}
+              </p>
+              <p className="mt-2 text-xs font-light lowercase text-[var(--t3-moss-soft)]">
+                verified patients
+              </p>
+            </div>
+            <div>
+              <p className="text-4xl font-light text-[var(--t3-moss)] sm:text-5xl">
+                {recommendPct}%
+              </p>
+              <p className="mt-2 text-xs font-light lowercase text-[var(--t3-moss-soft)]">
+                would recommend
+              </p>
+            </div>
+          </div>
+        </T3Reveal>
+
+        {/* Soft filter pills — browse by what patients came in for */}
         <T3Reveal delay={0.15}>
-          <div className="columns-1 gap-5 sm:columns-2 sm:gap-6 lg:columns-3">
-            {reviews.map((review) => {
-              const image = IMAGE_CARD_MAP[review.id];
-              return image ? (
-                <ImageCard key={review.id} review={review} image={image} />
-              ) : (
-                <QuoteCard key={review.id} review={review} />
+          <div className="mb-10 flex flex-wrap gap-2.5">
+            {chips.map((chip) => {
+              const active = filter === chip;
+              return (
+                <button
+                  key={chip}
+                  type="button"
+                  onClick={() => setFilter(chip)}
+                  aria-pressed={active}
+                  className={`rounded-full border px-4 py-2 text-[13px] font-light lowercase transition-colors duration-500 ${
+                    active
+                      ? "border-transparent bg-[var(--t3-euc-deep)] text-[var(--t3-sage-light)]"
+                      : "border-[var(--t3-line)] text-[var(--t3-moss-soft)] hover:border-[var(--t3-euc)] hover:text-[var(--t3-moss)]"
+                  }`}
+                >
+                  {chip}
+                </button>
               );
             })}
           </div>
+        </T3Reveal>
+
+        <T3Reveal delay={0.2}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={filter}
+              initial={reduced ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={reduced ? undefined : { opacity: 0 }}
+              transition={{ duration: 0.45, ease: HAVEN_EASE }}
+              className="columns-1 gap-5 sm:columns-2 sm:gap-6 lg:columns-3"
+            >
+              {filtered.map((review) => {
+                const image = IMAGE_CARD_MAP[review.id];
+                return image ? (
+                  <ImageCard key={review.id} review={review} image={image} />
+                ) : (
+                  <QuoteCard key={review.id} review={review} />
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
         </T3Reveal>
       </div>
     </section>
