@@ -86,7 +86,7 @@ const THEMES: Record<ThemeKey, ChatTheme> = {
     panel: "bg-[#F3EFE6] border border-[#1A1713] rounded-sm",
     header: "bg-[#1A1713] text-[#F3EFE6]",
     headerName:
-      "font-t2-mono text-[11px] font-medium uppercase tracking-[0.18em]",
+      "font-t1-mono text-[11px] font-bold uppercase tracking-[0.16em]",
     avatar:
       "rounded-sm bg-[#D92B21] text-[#F3EFE6] font-t1-press border border-[#F3EFE6]/30",
     statusDot: "bg-[#D92B21]",

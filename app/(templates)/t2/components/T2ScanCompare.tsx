@@ -202,11 +202,10 @@ export default function T2ScanCompare() {
 
           {/* Case metadata bar */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--t2p-line)] px-4 md:px-5 py-3.5 bg-[var(--t2p-surface)]">
+            {/* Label pruned: "Planned digitally · finished in-house"
+                duplicated the section lede one screenful up. */}
             <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)]">
               Case {String(caseIdx + 1).padStart(3, "0")} — {activeCase.procedureType}
-            </span>
-            <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
-              Planned digitally · finished in-house
             </span>
           </div>
         </motion.div>

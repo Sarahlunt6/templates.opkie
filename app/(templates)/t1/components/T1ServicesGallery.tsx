@@ -67,7 +67,7 @@ export default function T1ServicesGallery({
                 <h3 className="mt-5 font-t1-press text-2xl uppercase leading-[0.95] text-[#1A1713] md:text-[1.6rem]">
                   {service.title}
                 </h3>
-                <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-[#6B675E]">
+                <p className="font-t3-serif mt-3 flex-1 text-[15px] leading-[1.7] text-[#6B675E]">
                   {service.description}
                 </p>
 

@@ -158,12 +158,22 @@ export default function T2Compare() {
               </div>
             </div>
 
-            {/* Data rows */}
+            {/* Data rows — cascade top-to-bottom with a 60ms stagger.
+                The row wrappers are `display: contents` (no box), so the
+                whileInView observation lives on the four real cell boxes,
+                all sharing the row's delay. Skipped under reduced motion. */}
             {ROWS.map((row, i) => {
               const last = i === ROWS.length - 1;
+              const cellEntrance = {
+                initial: reduced ? (false as const) : { opacity: 0, y: 12 },
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true, amount: 0.3 },
+                transition: { duration: 0.45, delay: i * 0.06, ease: EASE },
+              };
               return (
                 <div role="row" key={row.label} className="contents">
-                  <div
+                  <motion.div
+                    {...cellEntrance}
                     role="rowheader"
                     className={`flex items-center px-4 py-4 ${
                       last ? "" : "border-b border-[var(--t2p-line)]"
@@ -172,16 +182,18 @@ export default function T2Compare() {
                     <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.14em] text-[var(--t2p-text-70)]">
                       {row.label}
                     </span>
-                  </div>
-                  <div
+                  </motion.div>
+                  <motion.div
+                    {...cellEntrance}
                     role="cell"
                     className={`flex items-center justify-center px-4 py-4 text-center ${
                       last ? "" : "border-b border-[var(--t2p-line)]"
                     }`}
                   >
                     <CellContent value={row.traditional} />
-                  </div>
-                  <div
+                  </motion.div>
+                  <motion.div
+                    {...cellEntrance}
                     role="cell"
                     className={`flex items-center justify-center border-x border-[var(--t2p-volt-dim)] bg-[rgba(126,224,75,0.05)] px-4 py-4 text-center ${
                       last
@@ -189,16 +201,30 @@ export default function T2Compare() {
                         : "border-b border-b-[rgba(126,224,75,0.16)]"
                     }`}
                   >
-                    <CellContent value={row.summit} highlight />
-                  </div>
-                  <div
+                    {/* Volt check flash — the scan confirms as the row lands */}
+                    {typeof row.summit === "boolean" && row.summit && !reduced ? (
+                      <motion.span
+                        className="inline-flex"
+                        initial={{ scale: 1 }}
+                        whileInView={{ scale: [1, 1.25, 1] }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.4, delay: i * 0.06, ease: EASE }}
+                      >
+                        <CellContent value={row.summit} highlight />
+                      </motion.span>
+                    ) : (
+                      <CellContent value={row.summit} highlight />
+                    )}
+                  </motion.div>
+                  <motion.div
+                    {...cellEntrance}
                     role="cell"
                     className={`flex items-center justify-center px-4 py-4 text-center ${
                       last ? "" : "border-b border-[var(--t2p-line)]"
                     }`}
                   >
                     <CellContent value={row.mailOrder} />
-                  </div>
+                  </motion.div>
                 </div>
               );
             })}

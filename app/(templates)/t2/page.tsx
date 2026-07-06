@@ -10,15 +10,14 @@ import T2Services from "./components/T2Services";
 import T2ScanCompare from "./components/T2ScanCompare";
 import T2Compare from "./components/T2Compare";
 import T2Doctors from "./components/T2Doctors";
-import T2FinancingCalculator from "./components/T2FinancingCalculator";
-import T2SmileAssessment from "./components/T2SmileAssessment";
+import T2ToolTabs from "./components/T2ToolTabs";
 import T2Reviews from "./components/T2Reviews";
 import T2Visit from "./components/T2Visit";
 import T2FinalCTA from "./components/T2FinalCTA";
 import T2Footer from "./components/T2Footer";
 import T2MobileBar from "./components/T2MobileBar";
+import T2ScanSpine from "./components/T2ScanSpine";
 import { SectionHeader, ScanDivider, Reveal } from "./components/T2Kit";
-import { practice } from "./components/t2-lib";
 
 /* ═══════════════════════════════════════════════════════════════════
    T2 PRECISION — dark hardware-launch digital dentistry
@@ -32,6 +31,9 @@ import { practice } from "./components/t2-lib";
 export default function Template2Page() {
   return (
     <div className="t2p font-sans antialiased relative overflow-x-hidden">
+      {/* Fixed scan spine — page scroll progress as a volt fill, lg+ only */}
+      <T2ScanSpine />
+
       <T2Nav />
 
       <main>
@@ -78,30 +80,11 @@ export default function Template2Page() {
                   Run the numbers <span className="t2p-duotext">before you sit down.</span>
                 </>
               }
-              lede="Two tools, zero obligation: model a monthly payment, or send us a first look at your smile."
+              lede="One panel, two instruments — model a monthly payment, or send us a first look at your smile. Zero obligation either way."
             />
 
             <Reveal>
-              <T2FinancingCalculator />
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="mt-5 flex flex-col md:flex-row md:items-center justify-between gap-6 rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-surface)] px-7 md:px-9 py-7">
-                <div className="max-w-xl">
-                  <p className="t2p-label mb-2.5">Intake scan</p>
-                  <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
-                    Not sure where to start?
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--t2p-text-70)]">
-                    Three questions and an optional photo. A coordinator at{" "}
-                    {practice.globalPracticeName} reads every submission and
-                    replies within one business day.
-                  </p>
-                </div>
-                <div className="shrink-0">
-                  <T2SmileAssessment />
-                </div>
-              </div>
+              <T2ToolTabs />
             </Reveal>
           </div>
         </section>

@@ -46,6 +46,9 @@ export default function Template3Page() {
     <div className="t3-haven font-sanctuary relative min-h-screen overflow-x-clip">
       <T3AmbientDrift />
 
+      {/* near-invisible paper grain over everything — non-interactive */}
+      <div className="t3-grain" aria-hidden="true" />
+
       <T3HavenNav
         practiceName={globalPracticeName}
         phone={location.phoneGBP}

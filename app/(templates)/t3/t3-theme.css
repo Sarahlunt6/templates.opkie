@@ -9,7 +9,7 @@
 .t3-haven {
   /* palette */
   --t3-sage: #e8efe3; /* main canvas — pale sage green */
-  --t3-sage-light: #f2f6ee; /* alternating lighter sections */
+  --t3-sage-light: #f4f6ec; /* alternating lighter sections — warmed one degree toward cream */
   --t3-moss: #2e3b34; /* text ground */
   --t3-euc: #6d8b7d; /* eucalyptus accent */
   --t3-euc-deep: #566e61; /* button fills, large accent phrases */
@@ -97,6 +97,8 @@
   border-radius: 9999px;
   background-color: var(--t3-euc);
   flex-shrink: 0;
+  /* every marker dot breathes on the same shared rhythm as the hero chips */
+  animation: t3-breathe 4s ease-in-out infinite;
 }
 
 /* ── glassmorphic annotation chips over imagery ───────────────────────── */
@@ -195,30 +197,46 @@
   animation: t3-drift-b 110s ease-in-out infinite;
 }
 
-/* ── gentle floating drift for glass chips over imagery ───────────────── */
-@keyframes t3-float {
+/* ── the shared breath — one 4s rhythm for the whole page ─────────────────
+   Replaces the old per-chip t3-float / t3-float-slow drifts. Every instance
+   (hero glass chips, section-marker dots) shares the same duration, easing,
+   and phase — no per-element delays — so the page breathes as one organism.
+   -4px splits the difference between the spec options: perceptible on the
+   7px marker dots without making the wide chips lurch. */
+@keyframes t3-breathe {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-9px);
+    transform: translateY(-4px);
   }
 }
-.t3-float {
-  animation: t3-float 14s ease-in-out infinite;
+.t3-breathe {
+  animation: t3-breathe 4s ease-in-out infinite;
 }
-.t3-float-slow {
-  animation: t3-float 18s ease-in-out infinite;
-  animation-delay: -6s;
+
+/* ── tactile grain wash ────────────────────────────────────────────────────
+   Near-invisible static feTurbulence noise (inline data-URI, zero runtime
+   cost) laid over the whole template. pointer-events: none guarantees it
+   never intercepts clicks at any stacking level. */
+.t3-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60; /* above nav (z-40) and mobile bar (z-50) — pure texture */
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='t3n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23t3n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 /* ── reduced motion: everything settles, nothing loops ────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .t3-drift-a,
   .t3-drift-b,
-  .t3-float,
-  .t3-float-slow {
+  .t3-breathe,
+  .t3-marker::before {
     animation: none;
   }
 }

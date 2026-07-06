@@ -1,7 +1,13 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { T1_EASE } from "./T1Motion";
 
 interface T1HeroProps {
@@ -38,6 +44,31 @@ export default function T1Hero({
   const tel = `tel:${phone.replace(/[^0-9+]/g, "")}`;
   const hasBooking = bookingUrl !== "none";
 
+  /* Scroll-linked settle: as the reader starts scrolling, the wordmark
+     tightens and the photo lifts into it — one breath of depth, desktop
+     only (scroll-linked transforms jank on low-end mobile) and off under
+     reduced motion. */
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isLg, setIsLg] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsLg(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const wordTracking = useTransform(
+    scrollYProgress,
+    [0, 0.6],
+    ["0.005em", "-0.01em"]
+  );
+  const photoLift = useTransform(scrollYProgress, [0, 0.6], [0, -24]);
+  const settleEnabled = isLg && !reduced;
+
   const word = practiceName.split(" ")[0] || practiceName;
   // Anton caps average ≈ 0.56em advance width — size the word so it
   // spans the viewport edge to edge at every width.
@@ -52,6 +83,7 @@ export default function T1Hero({
   return (
     <section
       id="top"
+      ref={sectionRef}
       aria-label={`${practiceName} — introduction`}
       className="t1-col-rules relative overflow-hidden border-b border-[rgba(26,23,19,0.15)]"
     >
@@ -61,7 +93,7 @@ export default function T1Hero({
           [ {city}, {state} ]
         </motion.p>
         <motion.p
-          className="t1-mono-label t1-mono-label-stone hidden sm:block"
+          className="t1-mono-label t1-mono-label-stone hidden lg:block"
           {...rise(0.1)}
         >
           [ NEW PATIENTS WELCOME ]
@@ -75,17 +107,23 @@ export default function T1Hero({
 
       {/* Wordmark + photo interleave */}
       <div className="relative pt-8 md:pt-12">
-        <h1 className="relative z-0 whitespace-nowrap text-center font-t1-press uppercase leading-[0.84] tracking-[0.005em] text-[#D92B21]">
+        <motion.h1
+          className="relative z-0 whitespace-nowrap text-center font-t1-press uppercase leading-[0.84] tracking-[0.005em] text-[#D92B21]"
+          style={settleEnabled ? { letterSpacing: wordTracking } : undefined}
+        >
           <span className="sr-only">{practiceName}</span>
           <span aria-hidden="true" style={{ fontSize: wordmarkSize }}>
             {word}
           </span>
-        </h1>
+        </motion.h1>
 
         {/* Cover photograph — rises into the letterforms */}
-        <div
+        <motion.div
           className="relative z-10 mx-auto w-[88vw] max-w-[760px]"
-          style={{ marginTop: `calc(${wordmarkSize} * -0.28)` }}
+          style={{
+            marginTop: `calc(${wordmarkSize} * -0.28)`,
+            ...(settleEnabled ? { y: photoLift } : {}),
+          }}
         >
           <motion.figure
             initial={reduced ? false : { opacity: 0 }}
@@ -151,13 +189,13 @@ export default function T1Hero({
                 : "APPOINTMENTS, BY RESERVATION"}
             </p>
           </motion.aside>
-        </div>
+        </motion.div>
       </div>
 
       {/* Statement + CTA */}
-      <div className="mx-auto max-w-[1500px] px-4 pb-16 pt-12 md:px-8 md:pb-24 md:pt-16 xl:px-12">
+      <div className="mx-auto max-w-[1500px] px-4 pb-16 pt-14 md:px-8 md:pb-24 md:pt-24 xl:px-12">
         <motion.h2
-          className="mx-auto max-w-5xl text-center font-t1-press text-[clamp(2rem,6vw,4.5rem)] uppercase leading-[0.95] text-[#1A1713]"
+          className="mx-auto max-w-4xl text-center font-t1-press text-[clamp(1.9rem,5vw,3.5rem)] uppercase leading-[0.95] text-[#1A1713]"
           {...rise(0.25)}
         >
           Good dentistry deserves{" "}

@@ -78,7 +78,7 @@ export default function T1Footer({
             </address>
             <a
               href={tel}
-              className="mt-3 inline-block font-t1-press text-xl text-[#F3EFE6] transition-colors duration-200 hover:text-[#D92B21]"
+              className="mt-3 inline-block font-t1-press text-2xl text-[#F3EFE6] transition-colors duration-200 hover:text-[#D92B21]"
             >
               {phone}
             </a>

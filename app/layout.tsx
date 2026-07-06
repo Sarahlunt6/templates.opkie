@@ -8,6 +8,7 @@ import {
   JetBrains_Mono,
   Newsreader,
   Anton,
+  Courier_Prime,
 } from "next/font/google";
 import "./globals.css";
 import PageTransition from "@/components/premium/PageTransition";
@@ -79,6 +80,14 @@ const anton = Anton({
   display: "swap",
 });
 
+// T1 Press Labels - Typewriter mono for bracket indexes and captions
+const courierPrime = Courier_Prime({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-t1-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "The Opkie Collection — Three Website Concepts for Your Practice",
   description:
@@ -91,7 +100,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${spaceGrotesk.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${spaceGrotesk.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable} ${courierPrime.variable}`}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
         <PageTransition>
           {children}

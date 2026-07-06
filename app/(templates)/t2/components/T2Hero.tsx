@@ -62,8 +62,12 @@ const HUD_MARKERS = [
   { top: "74%", left: "64%" },
 ];
 
+/** Radius (px) within which a HUD dot responds to the cursor. */
+const HUD_PROXIMITY = 120;
+
 export default function T2Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const hudDotsRef = useRef<(HTMLSpanElement | null)[]>([]);
   const reduced = useReducedMotion();
 
   // Scroll-linked parallax on the video plate
@@ -85,6 +89,64 @@ export default function T2Hero() {
     const trail = Math.min(100, Math.max(0, v - 26));
     return `inset(0% ${100 - lead}% 0% ${trail}%)`;
   });
+
+  // HUD proximity glow — one rAF-throttled mousemove listener on the
+  // section computes distance per dot and writes --t2p-hud-glow (0..1).
+  // Fine pointers at lg+ only; never on touch. Under reduced motion the
+  // dots keep their standard pulse ring and skip proximity entirely.
+  useEffect(() => {
+    if (reduced) return;
+    const section = sectionRef.current;
+    if (!section) return;
+    const mq = window.matchMedia("(pointer: fine) and (min-width: 1024px)");
+
+    let raf = 0;
+    let mx = 0;
+    let my = 0;
+
+    const update = () => {
+      raf = 0;
+      for (const el of hudDotsRef.current) {
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        const d = Math.hypot(
+          mx - (r.left + r.width / 2),
+          my - (r.top + r.height / 2),
+        );
+        const glow = Math.max(0, 1 - d / HUD_PROXIMITY);
+        el.style.setProperty("--t2p-hud-glow", glow.toFixed(3));
+      }
+    };
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX;
+      my = e.clientY;
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    let detach: (() => void) | null = null;
+    const sync = () => {
+      if (mq.matches && !detach) {
+        section.addEventListener("mousemove", onMove);
+        detach = () => {
+          section.removeEventListener("mousemove", onMove);
+          if (raf) cancelAnimationFrame(raf);
+          raf = 0;
+          for (const el of hudDotsRef.current) {
+            el?.style.removeProperty("--t2p-hud-glow");
+          }
+        };
+      } else if (!mq.matches && detach) {
+        detach();
+        detach = null;
+      }
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => {
+      mq.removeEventListener("change", sync);
+      detach?.();
+    };
+  }, [reduced]);
 
   useEffect(() => {
     if (reduced) return;
@@ -160,6 +222,9 @@ export default function T2Hero() {
         {HUD_MARKERS.map((m, i) => (
           <motion.span
             key={i}
+            ref={(el: HTMLSpanElement | null) => {
+              hudDotsRef.current[i] = el;
+            }}
             className="t2p-hud-dot absolute"
             style={{ top: m.top, left: m.left }}
             initial={reduced ? false : { opacity: 0, scale: 0.5 }}
@@ -175,14 +240,13 @@ export default function T2Hero() {
           <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
             {location.cityServed}, {location.stateServed}
           </span>
+          {/* Label pruned: practice name here duplicated the nav wordmark
+              sitting directly above it in the same screenful. */}
           <span className="hidden sm:flex items-center gap-2.5">
             <span className="t2p-dot rounded-full" aria-hidden="true" />
             <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.2em] text-[var(--t2p-text-70)]">
               Accepting new patients
             </span>
-          </span>
-          <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.2em] text-[var(--t2p-text-50)]">
-            {practice.globalPracticeName}
           </span>
         </div>
       </div>
@@ -198,9 +262,14 @@ export default function T2Hero() {
             initial={reduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.15, ease: EASE }}
-            className="t2p-mono inline-flex items-center gap-2.5 rounded-full border border-[var(--t2p-line-strong)] bg-[rgba(126,224,75,0.06)] px-4 py-2 text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--t2p-volt)]"
+            className="t2p-mono inline-flex items-center gap-2.5 rounded-full border border-[var(--t2p-line-strong)] px-4 py-2 text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)]"
           >
-            <span aria-hidden="true">●</span>
+            {/* Volt discipline: non-interactive badge demoted — the dot keeps
+                a dim volt point of light; the text no longer competes with
+                the readout and CTAs below. */}
+            <span aria-hidden="true" className="text-[var(--t2p-volt-dim)]">
+              ●
+            </span>
             Digital dentistry 2.0
           </motion.p>
 

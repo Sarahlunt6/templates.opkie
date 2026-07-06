@@ -24,6 +24,7 @@ import T1PatientLetters from "./components/T1PatientLetters";
 import T1Practicalities from "./components/T1Practicalities";
 import T1Footer from "./components/T1Footer";
 import T1UtilityBar from "./components/T1UtilityBar";
+import T1Folio from "./components/T1Folio";
 
 const location = clientMasterData.locations[0];
 
@@ -98,6 +99,9 @@ export default function Template1Page() {
 
       {/* Near-invisible paper grain across the whole issue */}
       <div aria-hidden="true" className="t1-grain" />
+
+      {/* Running folio — vertical page header naming the current chapter */}
+      <T1Folio practiceName={globalPracticeName} />
 
       {/* Utility strip + newspaper masthead */}
       <T1UtilityBar
@@ -201,14 +205,16 @@ export default function Template1Page() {
               deck="Documented results and the words of the patients who sat in the chair. Nothing here is retouched, including the opinions."
             />
 
-            {/* Before/after plate */}
-            <div className="mx-auto mt-10 max-w-4xl md:mt-14">
-              <T1PageTurnReveal
-                beforeUrl={featuredCase.beforeUrl}
-                afterUrl={featuredCase.afterUrl}
-                altTag={featuredCase.altTag}
-                procedureType={featuredCase.procedureType}
-              />
+            {/* Before/after plate — the chapter's one full-bleed image moment */}
+            <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
+              <div className="mx-auto max-w-6xl px-4 md:px-0">
+                <T1PageTurnReveal
+                  beforeUrl={featuredCase.beforeUrl}
+                  afterUrl={featuredCase.afterUrl}
+                  altTag={featuredCase.altTag}
+                  procedureType={featuredCase.procedureType}
+                />
+              </div>
             </div>
 
             {/* Testimonial band */}

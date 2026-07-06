@@ -1,7 +1,13 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { HAVEN_EASE } from "./T3Reveal";
 import { telHref } from "./hours";
 import { sampleReviews } from "@/data/master";
@@ -128,26 +134,50 @@ export default function T3HavenHero({
   const reduceMotion = useReducedMotion();
   const hasBooking = bookingUrl !== "none";
 
+  /* Scroll-linked parallax: the photo lags the scroll (~0.9x) while the
+     glass chips run slightly ahead (~1.05x) — one quiet plane of depth as
+     the hero leaves the viewport. Desktop only (scroll-linked transforms
+     jank on low-end mobile; same gating pattern as T1Hero) and off under
+     reduced motion. */
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isLg, setIsLg] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsLg(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  const chipsY = useTransform(scrollYProgress, [0, 1], [0, -15]);
+  const parallaxOn = isLg && !reduceMotion;
+
   const enter = (delay: number) => ({
     initial: reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 1.4, delay, ease: HAVEN_EASE },
   });
 
+  /* Chips enter sequentially (150ms apart, anchored card last) then hand
+     over to the shared .t3-breathe loop — entrance delays are computed
+     from index below so the sequence stays intact when sedation is off. */
+  const CHIP_BASE_DELAY = 0.7;
+  const CHIP_STAGGER = 0.15;
+
   const chips = [
     {
       icon: <LeafIcon />,
       label: "Gentle, judgment-free care",
       pos: "sm:absolute sm:left-[5%] sm:top-[14%]",
-      float: "t3-float",
-      delay: 0.7,
     },
     {
       icon: <ClockIcon />,
       label: "Same-day emergency visits",
       pos: "sm:absolute sm:right-[6%] sm:top-[24%]",
-      float: "t3-float-slow",
-      delay: 0.85,
     },
     ...(hasSedation
       ? [
@@ -155,8 +185,6 @@ export default function T3HavenHero({
             icon: <MoonIcon />,
             label: "Sedation for anxious patients",
             pos: "sm:absolute sm:left-[9%] sm:top-[52%]",
-            float: "t3-float-slow",
-            delay: 1,
           },
         ]
       : []),
@@ -164,14 +192,13 @@ export default function T3HavenHero({
       icon: <CalendarIcon />,
       label: "Simple online booking",
       pos: "sm:absolute sm:right-[10%] sm:top-[58%]",
-      float: "t3-float",
-      delay: 1.15,
     },
   ];
 
   return (
     <section
       id="top"
+      ref={sectionRef}
       aria-label="Welcome"
       className="relative overflow-hidden pt-[120px] pb-14 sm:pt-[150px] lg:pb-20"
     >
@@ -260,14 +287,21 @@ export default function T3HavenHero({
           className="relative"
         >
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] shadow-[var(--t3-shadow-bloom)] sm:aspect-[16/9] sm:rounded-[2.5rem] lg:aspect-[21/9]">
-            <Image
-              src="/images/office-interior.jpg"
-              alt={`Inside ${practiceName} — a soft, light-filled treatment room`}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1280px) 100vw, 1216px"
-            />
+            {/* photo on its own parallax plane — vertical bleed keeps the
+                frame covered while the image lags the scroll */}
+            <motion.div
+              className="absolute inset-x-0 -top-8 -bottom-8"
+              style={parallaxOn ? { y: photoY } : undefined}
+            >
+              <Image
+                src="/images/office-interior.jpg"
+                alt={`Inside ${practiceName} — a soft, light-filled treatment room`}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1216px"
+              />
+            </motion.div>
             {/* layered sage greenery atmosphere, CSS only */}
             <div
               aria-hidden="true"
@@ -278,33 +312,48 @@ export default function T3HavenHero({
               }}
             />
 
-            {/* floating glass annotation chips — desktop & tablet */}
-            {chips.map((chip) => (
+            {/* floating glass annotation chips — desktop & tablet.
+                Outer layer carries the parallax plane, inner layer the
+                one-shot entrance, and the span the shared breathe loop —
+                three transforms that never fight over the same element. */}
+            {chips.map((chip, i) => (
               <motion.div
                 key={chip.label}
-                initial={
-                  reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }
-                }
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2, delay: chip.delay, ease: HAVEN_EASE }}
                 className={`hidden sm:block ${chip.pos}`}
+                style={parallaxOn ? { y: chipsY } : undefined}
               >
-                <span
-                  className={`t3-glass-chip px-5 py-2.5 text-[13px] font-normal text-[var(--t3-moss)] ${chip.float}`}
+                <motion.div
+                  initial={
+                    reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }
+                  }
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 1.2,
+                    delay: CHIP_BASE_DELAY + i * CHIP_STAGGER,
+                    ease: HAVEN_EASE,
+                  }}
                 >
-                  <span className="text-[var(--t3-euc-ink)]">{chip.icon}</span>
-                  {chip.label}
-                </span>
+                  <span className="t3-glass-chip t3-breathe px-5 py-2.5 text-[13px] font-normal text-[var(--t3-moss)]">
+                    <span className="text-[var(--t3-euc-ink)]">
+                      {chip.icon}
+                    </span>
+                    {chip.label}
+                  </span>
+                </motion.div>
               </motion.div>
             ))}
 
-            {/* larger anchored glass card */}
+            {/* larger anchored glass card — enters last, after every chip */}
             <motion.div
               initial={
                 reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
               }
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.3, delay: 1.25, ease: HAVEN_EASE }}
+              transition={{
+                duration: 1.3,
+                delay: CHIP_BASE_DELAY + chips.length * CHIP_STAGGER + 0.1,
+                ease: HAVEN_EASE,
+              }}
               className="absolute inset-x-4 bottom-4 sm:inset-x-auto sm:left-[5%] sm:bottom-[9%] sm:max-w-sm"
             >
               <div className="t3-glass-card flex items-start gap-4 px-6 py-5">
@@ -328,7 +377,7 @@ export default function T3HavenHero({
           >
             {chips.map((chip) => (
               <li key={chip.label}>
-                <span className="t3-glass-chip px-4 py-2 text-[12px] font-normal text-[var(--t3-moss)]">
+                <span className="t3-glass-chip t3-breathe px-4 py-2 text-[12px] font-normal text-[var(--t3-moss)]">
                   <span className="text-[var(--t3-euc-ink)]">{chip.icon}</span>
                   {chip.label}
                 </span>

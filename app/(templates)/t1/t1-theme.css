@@ -38,12 +38,13 @@
 
 /* ---- Type atoms ---- */
 
-/* Mono bracket index label — "[ 01 ]" / "[ SMILE DESIGN ]" */
+/* Mono bracket index label — "[ 01 ]" / "[ SMILE DESIGN ]".
+   Courier Prime: typewriter mono, T1's own label voice (distinct from T2). */
 .t1-mono-label {
-  font-family: var(--font-t2-mono), ui-monospace, monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-family: var(--font-t1-mono), "Courier Prime", "Courier New", monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--t1-ink);
 }
@@ -116,10 +117,10 @@
   min-height: 52px;
   padding: 0.9rem 2rem;
   border-radius: 0;
-  font-family: var(--font-t2-mono), ui-monospace, monospace;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-family: var(--font-t1-mono), "Courier Prime", "Courier New", monospace;
+  font-size: 0.71875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   transition: background-color 0.25s ease-out, color 0.25s ease-out,
     border-color 0.25s ease-out;
@@ -190,6 +191,47 @@
   background-color: var(--t1-red);
   border-color: var(--t1-red);
   color: var(--t1-paper);
+}
+
+/* ---- Editorial scroll devices ---- */
+
+/* Self-drawing hairline rule: scaleX 0→1 when the chapter enters view.
+   Transform-only (compositor-only), triggered via data-inview. */
+.t1-rule {
+  display: block;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-inview="true"] .t1-rule {
+  transform: scaleX(1);
+}
+.t1-rule-delay {
+  transition-delay: 0.15s;
+}
+
+/* Running-folio crossfade — remounts on chapter change */
+.t1-folio-in {
+  animation: t1-folio-fade 0.25s ease-out;
+}
+@keyframes t1-folio-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t1-rule {
+    transform: scaleX(1);
+    transition: none;
+  }
+  .t1-folio-in {
+    animation: none;
+  }
 }
 
 /* ---- Print reproduction devices ---- */

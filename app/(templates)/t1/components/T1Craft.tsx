@@ -40,7 +40,7 @@ export default function T1Craft({
       </Fade>
 
       <Fade delay={0.14}>
-        <p className="mx-auto mt-6 max-w-2xl font-sans text-base leading-relaxed text-[#6B675E]">
+        <p className="font-t3-serif mx-auto mt-6 max-w-2xl text-[16px] leading-[1.7] text-[#6B675E]">
           That is the standard at {practiceName} — the difference between good
           and invisible lives at that scale.
           {hasSedation &&

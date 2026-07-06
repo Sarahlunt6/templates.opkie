@@ -65,7 +65,6 @@ export default function T3MissionStats({
     // "15+" mirrors the lead doctor's "over 15 years" in master-data bio
     { value: "15+", label: "years of care" },
     { value: `${locations.length}`, label: locations.length === 1 ? "location" : "locations" },
-    { value: "thousands", label: "of calm visits" },
   ];
 
   return (
@@ -113,7 +112,13 @@ export default function T3MissionStats({
 
         {/* stats row — large light numerals, small labels */}
         <T3Reveal delay={0.25}>
-          <dl className="grid grid-cols-2 gap-y-12 border-t border-[var(--t3-line)] pt-14 lg:grid-cols-4">
+          {/* 3 verifiable stats when a rating exists, 2 otherwise — the row
+              always balances because the column count follows the data */}
+          <dl
+            className={`grid gap-x-4 gap-y-12 border-t border-[var(--t3-line)] pt-14 ${
+              stats.length === 3 ? "grid-cols-3" : "grid-cols-2"
+            }`}
+          >
             {stats.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center gap-2">
                 <dd className="order-1 text-[clamp(2.2rem,4.5vw,3.4rem)] font-extralight leading-none tracking-[-0.01em] text-[var(--t3-moss)]">

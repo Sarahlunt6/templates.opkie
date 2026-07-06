@@ -49,7 +49,7 @@ const INSTRUMENTS = [
     name: "Guided implant surgery",
     claim:
       "Implant position is planned on your 3D scan, then executed through a printed surgical guide — not by eye.",
-    accent: "specs" as const,
+    accent: "none" as const,
     specs: [
       { k: "Planning", v: "On your CBCT scan" },
       { k: "Placement", v: "Guide-directed" },
@@ -124,7 +124,10 @@ export default function T2TechTriptych() {
                   {inst.claim}
                 </p>
 
-                {/* Per-card instrument accent */}
+                {/* Per-card instrument accent — data-bearing only; the
+                    decorative "mill spindle" / "guide calibrated" labels
+                    were pruned in the label-density pass. */}
+                {inst.accent !== "none" && (
                 <div className="mt-7">
                   {inst.accent === "progress" && (
                     <div aria-hidden="true">
@@ -144,10 +147,7 @@ export default function T2TechTriptych() {
                     </div>
                   )}
                   {inst.accent === "eq" && (
-                    <div className="flex items-end justify-between" aria-hidden="true">
-                      <span className="t2p-mono text-[0.5625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
-                        Mill spindle signal
-                      </span>
+                    <div className="flex items-end justify-end" aria-hidden="true">
                       <span className="t2p-eq">
                         {Array.from({ length: 14 }).map((_, b) => (
                           <span key={b} />
@@ -155,15 +155,8 @@ export default function T2TechTriptych() {
                       </span>
                     </div>
                   )}
-                  {inst.accent === "specs" && (
-                    <div className="flex items-center gap-2.5" aria-hidden="true">
-                      <span className="t2p-hud-dot" />
-                      <span className="t2p-mono text-[0.5625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
-                        Guide calibrated to scan
-                      </span>
-                    </div>
-                  )}
                 </div>
+                )}
 
                 {/* Spec readout */}
                 <div className="mt-auto pt-6">

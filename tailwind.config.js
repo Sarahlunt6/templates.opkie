@@ -45,6 +45,8 @@ module.exports = {
         "t1-display": ["var(--font-t1-display)", "Fraunces", "Georgia", "serif"],
         // T1 Press Display: Heavy condensed sans for giant wordmarks (Anton)
         "t1-press": ["var(--font-t1-press)", "Anton", "Impact", "sans-serif"],
+        // T1 Press Labels: Typewriter mono for bracket indexes (Courier Prime)
+        "t1-mono": ["var(--font-t1-mono)", "Courier Prime", "Courier New", "monospace"],
         // T3 Serif Accent: Soft italic serif for quotes (Newsreader)
         "t3-serif": ["var(--font-t3-serif)", "Newsreader", "Georgia", "serif"],
       },

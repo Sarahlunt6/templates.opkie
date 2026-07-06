@@ -43,7 +43,8 @@ export default function T1Masthead({
       }`}
     >
       <div className="mx-auto flex max-w-[1500px] items-stretch justify-between gap-4 px-4 md:px-8 xl:px-12">
-        {/* Logotype */}
+        {/* Logotype — the one sanctioned Anton-below-2xl exception: it is the
+            brand mark, and 2xl wraps long practice names at 375px */}
         <a
           href="#top"
           className="flex items-center py-3 font-t1-press text-xl uppercase leading-none tracking-[0.01em] text-[#1A1713] md:text-2xl"

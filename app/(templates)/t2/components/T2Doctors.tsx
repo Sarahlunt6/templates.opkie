@@ -85,7 +85,7 @@ export default function T2Doctors() {
                 >
                   <span
                     aria-hidden="true"
-                    className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt)]"
+                    className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt-dim)]"
                   />
                   {c}
                 </li>
@@ -123,7 +123,7 @@ export default function T2Doctors() {
                     >
                       <span
                         aria-hidden="true"
-                        className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt)]"
+                        className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt-dim)]"
                       />
                       {c}
                     </li>

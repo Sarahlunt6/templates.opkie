@@ -12,27 +12,29 @@ export default function T3AmbientDrift() {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
       aria-hidden="true"
     >
+      {/* opacities + core alphas tuned ~1.8x so the blooms register as
+          gentle atmosphere on a bright screen without competing with copy */}
       <div
-        className="t3-drift-a absolute -top-[20%] -left-[15%] h-[70vmax] w-[70vmax] rounded-full opacity-[0.55]"
+        className="t3-drift-a absolute -top-[20%] -left-[15%] h-[80vmax] w-[80vmax] rounded-full opacity-[0.85]"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(109,139,125,0.2) 0%, rgba(109,139,125,0.07) 45%, transparent 70%)",
+            "radial-gradient(circle at center, rgba(109,139,125,0.3) 0%, rgba(109,139,125,0.11) 45%, transparent 70%)",
           filter: "blur(40px)",
         }}
       />
       <div
-        className="t3-drift-b absolute -bottom-[25%] -right-[20%] h-[75vmax] w-[75vmax] rounded-full opacity-[0.5]"
+        className="t3-drift-b absolute -bottom-[25%] -right-[20%] h-[85vmax] w-[85vmax] rounded-full opacity-[0.8]"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(231,224,210,0.45) 0%, rgba(231,224,210,0.16) 45%, transparent 70%)",
+            "radial-gradient(circle at center, rgba(231,224,210,0.6) 0%, rgba(231,224,210,0.22) 45%, transparent 70%)",
           filter: "blur(40px)",
         }}
       />
       <div
-        className="t3-drift-a absolute top-[20%] right-[-10%] h-[50vmax] w-[50vmax] rounded-full opacity-[0.4]"
+        className="t3-drift-a absolute top-[20%] right-[-10%] h-[55vmax] w-[55vmax] rounded-full opacity-[0.65]"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(242,246,238,0.6) 0%, rgba(232,239,227,0.2) 50%, transparent 72%)",
+            "radial-gradient(circle at center, rgba(248,250,244,0.75) 0%, rgba(232,239,227,0.28) 50%, transparent 72%)",
           filter: "blur(50px)",
         }}
       />

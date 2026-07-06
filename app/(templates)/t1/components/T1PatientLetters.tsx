@@ -35,15 +35,14 @@ export default function T1PatientLetters({
               [ THE VERDICT ]
             </p>
             <div className="py-10">
-              <p className="font-t1-press text-[clamp(5rem,10vw,8rem)] leading-none text-[#D92B21]">
-                {avgRating}
-              </p>
               <p
-                className="mt-3 font-t1-press text-2xl tracking-[0.12em] text-[#D92B21]"
-                role="img"
+                className="font-t1-press text-[clamp(5rem,10vw,8rem)] leading-none text-[#D92B21]"
                 aria-label={`Rated ${avgRating} out of 5`}
               >
-                ★★★★★
+                {avgRating}
+              </p>
+              <p className="t1-mono-label mt-3 !text-[#F3EFE6]/60">
+                OUT OF 5
               </p>
             </div>
             <p className="t1-mono-label !text-[#F3EFE6]/70">

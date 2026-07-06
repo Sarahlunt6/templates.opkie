@@ -32,8 +32,9 @@ export default function T1DoctorFeature({
 
   return (
     <div className="mt-12 grid grid-cols-1 gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-10">
-      {/* Portrait — the profile photograph, reproduced in print */}
-      <div className="lg:col-span-5">
+      {/* Portrait — staggered down so the spread reads asymmetric, like a
+          feature well rather than another aligned grid */}
+      <div className="lg:col-span-5 lg:mt-24">
         <Fade>
           <figure className="group">
             <div className="relative aspect-[3/4] w-full overflow-hidden border border-[#1A1713] bg-[#E9E3D4]">
@@ -86,9 +87,13 @@ export default function T1DoctorFeature({
           </p>
         </Fade>
 
-        {/* Credentials — mono index list */}
+        {/* Credentials — mono index list, pulled left to overlap the
+            portrait's right edge at lg+ */}
         <Fade delay={0.12}>
-          <ul className="mt-8" aria-label={`Credentials of ${principal.name}`}>
+          <ul
+            className="mt-8 bg-[#F3EFE6] lg:-ml-24 lg:border lg:border-[rgba(26,23,19,0.15)] lg:p-6"
+            aria-label={`Credentials of ${principal.name}`}
+          >
             {principal.credentials.map((credential, i) => (
               <li
                 key={credential}
@@ -112,7 +117,7 @@ export default function T1DoctorFeature({
         {/* Pull quote — the one red statement of the spread */}
         <Fade delay={0.16}>
           <blockquote className="mt-10 border-l-2 border-[#D92B21] pl-6">
-            <p className="font-t1-press text-xl uppercase leading-tight text-[#1A1713] md:text-2xl">
+            <p className="font-t1-press text-2xl uppercase leading-tight text-[#1A1713] md:text-3xl">
               &ldquo;The best dentistry is the kind you eventually stop
               thinking about.&rdquo;
             </p>
@@ -131,7 +136,7 @@ export default function T1DoctorFeature({
               </p>
               {rest.map((doctor) => (
                 <div key={doctor.name} className="mt-5">
-                  <p className="font-t1-press text-lg uppercase leading-tight text-[#1A1713]">
+                  <p className="font-t3-serif text-lg font-medium leading-tight text-[#1A1713]">
                     {doctor.name}
                   </p>
                   <p className="t1-mono-label t1-mono-label-stone mt-1.5">
