@@ -6,10 +6,12 @@ import { SectionHeader } from "./T2Kit";
 import { practice, bookingHref, EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
-   Compare — flagship-launch comparison table. The center column
-   (this practice) is highlighted in volt; the flanking columns —
-   traditional impressions and mail-order aligners — sit in dim
-   text. Boolean rows use volt check circles vs. dim x circles.
+   Compare — flagship comparison table, and THE deliberate dark
+   moment on the porcelain page. The center column (this practice)
+   is a graphite panel with white text and scan-blue glowing checks
+   — a radiograph on a lightbox. The flanking columns — traditional
+   impressions and mail-order aligners — stay light with dim text
+   and blue-ink check circles vs. dim x circles.
    ──────────────────────────────────────────────────────────────── */
 
 type Verdict = boolean;
@@ -82,7 +84,7 @@ function CellContent({ value, highlight }: { value: Cell; highlight?: boolean })
   return (
     <span
       className={`t2p-mono text-[0.75rem] md:text-[0.8125rem] leading-snug ${
-        highlight ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text-50)]"
+        highlight ? "text-white" : "text-[var(--t2p-text-50)]"
       }`}
     >
       {value}
@@ -98,7 +100,7 @@ export default function T2Compare() {
       <div className="t2p-blueprint absolute inset-0 pointer-events-none" aria-hidden="true" />
       <div className="relative max-w-5xl mx-auto">
         <SectionHeader
-          index="04"
+          index="14"
           label="Comparison"
           title={
             <>
