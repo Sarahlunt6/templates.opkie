@@ -138,12 +138,12 @@ export default function T2Compare() {
               </div>
               <div
                 role="columnheader"
-                className="rounded-t-2xl border border-b-0 border-[var(--t2p-volt-dim)] bg-[rgba(126,224,75,0.05)] px-4 py-5 text-center"
+                className="t2p-dark-panel rounded-t-2xl border border-b-0 border-[var(--t2p-graphite)] bg-[var(--t2p-graphite)] px-4 py-5 text-center shadow-[0_16px_44px_-20px_rgba(16,22,29,0.5)]"
               >
-                <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-volt)]">
+                <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-white">
                   {practice.globalPracticeName}
                 </p>
-                <p className="mt-1 text-[0.8125rem] text-[var(--t2p-text)]">
+                <p className="mt-1 text-[0.8125rem] text-white/70">
                   Digital dentistry
                 </p>
               </div>
@@ -197,13 +197,13 @@ export default function T2Compare() {
                   <motion.div
                     {...cellEntrance}
                     role="cell"
-                    className={`flex items-center justify-center border-x border-[var(--t2p-volt-dim)] bg-[rgba(126,224,75,0.05)] px-4 py-4 text-center ${
+                    className={`t2p-dark-panel flex items-center justify-center border-x border-[var(--t2p-graphite)] bg-[var(--t2p-graphite)] px-4 py-4 text-center ${
                       last
-                        ? "rounded-b-2xl border-b"
-                        : "border-b border-b-[rgba(126,224,75,0.16)]"
+                        ? "rounded-b-2xl border-b border-b-[var(--t2p-graphite)]"
+                        : "border-b border-b-[rgba(255,255,255,0.12)]"
                     }`}
                   >
-                    {/* Volt check flash — the scan confirms as the row lands */}
+                    {/* Scan check flash — the scan confirms as the row lands */}
                     {typeof row.summit === "boolean" && row.summit && !reduced ? (
                       <motion.span
                         className="inline-flex"

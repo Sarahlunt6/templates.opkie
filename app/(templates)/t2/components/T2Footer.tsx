@@ -30,7 +30,7 @@ export default function T2Footer() {
             </address>
             <a
               href={telHref}
-              className="t2p-mono mt-3 inline-block text-sm text-[var(--t2p-text)] hover:text-[var(--t2p-volt)] transition-colors"
+              className="t2p-mono mt-3 inline-block text-sm text-[var(--t2p-text)] hover:text-[var(--t2p-blue)] transition-colors"
             >
               {location.phoneGBP}
             </a>
@@ -53,7 +53,7 @@ export default function T2Footer() {
                   href={href}
                   className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors"
                 >
-                  <span className="mr-2 text-[var(--t2p-volt)]/60 group-hover:text-[var(--t2p-volt)] transition-colors">
+                  <span className="mr-2 text-[rgba(3,105,161,0.65)] group-hover:text-[var(--t2p-blue)] transition-colors">
                     {idx}
                   </span>
                   {label}
@@ -61,7 +61,7 @@ export default function T2Footer() {
               ))}
               <a
                 href={bookingHref}
-                className="t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-volt)]"
+                className="t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-blue)]"
               >
                 <span className="mr-2">09</span>Book a visit
               </a>
@@ -72,6 +72,9 @@ export default function T2Footer() {
         <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-[var(--t2p-line)] pt-6 pb-16 lg:pb-0">
           <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
             © {year} {practice.globalPracticeName}
+          </p>
+          <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+            Sections indexed in FDI tooth notation.
           </p>
           <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
             {location.cityServed} / {location.stateServed} — digital dentistry

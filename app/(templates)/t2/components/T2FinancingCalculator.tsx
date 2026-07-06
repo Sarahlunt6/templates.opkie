@@ -104,7 +104,7 @@ function Slider({
   );
 }
 
-/** Configurator option row — name left, mono price right, volt check when selected. */
+/** Configurator option row — name left, mono price right, blue check when selected. */
 function OptionRow({
   selected,
   onSelect,
@@ -124,14 +124,14 @@ function OptionRow({
       aria-pressed={selected}
       className={`flex w-full items-center gap-4 rounded-xl border px-4 py-3.5 text-left transition-colors duration-300 ${
         selected
-          ? "border-[var(--t2p-volt)] bg-[rgba(126,224,75,0.06)]"
-          : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-volt-dim)]"
+          ? "border-[var(--t2p-blue)] bg-[rgba(3,105,161,0.05)]"
+          : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-scan-dim)]"
       }`}
     >
       <span
         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
           selected
-            ? "border-[var(--t2p-volt)] bg-[var(--t2p-volt)] text-[#061007]"
+            ? "border-[var(--t2p-blue)] bg-[var(--t2p-blue)] text-white"
             : "border-[var(--t2p-line-strong)] text-transparent"
         }`}
         aria-hidden="true"
@@ -150,7 +150,7 @@ function OptionRow({
       </span>
       <span
         className={`t2p-mono shrink-0 text-[0.75rem] ${
-          selected ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text-50)]"
+          selected ? "text-[var(--t2p-blue)]" : "text-[var(--t2p-text-50)]"
         }`}
       >
         {price}
@@ -297,7 +297,7 @@ export default function T2FinancingCalculator() {
               initial={reduced ? false : { opacity: 0.4 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.35, ease: EASE }}
-              className="t2p-mono mt-2 text-5xl md:text-6xl text-[var(--t2p-volt)] tracking-tight"
+              className="t2p-mono mt-2 text-5xl md:text-6xl text-[var(--t2p-blue)] tracking-tight"
             >
               {fmt(result.payment)}
             </motion.p>
@@ -328,7 +328,7 @@ export default function T2FinancingCalculator() {
             {/* Schedule preview */}
             <button
               onClick={() => setExpanded(!expanded)}
-              className="t2p-mono mt-4 flex w-full items-center justify-between py-2 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-volt)] transition-colors"
+              className="t2p-mono mt-4 flex w-full items-center justify-between py-2 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-blue)] transition-colors"
               aria-expanded={expanded}
             >
               <span>Payment schedule</span>

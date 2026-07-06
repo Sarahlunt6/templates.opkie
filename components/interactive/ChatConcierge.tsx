@@ -108,34 +108,35 @@ const THEMES: Record<ThemeKey, ChatTheme> = {
     send: "bg-[#1A1713] text-[#F3EFE6] rounded-sm hover:bg-[#D92B21] transition-colors",
   },
 
-  /* T2 PRECISION — near-black surfaces, volt green, mono readouts */
+  /* T2 PRECISION — porcelain lab: white surfaces, graphite header,
+     deep clinical blue ink, scan-blue glow, mono readouts */
   t2: {
-    fab: "bg-[#7EE04B] text-[#060806] rounded-full shadow-[0_8px_30px_rgba(126,224,75,0.35)] hover:shadow-[0_12px_44px_rgba(126,224,75,0.5)]",
-    dot: "bg-[#060806] border-[#7EE04B]",
-    panel: "bg-[#0E120E] border border-[rgba(242,245,240,0.1)] rounded-2xl",
+    fab: "bg-[#0369A1] text-white rounded-full shadow-[0_8px_30px_rgba(56,189,248,0.35)] hover:shadow-[0_12px_44px_rgba(56,189,248,0.5)]",
+    dot: "bg-[#38BDF8] border-white",
+    panel: "bg-[#FFFFFF] border border-[rgba(23,32,42,0.1)] rounded-2xl",
     header:
-      "bg-[#060806] text-[#F2F5F0] border-b border-[rgba(242,245,240,0.08)]",
+      "bg-[#10161D] text-white border-b border-[rgba(255,255,255,0.08)]",
     headerName:
-      "font-t2-mono text-[11px] uppercase tracking-[0.18em] text-[#7EE04B]",
+      "font-t2-mono text-[11px] uppercase tracking-[0.18em] text-[#7DD3FC]",
     avatar:
-      "rounded-full bg-[rgba(126,224,75,0.12)] text-[#7EE04B] border-2 border-[rgba(126,224,75,0.4)]",
-    statusDot: "bg-[#7EE04B]",
-    statusText: "text-[#F2F5F0]/60",
-    arena: "bg-[#0E120E]",
-    userBubble: "bg-[#7EE04B] text-[#060806] rounded-2xl rounded-tr-sm",
+      "rounded-full bg-[rgba(56,189,248,0.16)] text-[#7DD3FC] border-2 border-[rgba(56,189,248,0.45)]",
+    statusDot: "bg-[#38BDF8]",
+    statusText: "text-white/60",
+    arena: "bg-[#F6F8FA]",
+    userBubble: "bg-[#0369A1] text-white rounded-2xl rounded-tr-sm",
     conciergeBubble:
-      "bg-[#141A14] text-[#F2F5F0] rounded-2xl rounded-tl-sm border border-[rgba(242,245,240,0.08)]",
-    userTime: "text-[#060806]/60",
-    conciergeTime: "text-[#F2F5F0]/50",
-    typingDot: "bg-[#F2F5F0]/50",
-    quickWrap: "border-t border-[rgba(242,245,240,0.08)] bg-[#0E120E]",
-    quickLabel: "text-[#F2F5F0]/50",
+      "bg-white text-[#17202A] rounded-2xl rounded-tl-sm border border-[rgba(23,32,42,0.1)]",
+    userTime: "text-white/60",
+    conciergeTime: "text-[rgba(23,32,42,0.5)]",
+    typingDot: "bg-[rgba(23,32,42,0.4)]",
+    quickWrap: "border-t border-[rgba(23,32,42,0.1)] bg-white",
+    quickLabel: "text-[rgba(23,32,42,0.5)]",
     quickBtn:
-      "border border-[rgba(242,245,240,0.2)] text-[#F2F5F0] rounded-full bg-transparent hover:bg-[#7EE04B] hover:text-[#060806] hover:border-[#7EE04B]",
-    inputWrap: "border-t border-[rgba(242,245,240,0.08)] bg-[#0E120E]",
+      "border border-[rgba(23,32,42,0.18)] text-[#17202A] rounded-full bg-transparent hover:bg-[#0369A1] hover:text-white hover:border-[#0369A1]",
+    inputWrap: "border-t border-[rgba(23,32,42,0.1)] bg-white",
     input:
-      "bg-[#141A14] border border-[rgba(242,245,240,0.14)] rounded-full text-[#F2F5F0] placeholder-[#F2F5F0]/40 focus:ring-2 focus:ring-[#7EE04B]/25 focus:border-[#7EE04B]",
-    send: "bg-[#7EE04B] text-[#060806] rounded-full",
+      "bg-[#F6F8FA] border border-[rgba(23,32,42,0.18)] rounded-full text-[#17202A] placeholder-[rgba(23,32,42,0.4)] focus:ring-2 focus:ring-[#0369A1]/25 focus:border-[#0369A1]",
+    send: "bg-[#0369A1] text-white rounded-full hover:bg-[#075985] transition-colors",
   },
 
   /* T3 HAVEN — pale sage, eucalyptus, soft glass and generous radii */

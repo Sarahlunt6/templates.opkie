@@ -19,7 +19,7 @@ export default function T2Doctors() {
     <section id="doctors" className="relative py-24 md:py-32 px-6 md:px-12 bg-[var(--t2p-surface)] scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          index="05"
+          index="15"
           label="Your doctors"
           title={
             <>
@@ -69,7 +69,7 @@ export default function T2Doctors() {
             <h3 className="font-innovator text-3xl md:text-4xl font-medium tracking-tight text-[var(--t2p-text)]">
               {lead.name}
             </h3>
-            <p className="mt-2.5 text-base text-[var(--t2p-volt)]">
+            <p className="mt-2.5 text-base text-[var(--t2p-blue)]">
               {lead.role}
             </p>
 
@@ -85,7 +85,7 @@ export default function T2Doctors() {
                 >
                   <span
                     aria-hidden="true"
-                    className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt-dim)]"
+                    className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-scan-dim)]"
                   />
                   {c}
                 </li>
@@ -109,7 +109,7 @@ export default function T2Doctors() {
                 <h3 className="font-innovator text-xl md:text-2xl font-medium tracking-tight text-[var(--t2p-text)]">
                   {doc.name}
                 </h3>
-                <p className="mt-2 text-[0.9375rem] text-[var(--t2p-volt)]">
+                <p className="mt-2 text-[0.9375rem] text-[var(--t2p-blue)]">
                   {doc.role}
                 </p>
                 <p className="mt-5 text-sm md:text-[0.9375rem] leading-relaxed text-[var(--t2p-text-70)]">
@@ -123,7 +123,7 @@ export default function T2Doctors() {
                     >
                       <span
                         aria-hidden="true"
-                        className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-volt-dim)]"
+                        className="h-px w-4 shrink-0 translate-y-[-3px] bg-[var(--t2p-scan-dim)]"
                       />
                       {c}
                     </li>

@@ -72,7 +72,7 @@ export default function T2ToolTabs() {
               onKeyDown={(e) => onKeyDown(e, i)}
               className={`t2p-mono relative pb-3.5 text-[0.6875rem] uppercase tracking-[0.18em] transition-colors duration-300 ${
                 selected
-                  ? "text-[var(--t2p-volt)]"
+                  ? "text-[var(--t2p-blue)]"
                   : "text-[var(--t2p-text-50)] hover:text-[var(--t2p-text-70)]"
               }`}
             >
@@ -86,8 +86,8 @@ export default function T2ToolTabs() {
                   selected ? "opacity-100" : "opacity-0"
                 }`}
                 style={{
-                  background: "var(--t2p-volt)",
-                  boxShadow: "0 0 8px rgba(126, 224, 75, 0.6)",
+                  background: "var(--t2p-scan)",
+                  boxShadow: "0 0 8px rgba(56, 189, 248, 0.6)",
                 }}
               />
             </button>

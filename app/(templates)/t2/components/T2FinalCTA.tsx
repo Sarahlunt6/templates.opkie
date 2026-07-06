@@ -8,7 +8,8 @@ import { practice, location, bookingHref, telHref, EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
    Final CTA — "Begin your scan." The motif closes where it opened:
-   one last beam sweep across a full-bleed office frame.
+   one last beam sweep across a full-bleed office frame under a
+   bright porcelain wash.
    ──────────────────────────────────────────────────────────────── */
 
 export default function T2FinalCTA() {
@@ -31,8 +32,8 @@ export default function T2FinalCTA() {
           className="object-cover saturate-[0.4]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[#060806]/90" />
-        <div className="t2p-wireframe absolute inset-0 opacity-[0.08]" />
+        <div className="absolute inset-0 bg-[#F6F8FA]/90" />
+        <div className="t2p-wireframe absolute inset-0 opacity-[0.16]" />
         <div className="t2p-corner-glow absolute inset-0" />
       </div>
 
