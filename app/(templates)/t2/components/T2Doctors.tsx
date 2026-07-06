@@ -20,7 +20,7 @@ export default function T2Doctors() {
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           index="05"
-          label="Operators"
+          label="Your doctors"
           title={
             <>
               The hands behind <span className="t2p-duotext">the hardware.</span>

@@ -1,165 +1,245 @@
 /* ------------------------------------------------------------------ */
-/*  T1 "Maison" — editorial luxury theme tokens & typographic details  */
+/*  T1 PRESS — big graphic editorial print.                            */
+/*  Warm cream paper, near-black ink, one editorial red. Giant Anton   */
+/*  wordmarks, mono bracket indices, hairline grid rules, halftone.    */
 /*  Scoped to .t1-root so nothing leaks into sibling templates.        */
 /* ------------------------------------------------------------------ */
 
 .t1-root {
-  --t1-porcelain: #f7f5f0;
-  --t1-porcelain-deep: #efeae0;
-  --t1-ink: #16130f;
-  --t1-brass: #9c7e46;
-  --t1-oxblood: #5e2a2b;
+  --t1-paper: #f3efe6;
+  --t1-paper-deep: #e9e3d4;
+  --t1-ink: #1a1713;
+  --t1-red: #d92b21;
   --t1-stone: #6b675e;
-  --t1-hairline: rgba(22, 19, 15, 0.16);
-  --t1-hairline-soft: rgba(22, 19, 15, 0.09);
-  --t1-hairline-light: rgba(247, 245, 240, 0.2);
+  --t1-hairline: rgba(26, 23, 19, 0.15);
+  --t1-hairline-soft: rgba(26, 23, 19, 0.08);
+  --t1-hairline-light: rgba(243, 239, 230, 0.22);
 
-  background-color: var(--t1-porcelain);
+  background-color: var(--t1-paper);
   color: var(--t1-ink);
   font-feature-settings: "kern" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
 }
 
 .t1-root ::selection {
-  background-color: var(--t1-brass);
-  color: var(--t1-porcelain);
+  background-color: var(--t1-red);
+  color: var(--t1-paper);
 }
 
-/* Visible, elegant keyboard focus */
+/* Keyboard focus — a hard red rule, print register mark energy */
 .t1-root a:focus-visible,
 .t1-root button:focus-visible,
 .t1-root input:focus-visible,
 .t1-root [tabindex]:focus-visible {
-  outline: 2px solid var(--t1-brass);
-  outline-offset: 4px;
-  border-radius: 1px;
+  outline: 2px solid var(--t1-red);
+  outline-offset: 3px;
+  border-radius: 0;
 }
 
-/* ---- Recurring editorial atoms ---- */
+/* ---- Type atoms ---- */
 
-/* Small-caps eyebrow label */
-.t1-eyebrow {
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.6875rem;
+/* Mono bracket index label — "[ 01 ]" / "[ SMILE DESIGN ]" */
+.t1-mono-label {
+  font-family: var(--font-t2-mono), ui-monospace, monospace;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--t1-brass);
+  color: var(--t1-ink);
+}
+.t1-mono-label-red {
+  color: var(--t1-red);
+}
+.t1-mono-label-stone {
+  color: var(--t1-stone);
 }
 
-/* Hairline rules */
+/* Giant wordmark scale (generic; hero/footer size to viewport width) */
+.t1-wordmark {
+  font-family: var(--font-t1-press), Anton, Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.84;
+  letter-spacing: 0.005em;
+  font-size: clamp(4rem, 14vw, 13rem);
+  user-select: none;
+}
+
+/* Section display */
+.t1-display {
+  font-family: var(--font-t1-press), Anton, Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* Occasional single-phrase editorial italic (Newsreader) */
+.t1-italic {
+  font-family: var(--font-t3-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ---- Rules & grid devices ---- */
+
 .t1-rule {
   border: 0;
   border-top: 1px solid var(--t1-hairline);
 }
-.t1-rule-brass {
+.t1-rule-red {
   border: 0;
-  border-top: 1px solid var(--t1-brass);
+  border-top: 1px solid var(--t1-red);
 }
 
-/* Long-form drop cap (applied to the first paragraph of a chapter) */
-.t1-dropcap::first-letter {
-  font-family: var(--font-t1-display), Georgia, serif;
-  font-weight: 300;
-  font-size: 4.6em;
-  line-height: 0.78;
-  float: left;
-  padding-right: 0.14em;
-  padding-top: 0.06em;
-  color: var(--t1-brass);
+/* Background column rules — thin vertical hairlines structuring a section */
+.t1-col-rules {
+  background-image: linear-gradient(
+    to right,
+    var(--t1-hairline-soft) 1px,
+    transparent 1px
+  );
+  background-size: 25% 100%;
+  background-position: left top;
 }
 
-/* Outlined chapter numerals */
-.t1-numeral-outline {
-  font-family: var(--font-t1-display), Georgia, serif;
-  font-weight: 300;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--t1-brass);
-  user-select: none;
-}
+/* ---- Buttons — rectangular, sharp, mono voice ---- */
 
-/* SplitType line masking for headline reveals */
-.t1-root .t1-mask-line {
-  overflow: hidden;
-  display: block;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
-}
-
-/* Editorial text link — brass underline; oxblood draws in from the left */
-.t1-link {
-  color: inherit;
-  text-decoration: none;
-  padding-bottom: 2px;
-  background-image: linear-gradient(var(--t1-oxblood), var(--t1-oxblood)),
-    linear-gradient(var(--t1-brass), var(--t1-brass));
-  background-size: 0% 1px, 100% 1px;
-  background-position: bottom left, bottom left;
-  background-repeat: no-repeat;
-  transition: background-size 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.t1-link:hover {
-  color: var(--t1-oxblood);
-  background-size: 100% 1px, 100% 1px;
-}
-
-/* Solid & outline CTAs */
 .t1-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
   min-height: 52px;
-  padding: 0.95rem 2.2rem;
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  padding: 0.9rem 2rem;
+  border-radius: 0;
+  font-family: var(--font-t2-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: background-color 0.25s ease-out, color 0.25s ease-out,
+    border-color 0.25s ease-out;
 }
 .t1-btn-ink {
   background-color: var(--t1-ink);
-  color: var(--t1-porcelain);
+  color: var(--t1-paper);
   border: 1px solid var(--t1-ink);
 }
 .t1-btn-ink:hover {
-  background-color: var(--t1-oxblood);
-  border-color: var(--t1-oxblood);
+  background-color: var(--t1-red);
+  border-color: var(--t1-red);
+  color: var(--t1-paper);
 }
-.t1-btn-ghost {
+.t1-btn-outline {
   background-color: transparent;
   color: var(--t1-ink);
-  border: 1px solid var(--t1-hairline);
+  border: 1px solid var(--t1-ink);
 }
-.t1-btn-ghost:hover {
-  border-color: var(--t1-brass);
-  color: var(--t1-oxblood);
+.t1-btn-outline:hover {
+  background-color: var(--t1-red);
+  border-color: var(--t1-red);
+  color: var(--t1-paper);
 }
-.t1-btn-porcelain {
-  background-color: var(--t1-porcelain);
+.t1-btn-paper {
+  background-color: var(--t1-paper);
   color: var(--t1-ink);
-  border: 1px solid var(--t1-porcelain);
+  border: 1px solid var(--t1-paper);
 }
-.t1-btn-porcelain:hover {
-  background-color: var(--t1-brass);
-  border-color: var(--t1-brass);
-  color: var(--t1-porcelain);
-}
-.t1-btn-ghost-light {
-  background-color: transparent;
-  color: var(--t1-porcelain);
-  border: 1px solid var(--t1-hairline-light);
-}
-.t1-btn-ghost-light:hover {
-  border-color: var(--t1-brass);
-  color: var(--t1-brass);
+.t1-btn-paper:hover {
+  background-color: var(--t1-red);
+  border-color: var(--t1-red);
+  color: var(--t1-paper);
 }
 
-/* The Reveal — range slider that drives the page-turn wipe */
+/* Text links — ink with a red draw-in underline */
+.t1-link {
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 2px;
+  background-image: linear-gradient(var(--t1-red), var(--t1-red)),
+    linear-gradient(var(--t1-hairline), var(--t1-hairline));
+  background-size: 0% 1px, 100% 1px;
+  background-position: bottom left, bottom left;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease-out, color 0.3s ease-out;
+}
+.t1-link:hover {
+  color: var(--t1-red);
+  background-size: 100% 1px, 100% 1px;
+}
+
+/* Arrow chip — circled arrow, ink outline, fills red on card hover */
+.t1-arrow-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  border: 1px solid var(--t1-ink);
+  color: var(--t1-ink);
+  transition: background-color 0.25s ease-out, color 0.25s ease-out,
+    border-color 0.25s ease-out;
+}
+.group:hover .t1-arrow-chip,
+.t1-arrow-chip:hover {
+  background-color: var(--t1-red);
+  border-color: var(--t1-red);
+  color: var(--t1-paper);
+}
+
+/* ---- Print reproduction devices ---- */
+
+/* Halftone-dot texture — Continental-style screen printing artifact */
+.t1-halftone {
+  background-image: radial-gradient(var(--t1-ink) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.12;
+}
+.t1-halftone-paper {
+  background-image: radial-gradient(var(--t1-paper) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.16;
+}
+
+/* Photography as print reproduction — duotone / grayscale-contrast.
+   On hover the reproduction "develops" into full color — the one place
+   the print conceit gives way and the real practice shows through. */
+.t1-duotone {
+  filter: grayscale(1) contrast(1.12) brightness(1.04);
+  transition: filter 0.6s ease-out;
+}
+.group:hover .t1-duotone {
+  filter: grayscale(0) contrast(1) brightness(1);
+}
+/* Red-tinted accent plate: pair .t1-duotone image with this overlay */
+.t1-tint-red {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--t1-red);
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+/* Near-invisible paper grain across the whole page */
+.t1-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ---- Before/after wipe — keyboard range control, red seam ---- */
+
 .t1-wipe-range {
   -webkit-appearance: none;
   appearance: none;
@@ -182,129 +262,16 @@
   width: 14px;
   height: 14px;
   margin-top: -6.5px;
-  border-radius: 50%;
-  background: var(--t1-porcelain);
-  border: 1px solid var(--t1-brass);
+  border-radius: 0;
+  background: var(--t1-paper);
+  border: 1px solid var(--t1-red);
 }
 .t1-wipe-range::-moz-range-thumb {
   width: 14px;
   height: 14px;
-  border-radius: 50%;
-  background: var(--t1-porcelain);
-  border: 1px solid var(--t1-brass);
-}
-
-/* ---- Editorial cursor ---- */
-
-/* Native cursor retires wherever the editorial cursor is active… */
-.t1-cursor-zone,
-.t1-cursor-zone * {
-  cursor: none !important;
-}
-/* …but never where a caret or native affordance is needed */
-.t1-cursor-zone input:not([type="range"]),
-.t1-cursor-zone textarea,
-.t1-cursor-zone select {
-  cursor: auto !important;
-}
-
-.t1-cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  pointer-events: none;
-}
-.t1-cursor-core {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-  border-radius: 9999px;
-  border: 1px solid transparent;
-}
-.t1-cursor-label {
-  font-family: var(--font-t1-display), Georgia, serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1;
-  color: var(--t1-ink);
-  user-select: none;
-}
-
-/* ---- Masthead type-window: video living inside the letterforms ---- */
-
-.t1-video-word {
-  position: relative;
-  display: inline-block;
-  isolation: isolate;
-}
-.t1-video-word-media {
-  position: absolute;
-  top: 0;
-  bottom: -0.08em;
-  left: -0.06em;
-  right: -0.06em;
-  overflow: hidden;
-  pointer-events: none;
-}
-.t1-video-word-media video {
-  position: absolute;
-  /* 1px inside the knockout field so no unblended video row can peek
-     out at the box edges when the blend layer rasterizes off-pixel */
-  inset: 1px;
-  width: calc(100% - 2px);
-  height: calc(100% - 2px);
-  object-fit: cover;
-  /* kept safely below porcelain brightness so the lighten-knockout
-     field never lets highlights bleed outside the letterforms */
-  filter: saturate(0.8) contrast(1.02) brightness(0.72) sepia(0.12);
-}
-/* porcelain field + black word over the film; lighten keeps the field
-   indistinguishable from the page and fills only the letterforms with
-   video (per-channel max: porcelain beats the film, the film beats ink) */
-.t1-video-word-knockout {
-  position: absolute;
-  inset: 0;
-  padding-left: 0.06em;
-  background: var(--t1-porcelain);
-  color: #000;
-  mix-blend-mode: lighten;
-  white-space: nowrap;
-}
-
-/* ---- Print tactility ---- */
-
-/* Near-invisible paper grain across the whole page */
-.t1-grain {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-}
-
-/* Letters from patients — heavy paper.
-   NB: no position here — the component decides (cards are absolute,
-   the sizing ghost is relative). */
-.t1-letter {
-  background-color: #fdfcfa;
-  border: 1px solid rgba(22, 19, 15, 0.09);
-  box-shadow: 0 1px 2px rgba(22, 19, 15, 0.06),
-    0 18px 40px -18px rgba(22, 19, 15, 0.3);
-}
-.t1-letter::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
+  border-radius: 0;
+  background: var(--t1-paper);
+  border: 1px solid var(--t1-red);
 }
 
 /* Reduced motion: strip every nonessential animation & transition */

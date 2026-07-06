@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { Magnetic, ParallaxImage, T1_EASE } from "./T1Motion";
+import { T1_EASE } from "./T1Motion";
 
 interface T1HeroProps {
   practiceName: string;
@@ -11,135 +11,18 @@ interface T1HeroProps {
   address: string;
   phone: string;
   bookingUrl: string;
-  avgRating: string;
+  avgRating: string | null;
   reviewCount: number;
   hasSameDayEmergency: boolean;
 }
 
-const CONTENTS = [
-  {
-    numeral: "I",
-    title: "The Consultation",
-    note: "An hour that belongs entirely to you",
-    href: "#consultation",
-  },
-  {
-    numeral: "II",
-    title: "The Design",
-    note: "Dentistry drawn before it is done",
-    href: "#design",
-  },
-  {
-    numeral: "III",
-    title: "The Craft",
-    note: "The room, the instruments, the hands",
-    href: "#craft",
-  },
-  {
-    numeral: "IV",
-    title: "The Reveal",
-    note: "Before, after, and the moment between",
-    href: "#reveal",
-  },
-];
-
 /**
- * The final word of the masthead set as a type-window: the ambient
- * practice video plays inside the letterforms. Solid ink beneath acts
- * as the fallback wherever the video (or the blend stack) is absent,
- * and under prefers-reduced-motion the overlay never mounts.
+ * T1 PRESS — cover. The first word of the practice name set as a giant
+ * red Anton wordmark spanning the full viewport, with the cover
+ * photograph rising into the letterforms (photo layered over the lower
+ * third of the word). Mono stat callouts flank the photo; hairline
+ * column rules structure the page behind everything.
  */
-function VideoWord({ word }: { word: string }) {
-  const reduced = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-
-  const showVideo = mounted && !reduced && !failed;
-
-  return (
-    <span className="t1-video-word">
-      <em className="font-light italic">{word}</em>
-      {showVideo && (
-        <motion.span
-          aria-hidden="true"
-          className="t1-video-word-media"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.4, delay: 1.1, ease: T1_EASE }}
-        >
-          <video
-            src="/videos/hero-ambient.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            onError={() => setFailed(true)}
-          />
-          <em className="t1-video-word-knockout font-light italic">{word}</em>
-        </motion.span>
-      )}
-    </span>
-  );
-}
-
-/** Issue metadata that types itself in, character by character */
-function TypedLine({
-  text,
-  delay = 0.4,
-  className = "",
-}: {
-  text: string;
-  delay?: number;
-  className?: string;
-}) {
-  const reduced = useReducedMotion();
-
-  if (reduced) {
-    return <span className={className}>{text}</span>;
-  }
-
-  // Words stay unbreakable inside, but the line wraps at spaces —
-  // important at 375px where the metadata runs long.
-  const words = text.split(" ");
-  let charCursor = 0;
-
-  return (
-    <span className={className}>
-      <span className="sr-only">{text}</span>
-      <span aria-hidden="true">
-        {words.map((word, wi) => {
-          const start = charCursor;
-          charCursor += word.length + 1;
-          return (
-            <span key={wi}>
-              <span className="inline-block whitespace-nowrap">
-                {word.split("").map((ch, ci) => (
-                  <motion.span
-                    key={ci}
-                    className="inline-block"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 0.01,
-                      delay: delay + (start + ci) * 0.016,
-                    }}
-                  >
-                    {ch}
-                  </motion.span>
-                ))}
-              </span>
-              {wi < words.length - 1 ? " " : ""}
-            </span>
-          );
-        })}
-      </span>
-    </span>
-  );
-}
-
 export default function T1Hero({
   practiceName,
   city,
@@ -155,220 +38,149 @@ export default function T1Hero({
   const tel = `tel:${phone.replace(/[^0-9+]/g, "")}`;
   const hasBooking = bookingUrl !== "none";
 
-  const words = practiceName.split(" ");
-  const lastIndex = words.length - 1;
+  const word = practiceName.split(" ")[0] || practiceName;
+  // Anton caps average ≈ 0.56em advance width — size the word so it
+  // spans the viewport edge to edge at every width.
+  const wordmarkSize = `calc((100vw - 1rem) / ${(word.length * 0.56).toFixed(2)})`;
 
   const rise = (delay: number) => ({
-    initial: reduced ? false : ({ yPercent: 115 } as const),
-    animate: { yPercent: 0 },
-    transition: { duration: 1.3, delay, ease: T1_EASE },
+    initial: reduced ? false : ({ opacity: 0, y: 20 } as const),
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5, delay, ease: T1_EASE },
   });
 
   return (
     <section
       id="top"
       aria-label={`${practiceName} — introduction`}
-      className="relative px-6 pt-28 md:px-10 md:pt-32 xl:px-16"
+      className="t1-col-rules relative overflow-hidden border-b border-[rgba(26,23,19,0.15)]"
     >
-      <div className="mx-auto max-w-[1400px]">
-        {/* Folio line — issue metadata types in, hairline draws beneath */}
-        <div className="relative flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 pb-4">
-          <p className="t1-eyebrow">
-            <TypedLine
-              text={`Vol. I — The Smile Issue · Rated ${avgRating} across ${reviewCount} patient stories`}
-              delay={0.35}
-            />
-          </p>
-          <motion.p
-            initial={reduced ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1.2, ease: T1_EASE }}
-            className="hidden font-sans text-[11px] uppercase tracking-[0.28em] text-[#6B675E] sm:block"
-          >
-            {city}, {state}
+      {/* Dateline row */}
+      <div className="mx-auto flex max-w-[1500px] items-baseline justify-between gap-4 border-b border-[rgba(26,23,19,0.08)] px-4 py-3 md:px-8 xl:px-12">
+        <motion.p className="t1-mono-label" {...rise(0.05)}>
+          [ {city}, {state} ]
+        </motion.p>
+        <motion.p
+          className="t1-mono-label t1-mono-label-stone hidden sm:block"
+          {...rise(0.1)}
+        >
+          [ NEW PATIENTS WELCOME ]
+        </motion.p>
+        {avgRating !== null && (
+          <motion.p className="t1-mono-label t1-mono-label-red" {...rise(0.15)}>
+            [ EST. RATING {avgRating} / 5 ]
           </motion.p>
-          <motion.span
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 h-px w-full origin-left bg-[#16130F]/15"
-            initial={reduced ? false : { scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, delay: 0.25, ease: T1_EASE }}
-          />
-        </div>
+        )}
+      </div>
 
-        {/* Masthead — staggered line-mask rise; last word carries the film */}
-        <h1 className="mt-10 font-t1-display font-light leading-[0.92] tracking-[-0.02em] text-[#16130F] text-[clamp(3.2rem,10.5vw,9.75rem)]">
-          {words.map((word, i) => (
-            <span
-              key={`${word}-${i}`}
-              className="inline-block overflow-hidden pb-[0.08em] -mb-[0.08em] align-top"
-            >
-              <motion.span className="inline-block" {...rise(0.15 + i * 0.12)}>
-                {i === lastIndex && words.length > 1 ? (
-                  <VideoWord word={word} />
-                ) : (
-                  word
-                )}
-                {i < lastIndex ? " " : ""}
-              </motion.span>
-            </span>
-          ))}
+      {/* Wordmark + photo interleave */}
+      <div className="relative pt-8 md:pt-12">
+        <h1 className="relative z-0 whitespace-nowrap text-center font-t1-press uppercase leading-[0.84] tracking-[0.005em] text-[#D92B21]">
+          <span className="sr-only">{practiceName}</span>
+          <span aria-hidden="true" style={{ fontSize: wordmarkSize }}>
+            {word}
+          </span>
         </h1>
 
-        {/* Deck + contents + cover image */}
-        <div className="mt-10 grid grid-cols-1 gap-12 lg:mt-14 lg:grid-cols-12 lg:gap-8">
-          {/* Left column */}
-          <motion.div
-            className="order-2 lg:order-1 lg:col-span-5 xl:col-span-4"
-            initial={reduced ? false : { opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.75, ease: T1_EASE }}
+        {/* Cover photograph — rises into the letterforms */}
+        <div
+          className="relative z-10 mx-auto w-[88vw] max-w-[760px]"
+          style={{ marginTop: `calc(${wordmarkSize} * -0.28)` }}
+        >
+          <motion.figure
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: T1_EASE }}
+            className="group relative border border-[#1A1713] bg-[#E9E3D4]"
           >
-            <p className="max-w-md font-sans text-base leading-relaxed text-[#6B675E] md:text-lg">
-              A study in considered dentistry, practiced at {address} and
-              written one patient at a time.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Magnetic>
-                <a
-                  href={hasBooking ? bookingUrl : tel}
-                  {...(hasBooking
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                  className="t1-btn t1-btn-ink"
-                >
-                  Reserve a consultation
-                </a>
-              </Magnetic>
-              <a href={tel} className="t1-link font-sans text-sm">
-                or call {phone}
-              </a>
+            <div className="relative aspect-[4/3] w-full overflow-hidden md:aspect-[16/10]">
+              <Image
+                src="/images/office-interior.jpg"
+                alt={`Inside the ${practiceName} practice in ${city}, ${state}`}
+                fill
+                sizes="(max-width: 768px) 88vw, 760px"
+                priority
+                className="t1-duotone object-cover"
+              />
+              {/* Halftone edge — print reproduction artifact */}
+              <div
+                aria-hidden="true"
+                className="t1-halftone pointer-events-none absolute inset-x-0 bottom-0 h-16"
+              />
             </div>
+            <figcaption className="flex items-baseline justify-between gap-4 border-t border-[#1A1713] px-3 py-2">
+              <span className="t1-mono-label t1-mono-label-stone">
+                FIG. 01 — THE PRACTICE
+              </span>
+              <span className="t1-mono-label hidden sm:block">
+                {address.toUpperCase()}
+              </span>
+            </figcaption>
+          </motion.figure>
 
-            {/* The dental essentials, set like a colophon line */}
-            <motion.div
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.0, ease: T1_EASE }}
-              className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-sans text-[11px] uppercase tracking-[0.16em] text-[#6B675E]"
+          {/* Floating stat callouts — flank the photo on wide screens */}
+          {avgRating !== null && (
+            <motion.aside
+              aria-label="Patient rating"
+              className="mt-3 border border-[#1A1713] bg-[#F3EFE6] px-4 py-3 lg:absolute lg:-left-[9.5rem] lg:top-10 lg:mt-0 lg:w-36 xl:-left-44 xl:w-40"
+              {...rise(0.35)}
             >
-              <span
-                className="tracking-[0.1em] text-[#9C7E46]"
-                role="img"
-                aria-label={`Rated ${avgRating} out of 5 by patients`}
-              >
-                ★★★★★
-              </span>
-              <span>{avgRating} patient rating</span>
-              <span aria-hidden="true" className="text-[#16130F]/25">
-                ·
-              </span>
-              <span>New patients welcome</span>
-              <span aria-hidden="true" className="text-[#16130F]/25">
-                ·
-              </span>
-              <span>Insurance accepted</span>
-              {hasSameDayEmergency && (
-                <>
-                  <span aria-hidden="true" className="text-[#16130F]/25">
-                    ·
-                  </span>
-                  <span>Same-day emergency care</span>
-                </>
-              )}
-            </motion.div>
-
-            {/* In this issue */}
-            <nav aria-label="In this issue" className="mt-14">
-              <p className="t1-eyebrow">In this issue</p>
-              <ol className="mt-4">
-                {CONTENTS.map((entry, i) => (
-                  <motion.li
-                    key={entry.numeral}
-                    initial={reduced ? false : { opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.9,
-                      delay: 1.1 + i * 0.08,
-                      ease: T1_EASE,
-                    }}
-                  >
-                    <a
-                      href={entry.href}
-                      className="group flex items-baseline gap-4 border-t border-[#16130F]/15 py-3.5 transition-colors duration-500"
-                    >
-                      <span className="w-7 shrink-0 font-t1-display text-sm italic text-[#9C7E46]">
-                        {entry.numeral}.
-                      </span>
-                      <span className="font-t1-display text-lg text-[#16130F] transition-colors duration-500 group-hover:text-[#5E2A2B] md:text-xl">
-                        {entry.title}
-                      </span>
-                      <span className="ml-auto hidden text-right font-sans text-xs text-[#6B675E] sm:block">
-                        {entry.note}
-                      </span>
-                    </a>
-                  </motion.li>
-                ))}
-              </ol>
-            </nav>
-          </motion.div>
-
-          {/* Cover image — breaks the grid to the right edge */}
-          <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8">
-            <figure className="relative lg:-mr-10 xl:-mr-16">
-              <motion.div
-                initial={reduced ? false : { clipPath: "inset(0 0 100% 0)" }}
-                animate={{ clipPath: "inset(0 0 0% 0)" }}
-                transition={{ duration: 1.5, delay: 0.55, ease: T1_EASE }}
-                className="overflow-hidden"
-              >
-                {/* slow settle from 1.12 → 1 while the mask lifts */}
-                <motion.div
-                  initial={reduced ? false : { scale: 1.12 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 2.2, delay: 0.55, ease: T1_EASE }}
-                >
-                  <ParallaxImage
-                    src="/images/office-interior.jpg"
-                    alt={`Inside the ${practiceName} practice in ${city}, ${state}`}
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    priority
-                    reveal={false}
-                    className="aspect-[4/3] w-full md:aspect-[16/10] lg:aspect-[4/3] xl:aspect-[16/10]"
-                  />
-                </motion.div>
-              </motion.div>
-              <motion.figcaption
-                initial={reduced ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.4, ease: T1_EASE }}
-                className="mt-3 flex items-baseline justify-between gap-4 font-sans text-xs text-[#6B675E]"
-              >
-                <span>The practice, photographed on an ordinary morning.</span>
-                <span className="hidden uppercase tracking-[0.22em] sm:block">
-                  Fig. 01
+              <p className="font-t1-press text-4xl leading-none text-[#1A1713]">
+                <span aria-hidden="true" className="mr-1 text-[#D92B21]">
+                  ★
                 </span>
-              </motion.figcaption>
-            </figure>
-          </div>
-        </div>
+                {avgRating}
+              </p>
+              <p className="t1-mono-label t1-mono-label-stone mt-2">
+                AVG. RATING FROM {reviewCount} VERIFIED REVIEWS
+              </p>
+            </motion.aside>
+          )}
 
-        {/* Begin reading cue */}
+          <motion.aside
+            aria-label="Care availability"
+            className="mt-3 border border-[#1A1713] bg-[#1A1713] px-4 py-3 text-[#F3EFE6] lg:absolute lg:-right-[9.5rem] lg:bottom-16 lg:mt-0 lg:w-36 xl:-right-44 xl:w-40"
+            {...rise(0.45)}
+          >
+            <p className="font-t1-press text-2xl uppercase leading-[0.95]">
+              {hasSameDayEmergency ? "Same-day" : "Careful"}
+            </p>
+            <p className="t1-mono-label mt-2 !text-[#F3EFE6]/70">
+              {hasSameDayEmergency
+                ? "EMERGENCY CARE, BY PHONE"
+                : "APPOINTMENTS, BY RESERVATION"}
+            </p>
+          </motion.aside>
+        </div>
+      </div>
+
+      {/* Statement + CTA */}
+      <div className="mx-auto max-w-[1500px] px-4 pb-16 pt-12 md:px-8 md:pb-24 md:pt-16 xl:px-12">
+        <motion.h2
+          className="mx-auto max-w-5xl text-center font-t1-press text-[clamp(2rem,6vw,4.5rem)] uppercase leading-[0.95] text-[#1A1713]"
+          {...rise(0.25)}
+        >
+          Good dentistry deserves{" "}
+          <em className="t1-italic normal-case text-[#D92B21]">
+            to be seen.
+          </em>
+        </motion.h2>
+
         <motion.div
-          initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.7, ease: T1_EASE }}
-          className="mt-12 border-t border-[#16130F]/15 pt-5 pb-2 lg:mt-16"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          {...rise(0.4)}
         >
           <a
-            href="#consultation"
-            className="t1-eyebrow inline-flex items-center gap-3 !text-[#6B675E] transition-colors duration-500 hover:!text-[#5E2A2B]"
+            href={hasBooking ? bookingUrl : tel}
+            {...(hasBooking
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            className="t1-btn t1-btn-ink"
           >
-            Begin reading
-            <span aria-hidden="true" className="font-t1-display italic">
-              ↓
-            </span>
+            Book a consultation
+          </a>
+          <a href={tel} className="t1-mono-label t1-link">
+            OR CALL {phone}
           </a>
         </motion.div>
       </div>

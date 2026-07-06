@@ -49,7 +49,7 @@ function RatingDots({ rating }: { rating: number }) {
 
 function QuoteCard({ review }: { review: ReviewData }) {
   return (
-    <figure className="mb-5 break-inside-avoid rounded-[1.5rem] bg-white p-7 shadow-[var(--t3-shadow-soft)] sm:mb-6 sm:p-8">
+    <figure className="mb-5 break-inside-avoid rounded-[1.5rem] bg-white p-7 shadow-[var(--t3-shadow-soft)] transition-all duration-700 hover:shadow-[var(--t3-shadow-bloom)] motion-safe:hover:-translate-y-1 sm:mb-6 sm:p-8">
       <blockquote>
         <p className="t3-serif text-[17px] leading-relaxed text-[var(--t3-moss)]">
           &ldquo;{review.reviewText}&rdquo;
@@ -81,7 +81,7 @@ function ImageCard({
   image: { src: string; alt: string };
 }) {
   return (
-    <figure className="relative mb-5 break-inside-avoid overflow-hidden rounded-[1.5rem] shadow-[var(--t3-shadow-soft)] sm:mb-6">
+    <figure className="relative mb-5 break-inside-avoid overflow-hidden rounded-[1.5rem] shadow-[var(--t3-shadow-soft)] transition-all duration-700 hover:shadow-[var(--t3-shadow-bloom)] motion-safe:hover:-translate-y-1 sm:mb-6">
       <div className="relative aspect-[4/5]">
         <Image
           src={image.src}
@@ -118,6 +118,9 @@ function ImageCard({
 }
 
 export default function T3HavenReviews({ reviews }: T3HavenReviewsProps) {
+  // no reviews on file yet — publish nothing rather than an empty section
+  if (reviews.length === 0) return null;
+
   return (
     <section
       aria-labelledby="reviews-heading"

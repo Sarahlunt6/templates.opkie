@@ -58,6 +58,39 @@
   background: var(--t2p-surface);
   border: 1px solid var(--t2p-line);
   border-radius: 16px;
+  transition:
+    border-color 0.4s var(--t2p-ease),
+    transform 0.4s var(--t2p-ease),
+    box-shadow 0.4s var(--t2p-ease);
+}
+/* Instruments respond to the hand — cards power on when approached */
+.t2p .t2p-card:hover {
+  border-color: var(--t2p-volt-dim);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 44px -20px rgba(126, 224, 75, 0.28);
+}
+@media (prefers-reduced-motion: reduce) {
+  .t2p .t2p-card:hover {
+    transform: none;
+  }
+}
+
+/* Same power-on response for cards that keep their own background */
+.t2p .t2p-respond {
+  transition:
+    border-color 0.4s var(--t2p-ease),
+    transform 0.4s var(--t2p-ease),
+    box-shadow 0.4s var(--t2p-ease);
+}
+.t2p .t2p-respond:hover {
+  border-color: var(--t2p-volt-dim);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 44px -20px rgba(126, 224, 75, 0.28);
+}
+@media (prefers-reduced-motion: reduce) {
+  .t2p .t2p-respond:hover {
+    transform: none;
+  }
 }
 
 .t2p .t2p-tick::before,

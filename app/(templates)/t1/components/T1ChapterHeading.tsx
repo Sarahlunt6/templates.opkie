@@ -1,4 +1,4 @@
-import { LineReveal, Fade, Drift } from "./T1Motion";
+import { LineReveal, Fade } from "./T1Motion";
 
 interface T1ChapterHeadingProps {
   numeral: string;
@@ -10,8 +10,9 @@ interface T1ChapterHeadingProps {
 }
 
 /**
- * Chapter opener — outlined roman numeral, small-caps kicker,
- * oversized Fraunces title with a line-mask reveal, hairline rule.
+ * T1 PRESS — indexed chapter divider. "[ 01 ]" mono red index and a
+ * mono kicker on a ruled row, Anton uppercase title, one-line stone
+ * lede, hairline rules above and below.
  */
 export default function T1ChapterHeading({
   numeral,
@@ -20,35 +21,34 @@ export default function T1ChapterHeading({
   deck,
   dark = false,
 }: T1ChapterHeadingProps) {
+  const rule = dark ? "border-[rgba(243,239,230,0.22)]" : "border-[rgba(26,23,19,0.15)]";
   return (
-    <header className="relative">
-      <div className="flex items-end gap-6 md:gap-10">
-        <Drift range={20}>
-          <span
-            aria-hidden="true"
-            className="t1-numeral-outline block text-[4.5rem] leading-[0.8] md:text-[7rem]"
-          >
-            {numeral}
-          </span>
-        </Drift>
-        <div className={`h-px flex-1 ${dark ? "bg-[#F7F5F0]/20" : "bg-[#16130F]/15"}`} />
-        <p className="t1-eyebrow pb-1 text-right">{kicker}</p>
+    <header className={`border-y ${rule} py-6 md:py-8`}>
+      <div className="flex items-baseline justify-between gap-4">
+        <p className="t1-mono-label t1-mono-label-red">[ {numeral} ]</p>
+        <p
+          className={`t1-mono-label text-right ${
+            dark ? "!text-[#F3EFE6]/60" : "t1-mono-label-stone"
+          }`}
+        >
+          [ {kicker.toUpperCase()} ]
+        </p>
       </div>
 
       <LineReveal
         as="h2"
-        className={`mt-8 max-w-3xl font-t1-display text-[clamp(2.4rem,6vw,4.75rem)] font-light leading-[1.02] tracking-[-0.015em] ${
-          dark ? "text-[#F7F5F0]" : "text-[#16130F]"
+        className={`t1-display mt-5 max-w-4xl ${
+          dark ? "text-[#F3EFE6]" : "text-[#1A1713]"
         }`}
       >
         {title}
       </LineReveal>
 
       {deck && (
-        <Fade delay={0.15}>
+        <Fade delay={0.1}>
           <p
-            className={`mt-6 max-w-xl font-sans text-base leading-relaxed md:text-lg ${
-              dark ? "text-[#F7F5F0]/65" : "text-[#6B675E]"
+            className={`mt-4 max-w-xl font-sans text-base leading-relaxed ${
+              dark ? "text-[#F3EFE6]/65" : "text-[#6B675E]"
             }`}
           >
             {deck}

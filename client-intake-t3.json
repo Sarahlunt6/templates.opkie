@@ -1,7 +1,6 @@
 {
   "client_slug": "test-t3-dental",
   "template": "t3",
-  
   "practice": {
     "name": "Serenity Dental Sanctuary",
     "tagline_override": null,
@@ -23,7 +22,6 @@
       "sunday": "Closed"
     }
   },
-  
   "doctor": {
     "name": "Dr. Maria Calm, DDS",
     "title": "Holistic Family Dentist",
@@ -35,28 +33,28 @@
     ],
     "bio_short": "Dr. Calm focuses on creating anxiety-free dental experiences with a gentle, patient-centered approach."
   },
-  
   "booking_link": "https://calendly.com/test-t3-dental",
-  
   "brand": {
     "accent_color": "#10b981",
     "logo_path": "/images/logo-t3.svg"
   },
-  
   "membership": {
     "individual_price": 279,
     "couple_price": 499,
     "family_price": 799,
     "no_insurance_savings_plan_price": 229
   },
-  
   "stats": {
     "google_rating": 4.9,
     "review_count": 156,
     "patients_served": 4100,
     "satisfaction_rate": 98
   },
-  
+  "trust_signals": {
+    "has_same_day_emergency": false,
+    "has_sedation_anxiety_care": false,
+    "insurance_networks": []
+  },
   "vercel": {
     "project_name": "test-t3-dental",
     "domain": "testt3dental.com"

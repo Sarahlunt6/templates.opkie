@@ -1,7 +1,6 @@
 {
   "client_slug": "test-t2-dental",
   "template": "t2",
-  
   "practice": {
     "name": "Tech Dental Innovation",
     "tagline_override": null,
@@ -23,7 +22,6 @@
       "sunday": "Closed"
     }
   },
-  
   "doctor": {
     "name": "Dr. Sarah Tech, DDS",
     "title": "Advanced Implant Specialist",
@@ -35,28 +33,28 @@
     ],
     "bio_short": "Dr. Tech specializes in cutting-edge dental technology and digital dentistry."
   },
-  
   "booking_link": "https://calendly.com/test-t2-dental",
-  
   "brand": {
     "accent_color": "#06b6d4",
     "logo_path": "/images/logo-t2.svg"
   },
-  
   "membership": {
     "individual_price": 349,
     "couple_price": 599,
     "family_price": 949,
     "no_insurance_savings_plan_price": 279
   },
-  
   "stats": {
     "google_rating": 5.0,
     "review_count": 89,
     "patients_served": 2500,
     "satisfaction_rate": 99
   },
-  
+  "trust_signals": {
+    "has_same_day_emergency": false,
+    "has_sedation_anxiety_care": false,
+    "insurance_networks": []
+  },
   "vercel": {
     "project_name": "test-t2-dental",
     "domain": "testt2dental.com"

@@ -14,9 +14,12 @@ import T2MagneticButton from "./T2MagneticButton";
 import { practice, location, bookingHref, EASE } from "./t2-lib";
 import { sampleReviews } from "@/data/master";
 
-const AVG_RATING = (
-  sampleReviews.reduce((sum, r) => sum + r.rating, 0) / sampleReviews.length
-).toFixed(1);
+const AVG_RATING = sampleReviews.length
+  ? (
+      sampleReviews.reduce((sum, r) => sum + r.rating, 0) /
+      sampleReviews.length
+    ).toFixed(1)
+  : null;
 
 /* ────────────────────────────────────────────────────────────────
    T2 Hero — flagship product launch for a dental practice.
@@ -39,12 +42,17 @@ const READOUT = [
     suffix: " visit",
     label: "same-day crowns",
   },
-  {
-    value: Number(AVG_RATING),
-    decimals: 1,
-    suffix: "★",
-    label: "patient rating",
-  },
+  // the rating cell only exists when there are reviews to average
+  ...(AVG_RATING !== null
+    ? [
+        {
+          value: Number(AVG_RATING),
+          decimals: 1,
+          suffix: "★",
+          label: "patient rating",
+        },
+      ]
+    : []),
 ];
 
 /* HUD calibration markers, placed over the plate like scan targets */
@@ -255,7 +263,9 @@ export default function T2Hero() {
             initial={reduced ? false : { opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.82, ease: EASE }}
-            className="mt-12 max-w-2xl grid grid-cols-3 divide-x divide-[var(--t2p-line)] border-y border-[var(--t2p-line)]"
+            className={`mt-12 max-w-2xl grid ${
+              READOUT.length === 3 ? "grid-cols-3" : "grid-cols-2"
+            } divide-x divide-[var(--t2p-line)] border-y border-[var(--t2p-line)]`}
           >
             {READOUT.map((s, i) => (
               <div key={s.label} className={i === 0 ? "py-5 pr-4" : "py-5 px-4 md:px-6"}>

@@ -1,7 +1,6 @@
 {
   "client_slug": "minimal-test",
   "template": "t1",
-
   "practice": {
     "name": "Test Dental Practice",
     "tagline_override": null,
@@ -23,7 +22,6 @@
       "sunday": ""
     }
   },
-
   "doctor": {
     "name": "",
     "title": "",
@@ -31,28 +29,28 @@
     "credentials": [],
     "bio_short": null
   },
-
   "booking_link": "https://calendly.com/test",
-
   "brand": {
     "accent_color": null,
     "logo_path": null
   },
-
   "membership": {
     "individual_price": null,
     "couple_price": null,
     "family_price": null,
     "no_insurance_savings_plan_price": null
   },
-
   "stats": {
     "google_rating": null,
     "review_count": null,
     "patients_served": null,
     "satisfaction_rate": null
   },
-
+  "trust_signals": {
+    "has_same_day_emergency": false,
+    "has_sedation_anxiety_care": false,
+    "insurance_networks": []
+  },
   "vercel": {
     "project_name": "minimal-test",
     "domain": null

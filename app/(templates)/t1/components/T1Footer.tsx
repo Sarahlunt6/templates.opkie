@@ -13,6 +13,12 @@ interface T1FooterProps {
   hours: HoursEntry[];
 }
 
+/**
+ * T1 PRESS — ink-dark closing. A CTA statement with one italic phrase,
+ * a paper-colored rectangular button, ruled link columns, then the
+ * entire practice name as a giant cream wordmark spanning the full
+ * width, slightly cropped by the viewport edge.
+ */
 export default function T1Footer({
   practiceName,
   address,
@@ -26,56 +32,86 @@ export default function T1Footer({
   const hasBooking = bookingUrl !== "none";
   const year = new Date().getFullYear();
 
+  // Anton caps + word spaces average ≈ 0.52em advance — span the full
+  // practice name edge to edge at every viewport width.
+  const wordmarkSize = `calc(100vw / ${(practiceName.length * 0.52).toFixed(2)})`;
+
   return (
-    <footer className="bg-[#16130F] px-6 pb-28 pt-16 text-[#F7F5F0] md:px-10 lg:pb-16 xl:px-16">
-      <div className="mx-auto max-w-[1400px]">
-        <div className="grid grid-cols-1 gap-12 border-t border-[#F7F5F0]/20 pt-12 md:grid-cols-12 md:gap-8">
-          {/* Masthead repeat */}
-          <div className="md:col-span-5">
-            <p className="font-t1-display text-3xl font-light tracking-tight md:text-4xl">
-              {practiceName}
-            </p>
-            <address className="mt-5 font-sans text-sm not-italic leading-relaxed text-[#F7F5F0]/60">
+    <footer className="overflow-hidden bg-[#1A1713] text-[#F3EFE6]">
+      <div className="mx-auto max-w-[1500px] px-4 pt-20 md:px-8 md:pt-28 xl:px-12">
+        {/* Closing statement */}
+        <div className="border-b border-[rgba(243,239,230,0.22)] pb-14 md:pb-20">
+          <p className="t1-mono-label t1-mono-label-red">[ THE LAST WORD ]</p>
+          <h2 className="mt-6 max-w-4xl font-t1-press text-[clamp(2.2rem,6vw,4.5rem)] uppercase leading-[0.95]">
+            Your smile belongs on{" "}
+            <em className="t1-italic normal-case text-[#D92B21]">
+              the front page.
+            </em>
+          </h2>
+          <div className="mt-10 flex flex-wrap items-center gap-5">
+            <a
+              href={hasBooking ? bookingUrl : tel}
+              {...(hasBooking
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="t1-btn t1-btn-paper"
+            >
+              Book a consultation
+            </a>
+            <a
+              href={tel}
+              className="t1-mono-label !text-[#F3EFE6] underline decoration-[#D92B21] decoration-1 underline-offset-4 transition-colors duration-200 hover:text-[#D92B21]"
+            >
+              OR CALL {phone}
+            </a>
+          </div>
+        </div>
+
+        {/* Ruled link columns */}
+        <div className="grid grid-cols-1 gap-10 py-12 md:grid-cols-3 md:gap-8">
+          <div>
+            <h3 className="t1-mono-label t1-mono-label-red">[ VISIT ]</h3>
+            <address className="mt-4 font-sans text-sm not-italic leading-relaxed text-[#F3EFE6]/65">
               {address}
               <br />
               {city}, {state}
             </address>
             <a
               href={tel}
-              className="mt-4 inline-block font-t1-display text-xl text-[#F7F5F0] underline decoration-[#9C7E46] decoration-1 underline-offset-4 transition-colors duration-500 hover:text-[#9C7E46]"
+              className="mt-3 inline-block font-t1-press text-xl text-[#F3EFE6] transition-colors duration-200 hover:text-[#D92B21]"
             >
               {phone}
             </a>
           </div>
 
-          {/* Hours, condensed */}
-          <div className="md:col-span-4">
-            <h3 className="t1-eyebrow">Hours</h3>
+          <div>
+            <h3 className="t1-mono-label t1-mono-label-red">[ HOURS ]</h3>
             <ul className="mt-4 space-y-2">
               {hours.map((entry) => (
                 <li
                   key={entry.dayRange}
-                  className="flex items-baseline justify-between gap-6 font-sans text-sm text-[#F7F5F0]/60"
+                  className="flex items-baseline justify-between gap-6 font-sans text-sm text-[#F3EFE6]/65"
                 >
                   <span>{entry.dayRange}</span>
                   <span
-                    className={
+                    className={`t1-mono-label ${
                       /closed/i.test(entry.structuralHours)
-                        ? "italic text-[#F7F5F0]/35"
-                        : "text-[#F7F5F0]/80"
-                    }
+                        ? "!text-[#F3EFE6]/35"
+                        : "!text-[#F3EFE6]/80"
+                    }`}
                   >
-                    {entry.structuralHours}
+                    {entry.structuralHours.toUpperCase()}
                   </span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Appointments */}
-          <div className="md:col-span-3">
-            <h3 className="t1-eyebrow">Appointments</h3>
-            <p className="mt-4 font-sans text-sm leading-relaxed text-[#F7F5F0]/60">
+          <div>
+            <h3 className="t1-mono-label t1-mono-label-red">
+              [ APPOINTMENTS ]
+            </h3>
+            <p className="mt-4 font-sans text-sm leading-relaxed text-[#F3EFE6]/65">
               New patients are welcomed by reservation.
             </p>
             <a
@@ -83,23 +119,32 @@ export default function T1Footer({
               {...(hasBooking
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className="t1-btn t1-btn-ghost-light mt-6 !min-h-0 !px-5 !py-3 text-[10px]"
+              className="t1-mono-label mt-5 inline-block border border-[rgba(243,239,230,0.4)] px-4 py-3 !text-[#F3EFE6] transition-colors duration-200 hover:border-[#D92B21] hover:bg-[#D92B21]"
             >
-              Reserve a consultation
+              BOOK ONLINE
             </a>
           </div>
         </div>
 
-        {/* Colophon */}
-        <div className="mt-14 flex flex-col gap-2 border-t border-[#F7F5F0]/20 pt-6 sm:flex-row sm:items-baseline sm:justify-between">
-          <p className="font-sans text-xs text-[#F7F5F0]/45">
-            © {year} {practiceName}. All rights reserved.
+        {/* Legal line */}
+        <div className="flex flex-col gap-2 border-t border-[rgba(243,239,230,0.22)] py-5 sm:flex-row sm:items-baseline sm:justify-between">
+          <p className="t1-mono-label !text-[#F3EFE6]/45">
+            © {year} {practiceName.toUpperCase()}. ALL RIGHTS RESERVED.
           </p>
-          <p className="font-sans text-xs italic text-[#F7F5F0]/35">
-            Vol. I — The Smile Issue · Set in Fraunces &amp; Inter
+          <p className="t1-mono-label !text-[#F3EFE6]/35">
+            SET IN ANTON, INTER &amp; JETBRAINS MONO
           </p>
         </div>
       </div>
+
+      {/* The closing statement — the entire name, full width, cropped */}
+      <p
+        aria-hidden="true"
+        className="mt-4 whitespace-nowrap text-center font-t1-press uppercase leading-[0.78] tracking-[0.005em] text-[#F3EFE6]"
+        style={{ fontSize: wordmarkSize, marginBottom: `calc(${wordmarkSize} * -0.14)` }}
+      >
+        {practiceName}
+      </p>
     </footer>
   );
 }

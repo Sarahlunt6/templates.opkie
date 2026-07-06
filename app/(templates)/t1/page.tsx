@@ -3,6 +3,14 @@ import { clientMasterData, sampleReviews, sampleBeforeAfterCases } from "@/data/
 
 import "./t1-theme.css";
 
+/**
+ * T1 PRESS — big graphic editorial print.
+ * Warm cream paper, near-black ink, one editorial red. A giant Anton
+ * wordmark opens the page and closes it; sections are indexed with
+ * mono bracket labels and structured by hairline rules. All rendered
+ * facts come from @/data/master.
+ */
+
 import T1Masthead from "./components/T1Masthead";
 import T1Hero from "./components/T1Hero";
 import T1ChapterHeading from "./components/T1ChapterHeading";
@@ -16,8 +24,6 @@ import T1PatientLetters from "./components/T1PatientLetters";
 import T1Practicalities from "./components/T1Practicalities";
 import T1Footer from "./components/T1Footer";
 import T1UtilityBar from "./components/T1UtilityBar";
-import T1CursorProvider from "./components/T1Cursor";
-import { Fade, Magnetic, Drift } from "./components/T1Motion";
 
 const location = clientMasterData.locations[0];
 
@@ -26,7 +32,7 @@ export const metadata: Metadata = {
   description: `${clientMasterData.globalPracticeName}: considered ${location.primaryCategoryGBP.toLowerCase()} care in ${location.cityServed}, ${location.stateServed}. Consultation, smile design, and same-day emergency care by reservation.`,
 };
 
-/** The editorial services index — copy is template voice; facts stay in data */
+/** The services index — copy is template voice; facts stay in data */
 const SERVICES: ServiceEntry[] = [
   {
     title: "Invisalign",
@@ -58,9 +64,11 @@ export default function Template1Page() {
   const { doctors, trustSignals, globalPracticeName, onlineBookingUrl } =
     clientMasterData;
 
-  const avgRating =
-    sampleReviews.reduce((sum, r) => sum + r.rating, 0) / sampleReviews.length;
-  const avgRatingText = avgRating.toFixed(1);
+  const reviewCount = sampleReviews.length;
+  const avgRating = reviewCount
+    ? sampleReviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+    : null;
+  const avgRatingText = avgRating === null ? null : avgRating.toFixed(1);
   const featuredCase = sampleBeforeAfterCases[0];
 
   const doctorEntries = doctors.map((d) => ({
@@ -77,12 +85,13 @@ export default function Template1Page() {
     procedureCategory: r.procedureCategory,
   }));
 
+  const firstHours = location.hoursOfOperation[0];
+
   return (
     <div className="t1-root font-sans antialiased overflow-x-clip">
-      <T1CursorProvider>
       <a
-        href="#consultation"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[#16130F] focus:px-4 focus:py-2 focus:text-[#F7F5F0]"
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[#1A1713] focus:px-4 focus:py-2 focus:text-[#F3EFE6]"
       >
         Skip to content
       </a>
@@ -90,13 +99,21 @@ export default function Template1Page() {
       {/* Near-invisible paper grain across the whole issue */}
       <div aria-hidden="true" className="t1-grain" />
 
+      {/* Utility strip + newspaper masthead */}
+      <T1UtilityBar
+        phone={location.phoneGBP}
+        bookingUrl={onlineBookingUrl}
+        city={location.cityServed}
+        state={location.stateServed}
+        hoursNote={`${firstHours.dayRange.toUpperCase()} — ${firstHours.structuralHours.toUpperCase()}`}
+      />
       <T1Masthead
         practiceName={globalPracticeName}
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}
       />
 
-      {/* Cover */}
+      {/* Cover — the giant wordmark */}
       <T1Hero
         practiceName={globalPracticeName}
         city={location.cityServed}
@@ -105,23 +122,63 @@ export default function Template1Page() {
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}
         avgRating={avgRatingText}
-        reviewCount={sampleReviews.length}
+        reviewCount={reviewCount}
         hasSameDayEmergency={trustSignals.hasSameDayEmergency}
       />
 
       <main id="main">
-        {/* Chapter I — The Consultation */}
+        {/* [ 01 ] The services */}
         <section
-          id="consultation"
-          aria-label="Chapter one: the consultation"
-          className="scroll-mt-24 px-6 pt-28 md:px-10 md:pt-36 xl:px-16"
+          id="services"
+          aria-label="Section one: the services"
+          className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
-          <div className="mx-auto max-w-[1400px]">
+          <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="I"
-              kicker="Chapter one"
-              title="The consultation"
-              deck="An hour of questions, photographs and honest answers. Nothing is sold, and nothing is drilled."
+              numeral="01"
+              kicker="Smile design"
+              title="The services"
+              deck="Four ways a smile gets rebuilt here — each one planned before it is done, and priced before it is started."
+            />
+            <div className="mt-10 md:mt-14">
+              <T1ServicesGallery
+                services={SERVICES}
+                alsoPracticed={location.secondaryCategoriesGBP}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Statement band — why patients stay */}
+        <section
+          aria-label="The standard of care"
+          className="t1-col-rules mt-16 border-y border-[rgba(26,23,19,0.15)] bg-[#E9E3D4] px-4 py-16 md:mt-24 md:px-8 md:py-24 xl:px-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <T1Craft
+              practiceName={globalPracticeName}
+              city={location.cityServed}
+              avgRating={avgRating}
+              reviewCount={reviewCount}
+              clinicianCount={doctors.length}
+              neighborhoodCount={location.localizedNeighborhoods.length}
+              hasSedation={trustSignals.hasSedationAnxietyCare}
+            />
+          </div>
+        </section>
+
+        {/* [ 02 ] The doctors */}
+        <section
+          id="doctors"
+          aria-label="Section two: the doctors"
+          className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <T1ChapterHeading
+              numeral="02"
+              kicker="The profile"
+              title="The doctors"
+              deck="The people behind the work — credentials on the record, philosophy in plain words."
             />
             <T1DoctorFeature
               doctors={doctorEntries}
@@ -130,74 +187,22 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* Chapter II — The Design */}
+        {/* [ 03 ] The proof */}
         <section
-          id="design"
-          aria-label="Chapter two: the design"
-          className="scroll-mt-24 pt-28 md:pt-36"
+          id="reviews"
+          aria-label="Section three: patient stories and results"
+          className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
-          <div className="px-6 md:px-10 xl:px-16">
-            <div className="mx-auto max-w-[1400px]">
-              <T1ChapterHeading
-                numeral="II"
-                kicker="Chapter two"
-                title="The design"
-                deck="Every smile here is drawn before it is done — planned on screen, previewed in the mirror, and agreed upon before an instrument is lifted."
-              />
-            </div>
-          </div>
-          {/* Full-bleed horizontal portfolio — pinned and scrubbed by scroll */}
-          <div className="mt-14 lg:mt-4">
-            <T1ServicesGallery
-              services={SERVICES}
-              alsoPracticed={location.secondaryCategoriesGBP}
-            />
-          </div>
-        </section>
-
-        {/* Chapter III — The Craft */}
-        <section
-          id="craft"
-          aria-label="Chapter three: the craft"
-          className="scroll-mt-24 px-6 pt-28 md:px-10 md:pt-36 xl:px-16"
-        >
-          <div className="mx-auto max-w-[1400px]">
+          <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="III"
-              kicker="Chapter three"
-              title="The craft"
-              deck="The room, the instruments, and the hands that hold them — the part of dentistry patients rarely see and always feel."
+              numeral="03"
+              kicker="Verified"
+              title="The proof"
+              deck="Documented results and the words of the patients who sat in the chair. Nothing here is retouched, including the opinions."
             />
-            <T1Craft
-              practiceName={globalPracticeName}
-              city={location.cityServed}
-              avgRating={avgRating}
-              reviewCount={sampleReviews.length}
-              clinicianCount={doctors.length}
-              neighborhoodCount={location.localizedNeighborhoods.length}
-              hasSedation={trustSignals.hasSedationAnxietyCare}
-            />
-          </div>
-        </section>
 
-        {/* Chapter IV — The Reveal */}
-        <section
-          id="reveal"
-          aria-label="Chapter four: the reveal"
-          className="scroll-mt-24 pt-28 md:pt-36"
-        >
-          <div className="mx-auto max-w-[1400px] px-6 md:px-10 xl:px-16">
-            <T1ChapterHeading
-              numeral="IV"
-              kicker="Chapter four"
-              title="The reveal"
-              deck="The moment the mirror comes up — documented before and after, exactly as it happened."
-            />
-          </div>
-
-          {/* Signature moment — the page-turn before/after, matted like a plate in a fine book */}
-          <div className="mt-14 lg:mt-20">
-            <div className="mx-auto max-w-5xl px-6 md:px-10">
+            {/* Before/after plate */}
+            <div className="mx-auto mt-10 max-w-4xl md:mt-14">
               <T1PageTurnReveal
                 beforeUrl={featuredCase.beforeUrl}
                 afterUrl={featuredCase.afterUrl}
@@ -205,35 +210,26 @@ export default function Template1Page() {
                 procedureType={featuredCase.procedureType}
               />
             </div>
-          </div>
 
-          {/* Letters from patients */}
-          <div className="mx-auto max-w-[1400px] px-6 pt-24 md:px-10 md:pt-32 xl:px-16">
-            <div className="mx-auto max-w-3xl">
-              <Fade>
-                <p className="t1-eyebrow text-center">
-                  Letters from patients — verified stories
-                </p>
-              </Fade>
-              <div className="mt-14">
-                <T1PatientLetters letters={letters} />
-              </div>
+            {/* Testimonial band */}
+            <div className="mt-14 md:mt-20">
+              <T1PatientLetters letters={letters} avgRating={avgRatingText} />
             </div>
           </div>
         </section>
 
-        {/* Practicalities — the back of the book */}
+        {/* [ 04 ] The visit */}
         <section
-          id="practicalities"
-          aria-label="Practicalities: hours, insurance and directions"
-          className="scroll-mt-24 px-6 pt-28 md:px-10 md:pt-36 xl:px-16"
+          id="visit"
+          aria-label="Section four: plan your visit"
+          className="scroll-mt-20 px-4 pb-16 pt-16 md:px-8 md:pb-24 md:pt-24 xl:px-12"
         >
-          <div className="mx-auto max-w-[1400px]">
+          <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="¶"
-              kicker="The back of the book"
-              title="Practicalities"
-              deck="Hours, insurance, directions and the other details that make a first visit simple."
+              numeral="04"
+              kicker="Practicalities"
+              title="The visit"
+              deck="Four steps from a phone call to a plan — then the hours, the address, and the fine print, in full."
             />
             <T1Practicalities
               practiceName={globalPracticeName}
@@ -251,72 +247,6 @@ export default function Template1Page() {
             />
           </div>
         </section>
-
-        {/* Chapter V — yours to write: closing invitation */}
-        <section
-          aria-label="Reserve a consultation"
-          className="mt-28 bg-[#16130F] px-6 py-28 md:mt-36 md:px-10 md:py-36 xl:px-16"
-        >
-          <div className="mx-auto max-w-[1400px]">
-            <div className="flex items-end gap-6 md:gap-10">
-              <Drift range={20}>
-                <span
-                  aria-hidden="true"
-                  className="t1-numeral-outline block text-[4.5rem] leading-[0.8] md:text-[7rem]"
-                >
-                  V
-                </span>
-              </Drift>
-              <div className="h-px flex-1 bg-[#F7F5F0]/20" />
-              <p className="t1-eyebrow pb-1 text-right">
-                Chapter five — yours to write
-              </p>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
-              <div className="lg:col-span-8">
-                <Fade>
-                  <h2 className="font-t1-display text-[clamp(2.6rem,7vw,6rem)] font-light leading-[1.02] tracking-[-0.015em] text-[#F7F5F0]">
-                    The next case begins with{" "}
-                    <em className="text-[#9C7E46]">a conversation.</em>
-                  </h2>
-                </Fade>
-              </div>
-              <div className="flex flex-col justify-end lg:col-span-4">
-                <Fade delay={0.15}>
-                  <p className="max-w-sm font-sans text-base leading-relaxed text-[#F7F5F0]/65">
-                    Consultations are unhurried and private. Bring your
-                    questions — and, if you like, your skepticism. Both are
-                    welcome at {location.addressGBP}, {location.cityServed}.
-                  </p>
-                  <div className="mt-8 flex flex-wrap items-center gap-4">
-                    <Magnetic>
-                      <a
-                        href={
-                          onlineBookingUrl !== "none"
-                            ? onlineBookingUrl
-                            : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`
-                        }
-                        {...(onlineBookingUrl !== "none"
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                        className="t1-btn t1-btn-porcelain"
-                      >
-                        Reserve a consultation
-                      </a>
-                    </Magnetic>
-                    <a
-                      href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                      className="font-sans text-sm text-[#F7F5F0] underline decoration-[#9C7E46] decoration-1 underline-offset-4 transition-colors duration-500 hover:text-[#9C7E46]"
-                    >
-                      or call {location.phoneGBP}
-                    </a>
-                  </div>
-                </Fade>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       <T1Footer
@@ -328,9 +258,6 @@ export default function Template1Page() {
         bookingUrl={onlineBookingUrl}
         hours={location.hoursOfOperation}
       />
-
-      <T1UtilityBar phone={location.phoneGBP} bookingUrl={onlineBookingUrl} />
-      </T1CursorProvider>
     </div>
   );
 }

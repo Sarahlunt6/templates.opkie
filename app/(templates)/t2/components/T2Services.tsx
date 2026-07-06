@@ -73,12 +73,16 @@ export default function T2Services() {
   const services = location.secondaryCategoriesGBP;
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
+  // services are driven by the practice's GBP categories — until those are
+  // filled in (see MISSING_DATA.md on scaffolded sites), publish nothing
+  if (services.length === 0) return null;
+
   return (
     <section id="services" className="relative py-24 md:py-32 px-6 md:px-12 bg-[var(--t2p-surface)] scroll-mt-20">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           index="02"
-          label="Technical specifications"
+          label="Treatments &amp; services"
           title={
             <>
               Every treatment starts <span className="t2p-duotext">with a scan.</span>
@@ -190,9 +194,11 @@ export default function T2Services() {
           })}
         </div>
 
-        <p className="t2p-mono mt-6 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
-          Serving {location.localizedNeighborhoods.slice(0, 4).join(" · ")}
-        </p>
+        {location.localizedNeighborhoods.length > 0 && (
+          <p className="t2p-mono mt-6 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+            Serving {location.localizedNeighborhoods.slice(0, 4).join(" · ")}
+          </p>
+        )}
       </div>
     </section>
   );

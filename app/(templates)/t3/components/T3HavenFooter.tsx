@@ -92,8 +92,9 @@ export default function T3HavenFooter({
             © {year} {practiceName}. all rights reserved.
           </p>
           <p className="text-[13px] font-light text-[#a8bfb2]">
-            serving {location.cityServed} and{" "}
-            {location.localizedNeighborhoods.length} nearby neighborhoods
+            serving {location.cityServed}
+            {location.localizedNeighborhoods.length > 0 &&
+              ` and ${location.localizedNeighborhoods.length} nearby neighborhoods`}
           </p>
         </div>
       </div>

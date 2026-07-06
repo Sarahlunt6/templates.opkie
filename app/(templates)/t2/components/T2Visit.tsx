@@ -45,7 +45,7 @@ export default function T2Visit() {
       <div className="relative max-w-7xl mx-auto">
         <SectionHeader
           index="08"
-          label="Coordinates"
+          label="Plan your visit"
           title={
             <>
               Find us in <span className="t2p-duotext">{location.cityServed}.</span>

@@ -43,6 +43,8 @@ module.exports = {
         "t2-mono": ["var(--font-t2-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
         // T1 Editorial Display: Characterful optical serif (Fraunces)
         "t1-display": ["var(--font-t1-display)", "Fraunces", "Georgia", "serif"],
+        // T1 Press Display: Heavy condensed sans for giant wordmarks (Anton)
+        "t1-press": ["var(--font-t1-press)", "Anton", "Impact", "sans-serif"],
         // T3 Serif Accent: Soft italic serif for quotes (Newsreader)
         "t3-serif": ["var(--font-t3-serif)", "Newsreader", "Georgia", "serif"],
       },

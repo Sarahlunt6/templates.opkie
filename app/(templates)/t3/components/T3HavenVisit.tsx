@@ -180,6 +180,7 @@ export default function T3HavenVisit({
               )}
             </div>
 
+            {location.localizedNeighborhoods.length > 0 && (
             <T3Reveal delay={0.35}>
               <div className="mt-10 border-t border-[var(--t3-line)] pt-8">
                 <p className="mb-4 text-sm font-light text-[var(--t3-moss-soft)]">
@@ -197,6 +198,7 @@ export default function T3HavenVisit({
                 </ul>
               </div>
             </T3Reveal>
+            )}
           </div>
         </div>
       </div>

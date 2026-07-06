@@ -7,6 +7,7 @@ import {
   Fraunces,
   JetBrains_Mono,
   Newsreader,
+  Anton,
 } from "next/font/google";
 import "./globals.css";
 import PageTransition from "@/components/premium/PageTransition";
@@ -70,6 +71,14 @@ const newsreader = Newsreader({
   display: "swap",
 });
 
+// T1 Press Display - Heavy condensed sans for giant editorial wordmarks
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-t1-press",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "The Opkie Collection — Three Website Concepts for Your Practice",
   description:
@@ -82,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${spaceGrotesk.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${spaceGrotesk.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable}`}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
         <PageTransition>
           {children}

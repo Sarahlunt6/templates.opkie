@@ -6,9 +6,12 @@ import { HAVEN_EASE } from "./T3Reveal";
 import { telHref } from "./hours";
 import { sampleReviews } from "@/data/master";
 
-const AVG_RATING = (
-  sampleReviews.reduce((sum, r) => sum + r.rating, 0) / sampleReviews.length
-).toFixed(1);
+const AVG_RATING = sampleReviews.length
+  ? (
+      sampleReviews.reduce((sum, r) => sum + r.rating, 0) /
+      sampleReviews.length
+    ).toFixed(1)
+  : null;
 
 interface T3HavenHeroProps {
   practiceName: string;
@@ -226,17 +229,26 @@ export default function T3HavenHero({
             {...enter(0.55)}
             className="mt-8 flex flex-wrap items-center justify-center gap-x-2 text-sm font-light text-[var(--t3-moss-soft)]"
           >
-            <span
-              className="text-[var(--t3-euc-ink)]"
-              role="img"
-              aria-label={`Rated ${AVG_RATING} out of 5 by patients`}
-            >
-              ★ {AVG_RATING}
-            </span>
-            <span>
-              from <em className="t3-serif">people who were nervous too</em>
-              &ensp;·&ensp;new patients welcome
-            </span>
+            {AVG_RATING !== null && (
+              <span
+                className="text-[var(--t3-euc-ink)]"
+                role="img"
+                aria-label={`Rated ${AVG_RATING} out of 5 by patients`}
+              >
+                ★ {AVG_RATING}
+              </span>
+            )}
+            {AVG_RATING !== null ? (
+              <span>
+                from <em className="t3-serif">people who were nervous too</em>
+                &ensp;·&ensp;new patients welcome
+              </span>
+            ) : (
+              <span>
+                for <em className="t3-serif">people who were nervous too</em>
+                &ensp;·&ensp;new patients welcome
+              </span>
+            )}
           </motion.p>
         </div>
 

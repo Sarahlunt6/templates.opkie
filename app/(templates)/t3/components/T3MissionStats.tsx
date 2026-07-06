@@ -9,9 +9,12 @@ interface T3MissionStatsProps {
   locations: LocationNAP[];
 }
 
-const AVG_RATING = (
-  sampleReviews.reduce((sum, r) => sum + r.rating, 0) / sampleReviews.length
-).toFixed(1);
+const AVG_RATING = sampleReviews.length
+  ? (
+      sampleReviews.reduce((sum, r) => sum + r.rating, 0) /
+      sampleReviews.length
+    ).toFixed(1)
+  : null;
 
 /**
  * Mission + stats band — a centered two-voice mission sentence on the
@@ -55,7 +58,10 @@ export default function T3MissionStats({
   const insurers = parseInsuranceNames(insuranceAcceptedText);
 
   const stats = [
-    { value: `${AVG_RATING}/5`, label: "patient rating" },
+    // the rating stat only exists when there are reviews to average
+    ...(AVG_RATING !== null
+      ? [{ value: `${AVG_RATING}/5`, label: "patient rating" }]
+      : []),
     // "15+" mirrors the lead doctor's "over 15 years" in master-data bio
     { value: "15+", label: "years of care" },
     { value: `${locations.length}`, label: locations.length === 1 ? "location" : "locations" },

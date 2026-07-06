@@ -21,10 +21,10 @@ interface T1PageTurnRevealProps {
 }
 
 /**
- * The Reveal — the signature moment of the feature.
- * Moving the cursor across the photograph wipes the "after" into view
- * like turning a glossy magazine page. On touch, drag anywhere on the
- * image; a styled range slider provides keyboard access.
+ * T1 PRESS — the before/after plate. Moving across the photograph
+ * wipes the "after" into view along a hard red seam, like two press
+ * proofs laid over each other. Drag on touch; a range slider provides
+ * keyboard access.
  */
 export default function T1PageTurnReveal({
   beforeUrl,
@@ -41,14 +41,13 @@ export default function T1PageTurnReveal({
 
   // 0 = all "before", 100 = all "after"
   const progress = useMotionValue(0);
-  const eased = useSpring(progress, { stiffness: 110, damping: 24, mass: 0.6 });
+  const eased = useSpring(progress, { stiffness: 160, damping: 26, mass: 0.5 });
   const inset = useTransform(eased, (v) => 100 - v);
   const clipPath = useMotionTemplate`inset(0 ${inset}% 0 0)`;
   const seamLeft = useMotionTemplate`${eased}%`;
-  // The turning page casts a soft shadow just ahead of the seam
-  const sheenOpacity = useTransform(eased, [0, 4, 96, 100], [0, 1, 1, 0]);
+  const seamOpacity = useTransform(eased, [0, 4, 96, 100], [0, 1, 1, 0]);
 
-  // Slow opening turn when the plate first scrolls into view
+  // Quick opening wipe when the plate first scrolls into view
   useEffect(() => {
     if (!inView || introDone) return;
     setIntroDone(true);
@@ -58,8 +57,8 @@ export default function T1PageTurnReveal({
       return;
     }
     const controls = animate(progress, 55, {
-      duration: 1.8,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.9,
+      ease: [0.25, 1, 0.4, 1],
       onUpdate: (v) => setSliderValue(Math.round(v)),
     });
     return () => controls.stop();
@@ -99,8 +98,6 @@ export default function T1PageTurnReveal({
 
   return (
     <figure className="w-full">
-      {/* Matted like a plate in a fine book — keeps the clinical photograph contained */}
-      <div className="border border-[#16130F]/10 bg-[#FDFCFA] p-3 shadow-[0_24px_60px_-30px_rgba(22,19,15,0.3)] md:p-5">
       <div
         ref={containerRef}
         onPointerMove={onPointerMove}
@@ -108,11 +105,10 @@ export default function T1PageTurnReveal({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onPointerLeave={endDrag}
-        data-cursor="turn"
-        className="relative w-full cursor-ew-resize select-none overflow-hidden border border-[#9C7E46]/35 touch-pan-y"
+        className="relative w-full cursor-ew-resize select-none overflow-hidden border border-[#1A1713] touch-pan-y"
       >
         <div className="relative aspect-[4/3] w-full md:aspect-[21/10]">
-          {/* Before — the base page */}
+          {/* Before — the base proof */}
           <Image
             src={beforeUrl}
             alt={`${altTag} — before treatment`}
@@ -123,7 +119,7 @@ export default function T1PageTurnReveal({
             draggable={false}
           />
 
-          {/* After — wiped in like a turning page */}
+          {/* After — wiped in along the seam */}
           <motion.div className="absolute inset-0" style={{ clipPath }}>
             <Image
               src={afterUrl}
@@ -136,42 +132,29 @@ export default function T1PageTurnReveal({
             />
           </motion.div>
 
-          {/* Page-edge sheen ahead of the seam */}
+          {/* Seam — a hard red rule with a square handle */}
           <motion.div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 w-16 -translate-x-full"
-            style={{
-              left: seamLeft,
-              opacity: sheenOpacity,
-              background:
-                "linear-gradient(to left, rgba(22,19,15,0.28), transparent 70%)",
-            }}
-          />
-
-          {/* Seam — hairline brass rule with handle */}
-          <motion.div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 w-px bg-[#9C7E46]"
-            style={{ left: seamLeft, opacity: sheenOpacity }}
+            className="pointer-events-none absolute inset-y-0 w-0.5 bg-[#D92B21]"
+            style={{ left: seamLeft, opacity: seamOpacity }}
           >
-            <span className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#9C7E46] bg-[#F7F5F0]/90 font-t1-display text-xs italic text-[#9C7E46]">
-              ⟷
+            <span className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#D92B21] bg-[#F3EFE6] font-mono text-[11px] tracking-[0.1em] text-[#D92B21]">
+              &lt;&gt;
             </span>
           </motion.div>
 
           {/* Corner captions */}
-          <span className="absolute bottom-4 left-4 bg-[#16130F]/70 px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.24em] text-[#F7F5F0]">
-            Before
+          <span className="t1-mono-label absolute bottom-3 left-3 bg-[#1A1713] px-2.5 py-1.5 !text-[#F3EFE6]">
+            BEFORE
           </span>
-          <span className="absolute bottom-4 right-4 bg-[#F7F5F0]/85 px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.24em] text-[#16130F]">
-            After
+          <span className="t1-mono-label absolute bottom-3 right-3 bg-[#F3EFE6] px-2.5 py-1.5">
+            AFTER
           </span>
         </div>
       </div>
-      </div>
 
       {/* Keyboard-accessible control */}
-      <div className="mx-auto mt-5 max-w-md px-2">
+      <div className="mx-auto mt-4 max-w-md px-2">
         <label htmlFor="t1-reveal-slider" className="sr-only">
           Reveal the after photograph
         </label>
@@ -190,10 +173,13 @@ export default function T1PageTurnReveal({
         />
       </div>
 
-      <figcaption className="mt-4 text-center font-sans text-sm text-[#6B675E]">
-        <span className="t1-eyebrow mr-3">{procedureType}</span>
-        as documented by the practice — move across the photograph to turn
-        the page
+      <figcaption className="mt-3 flex flex-wrap items-baseline justify-center gap-x-4 gap-y-1 text-center">
+        <span className="t1-mono-label t1-mono-label-red">
+          [ {procedureType.toUpperCase()} ]
+        </span>
+        <span className="t1-mono-label t1-mono-label-stone">
+          AS DOCUMENTED BY THE PRACTICE — MOVE ACROSS THE PLATE
+        </span>
       </figcaption>
     </figure>
   );

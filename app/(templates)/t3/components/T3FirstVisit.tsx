@@ -85,7 +85,7 @@ export default function T3FirstVisit() {
           {STEPS.map((step, i) => (
             <li key={step.index} className="h-full">
               <T3Reveal delay={i * 0.12} className="h-full">
-                <article className="flex h-full flex-col rounded-[1.5rem] bg-[var(--t3-sage-light)] p-7 shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 hover:shadow-[var(--t3-shadow-bloom)] sm:p-8">
+                <article className="flex h-full flex-col rounded-[1.5rem] bg-[var(--t3-sage-light)] p-7 shadow-[var(--t3-shadow-soft)] transition-all duration-700 hover:shadow-[var(--t3-shadow-bloom)] motion-safe:hover:-translate-y-1 sm:p-8">
                   <div className="mb-8 flex items-start justify-between">
                     <span className="t3-index">{step.index}</span>
                     <span className="text-[var(--t3-euc)]" aria-hidden="true">

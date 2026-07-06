@@ -1,9 +1,11 @@
 "use client";
 
 /**
- * T1 Maison — motion primitives.
- * Paper-and-ink motion language: slow, weighted, expo/quart-out easings.
- * Every primitive degrades to a static state under prefers-reduced-motion.
+ * T1 PRESS — motion primitives.
+ * Print does not float: reveals are quick, editorial fades and short
+ * slides. Every primitive degrades to a static state under
+ * prefers-reduced-motion. Legacy export names are preserved so nothing
+ * downstream breaks.
  */
 
 import {
@@ -15,24 +17,15 @@ import {
   type Ref,
 } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitType from "split-type";
 import {
   motion,
-  useMotionValue,
-  useSpring,
   useScroll,
   useTransform,
   useReducedMotion,
 } from "framer-motion";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-/** Weighted editorial ease — shared across the template */
-export const T1_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+/** Sharp editorial ease — fast in, hard stop */
+export const T1_EASE: [number, number, number, number] = [0.25, 1, 0.4, 1];
 
 export function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);
@@ -47,7 +40,7 @@ export function usePrefersReducedMotion(): boolean {
 }
 
 /* ------------------------------------------------------------------ */
-/*  LineReveal — SplitType line-mask reveal for display headlines      */
+/*  LineReveal — quick slide-up for display headlines                  */
 /* ------------------------------------------------------------------ */
 
 interface LineRevealProps {
@@ -55,6 +48,7 @@ interface LineRevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  /** kept for API compatibility; unused in the print voice */
   start?: string;
 }
 
@@ -63,56 +57,36 @@ export function LineReveal({
   children,
   className = "",
   delay = 0,
-  start = "top 88%",
 }: LineRevealProps) {
   const Tag = as;
   const ref = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const split = new SplitType(el, { types: "lines,words", tagName: "span" });
-    split.lines?.forEach((line) => line.classList.add("t1-mask-line"));
-    if (!split.words || split.words.length === 0) return;
-
-    gsap.set(split.words, { yPercent: 112 });
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: el, start, once: true },
-    });
-    tl.to(split.words, {
-      yPercent: 0,
-      duration: 1.15,
-      delay,
-      ease: "expo.out",
-      stagger: 0.03,
-    });
-
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-      split.revert();
-    };
-  }, [delay, start]);
+  const reduced = useReducedMotion();
 
   return (
     <Tag ref={ref as Ref<never>} className={className}>
-      {children}
+      <motion.span
+        className="block"
+        initial={reduced ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-8% 0px" }}
+        transition={{ duration: 0.45, delay, ease: T1_EASE }}
+      >
+        {children}
+      </motion.span>
     </Tag>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Fade — quiet fade-up for supporting copy and frames                */
+/*  Fade — quick fade-up for supporting copy and frames                */
 /* ------------------------------------------------------------------ */
 
 export function Fade({
   children,
   className = "",
   delay = 0,
-  y = 28,
-  duration = 1,
+  y = 16,
+  duration = 0.45,
 }: {
   children: ReactNode;
   className?: string;
@@ -135,7 +109,8 @@ export function Fade({
 }
 
 /* ------------------------------------------------------------------ */
-/*  ParallaxImage — image drifting slowly inside a fixed frame         */
+/*  ParallaxImage — kept for API compatibility; in the print voice it  */
+/*  renders a static, duotone-friendly image frame with a quick fade.  */
 /* ------------------------------------------------------------------ */
 
 export function ParallaxImage({
@@ -145,7 +120,7 @@ export function ParallaxImage({
   imgClassName = "",
   sizes = "100vw",
   priority = false,
-  drift = 6,
+  drift: _drift = 0,
   reveal = true,
 }: {
   src: string;
@@ -154,55 +129,42 @@ export function ParallaxImage({
   imgClassName?: string;
   sizes?: string;
   priority?: boolean;
-  /** total drift, in % of frame height */
+  /** kept for API compatibility; print plates do not drift */
   drift?: number;
-  /** unmask the frame with a clip-path reveal as it scrolls into view */
   reveal?: boolean;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [`-${drift}%`, `${drift}%`]);
-  const unmask = reveal && !reduced;
+  const animate = reveal && !reduced;
 
   return (
     <motion.div
-      ref={ref}
       className={`relative overflow-hidden ${className}`}
-      initial={unmask ? { clipPath: "inset(0 0 100% 0)" } : false}
-      whileInView={unmask ? { clipPath: "inset(0 0 0% 0)" } : undefined}
+      initial={animate ? { opacity: 0 } : false}
+      whileInView={animate ? { opacity: 1 } : undefined}
       viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 1.05, ease: T1_EASE }}
+      transition={{ duration: 0.4, ease: T1_EASE }}
     >
-      <motion.div
-        className="absolute -inset-x-0 -inset-y-[8%]"
-        style={reduced ? undefined : { y }}
-      >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          loading={priority ? undefined : "lazy"}
-          className={`object-cover ${imgClassName}`}
-        />
-      </motion.div>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        loading={priority ? undefined : "lazy"}
+        className={`object-cover ${imgClassName}`}
+      />
     </motion.div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Drift — subtle scroll parallax for ornaments (chapter numerals)    */
+/*  Drift — restrained scroll parallax for large ornaments             */
 /* ------------------------------------------------------------------ */
 
 export function Drift({
   children,
   className = "",
-  range = 20,
+  range = 12,
 }: {
   children: ReactNode;
   className?: string;
@@ -229,52 +191,25 @@ export function Drift({
 }
 
 /* ------------------------------------------------------------------ */
-/*  Magnetic — CTA buttons that lean toward the cursor                 */
+/*  Magnetic — retired behavior, kept as a stable wrapper. Print CTAs  */
+/*  are rectangular and stationary; hover states carry the response.  */
 /* ------------------------------------------------------------------ */
 
 export function Magnetic({
   children,
-  strength = 0.22,
+  strength: _strength = 0,
   className = "",
 }: {
   children: ReactNode;
   strength?: number;
   className?: string;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 140, damping: 16 });
-  const springY = useSpring(y, { stiffness: 140, damping: 16 });
-
-  const onMove = (e: React.MouseEvent) => {
-    if (reduced || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set((e.clientX - (rect.left + rect.width / 2)) * strength);
-    y.set((e.clientY - (rect.top + rect.height / 2)) * strength);
-  };
-
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={`inline-block ${className}`}
-      style={{ x: springX, y: springY }}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={`inline-block ${className}`}>{children}</div>;
 }
 
 /* ------------------------------------------------------------------ */
-/*  BrassCounter — slow numeral count-up, static under reduced motion  */
+/*  BrassCounter — numeral count-up (now set in red, name preserved).  */
+/*  Static under reduced motion.                                       */
 /* ------------------------------------------------------------------ */
 
 export function BrassCounter({
@@ -282,7 +217,7 @@ export function BrassCounter({
   decimals = 0,
   suffix = "",
   className = "",
-  duration = 2.4,
+  duration = 1.2,
 }: {
   value: number;
   decimals?: number;
@@ -311,9 +246,7 @@ export function BrassCounter({
         const startTime = performance.now();
         const tick = (now: number) => {
           const progress = Math.min((now - startTime) / (duration * 1000), 1);
-          // press-counter feel: fast spin-up, long settle (expo out)
-          const eased =
-            progress === 1 ? 1 : 1 - Math.pow(2, -9.5 * progress);
+          const eased = progress === 1 ? 1 : 1 - Math.pow(2, -9.5 * progress);
           setDisplay(eased * value);
           if (progress < 1) requestAnimationFrame(tick);
         };

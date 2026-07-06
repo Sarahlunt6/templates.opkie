@@ -29,12 +29,15 @@ function RatingStars({ rating }: { rating: number }) {
 export default function T2Reviews() {
   const reduced = useReducedMotion();
 
+  // no reviews on file yet — publish nothing rather than an empty section
+  if (sampleReviews.length === 0) return null;
+
   return (
     <section id="reviews" className="relative py-24 md:py-32 px-6 md:px-12 bg-[var(--t2p-surface)] scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           index="07"
-          label="Patient telemetry"
+          label="Patient reviews"
           title={
             <>
               In their <span className="t2p-duotext">own words.</span>
@@ -51,7 +54,7 @@ export default function T2Reviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease: EASE }}
-              className="relative flex flex-col rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7"
+              className="t2p-respond relative flex flex-col rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7"
             >
               <div className="flex items-center justify-between gap-3 border-b border-[var(--t2p-line)] pb-4">
                 <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">

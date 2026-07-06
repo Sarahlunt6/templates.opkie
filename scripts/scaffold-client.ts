@@ -65,6 +65,17 @@ interface ClientIntake {
     patients_served: number | null;
     satisfaction_rate: number | null;
   };
+  /**
+   * Honest trust signals. Booleans default to FALSE when absent — the
+   * templates conditionally render sedation/emergency claims and insurance
+   * names, so a wrong `true` here puts false medical claims on a live site.
+   */
+  trust_signals?: {
+    has_same_day_emergency?: boolean;
+    has_sedation_anxiety_care?: boolean;
+    /** Insurance networks the practice actually accepts, e.g. ["Delta Dental", "Cigna"] */
+    insurance_networks?: string[];
+  };
   vercel: {
     project_name: string;
     domain: string | null;
@@ -80,26 +91,6 @@ interface MissingField {
 // ═══════════════════════════════════════════════════════════════════════
 // CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════
-
-const PLACEHOLDER_MAP = {
-  'Summit Dental Group': 'practice.name',
-  'Dr. Michael Roberts, DDS': 'doctor.name',
-  'Dr. Roberts': 'doctor.name', // Handle shortened versions
-  'Lead Cosmetic Dentist & Practice Owner': 'doctor.title',
-  '(801) 555-0123': 'practice.phone',
-  'tel:+18015550123': 'practice.phone_link',
-  '1250 Mountain View Drive, Suite 200': 'practice.address.street',
-  'Salt Lake City': 'practice.address.city',
-  'UT': 'practice.address.state',
-  'https://booking.example.com/summit-dental': 'booking_link',
-  '$335': 'membership.individual_price',
-  '$615': 'membership.couple_price',
-  '$965': 'membership.family_price',
-  '$299': 'membership.no_insurance_savings_plan_price',
-  '5.0': 'stats.google_rating',
-  '5,000+': 'stats.patients_served',
-  '98%': 'stats.satisfaction_rate',
-};
 
 // ═══════════════════════════════════════════════════════════════════════
 // MAIN EXECUTION
@@ -139,21 +130,19 @@ async function main() {
   console.log('🔄 Replacing placeholder data with client info...');
   await replaceAllPlaceholders(clientRoot, intakeData, missingFields);
 
-  // 6. Update brand colors if provided
+  // 7. Update brand colors if provided
   if (intakeData.brand.accent_color) {
     console.log('🎨 Applying brand colors...');
     updateBrandColors(clientRoot, intakeData.brand.accent_color);
   }
 
-  // 7. Remove placeholder testimonials
-  console.log('💬 Removing placeholder testimonials...');
-  removeTestimonials(clientRoot);
-
-  // 8. Inject SEO components (schema, maps, metadata)
-  console.log('🔍 Injecting SEO optimizations...');
+  // 8. Per-client page metadata + schema markup.
+  // The t2/t3 template pages are client components and cannot export
+  // metadata, so the copied root layout.tsx must carry the client's
+  // title/description — otherwise the site ships with Opkie's own.
+  console.log('🔍 Writing per-client metadata and schema markup...');
+  generateClientMetadata(clientRoot, intakeData);
   injectSchemaMarkup(clientRoot);
-  updateMetadataWithCTA(clientRoot, intakeData);
-  addGoogleMapToHomepage(clientRoot, intakeData);
 
   // 9. Generate MISSING_DATA.md
   if (missingFields.length > 0) {
@@ -238,131 +227,54 @@ function injectSchemaMarkup(clientRoot: string) {
     }
   }
 
-  // Inject SchemaMarkup into the <head> section or <html> tag
+  // Inject SchemaMarkup as the first child of <body>. The app router does
+  // not support a hand-written <head> in the root layout; JSON-LD is read
+  // by search engines anywhere in the document.
   if (!content.includes('<SchemaMarkup')) {
-    // Try to find <head> tag first
-    if (content.includes('<head>')) {
-      content = content.replace(
-        /(<head>)/,
-        `$1\n        <SchemaMarkup practiceData={clientMasterData} />`
-      );
-    } else {
-      // If no explicit <head>, add as first child of <html>
-      // In Next.js 14 app router, we need to add it in the <html> tag
-      content = content.replace(
-        /(<html[^>]*>)/,
-        `$1\n      <head>\n        <SchemaMarkup practiceData={clientMasterData} />\n      </head>`
-      );
-    }
+    content = content.replace(
+      /(<body[^>]*>)/,
+      `$1\n        <SchemaMarkup practiceData={clientMasterData} />`
+    );
   }
 
   fs.writeFileSync(layoutPath, content, 'utf-8');
 }
 
-function updateMetadataWithCTA(clientRoot: string, intake: ClientIntake) {
-  const pagePath = path.join(clientRoot, 'app', 'page.tsx');
-  if (!fs.existsSync(pagePath)) return;
+/**
+ * Rewrite the metadata export in the copied app/layout.tsx with the
+ * client's own title and description. Without this, sites scaffolded
+ * from client-component templates (t2/t3) launch with the template
+ * showcase's metadata in search results.
+ */
+function generateClientMetadata(clientRoot: string, intake: ClientIntake) {
+  const layoutPath = path.join(clientRoot, 'app', 'layout.tsx');
+  if (!fs.existsSync(layoutPath)) return;
 
-  let content = fs.readFileSync(pagePath, 'utf-8');
+  let content = fs.readFileSync(layoutPath, 'utf-8');
 
-  // Find the metadata description and append CTA if not already present
-  const descriptionRegex = /description:\s*`([^`]+)`/;
-  const match = content.match(descriptionRegex);
+  const { name, phone, address } = intake.practice;
+  const title = `${name} — Dentist in ${address.city}, ${address.state}`;
+  const description =
+    `${name} provides comprehensive dental care in ${address.city}, ${address.state}. ` +
+    `New patients welcome. Call ${phone} to schedule your appointment.`;
 
-  if (match && !match[1].includes('Call') && !match[1].includes('schedule')) {
-    const currentDescription = match[1];
-    const newDescription = `${currentDescription} Call ${intake.practice.phone} today to schedule your appointment.`;
+  const metadataBlock =
+    `export const metadata: Metadata = {\n` +
+    `  title: ${JSON.stringify(title)},\n` +
+    `  description: ${JSON.stringify(description)},\n` +
+    `};`;
 
-    content = content.replace(
-      descriptionRegex,
-      `description: \`${newDescription}\``
+  const metadataRegex = /export const metadata: Metadata = \{[\s\S]*?\};/;
+  if (metadataRegex.test(content)) {
+    content = content.replace(metadataRegex, metadataBlock);
+  } else {
+    throw new Error(
+      'Could not find a metadata export in app/layout.tsx to rewrite — ' +
+        'the client site would launch with missing page metadata.'
     );
   }
 
-  fs.writeFileSync(pagePath, content, 'utf-8');
-}
-
-function addGoogleMapToHomepage(clientRoot: string, intake: ClientIntake) {
-  const pagePath = path.join(clientRoot, 'app', 'page.tsx');
-  if (!fs.existsSync(pagePath)) return;
-
-  let content = fs.readFileSync(pagePath, 'utf-8');
-
-  // Add GoogleMapEmbed import if not present
-  if (!content.includes('import { GoogleMapEmbed }')) {
-    const importRegex = /^import .+;$/gm;
-    const imports = content.match(importRegex);
-    if (imports && imports.length > 0) {
-      const lastImport = imports[imports.length - 1];
-      content = content.replace(
-        lastImport,
-        `${lastImport}\nimport { GoogleMapEmbed } from "@/components/seo";`
-      );
-    }
-  }
-
-  // Add a comment marker for where to place the map
-  // We'll add it right before the Footer component
-  if (!content.includes('GoogleMapEmbed') || !content.includes('<GoogleMapEmbed')) {
-    // Find Footer component patterns (T1Footer, T2Footer, T3Footer, or generic Footer)
-    const footerPatterns = [
-      /<T1Footer\s*\/>/,
-      /<T2Footer\s*\/>/,
-      /<T3Footer\s*\/>/,
-      /<Footer\s*\/>/,
-    ];
-
-    let footerMatch = null;
-    let footerPattern = null;
-
-    for (const pattern of footerPatterns) {
-      const match = content.match(pattern);
-      if (match) {
-        footerMatch = match[0];
-        footerPattern = pattern;
-        break;
-      }
-    }
-
-    const mapSection = `
-      {/* Location Map - Auto-generated for SEO */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Visit Our Office</h2>
-          <div className="max-w-4xl mx-auto">
-            <GoogleMapEmbed
-              mapUrl={clientMasterData.locations[0].googleMapsEmbedUrl}
-              practiceName={clientMasterData.locations[0].practiceNameGBP}
-              className="h-96 w-full rounded-lg shadow-lg"
-            />
-            <div className="mt-6 text-center">
-              <p className="text-lg font-semibold">{clientMasterData.locations[0].practiceNameGBP}</p>
-              <p className="text-gray-600">{clientMasterData.locations[0].addressGBP}</p>
-              <p className="text-gray-600">{clientMasterData.locations[0].cityServed}, {clientMasterData.locations[0].stateServed}</p>
-              <p className="text-gray-600 mt-2">
-                <a href={\`tel:\${clientMasterData.locations[0].phoneGBP.replace(/[^0-9+]/g, '')}\`} className="text-blue-600 hover:underline">
-                  {clientMasterData.locations[0].phoneGBP}
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-`;
-
-    if (footerPattern) {
-      // Add map section before footer
-      content = content.replace(footerPattern, `${mapSection}\n      ${footerMatch}`);
-    } else {
-      // Fallback: add before last </main> or at the end of return statement
-      const lastMainClosing = content.lastIndexOf('</main>');
-      if (lastMainClosing > -1) {
-        content = content.slice(0, lastMainClosing) + mapSection + '\n    ' + content.slice(lastMainClosing);
-      }
-    }
-  }
-
-  fs.writeFileSync(pagePath, content, 'utf-8');
+  fs.writeFileSync(layoutPath, content, 'utf-8');
 }
 
 function createSEOChecklist(clientRoot: string, intake: ClientIntake) {
@@ -374,8 +286,8 @@ Generated: ${new Date().toISOString().split('T')[0]}
 ## ✅ Automated SEO Optimizations (Already Done)
 
 - ✅ **Schema.org Markup**: LocalBusiness/Dentist schema automatically injected in layout.tsx
-- ✅ **Meta Description CTA**: "Call [phone] to schedule your appointment" added to homepage
-- ✅ **Google Maps Embed**: Map component added to homepage with NAP details
+- ✅ **Page Metadata**: Per-client title and description (with call-to-schedule CTA) written into layout.tsx
+- ✅ **Google Maps Embed**: The template's visit section renders a keyless map from master.ts (no API key needed)
 - ✅ **Proper Heading Hierarchy**: H1 → H2 → H3 structure maintained in template
 - ✅ **Click-to-Call Links**: All phone numbers use tel: links
 - ✅ **NAP Consistency**: Name, Address, Phone pulled from master.ts throughout site
@@ -400,18 +312,10 @@ Generated: ${new Date().toISOString().split('T')[0]}
 - [ ] Verify secondary categories in data/master.ts match Google Business Profile
 - [ ] Ensure each secondary category has its own H2 section on homepage (50-100 words)
 
-**Current Categories** (from data/master.ts):
-${intake.practice.name === 'Camenzuli Dental Excellence' ? `
-- Cosmetic Dentist
-- Emergency Dental Service
-- Teeth Whitening Service
-- Dental Implants Provider
-` : `
-- Add your GBP secondary categories to data/master.ts
-`}
+**Current Categories** (from data/master.ts): the \`secondaryCategoriesGBP\` array starts empty — copy the categories from the client's Google Business Profile listing.
 
 ### 4. Testimonials
-- [ ] Replace placeholder reviews in data/master.ts with real patient testimonials
+- [ ] Add real patient reviews to \`sampleReviews\` in data/master.ts (the array starts empty — review sections and rating stats stay hidden until reviews exist)
 - [ ] Get patient consent for using reviews
 - [ ] Include patient initials or first names only
 - [ ] Add verification badges (google, facebook, yelp)
@@ -425,16 +329,8 @@ ${intake.practice.name === 'Camenzuli Dental Excellence' ? `
   - [ ] \`cases/smile-before.png\` - Before/after photos (with consent)
   - [ ] \`cases/smile-after.png\`
 
-### 6. Google Maps API Key
-- [ ] Get Google Maps Embed API key from Google Cloud Console
-- [ ] Replace \`YOUR_API_KEY\` in data/master.ts → googleMapsEmbedUrl
-- [ ] Test map embed loads correctly
-
-**How to get API key**:
-1. Go to https://console.cloud.google.com/
-2. Enable Maps Embed API
-3. Create credentials → API Key
-4. Restrict key to Maps Embed API only
+### 6. Map Embed
+- [ ] Load the site and confirm the visit-section map shows the correct address (the keyless embed URL is generated from the intake address — no API key needed)
 
 ### 7. Verify NAP Matches GBP Exactly
 - [ ] Compare website NAP to Google Business Profile listing
@@ -611,6 +507,7 @@ function createProjectStructure(
   // Copy essential root files from templates project
   const rootFiles = [
     'package.json',
+    'package-lock.json', // pin dependency versions so client builds are reproducible
     'tsconfig.json',
     'tailwind.config.js',
     'tailwind.config.ts',
@@ -683,9 +580,9 @@ function generateMasterDataFile(
 ) {
   const masterDataPath = path.join(clientRoot, 'data', 'master.ts');
 
-  // Generate Google Maps embed URL
+  // Keyless Google Maps embed URL — no API key or Cloud Console step needed
   const mapsQuery = encodeURIComponent(`${intake.practice.address.street}, ${intake.practice.address.city}, ${intake.practice.address.state} ${intake.practice.address.zip}`);
-  const googleMapsEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${mapsQuery}`;
+  const googleMapsEmbedUrl = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
 
   // Format hours of operation
   const hoursOfOperation = [
@@ -701,6 +598,39 @@ function generateMasterDataFile(
   // Build credentials array
   const credentials = intake.doctor.credentials.filter(c => c && c !== '');
 
+  // Honest trust signals — default to FALSE and flag for follow-up rather
+  // than putting unverified medical claims on a live site.
+  const trust = intake.trust_signals ?? {};
+  if (trust.has_same_day_emergency === undefined) {
+    missingFields.push({
+      path: masterDataPath,
+      fieldName: 'trust_signals.has_same_day_emergency',
+      context: 'Defaulted to false — set true only if the practice offers same-day emergency care',
+    });
+  }
+  if (trust.has_sedation_anxiety_care === undefined) {
+    missingFields.push({
+      path: masterDataPath,
+      fieldName: 'trust_signals.has_sedation_anxiety_care',
+      context: 'Defaulted to false — set true only if the practice offers sedation/anxiety care',
+    });
+  }
+  const insuranceNetworks = (trust.insurance_networks ?? []).filter(Boolean);
+  if (insuranceNetworks.length === 0) {
+    missingFields.push({
+      path: masterDataPath,
+      fieldName: 'trust_signals.insurance_networks',
+      context: 'No insurance networks listed — templates will show generic insurance copy without carrier names',
+    });
+  }
+  const insuranceAcceptedText = insuranceNetworks.length
+    ? `We accept most major dental insurance plans including ${formatList(insuranceNetworks)}. Contact us to verify your coverage.`
+    : 'We accept most major dental insurance plans. Contact us to verify your coverage.';
+
+  const membershipPlanSummary = intake.membership.no_insurance_savings_plan_price
+    ? `No insurance? Ask about our ${intake.practice.name} savings plan — $${intake.membership.no_insurance_savings_plan_price}/year for cleanings, exams, and member discounts.`
+    : `No insurance? Ask us about our in-house savings plan for uninsured patients.`;
+
   const masterDataContent = `import type {
   MasterDentalPracticeSchema,
   ReviewData,
@@ -708,66 +638,64 @@ function generateMasterDataFile(
 } from "@/types/dentist";
 
 export const clientMasterData: MasterDentalPracticeSchema = {
-  globalPracticeName: "${intake.practice.name}",
+  globalPracticeName: ${JSON.stringify(intake.practice.name)},
   practiceNiche: "dental",
-  brandingLogoUrl: "${intake.brand.logo_path || '/images/logo-placeholder.svg'}",
-  onlineBookingUrl: "${intake.booking_link}",
+  brandingLogoUrl: ${JSON.stringify(intake.brand.logo_path || '/images/logo-placeholder.svg')},
+  onlineBookingUrl: ${JSON.stringify(intake.booking_link)},
 
   locations: [
     {
       id: "loc-001",
       officeLabel: "Main Office",
-      practiceNameGBP: "${intake.practice.name}",
+      practiceNameGBP: ${JSON.stringify(intake.practice.name)},
       primaryCategoryGBP: "Dentist",
       secondaryCategoriesGBP: [
-        "Cosmetic Dentist",
-        "Emergency Dental Service",
-        "Teeth Whitening Service",
-        "Dental Implants Provider",
+        // TODO: Replace with this practice's actual Google Business Profile
+        // secondary categories — these drive on-page SEO sections
       ],
-      addressGBP: "${intake.practice.address.street}",
-      cityServed: "${intake.practice.address.city}",
-      stateServed: "${intake.practice.address.state}",
-      phoneGBP: "${intake.practice.phone}",
-      googleMapsEmbedUrl: "${googleMapsEmbedUrl}",
+      addressGBP: ${JSON.stringify(intake.practice.address.street)},
+      cityServed: ${JSON.stringify(intake.practice.address.city)},
+      stateServed: ${JSON.stringify(intake.practice.address.state)},
+      phoneGBP: ${JSON.stringify(intake.practice.phone)},
+      googleMapsEmbedUrl: ${JSON.stringify(googleMapsEmbedUrl)},
       hoursOfOperation: ${JSON.stringify(hoursOfOperation, null, 8).replace(/"([^"]+)":/g, '$1:')},
       localizedNeighborhoods: [
-        // TODO: Add local neighborhood names for ${intake.practice.address.city}
+        // TODO: Add local neighborhood names for ${intake.practice.address.city.replace(/[^\w\s.,'-]/g, '')}
       ],
     },
   ],
 
   doctors: [
     {
-      name: "${intake.doctor.name}",
-      role: "${intake.doctor.title}",
+      name: ${JSON.stringify(intake.doctor.name)},
+      role: ${JSON.stringify(intake.doctor.title)},
       credentials: ${JSON.stringify(credentials, null, 8)},
-      biography: "${intake.doctor.bio_short || 'Dedicated to providing exceptional dental care to our community.'}",
+      biography: ${JSON.stringify(intake.doctor.bio_short || 'Dedicated to providing exceptional dental care to our community.')},
       portraitUrl: "/images/team/doctor-portrait.png",
     },
   ],
 
   theme: {
-    primaryBrandHex: "${intake.brand.accent_color || '#0f766e'}",
+    primaryBrandHex: ${JSON.stringify(intake.brand.accent_color || '#0f766e')},
     secondaryAccentHex: "#38bdf8",
     textMainHex: "#1e293b",
     bgCanvasHex: "#ffffff",
   },
 
   trustSignals: {
-    insuranceAcceptedText:
-      "We accept most major dental insurance plans including Delta Dental, Cigna, Aetna, and United Healthcare. Contact us to verify your coverage.",
-    membershipPlanSummary:
-      "No insurance? Join our ${intake.practice.name} Savings Plan for $${intake.membership.no_insurance_savings_plan_price || 299}/year and receive 2 free cleanings, exams, and 20% off all treatments.",
-    hasSameDayEmergency: true,
-    hasSedationAnxietyCare: true,
+    insuranceAcceptedText: ${JSON.stringify(insuranceAcceptedText)},
+    membershipPlanSummary: ${JSON.stringify(membershipPlanSummary)},
+    hasSameDayEmergency: ${trust.has_same_day_emergency === true},
+    hasSedationAnxietyCare: ${trust.has_sedation_anxiety_care === true},
   },
 };
 
-export const sampleReviews: ReviewData[] = [
-  // TODO: Replace with real client testimonials — do not launch with placeholder reviews
-  // Remove this comment and add actual verified patient reviews
-];
+/**
+ * Reviews start EMPTY on purpose. The templates hide their review sections
+ * and rating stats until real, consented patient reviews are added here —
+ * never launch with invented testimonials.
+ */
+export const sampleReviews: ReviewData[] = [];
 
 export const sampleBeforeAfterCases: BeforeAfterCase[] = [
   {
@@ -798,12 +726,29 @@ export default clientMasterData;
 
   fs.writeFileSync(masterDataPath, masterDataContent, 'utf-8');
 
-  // Track missing neighborhoods
+  // Track fields that always need real client input
   missingFields.push({
     path: masterDataPath,
     fieldName: 'localizedNeighborhoods',
     context: 'Local neighborhood names for SEO and local relevance'
   });
+  missingFields.push({
+    path: masterDataPath,
+    fieldName: 'secondaryCategoriesGBP',
+    context: 'Secondary Google Business Profile categories — copy them from the client GBP listing'
+  });
+  missingFields.push({
+    path: masterDataPath,
+    fieldName: 'sampleReviews',
+    context: 'Real, consented patient reviews — review sections stay hidden until these exist'
+  });
+}
+
+/** "A", "A and B", or "A, B, and C" */
+function formatList(items: string[]): string {
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
 }
 
 async function replaceAllPlaceholders(
@@ -863,15 +808,6 @@ async function replaceAllPlaceholders(
       modified = true;
     }
 
-    // Track missing data
-    if (!intake.stats.google_rating) {
-      missingFields.push({
-        path: file,
-        fieldName: 'stats.google_rating',
-        context: 'Hero stat bar rating display'
-      });
-    }
-
     if (modified) {
       fs.writeFileSync(file, content, 'utf-8');
     }
@@ -924,53 +860,6 @@ function updateBrandColors(clientRoot: string, accentColor: string) {
     );
     fs.writeFileSync(globalsCss, content, 'utf-8');
   }
-}
-
-function removeTestimonials(clientRoot: string) {
-  const masterDataPath = path.join(clientRoot, 'data', 'master.ts');
-  if (!fs.existsSync(masterDataPath)) return;
-
-  let content = fs.readFileSync(masterDataPath, 'utf-8');
-
-  // Replace sampleReviews array with generic placeholders (keep structure intact for templates)
-  content = content.replace(
-    /export const sampleReviews: ReviewData\[\] = \[[\s\S]*?\];/,
-    `export const sampleReviews: ReviewData[] = [
-  // TODO: Replace with real client testimonials — do not launch with placeholder reviews
-  {
-    id: "placeholder-001",
-    reviewerName: "[Patient Name]",
-    rating: 5,
-    reviewText: "Add real patient testimonial here. This is a placeholder review that should be replaced with actual verified patient feedback before launch.",
-    procedureCategory: "General Dentistry",
-    verificationBadge: "google",
-    datePosted: new Date().toISOString().split('T')[0],
-    isVerifiedPatient: true,
-  },
-  {
-    id: "placeholder-002",
-    reviewerName: "[Patient Name]",
-    rating: 5,
-    reviewText: "Add real patient testimonial here. This is a placeholder review that should be replaced with actual verified patient feedback before launch.",
-    procedureCategory: "Cosmetic Dentistry",
-    verificationBadge: "facebook",
-    datePosted: new Date().toISOString().split('T')[0],
-    isVerifiedPatient: true,
-  },
-  {
-    id: "placeholder-003",
-    reviewerName: "[Patient Name]",
-    rating: 5,
-    reviewText: "Add real patient testimonial here. This is a placeholder review that should be replaced with actual verified patient feedback before launch.",
-    procedureCategory: "Dental Implants",
-    verificationBadge: "google",
-    datePosted: new Date().toISOString().split('T')[0],
-    isVerifiedPatient: true,
-  },
-];`
-  );
-
-  fs.writeFileSync(masterDataPath, content, 'utf-8');
 }
 
 function generateMissingDataReport(

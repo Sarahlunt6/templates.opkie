@@ -8,13 +8,17 @@ interface T1MastheadProps {
   bookingUrl: string;
 }
 
-const CHAPTER_LINKS = [
-  { numeral: "I", label: "Consultation", href: "#consultation" },
-  { numeral: "II", label: "Design", href: "#design" },
-  { numeral: "III", label: "Craft", href: "#craft" },
-  { numeral: "IV", label: "Reveal", href: "#reveal" },
+const NAV_LINKS = [
+  { index: "01", label: "Services", href: "#services" },
+  { index: "02", label: "Doctors", href: "#doctors" },
+  { index: "03", label: "Reviews", href: "#reviews" },
+  { index: "04", label: "Visit", href: "#visit" },
 ];
 
+/**
+ * T1 PRESS — newspaper masthead. Compact Anton logotype on the left,
+ * mono index nav, rectangular ink BOOK NOW button. Sticky, ruled.
+ */
 export default function T1Masthead({
   practiceName,
   phone,
@@ -23,7 +27,7 @@ export default function T1Masthead({
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -34,45 +38,43 @@ export default function T1Masthead({
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
-        scrolled
-          ? "bg-[#F7F5F0]/95 backdrop-blur-sm border-b border-[#16130F]/15"
-          : "bg-transparent border-b border-transparent"
+      className={`sticky top-0 z-50 border-b border-[rgba(26,23,19,0.15)] bg-[#F3EFE6] transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_1px_0_rgba(26,23,19,0.15)]" : ""
       }`}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 md:px-10 xl:px-16 transition-all duration-700 py-4 lg:py-5">
-        {/* Running head */}
+      <div className="mx-auto flex max-w-[1500px] items-stretch justify-between gap-4 px-4 md:px-8 xl:px-12">
+        {/* Logotype */}
         <a
           href="#top"
-          className="font-t1-display text-lg md:text-xl font-medium tracking-tight text-[#16130F] whitespace-nowrap"
+          className="flex items-center py-3 font-t1-press text-xl uppercase leading-none tracking-[0.01em] text-[#1A1713] md:text-2xl"
         >
           {practiceName}
         </a>
 
-        {/* Chapter index — desktop only */}
+        {/* Index nav — desktop */}
         <nav
-          aria-label="Chapters"
-          className="hidden xl:flex items-baseline gap-8"
+          aria-label="Sections"
+          className="hidden items-center gap-8 lg:flex"
         >
-          {CHAPTER_LINKS.map((c) => (
+          {NAV_LINKS.map((link) => (
             <a
-              key={c.numeral}
-              href={c.href}
-              className="group flex items-baseline gap-2 text-[11px] font-medium uppercase tracking-[0.22em] text-[#6B675E] transition-colors duration-500 hover:text-[#5E2A2B]"
+              key={link.index}
+              href={link.href}
+              className="t1-mono-label flex items-baseline gap-1.5 transition-colors duration-200 hover:text-[#D92B21]"
             >
-              <span className="font-t1-display text-xs italic text-[#9C7E46]">
-                {c.numeral}.
+              <span aria-hidden="true" className="text-[#D92B21]">
+                {link.index}
               </span>
-              {c.label}
+              {link.label}
             </a>
           ))}
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
           <a
             href={tel}
-            className="t1-link hidden md:inline-block font-sans text-sm text-[#16130F]"
+            className="t1-link hidden whitespace-nowrap font-sans text-sm text-[#1A1713] md:inline-block"
           >
             {phone}
           </a>
@@ -81,9 +83,9 @@ export default function T1Masthead({
             {...(hasBooking
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}
-            className="t1-btn t1-btn-ink !min-h-0 !px-5 !py-2.5 text-[10px]"
+            className="t1-btn t1-btn-ink !min-h-0 self-center !px-5 !py-3"
           >
-            Reserve
+            Book now
           </a>
         </div>
       </div>
