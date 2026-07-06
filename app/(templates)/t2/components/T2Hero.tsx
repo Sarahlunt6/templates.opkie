@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   animate,
   motion,
@@ -70,6 +70,9 @@ export default function T2Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const hudDotsRef = useRef<(HTMLSpanElement | null)[]>([]);
   const reduced = useReducedMotion();
+  // The headline reveal masks each line with overflow-hidden while it slides
+  // up; once settled we drop the clip so tight leading can't cut descenders.
+  const [titleRevealed, setTitleRevealed] = useState(false);
 
   // Scroll-linked parallax on the video plate
   const { scrollYProgress } = useScroll({
@@ -276,13 +279,23 @@ export default function T2Hero() {
           </motion.p>
 
           <h1 className="font-innovator mt-7 font-medium tracking-[-0.03em] leading-[0.98] text-[clamp(2.6rem,1.4rem+5.8vw,5.8rem)] max-w-5xl">
-            {["Precision", "you can feel."].map((line, i) => (
-              <span key={line} className="block overflow-hidden">
+            {["Precision", "you can feel."].map((line, i, lines) => (
+              <span
+                key={line}
+                className={`block ${
+                  !reduced && !titleRevealed ? "overflow-hidden" : ""
+                }`}
+              >
                 <motion.span
                   className="block"
                   initial={reduced ? false : { y: "110%" }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.7, delay: 0.25 + i * 0.12, ease: EASE }}
+                  onAnimationComplete={
+                    i === lines.length - 1
+                      ? () => setTitleRevealed(true)
+                      : undefined
+                  }
                 >
                   {i === 1 ? <span className="t2p-duotext">{line}</span> : line}
                 </motion.span>
