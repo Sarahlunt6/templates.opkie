@@ -9,7 +9,7 @@ import { location, bookingHref, EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
    Services — a technical-specifications sheet. Each capability is
-   a spec row: mono index, name, volt chevron, expandable detail
+   a spec row: mono index, name, blue chevron, expandable detail
    with the treatment readout and a reference image.
    Category names come from practice data; treatment copy is template.
    ──────────────────────────────────────────────────────────────── */
@@ -81,7 +81,7 @@ export default function T2Services() {
     <section id="services" className="relative py-24 md:py-32 px-6 md:px-12 bg-[var(--t2p-surface)] scroll-mt-20">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
-          index="02"
+          index="12"
           label="Treatments &amp; services"
           title={
             <>
@@ -109,11 +109,11 @@ export default function T2Services() {
                   onClick={() => setOpenIdx(open ? null : i)}
                   aria-expanded={open}
                   aria-controls={panelId}
-                  className="group flex w-full items-center gap-5 md:gap-8 px-5 md:px-8 py-5 md:py-6 text-left transition-colors duration-300 hover:bg-[rgba(126,224,75,0.03)]"
+                  className="group flex w-full items-center gap-5 md:gap-8 px-5 md:px-8 py-5 md:py-6 text-left transition-colors duration-300 hover:bg-[rgba(56,189,248,0.05)]"
                 >
                   <span
                     className={`t2p-mono text-[0.6875rem] tracking-[0.18em] transition-colors duration-300 ${
-                      open ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text-50)]"
+                      open ? "text-[var(--t2p-blue)]" : "text-[var(--t2p-text-50)]"
                     }`}
                     aria-hidden="true"
                   >
@@ -123,7 +123,7 @@ export default function T2Services() {
                     {category}
                   </span>
                   <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-[var(--t2p-volt)] transition-transform duration-300 ${
+                    className={`h-5 w-5 shrink-0 text-[var(--t2p-blue)] transition-transform duration-300 ${
                       open ? "rotate-180" : ""
                     }`}
                     strokeWidth={1.5}
@@ -156,7 +156,7 @@ export default function T2Services() {
                                 <span className="t2p-mono text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
                                   {k}
                                 </span>
-                                <span className="t2p-mono text-[0.8125rem] text-[var(--t2p-volt)] text-right">
+                                <span className="t2p-mono text-[0.8125rem] text-[var(--t2p-blue)] text-right">
                                   {v}
                                 </span>
                               </div>
@@ -164,7 +164,7 @@ export default function T2Services() {
                           </div>
                           <a
                             href={bookingHref}
-                            className="t2p-mono mt-6 inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-volt)] transition-opacity duration-300 hover:opacity-75"
+                            className="t2p-mono mt-6 inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-blue)] transition-opacity duration-300 hover:opacity-75"
                           >
                             Book this treatment <span aria-hidden="true">→</span>
                           </a>

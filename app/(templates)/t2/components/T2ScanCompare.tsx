@@ -12,7 +12,31 @@ import { EASE } from "./t2-lib";
    is the scanner beam itself: when the section enters the viewport
    it performs one full sweep (the "scan"), then hands control to
    the visitor. Drag, or use arrow keys on the beam handle.
+   Below the frame: a VITA classical shade-guide strip — the physical
+   porcelain tabs dentists hold up — with B1 ringed as the target.
    ──────────────────────────────────────────────────────────────── */
+
+/* VITA classical shade tabs, lightest → darkest as displayed.
+   Ivory gradients approximate fired porcelain; B1 is the "after"
+   target shade. Purely presentational. */
+const SHADE_TABS = [
+  { id: "B1", color: "#F5F0E4", target: true },
+  { id: "A1", color: "#F2EBDC", target: false },
+  { id: "A2", color: "#EDE2CC", target: false },
+  { id: "A3", color: "#E5D5B7", target: false },
+  { id: "C1", color: "#DECFB4", target: false },
+  { id: "C4", color: "#C9B08A", target: false },
+];
+
+/** Slightly darken a hex color (0..1 amount) for the tab's cervical end. */
+function darken(hex: string, amount: number): string {
+  const n = parseInt(hex.slice(1), 16);
+  const f = (v: number) => Math.max(0, Math.round(v * (1 - amount)));
+  const r = f((n >> 16) & 255);
+  const g = f((n >> 8) & 255);
+  const b = f(n & 255);
+  return `rgb(${r}, ${g}, ${b})`;
+}
 
 export default function T2ScanCompare() {
   const cases = sampleBeforeAfterCases;
@@ -91,7 +115,7 @@ export default function T2ScanCompare() {
       <div className="t2p-blueprint absolute inset-0 pointer-events-none" aria-hidden="true" />
       <div className="relative max-w-5xl mx-auto">
         <SectionHeader
-          index="03"
+          index="13"
           label="Scan comparison"
           title={
             <>
@@ -111,8 +135,8 @@ export default function T2ScanCompare() {
               onClick={() => setCaseIdx(i)}
               className={`t2p-mono rounded-full px-4 py-2 text-[0.6875rem] uppercase tracking-[0.14em] border transition-colors duration-300 ${
                 i === caseIdx
-                  ? "border-[var(--t2p-volt)] text-[var(--t2p-volt)] bg-[rgba(126,224,75,0.06)]"
-                  : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-volt-dim)]"
+                  ? "border-[var(--t2p-blue)] text-[var(--t2p-blue)] bg-[rgba(3,105,161,0.06)]"
+                  : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-scan-dim)]"
               }`}
             >
               {String(i + 1).padStart(2, "0")} · {c.procedureType}
@@ -180,20 +204,20 @@ export default function T2ScanCompare() {
               <span className="t2p-beam-v h-full w-[2px]" aria-hidden="true" />
               {/* HUD marker handle */}
               <span
-                className="absolute top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-[var(--t2p-volt)] bg-[#060806] shadow-[0_0_14px_rgba(126,224,75,0.6)]"
+                className="absolute top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-[var(--t2p-scan)] bg-white shadow-[0_0_14px_rgba(56,189,248,0.6)]"
                 aria-hidden="true"
               />
             </div>
 
-            {/* Mono readouts */}
-            <span className="t2p-mono absolute top-3 left-3 md:top-4 md:left-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] bg-[#060806]/70 px-2 py-1">
+            {/* Mono readouts — frosted porcelain chips over the imagery */}
+            <span className="t2p-mono absolute top-3 left-3 md:top-4 md:left-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)] bg-white/80 px-2 py-1">
               01 / source
             </span>
-            <span className="t2p-mono absolute top-3 right-3 md:top-4 md:right-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-volt)] bg-[#060806]/70 px-2 py-1">
+            <span className="t2p-mono absolute top-3 right-3 md:top-4 md:right-4 text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-blue)] bg-white/80 px-2 py-1">
               02 / result
             </span>
             <span
-              className="t2p-mono absolute bottom-3 left-1/2 -translate-x-1/2 text-[0.625rem] tracking-[0.14em] text-[var(--t2p-text-70)] bg-[#060806]/70 px-2.5 py-1"
+              className="t2p-mono absolute bottom-3 left-1/2 -translate-x-1/2 text-[0.625rem] tracking-[0.14em] text-[var(--t2p-text-70)] bg-white/80 px-2.5 py-1"
               aria-hidden="true"
             >
               scan {Math.round(pos)}%
@@ -207,6 +231,66 @@ export default function T2ScanCompare() {
             <span className="t2p-mono text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)]">
               Case {String(caseIdx + 1).padStart(3, "0")} — {activeCase.procedureType}
             </span>
+          </div>
+        </motion.div>
+
+        {/* VITA shade-guide strip — porcelain tabs under the comparison,
+            like the physical guide held against the result. B1 is ringed
+            and checked as the target shade. */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+          className="mt-8"
+        >
+          <p className="t2p-mono text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+            [ Target shade — VITA classical ]
+          </p>
+          <p className="sr-only">
+            Target shade B1, the lightest tab on the VITA classical
+            porcelain shade guide.
+          </p>
+          <div
+            className="mt-4 grid max-w-md grid-cols-6 gap-2.5 sm:gap-3"
+            aria-hidden="true"
+          >
+            {SHADE_TABS.map((tab) => (
+              <div key={tab.id} className="flex flex-col items-center gap-2">
+                <span className="relative block w-full">
+                  <span
+                    className={`t2p-shade-tab block ${
+                      tab.target
+                        ? "ring-2 ring-[var(--t2p-blue)] ring-offset-2 ring-offset-[var(--t2p-bg)]"
+                        : ""
+                    }`}
+                    style={{
+                      background: `linear-gradient(to bottom, #FDFBF5 0%, ${tab.color} 38%, ${tab.color} 72%, ${darken(tab.color, 0.14)} 100%)`,
+                    }}
+                  />
+                  {tab.target && (
+                    <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--t2p-blue)] text-white">
+                      <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none">
+                        <path
+                          d="M2.5 6.5 5 9l4.5-6"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  )}
+                </span>
+                <span
+                  className={`t2p-mono text-[0.5625rem] tracking-[0.14em] ${
+                    tab.target ? "text-[var(--t2p-blue)]" : "text-[var(--t2p-text-50)]"
+                  }`}
+                >
+                  {tab.id}
+                </span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

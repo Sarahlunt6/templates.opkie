@@ -135,7 +135,7 @@ export function SpecRow({
       </span>
       <span
         className={`t2p-mono text-sm text-right ${
-          accent ? "text-[var(--t2p-volt)]" : "text-[var(--t2p-text)]"
+          accent ? "text-[var(--t2p-blue)]" : "text-[var(--t2p-text)]"
         }`}
       >
         {v}

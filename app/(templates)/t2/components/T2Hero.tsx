@@ -22,11 +22,12 @@ const AVG_RATING = sampleReviews.length
   : null;
 
 /* ────────────────────────────────────────────────────────────────
-   T2 Hero — flagship product launch for a dental practice.
-   Pill eyebrow, huge Space Grotesk headline with a volt→emerald
-   gradient payoff, pill CTAs, and an ArcLight-style stat readout.
-   The signature scanline still sweeps the frame; HUD calibration
-   dots sit on the imagery like alignment markers on a scan.
+   T2 Hero — flagship instrument launch for a dental practice, on a
+   bright porcelain field. Pill eyebrow, huge Space Grotesk headline
+   with a blue→cyan gradient payoff, pill CTAs, and an ArcLight-style
+   stat readout in graphite ink. The signature scanline still sweeps
+   the frame; HUD calibration dots sit on the imagery like alignment
+   markers on a scan.
    ──────────────────────────────────────────────────────────────── */
 
 const READOUT = [
@@ -182,12 +183,13 @@ export default function T2Hero() {
           loop
           playsInline
         />
-        {/* Grade: near-black, precise, faint green undertone */}
-        <div className="absolute inset-0 bg-[#060806]/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060806] via-[#060806]/45 to-[#060806]/75" />
+        {/* Grade: bright porcelain wash — the video reads through a
+            cool clinical white, like scan light on a lightbox */}
+        <div className="absolute inset-0 bg-[#F6F8FA]/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F6F8FA] via-[#F6F8FA]/45 to-[#F6F8FA]/75" />
       </motion.div>
 
-      {/* Radial volt glow from the top-right corner */}
+      {/* Radial blue scan-light bloom from the top-right corner */}
       <div
         className="t2p-corner-glow absolute inset-0 pointer-events-none"
         aria-hidden="true"
@@ -264,10 +266,10 @@ export default function T2Hero() {
             transition={{ duration: 0.55, delay: 0.15, ease: EASE }}
             className="t2p-mono inline-flex items-center gap-2.5 rounded-full border border-[var(--t2p-line-strong)] px-4 py-2 text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)]"
           >
-            {/* Volt discipline: non-interactive badge demoted — the dot keeps
-                a dim volt point of light; the text no longer competes with
-                the readout and CTAs below. */}
-            <span aria-hidden="true" className="text-[var(--t2p-volt-dim)]">
+            {/* Accent discipline: non-interactive badge demoted — the dot
+                keeps a dim point of scan light; the text no longer competes
+                with the readout and CTAs below. */}
+            <span aria-hidden="true" className="text-[var(--t2p-scan-dim)]">
               ●
             </span>
             Digital dentistry 2.0
@@ -360,7 +362,7 @@ export default function T2Hero() {
               transition={{ duration: 0.6, delay: 1, ease: EASE }}
               className="t2p-mono mt-5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]"
             >
-              <span className="text-[var(--t2p-volt)]">＋</span> Same-day
+              <span className="text-[var(--t2p-blue)]">＋</span> Same-day
               emergency appointments held daily
             </motion.p>
           )}

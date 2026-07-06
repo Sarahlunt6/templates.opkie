@@ -91,7 +91,7 @@ const courierPrime = Courier_Prime({
 export const metadata: Metadata = {
   title: "The Opkie Collection — Three Website Concepts for Your Practice",
   description:
-    "Three dental homepage concepts — editorial luxury, cinematic technology, and organic calm. Choose the one that feels like your practice; Opkie tailors every word, photograph, color, and detail to your practice.",
+    "Three dental homepage concepts — bold print editorial, porcelain-lab precision, and organic calm. Choose the one that feels like your practice; Opkie tailors every word, photograph, color, and detail to your practice.",
 };
 
 export default function RootLayout({

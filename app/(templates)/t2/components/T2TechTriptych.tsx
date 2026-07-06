@@ -7,8 +7,8 @@ import { EASE } from "./t2-lib";
 
 /* ────────────────────────────────────────────────────────────────
    Engineered for precision — bento grid of the three systems,
-   treated like flagship hardware modules: rounded surface cards,
-   volt icon tiles, one live scan-signal equalizer, one dose
+   treated like flagship instrument modules: white porcelain cards,
+   blue icon tiles, one live scan-signal equalizer, one dose
    progress readout, and a big-stat card for the headline number.
    Technology copy is template copy by design.
    ──────────────────────────────────────────────────────────────── */
@@ -66,7 +66,7 @@ export default function T2TechTriptych() {
       <div className="t2p-blueprint absolute inset-0 pointer-events-none" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto">
         <SectionHeader
-          index="01"
+          index="11"
           label="Engineered for precision"
           title={
             <>
@@ -97,17 +97,17 @@ export default function T2TechTriptych() {
                 className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
                   background:
-                    "radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(126,224,75,0.08), transparent 65%)",
+                    "radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(56,189,248,0.1), transparent 65%)",
                 }}
                 aria-hidden="true"
               />
 
               <div className="relative flex h-full flex-col">
                 <div className="flex items-center justify-between mb-8">
-                  {/* Rounded volt icon tile */}
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--t2p-volt-dim)] bg-[rgba(126,224,75,0.08)]">
+                  {/* Rounded blue icon tile */}
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--t2p-scan-dim)] bg-[rgba(56,189,248,0.08)]">
                     <inst.Icon
-                      className="h-5 w-5 text-[var(--t2p-volt)]"
+                      className="h-5 w-5 text-[var(--t2p-blue)]"
                       strokeWidth={1.25}
                       aria-hidden="true"
                     />
@@ -133,11 +133,11 @@ export default function T2TechTriptych() {
                     <div aria-hidden="true">
                       <div className="t2p-mono flex justify-between text-[0.5625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
                         <span>Radiation vs. film X-ray</span>
-                        <span className="text-[var(--t2p-volt)]">−90% dose</span>
+                        <span className="text-[var(--t2p-blue)]">−90% dose</span>
                       </div>
-                      <div className="mt-2 h-1 rounded-full bg-[rgba(242,245,240,0.08)] overflow-hidden">
+                      <div className="mt-2 h-1 rounded-full bg-[rgba(23,32,42,0.08)] overflow-hidden">
                         <motion.div
-                          className="h-full rounded-full bg-gradient-to-r from-[var(--t2p-circuit)] to-[var(--t2p-volt)]"
+                          className="h-full rounded-full bg-gradient-to-r from-[var(--t2p-blue)] to-[var(--t2p-scan)]"
                           initial={reduced ? { width: "90%" } : { width: 0 }}
                           whileInView={{ width: "90%" }}
                           viewport={{ once: true }}

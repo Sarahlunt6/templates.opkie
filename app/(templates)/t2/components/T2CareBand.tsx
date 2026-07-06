@@ -57,7 +57,7 @@ export default function T2CareBand() {
           </p>
           <a
             href="#doctors"
-            className="t2p-mono mt-7 inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-volt)] transition-opacity duration-300 hover:opacity-75"
+            className="t2p-mono mt-7 inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-blue)] transition-opacity duration-300 hover:opacity-75"
           >
             Meet your doctors <span aria-hidden="true">→</span>
           </a>

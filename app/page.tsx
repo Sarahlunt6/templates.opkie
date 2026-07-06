@@ -46,41 +46,41 @@ const concepts: Concept[] = [
   {
     id: "t1",
     numeral: "I",
-    name: "Maison",
-    discipline: "Editorial luxury",
-    audience: "For the practice that feels like a private atelier.",
-    pullLine: "A magazine feature, not a brochure.",
+    name: "Press",
+    discipline: "Big graphic editorial",
+    audience: "For the practice proud enough to make front-page news.",
+    pullLine: "Good dentistry deserves to be seen.",
     signatures: [
-      "The patient journey told in four chapters",
-      "A page-turn before & after reveal",
-      "Masthead typography, brass rules, matted plates",
+      "A giant red wordmark the cover photo rises into",
+      "Duotone photography that develops into color on hover",
+      "Chapters with a running folio, set in Anton & Courier Prime",
     ],
-    bg: "#F7F5F0",
-    text: "#16130F",
+    bg: "#F3EFE6",
+    text: "#1A1713",
     muted: "#6B675E",
-    accent: "#9C7E46",
-    nameFont: "font-t1-display",
-    nameClass: "font-light tracking-[-0.01em]",
-    eyebrowFont: "font-sans",
-    pullFont: "font-t1-display italic",
+    accent: "#D92B21",
+    nameFont: "font-t1-press",
+    nameClass: "uppercase tracking-[0.01em]",
+    eyebrowFont: "font-t1-mono",
+    pullFont: "font-t3-serif italic",
     ctaLabel: "Enter the concept",
   },
   {
     id: "t2",
     numeral: "II",
     name: "Precision",
-    discipline: "Cinematic technology",
+    discipline: "The porcelain lab",
     audience: "For the practice that leads with what it can measure.",
     pullLine: "Scanned. Designed. Delivered under one roof.",
     signatures: [
-      "A scanner beam that sweeps the hero film",
-      "Live financing calculator & smile assessment",
-      "Telemetry stats and a scan-comparison gallery",
+      "A blue scan spine that fills as you read",
+      "Digital vs. traditional, proven side by side",
+      "Financing configurator & smile-check instruments",
     ],
-    bg: "#0A0C10",
-    text: "#F4F6F8",
-    muted: "rgba(244,246,248,0.55)",
-    accent: "#67E8F9",
+    bg: "#F6F8FA",
+    text: "#17202A",
+    muted: "rgba(23,32,42,0.55)",
+    accent: "#0369A1",
     nameFont: "font-innovator",
     nameClass: "font-medium tracking-[-0.02em]",
     eyebrowFont: "font-t2-mono",
@@ -96,10 +96,10 @@ const concepts: Concept[] = [
     pullLine: "walk in nervous. leave lighter.",
     signatures: [
       "A guided-breath moment for anxious patients",
-      "A comfort menu — sedation, blankets, breaks",
-      "Live open-now status and blob-framed photography",
+      "Floating glass chips over the welcome photograph",
+      "A page that breathes — one slow, shared rhythm",
     ],
-    bg: "#F4F6F1",
+    bg: "#E8EFE3",
     text: "#2E3B34",
     muted: "#5F6E65",
     accent: "#566E61",
@@ -113,33 +113,33 @@ const concepts: Concept[] = [
 
 /* ── Per-concept ambient hover effects ─────────────────────────── */
 
-function MaisonEffect({ active }: { active: boolean }) {
+function PressEffect({ active }: { active: boolean }) {
   return (
     <>
-      {/* Brass hairlines draw in from the edges */}
+      {/* Ink hairline rules draw in from the edges, like the chapter rules */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute left-10 right-10 top-[26%] h-px origin-left"
-        style={{ backgroundColor: "#9C7E46" }}
-        animate={{ scaleX: active ? 1 : 0, opacity: active ? 0.55 : 0 }}
+        style={{ backgroundColor: "#1A1713" }}
+        animate={{ scaleX: active ? 1 : 0, opacity: active ? 0.3 : 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       />
       <motion.div
         aria-hidden
         className="pointer-events-none absolute left-10 right-10 bottom-[30%] h-px origin-right"
-        style={{ backgroundColor: "#9C7E46" }}
-        animate={{ scaleX: active ? 1 : 0, opacity: active ? 0.55 : 0 }}
+        style={{ backgroundColor: "#1A1713" }}
+        animate={{ scaleX: active ? 1 : 0, opacity: active ? 0.3 : 0 }}
         transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
       />
-      {/* Oversized roman numeral, like a chapter plate */}
+      {/* Oversized red Anton index, like the giant cover wordmark */}
       <motion.span
         aria-hidden
-        className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 select-none font-t1-display text-[16rem] leading-none"
-        style={{ color: "rgba(156,126,70,0.10)" }}
+        className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 select-none font-t1-press text-[15rem] uppercase leading-none"
+        style={{ color: "rgba(217,43,33,0.12)" }}
         animate={{ opacity: active ? 1 : 0, x: active ? 0 : 24 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       >
-        I
+        01
       </motion.span>
     </>
   );
@@ -149,27 +149,27 @@ function PrecisionEffect({ active }: { active: boolean }) {
   const reduced = useReducedMotion();
   return (
     <>
-      {/* Faint engineering grid */}
+      {/* Faint engineering grid, graphite on porcelain */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(244,246,248,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(244,246,248,0.05) 1px, transparent 1px)",
+            "linear-gradient(rgba(23,32,42,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(23,32,42,0.05) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
         }}
         animate={{ opacity: active ? 1 : 0 }}
         transition={{ duration: 0.6 }}
       />
-      {/* Scanner beam sweep */}
+      {/* Blue scan-light sweep */}
       {active && !reduced && (
         <motion.div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 h-px"
           style={{
             background:
-              "linear-gradient(90deg, transparent, #67E8F9 30%, #A78BFA 70%, transparent)",
-            boxShadow: "0 0 18px rgba(103,232,249,0.5)",
+              "linear-gradient(90deg, transparent, #38BDF8 30%, #22D3EE 70%, transparent)",
+            boxShadow: "0 0 18px rgba(56,189,248,0.5)",
           }}
           initial={{ top: "0%" }}
           animate={{ top: ["0%", "100%"] }}
@@ -207,7 +207,7 @@ function HavenEffect({ active }: { active: boolean }) {
 }
 
 function ConceptAmbient({ id, active }: { id: string; active: boolean }) {
-  if (id === "t1") return <MaisonEffect active={active} />;
+  if (id === "t1") return <PressEffect active={active} />;
   if (id === "t2") return <PrecisionEffect active={active} />;
   return <HavenEffect active={active} />;
 }
@@ -498,8 +498,8 @@ function CollectionContent() {
                   rel="noopener noreferrer"
                   className="mt-1 inline-flex w-fit items-center gap-3 rounded-full px-6 py-3.5"
                   style={{
-                    backgroundColor: c.id === "t2" ? "#67E8F9" : c.text,
-                    color: c.id === "t2" ? "#0A0C10" : c.bg,
+                    backgroundColor: c.id === "t2" ? "#0369A1" : c.text,
+                    color: c.id === "t2" ? "#FFFFFF" : c.bg,
                   }}
                 >
                   <span className={`text-[12px] uppercase tracking-[0.16em] ${c.eyebrowFont}`}>

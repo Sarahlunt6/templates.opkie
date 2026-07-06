@@ -20,18 +20,20 @@ import T2ScanSpine from "./components/T2ScanSpine";
 import { SectionHeader, ScanDivider, Reveal } from "./components/T2Kit";
 
 /* ═══════════════════════════════════════════════════════════════════
-   T2 PRECISION — dark hardware-launch digital dentistry
-   The practice presented like a flagship product: near-black canvas
-   with a volt-green scan accent, pill CTAs, mono spec readouts, and
-   HUD calibration dots. One motif — the scan — still runs the page:
-   it reveals the hero, divides the sections, and drives the
-   before/after comparison. Numbers do the persuading.
+   T2 PRECISION — porcelain lab digital dentistry
+   Cool clinical white, graphite ink, blue scan-light. The practice
+   presented like a flagship instrument: porcelain canvas, pill CTAs,
+   mono spec readouts, and HUD calibration dots. One motif — the scan
+   — still runs the page: it reveals the hero, divides the sections,
+   and drives the before/after comparison. Numbers do the persuading.
+   Section headers are indexed in FDI tooth notation (11–18, upper
+   quadrants); the nav keeps plain 01–08 for patient-facing clarity.
    ═══════════════════════════════════════════════════════════════════ */
 
 export default function Template2Page() {
   return (
     <div className="t2p font-sans antialiased relative overflow-x-hidden">
-      {/* Fixed scan spine — page scroll progress as a volt fill, lg+ only */}
+      {/* Fixed scan spine — page scroll progress as a scan-light fill, lg+ only */}
       <T2ScanSpine />
 
       <T2Nav />
@@ -73,7 +75,7 @@ export default function Template2Page() {
           <div className="t2p-blueprint absolute inset-0 pointer-events-none" aria-hidden="true" />
           <div className="relative max-w-7xl mx-auto">
             <SectionHeader
-              index="06"
+              index="16"
               label="Planning tools"
               title={
                 <>
