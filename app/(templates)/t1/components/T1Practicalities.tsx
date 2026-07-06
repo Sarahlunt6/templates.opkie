@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { GoogleMapEmbed } from "@/components/seo/GoogleMapEmbed";
-import { Fade } from "./T1Motion";
+import { Fade, T1_EASE } from "./T1Motion";
 
 interface HoursEntry {
   dayRange: string;
@@ -42,9 +46,11 @@ const STEPS = [
 ];
 
 /**
- * T1 PRESS — the practical facts. A staggered four-step application
- * line with mono indices and hairline connectors, then hours, address,
- * map, insurance and neighborhoods set in a ruled grid.
+ * T1 PRESS — the practical facts. A staggered four-step application line
+ * with mono indices on a hairline spine; each step's note expands on click
+ * (titles always read, so nothing essential hides). Below, hours, address,
+ * map, insurance and neighborhoods in a ruled grid, with a compact/detailed
+ * toggle that tucks the insurance prose away for returning visitors.
  */
 export default function T1Practicalities({
   practiceName,
@@ -60,41 +66,77 @@ export default function T1Practicalities({
   membershipSummary,
   hasSameDayEmergency,
 }: T1PracticalitiesProps) {
+  const reduced = useReducedMotion();
+  const [openStep, setOpenStep] = useState<number | null>(0);
+  const [showDetails, setShowDetails] = useState(false);
+
   const tel = `tel:${phone.replace(/[^0-9+]/g, "")}`;
   const hasBooking = bookingUrl !== "none";
 
   return (
     <div className="mt-10 lg:mt-14">
-      {/* The four steps — staggered timeline on a hairline spine */}
+      {/* The four steps — staggered timeline on a hairline spine; notes expand */}
       <ol className="relative" aria-label="How a first visit works">
-        {STEPS.map((step, i) => (
-          <li
-            key={step.title}
-            className="relative border-l border-[rgba(26,23,19,0.15)] pb-10 pl-6 last:pb-2 md:pl-10"
-          >
-            <span
-              aria-hidden="true"
-              className="absolute -left-[5px] top-1 h-[9px] w-[9px] bg-[#D92B21]"
-            />
-            <Fade delay={i * 0.06}>
-              <div
-                className={`max-w-xl ${
-                  i % 2 === 1 ? "md:ml-[14%]" : ""
+        {STEPS.map((step, i) => {
+          const open = openStep === i;
+          const panelId = `t1-step-panel-${i}`;
+          return (
+            <li
+              key={step.title}
+              className="relative border-l border-[rgba(26,23,19,0.15)] pb-10 pl-6 last:pb-2 md:pl-10"
+            >
+              <span
+                aria-hidden="true"
+                className={`absolute -left-[5px] top-1 h-[9px] w-[9px] bg-[#D92B21] transition-transform duration-300 ${
+                  open ? "scale-150" : ""
                 }`}
-              >
-                <p className="t1-mono-label t1-mono-label-red">
-                  [ 0{i + 1} ]
-                </p>
-                <h3 className="mt-2 font-t1-press text-2xl uppercase leading-none text-[#1A1713] md:text-3xl">
-                  {step.title}
-                </h3>
-                <p className="mt-2 font-sans text-sm leading-relaxed text-[#6B675E] md:text-base">
-                  {step.note}
-                </p>
-              </div>
-            </Fade>
-          </li>
-        ))}
+              />
+              <Fade delay={i * 0.06}>
+                <div className={`max-w-xl ${i % 2 === 1 ? "md:ml-[14%]" : ""}`}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenStep(open ? null : i)}
+                    aria-expanded={open}
+                    aria-controls={panelId}
+                    className="group block w-full text-left"
+                  >
+                    <p className="t1-mono-label t1-mono-label-red">[ 0{i + 1} ]</p>
+                    <span className="mt-2 flex items-baseline justify-between gap-4">
+                      <span className="font-t1-press text-2xl uppercase leading-none text-[#1A1713] transition-colors duration-300 group-hover:text-[#D92B21] md:text-3xl">
+                        {step.title}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className={`t1-mono-label t1-mono-label-stone shrink-0 transition-transform duration-300 ${
+                          open ? "rotate-45" : ""
+                        }`}
+                      >
+                        +
+                      </span>
+                    </span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {open && (
+                      <motion.div
+                        key="note"
+                        id={panelId}
+                        initial={reduced ? { opacity: 1 } : { height: 0, opacity: 0 }}
+                        animate={reduced ? { opacity: 1 } : { height: "auto", opacity: 1 }}
+                        exit={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: T1_EASE }}
+                        className="overflow-hidden"
+                      >
+                        <p className="mt-2 font-sans text-sm leading-relaxed text-[#6B675E] md:text-base">
+                          {step.note}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </Fade>
+            </li>
+          );
+        })}
       </ol>
 
       {/* Emergency line — red, impossible to miss */}
@@ -119,8 +161,21 @@ export default function T1Practicalities({
         </Fade>
       )}
 
+      {/* Facts header + compact/detailed toggle */}
+      <div className="mt-12 flex items-baseline justify-between gap-4 border-b border-[rgba(26,23,19,0.15)] pb-3">
+        <p className="t1-mono-label t1-mono-label-red">[ THE FACTS ]</p>
+        <button
+          type="button"
+          onClick={() => setShowDetails((s) => !s)}
+          aria-expanded={showDetails}
+          className="t1-mono-label t1-mono-label-stone transition-colors duration-300 hover:text-[#D92B21]"
+        >
+          {showDetails ? "Hide details —" : "Show details +"}
+        </button>
+      </div>
+
       {/* The facts — ruled grid */}
-      <div className="mt-12 grid grid-cols-1 gap-px border border-[rgba(26,23,19,0.15)] bg-[rgba(26,23,19,0.15)] lg:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-px border border-[rgba(26,23,19,0.15)] bg-[rgba(26,23,19,0.15)] lg:grid-cols-2">
         {/* Hours */}
         <div className="bg-[#F3EFE6] p-6 md:p-8">
           <Fade>
@@ -209,42 +264,54 @@ export default function T1Practicalities({
           </Fade>
         </div>
 
-        {/* Insurance */}
-        <div className="bg-[#F3EFE6] p-6 md:p-8">
-          <Fade>
-            <h3 className="t1-mono-label t1-mono-label-red">
-              [ ON INSURANCE ]
-            </h3>
-            <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
-              {insuranceText}
-            </p>
-          </Fade>
-        </div>
-
-        {/* Membership */}
-        <div className="bg-[#F3EFE6] p-6 md:p-8">
-          <Fade delay={0.05}>
-            {membershipSummary ? (
-              <>
-                <h3 className="t1-mono-label t1-mono-label-red">
-                  [ WITHOUT INSURANCE ]
-                </h3>
-                <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
-                  {membershipSummary}
-                </p>
-              </>
-            ) : (
-              <>
-                <h3 className="t1-mono-label t1-mono-label-red">
-                  [ QUESTIONS ]
-                </h3>
-                <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
-                  Call {phone} — a real person answers.
-                </p>
-              </>
-            )}
-          </Fade>
-        </div>
+        {/* Insurance + Membership — the "details", revealed on toggle */}
+        <AnimatePresence initial={false}>
+          {showDetails && [
+            <motion.div
+              key="insurance"
+              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
+              transition={{ duration: 0.35, ease: T1_EASE }}
+              className="bg-[#F3EFE6] p-6 md:p-8"
+            >
+              <h3 className="t1-mono-label t1-mono-label-red">
+                [ ON INSURANCE ]
+              </h3>
+              <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
+                {insuranceText}
+              </p>
+            </motion.div>,
+            <motion.div
+              key="membership"
+              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
+              transition={{ duration: 0.35, delay: 0.05, ease: T1_EASE }}
+              className="bg-[#F3EFE6] p-6 md:p-8"
+            >
+              {membershipSummary ? (
+                <>
+                  <h3 className="t1-mono-label t1-mono-label-red">
+                    [ WITHOUT INSURANCE ]
+                  </h3>
+                  <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
+                    {membershipSummary}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h3 className="t1-mono-label t1-mono-label-red">
+                    [ QUESTIONS ]
+                  </h3>
+                  <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
+                    Call {phone} — a real person answers.
+                  </p>
+                </>
+              )}
+            </motion.div>,
+          ]}
+        </AnimatePresence>
       </div>
 
       {/* Neighborhoods — ruled closing line */}

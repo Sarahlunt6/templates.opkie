@@ -22,6 +22,7 @@ interface ServiceCard {
   image: string;
   alt: string;
   span: string;
+  category: string;
   tall?: boolean;
 }
 
@@ -36,6 +37,7 @@ const SERVICES: ServiceCard[] = [
     image: "/images/office-interior.jpg",
     alt: "A soft, light-filled treatment room prepared for a sedation visit",
     span: "md:col-span-4",
+    category: "comfort",
     tall: true,
   },
   {
@@ -48,6 +50,7 @@ const SERVICES: ServiceCard[] = [
     image: "/images/services/invisalign.jpg",
     alt: "A clear Invisalign aligner tray held up to the light",
     span: "md:col-span-2",
+    category: "alignment",
   },
   {
     id: "veneers",
@@ -59,6 +62,7 @@ const SERVICES: ServiceCard[] = [
     image: "/images/services/full-mouth-smile.jpg",
     alt: "A close, natural smile after porcelain veneer treatment",
     span: "md:col-span-2",
+    category: "cosmetic",
   },
   {
     id: "implants",
@@ -70,6 +74,7 @@ const SERVICES: ServiceCard[] = [
     image: "/images/services/implant.jpg",
     alt: "A ceramic dental implant crown displayed on a neutral background",
     span: "md:col-span-2",
+    category: "restorative",
   },
   {
     id: "whitening",
@@ -81,6 +86,7 @@ const SERVICES: ServiceCard[] = [
     image: "/images/services/full-mouth-shade.jpg",
     alt: "A dental shade guide held next to brightened teeth",
     span: "md:col-span-2",
+    category: "cosmetic",
   },
   {
     id: "braces",
@@ -92,16 +98,29 @@ const SERVICES: ServiceCard[] = [
     image: "/images/services/braces.jpg",
     alt: "Modern low-profile braces on a relaxed, smiling patient",
     span: "md:col-span-3",
+    category: "alignment",
   },
 ];
 
-function ServiceTile({ service, delay }: { service: ServiceCard; delay: number }) {
+function ServiceTile({
+  service,
+  delay,
+  dimmed,
+}: {
+  service: ServiceCard;
+  delay: number;
+  dimmed: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
   return (
     <T3Reveal delay={delay} className={`col-span-1 ${service.span}`}>
-      <article className="group flex h-full flex-col overflow-hidden rounded-[2rem] bg-[var(--t3-sage-light)] shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 hover:shadow-[var(--t3-shadow-bloom)]">
+      <article
+        className={`group flex h-full flex-col overflow-hidden rounded-[2rem] bg-[var(--t3-sage-light)] shadow-[var(--t3-shadow-soft)] transition-all duration-700 hover:shadow-[var(--t3-shadow-bloom)] ${
+          dimmed ? "opacity-40" : "opacity-100"
+        }`}
+      >
         <div
           className={`relative w-full overflow-hidden ${
             service.tall ? "aspect-[16/10] md:aspect-[16/9]" : "aspect-[16/10]"
@@ -182,9 +201,15 @@ export default function T3HavenServices({
   hasEmergency,
   hasSedation,
 }: T3HavenServicesProps) {
+  const [filter, setFilter] = useState("all");
   const visibleServices = hasSedation
     ? SERVICES
     : SERVICES.filter((s) => s.id !== "sedation");
+
+  // Filter pills highlight a category and gently dim the rest, keeping the
+  // curated bento layout intact rather than fragmenting it.
+  const categories = Array.from(new Set(visibleServices.map((s) => s.category)));
+  const filterChips = ["all", ...categories];
 
   return (
     <section
@@ -217,9 +242,36 @@ export default function T3HavenServices({
           </T3Reveal>
         </div>
 
+        {/* Soft category filter — browse by what brought you in */}
+        <T3Reveal className="mb-8 flex flex-wrap gap-2.5">
+          {filterChips.map((chip) => {
+            const active = filter === chip;
+            return (
+              <button
+                key={chip}
+                type="button"
+                onClick={() => setFilter(chip)}
+                aria-pressed={active}
+                className={`rounded-full border px-4 py-2 text-[13px] font-light lowercase transition-colors duration-500 ${
+                  active
+                    ? "border-transparent bg-[var(--t3-euc-deep)] text-[var(--t3-sage-light)]"
+                    : "border-[var(--t3-line)] text-[var(--t3-moss-soft)] hover:border-[var(--t3-euc)] hover:text-[var(--t3-moss)]"
+                }`}
+              >
+                {chip}
+              </button>
+            );
+          })}
+        </T3Reveal>
+
         <div className="grid grid-cols-1 gap-6 md:grid-cols-6">
           {visibleServices.map((service, i) => (
-            <ServiceTile key={service.id} service={service} delay={i * 0.08} />
+            <ServiceTile
+              key={service.id}
+              service={service}
+              delay={i * 0.08}
+              dimmed={filter !== "all" && service.category !== filter}
+            />
           ))}
 
           {/* the one clay moment on this screen — same-day emergency */}
@@ -227,7 +279,9 @@ export default function T3HavenServices({
             <T3Reveal delay={0.3} className="col-span-1 md:col-span-3">
               <a
                 href={telHref(phone)}
-                className="group flex h-full min-h-[220px] flex-col justify-between rounded-[2rem] p-7 shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 hover:shadow-[var(--t3-shadow-bloom)] sm:p-8"
+                className={`group flex h-full min-h-[220px] flex-col justify-between rounded-[2rem] p-7 shadow-[var(--t3-shadow-soft)] transition-all duration-700 hover:shadow-[var(--t3-shadow-bloom)] sm:p-8 ${
+                  filter !== "all" ? "opacity-40" : "opacity-100"
+                }`}
                 style={{ backgroundColor: "rgba(201,126,93,0.14)" }}
               >
                 <div>

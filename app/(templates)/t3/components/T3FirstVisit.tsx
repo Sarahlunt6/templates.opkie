@@ -1,7 +1,8 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { useSmoothScroll } from "@/components/premium/SmoothScrollProvider";
-import T3Reveal from "./T3Reveal";
+import T3Reveal, { HAVEN_EASE } from "./T3Reveal";
 
 /**
  * How a first visit unfolds — four numbered process cards in the wellness
@@ -61,6 +62,7 @@ function SproutGlyph() {
 
 export default function T3FirstVisit() {
   const { scrollTo } = useSmoothScroll();
+  const reduce = useReducedMotion();
 
   return (
     <section
@@ -80,6 +82,27 @@ export default function T3FirstVisit() {
             <em className="t3-serif text-[var(--t3-euc-deep)]">unhurried</em>
           </h2>
         </T3Reveal>
+
+        {/* Progress track — nodes centred over each step card, the line
+            drawing in as the section arrives (decorative, desktop only) */}
+        <div className="relative mb-8 hidden lg:block" aria-hidden="true">
+          <div className="absolute inset-x-[12.5%] top-1/2 h-px -translate-y-1/2 bg-[var(--t3-line)]" />
+          <motion.div
+            className="absolute left-[12.5%] top-1/2 h-px -translate-y-1/2 bg-[var(--t3-euc)]"
+            initial={reduce ? { width: "75%" } : { width: 0 }}
+            whileInView={{ width: "75%" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 1.4, ease: HAVEN_EASE }}
+          />
+          <div className="relative flex justify-between px-[12.5%]">
+            {STEPS.map((step) => (
+              <span
+                key={step.index}
+                className="block h-3 w-3 rounded-full bg-[var(--t3-euc)] ring-4 ring-[var(--t3-sage)]"
+              />
+            ))}
+          </div>
+        </div>
 
         <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {STEPS.map((step, i) => (

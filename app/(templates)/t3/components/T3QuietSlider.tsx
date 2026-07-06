@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { animate, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 interface T3QuietSliderProps {
@@ -22,6 +23,19 @@ export default function T3QuietSlider({
   const [position, setPosition] = useState(50);
   const [dragging, setDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+
+  const snapToCenter = useCallback(() => {
+    if (reduced) {
+      setPosition(50);
+      return;
+    }
+    animate(position, 50, {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => setPosition(v),
+    });
+  }, [position, reduced]);
 
   const updateFromClientX = useCallback((clientX: number) => {
     const rect = containerRef.current?.getBoundingClientRect();
@@ -37,6 +51,7 @@ export default function T3QuietSlider({
   }, []);
 
   return (
+    <div>
     <div
       ref={containerRef}
       role="slider"
@@ -131,6 +146,28 @@ export default function T3QuietSlider({
         className="sr-only"
         aria-label="Adjust before and after comparison"
       />
+    </div>
+
+      {/* Reveal readout + gentle re-center */}
+      <div className="mt-4 flex items-center justify-between gap-4">
+        <span className="text-[13px] font-light text-[var(--t3-moss-soft)]">
+          <span className="tabular-nums text-[var(--t3-moss)]">
+            {Math.round(position)}%
+          </span>{" "}
+          before ·{" "}
+          <span className="tabular-nums text-[var(--t3-moss)]">
+            {100 - Math.round(position)}%
+          </span>{" "}
+          after
+        </span>
+        <button
+          type="button"
+          onClick={snapToCenter}
+          className="rounded-full border border-[var(--t3-line)] px-4 py-1.5 text-[13px] font-light lowercase text-[var(--t3-moss-soft)] transition-colors duration-500 hover:border-[var(--t3-euc)] hover:text-[var(--t3-moss)]"
+        >
+          center
+        </button>
+      </div>
     </div>
   );
 }

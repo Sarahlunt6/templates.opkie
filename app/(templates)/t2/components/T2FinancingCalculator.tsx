@@ -104,6 +104,79 @@ function Slider({
   );
 }
 
+/**
+ * Balance-over-term sparkline — the outstanding balance amortizing to zero,
+ * drawn as a filled area in scan blue. A compact readout of how the plan pays
+ * down, sized to the narrow results column.
+ */
+function BalanceChart({
+  financed,
+  payment,
+  months,
+  apr,
+}: {
+  financed: number;
+  payment: number;
+  months: number;
+  apr: number;
+}) {
+  const r = apr / 100 / 12;
+  const points: number[] = [financed];
+  for (let k = 1; k <= months; k++) {
+    const bal =
+      r === 0
+        ? financed - payment * k
+        : financed * Math.pow(1 + r, k) - payment * ((Math.pow(1 + r, k) - 1) / r);
+    points.push(Math.max(0, bal));
+  }
+  const max = financed || 1;
+  const W = 100;
+  const H = 40;
+  const stepX = points.length > 1 ? W / (points.length - 1) : W;
+  const coords = points.map(
+    (b, i) => [i * stepX, H - (b / max) * H] as const,
+  );
+  const line = coords
+    .map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`)
+    .join(" ");
+  const area = `${line} L${W} ${H} L0 ${H} Z`;
+
+  return (
+    <div className="mt-6">
+      <p className="t2p-mono mb-2.5 text-[0.625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
+        Balance over term
+      </p>
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        preserveAspectRatio="none"
+        className="h-14 w-full"
+        role="img"
+        aria-label={`Outstanding balance declining from ${fmt(financed)} to $0 over ${months} months`}
+      >
+        <defs>
+          <linearGradient id="t2p-bal-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(56,189,248,0.35)" />
+            <stop offset="100%" stopColor="rgba(56,189,248,0)" />
+          </linearGradient>
+        </defs>
+        <path d={area} fill="url(#t2p-bal-fill)" />
+        <path
+          d={line}
+          fill="none"
+          stroke="var(--t2p-blue)"
+          strokeWidth={1.5}
+          vectorEffect="non-scaling-stroke"
+          strokeLinejoin="round"
+        />
+      </svg>
+      <div className="t2p-mono mt-1.5 flex justify-between text-[0.5625rem] uppercase tracking-[0.14em] text-[var(--t2p-text-50)]">
+        <span>{fmt(financed)}</span>
+        <span>paid off · M{months}</span>
+      </div>
+    </div>
+  );
+}
+
 /** Configurator option row — name left, mono price right, blue check when selected. */
 function OptionRow({
   selected,
@@ -324,6 +397,14 @@ export default function T2FinancingCalculator() {
                 </div>
               ))}
             </div>
+
+            {/* Amortization visual */}
+            <BalanceChart
+              financed={result.financed}
+              payment={result.payment}
+              months={months}
+              apr={plan.apr}
+            />
 
             {/* Schedule preview */}
             <button

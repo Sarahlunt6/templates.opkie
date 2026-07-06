@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import { animate, useInView, useReducedMotion } from "framer-motion";
 import type { LocationNAP } from "@/types/dentist";
 import { sampleReviews } from "@/data/master";
-import T3Reveal from "./T3Reveal";
+import T3Reveal, { HAVEN_EASE } from "./T3Reveal";
 
 interface T3MissionStatsProps {
   insuranceAcceptedText: string;
@@ -31,6 +33,39 @@ function parseInsuranceNames(text: string): string[] {
     .split(/,|\band\b/i)
     .map((name) => name.trim())
     .filter(Boolean);
+}
+
+/**
+ * Counts a numeric value up from zero when it scrolls into view, keeping any
+ * prefix/suffix ("15+", "5.0/5") intact. Non-numeric values render as-is, and
+ * reduced-motion renders the final value without animating.
+ */
+function CountUp({ value }: { value: string }) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  const match = value.match(/^([\d.]+)(.*)$/);
+  const target = match ? parseFloat(match[1]) : NaN;
+  const suffix = match ? match[2] : "";
+  const decimals = match && match[1].includes(".") ? match[1].split(".")[1].length : 0;
+  const animatable = !reduce && match !== null && !Number.isNaN(target);
+
+  const [display, setDisplay] = useState(
+    animatable ? (0).toFixed(decimals) + suffix : value,
+  );
+
+  useEffect(() => {
+    if (!animatable || !inView) return;
+    const controls = animate(0, target, {
+      duration: 1.6,
+      ease: HAVEN_EASE,
+      onUpdate: (v) => setDisplay(v.toFixed(decimals) + suffix),
+    });
+    return () => controls.stop();
+  }, [animatable, inView, target, suffix, decimals]);
+
+  return <span ref={ref}>{animatable ? display : value}</span>;
 }
 
 function ShieldGlyph() {
@@ -122,7 +157,7 @@ export default function T3MissionStats({
             {stats.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center gap-2">
                 <dd className="order-1 text-[clamp(2.2rem,4.5vw,3.4rem)] font-extralight leading-none tracking-[-0.01em] text-[var(--t3-moss)]">
-                  {stat.value}
+                  <CountUp value={stat.value} />
                 </dd>
                 <dt className="order-2 text-sm font-light text-[var(--t3-moss-soft)]">
                   {stat.label}

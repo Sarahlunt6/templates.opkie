@@ -409,6 +409,54 @@ export default function T2SmileAssessment() {
                         Thanks, {form.firstName}. We&apos;ll review your notes
                         and reach out within one business day with next steps.
                       </p>
+
+                      {/* Transmission summary — what was sent */}
+                      <div className="mx-auto mt-7 max-w-sm rounded-xl border border-[var(--t2p-line)] bg-[var(--t2p-surface)] p-5 text-left">
+                        <p className="t2p-mono mb-4 text-[0.5625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]">
+                          Transmission summary
+                        </p>
+                        <div className="space-y-3.5">
+                          <div>
+                            <p className="t2p-mono text-[0.5625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
+                              Concerns
+                            </p>
+                            <div className="mt-2 flex flex-wrap gap-1.5">
+                              {selected
+                                .map((id) => CONCERNS.find((c) => c.id === id)?.label)
+                                .filter(Boolean)
+                                .map((label) => (
+                                  <span
+                                    key={label}
+                                    className="t2p-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--t2p-line-strong)] px-2.5 py-1 text-[0.5625rem] uppercase tracking-[0.14em] text-[var(--t2p-text-70)]"
+                                  >
+                                    <span
+                                      className="h-1 w-1 rounded-full bg-[var(--t2p-scan)]"
+                                      aria-hidden="true"
+                                    />
+                                    {label}
+                                  </span>
+                                ))}
+                            </div>
+                          </div>
+                          <div className="flex items-baseline justify-between gap-4 border-t border-[var(--t2p-line)] pt-3">
+                            <span className="t2p-mono text-[0.5625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
+                              Photo
+                            </span>
+                            <span className="text-sm text-[var(--t2p-text)]">
+                              {photo ? "Attached" : "Not included"}
+                            </span>
+                          </div>
+                          <div className="flex items-baseline justify-between gap-4 border-t border-[var(--t2p-line)] pt-3">
+                            <span className="t2p-mono text-[0.5625rem] uppercase tracking-[0.16em] text-[var(--t2p-text-50)]">
+                              Sent to
+                            </span>
+                            <span className="min-w-0 truncate text-sm text-[var(--t2p-text)]">
+                              {form.email}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="mt-8 flex flex-col items-center gap-3">
                         <a href={bookingHref} className="t2p-btn t2p-btn-primary">
                           Book now instead
