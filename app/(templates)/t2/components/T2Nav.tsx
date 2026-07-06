@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { href: "#results", label: "Results", index: "03" },
   { href: "#compare", label: "Compare", index: "04" },
   { href: "#doctors", label: "Doctors", index: "05" },
-  { href: "#visit", label: "Visit", index: "08" },
+  { href: "#visit", label: "Visit", index: "06" },
 ];
 
 export default function T2Nav() {
@@ -38,25 +38,27 @@ export default function T2Nav() {
             : "bg-transparent border-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between h-16 md:h-[4.5rem]">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+          <div className="flex items-center justify-between gap-8 h-16 md:h-[4.5rem]">
             {/* Wordmark */}
-            <Link href="/t2" className="group flex items-baseline gap-3">
-              <span className="font-innovator text-base md:text-lg font-medium tracking-tight text-[var(--t2p-text)]">
+            <Link href="/t2" className="group flex items-baseline gap-3 shrink-0">
+              <span className="font-innovator text-base md:text-lg font-medium tracking-tight text-[var(--t2p-text)] whitespace-nowrap">
                 {practice.globalPracticeName}
               </span>
-              <span className="t2p-mono hidden md:inline text-[0.5625rem] uppercase tracking-[0.22em] text-[var(--t2p-text-50)] group-hover:text-[var(--t2p-blue)] transition-colors duration-300">
+              {/* City tag: shown on tablet and on ultrawide, hidden at xl where
+                  it would compete with the full horizontal nav */}
+              <span className="t2p-mono hidden md:inline xl:hidden 2xl:inline whitespace-nowrap text-[0.5625rem] uppercase tracking-[0.22em] text-[var(--t2p-text-50)] group-hover:text-[var(--t2p-blue)] transition-colors duration-300">
                 {location.cityServed} / {location.stateServed}
               </span>
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-7" aria-label="Primary">
+            <nav className="hidden xl:flex items-center gap-7 2xl:gap-9" aria-label="Primary">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors duration-300"
+                  className="group t2p-mono whitespace-nowrap text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors duration-300"
                 >
                   <span className="text-[rgba(3,105,161,0.65)] mr-1.5 group-hover:text-[var(--t2p-blue)] transition-colors duration-300">
                     {link.index}
@@ -66,10 +68,10 @@ export default function T2Nav() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 md:gap-4 shrink-0">
               <a
                 href={telHref}
-                className="t2p-mono hidden xl:inline-block text-[0.6875rem] tracking-[0.12em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-blue)] transition-colors duration-300"
+                className="t2p-mono hidden 2xl:inline-block whitespace-nowrap text-[0.6875rem] tracking-[0.12em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-blue)] transition-colors duration-300"
               >
                 {location.phoneGBP}
               </a>
@@ -83,7 +85,7 @@ export default function T2Nav() {
               {/* Mobile toggle */}
               <button
                 onClick={() => setOpen(!open)}
-                className="lg:hidden flex h-10 w-10 items-center justify-center rounded-full border border-[var(--t2p-line-strong)]"
+                className="xl:hidden flex h-10 w-10 items-center justify-center rounded-full border border-[var(--t2p-line-strong)]"
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
               >
@@ -113,7 +115,7 @@ export default function T2Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="fixed inset-0 z-40 bg-[#F6F8FA]/95 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-[#F6F8FA]/95 backdrop-blur-sm xl:hidden"
           >
             <div className="t2p-blueprint absolute inset-0" aria-hidden="true" />
             <nav
