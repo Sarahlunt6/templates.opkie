@@ -30,7 +30,7 @@ module.exports = {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         // Template-specific premium families
         prestige: ["var(--font-prestige)", "Cormorant Garamond", "Georgia", "serif"],
-        innovator: ["var(--font-innovator)", "Space Grotesk", "ui-sans-serif", "sans-serif"],
+        innovator: ["var(--font-innovator)", "Sora", "ui-sans-serif", "sans-serif"],
         sanctuary: ["var(--font-sanctuary)", "Outfit", "ui-sans-serif", "sans-serif"],
         // T2 Premium Cinematic Typography System
         // Display: Elegant serif for headlines - editorial gravitas

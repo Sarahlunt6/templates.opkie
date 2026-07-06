@@ -188,8 +188,8 @@ export default function T2Hero() {
         />
         {/* Grade: bright porcelain wash — the video reads through a
             cool clinical white, like scan light on a lightbox */}
-        <div className="absolute inset-0 bg-[#F6F8FA]/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F6F8FA] via-[#F6F8FA]/45 to-[#F6F8FA]/75" />
+        <div className="absolute inset-0 bg-[#F6F8FA]/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F6F8FA] via-[#F6F8FA]/25 to-[#F6F8FA]/55" />
       </motion.div>
 
       {/* Radial blue scan-light bloom from the top-right corner */}

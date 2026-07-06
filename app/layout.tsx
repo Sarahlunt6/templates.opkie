@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import {
   Inter,
   Cormorant_Garamond,
-  Space_Grotesk,
+  Sora,
   Outfit,
   Fraunces,
   JetBrains_Mono,
@@ -30,8 +30,8 @@ const cormorantGaramond = Cormorant_Garamond({
   display: "swap",
 });
 
-// T2 Modern Innovator - Clean geometric sans for tech-forward aesthetics
-const spaceGrotesk = Space_Grotesk({
+// T2 Modern Innovator - Precise geometric sans for a professional, tech-forward feel
+const sora = Sora({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-innovator",
@@ -100,7 +100,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${spaceGrotesk.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable} ${courierPrime.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${sora.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable} ${courierPrime.variable}`}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
         <PageTransition>
           {children}
