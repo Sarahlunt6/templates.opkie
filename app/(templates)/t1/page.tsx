@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { clientMasterData, sampleReviews, sampleBeforeAfterCases } from "@/data/master";
+import { clientMasterData, sampleReviews, sampleBeforeAfterCases, sampleFaqs } from "@/data/master";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 
 import "./t1-theme.css";
 
@@ -25,6 +26,8 @@ import T1Practicalities from "./components/T1Practicalities";
 import T1Footer from "./components/T1Footer";
 import T1UtilityBar from "./components/T1UtilityBar";
 import T1Folio from "./components/T1Folio";
+import T1Faq from "./components/T1Faq";
+import T1Financing from "./components/T1Financing";
 
 const location = clientMasterData.locations[0];
 
@@ -90,6 +93,11 @@ export default function Template1Page() {
 
   return (
     <div className="t1-root font-sans antialiased overflow-x-clip">
+      <SchemaMarkup
+        practiceData={clientMasterData}
+        faqs={sampleFaqs}
+        reviews={sampleReviews}
+      />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[#1A1713] focus:px-4 focus:py-2 focus:text-[#F3EFE6]"
@@ -191,15 +199,38 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* [ 03 ] The proof */}
+        {/* [ 03 ] The cost */}
         <section
-          id="reviews"
-          aria-label="Section three: patient stories and results"
+          id="financing"
+          aria-label="Section three: financing and insurance"
           className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
               numeral="03"
+              kicker="Cost & coverage"
+              title="The cost"
+              deck="Financing that fits the month, the insurance we take, and a membership for those without — stated plainly, before you commit."
+            />
+            <div className="mt-10 md:mt-14">
+              <T1Financing
+                insuranceText={trustSignals.insuranceAcceptedText}
+                membershipSummary={trustSignals.membershipPlanSummary}
+                phone={location.phoneGBP}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* [ 04 ] The proof */}
+        <section
+          id="reviews"
+          aria-label="Section four: patient stories and results"
+          className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <T1ChapterHeading
+              numeral="04"
               kicker="Verified"
               title="The proof"
               deck="Documented results and the words of the patients who sat in the chair. Nothing here is retouched, including the opinions."
@@ -224,15 +255,34 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* [ 04 ] The visit */}
+        {/* [ 05 ] The questions */}
+        <section
+          id="faq"
+          aria-label="Section five: common questions"
+          className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <T1ChapterHeading
+              numeral="05"
+              kicker="Common questions"
+              title="The questions"
+              deck="The things patients ask before they book — coverage, comfort, cost, and what a first visit is actually like."
+            />
+            <div className="mt-10 md:mt-14">
+              <T1Faq faqs={sampleFaqs} />
+            </div>
+          </div>
+        </section>
+
+        {/* [ 06 ] The visit */}
         <section
           id="visit"
-          aria-label="Section four: plan your visit"
+          aria-label="Section six: plan your visit"
           className="scroll-mt-20 px-4 pb-16 pt-16 md:px-8 md:pb-24 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="04"
+              numeral="06"
               kicker="Practicalities"
               title="The visit"
               deck="Four steps from a phone call to a plan — then the hours, the address, and the fine print, in full."

@@ -11,8 +11,10 @@ interface T1MastheadProps {
 const NAV_LINKS = [
   { index: "01", label: "Services", href: "#services" },
   { index: "02", label: "Doctors", href: "#doctors" },
-  { index: "03", label: "Reviews", href: "#reviews" },
-  { index: "04", label: "Visit", href: "#visit" },
+  { index: "03", label: "Financing", href: "#financing" },
+  { index: "04", label: "Reviews", href: "#reviews" },
+  { index: "05", label: "FAQ", href: "#faq" },
+  { index: "06", label: "Visit", href: "#visit" },
 ];
 
 /**

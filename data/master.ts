@@ -2,6 +2,7 @@ import type {
   MasterDentalPracticeSchema,
   ReviewData,
   BeforeAfterCase,
+  FaqItem,
 } from "@/types/dentist";
 
 export const clientMasterData: MasterDentalPracticeSchema = {
@@ -205,6 +206,61 @@ export const sampleBeforeAfterCases: BeforeAfterCase[] = [
     afterUrl: "/images/cases/smile-after.png",
     procedureType: "Invisalign Treatment",
     altTag: "Invisalign orthodontic alignment results",
+  },
+];
+
+/**
+ * Common patient questions — template voice, safe defaults. Shared across
+ * all three templates' FAQ sections and emitted as FAQPage structured data.
+ */
+export const sampleFaqs: FaqItem[] = [
+  {
+    id: "faq-new-patients",
+    question: "Are you accepting new patients?",
+    answer:
+      "Yes — we welcome new patients of all ages. New-patient visits start with an unhurried conversation about your goals and any concerns, then a thorough exam. You can book online or call us and a real person will help you find a time.",
+  },
+  {
+    id: "faq-insurance",
+    question: "Do you take my insurance?",
+    answer:
+      "We accept most major dental insurance plans, including Delta Dental, Cigna, Aetna, and United Healthcare. If you're not sure about your coverage, call us with your plan details and we'll verify your benefits before your visit — no surprises.",
+  },
+  {
+    id: "faq-no-insurance",
+    question: "What if I don't have insurance?",
+    answer:
+      "You still have options. We offer a membership savings plan for uninsured patients, plus financing that breaks treatment into predictable monthly payments — including interest-free plans for qualifying cases. We'll walk through the numbers with you before anything begins.",
+  },
+  {
+    id: "faq-first-visit",
+    question: "What happens at my first visit?",
+    answer:
+      "You'll meet your dentist, talk through what brought you in, and get a gentle, complete exam — often with digital imaging so you can see what we see. We finish with a clear, written plan of what's recommended, what's optional, and what it costs. Nothing is started without your okay.",
+  },
+  {
+    id: "faq-nervous",
+    question: "I'm nervous about the dentist. Can you help?",
+    answer:
+      "Absolutely — a lot of our patients haven't been in years, and there's no judgment here. We move at your pace, explain each step before it happens, and pause the moment you raise a hand. Sedation and comfort options are available if you'd like them.",
+  },
+  {
+    id: "faq-emergency",
+    question: "Do you see dental emergencies?",
+    answer:
+      "Yes. We hold time each day for urgent problems like a cracked tooth, lost filling, or sudden pain. Call us as early as you can and describe what's happening — in many cases we can see you the same day.",
+  },
+  {
+    id: "faq-payment",
+    question: "How does payment and financing work?",
+    answer:
+      "We accept cash, all major credit cards, and most insurance. For larger treatment plans we offer monthly financing, including 0% APR options for those who qualify, so you can move forward on a schedule that fits your budget.",
+  },
+  {
+    id: "faq-how-often",
+    question: "How often should I come in?",
+    answer:
+      "For most people, a cleaning and exam every six months keeps small problems from becoming big ones. If you're managing gum health or other concerns, we may suggest a schedule tailored to you — we'll never recommend more than you actually need.",
   },
 ];
 

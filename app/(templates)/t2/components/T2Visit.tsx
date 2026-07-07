@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { PhoneCall } from "lucide-react";
-import { SectionHeader, SpecRow } from "./T2Kit";
+import { SectionHeader } from "./T2Kit";
 import {
   practice,
   location,
@@ -190,39 +190,6 @@ export default function T2Visit() {
             <span className="t2p-mono pointer-events-none absolute top-4 left-4 bg-white/85 px-2.5 py-1.5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)]">
               {location.cityServed}, {location.stateServed}
             </span>
-          </motion.div>
-        </div>
-
-        {/* Insurance + membership readouts */}
-        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-8"
-          >
-            <p className="t2p-label mb-3.5">Insurance</p>
-            <p className="text-sm leading-relaxed text-[var(--t2p-text-70)]">
-              {practice.trustSignals.insuranceAcceptedText}
-            </p>
-          </motion.div>
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.08, ease: EASE }}
-            className="rounded-2xl border border-[var(--t2p-line)] bg-[var(--t2p-bg)] p-7 md:p-8"
-          >
-            <p className="t2p-label mb-3.5">No insurance?</p>
-            <p className="text-sm leading-relaxed text-[var(--t2p-text-70)]">
-              {practice.trustSignals.membershipPlanSummary}
-            </p>
-            {practice.trustSignals.hasSedationAnxietyCare && (
-              <div className="mt-5 border-t border-[var(--t2p-line)] pt-4">
-                <SpecRow k="Anxious patients" v="Sedation options available" accent />
-              </div>
-            )}
           </motion.div>
         </div>
       </div>

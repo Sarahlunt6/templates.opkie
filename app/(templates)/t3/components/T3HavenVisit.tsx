@@ -28,7 +28,6 @@ interface T3HavenVisitProps {
 export default function T3HavenVisit({
   location,
   practiceName,
-  trustSignals,
   bookingUrl,
 }: T3HavenVisitProps) {
   const schedule = useMemo(
@@ -157,28 +156,6 @@ export default function T3HavenVisit({
                 />
               </div>
             </T3Reveal>
-
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              <T3Reveal delay={0.25}>
-                <h3 className="t3-serif mb-3 text-lg text-[var(--t3-euc-ink)]">
-                  insurance, handled
-                </h3>
-                <p className="text-sm font-light leading-relaxed text-[var(--t3-moss-soft)]">
-                  {trustSignals.insuranceAcceptedText}
-                </p>
-              </T3Reveal>
-
-              {trustSignals.membershipPlanSummary && (
-                <T3Reveal delay={0.3}>
-                  <h3 className="t3-serif mb-3 text-lg text-[var(--t3-euc-ink)]">
-                    no insurance? no problem
-                  </h3>
-                  <p className="text-sm font-light leading-relaxed text-[var(--t3-moss-soft)]">
-                    {trustSignals.membershipPlanSummary}
-                  </p>
-                </T3Reveal>
-              )}
-            </div>
 
             {location.localizedNeighborhoods.length > 0 && (
             <T3Reveal delay={0.35}>

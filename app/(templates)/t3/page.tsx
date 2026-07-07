@@ -20,7 +20,9 @@ import {
   clientMasterData,
   sampleReviews,
   sampleBeforeAfterCases,
+  sampleFaqs,
 } from "@/data/master";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 
 import T3AmbientDrift from "./components/T3AmbientDrift";
 import T3HavenNav from "./components/T3HavenNav";
@@ -35,6 +37,8 @@ import T3HavenReviews from "./components/T3HavenReviews";
 import T3HavenVisit from "./components/T3HavenVisit";
 import T3ClosingInvite from "./components/T3ClosingInvite";
 import T3HavenFooter from "./components/T3HavenFooter";
+import T3HavenFaq from "./components/T3HavenFaq";
+import T3HavenFinancing from "./components/T3HavenFinancing";
 import T3MobileBar from "./components/T3MobileBar";
 
 const location = clientMasterData.locations[0];
@@ -44,6 +48,11 @@ const { trustSignals, doctors, globalPracticeName, onlineBookingUrl } =
 export default function Template3Page() {
   return (
     <div className="t3-haven font-sanctuary relative min-h-screen overflow-x-clip">
+      <SchemaMarkup
+        practiceData={clientMasterData}
+        faqs={sampleFaqs}
+        reviews={sampleReviews}
+      />
       <T3AmbientDrift />
 
       {/* near-invisible paper grain over everything — non-interactive */}
@@ -90,8 +99,17 @@ export default function Template3Page() {
         {/* quiet transformations — soft-framed before/after */}
         <T3Transformations cases={sampleBeforeAfterCases} />
 
+        {/* financing & insurance — the affordability story, gently */}
+        <T3HavenFinancing
+          insuranceText={trustSignals.insuranceAcceptedText}
+          membershipSummary={trustSignals.membershipPlanSummary}
+        />
+
         {/* reviews drifting slowly, in serif italic */}
         <T3HavenReviews reviews={sampleReviews} />
+
+        {/* questions, answered gently */}
+        <T3HavenFaq faqs={sampleFaqs} />
 
         {/* practicalities — live status, hours, insurance, membership, map */}
         <T3HavenVisit

@@ -62,13 +62,10 @@ export default function T1Practicalities({
   mapsEmbedUrl,
   hours,
   neighborhoods,
-  insuranceText,
-  membershipSummary,
   hasSameDayEmergency,
 }: T1PracticalitiesProps) {
   const reduced = useReducedMotion();
   const [openStep, setOpenStep] = useState<number | null>(0);
-  const [showDetails, setShowDetails] = useState(false);
 
   const tel = `tel:${phone.replace(/[^0-9+]/g, "")}`;
   const hasBooking = bookingUrl !== "none";
@@ -161,17 +158,9 @@ export default function T1Practicalities({
         </Fade>
       )}
 
-      {/* Facts header + compact/detailed toggle */}
-      <div className="mt-12 flex items-baseline justify-between gap-4 border-b border-[rgba(26,23,19,0.15)] pb-3">
+      {/* Facts header */}
+      <div className="mt-12 border-b border-[rgba(26,23,19,0.15)] pb-3">
         <p className="t1-mono-label t1-mono-label-red">[ THE FACTS ]</p>
-        <button
-          type="button"
-          onClick={() => setShowDetails((s) => !s)}
-          aria-expanded={showDetails}
-          className="t1-mono-label t1-mono-label-stone transition-colors duration-300 hover:text-[#D92B21]"
-        >
-          {showDetails ? "Hide details —" : "Show details +"}
-        </button>
       </div>
 
       {/* The facts — ruled grid */}
@@ -263,55 +252,6 @@ export default function T1Practicalities({
             </p>
           </Fade>
         </div>
-
-        {/* Insurance + Membership — the "details", revealed on toggle */}
-        <AnimatePresence initial={false}>
-          {showDetails && [
-            <motion.div
-              key="insurance"
-              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
-              transition={{ duration: 0.35, ease: T1_EASE }}
-              className="bg-[#F3EFE6] p-6 md:p-8"
-            >
-              <h3 className="t1-mono-label t1-mono-label-red">
-                [ ON INSURANCE ]
-              </h3>
-              <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
-                {insuranceText}
-              </p>
-            </motion.div>,
-            <motion.div
-              key="membership"
-              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
-              transition={{ duration: 0.35, delay: 0.05, ease: T1_EASE }}
-              className="bg-[#F3EFE6] p-6 md:p-8"
-            >
-              {membershipSummary ? (
-                <>
-                  <h3 className="t1-mono-label t1-mono-label-red">
-                    [ WITHOUT INSURANCE ]
-                  </h3>
-                  <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
-                    {membershipSummary}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h3 className="t1-mono-label t1-mono-label-red">
-                    [ QUESTIONS ]
-                  </h3>
-                  <p className="mt-4 max-w-prose font-sans text-sm leading-[1.8] text-[#6B675E] md:text-base">
-                    Call {phone} — a real person answers.
-                  </p>
-                </>
-              )}
-            </motion.div>,
-          ]}
-        </AnimatePresence>
       </div>
 
       {/* Neighborhoods — ruled closing line */}
