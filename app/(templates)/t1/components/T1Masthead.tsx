@@ -9,12 +9,13 @@ interface T1MastheadProps {
 }
 
 const NAV_LINKS = [
+  // Curated quick-jump set (like the sibling templates' navs); every section
+  // still lives on the page with its [0X] chapter numeral.
   { index: "01", label: "Services", href: "#services" },
   { index: "02", label: "Doctors", href: "#doctors" },
-  { index: "03", label: "Financing", href: "#financing" },
-  { index: "04", label: "Reviews", href: "#reviews" },
-  { index: "05", label: "FAQ", href: "#faq" },
-  { index: "06", label: "Visit", href: "#visit" },
+  { index: "04", label: "Financing", href: "#financing" },
+  { index: "05", label: "Reviews", href: "#reviews" },
+  { index: "07", label: "Visit", href: "#visit" },
 ];
 
 /**
@@ -54,20 +55,18 @@ export default function T1Masthead({
           {practiceName}
         </a>
 
-        {/* Index nav — desktop */}
+        {/* Index nav — desktop. Chapter numerals live on the page headings;
+            the masthead keeps clean labels so seven fit on one line. */}
         <nav
           aria-label="Sections"
-          className="hidden items-center gap-8 lg:flex"
+          className="hidden items-center gap-5 lg:flex xl:gap-7"
         >
           {NAV_LINKS.map((link) => (
             <a
               key={link.index}
               href={link.href}
-              className="t1-mono-label flex items-baseline gap-1.5 transition-colors duration-200 hover:text-[#D92B21]"
+              className="t1-mono-label whitespace-nowrap transition-colors duration-200 hover:text-[#D92B21]"
             >
-              <span aria-hidden="true" className="text-[#D92B21]">
-                {link.index}
-              </span>
               {link.label}
             </a>
           ))}

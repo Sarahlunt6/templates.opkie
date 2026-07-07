@@ -11,6 +11,8 @@ import T2ScanCompare from "./components/T2ScanCompare";
 import T2Compare from "./components/T2Compare";
 import T2Doctors from "./components/T2Doctors";
 import T2Financing from "./components/T2Financing";
+import T2Comfort from "./components/T2Comfort";
+import T2FirstVisit from "./components/T2FirstVisit";
 import T2Reviews from "./components/T2Reviews";
 import T2Visit from "./components/T2Visit";
 import T2FinalCTA from "./components/T2FinalCTA";
@@ -78,7 +80,17 @@ export default function Template2Page() {
 
         <ScanDivider />
 
-        {/* 06 — Financing & insurance: payment configurator + coverage */}
+        {/* 06 — Comfort & sedation protocol */}
+        <T2Comfort />
+
+        <ScanDivider />
+
+        {/* 07 — First-visit intake sequence */}
+        <T2FirstVisit />
+
+        <ScanDivider />
+
+        {/* 08 — Financing & insurance: payment configurator + coverage */}
         <T2Financing />
 
         <ScanDivider />
