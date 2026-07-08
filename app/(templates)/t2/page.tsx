@@ -51,16 +51,16 @@ export default function Template2Page() {
         {/* 00 — Product-launch hero: parallax video + scanline reveal */}
         <T2Hero />
 
-        {/* 00.5 — The human beat before the hardware */}
+        {/* 00.5 — The human beat before the hardware (about/mission) */}
         <T2CareBand />
 
-        {/* 01 — Engineered for precision (bento) */}
-        <T2TechTriptych />
+        {/* 01 — Technical specifications (services) */}
+        <T2Services />
 
         <ScanDivider />
 
-        {/* 02 — Technical specifications (services) */}
-        <T2Services />
+        {/* 02 — Engineered for precision (technology bento) */}
+        <T2TechTriptych />
 
         <ScanDivider />
 

@@ -78,10 +78,7 @@ export default function Template3Page() {
         {/* signature: the guided breath, flowing into the comfort story */}
         <T3BreathGuide hasSedation={trustSignals.hasSedationAnxietyCare} />
 
-        {/* philosophy — a first visit as four numbered, honest steps */}
-        <T3FirstVisit />
-
-        {/* mission sentence, insurance text-marks, and calm stats */}
+        {/* mission sentence + calm stats (about / mission) */}
         <T3MissionStats
           insuranceAcceptedText={trustSignals.insuranceAcceptedText}
           locations={clientMasterData.locations}
@@ -97,11 +94,14 @@ export default function Template3Page() {
         {/* gentle technology — advanced tools, plain language */}
         <T3HavenTechnology />
 
+        {/* quiet transformations — soft-framed before/after */}
+        <T3Transformations cases={sampleBeforeAfterCases} />
+
         {/* the people behind the calm */}
         <T3HavenDoctors doctors={doctors} practiceName={globalPracticeName} />
 
-        {/* quiet transformations — soft-framed before/after */}
-        <T3Transformations cases={sampleBeforeAfterCases} />
+        {/* philosophy — a first visit as four honest steps */}
+        <T3FirstVisit />
 
         {/* financing & insurance — the affordability story, gently */}
         <T3HavenFinancing

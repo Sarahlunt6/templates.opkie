@@ -30,6 +30,7 @@ import T1Faq from "./components/T1Faq";
 import T1Financing from "./components/T1Financing";
 import T1Comfort from "./components/T1Comfort";
 import T1Technology from "./components/T1Technology";
+import T1FirstVisit from "./components/T1FirstVisit";
 
 const location = clientMasterData.locations[0];
 
@@ -141,6 +142,24 @@ export default function Template1Page() {
       />
 
       <main id="main">
+        {/* Statement band — the standard of care (about / mission) */}
+        <section
+          aria-label="The standard of care"
+          className="t1-col-rules border-y border-[rgba(26,23,19,0.15)] bg-[#E9E3D4] px-4 py-16 md:px-8 md:py-24 xl:px-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <T1Craft
+              practiceName={globalPracticeName}
+              city={location.cityServed}
+              avgRating={avgRating}
+              reviewCount={reviewCount}
+              clinicianCount={doctors.length}
+              neighborhoodCount={location.localizedNeighborhoods.length}
+              hasSedation={trustSignals.hasSedationAnxietyCare}
+            />
+          </div>
+        </section>
+
         {/* [ 01 ] The services */}
         <section
           id="services"
@@ -163,24 +182,6 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* Statement band — why patients stay */}
-        <section
-          aria-label="The standard of care"
-          className="t1-col-rules mt-16 border-y border-[rgba(26,23,19,0.15)] bg-[#E9E3D4] px-4 py-16 md:mt-24 md:px-8 md:py-24 xl:px-12"
-        >
-          <div className="mx-auto max-w-[1500px]">
-            <T1Craft
-              practiceName={globalPracticeName}
-              city={location.cityServed}
-              avgRating={avgRating}
-              reviewCount={reviewCount}
-              clinicianCount={doctors.length}
-              neighborhoodCount={location.localizedNeighborhoods.length}
-              hasSedation={trustSignals.hasSedationAnxietyCare}
-            />
-          </div>
-        </section>
-
         {/* [ 02 ] The instruments */}
         <section
           id="technology"
@@ -200,15 +201,42 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* [ 03 ] The doctors */}
+        {/* [ 03 ] The results */}
         <section
-          id="doctors"
-          aria-label="Section three: the doctors"
+          id="results"
+          aria-label="Section three: before and after"
           className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
               numeral="03"
+              kicker="Before / after"
+              title="The results"
+              deck="Documented outcomes — the same tooth before and after, nothing retouched. Drag to compare."
+            />
+            {/* Before/after plate — one full-bleed image moment */}
+            <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
+              <div className="mx-auto max-w-6xl px-4 md:px-0">
+                <T1PageTurnReveal
+                  beforeUrl={featuredCase.beforeUrl}
+                  afterUrl={featuredCase.afterUrl}
+                  altTag={featuredCase.altTag}
+                  procedureType={featuredCase.procedureType}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* [ 04 ] The doctors */}
+        <section
+          id="doctors"
+          aria-label="Section four: the doctors"
+          className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <T1ChapterHeading
+              numeral="04"
               kicker="The profile"
               title="The doctors"
               deck="The people behind the work — credentials on the record, philosophy in plain words."
@@ -220,15 +248,15 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* [ 04 ] The nerves */}
+        {/* [ 05 ] The nerves */}
         <section
           id="comfort"
-          aria-label="Section four: comfort and sedation"
+          aria-label="Section five: comfort and sedation"
           className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="04"
+              numeral="05"
               kicker="Comfort & sedation"
               title="The nerves"
               deck="Dental anxiety is common here, and welcome. What we do about it — plainly, and without being asked."
@@ -239,15 +267,34 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* [ 05 ] The cost */}
+        {/* [ 06 ] The first visit */}
         <section
-          id="financing"
-          aria-label="Section five: financing and insurance"
+          id="first-visit"
+          aria-label="Section six: your first visit"
           className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="05"
+              numeral="06"
+              kicker="What to expect"
+              title="The first visit"
+              deck="From a phone call to a plan — the four steps of a first appointment, start to finish."
+            />
+            <div className="mt-10 md:mt-14">
+              <T1FirstVisit />
+            </div>
+          </div>
+        </section>
+
+        {/* [ 07 ] The cost */}
+        <section
+          id="financing"
+          aria-label="Section seven: financing and insurance"
+          className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <T1ChapterHeading
+              numeral="07"
               kicker="Cost & coverage"
               title="The cost"
               deck="Financing that fits the month, the insurance we take, and a membership for those without — stated plainly, before you commit."
@@ -262,48 +309,34 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* [ 06 ] The proof */}
+        {/* [ 08 ] The proof */}
         <section
           id="reviews"
-          aria-label="Section six: patient stories and results"
+          aria-label="Section eight: patient stories"
           className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="06"
+              numeral="08"
               kicker="Verified"
               title="The proof"
-              deck="Documented results and the words of the patients who sat in the chair. Nothing here is retouched, including the opinions."
+              deck="The words of patients who sat in the chair. Nothing here is retouched, including the opinions."
             />
-
-            {/* Before/after plate — the chapter's one full-bleed image moment */}
-            <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
-              <div className="mx-auto max-w-6xl px-4 md:px-0">
-                <T1PageTurnReveal
-                  beforeUrl={featuredCase.beforeUrl}
-                  afterUrl={featuredCase.afterUrl}
-                  altTag={featuredCase.altTag}
-                  procedureType={featuredCase.procedureType}
-                />
-              </div>
-            </div>
-
-            {/* Testimonial band */}
-            <div className="mt-14 md:mt-20">
+            <div className="mt-10 md:mt-14">
               <T1PatientLetters letters={letters} avgRating={avgRatingText} />
             </div>
           </div>
         </section>
 
-        {/* [ 07 ] The questions */}
+        {/* [ 09 ] The questions */}
         <section
           id="faq"
-          aria-label="Section seven: common questions"
+          aria-label="Section nine: common questions"
           className="scroll-mt-20 px-4 pt-16 md:px-8 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="07"
+              numeral="09"
               kicker="Common questions"
               title="The questions"
               deck="The things patients ask before they book — coverage, comfort, cost, and what a first visit is actually like."
@@ -314,18 +347,18 @@ export default function Template1Page() {
           </div>
         </section>
 
-        {/* [ 08 ] The visit */}
+        {/* [ 10 ] The visit */}
         <section
           id="visit"
-          aria-label="Section eight: plan your visit"
+          aria-label="Section ten: plan your visit"
           className="scroll-mt-20 px-4 pb-16 pt-16 md:px-8 md:pb-24 md:pt-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1ChapterHeading
-              numeral="08"
+              numeral="10"
               kicker="Practicalities"
               title="The visit"
-              deck="Four steps from a phone call to a plan — then the hours, the address, and the fine print, in full."
+              deck="The hours, the address, the map, and the fine print — in full."
             />
             <T1Practicalities
               practiceName={globalPracticeName}
