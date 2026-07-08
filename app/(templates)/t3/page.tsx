@@ -31,6 +31,7 @@ import T3BreathGuide from "./components/T3BreathGuide";
 import T3FirstVisit from "./components/T3FirstVisit";
 import T3MissionStats from "./components/T3MissionStats";
 import T3HavenServices from "./components/T3HavenServices";
+import T3HavenTechnology from "./components/T3HavenTechnology";
 import T3HavenDoctors from "./components/T3HavenDoctors";
 import T3Transformations from "./components/T3Transformations";
 import T3HavenReviews from "./components/T3HavenReviews";
@@ -92,6 +93,9 @@ export default function Template3Page() {
           hasEmergency={trustSignals.hasSameDayEmergency}
           hasSedation={trustSignals.hasSedationAnxietyCare}
         />
+
+        {/* gentle technology — advanced tools, plain language */}
+        <T3HavenTechnology />
 
         {/* the people behind the calm */}
         <T3HavenDoctors doctors={doctors} practiceName={globalPracticeName} />

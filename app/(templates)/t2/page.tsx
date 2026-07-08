@@ -8,7 +8,6 @@ import T2CareBand from "./components/T2CareBand";
 import T2TechTriptych from "./components/T2TechTriptych";
 import T2Services from "./components/T2Services";
 import T2ScanCompare from "./components/T2ScanCompare";
-import T2Compare from "./components/T2Compare";
 import T2Doctors from "./components/T2Doctors";
 import T2Financing from "./components/T2Financing";
 import T2Comfort from "./components/T2Comfort";
@@ -70,12 +69,7 @@ export default function Template2Page() {
 
         <ScanDivider />
 
-        {/* 04 — Summit digital vs. the old way */}
-        <T2Compare />
-
-        <ScanDivider />
-
-        {/* 05 — Operator profiles */}
+        {/* 04 — Operator profiles */}
         <T2Doctors />
 
         <ScanDivider />
