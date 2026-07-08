@@ -75,9 +75,6 @@ export default function Template3Page() {
           hasSedation={trustSignals.hasSedationAnxietyCare}
         />
 
-        {/* signature: the guided breath, flowing into the comfort story */}
-        <T3BreathGuide hasSedation={trustSignals.hasSedationAnxietyCare} />
-
         {/* mission sentence + calm stats (about / mission) */}
         <T3MissionStats
           insuranceAcceptedText={trustSignals.insuranceAcceptedText}
@@ -99,6 +96,9 @@ export default function Template3Page() {
 
         {/* the people behind the calm */}
         <T3HavenDoctors doctors={doctors} practiceName={globalPracticeName} />
+
+        {/* comfort & sedation — the guided breath, the anxiety story */}
+        <T3BreathGuide hasSedation={trustSignals.hasSedationAnxietyCare} />
 
         {/* philosophy — a first visit as four honest steps */}
         <T3FirstVisit />
