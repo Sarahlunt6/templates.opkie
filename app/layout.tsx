@@ -11,7 +11,6 @@ import {
   Courier_Prime,
 } from "next/font/google";
 import "./globals.css";
-import PageTransition from "@/components/premium/PageTransition";
 import ChatConcierge from "@/components/interactive/ChatConcierge";
 
 // Universal Body Text - Highly legible clean paragraphs
@@ -102,9 +101,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${sora.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable} ${courierPrime.variable}`}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
-        <PageTransition>
-          {children}
-        </PageTransition>
+        {children}
         <ChatConcierge />
       </body>
     </html>
