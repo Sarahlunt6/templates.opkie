@@ -1,45 +1,43 @@
 {
-  "_note": "NRH Orthodontics — generated from live site (nrhorthodontics.com) + Opkie Master Document (Pass 2). Aligner-first orthodontic specialty. Stats left null on purpose: GBP aggregate rating/review count were not accessible and must never be invented. Membership fields null: ortho practice with CareCredit + in-house 0% financing, no dental savings plan.",
-  "client_slug": "nrh-orthodontics",
-  "template": "t2",
+  "client_slug": "musso",
+  "template": "t1",
   "practice": {
-    "name": "NRH Orthodontics",
-    "tagline_override": "Expertise that changes what's possible.",
-    "phone": "(817) 581-8881",
-    "phone_link": "tel:+18175818881",
+    "name": "Musso Family Dentistry",
+    "tagline_override": "Where Garland Families Go for Honest, Stress-Free, Modern Dentistry",
+    "phone": "972-840-8477",
+    "phone_link": "tel:+19728408477",
     "address": {
-      "street": "8601 Mid Cities Blvd",
-      "city": "North Richland Hills",
+      "street": "513 W. Centerville Rd.",
+      "city": "Garland",
       "state": "TX",
-      "zip": "76182"
+      "zip": "75041"
     },
     "hours": {
-      "monday": "8:00 AM – 1:00 PM, 2:00 PM – 5:00 PM",
-      "tuesday": "7:00 AM – 3:00 PM",
-      "wednesday": "8:00 AM – 1:00 PM, 2:00 PM – 5:00 PM",
-      "thursday": "7:00 AM – 3:00 PM",
+      "monday": "7:30am–4:30pm",
+      "tuesday": "7:30am–4:30pm",
+      "wednesday": "7:30am–4:30pm",
+      "thursday": "7:30am–4:30pm",
       "friday": "Closed",
       "saturday": "Closed",
       "sunday": "Closed"
     }
   },
   "doctor": {
-    "name": "Dr. Basma Fallah",
-    "title": "Specialist in Orthodontics & Dentofacial Orthopedics",
-    "years_experience": 22,
+    "name": "Dr. Mike Musso",
+    "title": "DDS",
+    "years_experience": 34,
     "credentials": [
-      "Diplomate, American Board of Orthodontics (2007)",
-      "Harry Sicher Orthodontic Research Award, American Association of Orthodontists",
-      "Quintessence Research Achievement Award",
-      "Adjunct Faculty, University of the Pacific Arthur A. Dugoni School of Dentistry",
-      "Invisalign Premier Provider — complex cases"
+      "UT Dental Branch Houston, 1990",
+      "Las Vegas Institute for Advanced Dental Studies",
+      "Invisalign certified",
+      "ADA, TDA, Dallas County Dental Society member"
     ],
-    "bio_short": "Dr. Basma Fallah is a board-certified orthodontist and second-generation specialist who has practiced for 22 years — 16 in her own North Richland Hills office. An ABO Diplomate who has taught Invisalign technique as adjunct faculty at the University of the Pacific, she runs an aligner-first practice built for complex cases other providers say require braces. Every patient receives CBCT-based airway evaluation as part of a standard intake, connecting orthodontic treatment to airway, sleep, and developmental health."
+    "bio_short": "Garland native with 30+ years of relationship-focused family dentistry, advanced cosmetic training from LVI"
   },
-  "booking_link": "https://nrhorthodontics.com/contact-us/",
+  "booking_link": "https://book.modento.io/c/6a62f1b85dcc40359b8a4ac5440a869a/schedule",
   "brand": {
-    "accent_color": "#32465F",
-    "logo_path": "/images/logo-placeholder.svg"
+    "accent_color": null,
+    "logo_path": null
   },
   "membership": {
     "individual_price": null,
@@ -50,16 +48,16 @@
   "stats": {
     "google_rating": null,
     "review_count": null,
-    "patients_served": null,
+    "patients_served": 9682,
     "satisfaction_rate": null
   },
   "trust_signals": {
-    "has_same_day_emergency": false,
-    "has_sedation_anxiety_care": false,
-    "insurance_networks": []
+    "has_same_day_emergency": true,
+    "has_sedation_anxiety_care": true,
+    "insurance_networks": ["PPO plans"]
   },
   "vercel": {
-    "project_name": "nrh-orthodontics",
-    "domain": "nrhorthodontics.com"
+    "project_name": "musso-family-dentistry",
+    "domain": null
   }
 }
