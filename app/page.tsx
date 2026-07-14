@@ -80,6 +80,32 @@ const concepts: Concept[] = [
     eyebrowFont: "font-sanctuary",
     pullFont: "font-t3-serif italic",
   },
+  {
+    id: "t4",
+    numeral: "IV",
+    name: "Atelier",
+    discipline: "After-dark couture",
+    pullLine: "Every smile, made to measure.",
+    bg: "#1E1410",
+    accentOnDark: "#C9A56A",
+    nameFont: "font-t4-display",
+    nameClass: "tracking-[0.05em]",
+    eyebrowFont: "font-t4-body",
+    pullFont: "font-t4-display italic",
+  },
+  {
+    id: "t5",
+    numeral: "V",
+    name: "Marigold",
+    discipline: "Main-street retro",
+    pullLine: "The dentist your kids ask to visit.",
+    bg: "#FFF6E8",
+    accentOnDark: "#F0A32F",
+    nameFont: "font-t5-display",
+    nameClass: "tracking-[0.005em]",
+    eyebrowFont: "font-t5-body",
+    pullFont: "font-t5-script",
+  },
 ];
 
 /* ── Per-concept ambient signatures, played over the screenshot ──── */
@@ -180,9 +206,106 @@ function HavenEffect({ active }: { active: boolean }) {
   );
 }
 
+function AtelierEffect({ active }: { active: boolean }) {
+  const reduced = useReducedMotion();
+  return (
+    <>
+      {/* a cone of gallery light warming from above */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(80% 60% at 50% -8%, rgba(230,203,150,0.30), rgba(230,203,150,0.06) 50%, transparent 72%)",
+        }}
+        animate={{ opacity: active ? 1 : 0.35 }}
+        transition={{ duration: 0.8 }}
+      />
+      {/* brass hairline, drawn like a fitting mark */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute left-6 right-6 bottom-[22%] h-px origin-left"
+        style={{ backgroundColor: "rgba(201,165,106,0.55)" }}
+        animate={{ scaleX: active ? 1 : 0, opacity: active ? 1 : 0 }}
+        transition={{ duration: 0.9, ease: EASE }}
+      />
+      {/* the champagne sheen sweeping across the dark */}
+      {active && !reduced && (
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 w-1/3"
+          style={{
+            background:
+              "linear-gradient(100deg, transparent 10%, rgba(230,203,150,0.16) 50%, transparent 90%)",
+          }}
+          initial={{ x: "-140%" }}
+          animate={{ x: "340%" }}
+          transition={{
+            duration: 2.2,
+            repeat: Infinity,
+            repeatDelay: 1.1,
+            ease: "easeInOut",
+          }}
+        />
+      )}
+    </>
+  );
+}
+
+function MarigoldEffect({ active }: { active: boolean }) {
+  const reduced = useReducedMotion();
+  return (
+    <>
+      {/* the scalloped awning rolls down over the storefront */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 origin-top"
+        animate={{
+          scaleY: active ? 1 : 0,
+          opacity: active ? 1 : 0,
+        }}
+        transition={{ duration: 0.5, ease: EASE }}
+      >
+        <div
+          style={{
+            height: 14,
+            background:
+              "repeating-linear-gradient(90deg, #F0A32F 0 28px, #FFFDF7 28px 56px)",
+          }}
+        />
+        <div
+          style={{
+            height: 13,
+            backgroundImage:
+              "radial-gradient(circle at 14px 0, #F0A32F 12px, transparent 13px), radial-gradient(circle at 42px 0, #FFFDF7 12px, transparent 13px)",
+            backgroundSize: "56px 13px",
+            backgroundRepeat: "repeat-x",
+          }}
+        />
+      </motion.div>
+      {/* the marigold sun rising in the corner */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -right-8 -bottom-8 h-36 w-36 rounded-full"
+        style={{ backgroundColor: "rgba(240,163,47,0.85)" }}
+        animate={
+          active
+            ? reduced
+              ? { opacity: 1, y: 0 }
+              : { opacity: 1, y: -8, scale: 1 }
+            : { opacity: 0, y: 24, scale: 0.85 }
+        }
+        transition={{ duration: 0.55, ease: EASE }}
+      />
+    </>
+  );
+}
+
 function ConceptAmbient({ id, active }: { id: string; active: boolean }) {
   if (id === "t1") return <PressEffect active={active} />;
   if (id === "t2") return <PrecisionEffect active={active} />;
+  if (id === "t4") return <AtelierEffect active={active} />;
+  if (id === "t5") return <MarigoldEffect active={active} />;
   return <HavenEffect active={active} />;
 }
 
@@ -363,10 +486,10 @@ export default function CollectionPage() {
         >
           <h1 className="text-[clamp(1.9rem,3.4vw,3rem)] font-light leading-[1.08] tracking-[-0.015em] [text-wrap:balance]">
             One practice.
-            <br className="hidden sm:block" /> Three ways to meet it.
+            <br className="hidden sm:block" /> Five ways to meet it.
           </h1>
           <p className="mt-4 max-w-lg text-[14px] font-light leading-relaxed text-white/55">
-            Three homepage concepts, each with its own voice and interactive
+            Five homepage concepts, each with its own voice and interactive
             signature. Open the one that fits your practice — we tailor every
             word, photograph, and color from there.
           </p>

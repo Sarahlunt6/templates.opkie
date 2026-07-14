@@ -188,22 +188,22 @@ export const sampleReviews: ReviewData[] = [
 export const sampleBeforeAfterCases: BeforeAfterCase[] = [
   {
     id: "case-001",
-    beforeUrl: "/images/cases/smile-before.png",
-    afterUrl: "/images/cases/smile-after.png",
+    beforeUrl: "/images/cases/smile-before.jpg",
+    afterUrl: "/images/cases/smile-after.jpg",
     procedureType: "Porcelain Veneers",
     altTag: "Porcelain veneers smile transformation",
   },
   {
     id: "case-002",
-    beforeUrl: "/images/cases/smile-before.png",
-    afterUrl: "/images/cases/smile-after.png",
+    beforeUrl: "/images/cases/smile-before.jpg",
+    afterUrl: "/images/cases/smile-after.jpg",
     procedureType: "Professional Whitening",
     altTag: "Professional teeth whitening results",
   },
   {
     id: "case-003",
-    beforeUrl: "/images/cases/smile-before.png",
-    afterUrl: "/images/cases/smile-after.png",
+    beforeUrl: "/images/cases/smile-before.jpg",
+    afterUrl: "/images/cases/smile-after.jpg",
     procedureType: "Invisalign Treatment",
     altTag: "Invisalign orthodontic alignment results",
   },

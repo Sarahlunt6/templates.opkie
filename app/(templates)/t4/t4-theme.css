@@ -1,0 +1,299 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   T4 ATELIER — template-scoped theme
+   After-dark couture: warm espresso darkness (never tech-black), champagne
+   brass fittings, porcelain type in a high-contrast Didone. Dark rooms for
+   the showcase acts, porcelain "salon" rooms for the practical acts. All
+   rules are scoped under .t4-atelier so nothing leaks.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.t4-atelier {
+  /* the house palette */
+  --t4-noir: #17100a; /* footer, deepest room */
+  --t4-espresso: #1e1410; /* main dark canvas — warm brown-black */
+  --t4-umber: #291c15; /* elevated dark surfaces */
+  --t4-mahogany: #362519; /* card hover, borders on dark */
+  --t4-champagne: #c9a56a; /* brass accent on dark */
+  --t4-champagne-bright: #e6cb96; /* brass hover / highlights */
+  --t4-brass-ink: #8a6a33; /* AA-safe brass for text on porcelain */
+  --t4-porcelain: #f2eadd; /* light "salon" rooms */
+  --t4-porcelain-deep: #e9dfcd; /* alternate light surface / mats */
+  --t4-ivory: #f6f0e6; /* display text on dark */
+  --t4-oxblood: #6e3a30; /* one deep warm moment (emergency) */
+
+  /* derived inks */
+  --t4-ivory-soft: rgba(246, 240, 230, 0.74);
+  --t4-ivory-faint: rgba(246, 240, 230, 0.48);
+  --t4-espresso-soft: rgba(30, 20, 16, 0.76);
+  --t4-espresso-faint: rgba(30, 20, 16, 0.52);
+  --t4-line-dark: rgba(201, 165, 106, 0.26); /* brass hairline on dark */
+  --t4-line-light: rgba(30, 20, 16, 0.16); /* espresso hairline on porcelain */
+  --t4-shadow-deep: 0 30px 80px -30px rgba(0, 0, 0, 0.75);
+  --t4-shadow-salon: 0 24px 60px -28px rgba(30, 20, 16, 0.28);
+
+  /* scoped overrides so shared primitives inherit the house accent */
+  --primary-brand: #c9a56a;
+  --secondary-accent: #e6cb96;
+  --bg-canvas: #1e1410;
+  --text-main: #f6f0e6;
+
+  background-color: var(--t4-espresso);
+  color: var(--t4-ivory);
+  font-kerning: normal;
+}
+
+.t4-atelier ::selection {
+  background-color: rgba(201, 165, 106, 0.35);
+  color: var(--t4-ivory);
+}
+
+.t4-atelier :focus-visible {
+  outline: 2px solid var(--t4-champagne);
+  outline-offset: 3px;
+}
+.t4-atelier .t4-salon :focus-visible {
+  outline-color: var(--t4-brass-ink);
+}
+
+/* ── rooms ────────────────────────────────────────────────────────────── */
+/* a porcelain "salon" room — light relief between dark acts */
+.t4-atelier .t4-salon {
+  background-color: var(--t4-porcelain);
+  color: #241a12;
+}
+
+/* ── typography ───────────────────────────────────────────────────────── */
+.t4-atelier .t4-display {
+  font-family: var(--font-t4-display), "Bodoni Moda", Didot, Georgia, serif;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+}
+.t4-atelier .t4-display-hero {
+  font-size: clamp(2.9rem, 7.5vw, 6.25rem);
+}
+.t4-atelier .t4-display-lg {
+  font-size: clamp(2.1rem, 4.6vw, 3.9rem);
+}
+.t4-atelier .t4-display-md {
+  font-size: clamp(1.55rem, 2.8vw, 2.4rem);
+  line-height: 1.12;
+}
+
+/* couture label — the house's utility voice (deliberately NOT mono) */
+.t4-atelier .t4-label {
+  font-family: var(--font-t4-body), "Hanken Grotesk", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+}
+.t4-atelier .t4-label-wide {
+  letter-spacing: 0.42em;
+}
+
+/* engraved numerals for fittings & case plaques */
+.t4-atelier .t4-numeral {
+  font-family: var(--font-t4-display), "Bodoni Moda", Didot, Georgia, serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+/* ── brass fittings ───────────────────────────────────────────────────── */
+.t4-atelier .t4-rule {
+  height: 1px;
+  background-color: var(--t4-line-dark);
+}
+.t4-atelier .t4-salon .t4-rule {
+  background-color: var(--t4-line-light);
+}
+
+/* diamond separator used in tickers and plaques */
+.t4-atelier .t4-diamond {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background-color: var(--t4-champagne);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* small engraved plaque — brass hairline box, tracked caps */
+.t4-atelier .t4-plaque {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid var(--t4-line-dark);
+  padding: 0.45rem 0.9rem;
+}
+.t4-atelier .t4-salon .t4-plaque {
+  border-color: var(--t4-line-light);
+}
+
+/* ── buttons ──────────────────────────────────────────────────────────── */
+/* filled brass — the sheen sweeps across once on hover */
+.t4-atelier .t4-btn-solid {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.05rem 2.1rem;
+  background-color: var(--t4-champagne);
+  color: #241a12;
+  font-family: var(--font-t4-body), "Hanken Grotesk", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  overflow: hidden;
+  transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t4-atelier .t4-btn-solid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+}
+.t4-atelier .t4-btn-solid:hover {
+  background-color: var(--t4-champagne-bright);
+}
+.t4-atelier .t4-btn-solid:hover::after {
+  transform: translateX(120%);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* hairline brass outline */
+.t4-atelier .t4-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.05rem 2.1rem;
+  border: 1px solid var(--t4-line-dark);
+  color: var(--t4-ivory);
+  font-family: var(--font-t4-body), "Hanken Grotesk", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  transition:
+    border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t4-atelier .t4-btn-outline:hover {
+  border-color: var(--t4-champagne);
+  color: var(--t4-champagne-bright);
+  background-color: rgba(201, 165, 106, 0.06);
+}
+.t4-atelier .t4-salon .t4-btn-outline {
+  border-color: rgba(30, 20, 16, 0.35);
+  color: #241a12;
+}
+.t4-atelier .t4-salon .t4-btn-outline:hover {
+  border-color: var(--t4-brass-ink);
+  color: var(--t4-brass-ink);
+  background-color: rgba(138, 106, 51, 0.06);
+}
+
+/* quiet text link with brass underline draw */
+.t4-atelier .t4-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+.t4-atelier .t4-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--t4-champagne);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t4-atelier .t4-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── framed photography ───────────────────────────────────────────────── */
+/* porcelain mat around imagery, like framed work on a dark wall */
+.t4-atelier .t4-frame {
+  background-color: var(--t4-porcelain);
+  padding: 10px;
+  box-shadow: var(--t4-shadow-deep);
+}
+.t4-atelier .t4-frame-inner {
+  position: relative;
+  overflow: hidden;
+}
+
+/* warm evening grade over photography on dark grounds */
+.t4-atelier .t4-grade img {
+  filter: saturate(0.82) contrast(1.04) brightness(0.94) sepia(0.14);
+}
+.t4-atelier .t4-grade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(30, 20, 16, 0) 55%, rgba(30, 20, 16, 0.38) 100%),
+    radial-gradient(120% 90% at 50% 0%, rgba(201, 165, 106, 0.1), transparent 55%);
+}
+
+/* the vitrine spotlight — a soft cone of light from above */
+.t4-atelier .t4-spot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    85% 62% at 50% -6%,
+    rgba(230, 203, 150, 0.22),
+    rgba(230, 203, 150, 0.05) 45%,
+    transparent 70%
+  );
+  opacity: 0.65;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t4-atelier .t4-vitrine-case:hover .t4-spot {
+  opacity: 1;
+}
+
+/* ── the price book: dotted leaders ───────────────────────────────────── */
+.t4-atelier .t4-leader {
+  flex: 1 1 auto;
+  min-width: 2rem;
+  margin: 0 0.75rem;
+  border-bottom: 1px dotted rgba(30, 20, 16, 0.35);
+  transform: translateY(-0.35em);
+}
+.t4-atelier .t4-leader-dark {
+  border-bottom-color: rgba(246, 240, 230, 0.3);
+}
+
+/* ── slow house ticker (marquee expects tripled content) ─────────────── */
+.t4-atelier .t4-ticker {
+  animation: marquee 46s linear infinite;
+}
+.t4-atelier .t4-ticker-wrap:hover .t4-ticker {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t4-atelier .t4-ticker {
+    animation: none;
+  }
+  .t4-atelier .t4-btn-solid::after {
+    display: none;
+  }
+}

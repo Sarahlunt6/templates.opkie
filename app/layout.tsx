@@ -9,6 +9,11 @@ import {
   Newsreader,
   Anton,
   Courier_Prime,
+  Bodoni_Moda,
+  Hanken_Grotesk,
+  Young_Serif,
+  DM_Sans,
+  Yellowtail,
 } from "next/font/google";
 import "./globals.css";
 import ChatConcierge from "@/components/interactive/ChatConcierge";
@@ -87,10 +92,51 @@ const courierPrime = Courier_Prime({
   display: "swap",
 });
 
+// T4 Atelier Display - High-contrast Didone for couture headlines
+const bodoniModa = Bodoni_Moda({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-t4-display",
+  display: "swap",
+});
+
+// T4 Atelier Body - Quiet, refined grotesque for reading on dark grounds
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-t4-body",
+  display: "swap",
+});
+
+// T5 Marigold Display - Chunky warm old-style serif, sign-painter charm
+const youngSerif = Young_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-t5-display",
+  display: "swap",
+});
+
+// T5 Marigold Body - Friendly geometric sans for plainspoken copy
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-t5-body",
+  display: "swap",
+});
+
+// T5 Marigold Script - Brush-lettered accent, one moment per page
+const yellowtail = Yellowtail({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-t5-script",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "The Opkie Collection — Three Website Concepts for Your Practice",
+  title: "The Opkie Collection — Five Website Concepts for Your Practice",
   description:
-    "Three dental homepage concepts — bold print editorial, porcelain-lab precision, and organic calm. Choose the one that feels like your practice; Opkie tailors every word, photograph, color, and detail to your practice.",
+    "Five dental homepage concepts — bold print editorial, porcelain-lab precision, organic calm, after-dark couture, and main-street retro. Choose the one that feels like your practice; Opkie tailors every word, photograph, color, and detail to your practice.",
 };
 
 export default function RootLayout({
@@ -99,7 +145,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${sora.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable} ${courierPrime.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorantGaramond.variable} ${sora.variable} ${outfit.variable} ${fraunces.variable} ${jetbrainsMono.variable} ${newsreader.variable} ${anton.variable} ${courierPrime.variable} ${bodoniModa.variable} ${hankenGrotesk.variable} ${youngSerif.variable} ${dmSans.variable} ${yellowtail.variable}`}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
         {children}
         <ChatConcierge />

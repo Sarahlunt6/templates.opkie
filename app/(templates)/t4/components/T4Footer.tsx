@@ -1,106 +1,102 @@
-import Link from "next/link";
-import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+"use client";
 
-const footerLinks = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Services" },
-  { href: "#", label: "Gallery" },
-  { href: "#", label: "About Us" },
-  { href: "#", label: "Contact" },
+import type { LocationNAP } from "@/types/dentist";
+
+interface T4FooterProps {
+  practiceName: string;
+  locations: LocationNAP[];
+  bookingUrl: string;
+}
+
+const FOOTER_LINKS = [
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "The work" },
+  { href: "#doctors", label: "Doctors" },
+  { href: "#terms", label: "Financing" },
+  { href: "#questions", label: "Questions" },
+  { href: "#visit", label: "Visit" },
 ];
 
-export default function T4Footer() {
-  const location = clientMasterData.locations[0];
-  const { trustSignals } = clientMasterData;
+export default function T4Footer({
+  practiceName,
+  locations,
+  bookingUrl,
+}: T4FooterProps) {
+  const primaryTel = `tel:${locations[0]?.phoneGBP.replace(/[^0-9+]/g, "")}`;
+  const bookHref = bookingUrl !== "none" ? bookingUrl : primaryTel;
 
   return (
-    <footer className="py-16 px-8 bg-slate-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Practice Info */}
-          <div>
-            <Image
-              src="/images/logo-dental.png"
-              alt={location.practiceNameGBP}
-              width={180}
-              height={40}
-              className="h-14 w-auto mb-4"
-            />
-            <address className="not-italic text-gray-300 leading-relaxed">
-              <p>{location.addressGBP}</p>
-              <p>
-                {location.cityServed}, {location.stateServed}
-              </p>
-              <p className="mt-2">
-                <a
-                  href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                  className="hover:text-sky-400 transition-colors"
-                >
-                  {location.phoneGBP}
-                </a>
-              </p>
-            </address>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-300 hover:text-sky-400 text-sm transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Hours */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Hours</h4>
-            <ul className="text-gray-300 space-y-2">
-              {location.hoursOfOperation.map((h, i) => (
-                <li key={i} className="flex justify-between text-sm gap-4">
-                  <span>{h.dayRange}</span>
-                  <span>{h.structuralHours}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Insurance */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Insurance</h4>
-            <p className="text-gray-300 text-sm mb-4">
-              {trustSignals.insuranceAcceptedText}
+    <footer
+      className="relative border-t border-[var(--t4-line-dark)] pb-28 pt-16 lg:pb-16"
+      style={{ backgroundColor: "var(--t4-noir)" }}
+    >
+      <div className="mx-auto max-w-[88rem] px-6 lg:px-12">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* wordmark + the standing invitation */}
+          <div className="lg:col-span-4">
+            <p className="t4-display text-[1.35rem] uppercase tracking-[0.16em] text-[var(--t4-ivory)]">
+              {practiceName}
             </p>
-            <a
-              href={clientMasterData.onlineBookingUrl}
-              className="inline-block px-5 py-2.5 rounded-full bg-teal-600 text-white font-semibold text-sm hover:shadow-lg transition-all"
+            <p className="mt-4 max-w-sm font-t4-body text-[0.92rem] font-light leading-relaxed text-[var(--t4-ivory-faint)]">
+              Cosmetic and general dentistry, practiced with a tailor's
+              patience. New patients are welcome at both offices.
+            </p>
+            <a href={bookHref}
+              {...(bookingUrl !== "none"
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="t4-link t4-label mt-7 inline-block text-[var(--t4-champagne)]"
             >
-              Book Online
+              Book a consultation
             </a>
+          </div>
+
+          {/* NAP for each office */}
+          {locations.map((loc) => (
+            <div key={loc.id} className="lg:col-span-3">
+              <p className="t4-label text-[var(--t4-champagne)]">
+                {loc.officeLabel}
+              </p>
+              <address className="mt-4 font-t4-body text-[0.9rem] font-light not-italic leading-relaxed text-[var(--t4-ivory-soft)]">
+                {loc.addressGBP}
+                <br />
+                {loc.cityServed}, {loc.stateServed}
+              </address>
+              <a
+                href={`tel:${loc.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="t4-link t4-label mt-3 inline-block text-[var(--t4-ivory-soft)]"
+              >
+                {loc.phoneGBP}
+              </a>
+            </div>
+          ))}
+
+          {/* in-page links */}
+          <div className="lg:col-span-2 lg:justify-self-end">
+            <ul className="space-y-2.5">
+              {FOOTER_LINKS.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="t4-link t4-label whitespace-nowrap text-[var(--t4-ivory-faint)] transition-colors duration-300 hover:text-[var(--t4-ivory)]"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} {location.practiceNameGBP}. All rights reserved.
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-[var(--t4-line-dark)] pt-7 sm:flex-row sm:items-center">
+          <p className="t4-label text-[var(--t4-ivory-faint)]">
+            © {new Date().getFullYear()} {practiceName} · All rights reserved
           </p>
-          <div className="flex gap-6 text-gray-500 text-sm">
-            <Link href="/t4" className="hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/t4" className="hover:text-white transition-colors">
-              Accessibility
-            </Link>
-          </div>
+          <p className="t4-label flex items-center gap-3 text-[var(--t4-ivory-faint)]">
+            <span>Se habla español</span>
+            <span className="t4-diamond" />
+            <span>ADA accessible</span>
+          </p>
         </div>
       </div>
     </footer>

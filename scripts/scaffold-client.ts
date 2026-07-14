@@ -19,7 +19,7 @@ import { execSync } from 'child_process';
 
 interface ClientIntake {
   client_slug: string;
-  template: 't1' | 't2' | 't3';
+  template: 't1' | 't2' | 't3' | 't4' | 't5';
   practice: {
     name: string;
     tagline_override: string | null;
@@ -945,9 +945,11 @@ function updateProjectMetadata(clientRoot: string, intake: ClientIntake) {
     '',
     '## Template Features',
     '',
-    intake.template === 't1' ? '- **T1 Prestige Leader**: Premium editorial design with luxury aesthetics' :
-    intake.template === 't2' ? '- **T2 Clinical Innovator**: High-tech motion design with precision focus' :
-    '- **T3 Spatial Sanctuary**: Mindful, therapeutic design with comfort emphasis',
+    intake.template === 't1' ? '- **T1 Press**: Big graphic editorial design with print-inspired aesthetics' :
+    intake.template === 't2' ? '- **T2 Precision**: High-tech motion design with precision focus' :
+    intake.template === 't4' ? '- **T4 Atelier**: After-dark couture design with espresso-and-champagne luxury' :
+    intake.template === 't5' ? '- **T5 Marigold**: Main-street retro design with warm, family-friendly charm' :
+    '- **T3 Haven**: Mindful, therapeutic design with comfort emphasis',
     '',
   ].join('\n');
 

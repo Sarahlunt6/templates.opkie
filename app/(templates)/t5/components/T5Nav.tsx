@@ -1,167 +1,162 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { MARIGOLD_EASE } from "./T5Reveal";
 
-const navLinks = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Philosophy" },
-  { href: "#", label: "Your Provider" },
-  { href: "#", label: "Contact" },
-];
-
-const serviceLinks = [
-  { href: "#", label: "Invisalign", description: "Clear aligner therapy" },
-  { href: "#", label: "Dental Implants", description: "Permanent tooth replacement" },
-  { href: "#", label: "Cosmetic Dentistry", description: "Veneers, bonding & whitening" },
-  { href: "#", label: "Holistic Dentistry", description: "Natural, biocompatible care" },
-  { href: "#", label: "Restorative Care", description: "Crowns, bridges & fillings" },
-];
-
-export default function T5Nav() {
-  const location = clientMasterData.locations[0];
-
-  return (
-    <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
-      <div className="max-w-4xl mx-auto px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/t5" className="flex items-center">
-            <Image
-              src="/images/logo-dental.png"
-              alt={clientMasterData.globalPracticeName}
-              width={180}
-              height={40}
-              className="h-12 w-auto invert"
-              priority
-            />
-          </Link>
-
-          {/* Desktop Navigation - Minimal */}
-          <nav className="hidden md:flex items-center gap-6">
-            <a
-              href="#"
-              className="text-sm text-neutral-muted hover:text-brand-primary transition-colors"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-sm text-neutral-muted hover:text-brand-primary transition-colors"
-            >
-              Philosophy
-            </a>
-
-            {/* Services Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm text-neutral-muted hover:text-brand-primary transition-colors">
-                Services
-                <svg className="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <div className="w-64 bg-brand-canvas shadow-xl border border-neutral-border py-2">
-                  {serviceLinks.map((service) => (
-                    <a
-                      key={service.label}
-                      href={service.href}
-                      className="block px-4 py-3 hover:bg-brand-primary/5 transition-colors"
-                    >
-                      <span className="block text-sm font-medium text-brand-mainText">{service.label}</span>
-                      <span className="block text-xs text-neutral-muted mt-0.5">{service.description}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {navLinks.slice(2).map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm text-neutral-muted hover:text-brand-primary transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* CTA - Minimal */}
-          <a
-            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="hidden md:inline-flex items-center gap-2 text-brand-primary text-sm font-medium hover:gap-3 transition-all"
-          >
-            <span>Book</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-
-          {/* Mobile Menu */}
-          <MobileMenu />
-        </div>
-      </div>
-    </header>
-  );
+interface T5NavProps {
+  practiceName: string;
+  phone: string;
+  bookingUrl: string;
 }
 
-function MobileMenu() {
-  const location = clientMasterData.locations[0];
+const LINKS = [
+  { href: "#menu", label: "The menu" },
+  { href: "#smiles", label: "Smiles" },
+  { href: "#dentists", label: "Your dentists" },
+  { href: "#fair-and-square", label: "Pricing" },
+  { href: "#visit", label: "Come say hi" },
+];
+
+export default function T5Nav({ practiceName, phone, bookingUrl }: T5NavProps) {
+  const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const telHref = `tel:${phone.replace(/[^0-9+]/g, "")}`;
+  const bookHref = bookingUrl !== "none" ? bookingUrl : telHref;
 
   return (
-    <div className="md:hidden">
-      <details className="relative">
-        <summary className="list-none cursor-pointer p-2">
-          <svg className="w-5 h-5 text-brand-mainText" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </summary>
-        <div className="absolute right-0 top-full mt-2 w-64 bg-brand-canvas shadow-xl border border-neutral-border py-4 z-50">
-          <a href="#" className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors">
-            Home
-          </a>
-          <a href="#" className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors">
-            Philosophy
-          </a>
-          <details className="group">
-            <summary className="list-none cursor-pointer px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors flex items-center justify-between">
-              Services
-              <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </summary>
-            <div className="bg-brand-primary/5 py-1">
-              {serviceLinks.map((service) => (
+    <>
+      <motion.header
+        initial={reduced ? false : { opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: MARIGOLD_EASE }}
+        className="sticky top-0 z-50"
+      >
+        <div className="bg-[var(--t5-cream)]/95 backdrop-blur-sm">
+          <nav
+            aria-label="Primary"
+            className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 lg:px-10"
+          >
+            {/* the shop sign */}
+            <a href="#top" className="flex items-baseline gap-2.5">
+              <span className="t5-display text-[1.15rem] leading-none text-[var(--t5-walnut)] sm:text-[1.3rem]">
+                {practiceName}
+              </span>
+            </a>
+
+            {/* desktop links */}
+            <div className="hidden items-center gap-7 lg:flex">
+              {LINKS.map((l) => (
                 <a
-                  key={service.label}
-                  href={service.href}
-                  className="block px-8 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+                  key={l.href}
+                  href={l.href}
+                  className="text-[0.92rem] font-medium text-[var(--t5-walnut-soft)] transition-colors duration-200 hover:text-[var(--t5-teal)]"
                 >
-                  {service.label}
+                  {l.label}
                 </a>
               ))}
             </div>
-          </details>
-          {navLinks.slice(2).map((link) => (
+
+            <div className="flex items-center gap-4">
+              <a
+                href={telHref}
+                className="t5-kicker hidden text-[var(--t5-teal)] transition-colors duration-200 hover:text-[var(--t5-teal-bright)] md:inline"
+              >
+                {phone}
+              </a>
+              <a
+                href={bookHref}
+                {...(bookingUrl !== "none"
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="t5-btn max-md:!hidden !px-5 !py-2.5 !text-[0.85rem]"
+              >
+                Book a visit
+              </a>
+
+              {/* mobile menu button */}
+              <button
+                type="button"
+                aria-expanded={open}
+                aria-controls="t5-menu"
+                onClick={() => setOpen(!open)}
+                className="flex h-11 w-11 flex-col items-center justify-center gap-[6px] rounded-full border-2 border-[var(--t5-walnut)] bg-[var(--t5-paper)] lg:hidden"
+              >
+                <span className="sr-only">
+                  {open ? "Close menu" : "Open menu"}
+                </span>
+                <span
+                  className="block h-[2px] w-5 rounded-full bg-[var(--t5-walnut)] transition-transform duration-300"
+                  style={{
+                    transform: open ? "translateY(4px) rotate(45deg)" : "none",
+                  }}
+                />
+                <span
+                  className="block h-[2px] w-5 rounded-full bg-[var(--t5-walnut)] transition-transform duration-300"
+                  style={{
+                    transform: open ? "translateY(-4px) rotate(-45deg)" : "none",
+                  }}
+                />
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        {/* the awning — the storefront's signature, hanging from the nav */}
+        <div className="t5-awning" aria-hidden />
+      </motion.header>
+
+      {/* mobile menu — the shop interior */}
+      <div
+        id="t5-menu"
+        aria-hidden={!open}
+        className="fixed inset-0 z-40 flex flex-col justify-between bg-[var(--t5-cream)] px-6 pb-10 pt-32 transition-opacity duration-300 lg:hidden"
+        style={{ opacity: open ? 1 : 0, pointerEvents: open ? "auto" : "none" }}
+      >
+        <div className="flex flex-col">
+          {LINKS.map((l, i) => (
             <a
-              key={link.label}
-              href={link.href}
-              className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-primary transition-colors"
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="t5-display border-b-2 border-dotted border-[var(--t5-line)] py-4 text-[1.75rem] text-[var(--t5-walnut)]"
+              style={{
+                transitionDelay: open ? `${60 + i * 40}ms` : "0ms",
+                opacity: open ? 1 : 0,
+                transform: open ? "none" : "translateY(8px)",
+                transition:
+                  "opacity 0.45s cubic-bezier(0.34,1.3,0.5,1), transform 0.45s cubic-bezier(0.34,1.3,0.5,1)",
+              }}
             >
-              {link.label}
+              {l.label}
             </a>
           ))}
-          <div className="mx-6 my-3 h-px bg-neutral-border" />
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <a href={telHref} className="t5-kicker text-[var(--t5-teal)]">
+            Call us — a person answers · {phone}
+          </a>
           <a
-            href={clientMasterData.onlineBookingUrl !== "none" ? clientMasterData.onlineBookingUrl : `tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-            className="block px-6 py-2 text-sm text-brand-primary font-medium"
+            href={bookHref}
+            {...(bookingUrl !== "none"
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            onClick={() => setOpen(false)}
+            className="t5-btn w-full"
           >
-            Schedule Consultation
+            Book a visit
           </a>
         </div>
-      </details>
-    </div>
+      </div>
+    </>
   );
 }

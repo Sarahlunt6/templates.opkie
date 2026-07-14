@@ -1,67 +1,87 @@
-import Link from "next/link";
-import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+"use client";
 
-const footerLinks = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Philosophy" },
-  { href: "#", label: "Services" },
-  { href: "#", label: "Your Provider" },
-  { href: "#", label: "Contact" },
+import type { LocationNAP } from "@/types/dentist";
+
+interface T5FooterProps {
+  practiceName: string;
+  locations: LocationNAP[];
+  bookingUrl: string;
+}
+
+const FOOTER_LINKS = [
+  { href: "#menu", label: "The menu" },
+  { href: "#smiles", label: "Show & tell" },
+  { href: "#dentists", label: "Your dentists" },
+  { href: "#fair-and-square", label: "Money talk" },
+  { href: "#questions", label: "Good questions" },
+  { href: "#visit", label: "Come say hi" },
 ];
 
-export default function T5Footer() {
-  const location = clientMasterData.locations[0];
-  const { trustSignals } = clientMasterData;
+export default function T5Footer({
+  practiceName,
+  locations,
+  bookingUrl,
+}: T5FooterProps) {
+  const primaryTel = `tel:${locations[0]?.phoneGBP.replace(/[^0-9+]/g, "")}`;
+  const bookHref = bookingUrl !== "none" ? bookingUrl : primaryTel;
 
   return (
-    <footer className="py-16 px-8 bg-brand-canvas border-t border-neutral-border">
-      <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Contact */}
-          <div>
-            <Image
-              src="/images/logo-dental.png"
-              alt={location.practiceNameGBP}
-              width={180}
-              height={40}
-              className="h-14 w-auto mb-6 invert"
-            />
-            <address className="not-italic text-neutral-muted leading-relaxed space-y-1 text-sm">
-              <p>{location.addressGBP}</p>
-              <p>{location.cityServed}, {location.stateServed}</p>
-            </address>
-            <p className="mt-4">
-              <a
-                href={`tel:${location.phoneGBP.replace(/[^0-9+]/g, "")}`}
-                className="text-brand-primary hover:underline text-sm"
-              >
-                {location.phoneGBP}
-              </a>
+    <footer
+      className="relative pb-32 pt-14 lg:pb-14"
+      style={{ backgroundColor: "var(--t5-teal-deep)" }}
+    >
+      <div className="mx-auto max-w-7xl px-5 lg:px-10">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+          {/* the shop sign, after hours */}
+          <div className="lg:col-span-5">
+            <p className="t5-display text-[1.5rem] text-[var(--t5-cream)]">
+              {practiceName}
             </p>
+            <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-[rgba(255,246,232,0.72)]">
+              The neighborhood dental office — honest prices, gentle hands,
+              and appointments that start on time.
+            </p>
+            <a
+              href={bookHref}
+              {...(bookingUrl !== "none"
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="t5-btn mt-7 !border-[var(--t5-walnut)] !px-6 !py-3 !text-[0.9rem]"
+            >
+              Book a visit
+            </a>
           </div>
 
-          {/* Hours */}
-          <div>
-            <h4 className="text-lg font-medium text-brand-mainText mb-6">Hours</h4>
-            <ul className="text-neutral-muted space-y-2">
-              {location.hoursOfOperation.map((h, i) => (
-                <li key={i} className="flex justify-between text-sm">
-                  <span>{h.dayRange}</span>
-                  <span>{h.structuralHours}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* NAP per shop */}
+          {locations.map((loc) => (
+            <div key={loc.id} className="lg:col-span-3">
+              <p className="t5-kicker text-[var(--t5-marigold)]">
+                {loc.officeLabel}
+              </p>
+              <address className="mt-3 text-[0.92rem] not-italic leading-relaxed text-[rgba(255,246,232,0.85)]">
+                {loc.addressGBP}
+                <br />
+                {loc.cityServed}, {loc.stateServed}
+              </address>
+              <a
+                href={`tel:${loc.phoneGBP.replace(/[^0-9+]/g, "")}`}
+                className="mt-2 inline-block text-[0.92rem] font-bold text-[var(--t5-cream)] underline decoration-[var(--t5-marigold)] decoration-2 underline-offset-4"
+              >
+                {loc.phoneGBP}
+              </a>
+            </div>
+          ))}
 
-          {/* Links */}
-          <div>
-            <h4 className="text-lg font-medium text-brand-mainText mb-6">Navigate</h4>
+          {/* around the shop */}
+          <div className="lg:col-span-1">
             <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-neutral-muted hover:text-brand-primary text-sm transition-colors">
-                    {link.label}
+              {FOOTER_LINKS.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="whitespace-nowrap text-[0.88rem] font-medium text-[rgba(255,246,232,0.72)] transition-colors duration-200 hover:text-[var(--t5-cream)]"
+                  >
+                    {l.label}
                   </a>
                 </li>
               ))}
@@ -69,27 +89,14 @@ export default function T5Footer() {
           </div>
         </div>
 
-        {/* Insurance Note */}
-        <div className="mt-12 pt-8 border-t border-neutral-border">
-          <p className="text-sm text-neutral-muted">
-            {trustSignals.insuranceAcceptedText}
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t-2 border-dotted border-[rgba(255,246,232,0.25)] pt-6 sm:flex-row sm:items-center">
+          <p className="t5-kicker text-[rgba(255,246,232,0.6)]">
+            © {new Date().getFullYear()} {practiceName} · all rights reserved
           </p>
-          {trustSignals.membershipPlanSummary && (
-            <p className="text-sm text-neutral-muted mt-2">
-              {trustSignals.membershipPlanSummary}
-            </p>
-          )}
-        </div>
-
-        {/* Bottom */}
-        <div className="mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-neutral-muted/60 text-xs">
-            © {new Date().getFullYear()} {location.practiceNameGBP}
+          <p className="t5-kicker flex items-center gap-2 text-[rgba(255,246,232,0.6)]">
+            made with <span aria-hidden className="text-[var(--t5-marigold)]">★</span> in{" "}
+            {locations[0]?.cityServed}
           </p>
-          <div className="flex gap-6 text-neutral-muted/60 text-xs">
-            <a href="#" className="hover:text-brand-mainText transition-colors">Privacy</a>
-            <a href="#" className="hover:text-brand-mainText transition-colors">Accessibility</a>
-          </div>
         </div>
       </div>
     </footer>

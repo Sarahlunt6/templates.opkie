@@ -1,163 +1,182 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { clientMasterData } from "@/data/master";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ATELIER_EASE } from "./T4Reveal";
 
-const navLinks = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Gallery" },
-  { href: "#", label: "About" },
-  { href: "#", label: "Contact" },
-];
-
-const serviceLinks = [
-  { href: "#", label: "Invisalign", description: "Clear aligner therapy" },
-  { href: "#", label: "Dental Implants", description: "Permanent tooth replacement" },
-  { href: "#", label: "Porcelain Veneers", description: "Smile makeover specialists" },
-  { href: "#", label: "Full Mouth Restoration", description: "Complete smile reconstruction" },
-  { href: "#", label: "Teeth Whitening", description: "Professional brightening" },
-];
-
-export default function T4Nav() {
-  const location = clientMasterData.locations[0];
-
-  return (
-    <header className="sticky top-0 z-50 bg-brand-canvas border-b border-neutral-border">
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/t4" className="flex items-center">
-            <Image
-              src="/images/logo-dental.png"
-              alt={location.practiceNameGBP}
-              width={180}
-              height={40}
-              className="h-12 w-auto invert"
-              priority
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
-            <a
-              href="#"
-              className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/10 rounded-lg transition-colors"
-            >
-              Home
-            </a>
-
-            {/* Services Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/10 rounded-lg transition-colors">
-                Services
-                <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <div className="w-72 bg-brand-canvas rounded-xl shadow-xl border border-neutral-border py-2">
-                  {serviceLinks.map((service) => (
-                    <a
-                      key={service.label}
-                      href={service.href}
-                      className="block px-4 py-3 hover:bg-brand-primary/5 transition-colors"
-                    >
-                      <span className="block text-sm font-medium text-brand-mainText">{service.label}</span>
-                      <span className="block text-xs text-neutral-muted mt-0.5">{service.description}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {navLinks.slice(1).map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="px-4 py-2 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/10 rounded-lg transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* CTA Button */}
-          <a
-            href={clientMasterData.onlineBookingUrl}
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-primary text-brand-canvas font-semibold text-sm hover:shadow-lg transition-all"
-          >
-            Book Consultation
-          </a>
-
-          {/* Mobile Menu Button */}
-          <MobileMenu />
-        </div>
-      </div>
-    </header>
-  );
+interface T4NavProps {
+  practiceName: string;
+  phone: string;
+  city: string;
+  bookingUrl: string;
 }
 
-function MobileMenu() {
+const LINKS = [
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "The work" },
+  { href: "#doctors", label: "Doctors" },
+  { href: "#terms", label: "Financing" },
+  { href: "#visit", label: "Visit" },
+];
+
+export default function T4Nav({
+  practiceName,
+  phone,
+  city,
+  bookingUrl,
+}: T4NavProps) {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // lock body scroll while the menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const telHref = `tel:${phone.replace(/[^0-9+]/g, "")}`;
+  const bookHref = bookingUrl !== "none" ? bookingUrl : telHref;
+
   return (
-    <div className="md:hidden">
-      <details className="relative">
-        <summary className="list-none cursor-pointer p-2 rounded-lg hover:bg-brand-primary/10">
-          <svg
-            className="w-6 h-6 text-brand-mainText"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </summary>
-        <div className="absolute right-0 top-full mt-2 w-64 bg-brand-canvas rounded-xl shadow-xl border border-neutral-border py-2 z-50">
-          <a href="#" className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/5 transition-colors">
-            Home
+    <>
+      <motion.header
+        initial={reduced ? false : { opacity: 0, y: -14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: ATELIER_EASE }}
+        className="fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-500"
+        style={{
+          backgroundColor: scrolled ? "rgba(23, 16, 10, 0.92)" : "transparent",
+          backdropFilter: scrolled ? "blur(10px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(10px)" : "none",
+          boxShadow: scrolled ? "0 1px 0 rgba(201,165,106,0.18)" : "none",
+        }}
+      >
+        <nav
+          aria-label="Primary"
+          className="mx-auto flex max-w-[88rem] items-center justify-between gap-6 px-6 py-5 lg:px-12"
+        >
+          {/* wordmark */}
+          <a href="#top" className="flex items-baseline gap-3">
+            <span className="t4-display whitespace-nowrap text-[1.05rem] uppercase tracking-[0.18em] text-[var(--t4-ivory)]">
+              {practiceName}
+            </span>
+            <span className="t4-label hidden whitespace-nowrap text-[var(--t4-champagne)] xl:inline">
+              {city}
+            </span>
           </a>
-          <details className="group">
-            <summary className="list-none cursor-pointer px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/5 transition-colors flex items-center justify-between">
-              Services
-              <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </summary>
-            <div className="bg-brand-primary/5 py-1">
-              {serviceLinks.map((service) => (
-                <a
-                  key={service.label}
-                  href={service.href}
-                  className="block px-6 py-2 text-sm text-neutral-muted hover:text-brand-mainText transition-colors"
-                >
-                  {service.label}
-                </a>
-              ))}
-            </div>
-          </details>
-          {navLinks.slice(1).map((link) => (
+
+          {/* desktop links */}
+          <div className="hidden items-center gap-8 lg:flex">
+            {LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="t4-link t4-label whitespace-nowrap text-[var(--t4-ivory-soft)] transition-colors duration-300 hover:text-[var(--t4-ivory)]"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-5">
             <a
-              key={link.label}
-              href={link.href}
-              className="block px-4 py-2.5 text-sm font-medium text-neutral-muted hover:text-brand-mainText hover:bg-brand-primary/5 transition-colors"
+              href={telHref}
+              className="t4-label hidden whitespace-nowrap text-[var(--t4-champagne)] transition-colors duration-300 hover:text-[var(--t4-champagne-bright)] md:inline"
             >
-              {link.label}
+              {phone}
+            </a>
+            <a
+              href={bookHref}
+              {...(bookingUrl !== "none"
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="t4-btn-outline max-md:!hidden whitespace-nowrap !px-6 !py-3"
+            >
+              Book a consultation
+            </a>
+
+            {/* mobile menu button */}
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls="t4-menu"
+              onClick={() => setOpen(!open)}
+              className="flex h-11 w-11 flex-col items-center justify-center gap-[7px] lg:hidden"
+            >
+              <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+              <span
+                className="block h-px w-6 bg-[var(--t4-ivory)] transition-transform duration-500"
+                style={{
+                  transform: open ? "translateY(4px) rotate(45deg)" : "none",
+                }}
+              />
+              <span
+                className="block h-px w-6 bg-[var(--t4-champagne)] transition-transform duration-500"
+                style={{
+                  transform: open ? "translateY(-4px) rotate(-45deg)" : "none",
+                }}
+              />
+            </button>
+          </div>
+        </nav>
+      </motion.header>
+
+      {/* mobile menu — a dark room of its own */}
+      <div
+        id="t4-menu"
+        aria-hidden={!open}
+        className="fixed inset-0 z-40 flex flex-col justify-between bg-[var(--t4-noir)] px-6 pb-10 pt-28 transition-opacity duration-500 lg:hidden"
+        style={{
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? "auto" : "none",
+        }}
+      >
+        <div className="flex flex-col gap-1">
+          {LINKS.map((l, i) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="t4-display border-b border-[var(--t4-line-dark)] py-4 text-[2rem] text-[var(--t4-ivory)] transition-colors duration-300 hover:text-[var(--t4-champagne-bright)]"
+              style={{
+                transitionDelay: open ? `${80 + i * 45}ms` : "0ms",
+                opacity: open ? 1 : 0,
+                transform: open ? "none" : "translateY(10px)",
+                transition:
+                  "opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1), color 0.3s",
+              }}
+            >
+              {l.label}
             </a>
           ))}
-          <hr className="my-2 border-neutral-border" />
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <a href={telHref} className="t4-label text-[var(--t4-champagne)]">
+            {phone}
+          </a>
           <a
-            href={clientMasterData.onlineBookingUrl}
-            className="block mx-2 px-4 py-2.5 text-sm font-semibold text-center rounded-lg bg-brand-primary text-brand-canvas"
+            href={bookHref}
+            {...(bookingUrl !== "none"
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            onClick={() => setOpen(false)}
+            className="t4-btn-solid w-full"
           >
-            Book Consultation
+            Book a consultation
           </a>
         </div>
-      </details>
-    </div>
+      </div>
+    </>
   );
 }

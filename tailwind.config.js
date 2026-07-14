@@ -49,6 +49,16 @@ module.exports = {
         "t1-mono": ["var(--font-t1-mono)", "Courier Prime", "Courier New", "monospace"],
         // T3 Serif Accent: Soft italic serif for quotes (Newsreader)
         "t3-serif": ["var(--font-t3-serif)", "Newsreader", "Georgia", "serif"],
+        // T4 Atelier Display: High-contrast Didone for couture headlines (Bodoni Moda)
+        "t4-display": ["var(--font-t4-display)", "Bodoni Moda", "Didot", "Georgia", "serif"],
+        // T4 Atelier Body: Refined grotesque for reading on dark grounds (Hanken Grotesk)
+        "t4-body": ["var(--font-t4-body)", "Hanken Grotesk", "ui-sans-serif", "sans-serif"],
+        // T5 Marigold Display: Chunky warm old-style serif (Young Serif)
+        "t5-display": ["var(--font-t5-display)", "Young Serif", "Georgia", "serif"],
+        // T5 Marigold Body: Friendly geometric sans (DM Sans)
+        "t5-body": ["var(--font-t5-body)", "DM Sans", "ui-sans-serif", "sans-serif"],
+        // T5 Marigold Script: Brush-lettered accent (Yellowtail)
+        "t5-script": ["var(--font-t5-script)", "Yellowtail", "cursive"],
       },
       fontSize: {
         // Fluid typography using clamp()
