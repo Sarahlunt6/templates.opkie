@@ -58,6 +58,7 @@ export default function Template4Page() {
         practiceName={globalPracticeName}
         phone={location.phoneGBP}
         city={location.cityServed}
+        state={location.stateServed}
         bookingUrl={onlineBookingUrl}
       />
 
