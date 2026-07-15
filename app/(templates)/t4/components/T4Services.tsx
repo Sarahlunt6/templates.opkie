@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import T4Reveal, { T4RuleDraw } from "./T4Reveal";
 
 interface T4ServicesProps {
@@ -94,7 +95,7 @@ export default function T4Services({ phone, hasEmergency }: T4ServicesProps) {
             </T4Reveal>
           </div>
 
-          <div className="lg:col-span-8 lg:col-start-5">
+          <div className="lg:col-span-6 lg:col-start-4">
             <T4Reveal>
               <h2 className="t4-display t4-display-lg text-[#241a12]">
                 The price book
@@ -170,6 +171,55 @@ export default function T4Services({ phone, hasEmergency }: T4ServicesProps) {
                 </div>
               </T4Reveal>
             )}
+          </div>
+
+          {/* the book's plates — work from Parts II and III, hung beside */}
+          <div className="lg:col-span-3 lg:col-start-10">
+            <div className="grid grid-cols-2 gap-5 lg:sticky lg:top-32 lg:block lg:space-y-12">
+              <T4Reveal delay={0.15}>
+                <figure>
+                  <div className="t4-frame !bg-[var(--t4-porcelain-deep)]" style={{ boxShadow: "var(--t4-shadow-salon)" }}>
+                    <div className="t4-frame-inner relative aspect-[3/4]">
+                      <Image
+                        src="/images/services/invisalign.jpg"
+                        alt="A patient placing a clear Invisalign aligner"
+                        fill
+                        sizes="(max-width: 1024px) 45vw, 22vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                  <figcaption className="mt-4 flex items-center gap-3">
+                    <span className="t4-diamond !bg-[var(--t4-brass-ink)]" />
+                    <span className="t4-label text-[var(--t4-espresso-faint)]">
+                      Part II · Worn, not seen
+                    </span>
+                  </figcaption>
+                </figure>
+              </T4Reveal>
+
+              <T4Reveal delay={0.25}>
+                <figure>
+                  <div className="t4-frame !bg-[var(--t4-porcelain-deep)]" style={{ boxShadow: "var(--t4-shadow-salon)" }}>
+                    <div className="t4-frame-inner relative aspect-[3/4]">
+                      <Image
+                        src="/images/services/implant.jpg"
+                        alt="A model of a dental implant seated in the jaw"
+                        fill
+                        sizes="(max-width: 1024px) 45vw, 22vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                  <figcaption className="mt-4 flex items-center gap-3">
+                    <span className="t4-diamond !bg-[var(--t4-brass-ink)]" />
+                    <span className="t4-label text-[var(--t4-espresso-faint)]">
+                      Part III · Built to stay
+                    </span>
+                  </figcaption>
+                </figure>
+              </T4Reveal>
+            </div>
           </div>
         </div>
       </div>

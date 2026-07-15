@@ -75,6 +75,7 @@ export default function Template4Page() {
       <T4Philosophy
         practiceName={globalPracticeName}
         locationsCount={clientMasterData.locations.length}
+        city={location.cityServed}
       />
 
       {/* 4 · services — the price book */}

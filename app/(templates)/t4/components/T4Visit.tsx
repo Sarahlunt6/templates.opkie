@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { LocationNAP } from "@/types/dentist";
 import T4Reveal, { T4RuleDraw } from "./T4Reveal";
 
@@ -90,22 +91,46 @@ export default function T4Visit({ locations, practiceName }: T4VisitProps) {
               ))}
             </div>
 
-            {/* the map, matted like everything else in the house */}
-            <T4Reveal delay={0.15}>
-              <div className="t4-frame mt-8 !bg-[var(--t4-porcelain-deep)]" style={{ boxShadow: "var(--t4-shadow-salon)" }}>
-                <div className="t4-frame-inner relative aspect-[16/7]">
-                  <iframe
-                    src={primary.googleMapsEmbedUrl}
-                    title={`Map to ${practiceName}, ${primary.addressGBP}, ${primary.cityServed}`}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                    className="absolute inset-0 h-full w-full border-0"
-                    style={{ filter: "sepia(0.22) saturate(0.82) contrast(1.02)" }}
-                  />
+            {/* the house at dusk, and the way to its door */}
+            <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12">
+              <T4Reveal delay={0.1} className="lg:col-span-5">
+                <figure className="flex h-full flex-col">
+                  <div className="t4-frame flex-1 !bg-[var(--t4-porcelain-deep)]" style={{ boxShadow: "var(--t4-shadow-salon)" }}>
+                    <div className="t4-frame-inner t4-grade relative h-full min-h-[280px]">
+                      <Image
+                        src="/images/office-exterior.jpg"
+                        alt={`The ${practiceName} building at dusk, sign lit`}
+                        fill
+                        sizes="(max-width: 1024px) 90vw, 34vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                  <figcaption className="mt-4 flex items-center gap-3">
+                    <span className="t4-diamond !bg-[var(--t4-brass-ink)]" />
+                    <span className="t4-label text-[var(--t4-espresso-faint)]">
+                      The house, after hours
+                    </span>
+                  </figcaption>
+                </figure>
+              </T4Reveal>
+
+              <T4Reveal delay={0.18} className="lg:col-span-7">
+                <div className="t4-frame h-full !bg-[var(--t4-porcelain-deep)]" style={{ boxShadow: "var(--t4-shadow-salon)" }}>
+                  <div className="t4-frame-inner relative h-full min-h-[320px]">
+                    <iframe
+                      src={primary.googleMapsEmbedUrl}
+                      title={`Map to ${practiceName}, ${primary.addressGBP}, ${primary.cityServed}`}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full border-0"
+                      style={{ filter: "sepia(0.22) saturate(0.82) contrast(1.02)" }}
+                    />
+                  </div>
                 </div>
-              </div>
-            </T4Reveal>
+              </T4Reveal>
+            </div>
           </div>
         </div>
       </div>
