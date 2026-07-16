@@ -8,6 +8,7 @@ import {
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 
 import "./t4-theme.css";
+import { t4FontVariables } from "./fonts";
 
 /**
  * T4 ATELIER — after-dark cosmetic couture.
@@ -46,7 +47,10 @@ export const metadata: Metadata = {
 
 export default function Template4Page() {
   return (
-    <div id="top" className="t4-atelier font-t4-body relative min-h-screen overflow-x-clip">
+    <div
+      id="top"
+      className={`t4-atelier font-t4-body relative min-h-screen overflow-x-clip ${t4FontVariables}`}
+    >
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}

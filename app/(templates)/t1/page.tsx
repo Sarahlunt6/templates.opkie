@@ -3,6 +3,7 @@ import { clientMasterData, sampleReviews, sampleBeforeAfterCases, sampleFaqs } f
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 
 import "./t1-theme.css";
+import { t1FontVariables } from "./fonts";
 
 /**
  * T1 PRESS — big graphic editorial print.
@@ -95,7 +96,10 @@ export default function Template1Page() {
   const firstHours = location.hoursOfOperation[0];
 
   return (
-    <div id="top" className="t1-root font-sans antialiased overflow-x-clip">
+    <div
+      id="top"
+      className={`t1-root font-sans antialiased overflow-x-clip ${t1FontVariables}`}
+    >
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}

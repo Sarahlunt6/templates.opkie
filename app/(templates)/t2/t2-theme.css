@@ -22,7 +22,7 @@
   --t2p-blue-deep: #075985;
   --t2p-text: #17202A;
   --t2p-text-70: rgba(23, 32, 42, 0.72);
-  --t2p-text-50: rgba(23, 32, 42, 0.5);
+  --t2p-text-50: rgba(23, 32, 42, 0.66); /* AA-safe on bg + white for small mono */
   --t2p-line: rgba(23, 32, 42, 0.10);
   --t2p-line-strong: rgba(23, 32, 42, 0.18);
   --t2p-duo: linear-gradient(100deg, #0369A1 0%, #22D3EE 100%);

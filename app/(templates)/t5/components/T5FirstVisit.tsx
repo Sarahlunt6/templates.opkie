@@ -63,8 +63,11 @@ export default function T5FirstVisit() {
 
           <ol className="space-y-10">
             {TIMELINE.map((step, i) => (
-              <T5Reveal key={step.time} delay={i * 0.07}>
-                <li className="relative flex items-start gap-6 sm:gap-8">
+              <li key={step.time}>
+                <T5Reveal
+                  delay={i * 0.07}
+                  className="relative flex items-start gap-6 sm:gap-8"
+                >
                   {/* the clock stop */}
                   <span className="relative z-10 flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-full border-2 border-[var(--t5-walnut)] bg-[var(--t5-marigold)] shadow-[3px_3px_0_var(--t5-walnut)] sm:h-[84px] sm:w-[84px]">
                     <span className="font-t5-display text-[0.95rem] text-[var(--t5-walnut)] sm:text-[1.1rem]">
@@ -80,8 +83,8 @@ export default function T5FirstVisit() {
                       {step.detail}
                     </p>
                   </div>
-                </li>
-              </T5Reveal>
+                </T5Reveal>
+              </li>
             ))}
           </ol>
         </div>

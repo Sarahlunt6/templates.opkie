@@ -126,7 +126,9 @@ export default function T5Nav({
       <div
         id="t5-menu"
         aria-hidden={!open}
-        className="fixed inset-0 z-40 flex flex-col justify-between bg-[var(--t5-cream)] px-6 pb-10 pt-32 transition-opacity duration-300 lg:hidden"
+        className={`fixed inset-0 z-40 flex flex-col justify-between bg-[var(--t5-cream)] px-6 pb-10 pt-32 transition-[opacity,visibility] duration-300 lg:hidden ${
+          open ? "visible" : "invisible"
+        }`}
         style={{ opacity: open ? 1 : 0, pointerEvents: open ? "auto" : "none" }}
       >
         <div className="flex flex-col">

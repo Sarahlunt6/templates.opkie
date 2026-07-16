@@ -35,7 +35,7 @@ Note: `globals.css` also carries legacy `--t2-*` dark-cinematic tokens — new w
 
 ## 3 · Typography
 
-Fonts load once in `app/layout.tsx` via `next/font` CSS variables — swap families there, keep the variable names.
+Fonts load from this template's `fonts.ts` module (`app/fonts.ts` in a client repo) via `next/font` CSS variables, applied on the template wrapper — swap families there, keep the variable names. Only Inter (`--font-sans`) still loads globally in `app/layout.tsx`.
 
 | Role | Family | CSS variable | Weights | Usage |
 |---|---|---|---|---|
@@ -114,7 +114,7 @@ Follow `app/(templates)/t2/IMAGERY.md` (copied into client repos alongside the t
 1. **`t2-theme.css` palette block** (manual): replace the `--t2p-*` hexes (§2) — canvas, surfaces, graphite, scan, blue pair, text/lines — and the `--t2p-duo` gradient stops; update `::selection` if present.
    - Contrast contract: `--t2p-blue` must stay AA-safe on `--t2p-bg` and `--t2p-surface`; text-70 must stay readable on all surfaces.
 2. **`app/globals.css` + `tailwind.config.js`** — the scaffold's `updateBrandColors` swaps `--primary-brand` + the tailwind brand teal from intake `brand.accent_color`. Verify they match the new blue. (globals.css `--secondary-accent: #38bdf8` pairs with the scan cyan.)
-3. **`app/layout.tsx` fonts** — swap `Sora` / `JetBrains_Mono` for the client's faces, KEEPING `--font-innovator` / `--font-t2-mono` variable names. Keep a true monospace for the telemetry voice.
+3. **`fonts.ts` fonts** (`app/fonts.ts` in a client repo) — swap `Sora` / `JetBrains_Mono` for the client's faces, KEEPING `--font-innovator` / `--font-t2-mono` variable names. Keep a true monospace for the telemetry voice.
 4. **`data/master.ts` `theme` block** — update hexes to match.
 5. **Logo & favicon** — `public/images/`, path from intake `brand.logo_path`.
 6. Rebuild; verify the instrument feel: hairlines crisp, indexes aligned, AA contrast.

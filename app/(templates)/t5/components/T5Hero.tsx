@@ -25,8 +25,10 @@ export default function T5Hero({
   const telHref = `tel:${phone.replace(/[^0-9+]/g, "")}`;
   const bookHref = bookingUrl !== "none" ? bookingUrl : telHref;
 
+  // Hero content renders settled — an animated entrance would hold the
+  // page's LCP hostage until hydration (mobile perf).
   const rise = (delay: number) => ({
-    initial: reduced ? undefined : { opacity: 0, y: 26 },
+    initial: false as const,
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.75, delay, ease: MARIGOLD_EASE },
   });
@@ -118,14 +120,14 @@ export default function T5Hero({
           {/* the sun behind the window */}
           <motion.div
             aria-hidden
-            initial={reduced ? undefined : { opacity: 0, scale: 0.8 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2, ease: MARIGOLD_EASE }}
             className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-[var(--t5-marigold)] opacity-90 lg:-right-16 lg:-top-14 lg:h-64 lg:w-64"
           />
 
           <motion.div
-            initial={reduced ? undefined : { opacity: 0, y: 34 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.3, ease: MARIGOLD_EASE }}
             className="relative mx-auto max-w-sm lg:max-w-none"
@@ -167,7 +169,7 @@ export default function T5Hero({
 
       {/* ── the neighborhood parade ── */}
       <motion.div
-        initial={reduced ? undefined : { opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.9 }}
         className="relative border-y-2 border-[var(--t5-walnut)] bg-[var(--t5-butter)]"

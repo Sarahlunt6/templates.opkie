@@ -33,7 +33,7 @@ Shared-variable overrides (also set in `t5-theme.css` under `.t5-marigold`): `--
 
 ## 3 · Typography
 
-Fonts load once in `app/layout.tsx` via `next/font` CSS variables — swap families there, keep the variable names.
+Fonts load from this template's `fonts.ts` module (`app/fonts.ts` in a client repo) via `next/font` CSS variables, applied on the template wrapper — swap families there, keep the variable names. Only Inter (`--font-sans`) still loads globally in `app/layout.tsx`.
 
 | Role | Family | CSS variable | Weights | Usage |
 |---|---|---|---|---|
@@ -119,7 +119,7 @@ When adapting this template to a client's brand, edit these in order:
 1. **`t5-theme.css` palette block** (manual, the big one): replace the hex values of `--t5-cream, --t5-butter, --t5-marigold, --t5-marigold-deep, --t5-teal, --t5-teal-bright, --t5-teal-deep, --t5-walnut, --t5-blush, --t5-paper` and re-derive the rgba inks (`--t5-walnut-soft/faint`, `--t5-line`, both shadows) from the new text color. Also update the scoped `--primary-brand / --secondary-accent / --bg-canvas / --text-main` overrides at the bottom of the block, and `::selection`.
    - Keep the contrast contract: the "-deep" variants must stay AA-safe (≥4.5:1) for small text on the canvas color.
 2. **`app/globals.css` + `tailwind.config.js`** — the scaffold's `updateBrandColors` already swaps `--primary-brand` and the tailwind brand teal from `client-intake.json`'s `brand.accent_color`. Verify they match the new theme.
-3. **`app/layout.tsx` fonts** — swap `Young_Serif` / `DM_Sans` / `Yellowtail` imports for the client's faces but KEEP the variable names (`--font-t5-display`, `--font-t5-body`, `--font-t5-script`) so every component keeps working.
+3. **`fonts.ts` fonts** (`app/fonts.ts` in a client repo) — swap `Young_Serif` / `DM_Sans` / `Yellowtail` imports for the client's faces but KEEP the variable names (`--font-t5-display`, `--font-t5-body`, `--font-t5-script`) so every component keeps working.
 4. **`data/master.ts` `theme` block** — update `primaryBrandHex` etc. to match (used by shared tokens and schema).
 5. **Logo & favicon** — drop files in `public/images/`, wire the path from `client-intake.json`'s `brand.logo_path`.
 6. Rebuild and eyeball every section against §10's contrast rules.

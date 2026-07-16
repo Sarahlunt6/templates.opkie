@@ -1,6 +1,7 @@
 "use client";
 
 import "./t2-theme.css";
+import { t2FontVariables } from "./fonts";
 
 import T2Nav from "./components/T2Nav";
 import T2Hero from "./components/T2Hero";
@@ -36,7 +37,10 @@ import { clientMasterData, sampleReviews, sampleFaqs } from "@/data/master";
 
 export default function Template2Page() {
   return (
-    <div id="top" className="t2p font-sans antialiased relative overflow-x-hidden">
+    <div
+      id="top"
+      className={`t2p font-sans antialiased relative overflow-x-hidden ${t2FontVariables}`}
+    >
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}

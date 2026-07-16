@@ -6,6 +6,7 @@ import T3HavenFooter from "./T3HavenFooter";
 import T3MobileBar from "./T3MobileBar";
 
 import "../t3-theme.css";
+import { t3FontVariables } from "../fonts";
 
 /**
  * Chrome for T3 wireframe interior pages: the real Haven nav, footer, and
@@ -18,7 +19,7 @@ export default function T3WireShell({ children }: { children: ReactNode }) {
   const location = locations[0];
 
   return (
-    <div className="t3-haven font-sanctuary relative min-h-screen overflow-x-clip">
+    <div className={`t3-haven font-sanctuary relative min-h-screen overflow-x-clip ${t3FontVariables}`}>
       <T3HavenNav
         practiceName={globalPracticeName}
         phone={location.phoneGBP}

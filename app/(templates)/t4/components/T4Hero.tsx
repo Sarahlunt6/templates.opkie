@@ -36,8 +36,10 @@ export default function T4Hero({
   const telHref = `tel:${phone.replace(/[^0-9+]/g, "")}`;
   const bookHref = bookingUrl !== "none" ? bookingUrl : telHref;
 
+  // Hero content renders settled — an animated entrance would hold the
+  // page's LCP hostage until hydration (mobile perf).
   const rise = (delay: number) => ({
-    initial: reduced ? undefined : { opacity: 0, y: 28 },
+    initial: false as const,
     animate: { opacity: 1, y: 0 },
     transition: { duration: 1.2, delay, ease: ATELIER_EASE },
   });
@@ -121,7 +123,7 @@ export default function T4Hero({
 
         {/* ── right: the work, framed and lit ── */}
         <motion.div
-          initial={reduced ? undefined : { opacity: 0, y: 36 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.5, ease: ATELIER_EASE }}
           className="relative lg:col-span-5"
@@ -166,7 +168,7 @@ export default function T4Hero({
 
       {/* ── the house ticker ── */}
       <motion.div
-        initial={reduced ? undefined : { opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, delay: 1.05, ease: ATELIER_EASE }}
         className="relative border-t border-[var(--t4-line-dark)]"

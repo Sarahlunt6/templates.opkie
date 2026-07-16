@@ -6,6 +6,7 @@ import T5Footer from "./T5Footer";
 import T5MobileBar from "./T5MobileBar";
 
 import "../t5-theme.css";
+import { t5FontVariables } from "../fonts";
 
 /**
  * Chrome for T5 wireframe interior pages: the real Marigold nav, footer,
@@ -18,7 +19,7 @@ export default function T5WireShell({ children }: { children: ReactNode }) {
   const location = locations[0];
 
   return (
-    <div className="t5-marigold font-t5-body relative min-h-screen overflow-x-clip">
+    <div className={`t5-marigold font-t5-body relative min-h-screen overflow-x-clip ${t5FontVariables}`}>
       <T5Nav
         practiceName={globalPracticeName}
         phone={location.phoneGBP}

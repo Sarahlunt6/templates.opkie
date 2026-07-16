@@ -119,11 +119,13 @@ export default function T2Visit() {
                 return (
                   <div
                     key={d.day}
+                    role="row"
                     className={`flex items-baseline justify-between gap-4 py-2.5 border-b border-[var(--t2p-line)] last:border-b-0 ${
                       isToday ? "bg-[rgba(56,189,248,0.07)] -mx-3 px-3" : ""
                     }`}
                   >
                     <span
+                      role="cell"
                       className={`t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] ${
                         isToday ? "text-[var(--t2p-blue)]" : "text-[var(--t2p-text-50)]"
                       }`}
@@ -131,6 +133,7 @@ export default function T2Visit() {
                       {d.day}
                     </span>
                     <span
+                      role="cell"
                       className={`t2p-mono text-sm ${
                         d.hours === "Closed"
                           ? "text-[var(--t2p-text-50)]"

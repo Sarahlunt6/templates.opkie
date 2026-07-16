@@ -177,14 +177,18 @@ export default function T2Hero() {
         style={reduced ? undefined : { y: videoY, scale: videoScale }}
         aria-hidden="true"
       >
+        {/* The ambient video (1.6 MB) starts after hydration so it never
+            competes with fonts/CSS for first-paint bandwidth — the poster
+            covers the plate until then. Reduced-motion visitors keep the
+            still poster and never download the video. */}
         <video
+          ref={videoRef}
           className="h-full w-full object-cover"
-          src="/videos/hero-ambient-t2.mp4"
-          poster="/images/office-interior.jpg"
-          autoPlay
+          poster="/images/office-interior-poster.jpg"
           muted
           loop
           playsInline
+          preload="none"
         />
         {/* Grade: bright porcelain wash — the video reads through a
             cool clinical white, like scan light on a lightbox */}
@@ -264,7 +268,7 @@ export default function T2Hero() {
         <div className="max-w-7xl mx-auto w-full py-14 md:py-16">
           {/* Pill eyebrow */}
           <motion.p
-            initial={reduced ? false : { opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.15, ease: EASE }}
             className="t2p-mono inline-flex items-center gap-2.5 rounded-full border border-[var(--t2p-line-strong)] px-4 py-2 text-[0.625rem] md:text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--t2p-text-70)]"
@@ -288,7 +292,7 @@ export default function T2Hero() {
               >
                 <motion.span
                   className="block"
-                  initial={reduced ? false : { y: "110%" }}
+                  initial={false}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.7, delay: 0.25 + i * 0.12, ease: EASE }}
                   onAnimationComplete={
@@ -304,7 +308,7 @@ export default function T2Hero() {
           </h1>
 
           <motion.p
-            initial={reduced ? false : { opacity: 0, y: 18 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.55, ease: EASE }}
             className="mt-6 text-base md:text-lg text-[var(--t2p-text-70)] max-w-xl leading-relaxed"
@@ -315,7 +319,7 @@ export default function T2Hero() {
           </motion.p>
 
           <motion.div
-            initial={reduced ? false : { opacity: 0, y: 18 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.68, ease: EASE }}
             className="mt-9 flex flex-wrap items-center gap-4"
@@ -344,7 +348,7 @@ export default function T2Hero() {
 
           {/* ── Stat readout strip ── */}
           <motion.div
-            initial={reduced ? false : { opacity: 0, y: 22 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.82, ease: EASE }}
             className={`mt-12 max-w-2xl grid ${
@@ -370,7 +374,7 @@ export default function T2Hero() {
 
           {practice.trustSignals.hasSameDayEmergency && (
             <motion.p
-              initial={reduced ? false : { opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1, ease: EASE }}
               className="t2p-mono mt-5 text-[0.625rem] uppercase tracking-[0.18em] text-[var(--t2p-text-50)]"

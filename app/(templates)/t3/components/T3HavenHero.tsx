@@ -156,8 +156,10 @@ export default function T3HavenHero({
   const chipsY = useTransform(scrollYProgress, [0, 1], [0, -15]);
   const parallaxOn = isLg && !reduceMotion;
 
+  // Hero content renders settled — an animated entrance would hold the
+  // page's LCP hostage until hydration (mobile perf).
   const enter = (delay: number) => ({
-    initial: reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 },
+    initial: false as const,
     animate: { opacity: 1, y: 0 },
     transition: { duration: 1.4, delay, ease: HAVEN_EASE },
   });
@@ -281,7 +283,7 @@ export default function T3HavenHero({
 
         {/* ── immersive imagery zone with floating glass chips ─── */}
         <motion.div
-          initial={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.985 }}
+          initial={false}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.8, delay: 0.4, ease: HAVEN_EASE }}
           className="relative"

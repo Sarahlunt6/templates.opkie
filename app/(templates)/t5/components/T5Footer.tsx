@@ -127,10 +127,10 @@ export default function T5Footer({
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t-2 border-dotted border-[rgba(255,246,232,0.25)] pt-6 sm:flex-row sm:items-center">
-          <p className="t5-kicker text-[rgba(255,246,232,0.6)]">
+          <p className="t5-kicker text-[rgba(255,246,232,0.78)]">
             © {new Date().getFullYear()} {practiceName} · all rights reserved
           </p>
-          <p className="t5-kicker flex items-center gap-2 text-[rgba(255,246,232,0.6)]">
+          <p className="t5-kicker flex items-center gap-2 text-[rgba(255,246,232,0.78)]">
             made with <span aria-hidden className="text-[var(--t5-marigold)]">★</span> in{" "}
             {locations[0]?.cityServed}
           </p>

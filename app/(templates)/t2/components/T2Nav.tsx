@@ -66,7 +66,7 @@ export default function T2Nav({ homeHref = "" }: T2NavProps) {
                   href={`${homeHref}${link.href}`}
                   className="group t2p-mono whitespace-nowrap text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors duration-300"
                 >
-                  <span className="text-[rgba(3,105,161,0.65)] mr-1.5 group-hover:text-[var(--t2p-blue)] transition-colors duration-300">
+                  <span className="text-[var(--t2p-blue)] mr-1.5 group-hover:text-[var(--t2p-blue)] transition-colors duration-300">
                     {link.index}
                   </span>
                   {link.label}

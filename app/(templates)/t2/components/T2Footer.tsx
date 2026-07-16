@@ -60,7 +60,7 @@ export default function T2Footer({ homeHref = "" }: T2FooterProps) {
                   href={`${homeHref}${href}`}
                   className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors"
                 >
-                  <span className="mr-2 text-[rgba(3,105,161,0.65)] group-hover:text-[var(--t2p-blue)] transition-colors">
+                  <span className="mr-2 text-[var(--t2p-blue)] group-hover:text-[var(--t2p-blue)] transition-colors">
                     {idx}
                   </span>
                   {label}
@@ -95,7 +95,7 @@ export default function T2Footer({ homeHref = "" }: T2FooterProps) {
                   }
                   className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors"
                 >
-                  <span className="mr-2 text-[rgba(3,105,161,0.65)] group-hover:text-[var(--t2p-blue)] transition-colors">
+                  <span className="mr-2 text-[var(--t2p-blue)] group-hover:text-[var(--t2p-blue)] transition-colors">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {entry.label}

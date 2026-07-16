@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import O1Nav from "./components/O1Nav";
+import { prestigeFontVariable } from "../shared-fonts";
 import O1Footer from "./components/O1Footer";
 import {
   HeadlineReveal,
@@ -22,7 +23,7 @@ export default function OrthoTemplate1Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-serif antialiased bg-brand-canvas">
+    <div className={`font-serif antialiased bg-brand-canvas ${prestigeFontVariable}`}>
       <O1Nav />
 
       {/* Hero Section - Orthodontic Focus */}

@@ -74,8 +74,11 @@ export default function T1Hero({
   // spans the viewport edge to edge at every width.
   const wordmarkSize = `calc((100vw - 1rem) / ${(word.length * 0.56).toFixed(2)})`;
 
+  // Hero content renders settled — an animated entrance would hold the
+  // page's LCP hostage until hydration (mobile perf). Below-fold sections
+  // keep their scroll reveals.
   const rise = (delay: number) => ({
-    initial: reduced ? false : ({ opacity: 0, y: 20 } as const),
+    initial: false as const,
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.5, delay, ease: T1_EASE },
   });
@@ -126,7 +129,7 @@ export default function T1Hero({
           }}
         >
           <motion.figure
-            initial={reduced ? false : { opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.15, ease: T1_EASE }}
             className="group relative border border-[#1A1713] bg-[#E9E3D4]"

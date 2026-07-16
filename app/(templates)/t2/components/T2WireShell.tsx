@@ -5,6 +5,7 @@ import T2Footer from "./T2Footer";
 import T2MobileBar from "./T2MobileBar";
 
 import "../t2-theme.css";
+import { t2FontVariables } from "../fonts";
 
 /**
  * Chrome for T2 wireframe interior pages: the real Precision nav, footer,
@@ -15,7 +16,7 @@ import "../t2-theme.css";
  */
 export default function T2WireShell({ children }: { children: ReactNode }) {
   return (
-    <div className="t2p font-sans antialiased relative overflow-x-hidden">
+    <div className={`t2p font-sans antialiased relative overflow-x-hidden ${t2FontVariables}`}>
       <T2Nav homeHref="/t2" />
 
       {/* The nav is fixed (4.5rem tall on desktop) — hold space so the

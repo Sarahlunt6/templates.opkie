@@ -8,6 +8,7 @@ import {
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 
 import "./t5-theme.css";
+import { t5FontVariables } from "./fonts";
 
 /**
  * T5 MARIGOLD — main-street retro warmth.
@@ -50,7 +51,10 @@ export const metadata: Metadata = {
 
 export default function Template5Page() {
   return (
-    <div id="top" className="t5-marigold font-t5-body relative min-h-screen overflow-x-clip">
+    <div
+      id="top"
+      className={`t5-marigold font-t5-body relative min-h-screen overflow-x-clip ${t5FontVariables}`}
+    >
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}

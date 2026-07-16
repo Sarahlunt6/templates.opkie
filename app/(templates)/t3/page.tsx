@@ -15,6 +15,7 @@
  */
 
 import "./t3-theme.css";
+import { t3FontVariables } from "./fonts";
 
 import {
   clientMasterData,
@@ -48,7 +49,10 @@ const { trustSignals, doctors, globalPracticeName, onlineBookingUrl } =
 
 export default function Template3Page() {
   return (
-    <div id="top" className="t3-haven font-sanctuary relative min-h-screen overflow-x-clip">
+    <div
+      id="top"
+      className={`t3-haven font-sanctuary relative min-h-screen overflow-x-clip ${t3FontVariables}`}
+    >
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}

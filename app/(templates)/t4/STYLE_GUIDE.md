@@ -34,7 +34,7 @@ Shared-variable overrides set under `.t4-atelier`: `--primary-brand`, `--seconda
 
 ## 3 · Typography
 
-Fonts load once in `app/layout.tsx` via `next/font` CSS variables — swap families there, keep the variable names.
+Fonts load from this template's `fonts.ts` module (`app/fonts.ts` in a client repo) via `next/font` CSS variables, applied on the template wrapper — swap families there, keep the variable names. Only Inter (`--font-sans`) still loads globally in `app/layout.tsx`.
 
 | Role | Family | CSS variable | Weights | Usage |
 |---|---|---|---|---|
@@ -116,7 +116,7 @@ Rhythm rule: dark "showcase" rooms alternate with porcelain "salon" rooms — ne
 1. **`t4-theme.css` palette block** (manual): replace the eleven palette hexes (§2) and re-derive the rgba inks and hairlines from the new grounds; update the scoped `--primary-brand / --secondary-accent / --bg-canvas / --text-main` overrides and `::selection`.
    - Contrast contract: `--t4-brass-ink` must stay AA-safe on the new porcelain; ivory must stay AA on espresso/umber.
 2. **`app/globals.css` + `tailwind.config.js`** — the scaffold's `updateBrandColors` swaps `--primary-brand` + the tailwind brand teal from `client-intake.json`'s `brand.accent_color`. Verify they match.
-3. **`app/layout.tsx` fonts** — swap `Bodoni_Moda` / `Hanken_Grotesk` for the client's faces, KEEPING `--font-t4-display` / `--font-t4-body` variable names.
+3. **`fonts.ts` fonts** (`app/fonts.ts` in a client repo) — swap `Bodoni_Moda` / `Hanken_Grotesk` for the client's faces, KEEPING `--font-t4-display` / `--font-t4-body` variable names.
 4. **`data/master.ts` `theme` block** — update the hexes to match.
 5. **Logo & favicon** — `public/images/`, path from intake `brand.logo_path`.
 6. Rebuild; check both dark and salon rooms against §10.

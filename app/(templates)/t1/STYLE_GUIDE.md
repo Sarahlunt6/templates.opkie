@@ -19,8 +19,10 @@ All palette variables live in `app/t1-theme.css` (in the template repo: `app/(te
 | `--t1-paper` | `#f3efe6` | The paper — page canvas | Default ground |
 | `--t1-paper-deep` | `#e9e3d4` | Aged-paper alternate sections | Section alternation |
 | `--t1-ink` | `#1a1713` | The ink — text, dark blocks, footer | The "black" |
-| `--t1-red` | `#d92b21` | Press red — THE accent | Rules, labels, italic moments |
-| `--t1-stone` | `#6b675e` | Muted captions | Secondary text |
+| `--t1-red` | `#d92b21` | Press red — THE accent | Rules, buttons, large/italic moments |
+| `--t1-stone` | `#6b675e` | Muted tone | Large secondary text, decorative |
+| `--t1-red-ink` | `#c02015` | AA-safe red for small text | The 11.5px mono labels (`.t1-mono-label-red`) |
+| `--t1-stone-ink` | `#5f5b52` | AA-safe stone for small text | The 11.5px mono labels (`.t1-mono-label-stone`) |
 | `--t1-hairline` | rgba(ink, .15) | Ruled lines on paper | Column rules |
 | `--t1-hairline-soft` | rgba(ink, .08) | Faint rules | Backgrounds |
 | `--t1-hairline-light` | rgba(paper, .22) | Rules on ink | Footer/dark blocks |
@@ -29,7 +31,7 @@ Hardcoded companions appear throughout components as `#1A1713` / `#F3EFE6` / `#D
 
 ## 3 · Typography
 
-Fonts load once in `app/layout.tsx` via `next/font` CSS variables — swap families there, keep the variable names.
+Fonts load from this template's `fonts.ts` module (`app/fonts.ts` in a client repo) via `next/font` CSS variables, applied on the template wrapper — swap families there, keep the variable names. Only Inter (`--font-sans`) still loads globally in `app/layout.tsx`.
 
 | Role | Family | CSS variable | Weights | Usage |
 |---|---|---|---|---|
@@ -114,7 +116,7 @@ Follow `app/(templates)/t1/IMAGERY.md` (copied into client repos alongside the t
 1. **`t1-theme.css` palette block** (manual): replace `--t1-paper, --t1-paper-deep, --t1-ink, --t1-red, --t1-stone` and re-derive the three hairlines.
 2. **Sweep hardcoded hexes in T1 components** (this template inlines its palette): search `app/components/` (client repo) or `app/(templates)/t1/components/` (hub) for `#1A1713`, `#F3EFE6`, `#D92B21`, `rgba(26, 23, 19`, `rgba(243, 239, 230` and replace with the new ink/paper/red. This step is unique to T1 — budget for it.
 3. **`app/globals.css` + `tailwind.config.js`** — the scaffold's `updateBrandColors` swaps `--primary-brand` + the tailwind brand teal from intake `brand.accent_color`. Verify against the new red/ink.
-4. **`app/layout.tsx` fonts** — swap `Anton` / `Fraunces` / `Courier_Prime` for the client's faces, KEEPING `--font-t1-press` / `--font-t1-display` / `--font-t1-mono` variable names. The press face must be a heavy condensed sans; the label face must be a typewriter mono.
+4. **`fonts.ts` fonts** (`app/fonts.ts` in a client repo) — swap `Anton` / `Fraunces` / `Courier_Prime` for the client's faces, KEEPING `--font-t1-press` / `--font-t1-display` / `--font-t1-mono` variable names. The press face must be a heavy condensed sans; the label face must be a typewriter mono.
 5. **`data/master.ts` `theme` block** — update hexes to match.
 6. **Logo & favicon** — `public/images/`, path from intake `brand.logo_path`. (T1's logotype is set live in Anton from the practice name — a graphic logo is optional here.)
 7. Rebuild; check ink-on-paper and paper-on-ink contrast both ways, and the giant footer wordmark at mobile widths.

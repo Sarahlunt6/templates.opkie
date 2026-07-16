@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import O2Nav from "./components/O2Nav";
+import { t2FontVariables } from "../t2/fonts";
 import O2Footer from "./components/O2Footer";
 import {
   HeadlineReveal,
@@ -22,7 +23,7 @@ export default function OrthoTemplate2Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-innovator bg-zinc-950 text-white relative">
+    <div className={`font-innovator bg-zinc-950 text-white relative ${t2FontVariables}`}>
       <CursorGlow color="var(--primary-brand)" size={500} blur={120} opacity={0.12} />
 
       <O2Nav />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { clientMasterData, sampleReviews } from "@/data/master";
 import O3Nav from "./components/O3Nav";
+import { t3FontVariables } from "../t3/fonts";
 import O3Footer from "./components/O3Footer";
 import {
   TextReveal,
@@ -20,7 +21,7 @@ export default function OrthoTemplate3Page() {
   const primaryDoctor = doctors[0];
 
   return (
-    <div className="font-sanctuary bg-brand-canvas text-brand-mainText relative">
+    <div className={`font-sanctuary bg-brand-canvas text-brand-mainText relative ${t3FontVariables}`}>
       <O3Nav />
 
       {/* Hero - Warm & Welcoming */}

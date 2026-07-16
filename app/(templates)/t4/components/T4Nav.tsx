@@ -174,7 +174,9 @@ export default function T4Nav({
       <div
         id="t4-menu"
         aria-hidden={!open}
-        className="fixed inset-0 z-[45] flex flex-col justify-between bg-[var(--t4-noir)] px-6 pb-10 pt-28 transition-opacity duration-500 lg:hidden"
+        className={`fixed inset-0 z-[45] flex flex-col justify-between bg-[var(--t4-noir)] px-6 pb-10 pt-28 transition-[opacity,visibility] duration-500 lg:hidden ${
+          open ? "visible" : "invisible"
+        }`}
         style={{
           opacity: open ? 1 : 0,
           pointerEvents: open ? "auto" : "none",

@@ -32,7 +32,7 @@ Shared-variable overrides under `.t3-haven` include `--text-main: #2e3b34`.
 
 ## 3 · Typography
 
-Fonts load once in `app/layout.tsx` via `next/font` CSS variables — swap families there, keep the variable names.
+Fonts load from this template's `fonts.ts` module (`app/fonts.ts` in a client repo) via `next/font` CSS variables, applied on the template wrapper — swap families there, keep the variable names. Only Inter (`--font-sans`) still loads globally in `app/layout.tsx`.
 
 | Role | Family | CSS variable | Weights | Usage |
 |---|---|---|---|---|
@@ -110,7 +110,7 @@ Follow `app/(templates)/t3/IMAGERY.md` (copied into client repos alongside the t
 1. **`t3-theme.css` palette block** (manual): replace the nine palette hexes (§2), re-derive `--t3-moss-soft/faint`, `--t3-line`, both shadows, and the glass tokens from the new grounds; update the scoped shared-variable overrides and `::selection`.
    - Contrast contract: `--t3-euc-ink` and `--t3-clay-deep` must stay AA-safe on the new sage/sand.
 2. **`app/globals.css` + `tailwind.config.js`** — the scaffold's `updateBrandColors` swaps `--primary-brand` + the tailwind brand teal from intake `brand.accent_color`. Verify they harmonize with the new palette.
-3. **`app/layout.tsx` fonts** — swap `Outfit` / `Newsreader` for the client's faces, KEEPING `--font-sanctuary` / `--font-t3-serif` variable names and the light weights.
+3. **`fonts.ts` fonts** (`app/fonts.ts` in a client repo) — swap `Outfit` / `Newsreader` for the client's faces, KEEPING `--font-sanctuary` / `--font-t3-serif` variable names and the light weights.
 4. **`data/master.ts` `theme` block** — update hexes to match.
 5. **Logo & favicon** — `public/images/`, path from intake `brand.logo_path`.
 6. Rebuild; verify calm is preserved: light weights, AA contrast, one clay moment.

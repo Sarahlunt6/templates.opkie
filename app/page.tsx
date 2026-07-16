@@ -4,6 +4,11 @@ import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { t1FontVariables } from "./(templates)/t1/fonts";
+import { t2FontVariables } from "./(templates)/t2/fonts";
+import { t3FontVariables } from "./(templates)/t3/fonts";
+import { t4FontVariables } from "./(templates)/t4/fonts";
+import { t5FontVariables } from "./(templates)/t5/fonts";
 
 /* ────────────────────────────────────────────────────────────────
    The Opkie Collection — hub page.
@@ -442,7 +447,9 @@ export default function CollectionPage() {
   const reduced = useReducedMotion();
 
   return (
-    <main className="relative flex min-h-screen w-full flex-col overflow-x-clip bg-[#0D0D0F] text-white">
+    <main
+      className={`relative flex min-h-screen w-full flex-col overflow-x-clip bg-[#0D0D0F] text-white ${t1FontVariables} ${t2FontVariables} ${t3FontVariables} ${t4FontVariables} ${t5FontVariables}`}
+    >
       {/* Gallery-wall lighting: a soft lift from the top, quiet at the edges */}
       <div
         aria-hidden

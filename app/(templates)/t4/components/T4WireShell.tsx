@@ -6,6 +6,7 @@ import T4Footer from "./T4Footer";
 import T4MobileBar from "./T4MobileBar";
 
 import "../t4-theme.css";
+import { t4FontVariables } from "../fonts";
 
 /**
  * Chrome for T4 wireframe interior pages: the real Atelier nav, footer,
@@ -18,7 +19,7 @@ export default function T4WireShell({ children }: { children: ReactNode }) {
   const location = locations[0];
 
   return (
-    <div className="t4-atelier font-t4-body relative min-h-screen overflow-x-clip">
+    <div className={`t4-atelier font-t4-body relative min-h-screen overflow-x-clip ${t4FontVariables}`}>
       <T4Nav
         practiceName={globalPracticeName}
         phone={location.phoneGBP}

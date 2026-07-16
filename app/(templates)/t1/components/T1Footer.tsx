@@ -47,7 +47,7 @@ export default function T1Footer({
       <div className="mx-auto max-w-[1500px] px-4 pt-20 md:px-8 md:pt-28 xl:px-12">
         {/* Closing statement */}
         <div className="border-b border-[rgba(243,239,230,0.22)] pb-14 md:pb-20">
-          <p className="t1-mono-label t1-mono-label-red">[ THE LAST WORD ]</p>
+          <p className="t1-mono-label t1-mono-label-red-paper">[ THE LAST WORD ]</p>
           <h2 className="mt-6 max-w-4xl font-t1-press text-[clamp(2.2rem,6vw,4.5rem)] uppercase leading-[0.95]">
             Your smile belongs on{" "}
             <em className="t1-italic normal-case text-[#D92B21]">
@@ -76,7 +76,7 @@ export default function T1Footer({
         {/* Ruled link columns */}
         <div className="grid grid-cols-1 gap-10 py-12 md:grid-cols-4 md:gap-8">
           <div>
-            <h3 className="t1-mono-label t1-mono-label-red">[ VISIT ]</h3>
+            <h3 className="t1-mono-label t1-mono-label-red-paper">[ VISIT ]</h3>
             <address className="mt-4 font-sans text-sm not-italic leading-relaxed text-[#F3EFE6]/65">
               {address}
               <br />
@@ -91,7 +91,7 @@ export default function T1Footer({
           </div>
 
           <div>
-            <h3 className="t1-mono-label t1-mono-label-red">[ HOURS ]</h3>
+            <h3 className="t1-mono-label t1-mono-label-red-paper">[ HOURS ]</h3>
             <ul className="mt-4 space-y-2">
               {hours.map((entry) => (
                 <li
@@ -102,7 +102,7 @@ export default function T1Footer({
                   <span
                     className={`t1-mono-label ${
                       /closed/i.test(entry.structuralHours)
-                        ? "!text-[#F3EFE6]/35"
+                        ? "!text-[#F3EFE6]/60"
                         : "!text-[#F3EFE6]/80"
                     }`}
                   >
@@ -114,7 +114,7 @@ export default function T1Footer({
           </div>
 
           <div>
-            <h3 className="t1-mono-label t1-mono-label-red">
+            <h3 className="t1-mono-label t1-mono-label-red-paper">
               [ APPOINTMENTS ]
             </h3>
             <p className="mt-4 font-sans text-sm leading-relaxed text-[#F3EFE6]/65">
@@ -133,7 +133,7 @@ export default function T1Footer({
 
           {/* Full site map — every page of the finished edition */}
           <div>
-            <h3 className="t1-mono-label t1-mono-label-red">
+            <h3 className="t1-mono-label t1-mono-label-red-paper">
               [ THE FULL EDITION ]
             </h3>
             <ul className="mt-4 space-y-2">
@@ -161,10 +161,10 @@ export default function T1Footer({
 
         {/* Legal line */}
         <div className="flex flex-col gap-2 border-t border-[rgba(243,239,230,0.22)] py-5 sm:flex-row sm:items-baseline sm:justify-between">
-          <p className="t1-mono-label !text-[#F3EFE6]/45">
+          <p className="t1-mono-label !text-[#F3EFE6]/60">
             © {year} {practiceName.toUpperCase()}. ALL RIGHTS RESERVED.
           </p>
-          <p className="t1-mono-label !text-[#F3EFE6]/35">
+          <p className="t1-mono-label !text-[#F3EFE6]/60">
             SET IN ANTON, INTER &amp; JETBRAINS MONO
           </p>
         </div>

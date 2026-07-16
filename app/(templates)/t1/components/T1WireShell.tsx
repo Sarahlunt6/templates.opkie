@@ -6,6 +6,7 @@ import T1Masthead from "./T1Masthead";
 import T1Footer from "./T1Footer";
 
 import "../t1-theme.css";
+import { t1FontVariables } from "../fonts";
 
 /**
  * Chrome for T1 wireframe interior pages: the real Press utility bar,
@@ -20,7 +21,7 @@ export default function T1WireShell({ children }: { children: ReactNode }) {
   const firstHours = location.hoursOfOperation[0];
 
   return (
-    <div className="t1-root font-sans antialiased overflow-x-clip">
+    <div className={`t1-root font-sans antialiased overflow-x-clip ${t1FontVariables}`}>
       <T1UtilityBar
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}

@@ -11,6 +11,12 @@
   --t1-ink: #1a1713;
   --t1-red: #d92b21;
   --t1-stone: #6b675e;
+  /* AA-safe inks for 11.5px mono labels (≥4.5:1 on paper AND paper-deep);
+     the brighter --t1-red / --t1-stone stay for rules, buttons, large type */
+  --t1-red-ink: #c02015;
+  --t1-stone-ink: #5f5b52;
+  /* AA-safe red for labels ON INK grounds (footer, dark blocks) */
+  --t1-red-paper: #e8564a;
   --t1-hairline: rgba(26, 23, 19, 0.15);
   --t1-hairline-soft: rgba(26, 23, 19, 0.08);
   --t1-hairline-light: rgba(243, 239, 230, 0.22);
@@ -49,10 +55,14 @@
   color: var(--t1-ink);
 }
 .t1-mono-label-red {
-  color: var(--t1-red);
+  color: var(--t1-red-ink);
+}
+/* red label variant for ink grounds — #c02015 drops to 2.9:1 on ink */
+.t1-mono-label-red-paper {
+  color: var(--t1-red-paper);
 }
 .t1-mono-label-stone {
-  color: var(--t1-stone);
+  color: var(--t1-stone-ink);
 }
 
 /* Giant wordmark scale (generic; hero/footer size to viewport width) */
