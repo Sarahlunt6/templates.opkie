@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 
 export default function Template4Page() {
   return (
-    <div className="t4-atelier font-t4-body relative min-h-screen overflow-x-clip">
+    <div id="top" className="t4-atelier font-t4-body relative min-h-screen overflow-x-clip">
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}
@@ -60,6 +60,7 @@ export default function Template4Page() {
         city={location.cityServed}
         state={location.stateServed}
         bookingUrl={onlineBookingUrl}
+        homeHref="/t4"
       />
 
       {/* 2 · hero */}
@@ -129,6 +130,7 @@ export default function Template4Page() {
         practiceName={globalPracticeName}
         locations={clientMasterData.locations}
         bookingUrl={onlineBookingUrl}
+        homeHref="/t4"
       />
 
       <T4MobileBar phone={location.phoneGBP} bookingUrl={onlineBookingUrl} />

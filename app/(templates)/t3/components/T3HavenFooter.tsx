@@ -2,11 +2,15 @@
 
 import type { LocationNAP } from "@/types/dentist";
 import { telHref } from "./hours";
+import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
 
 interface T3HavenFooterProps {
   practiceName: string;
   location: LocationNAP;
   bookingUrl: string | "none";
+  /** Path of the template home ("/t3" in the hub, "/" in a client site) so
+   *  the site-map links resolve from interior pages. */
+  homeHref?: string;
 }
 
 /**
@@ -16,6 +20,7 @@ export default function T3HavenFooter({
   practiceName,
   location,
   bookingUrl,
+  homeHref = "",
 }: T3HavenFooterProps) {
   const hasBooking = bookingUrl !== "none";
   const year = new Date().getFullYear();
@@ -27,7 +32,7 @@ export default function T3HavenFooter({
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="mb-14 grid grid-cols-1 gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <p className="mb-4 flex items-center gap-2.5 text-lg font-light tracking-[0.04em]">
               <span
                 aria-hidden="true"
@@ -40,7 +45,7 @@ export default function T3HavenFooter({
             </p>
           </div>
 
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
             <h3 className="mb-4 text-sm font-light text-[#a8bfb2]">find us</h3>
             <address className="space-y-1.5 not-italic">
               <p className="text-[15px] font-light text-[#e6ece7]">
@@ -84,6 +89,33 @@ export default function T3HavenFooter({
             >
               Book a visit
             </a>
+          </div>
+
+          {/* full site map — every page of the finished site */}
+          <div className="md:col-span-2">
+            <h3 className="mb-4 text-sm font-light text-[#a8bfb2]">
+              more to explore
+            </h3>
+            <ul className="space-y-1.5">
+              <li>
+                <a
+                  href={homeHref || "/"}
+                  className="text-[15px] font-light text-[#c9d6cd] transition-colors duration-500 hover:text-white"
+                >
+                  home
+                </a>
+              </li>
+              {SITE_PAGES.map((page) => (
+                <li key={page.slug}>
+                  <a
+                    href={pageHref(homeHref, page.slug)}
+                    className="text-[15px] font-light text-[#c9d6cd] transition-colors duration-500 hover:text-white"
+                  >
+                    {page.label.toLowerCase()}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

@@ -186,8 +186,10 @@ async function main() {
   console.log(`\n🚀 Next steps:`);
   console.log(`   1. cd ${intakeData.client_slug}`);
   console.log(`   2. Review MISSING_DATA.md if present`);
-  console.log(`   3. Run: vercel link`);
-  console.log(`   4. Run: vercel deploy\n`);
+  console.log(`   3. Rebrand: edit STYLE_GUIDE.md + theme CSS to the client's colors/fonts`);
+  console.log(`   4. Build out interior pages from their wireframes (see README)`);
+  console.log(`   5. Run: vercel link`);
+  console.log(`   6. Run: vercel deploy\n`);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -448,8 +450,8 @@ function validateMinimumFields(data: ClientIntake) {
     throw new Error(`Missing required fields in client-intake.json: ${missing.join(', ')}`);
   }
 
-  if (!['t1', 't2', 't3'].includes(data.template)) {
-    throw new Error(`Invalid template "${data.template}". Must be t1, t2, or t3.`);
+  if (!['t1', 't2', 't3', 't4', 't5'].includes(data.template)) {
+    throw new Error(`Invalid template "${data.template}". Must be t1, t2, t3, t4, or t5.`);
   }
 }
 
@@ -492,14 +494,23 @@ function createProjectStructure(
   }
 
   // Copy any other template-specific files (like PREMIUM_MOTION_DESIGN.md)
+  // and route subdirectories (the wireframe interior pages: about/,
+  // services/, doctors/, new-patients/, smile-gallery/, financing/,
+  // contact/ — each holding a page.tsx whose relative imports resolve at
+  // the same depth in the client repo).
   const templateFiles = fs.readdirSync(templateSource);
   for (const file of templateFiles) {
     if (file !== 'page.tsx' && file !== 'components') {
       const src = path.join(templateSource, file);
-      const dest = path.join(appDir, file);
       const stat = fs.statSync(src);
-      if (stat.isFile()) {
-        fs.copyFileSync(src, dest);
+      if (stat.isDirectory()) {
+        copyRecursive(src, path.join(appDir, file));
+      } else if (file === 'STYLE_GUIDE.md') {
+        // The style guide is the client repo's build-out contract — put it
+        // at the repo root where it gets found, not buried in app/.
+        fs.copyFileSync(src, path.join(clientRoot, file));
+      } else if (stat.isFile()) {
+        fs.copyFileSync(src, path.join(appDir, file));
       }
     }
   }
@@ -631,10 +642,72 @@ function generateMasterDataFile(
     ? `No insurance? Ask about our ${intake.practice.name} savings plan — $${intake.membership.no_insurance_savings_plan_price}/year for cleanings, exams, and member discounts.`
     : `No insurance? Ask us about our in-house savings plan for uninsured patients.`;
 
+  // FAQ set for the FAQ sections + FAQPage schema. Generic answers are
+  // template-voice and practice-agnostic; the insurance answer reuses the
+  // honest insurance text computed above, and medical-claim FAQs (sedation,
+  // same-day emergencies) are only emitted when the intake's trust signals
+  // say the practice actually offers them.
+  const faqs: Array<{ id: string; question: string; answer: string }> = [
+    {
+      id: 'faq-new-patients',
+      question: 'Are you accepting new patients?',
+      answer:
+        'Yes — we welcome new patients of all ages. New-patient visits start with an unhurried conversation about your goals and any concerns, then a thorough exam. You can book online or call us and a real person will help you find a time.',
+    },
+    {
+      id: 'faq-insurance',
+      question: 'Do you take my insurance?',
+      answer: `${insuranceAcceptedText} If you're not sure about your coverage, call us with your plan details and we'll verify your benefits before your visit.`,
+    },
+    {
+      id: 'faq-no-insurance',
+      question: "What if I don't have insurance?",
+      answer: `You still have options. ${membershipPlanSummary} We'll walk through the numbers with you before anything begins.`,
+    },
+    {
+      id: 'faq-first-visit',
+      question: 'What happens at my first visit?',
+      answer:
+        "You'll meet your dentist, talk through what brought you in, and get a gentle, complete exam — often with digital imaging so you can see what we see. We finish with a clear, written plan of what's recommended, what's optional, and what it costs. Nothing is started without your okay.",
+    },
+    {
+      id: 'faq-nervous',
+      question: "I'm nervous about the dentist. Can you help?",
+      answer: `Absolutely — a lot of our patients haven't been in years, and there's no judgment here. We move at your pace, explain each step before it happens, and pause the moment you raise a hand.${
+        trust.has_sedation_anxiety_care === true
+          ? " Sedation and comfort options are available if you'd like them."
+          : ''
+      }`,
+    },
+    ...(trust.has_same_day_emergency === true
+      ? [
+          {
+            id: 'faq-emergency',
+            question: 'Do you see dental emergencies?',
+            answer:
+              'Yes. We hold time each day for urgent problems like a cracked tooth, lost filling, or sudden pain. Call us as early as you can and describe what’s happening — in many cases we can see you the same day.',
+          },
+        ]
+      : []),
+    {
+      id: 'faq-payment',
+      question: 'How does payment and financing work?',
+      answer:
+        'We accept cash, all major credit cards, and most insurance. For larger treatment plans we offer monthly financing options, so you can move forward on a schedule that fits your budget.',
+    },
+    {
+      id: 'faq-how-often',
+      question: 'How often should I come in?',
+      answer:
+        "For most people, a cleaning and exam every six months keeps small problems from becoming big ones. If you're managing gum health or other concerns, we may suggest a schedule tailored to you — we'll never recommend more than you actually need.",
+    },
+  ];
+
   const masterDataContent = `import type {
   MasterDentalPracticeSchema,
   ReviewData,
   BeforeAfterCase,
+  FaqItem,
 } from "@/types/dentist";
 
 export const clientMasterData: MasterDentalPracticeSchema = {
@@ -721,6 +794,13 @@ export const sampleBeforeAfterCases: BeforeAfterCase[] = [
   },
 ];
 
+/**
+ * Common patient questions — rendered in the FAQ section and emitted as
+ * FAQPage structured data. Generated from the intake's trust signals;
+ * review and personalize before launch.
+ */
+export const sampleFaqs: FaqItem[] = ${JSON.stringify(faqs, null, 2).replace(/"([a-zA-Z_][a-zA-Z0-9_]*)":/g, '$1:')};
+
 export default clientMasterData;
 `;
 
@@ -805,6 +885,13 @@ async function replaceAllPlaceholders(
     // Replace booking link
     if (intake.booking_link) {
       content = content.replace(/https:\/\/booking\.example\.com\/summit-dental/g, intake.booking_link);
+      modified = true;
+    }
+
+    // Rebase nav/footer/wire-shell links: the template home lives at
+    // "/t1".."/t5" in the hub but at "/" in a standalone client site.
+    if (/homeHref="\/t[1-5]"/.test(content)) {
+      content = content.replace(/homeHref="\/t[1-5]"/g, 'homeHref="/"');
       modified = true;
     }
 
@@ -950,6 +1037,30 @@ function updateProjectMetadata(clientRoot: string, intake: ClientIntake) {
     intake.template === 't4' ? '- **T4 Atelier**: After-dark couture design with espresso-and-champagne luxury' :
     intake.template === 't5' ? '- **T5 Marigold**: Main-street retro design with warm, family-friendly charm' :
     '- **T3 Haven**: Mindful, therapeutic design with comfort emphasis',
+    '',
+    '## Site structure',
+    '',
+    'The homepage (`app/page.tsx`) is fully designed. Seven interior pages ship as',
+    '**wireframes** — real navigation and footer around a schematic gray body — so the',
+    'client can preview the planned structure before each page is designed:',
+    '',
+    '- `/about` · `/services` · `/doctors` · `/new-patients` · `/smile-gallery` · `/financing` · `/contact`',
+    '',
+    'They are linked from the footer site map and carry `noindex` metadata until built out.',
+    '',
+    '## Building out pages',
+    '',
+    '1. **Rebrand first**: follow the "Client rebrand checklist" in [STYLE_GUIDE.md](STYLE_GUIDE.md)',
+    '   to apply the client\'s colors and fonts (theme CSS, fonts in `app/layout.tsx`, logo).',
+    '2. **Then build pages one at a time**: each wireframe page in `app/<slug>/page.tsx` renders a',
+    '   structure blueprint from `components/wireframe/pages/`. Replace the wire body with real',
+    '   sections that follow STYLE_GUIDE.md, keep pulling practice facts from `data/master.ts`,',
+    '   and remove the `robots: { index: false, follow: false }` metadata from that page.',
+    '',
+    '   Suggested prompt for Claude: *"Build out the About page (`app/about/page.tsx`): replace the',
+    '   wireframe body with fully designed sections per STYLE_GUIDE.md, keeping the wireframe\'s',
+    '   section structure, pulling practice facts from data/master.ts, and matching the homepage\'s',
+    '   component patterns. Then remove the noindex metadata."*',
     '',
   ].join('\n');
 

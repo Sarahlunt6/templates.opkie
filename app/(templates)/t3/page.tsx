@@ -48,7 +48,7 @@ const { trustSignals, doctors, globalPracticeName, onlineBookingUrl } =
 
 export default function Template3Page() {
   return (
-    <div className="t3-haven font-sanctuary relative min-h-screen overflow-x-clip">
+    <div id="top" className="t3-haven font-sanctuary relative min-h-screen overflow-x-clip">
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}
@@ -63,6 +63,7 @@ export default function Template3Page() {
         practiceName={globalPracticeName}
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}
+        homeHref="/t3"
       />
 
       <div className="relative z-10">
@@ -135,6 +136,7 @@ export default function Template3Page() {
           practiceName={globalPracticeName}
           location={location}
           bookingUrl={onlineBookingUrl}
+          homeHref="/t3"
         />
       </div>
 

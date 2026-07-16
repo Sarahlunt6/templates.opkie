@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function Template5Page() {
   return (
-    <div className="t5-marigold font-t5-body relative min-h-screen overflow-x-clip">
+    <div id="top" className="t5-marigold font-t5-body relative min-h-screen overflow-x-clip">
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}
@@ -62,6 +62,7 @@ export default function Template5Page() {
         practiceName={globalPracticeName}
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}
+        homeHref="/t5"
       />
 
       {/* 2 · hero — the storefront window */}
@@ -127,6 +128,7 @@ export default function Template5Page() {
         practiceName={globalPracticeName}
         locations={clientMasterData.locations}
         bookingUrl={onlineBookingUrl}
+        homeHref="/t5"
       />
 
       <T5MobileBar phone={location.phoneGBP} bookingUrl={onlineBookingUrl} />

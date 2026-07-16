@@ -36,7 +36,7 @@ import { clientMasterData, sampleReviews, sampleFaqs } from "@/data/master";
 
 export default function Template2Page() {
   return (
-    <div className="t2p font-sans antialiased relative overflow-x-hidden">
+    <div id="top" className="t2p font-sans antialiased relative overflow-x-hidden">
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}
@@ -45,7 +45,7 @@ export default function Template2Page() {
       {/* Fixed scan spine — page scroll progress as a scan-light fill, lg+ only */}
       <T2ScanSpine />
 
-      <T2Nav />
+      <T2Nav homeHref="/t2" />
 
       <main>
         {/* 00 — Product-launch hero: parallax video + scanline reveal */}
@@ -106,7 +106,7 @@ export default function Template2Page() {
         <T2FinalCTA />
       </main>
 
-      <T2Footer />
+      <T2Footer homeHref="/t2" />
       <T2MobileBar />
     </div>
   );

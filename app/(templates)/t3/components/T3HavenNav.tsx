@@ -8,6 +8,9 @@ interface T3HavenNavProps {
   practiceName: string;
   phone: string;
   bookingUrl: string | "none";
+  /** Path of the template home ("/t3" in the hub, "/" in a client site) so
+   *  anchor links resolve from interior pages. Empty = same-page anchors. */
+  homeHref?: string;
 }
 
 const NAV_LINKS = [
@@ -21,6 +24,7 @@ export default function T3HavenNav({
   practiceName,
   phone,
   bookingUrl,
+  homeHref = "",
 }: T3HavenNavProps) {
   const [scrolled, setScrolled] = useState(false);
   const { scrollTo } = useSmoothScroll();
@@ -37,7 +41,17 @@ export default function T3HavenNav({
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
+    // Only take over when Lenis is running AND the target exists on this
+    // page. Otherwise let the browser navigate: from an interior page the
+    // link goes to `${homeHref}#section` (a full navigation), and client
+    // sites without SmoothScrollProvider rely on native smooth scrolling.
+    const id = href.replace(/^#/, "");
+    const lenisActive = document.documentElement.classList.contains("lenis");
+    if (!lenisActive || !document.getElementById(id)) return;
     e.preventDefault();
+    // Keep the click away from Lenis's own anchor handler, which would
+    // re-scroll without this nav's fixed-header offset.
+    e.stopPropagation();
     scrollTo(href, { offset: -88, duration: 1.6 });
   };
 
@@ -55,7 +69,7 @@ export default function T3HavenNav({
       >
         {/* wordmark */}
         <a
-          href="#top"
+          href={`${homeHref}#top`}
           onClick={(e) => handleAnchor(e, "#top")}
           className="flex items-center gap-2.5"
         >
@@ -73,7 +87,7 @@ export default function T3HavenNav({
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={`${homeHref}${link.href}`}
               onClick={(e) => handleAnchor(e, link.href)}
               className="text-sm font-light text-[var(--t3-moss-soft)] transition-colors duration-500 hover:text-[var(--t3-euc-ink)]"
             >

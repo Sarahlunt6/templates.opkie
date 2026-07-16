@@ -10,6 +10,9 @@ interface T4NavProps {
   city: string;
   state: string;
   bookingUrl: string;
+  /** Path of the template home ("/t4" in the hub, "/" in a client site) so
+   *  anchor links resolve from interior pages. Empty = same-page anchors. */
+  homeHref?: string;
 }
 
 const LINKS = [
@@ -26,6 +29,7 @@ export default function T4Nav({
   city,
   state,
   bookingUrl,
+  homeHref = "",
 }: T4NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -71,7 +75,7 @@ export default function T4Nav({
           }}
         >
           {/* the lockup — house over city, like a label stitched in a collar */}
-          <a href="#top" className="group flex flex-col gap-1">
+          <a href={`${homeHref}#top`} className="group flex flex-col gap-1">
             <span className="t4-display whitespace-nowrap text-[1.02rem] uppercase leading-none tracking-[0.22em] text-[var(--t4-ivory)] transition-colors duration-300 group-hover:text-[var(--t4-champagne-bright)] sm:text-[1.12rem]">
               {practiceName}
             </span>
@@ -97,7 +101,7 @@ export default function T4Nav({
                   />
                 )}
                 <a
-                  href={l.href}
+                  href={`${homeHref}${l.href}`}
                   className="t4-link t4-label whitespace-nowrap py-1 text-[var(--t4-ivory-soft)] transition-colors duration-300 hover:text-[var(--t4-ivory)]"
                 >
                   {l.label}
@@ -180,7 +184,7 @@ export default function T4Nav({
           {LINKS.map((l, i) => (
             <a
               key={l.href}
-              href={l.href}
+              href={`${homeHref}${l.href}`}
               onClick={() => setOpen(false)}
               className="flex items-baseline justify-between border-b border-[var(--t4-line-dark)] py-4"
               style={{

@@ -1,3 +1,5 @@
+import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
+
 interface HoursEntry {
   dayRange: string;
   structuralHours: string;
@@ -11,6 +13,9 @@ interface T1FooterProps {
   phone: string;
   bookingUrl: string;
   hours: HoursEntry[];
+  /** Path of the template home ("/t1" in the hub, "/" in a client site) so
+   *  the site-map links resolve from interior pages. */
+  homeHref?: string;
 }
 
 /**
@@ -27,6 +32,7 @@ export default function T1Footer({
   phone,
   bookingUrl,
   hours,
+  homeHref = "",
 }: T1FooterProps) {
   const tel = `tel:${phone.replace(/[^0-9+]/g, "")}`;
   const hasBooking = bookingUrl !== "none";
@@ -68,7 +74,7 @@ export default function T1Footer({
         </div>
 
         {/* Ruled link columns */}
-        <div className="grid grid-cols-1 gap-10 py-12 md:grid-cols-3 md:gap-8">
+        <div className="grid grid-cols-1 gap-10 py-12 md:grid-cols-4 md:gap-8">
           <div>
             <h3 className="t1-mono-label t1-mono-label-red">[ VISIT ]</h3>
             <address className="mt-4 font-sans text-sm not-italic leading-relaxed text-[#F3EFE6]/65">
@@ -123,6 +129,33 @@ export default function T1Footer({
             >
               BOOK ONLINE
             </a>
+          </div>
+
+          {/* Full site map — every page of the finished edition */}
+          <div>
+            <h3 className="t1-mono-label t1-mono-label-red">
+              [ THE FULL EDITION ]
+            </h3>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a
+                  href={homeHref || "/"}
+                  className="t1-mono-label !text-[#F3EFE6]/65 transition-colors duration-200 hover:!text-[#D92B21]"
+                >
+                  HOME
+                </a>
+              </li>
+              {SITE_PAGES.map((page) => (
+                <li key={page.slug}>
+                  <a
+                    href={pageHref(homeHref, page.slug)}
+                    className="t1-mono-label !text-[#F3EFE6]/65 transition-colors duration-200 hover:!text-[#D92B21]"
+                  >
+                    {page.label.toUpperCase()}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

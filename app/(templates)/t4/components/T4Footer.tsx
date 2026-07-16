@@ -1,11 +1,15 @@
 "use client";
 
 import type { LocationNAP } from "@/types/dentist";
+import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
 
 interface T4FooterProps {
   practiceName: string;
   locations: LocationNAP[];
   bookingUrl: string;
+  /** Path of the template home ("/t4" in the hub, "/" in a client site) so
+   *  anchor + site-map links resolve from interior pages. */
+  homeHref?: string;
 }
 
 const FOOTER_LINKS = [
@@ -21,6 +25,7 @@ export default function T4Footer({
   practiceName,
   locations,
   bookingUrl,
+  homeHref = "",
 }: T4FooterProps) {
   const primaryTel = `tel:${locations[0]?.phoneGBP.replace(/[^0-9+]/g, "")}`;
   const bookHref = bookingUrl !== "none" ? bookingUrl : primaryTel;
@@ -71,20 +76,50 @@ export default function T4Footer({
             </div>
           ))}
 
-          {/* in-page links */}
-          <div className="lg:col-span-2 lg:justify-self-end">
-            <ul className="space-y-2.5">
-              {FOOTER_LINKS.map((l) => (
-                <li key={l.href}>
+          {/* in-page links + the full collection */}
+          <div className="space-y-10 lg:col-span-2 lg:justify-self-end">
+            <div>
+              <p className="t4-label text-[var(--t4-champagne)]">This page</p>
+              <ul className="mt-4 space-y-2.5">
+                {FOOTER_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a
+                      href={`${homeHref}${l.href}`}
+                      className="t4-link t4-label whitespace-nowrap text-[var(--t4-ivory-faint)] transition-colors duration-300 hover:text-[var(--t4-ivory)]"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* full site map — every room of the finished site */}
+            <div>
+              <p className="t4-label text-[var(--t4-champagne)]">
+                The full collection
+              </p>
+              <ul className="mt-4 space-y-2.5">
+                <li>
                   <a
-                    href={l.href}
+                    href={homeHref || "/"}
                     className="t4-link t4-label whitespace-nowrap text-[var(--t4-ivory-faint)] transition-colors duration-300 hover:text-[var(--t4-ivory)]"
                   >
-                    {l.label}
+                    Home
                   </a>
                 </li>
-              ))}
-            </ul>
+                {SITE_PAGES.map((page) => (
+                  <li key={page.slug}>
+                    <a
+                      href={pageHref(homeHref, page.slug)}
+                      className="t4-link t4-label whitespace-nowrap text-[var(--t4-ivory-faint)] transition-colors duration-300 hover:text-[var(--t4-ivory)]"
+                    >
+                      {page.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 

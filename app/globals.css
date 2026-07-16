@@ -56,6 +56,14 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* Lenis (SmoothScrollProvider) drives the scroll wherever it's mounted —
+     it stamps `lenis` on <html>. CSS smooth-behavior must yield there or
+     the two animation systems fight and anchor jumps stall. Sites without
+     Lenis (scaffolded client repos) keep native smooth anchors above. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   body {
     font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
     color: var(--text-main);

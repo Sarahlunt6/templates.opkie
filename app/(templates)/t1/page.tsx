@@ -95,7 +95,7 @@ export default function Template1Page() {
   const firstHours = location.hoursOfOperation[0];
 
   return (
-    <div className="t1-root font-sans antialiased overflow-x-clip">
+    <div id="top" className="t1-root font-sans antialiased overflow-x-clip">
       <SchemaMarkup
         practiceData={clientMasterData}
         faqs={sampleFaqs}
@@ -120,12 +120,17 @@ export default function Template1Page() {
         bookingUrl={onlineBookingUrl}
         city={location.cityServed}
         state={location.stateServed}
-        hoursNote={`${firstHours.dayRange.toUpperCase()} — ${firstHours.structuralHours.toUpperCase()}`}
+        hoursNote={
+          firstHours
+            ? `${firstHours.dayRange.toUpperCase()} — ${firstHours.structuralHours.toUpperCase()}`
+            : ""
+        }
       />
       <T1Masthead
         practiceName={globalPracticeName}
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}
+        homeHref="/t1"
       />
 
       {/* Cover — the giant wordmark */}
@@ -386,6 +391,7 @@ export default function Template1Page() {
         phone={location.phoneGBP}
         bookingUrl={onlineBookingUrl}
         hours={location.hoursOfOperation}
+        homeHref="/t1"
       />
     </div>
   );

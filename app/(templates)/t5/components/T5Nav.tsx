@@ -8,6 +8,9 @@ interface T5NavProps {
   practiceName: string;
   phone: string;
   bookingUrl: string;
+  /** Path of the template home ("/t5" in the hub, "/" in a client site) so
+   *  anchor links resolve from interior pages. Empty = same-page anchors. */
+  homeHref?: string;
 }
 
 const LINKS = [
@@ -18,7 +21,12 @@ const LINKS = [
   { href: "#visit", label: "Come say hi" },
 ];
 
-export default function T5Nav({ practiceName, phone, bookingUrl }: T5NavProps) {
+export default function T5Nav({
+  practiceName,
+  phone,
+  bookingUrl,
+  homeHref = "",
+}: T5NavProps) {
   const [open, setOpen] = useState(false);
   const reduced = useReducedMotion();
 
@@ -46,7 +54,7 @@ export default function T5Nav({ practiceName, phone, bookingUrl }: T5NavProps) {
             className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 lg:px-10"
           >
             {/* the shop sign */}
-            <a href="#top" className="flex items-baseline gap-2.5">
+            <a href={`${homeHref}#top`} className="flex items-baseline gap-2.5">
               <span className="t5-display text-[1.15rem] leading-none text-[var(--t5-walnut)] sm:text-[1.3rem]">
                 {practiceName}
               </span>
@@ -57,7 +65,7 @@ export default function T5Nav({ practiceName, phone, bookingUrl }: T5NavProps) {
               {LINKS.map((l) => (
                 <a
                   key={l.href}
-                  href={l.href}
+                  href={`${homeHref}${l.href}`}
                   className="text-[0.92rem] font-medium text-[var(--t5-walnut-soft)] transition-colors duration-200 hover:text-[var(--t5-teal)]"
                 >
                   {l.label}
@@ -125,7 +133,7 @@ export default function T5Nav({ practiceName, phone, bookingUrl }: T5NavProps) {
           {LINKS.map((l, i) => (
             <a
               key={l.href}
-              href={l.href}
+              href={`${homeHref}${l.href}`}
               onClick={() => setOpen(false)}
               className="t5-display border-b-2 border-dotted border-[var(--t5-line)] py-4 text-[1.75rem] text-[var(--t5-walnut)]"
               style={{

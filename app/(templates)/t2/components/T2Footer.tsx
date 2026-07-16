@@ -1,8 +1,15 @@
 "use client";
 
 import { practice, location, telHref, bookingHref } from "./t2-lib";
+import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
 
-export default function T2Footer() {
+interface T2FooterProps {
+  /** Path of the template home ("/t2" in the hub, "/" in a client site) so
+   *  anchor + site-map links resolve from interior pages. */
+  homeHref?: string;
+}
+
+export default function T2Footer({ homeHref = "" }: T2FooterProps) {
   const year = new Date().getFullYear();
 
   return (
@@ -10,7 +17,7 @@ export default function T2Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Identity */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <p className="font-innovator text-lg font-medium tracking-tight text-[var(--t2p-text)]">
               {practice.globalPracticeName}
             </p>
@@ -21,7 +28,7 @@ export default function T2Footer() {
           </div>
 
           {/* Contact */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
             <p className="t2p-label mb-4">Contact</p>
             <address className="not-italic text-sm leading-relaxed text-[var(--t2p-text-70)]">
               {location.addressGBP}
@@ -50,7 +57,7 @@ export default function T2Footer() {
               ].map(([idx, label, href]) => (
                 <a
                   key={href}
-                  href={href}
+                  href={`${homeHref}${href}`}
                   className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors"
                 >
                   <span className="mr-2 text-[rgba(3,105,161,0.65)] group-hover:text-[var(--t2p-blue)] transition-colors">
@@ -65,6 +72,35 @@ export default function T2Footer() {
               >
                 <span className="mr-2">09</span>Book a visit
               </a>
+            </nav>
+          </div>
+
+          {/* Site map — every page of the finished site */}
+          <div className="md:col-span-2">
+            <p className="t2p-label mb-4">Site map</p>
+            <nav className="flex flex-col gap-2.5" aria-label="Site map">
+              {[
+                { slug: null, label: "Home" },
+                ...SITE_PAGES.map((page) => ({
+                  slug: page.slug,
+                  label: page.label,
+                })),
+              ].map((entry, i) => (
+                <a
+                  key={entry.slug ?? "home"}
+                  href={
+                    entry.slug === null
+                      ? homeHref || "/"
+                      : pageHref(homeHref, entry.slug)
+                  }
+                  className="group t2p-mono text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors"
+                >
+                  <span className="mr-2 text-[rgba(3,105,161,0.65)] group-hover:text-[var(--t2p-blue)] transition-colors">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {entry.label}
+                </a>
+              ))}
             </nav>
           </div>
         </div>

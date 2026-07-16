@@ -21,14 +21,57 @@ The scaffold script creates a **completely standalone Next.js project** in a sib
 templates-opkie/           ← Template source (this repo)
 client-name/              ← New standalone client site
 ├── app/                  ← Copied from chosen template
-├── components/           ← Shared components
+│   ├── page.tsx          ← Fully designed homepage
+│   ├── about/ services/ doctors/ new-patients/
+│   │   smile-gallery/ financing/ contact/
+│   │                     ← 7 wireframe interior pages (structure previews)
+│   └── components/       ← Template components (incl. the wire shell)
+├── components/           ← Shared components (incl. components/wireframe/)
 ├── data/                 ← Client data (placeholders replaced)
 ├── public/               ← Assets
+├── STYLE_GUIDE.md        ← The template's design contract (rebrand + build-out)
 ├── package.json          ← Independent dependencies
-├── README.md             ← Client-specific docs
+├── README.md             ← Client-specific docs (incl. build-out workflow)
 ├── MISSING_DATA.md       ← TODO list (if any fields missing)
 └── .git/                 ← Fresh git history
 ```
+
+---
+
+## Style Guide + Wireframe Workflow
+
+Every template ships with two build-out assets that travel into the client repo:
+
+**`STYLE_GUIDE.md` (client repo root)** — the template's design contract: palette
+variables, fonts, type scale, buttons, signature elements, layout, motion, do/don'ts,
+plus two workflow sections:
+
+- **Client rebrand checklist** (§11): the exact files/CSS variables to edit when the
+  client wants their own colors/fonts — the theme CSS palette block (always manual),
+  `app/layout.tsx` font swaps (keep the CSS variable names), `data/master.ts` theme
+  hexes, logo. The scaffold's `updateBrandColors` only swaps `--primary-brand` +
+  the Tailwind brand color from `brand.accent_color` — the template palette in
+  `*-theme.css` is always a manual/Claude edit driven by this checklist.
+- **Building out pages** (§12): how to turn each wireframe into a designed page,
+  with a suggested Claude prompt.
+
+**Wireframe interior pages** — `/about`, `/services`, `/doctors`, `/new-patients`,
+`/smile-gallery`, `/financing`, `/contact`. Each renders the template's REAL nav,
+footer, and mobile bar around a deliberately schematic gray body (shared blueprints
+in `components/wireframe/pages/`), so clients see exactly what's planned without
+mistaking it for final design. All are linked from the footer's site-map column and
+carry `noindex` metadata until built out.
+
+**The intended flow:**
+
+1. Scaffold the client repo (below).
+2. Edit `STYLE_GUIDE.md` + the theme CSS to the client's brand (checklist §11) — or
+   tell Claude: *"Apply the client's brand per STYLE_GUIDE.md §11: primary #…,
+   secondary #…, fonts X/Y."*
+3. Share the deployed preview — the client sees the designed homepage plus wireframes
+   of every coming page.
+4. Build out pages one at a time from their wireframes (checklist §12), removing each
+   page's `noindex` as it's approved.
 
 ---
 

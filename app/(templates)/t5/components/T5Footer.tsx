@@ -1,11 +1,15 @@
 "use client";
 
 import type { LocationNAP } from "@/types/dentist";
+import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
 
 interface T5FooterProps {
   practiceName: string;
   locations: LocationNAP[];
   bookingUrl: string;
+  /** Path of the template home ("/t5" in the hub, "/" in a client site) so
+   *  anchor + site-map links resolve from interior pages. */
+  homeHref?: string;
 }
 
 const FOOTER_LINKS = [
@@ -21,6 +25,7 @@ export default function T5Footer({
   practiceName,
   locations,
   bookingUrl,
+  homeHref = "",
 }: T5FooterProps) {
   const primaryTel = `tel:${locations[0]?.phoneGBP.replace(/[^0-9+]/g, "")}`;
   const bookHref = bookingUrl !== "none" ? bookingUrl : primaryTel;
@@ -33,7 +38,7 @@ export default function T5Footer({
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* the shop sign, after hours */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <p className="t5-display text-[1.5rem] text-[var(--t5-cream)]">
               {practiceName}
             </p>
@@ -72,20 +77,52 @@ export default function T5Footer({
             </div>
           ))}
 
-          {/* around the shop */}
-          <div className="lg:col-span-1">
-            <ul className="space-y-2">
-              {FOOTER_LINKS.map((l) => (
-                <li key={l.href}>
+          {/* around the shop + the whole shop */}
+          <div className="space-y-8 lg:col-span-2">
+            <div>
+              <p className="t5-kicker text-[var(--t5-marigold)]">
+                Around the shop
+              </p>
+              <ul className="mt-3 space-y-2">
+                {FOOTER_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a
+                      href={`${homeHref}${l.href}`}
+                      className="whitespace-nowrap text-[0.88rem] font-medium text-[rgba(255,246,232,0.72)] transition-colors duration-200 hover:text-[var(--t5-cream)]"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* full site map — every page of the finished site */}
+            <div>
+              <p className="t5-kicker text-[var(--t5-marigold)]">
+                The whole shop
+              </p>
+              <ul className="mt-3 space-y-2">
+                <li>
                   <a
-                    href={l.href}
+                    href={homeHref || "/"}
                     className="whitespace-nowrap text-[0.88rem] font-medium text-[rgba(255,246,232,0.72)] transition-colors duration-200 hover:text-[var(--t5-cream)]"
                   >
-                    {l.label}
+                    Home
                   </a>
                 </li>
-              ))}
-            </ul>
+                {SITE_PAGES.map((page) => (
+                  <li key={page.slug}>
+                    <a
+                      href={pageHref(homeHref, page.slug)}
+                      className="whitespace-nowrap text-[0.88rem] font-medium text-[rgba(255,246,232,0.72)] transition-colors duration-200 hover:text-[var(--t5-cream)]"
+                    >
+                      {page.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 

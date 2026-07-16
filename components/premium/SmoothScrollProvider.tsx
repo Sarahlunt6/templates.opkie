@@ -107,6 +107,11 @@ export default function SmoothScrollProvider({
       touchMultiplier: 1.8, // Enhanced touch responsiveness
       infinite,
       autoResize: true,
+      // Same-page anchor clicks (e.g. /t5#services while on /t5) must go
+      // through Lenis — the browser's own fragment scroll fights the
+      // animation loop and the page never moves. Cross-page anchor links
+      // full-navigate instead and are handled by the hash effect below.
+      anchors: true,
     });
 
     lenisRef.current = lenis;
@@ -124,6 +129,19 @@ export default function SmoothScrollProvider({
       rafRef.current = requestAnimationFrame(raf);
     };
     rafRef.current = requestAnimationFrame(raf);
+
+    // Honor a #fragment on full-page loads (e.g. arriving at /t5#menu from
+    // an interior page). Lenis owns the scroll position, so the browser's
+    // native fragment jump gets pulled back to Lenis's internal target —
+    // re-apply the fragment through Lenis instead. `#top` has no matching
+    // element and correctly stays at the top.
+    const { hash } = window.location;
+    if (hash) {
+      const target = document.getElementById(hash.slice(1));
+      if (target) {
+        lenis.scrollTo(target, { immediate: true, force: true });
+      }
+    }
 
     // Disable GSAP lag smoothing for buttery animation
     gsap.ticker.lagSmoothing(0);

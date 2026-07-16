@@ -14,7 +14,13 @@ const NAV_LINKS = [
   { href: "#visit", label: "Visit", index: "06" },
 ];
 
-export default function T2Nav() {
+interface T2NavProps {
+  /** Path of the template home ("/t2" in the hub, "/" in a client site) so
+   *  anchor links resolve from interior pages. Empty = same-page anchors. */
+  homeHref?: string;
+}
+
+export default function T2Nav({ homeHref = "" }: T2NavProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const reduced = useReducedMotion();
@@ -41,7 +47,7 @@ export default function T2Nav() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between gap-8 h-16 md:h-[4.5rem]">
             {/* Wordmark */}
-            <Link href="/t2" className="group flex items-baseline gap-3 shrink-0">
+            <Link href={homeHref || "/"} className="group flex items-baseline gap-3 shrink-0">
               <span className="font-innovator text-base md:text-lg font-medium tracking-tight text-[var(--t2p-text)] whitespace-nowrap">
                 {practice.globalPracticeName}
               </span>
@@ -57,7 +63,7 @@ export default function T2Nav() {
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={`${homeHref}${link.href}`}
                   className="group t2p-mono whitespace-nowrap text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors duration-300"
                 >
                   <span className="text-[rgba(3,105,161,0.65)] mr-1.5 group-hover:text-[var(--t2p-blue)] transition-colors duration-300">
@@ -125,7 +131,7 @@ export default function T2Nav() {
               {NAV_LINKS.map((link, i) => (
                 <motion.a
                   key={link.href}
-                  href={link.href}
+                  href={`${homeHref}${link.href}`}
                   onClick={() => setOpen(false)}
                   initial={reduced ? false : { opacity: 0, x: 24 }}
                   animate={{ opacity: 1, x: 0 }}

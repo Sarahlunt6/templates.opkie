@@ -6,6 +6,9 @@ interface T1MastheadProps {
   practiceName: string;
   phone: string;
   bookingUrl: string;
+  /** Path of the template home ("/t1" in the hub, "/" in a client site) so
+   *  anchor links resolve from interior pages. Empty = same-page anchors. */
+  homeHref?: string;
 }
 
 const NAV_LINKS = [
@@ -26,6 +29,7 @@ export default function T1Masthead({
   practiceName,
   phone,
   bookingUrl,
+  homeHref = "",
 }: T1MastheadProps) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -49,7 +53,7 @@ export default function T1Masthead({
         {/* Logotype — the one sanctioned Anton-below-2xl exception: it is the
             brand mark, and 2xl wraps long practice names at 375px */}
         <a
-          href="#top"
+          href={`${homeHref}#top`}
           className="flex items-center py-3 font-t1-press text-xl uppercase leading-none tracking-[0.01em] text-[#1A1713] md:text-2xl"
         >
           {practiceName}
@@ -64,7 +68,7 @@ export default function T1Masthead({
           {NAV_LINKS.map((link) => (
             <a
               key={link.index}
-              href={link.href}
+              href={`${homeHref}${link.href}`}
               className="t1-mono-label whitespace-nowrap transition-colors duration-200 hover:text-[#D92B21]"
             >
               {link.label}
