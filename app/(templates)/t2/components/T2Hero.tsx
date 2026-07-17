@@ -69,6 +69,7 @@ const HUD_PROXIMITY = 120;
 export default function T2Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const hudDotsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const reduced = useReducedMotion();
   // The headline reveal masks each line with overflow-hidden while it slides
   // up; once settled we drop the clip so tight leading can't cut descenders.
@@ -150,6 +151,30 @@ export default function T2Hero() {
       mq.removeEventListener("change", sync);
       detach?.();
     };
+  }, [reduced]);
+
+  // Defer the 1.6 MB ambient video until the page is idle, so it never
+  // competes with fonts/CSS/hero paint for first-load bandwidth. Reduced-
+  // motion visitors keep the still poster and never fetch it.
+  useEffect(() => {
+    if (reduced) return;
+    const el = videoRef.current;
+    if (!el) return;
+    const start = () => {
+      el.src = "/videos/hero-ambient-t2.mp4";
+      el.load();
+      el.play().catch(() => {});
+    };
+    const ric =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback
+        : null;
+    if (ric) {
+      const id = ric(start, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(start, 1200);
+    return () => clearTimeout(id);
   }, [reduced]);
 
   useEffect(() => {
