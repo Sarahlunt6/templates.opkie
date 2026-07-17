@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSmoothScroll } from "@/components/premium/SmoothScrollProvider";
 import { telHref } from "./hours";
+import { pageHref } from "@/components/wireframe/site-pages";
 
 interface T3HavenNavProps {
   practiceName: string;
@@ -13,11 +14,14 @@ interface T3HavenNavProps {
   homeHref?: string;
 }
 
+/** Main nav navigates PAGES (like the finished site); the homepage's
+ *  sections are reached by scrolling — nothing shouts here. */
 const NAV_LINKS = [
-  { href: "#comfort", label: "comfort" },
-  { href: "#services", label: "services" },
-  { href: "#doctors", label: "doctors" },
-  { href: "#visit", label: "visit" },
+  { slug: "about", label: "about" },
+  { slug: "services", label: "services" },
+  { slug: "doctors", label: "doctors" },
+  { slug: "new-patients", label: "new patients" },
+  { slug: "contact", label: "contact" },
 ];
 
 export default function T3HavenNav({
@@ -86,9 +90,8 @@ export default function T3HavenNav({
         <div className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <a
-              key={link.href}
-              href={`${homeHref}${link.href}`}
-              onClick={(e) => handleAnchor(e, link.href)}
+              key={link.slug}
+              href={pageHref(homeHref, link.slug)}
               className="text-sm font-light text-[var(--t3-moss-soft)] transition-colors duration-500 hover:text-[var(--t3-euc-ink)]"
             >
               {link.label}

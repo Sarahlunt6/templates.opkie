@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { pageHref } from "@/components/wireframe/site-pages";
 
 interface T1MastheadProps {
   practiceName: string;
@@ -12,13 +13,13 @@ interface T1MastheadProps {
 }
 
 const NAV_LINKS = [
-  // Curated quick-jump set (like the sibling templates' navs); every section
-  // still lives on the page with its [0X] chapter numeral.
-  { index: "01", label: "Services", href: "#services" },
-  { index: "02", label: "Doctors", href: "#doctors" },
-  { index: "04", label: "Financing", href: "#financing" },
-  { index: "05", label: "Reviews", href: "#reviews" },
-  { index: "07", label: "Visit", href: "#visit" },
+  // Main nav navigates PAGES (like the finished site); the homepage's
+  // chapters are read by scrolling, with their [0X] numerals on-page.
+  { index: "01", label: "About", slug: "about" },
+  { index: "02", label: "Services", slug: "services" },
+  { index: "03", label: "Doctors", slug: "doctors" },
+  { index: "04", label: "New patients", slug: "new-patients" },
+  { index: "05", label: "Contact", slug: "contact" },
 ];
 
 /**
@@ -68,7 +69,7 @@ export default function T1Masthead({
           {NAV_LINKS.map((link) => (
             <a
               key={link.index}
-              href={`${homeHref}${link.href}`}
+              href={pageHref(homeHref, link.slug)}
               className="t1-mono-label whitespace-nowrap transition-colors duration-200 hover:text-[#D92B21]"
             >
               {link.label}

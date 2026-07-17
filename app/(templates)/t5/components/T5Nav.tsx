@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MARIGOLD_EASE } from "./T5Reveal";
+import { pageHref } from "@/components/wireframe/site-pages";
 
 interface T5NavProps {
   practiceName: string;
@@ -13,12 +14,14 @@ interface T5NavProps {
   homeHref?: string;
 }
 
+/** Main nav navigates PAGES (like the finished site) — the homepage's
+ *  on-page sections stay reachable from the footer's anchor column. */
 const LINKS = [
-  { href: "#menu", label: "The menu" },
-  { href: "#smiles", label: "Smiles" },
-  { href: "#dentists", label: "Your dentists" },
-  { href: "#fair-and-square", label: "Pricing" },
-  { href: "#visit", label: "Come say hi" },
+  { slug: "about", label: "Our story" },
+  { slug: "services", label: "The menu" },
+  { slug: "doctors", label: "Your dentists" },
+  { slug: "new-patients", label: "First visit" },
+  { slug: "contact", label: "Come say hi" },
 ];
 
 export default function T5Nav({
@@ -64,8 +67,8 @@ export default function T5Nav({
             <div className="hidden items-center gap-7 lg:flex">
               {LINKS.map((l) => (
                 <a
-                  key={l.href}
-                  href={`${homeHref}${l.href}`}
+                  key={l.slug}
+                  href={pageHref(homeHref, l.slug)}
                   className="text-[0.92rem] font-medium text-[var(--t5-walnut-soft)] transition-colors duration-200 hover:text-[var(--t5-teal)]"
                 >
                   {l.label}
@@ -134,8 +137,8 @@ export default function T5Nav({
         <div className="flex flex-col">
           {LINKS.map((l, i) => (
             <a
-              key={l.href}
-              href={`${homeHref}${l.href}`}
+              key={l.slug}
+              href={pageHref(homeHref, l.slug)}
               onClick={() => setOpen(false)}
               className="t5-display border-b-2 border-dotted border-[var(--t5-line)] py-4 text-[1.75rem] text-[var(--t5-walnut)]"
               style={{

@@ -59,8 +59,10 @@ plus two workflow sections:
 `/smile-gallery`, `/financing`, `/contact`. Each renders the template's REAL nav,
 footer, and mobile bar around a deliberately schematic gray body (shared blueprints
 in `components/wireframe/pages/`), so clients see exactly what's planned without
-mistaking it for final design. All are linked from the footer's site-map column and
-carry `noindex` metadata until built out.
+mistaking it for final design. The **main nav navigates between these pages** exactly
+like the finished site will (the homepage's own sections are reached by scrolling, or
+via the footer's anchor column where the template has one), and the footer also carries
+a full site-map column. All wireframe pages carry `noindex` metadata until built out.
 
 **The intended flow:**
 

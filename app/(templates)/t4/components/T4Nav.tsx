@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ATELIER_EASE } from "./T4Reveal";
+import { pageHref } from "@/components/wireframe/site-pages";
 
 interface T4NavProps {
   practiceName: string;
@@ -15,12 +16,14 @@ interface T4NavProps {
   homeHref?: string;
 }
 
+/** Main nav navigates PAGES (like the finished site) — the homepage's
+ *  on-page sections stay reachable from the footer's anchor column. */
 const LINKS = [
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "The work" },
-  { href: "#doctors", label: "Doctors" },
-  { href: "#terms", label: "Financing" },
-  { href: "#visit", label: "Visit" },
+  { slug: "about", label: "About" },
+  { slug: "services", label: "Services" },
+  { slug: "doctors", label: "Doctors" },
+  { slug: "new-patients", label: "New patients" },
+  { slug: "contact", label: "Contact" },
 ];
 
 export default function T4Nav({
@@ -93,7 +96,7 @@ export default function T4Nav({
           {/* the row of rooms, set with diamond pins */}
           <div className="hidden items-center justify-center gap-5 lg:flex xl:gap-6">
             {LINKS.map((l, i) => (
-              <Fragment key={l.href}>
+              <Fragment key={l.slug}>
                 {i > 0 && (
                   <span
                     aria-hidden
@@ -101,7 +104,7 @@ export default function T4Nav({
                   />
                 )}
                 <a
-                  href={`${homeHref}${l.href}`}
+                  href={pageHref(homeHref, l.slug)}
                   className="t4-link t4-label whitespace-nowrap py-1 text-[var(--t4-ivory-soft)] transition-colors duration-300 hover:text-[var(--t4-ivory)]"
                 >
                   {l.label}
@@ -185,8 +188,8 @@ export default function T4Nav({
         <div className="flex flex-col">
           {LINKS.map((l, i) => (
             <a
-              key={l.href}
-              href={`${homeHref}${l.href}`}
+              key={l.slug}
+              href={pageHref(homeHref, l.slug)}
               onClick={() => setOpen(false)}
               className="flex items-baseline justify-between border-b border-[var(--t4-line-dark)] py-4"
               style={{

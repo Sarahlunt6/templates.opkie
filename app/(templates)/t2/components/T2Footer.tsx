@@ -48,10 +48,11 @@ export default function T2Footer({ homeHref = "" }: T2FooterProps) {
             <p className="t2p-label mb-4">Index</p>
             <nav className="flex flex-col gap-2.5" aria-label="Footer">
               {[
+                // On-page section jumps for the homepage. (No "04": the
+                // compare section was retired — the gaps suit the FDI joke.)
                 ["01", "Technology", "#technology"],
                 ["02", "Services", "#services"],
                 ["03", "Results", "#results"],
-                ["04", "Compare", "#compare"],
                 ["05", "Doctors", "#doctors"],
                 ["08", "Visit", "#visit"],
               ].map(([idx, label, href]) => (

@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { practice, location, bookingHref, telHref, EASE } from "./t2-lib";
+import { pageHref } from "@/components/wireframe/site-pages";
 
+/** Main nav navigates PAGES (like the finished site) — the homepage's
+ *  on-page sections stay reachable from the footer's Index column. */
 const NAV_LINKS = [
-  { href: "#technology", label: "Technology", index: "01" },
-  { href: "#services", label: "Services", index: "02" },
-  { href: "#results", label: "Results", index: "03" },
-  { href: "#compare", label: "Compare", index: "04" },
-  { href: "#doctors", label: "Doctors", index: "05" },
-  { href: "#visit", label: "Visit", index: "06" },
+  { slug: "about", label: "About", index: "01" },
+  { slug: "services", label: "Services", index: "02" },
+  { slug: "doctors", label: "Doctors", index: "03" },
+  { slug: "new-patients", label: "New patients", index: "04" },
+  { slug: "contact", label: "Contact", index: "05" },
 ];
 
 interface T2NavProps {
@@ -62,8 +64,8 @@ export default function T2Nav({ homeHref = "" }: T2NavProps) {
             <nav className="hidden xl:flex items-center gap-7 2xl:gap-9" aria-label="Primary">
               {NAV_LINKS.map((link) => (
                 <a
-                  key={link.href}
-                  href={`${homeHref}${link.href}`}
+                  key={link.slug}
+                  href={pageHref(homeHref, link.slug)}
                   className="group t2p-mono whitespace-nowrap text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--t2p-text-70)] hover:text-[var(--t2p-text)] transition-colors duration-300"
                 >
                   <span className="text-[var(--t2p-blue)] mr-1.5 group-hover:text-[var(--t2p-blue)] transition-colors duration-300">
@@ -130,8 +132,8 @@ export default function T2Nav({ homeHref = "" }: T2NavProps) {
             >
               {NAV_LINKS.map((link, i) => (
                 <motion.a
-                  key={link.href}
-                  href={`${homeHref}${link.href}`}
+                  key={link.slug}
+                  href={pageHref(homeHref, link.slug)}
                   onClick={() => setOpen(false)}
                   initial={reduced ? false : { opacity: 0, x: 24 }}
                   animate={{ opacity: 1, x: 0 }}
