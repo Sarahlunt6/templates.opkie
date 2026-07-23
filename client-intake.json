@@ -1,43 +1,47 @@
 {
-  "client_slug": "musso",
-  "template": "t1",
+  "_instructions": "Client intake for Camenzuli Dental Excellence — template t3 (Haven). Data verified against live site camenzulidental.com on 2026-07-21. Unverified stats/membership left null on purpose (see PRD data-gap section); scaffold will surface them in MISSING_DATA.md.",
+  "client_slug": "camenzuli-dental",
+  "template": "t3",
   "practice": {
-    "name": "Musso Family Dentistry",
-    "tagline_override": "Where Garland Families Go for Honest, Stress-Free, Modern Dentistry",
-    "phone": "972-840-8477",
-    "phone_link": "tel:+19728408477",
+    "name": "Camenzuli Dental Excellence",
+    "tagline_override": null,
+    "phone": "(504) 895-3400",
+    "phone_link": "tel:+15048953400",
     "address": {
-      "street": "513 W. Centerville Rd.",
-      "city": "Garland",
-      "state": "TX",
-      "zip": "75041"
+      "street": "5100 Tchoupitoulas Street, Suite 300",
+      "city": "New Orleans",
+      "state": "LA",
+      "zip": "70115"
     },
     "hours": {
-      "monday": "7:30am–4:30pm",
-      "tuesday": "7:30am–4:30pm",
-      "wednesday": "7:30am–4:30pm",
-      "thursday": "7:30am–4:30pm",
+      "monday": "8:00 AM - 5:00 PM",
+      "tuesday": "8:00 AM - 5:00 PM",
+      "wednesday": "8:00 AM - 5:00 PM",
+      "thursday": "8:00 AM - 5:00 PM",
       "friday": "Closed",
       "saturday": "Closed",
       "sunday": "Closed"
     }
   },
   "doctor": {
-    "name": "Dr. Mike Musso",
-    "title": "DDS",
-    "years_experience": 34,
+    "name": "Dr. Robert Camenzuli, DDS",
+    "title": "General, Implant & Sedation Dentist",
+    "years_experience": 25,
     "credentials": [
-      "UT Dental Branch Houston, 1990",
-      "Las Vegas Institute for Advanced Dental Studies",
-      "Invisalign certified",
-      "ADA, TDA, Dallas County Dental Society member"
+      "Fellow, Academy of General Dentistry (FAGD)",
+      "Fellow, International College of Oral Implantologists (ICOI)",
+      "Fellow, American College of Dentists (FACD)",
+      "58 CE hours toward AGD Mastership (top 1% pathway)",
+      "IV Sedation Licensed",
+      "ZBLC Immediate Implant Protocol",
+      "14 Years In-House Orthodontics"
     ],
-    "bio_short": "Garland native with 30+ years of relationship-focused family dentistry, advanced cosmetic training from LVI"
+    "bio_short": "Dr. Camenzuli has spent 25 years building the clinical capability to help patients who would otherwise avoid care entirely. His mother lost all her teeth by age 16 to untreated dental fear — that experience drove three fellowships, IV sedation licensure, and advanced implant protocols. He treats the full scope of dental care in-house, without the referrals and fragmented experience most general practices require."
   },
-  "booking_link": "https://book.modento.io/c/6a62f1b85dcc40359b8a4ac5440a869a/schedule",
+  "booking_link": "https://www.patientsreach.com/schedule/CamenzuliDentalExcellence",
   "brand": {
-    "accent_color": null,
-    "logo_path": null
+    "accent_color": "#1d6fa5",
+    "logo_path": "/images/logo-camenzuli.svg"
   },
   "membership": {
     "individual_price": null,
@@ -48,16 +52,16 @@
   "stats": {
     "google_rating": null,
     "review_count": null,
-    "patients_served": 9682,
+    "patients_served": null,
     "satisfaction_rate": null
   },
   "trust_signals": {
-    "has_same_day_emergency": true,
+    "has_same_day_emergency": false,
     "has_sedation_anxiety_care": true,
-    "insurance_networks": ["PPO plans"]
+    "insurance_networks": []
   },
   "vercel": {
-    "project_name": "musso-family-dentistry",
-    "domain": null
+    "project_name": "camenzuli-dental",
+    "domain": "camenzulidental.com"
   }
 }
