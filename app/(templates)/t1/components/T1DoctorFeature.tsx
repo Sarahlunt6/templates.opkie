@@ -66,7 +66,7 @@ export default function T1DoctorFeature({
           role="tablist"
           aria-label="Our doctors"
           onKeyDown={onKeyDown}
-          className="mt-12 flex flex-col gap-px border border-[rgba(26,23,19,0.15)] bg-[rgba(26,23,19,0.15)] sm:flex-row lg:mt-16"
+          className="mt-12 flex flex-col gap-px border border-[var(--t1-hairline)] bg-[var(--t1-hairline)] sm:flex-row lg:mt-16"
         >
           {doctors.map((d, i) => {
             const on = i === active;
@@ -83,7 +83,7 @@ export default function T1DoctorFeature({
                 tabIndex={on ? 0 : -1}
                 onClick={() => setActive(i)}
                 className={`flex flex-1 items-center gap-4 p-5 text-left transition-colors duration-300 md:p-6 ${
-                  on ? "bg-[#F3EFE6]" : "bg-[#E9E3D4] hover:bg-[#EFEADC]"
+                  on ? "bg-[var(--t1-paper)]" : "bg-[var(--t1-paper-deep)] hover:bg-[var(--t1-paper-mid)]"
                 }`}
               >
                 <span
@@ -96,7 +96,7 @@ export default function T1DoctorFeature({
                 <span className="min-w-0">
                   <span
                     className={`block font-t1-press text-lg uppercase leading-tight transition-colors duration-300 ${
-                      on ? "text-[#1A1713]" : "text-[#6B675E]"
+                      on ? "text-[var(--t1-ink)]" : "text-[var(--t1-stone)]"
                     }`}
                   >
                     {d.name}
@@ -128,7 +128,7 @@ export default function T1DoctorFeature({
                 feature well rather than another aligned grid */}
             <div className="lg:col-span-5 lg:mt-24">
               <figure className="group">
-                <div className="relative aspect-[3/4] w-full overflow-hidden border border-[#1A1713] bg-[#E9E3D4]">
+                <div className="relative aspect-[3/4] w-full overflow-hidden border border-[var(--t1-ink)] bg-[var(--t1-paper-deep)]">
                   <Image
                     src={PORTRAITS[active] ?? PORTRAITS[0]}
                     alt={`Portrait of ${doc.name}, ${doc.role}`}
@@ -142,7 +142,7 @@ export default function T1DoctorFeature({
                     className="t1-halftone pointer-events-none absolute inset-x-0 bottom-0 h-24"
                   />
                 </div>
-                <figcaption className="flex items-baseline justify-between gap-4 border-x border-b border-[#1A1713] px-3 py-2">
+                <figcaption className="flex items-baseline justify-between gap-4 border-x border-b border-[var(--t1-ink)] px-3 py-2">
                   <span className="t1-mono-label t1-mono-label-stone">
                     FIG. 02 — THE DOCTOR
                   </span>
@@ -156,17 +156,17 @@ export default function T1DoctorFeature({
             {/* Profile text */}
             <div className="lg:col-span-7">
               <p className="t1-mono-label t1-mono-label-red">[ THE PROFILE ]</p>
-              <h3 className="mt-4 font-t1-press text-[clamp(2rem,4.5vw,3.4rem)] uppercase leading-[0.95] text-[#1A1713]">
+              <h3 className="mt-4 font-t1-press text-[clamp(2rem,4.5vw,3.4rem)] uppercase leading-[0.95] text-[var(--t1-ink)]">
                 {doc.name}
               </h3>
               <p className="t1-mono-label t1-mono-label-stone mt-3">
                 {doc.role.toUpperCase()}
               </p>
 
-              <p className="mt-6 max-w-prose font-sans text-base leading-[1.8] text-[#1A1713]">
+              <p className="mt-6 max-w-prose font-sans text-base leading-[1.8] text-[var(--t1-ink)]">
                 {doc.biography}
               </p>
-              <p className="mt-4 max-w-prose font-sans text-base leading-[1.8] text-[#6B675E]">
+              <p className="mt-4 max-w-prose font-sans text-base leading-[1.8] text-[var(--t1-stone)]">
                 Patients arrive from across {city} with photographs, questions,
                 and occasionally decades of putting this off. The first hour ends
                 with an honest account of what is possible, what is necessary,
@@ -176,31 +176,31 @@ export default function T1DoctorFeature({
               {/* Credentials — mono index list, pulled left to overlap the
                   portrait's right edge at lg+ */}
               <ul
-                className="mt-8 bg-[#F3EFE6] lg:-ml-24 lg:border lg:border-[rgba(26,23,19,0.15)] lg:p-6"
+                className="mt-8 bg-[var(--t1-paper)] lg:-ml-24 lg:border lg:border-[var(--t1-hairline)] lg:p-6"
                 aria-label={`Credentials of ${doc.name}`}
               >
                 {doc.credentials.map((credential, i) => (
                   <li
                     key={credential}
-                    className="flex items-baseline gap-5 border-t border-[rgba(26,23,19,0.15)] py-3"
+                    className="flex items-baseline gap-5 border-t border-[var(--t1-hairline)] py-3"
                   >
                     <span className="t1-mono-label t1-mono-label-red shrink-0">
                       [ {String(i + 1).padStart(2, "0")} ]
                     </span>
-                    <span className="font-sans text-sm leading-relaxed text-[#1A1713]">
+                    <span className="font-sans text-sm leading-relaxed text-[var(--t1-ink)]">
                       {credential}
                     </span>
                   </li>
                 ))}
                 <li
-                  className="border-t border-[rgba(26,23,19,0.15)]"
+                  className="border-t border-[var(--t1-hairline)]"
                   aria-hidden="true"
                 />
               </ul>
 
               {/* Pull quote — the one red statement of the spread */}
-              <blockquote className="mt-10 border-l-2 border-[#D92B21] pl-6">
-                <p className="font-t1-press text-2xl uppercase leading-tight text-[#1A1713] md:text-3xl">
+              <blockquote className="mt-10 border-l-2 border-[var(--t1-red)] pl-6">
+                <p className="font-t1-press text-2xl uppercase leading-tight text-[var(--t1-ink)] md:text-3xl">
                   &ldquo;The best dentistry is the kind you eventually stop
                   thinking about.&rdquo;
                 </p>

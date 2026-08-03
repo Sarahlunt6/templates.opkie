@@ -169,7 +169,7 @@ export default function T2Reviews() {
               >
                 <motion.div
                   className="h-full bg-[var(--t2p-blue)]"
-                  style={{ boxShadow: "0 0 8px rgba(56, 189, 248, 0.5)" }}
+                  style={{ boxShadow: "0 0 8px rgb(var(--t2p-scan-rgb) / 0.5)" }}
                   initial={
                     reduced
                       ? { width: `${(avgRating / 5) * 100}%` }
@@ -213,7 +213,7 @@ export default function T2Reviews() {
                     <span className="h-[2px] flex-1 overflow-hidden rounded-full bg-[rgba(23,32,42,0.1)]">
                       <motion.span
                         className="block h-full bg-[var(--t2p-scan)]"
-                        style={{ boxShadow: "0 0 6px rgba(56, 189, 248, 0.5)" }}
+                        style={{ boxShadow: "0 0 6px rgb(var(--t2p-scan-rgb) / 0.5)" }}
                         initial={
                           reduced
                             ? { width: `${(s.count / maxSource) * 100}%` }
@@ -256,7 +256,7 @@ export default function T2Reviews() {
                 aria-pressed={active}
                 className={`t2p-mono inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[0.625rem] uppercase tracking-[0.14em] transition-colors duration-300 ${
                   active
-                    ? "border-[var(--t2p-blue)] bg-[rgba(3,105,161,0.08)] text-[var(--t2p-blue)]"
+                    ? "border-[var(--t2p-blue)] bg-[rgb(var(--t2p-blue-rgb)_/_0.08)] text-[var(--t2p-blue)]"
                     : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-blue)] hover:text-[var(--t2p-text)]"
                 }`}
               >
@@ -294,13 +294,13 @@ export default function T2Reviews() {
               {/* Scan-light edge — ignites when the card powers on */}
               <span
                 className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[var(--t2p-scan)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                style={{ boxShadow: "0 0 12px rgba(56, 189, 248, 0.6)" }}
+                style={{ boxShadow: "0 0 12px rgb(var(--t2p-scan-rgb) / 0.6)" }}
                 aria-hidden="true"
               />
               {/* Oversized quotation mark, kept faint behind the metadata */}
               <span
                 className="font-innovator pointer-events-none absolute right-6 top-2 select-none text-6xl leading-none"
-                style={{ color: "rgba(56, 189, 248, 0.16)" }}
+                style={{ color: "rgb(var(--t2p-scan-rgb) / 0.16)" }}
                 aria-hidden="true"
               >
                 &rdquo;

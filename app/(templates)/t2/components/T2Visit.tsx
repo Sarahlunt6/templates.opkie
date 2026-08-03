@@ -62,7 +62,7 @@ export default function T2Visit() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="group mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-[var(--t2p-scan-dim)] bg-[rgba(56,189,248,0.06)] px-6 md:px-8 py-5 hover:bg-[rgba(56,189,248,0.1)] transition-colors duration-300"
+            className="group mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-[var(--t2p-scan-dim)] bg-[rgb(var(--t2p-scan-rgb)_/_0.06)] px-6 md:px-8 py-5 hover:bg-[rgb(var(--t2p-scan-rgb)_/_0.1)] transition-colors duration-300"
           >
             <span className="flex items-center gap-4">
               <PhoneCall
@@ -121,7 +121,7 @@ export default function T2Visit() {
                     key={d.day}
                     role="row"
                     className={`flex items-baseline justify-between gap-4 py-2.5 border-b border-[var(--t2p-line)] last:border-b-0 ${
-                      isToday ? "bg-[rgba(56,189,248,0.07)] -mx-3 px-3" : ""
+                      isToday ? "bg-[rgb(var(--t2p-scan-rgb)_/_0.07)] -mx-3 px-3" : ""
                     }`}
                   >
                     <span

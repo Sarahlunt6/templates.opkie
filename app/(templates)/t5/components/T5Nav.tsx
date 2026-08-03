@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MARIGOLD_EASE } from "./T5Reveal";
 import { pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T5NavProps {
   practiceName: string;
@@ -59,7 +60,9 @@ export default function T5Nav({
             {/* the shop sign */}
             <a href={`${homeHref}#top`} className="flex items-baseline gap-2.5">
               <span className="t5-display text-[1.15rem] leading-none text-[var(--t5-walnut)] sm:text-[1.3rem]">
-                {practiceName}
+                <BrandMark height={26} maxWidth={220} label={practiceName}>
+                  {practiceName}
+                </BrandMark>
               </span>
             </a>
 

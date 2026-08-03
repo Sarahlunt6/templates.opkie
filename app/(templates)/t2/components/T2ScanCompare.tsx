@@ -135,7 +135,7 @@ export default function T2ScanCompare() {
               onClick={() => setCaseIdx(i)}
               className={`t2p-mono rounded-full px-4 py-2 text-[0.6875rem] uppercase tracking-[0.14em] border transition-colors duration-300 ${
                 i === caseIdx
-                  ? "border-[var(--t2p-blue)] text-[var(--t2p-blue)] bg-[rgba(3,105,161,0.06)]"
+                  ? "border-[var(--t2p-blue)] text-[var(--t2p-blue)] bg-[rgb(var(--t2p-blue-rgb)_/_0.06)]"
                   : "border-[var(--t2p-line-strong)] text-[var(--t2p-text-70)] hover:border-[var(--t2p-scan-dim)]"
               }`}
             >
@@ -204,7 +204,7 @@ export default function T2ScanCompare() {
               <span className="t2p-beam-v h-full w-[2px]" aria-hidden="true" />
               {/* HUD marker handle */}
               <span
-                className="absolute top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-[var(--t2p-scan)] bg-white shadow-[0_0_14px_rgba(56,189,248,0.6)]"
+                className="absolute top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-[var(--t2p-scan)] bg-white shadow-[0_0_14px_rgb(var(--t2p-scan-rgb)_/_0.6)]"
                 aria-hidden="true"
               />
             </div>

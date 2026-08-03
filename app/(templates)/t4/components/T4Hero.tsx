@@ -52,7 +52,7 @@ export default function T4Hero({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(90% 55% at 72% 0%, rgba(201,165,106,0.09), transparent 60%)",
+            "radial-gradient(90% 55% at 72% 0%, rgb(var(--t4-champagne-rgb) / 0.09), transparent 60%)",
         }}
       />
 

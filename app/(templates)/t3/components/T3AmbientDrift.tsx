@@ -18,7 +18,7 @@ export default function T3AmbientDrift() {
         className="t3-drift-a absolute -top-[20%] -left-[15%] h-[80vmax] w-[80vmax] rounded-full opacity-[0.85]"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(109,139,125,0.3) 0%, rgba(109,139,125,0.11) 45%, transparent 70%)",
+            "radial-gradient(circle at center, rgb(var(--t3-euc-rgb) / 0.3) 0%, rgb(var(--t3-euc-rgb) / 0.11) 45%, transparent 70%)",
           filter: "blur(40px)",
         }}
       />

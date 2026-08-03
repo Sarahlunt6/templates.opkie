@@ -101,7 +101,7 @@ export default function T3HavenVisit({
                     key={day.day}
                     className={`flex items-center justify-between border-t border-[var(--t3-line)] px-2 py-3 text-[15px] font-light transition-colors duration-500 ${
                       isToday
-                        ? "rounded-lg bg-[rgba(109,139,125,0.1)] text-[var(--t3-moss)]"
+                        ? "rounded-lg bg-[rgb(var(--t3-euc-rgb)_/_0.1)] text-[var(--t3-moss)]"
                         : "text-[var(--t3-moss-soft)]"
                     }`}
                   >

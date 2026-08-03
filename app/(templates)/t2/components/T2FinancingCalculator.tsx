@@ -155,8 +155,8 @@ function BalanceChart({
       >
         <defs>
           <linearGradient id="t2p-bal-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(56,189,248,0.35)" />
-            <stop offset="100%" stopColor="rgba(56,189,248,0)" />
+            <stop offset="0%" stopColor="rgb(var(--t2p-scan-rgb) / 0.35)" />
+            <stop offset="100%" stopColor="rgb(var(--t2p-scan-rgb) / 0)" />
           </linearGradient>
         </defs>
         <path d={area} fill="url(#t2p-bal-fill)" />
@@ -197,7 +197,7 @@ function OptionRow({
       aria-pressed={selected}
       className={`flex w-full items-center gap-4 rounded-xl border px-4 py-3.5 text-left transition-colors duration-300 ${
         selected
-          ? "border-[var(--t2p-blue)] bg-[rgba(3,105,161,0.05)]"
+          ? "border-[var(--t2p-blue)] bg-[rgb(var(--t2p-blue-rgb)_/_0.05)]"
           : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-scan-dim)]"
       }`}
     >

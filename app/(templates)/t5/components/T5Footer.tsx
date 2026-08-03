@@ -2,6 +2,7 @@
 
 import type { LocationNAP } from "@/types/dentist";
 import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T5FooterProps {
   practiceName: string;
@@ -40,7 +41,9 @@ export default function T5Footer({
           {/* the shop sign, after hours */}
           <div className="lg:col-span-4">
             <p className="t5-display text-[1.5rem] text-[var(--t5-cream)]">
-              {practiceName}
+              <BrandMark height={34} maxWidth={250} on="dark" label={practiceName}>
+                {practiceName}
+              </BrandMark>
             </p>
             <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-[rgba(255,246,232,0.72)]">
               The neighborhood dental office — honest prices, gentle hands,

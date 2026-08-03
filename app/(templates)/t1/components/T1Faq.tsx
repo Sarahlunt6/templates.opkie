@@ -18,12 +18,12 @@ export default function T1Faq({ faqs }: { faqs: FaqItem[] }) {
 
   return (
     <Fade>
-      <dl className="border-t border-[rgba(26,23,19,0.15)]">
+      <dl className="border-t border-[var(--t1-hairline)]">
         {faqs.map((f, i) => {
           const isOpen = open === f.id;
           const panelId = `t1-faq-${f.id}`;
           return (
-            <div key={f.id} className="border-b border-[rgba(26,23,19,0.15)]">
+            <div key={f.id} className="border-b border-[var(--t1-hairline)]">
               <dt>
                 <button
                   type="button"
@@ -35,7 +35,7 @@ export default function T1Faq({ faqs }: { faqs: FaqItem[] }) {
                   <span className="t1-mono-label t1-mono-label-red shrink-0">
                     [ {String(i + 1).padStart(2, "0")} ]
                   </span>
-                  <span className="flex-1 font-t1-press text-xl uppercase leading-tight text-[#1A1713] transition-colors duration-300 group-hover:text-[#D92B21] md:text-2xl">
+                  <span className="flex-1 font-t1-press text-xl uppercase leading-tight text-[var(--t1-ink)] transition-colors duration-300 group-hover:text-[var(--t1-red)] md:text-2xl">
                     {f.question}
                   </span>
                   <span
@@ -58,7 +58,7 @@ export default function T1Faq({ faqs }: { faqs: FaqItem[] }) {
                     transition={{ duration: 0.4, ease: T1_EASE }}
                     className="overflow-hidden"
                   >
-                    <p className="max-w-3xl pb-6 pl-[3.25rem] font-sans text-[15px] leading-[1.8] text-[#6B675E] md:pl-[4.75rem] md:text-base">
+                    <p className="max-w-3xl pb-6 pl-[3.25rem] font-sans text-[15px] leading-[1.8] text-[var(--t1-stone)] md:pl-[4.75rem] md:text-base">
                       {f.answer}
                     </p>
                   </motion.dd>

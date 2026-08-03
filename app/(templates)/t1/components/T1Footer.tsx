@@ -1,4 +1,5 @@
 import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface HoursEntry {
   dayRange: string;
@@ -43,14 +44,14 @@ export default function T1Footer({
   const wordmarkSize = `calc(100vw / ${(practiceName.length * 0.52).toFixed(2)})`;
 
   return (
-    <footer className="overflow-hidden bg-[#1A1713] text-[#F3EFE6]">
+    <footer className="overflow-hidden bg-[var(--t1-ink)] text-[var(--t1-paper)]">
       <div className="mx-auto max-w-[1500px] px-4 pt-20 md:px-8 md:pt-28 xl:px-12">
         {/* Closing statement */}
-        <div className="border-b border-[rgba(243,239,230,0.22)] pb-14 md:pb-20">
+        <div className="border-b border-[var(--t1-hairline-light)] pb-14 md:pb-20">
           <p className="t1-mono-label t1-mono-label-red-paper">[ THE LAST WORD ]</p>
           <h2 className="mt-6 max-w-4xl font-t1-press text-[clamp(2.2rem,6vw,4.5rem)] uppercase leading-[0.95]">
             Your smile belongs on{" "}
-            <em className="t1-italic normal-case text-[#D92B21]">
+            <em className="t1-italic normal-case text-[var(--t1-red)]">
               the front page.
             </em>
           </h2>
@@ -66,7 +67,7 @@ export default function T1Footer({
             </a>
             <a
               href={tel}
-              className="t1-mono-label !text-[#F3EFE6] underline decoration-[#D92B21] decoration-1 underline-offset-4 transition-colors duration-200 hover:text-[#D92B21]"
+              className="t1-mono-label !text-[var(--t1-paper)] underline decoration-[var(--t1-red)] decoration-1 underline-offset-4 transition-colors duration-200 hover:text-[var(--t1-red)]"
             >
               OR CALL {phone}
             </a>
@@ -77,14 +78,14 @@ export default function T1Footer({
         <div className="grid grid-cols-1 gap-10 py-12 md:grid-cols-4 md:gap-8">
           <div>
             <h3 className="t1-mono-label t1-mono-label-red-paper">[ VISIT ]</h3>
-            <address className="mt-4 font-sans text-sm not-italic leading-relaxed text-[#F3EFE6]/65">
+            <address className="mt-4 font-sans text-sm not-italic leading-relaxed text-[var(--t1-paper-65)]">
               {address}
               <br />
               {city}, {state}
             </address>
             <a
               href={tel}
-              className="mt-3 inline-block font-t1-press text-2xl text-[#F3EFE6] transition-colors duration-200 hover:text-[#D92B21]"
+              className="mt-3 inline-block font-t1-press text-2xl text-[var(--t1-paper)] transition-colors duration-200 hover:text-[var(--t1-red)]"
             >
               {phone}
             </a>
@@ -96,14 +97,14 @@ export default function T1Footer({
               {hours.map((entry) => (
                 <li
                   key={entry.dayRange}
-                  className="flex items-baseline justify-between gap-6 font-sans text-sm text-[#F3EFE6]/65"
+                  className="flex items-baseline justify-between gap-6 font-sans text-sm text-[var(--t1-paper-65)]"
                 >
                   <span>{entry.dayRange}</span>
                   <span
                     className={`t1-mono-label ${
                       /closed/i.test(entry.structuralHours)
-                        ? "!text-[#F3EFE6]/60"
-                        : "!text-[#F3EFE6]/80"
+                        ? "!text-[var(--t1-paper-60)]"
+                        : "!text-[var(--t1-paper-80)]"
                     }`}
                   >
                     {entry.structuralHours.toUpperCase()}
@@ -117,7 +118,7 @@ export default function T1Footer({
             <h3 className="t1-mono-label t1-mono-label-red-paper">
               [ APPOINTMENTS ]
             </h3>
-            <p className="mt-4 font-sans text-sm leading-relaxed text-[#F3EFE6]/65">
+            <p className="mt-4 font-sans text-sm leading-relaxed text-[var(--t1-paper-65)]">
               New patients are welcomed by reservation.
             </p>
             <a
@@ -125,7 +126,7 @@ export default function T1Footer({
               {...(hasBooking
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className="t1-mono-label mt-5 inline-block border border-[rgba(243,239,230,0.4)] px-4 py-3 !text-[#F3EFE6] transition-colors duration-200 hover:border-[#D92B21] hover:bg-[#D92B21]"
+              className="t1-mono-label mt-5 inline-block border border-[var(--t1-paper-40)] px-4 py-3 !text-[var(--t1-paper)] transition-colors duration-200 hover:border-[var(--t1-red)] hover:bg-[var(--t1-red)]"
             >
               BOOK ONLINE
             </a>
@@ -140,7 +141,7 @@ export default function T1Footer({
               <li>
                 <a
                   href={homeHref || "/"}
-                  className="t1-mono-label !text-[#F3EFE6]/65 transition-colors duration-200 hover:!text-[#D92B21]"
+                  className="t1-mono-label !text-[var(--t1-paper-65)] transition-colors duration-200 hover:!text-[var(--t1-red)]"
                 >
                   HOME
                 </a>
@@ -149,7 +150,7 @@ export default function T1Footer({
                 <li key={page.slug}>
                   <a
                     href={pageHref(homeHref, page.slug)}
-                    className="t1-mono-label !text-[#F3EFE6]/65 transition-colors duration-200 hover:!text-[#D92B21]"
+                    className="t1-mono-label !text-[var(--t1-paper-65)] transition-colors duration-200 hover:!text-[var(--t1-red)]"
                   >
                     {page.label.toUpperCase()}
                   </a>
@@ -160,24 +161,36 @@ export default function T1Footer({
         </div>
 
         {/* Legal line */}
-        <div className="flex flex-col gap-2 border-t border-[rgba(243,239,230,0.22)] py-5 sm:flex-row sm:items-baseline sm:justify-between">
-          <p className="t1-mono-label !text-[#F3EFE6]/60">
+        <div className="flex flex-col gap-2 border-t border-[var(--t1-hairline-light)] py-5 sm:flex-row sm:items-baseline sm:justify-between">
+          <p className="t1-mono-label !text-[var(--t1-paper-60)]">
             © {year} {practiceName.toUpperCase()}. ALL RIGHTS RESERVED.
           </p>
-          <p className="t1-mono-label !text-[#F3EFE6]/60">
+          <p className="t1-mono-label !text-[var(--t1-paper-60)]">
             SET IN ANTON, INTER &amp; JETBRAINS MONO
           </p>
         </div>
       </div>
 
-      {/* The closing statement — the entire name, full width, cropped */}
-      <p
-        aria-hidden="true"
-        className="mt-4 whitespace-nowrap text-center font-t1-press uppercase leading-[0.78] tracking-[0.005em] text-[#F3EFE6]"
-        style={{ fontSize: wordmarkSize, marginBottom: `calc(${wordmarkSize} * -0.14)` }}
+      {/* The closing statement — the entire name, full width, cropped.
+          A supplied logo signs off in its place, held to a sane size:
+          a 400px mark blown up to the viewport would only show its
+          pixels, and the point of the slot is the sign-off, not the
+          scale. */}
+      <BrandMark
+        height={76}
+        maxWidth={460}
+        on="dark"
+        label={practiceName}
+        className="mb-14 mt-12 w-full justify-center"
       >
-        {practiceName}
-      </p>
+        <p
+          aria-hidden="true"
+          className="mt-4 whitespace-nowrap text-center font-t1-press uppercase leading-[0.78] tracking-[0.005em] text-[var(--t1-paper)]"
+          style={{ fontSize: wordmarkSize, marginBottom: `calc(${wordmarkSize} * -0.14)` }}
+        >
+          {practiceName}
+        </p>
+      </BrandMark>
     </footer>
   );
 }

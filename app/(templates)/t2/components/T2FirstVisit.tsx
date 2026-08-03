@@ -64,7 +64,7 @@ export default function T2FirstVisit() {
               className="absolute left-[12.5%] top-0 h-px"
               style={{
                 background: "var(--t2p-scan)",
-                boxShadow: "0 0 8px rgba(56, 189, 248, 0.5)",
+                boxShadow: "0 0 8px rgb(var(--t2p-scan-rgb) / 0.5)",
               }}
               initial={reduced ? { width: "75%" } : { width: 0 }}
               whileInView={{ width: "75%" }}

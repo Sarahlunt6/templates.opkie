@@ -3,6 +3,7 @@
 import type { LocationNAP } from "@/types/dentist";
 import { telHref } from "./hours";
 import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T3HavenFooterProps {
   practiceName: string;
@@ -38,7 +39,9 @@ export default function T3HavenFooter({
                 aria-hidden="true"
                 className="h-2 w-2 rounded-full bg-[#a8bfb2]"
               />
-              {practiceName}
+              <BrandMark height={28} maxWidth={230} on="dark" label={practiceName}>
+                {practiceName}
+              </BrandMark>
             </p>
             <p className="t3-serif max-w-xs text-xl leading-relaxed text-[#c9d6cd]">
               whenever you&rsquo;re ready, we&rsquo;ll be gentle.
@@ -57,7 +60,7 @@ export default function T3HavenFooter({
               <p className="pt-2">
                 <a
                   href={telHref(location.phoneGBP)}
-                  className="text-[15px] font-light text-[#e6ece7] underline decoration-[#6d8b7d] underline-offset-4 transition-colors duration-500 hover:text-white"
+                  className="text-[15px] font-light text-[#e6ece7] underline decoration-[var(--t3-euc)] underline-offset-4 transition-colors duration-500 hover:text-white"
                 >
                   {location.phoneGBP}
                 </a>
@@ -85,7 +88,7 @@ export default function T3HavenFooter({
               href={hasBooking ? bookingUrl : telHref(location.phoneGBP)}
               target={hasBooking ? "_blank" : undefined}
               rel={hasBooking ? "noopener noreferrer" : undefined}
-              className="mt-6 inline-block rounded-full border border-[#6d8b7d] px-6 py-2.5 text-sm font-light text-[#e6ece7] transition-colors duration-500 hover:bg-[#6d8b7d] hover:text-[var(--t3-moss)]"
+              className="mt-6 inline-block rounded-full border border-[var(--t3-euc)] px-6 py-2.5 text-sm font-light text-[#e6ece7] transition-colors duration-500 hover:bg-[var(--t3-euc)] hover:text-[var(--t3-moss)]"
             >
               Book a visit
             </a>

@@ -68,7 +68,7 @@ export default function T3HavenDoctors({
                       }`}
                       style={{
                         background:
-                          "radial-gradient(circle at 50% 40%, rgba(109,139,125,0.18), transparent 70%)",
+                          "radial-gradient(circle at 50% 40%, rgb(var(--t3-euc-rgb) / 0.18), transparent 70%)",
                       }}
                     />
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[var(--t3-shadow-soft)] transition-shadow duration-700 group-hover:shadow-[var(--t3-shadow-bloom)] sm:rounded-[2.5rem]">

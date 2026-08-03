@@ -89,7 +89,7 @@ export default function T2ToolTabs() {
                 }`}
                 style={{
                   background: "var(--t2p-scan)",
-                  boxShadow: "0 0 8px rgba(56, 189, 248, 0.6)",
+                  boxShadow: "0 0 8px rgb(var(--t2p-scan-rgb) / 0.6)",
                 }}
               />
             </button>

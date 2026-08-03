@@ -49,7 +49,7 @@ export default function T2Faq() {
                   onClick={() => setOpenIdx(open ? null : i)}
                   aria-expanded={open}
                   aria-controls={panelId}
-                  className="group flex w-full items-center gap-5 md:gap-8 px-5 md:px-8 py-5 md:py-6 text-left transition-colors duration-300 hover:bg-[rgba(56,189,248,0.05)]"
+                  className="group flex w-full items-center gap-5 md:gap-8 px-5 md:px-8 py-5 md:py-6 text-left transition-colors duration-300 hover:bg-[rgb(var(--t2p-scan-rgb)_/_0.05)]"
                 >
                   <span
                     className={`t2p-mono text-[0.6875rem] tracking-[0.18em] transition-colors duration-300 ${
@@ -88,7 +88,7 @@ export default function T2Faq() {
                           className="pointer-events-none absolute top-0 bottom-0 z-10 w-px"
                           style={{
                             background: "var(--t2p-scan)",
-                            boxShadow: "0 0 12px rgba(56, 189, 248, 0.6)",
+                            boxShadow: "0 0 12px rgb(var(--t2p-scan-rgb) / 0.6)",
                           }}
                           initial={{ left: "0%", opacity: 0 }}
                           animate={{ left: "100%", opacity: [0, 1, 1, 0] }}

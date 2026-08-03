@@ -86,7 +86,7 @@ export default function T3BreathGuide({ hasSedation }: T3BreathGuideProps) {
               className="absolute inset-0 rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle at center, rgba(109,139,125,0.28) 0%, rgba(109,139,125,0.1) 50%, transparent 72%)",
+                  "radial-gradient(circle at center, rgb(var(--t3-euc-rgb) / 0.28) 0%, rgb(var(--t3-euc-rgb) / 0.1) 50%, transparent 72%)",
               }}
               animate={
                 reduceMotion
@@ -103,7 +103,7 @@ export default function T3BreathGuide({ hasSedation }: T3BreathGuideProps) {
               className="absolute inset-[27%] rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle at 42% 38%, rgba(109,139,125,0.5), rgba(86,110,97,0.34) 70%)",
+                  "radial-gradient(circle at 42% 38%, rgb(var(--t3-euc-rgb) / 0.5), rgba(86,110,97,0.34) 70%)",
                 boxShadow: "0 24px 60px -20px rgba(46,59,52,0.25)",
               }}
               animate={

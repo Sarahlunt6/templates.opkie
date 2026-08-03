@@ -13,6 +13,7 @@
   --t4-umber: #291c15; /* elevated dark surfaces */
   --t4-mahogany: #362519; /* card hover, borders on dark */
   --t4-champagne: #c9a56a; /* brass accent on dark */
+  --t4-champagne-rgb: 201 165 106;
   --t4-champagne-bright: #e6cb96; /* brass hover / highlights */
   --t4-brass-ink: #8a6a33; /* AA-safe brass for text on porcelain */
   --t4-porcelain: #f2eadd; /* light "salon" rooms */
@@ -25,14 +26,14 @@
   --t4-ivory-faint: rgba(246, 240, 230, 0.48);
   --t4-espresso-soft: rgba(30, 20, 16, 0.76);
   --t4-espresso-faint: rgba(30, 20, 16, 0.52);
-  --t4-line-dark: rgba(201, 165, 106, 0.26); /* brass hairline on dark */
+  --t4-line-dark: rgb(var(--t4-champagne-rgb) / 0.26); /* brass hairline on dark */
   --t4-line-light: rgba(30, 20, 16, 0.16); /* espresso hairline on porcelain */
   --t4-shadow-deep: 0 30px 80px -30px rgba(0, 0, 0, 0.75);
   --t4-shadow-salon: 0 24px 60px -28px rgba(30, 20, 16, 0.28);
 
   /* scoped overrides so shared primitives inherit the house accent */
-  --primary-brand: #c9a56a;
-  --secondary-accent: #e6cb96;
+  --primary-brand: var(--t4-champagne);
+  --secondary-accent: var(--t4-champagne-bright);
   --bg-canvas: #1e1410;
   --text-main: #f6f0e6;
 
@@ -42,7 +43,7 @@
 }
 
 .t4-atelier ::selection {
-  background-color: rgba(201, 165, 106, 0.35);
+  background-color: rgb(var(--t4-champagne-rgb) / 0.35);
   color: var(--t4-ivory);
 }
 
@@ -191,7 +192,7 @@
 .t4-atelier .t4-btn-outline:hover {
   border-color: var(--t4-champagne);
   color: var(--t4-champagne-bright);
-  background-color: rgba(201, 165, 106, 0.06);
+  background-color: rgb(var(--t4-champagne-rgb) / 0.06);
 }
 .t4-atelier .t4-salon .t4-btn-outline {
   border-color: rgba(30, 20, 16, 0.35);
@@ -248,7 +249,7 @@
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(30, 20, 16, 0) 55%, rgba(30, 20, 16, 0.38) 100%),
-    radial-gradient(120% 90% at 50% 0%, rgba(201, 165, 106, 0.1), transparent 55%);
+    radial-gradient(120% 90% at 50% 0%, rgb(var(--t4-champagne-rgb) / 0.1), transparent 55%);
 }
 
 /* the vitrine spotlight — a soft cone of light from above */

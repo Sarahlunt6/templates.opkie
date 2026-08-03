@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ATELIER_EASE } from "./T4Reveal";
 import { pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T4NavProps {
   practiceName: string;
@@ -80,7 +81,9 @@ export default function T4Nav({
           {/* the lockup — house over city, like a label stitched in a collar */}
           <a href={`${homeHref}#top`} className="group flex flex-col gap-1">
             <span className="t4-display whitespace-nowrap text-[1.02rem] uppercase leading-none tracking-[0.22em] text-[var(--t4-ivory)] transition-colors duration-300 group-hover:text-[var(--t4-champagne-bright)] sm:text-[1.12rem]">
-              {practiceName}
+              <BrandMark height={24} maxWidth={210} on="dark" label={practiceName}>
+                {practiceName}
+              </BrandMark>
             </span>
             <span className="flex items-center gap-2">
               <span
@@ -167,8 +170,8 @@ export default function T4Nav({
           className="mx-auto h-px max-w-[88rem] transition-colors duration-500 lg:mx-12 xl:mx-auto"
           style={{
             backgroundColor: scrolled
-              ? "rgba(201, 165, 106, 0.38)"
-              : "rgba(201, 165, 106, 0.22)",
+              ? "rgb(var(--t4-champagne-rgb) / 0.38)"
+              : "rgb(var(--t4-champagne-rgb) / 0.22)",
           }}
         />
       </motion.header>

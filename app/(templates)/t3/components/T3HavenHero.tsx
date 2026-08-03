@@ -310,7 +310,7 @@ export default function T3HavenHero({
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(46,59,52,0.32), transparent 45%), radial-gradient(90% 70% at 12% 108%, rgba(109,139,125,0.4), transparent 60%), radial-gradient(70% 60% at 95% -10%, rgba(232,239,227,0.35), transparent 55%)",
+                  "linear-gradient(to top, rgba(46,59,52,0.32), transparent 45%), radial-gradient(90% 70% at 12% 108%, rgb(var(--t3-euc-rgb) / 0.4), transparent 60%), radial-gradient(70% 60% at 95% -10%, rgba(232,239,227,0.35), transparent 55%)",
               }}
             />
 

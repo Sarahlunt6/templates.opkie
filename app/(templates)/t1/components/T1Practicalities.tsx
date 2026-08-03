@@ -50,12 +50,12 @@ export default function T1Practicalities({
         <Fade>
           <aside
             aria-label="Same-day emergency care"
-            className="mt-12 flex flex-col gap-2 border border-[#D92B21] px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+            className="mt-12 flex flex-col gap-2 border border-[var(--t1-red)] px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
           >
             <p className="t1-mono-label t1-mono-label-red shrink-0">
               [ SAME-DAY EMERGENCIES ]
             </p>
-            <p className="font-sans text-sm leading-relaxed text-[#1A1713] sm:text-right">
+            <p className="font-sans text-sm leading-relaxed text-[var(--t1-ink)] sm:text-right">
               A cracked tooth does not wait for a convenient hour. Time is
               held each day for urgent care —{" "}
               <a href={tel} className="t1-link whitespace-nowrap font-medium">
@@ -68,23 +68,23 @@ export default function T1Practicalities({
       )}
 
       {/* Facts header */}
-      <div className="mt-12 border-b border-[rgba(26,23,19,0.15)] pb-3">
+      <div className="mt-12 border-b border-[var(--t1-hairline)] pb-3">
         <p className="t1-mono-label t1-mono-label-red">[ THE FACTS ]</p>
       </div>
 
       {/* The facts — ruled grid */}
-      <div className="mt-4 grid grid-cols-1 gap-px border border-[rgba(26,23,19,0.15)] bg-[rgba(26,23,19,0.15)] lg:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-px border border-[var(--t1-hairline)] bg-[var(--t1-hairline)] lg:grid-cols-2">
         {/* Hours */}
-        <div className="bg-[#F3EFE6] p-6 md:p-8">
+        <div className="bg-[var(--t1-paper)] p-6 md:p-8">
           <Fade>
             <h3 className="t1-mono-label t1-mono-label-red">[ HOURS ]</h3>
             <ul className="mt-4">
               {hours.map((entry) => (
                 <li
                   key={entry.dayRange}
-                  className="flex items-baseline justify-between gap-6 border-t border-[rgba(26,23,19,0.15)] py-3"
+                  className="flex items-baseline justify-between gap-6 border-t border-[var(--t1-hairline)] py-3"
                 >
-                  <span className="font-sans text-sm text-[#1A1713]">
+                  <span className="font-sans text-sm text-[var(--t1-ink)]">
                     {entry.dayRange}
                   </span>
                   <span
@@ -99,7 +99,7 @@ export default function T1Practicalities({
                 </li>
               ))}
               <li
-                className="border-t border-[rgba(26,23,19,0.15)]"
+                className="border-t border-[var(--t1-hairline)]"
                 aria-hidden="true"
               />
             </ul>
@@ -111,7 +111,7 @@ export default function T1Practicalities({
                 </h3>
                 <a
                   href={tel}
-                  className="t1-link mt-3 inline-block font-t1-press text-2xl text-[#1A1713]"
+                  className="t1-link mt-3 inline-block font-t1-press text-2xl text-[var(--t1-ink)]"
                 >
                   {phone}
                 </a>
@@ -120,7 +120,7 @@ export default function T1Practicalities({
                 <h3 className="t1-mono-label t1-mono-label-red">
                   [ ADDRESS ]
                 </h3>
-                <address className="mt-3 font-sans text-sm not-italic leading-relaxed text-[#1A1713]">
+                <address className="mt-3 font-sans text-sm not-italic leading-relaxed text-[var(--t1-ink)]">
                   {address}
                   <br />
                   {city}, {state}
@@ -142,10 +142,10 @@ export default function T1Practicalities({
         </div>
 
         {/* Map — framed like a printed plate */}
-        <div className="bg-[#F3EFE6] p-6 md:p-8">
+        <div className="bg-[var(--t1-paper)] p-6 md:p-8">
           <Fade delay={0.05}>
             <h3 className="t1-mono-label t1-mono-label-red">[ THE MAP ]</h3>
-            <div className="mt-4 border border-[#1A1713]">
+            <div className="mt-4 border border-[var(--t1-ink)]">
               <div className="relative aspect-[4/3] w-full">
                 <GoogleMapEmbed
                   mapUrl={mapsEmbedUrl}
@@ -165,7 +165,7 @@ export default function T1Practicalities({
 
       {/* Neighborhoods — ruled closing line */}
       <Fade delay={0.05}>
-        <div className="mt-8 flex flex-col gap-2 border-t border-[rgba(26,23,19,0.15)] pt-4 sm:flex-row sm:items-baseline sm:gap-6">
+        <div className="mt-8 flex flex-col gap-2 border-t border-[var(--t1-hairline)] pt-4 sm:flex-row sm:items-baseline sm:gap-6">
           <p className="t1-mono-label t1-mono-label-red shrink-0">
             [ AT HOME IN ]
           </p>

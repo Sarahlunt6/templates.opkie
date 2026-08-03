@@ -86,22 +86,22 @@ export default function T1PatientLetters({
   };
 
   return (
-    <div className="grid grid-cols-1 gap-px border border-[rgba(26,23,19,0.15)] bg-[rgba(26,23,19,0.15)] md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-px border border-[var(--t1-hairline)] bg-[var(--t1-hairline)] md:grid-cols-3">
       {/* Rating summary — the ink card */}
-      <div className="bg-[#1A1713] text-[#F3EFE6]">
+      <div className="bg-[var(--t1-ink)] text-[var(--t1-paper)]">
         <Fade className="h-full">
           <div className="flex h-full flex-col justify-between p-6 md:p-8">
-            <p className="t1-mono-label !text-[#F3EFE6]/60">[ THE VERDICT ]</p>
+            <p className="t1-mono-label !text-[var(--t1-paper-60)]">[ THE VERDICT ]</p>
             <div className="py-10">
               <p
-                className="font-t1-press text-[clamp(5rem,10vw,8rem)] leading-none text-[#D92B21]"
+                className="font-t1-press text-[clamp(5rem,10vw,8rem)] leading-none text-[var(--t1-red)]"
                 aria-label={`Rated ${avgRating} out of 5`}
               >
                 {avgRating}
               </p>
-              <p className="t1-mono-label mt-3 !text-[#F3EFE6]/60">OUT OF 5</p>
+              <p className="t1-mono-label mt-3 !text-[var(--t1-paper-60)]">OUT OF 5</p>
             </div>
-            <p className="t1-mono-label !text-[#F3EFE6]/70">
+            <p className="t1-mono-label !text-[var(--t1-paper-70)]">
               FROM {n} VERIFIED PATIENTS
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function T1PatientLetters({
 
       {/* Featured quote — the carousel panel */}
       <div
-        className="bg-[#F3EFE6] md:col-span-2"
+        className="bg-[var(--t1-paper)] md:col-span-2"
         onMouseEnter={pauseRef.current.enter}
         onMouseLeave={pauseRef.current.leave}
         onFocus={pauseRef.current.enter}
@@ -132,7 +132,7 @@ export default function T1PatientLetters({
               </span>
               <span
                 aria-hidden="true"
-                className="font-t1-press text-5xl leading-none text-[#D92B21]"
+                className="font-t1-press text-5xl leading-none text-[var(--t1-red)]"
               >
                 &ldquo;
               </span>
@@ -154,7 +154,7 @@ export default function T1PatientLetters({
                   transition={{ duration: 0.4, ease: T1_EASE }}
                   className="flex min-h-[9rem] w-full flex-col md:min-h-[11rem]"
                 >
-                  <p className="flex-1 font-sans text-lg leading-[1.7] text-[#1A1713] md:text-xl md:leading-[1.65]">
+                  <p className="flex-1 font-sans text-lg leading-[1.7] text-[var(--t1-ink)] md:text-xl md:leading-[1.65]">
                     {active.reviewText}
                   </p>
                   <footer className="mt-6">
@@ -170,7 +170,7 @@ export default function T1PatientLetters({
             </div>
 
             {/* Control row: counter · ticks · arrows */}
-            <div className="mt-6 flex items-center justify-between gap-4 border-t border-[rgba(26,23,19,0.15)] pt-4">
+            <div className="mt-6 flex items-center justify-between gap-4 border-t border-[var(--t1-hairline)] pt-4">
               <span className="t1-mono-label t1-mono-label-stone whitespace-nowrap">
                 {String(index + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
               </span>
@@ -190,8 +190,8 @@ export default function T1PatientLetters({
                     <span
                       className={`block h-0.5 w-6 transition-colors duration-300 ${
                         i === index
-                          ? "bg-[#D92B21]"
-                          : "bg-[rgba(26,23,19,0.25)] group-hover:bg-[rgba(26,23,19,0.5)]"
+                          ? "bg-[var(--t1-red)]"
+                          : "bg-[var(--t1-ink-25)] group-hover:bg-[var(--t1-ink-50)]"
                       }`}
                     />
                   </button>
@@ -204,7 +204,7 @@ export default function T1PatientLetters({
                   type="button"
                   onClick={() => paginate(-1)}
                   aria-label="Previous testimonial"
-                  className="flex h-9 w-9 items-center justify-center border border-[rgba(26,23,19,0.25)] text-[#1A1713] transition-colors duration-200 hover:border-[#D92B21] hover:bg-[#D92B21] hover:text-[#F3EFE6]"
+                  className="flex h-9 w-9 items-center justify-center border border-[var(--t1-ink-25)] text-[var(--t1-ink)] transition-colors duration-200 hover:border-[var(--t1-red)] hover:bg-[var(--t1-red)] hover:text-[var(--t1-paper)]"
                 >
                   <span aria-hidden="true" className="text-base leading-none">
                     &larr;
@@ -214,7 +214,7 @@ export default function T1PatientLetters({
                   type="button"
                   onClick={() => paginate(1)}
                   aria-label="Next testimonial"
-                  className="flex h-9 w-9 items-center justify-center border border-[rgba(26,23,19,0.25)] text-[#1A1713] transition-colors duration-200 hover:border-[#D92B21] hover:bg-[#D92B21] hover:text-[#F3EFE6]"
+                  className="flex h-9 w-9 items-center justify-center border border-[var(--t1-ink-25)] text-[var(--t1-ink)] transition-colors duration-200 hover:border-[var(--t1-red)] hover:bg-[var(--t1-red)] hover:text-[var(--t1-paper)]"
                 >
                   <span aria-hidden="true" className="text-base leading-none">
                     &rarr;

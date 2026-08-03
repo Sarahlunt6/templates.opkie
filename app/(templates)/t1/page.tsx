@@ -107,7 +107,7 @@ export default function Template1Page() {
       />
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[#1A1713] focus:px-4 focus:py-2 focus:text-[#F3EFE6]"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[var(--t1-ink)] focus:px-4 focus:py-2 focus:text-[var(--t1-paper)]"
       >
         Skip to content
       </a>
@@ -154,7 +154,7 @@ export default function Template1Page() {
         {/* Statement band — the standard of care (about / mission) */}
         <section
           aria-label="The standard of care"
-          className="t1-col-rules border-y border-[rgba(26,23,19,0.15)] bg-[#E9E3D4] px-4 py-16 md:px-8 md:py-24 xl:px-12"
+          className="t1-col-rules border-y border-[var(--t1-hairline)] bg-[var(--t1-paper-deep)] px-4 py-16 md:px-8 md:py-24 xl:px-12"
         >
           <div className="mx-auto max-w-[1500px]">
             <T1Craft

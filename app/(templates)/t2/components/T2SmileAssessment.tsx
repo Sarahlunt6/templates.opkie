@@ -191,7 +191,7 @@ export default function T2SmileAssessment() {
                               aria-pressed={on}
                               className={`relative flex items-start gap-3.5 rounded-xl p-4 text-left border transition-colors duration-300 ${
                                 on
-                                  ? "border-[var(--t2p-blue)] bg-[rgba(3,105,161,0.05)]"
+                                  ? "border-[var(--t2p-blue)] bg-[rgb(var(--t2p-blue-rgb)_/_0.05)]"
                                   : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-scan-dim)]"
                               }`}
                             >
@@ -245,7 +245,7 @@ export default function T2SmileAssessment() {
                         onClick={() => fileRef.current?.click()}
                         className={`mt-7 w-full rounded-xl border border-dashed p-8 text-center transition-colors duration-300 ${
                           photo
-                            ? "border-[var(--t2p-scan-dim)] bg-[rgba(56,189,248,0.05)]"
+                            ? "border-[var(--t2p-scan-dim)] bg-[rgb(var(--t2p-scan-rgb)_/_0.05)]"
                             : "border-[var(--t2p-line-strong)] hover:border-[var(--t2p-scan-dim)]"
                         }`}
                       >
@@ -395,7 +395,7 @@ export default function T2SmileAssessment() {
 
                   {step === "complete" && (
                     <motion.div key="complete" {...fade} className="py-6 text-center">
-                      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[var(--t2p-scan-dim)] bg-[rgba(56,189,248,0.08)]">
+                      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[var(--t2p-scan-dim)] bg-[rgb(var(--t2p-scan-rgb)_/_0.08)]">
                         <Check
                           className="h-7 w-7 text-[var(--t2p-blue)]"
                           strokeWidth={1.5}

@@ -88,10 +88,10 @@ export default function T1Hero({
       id="top"
       ref={sectionRef}
       aria-label={`${practiceName} — introduction`}
-      className="t1-col-rules relative overflow-hidden border-b border-[rgba(26,23,19,0.15)]"
+      className="t1-col-rules relative overflow-hidden border-b border-[var(--t1-hairline)]"
     >
       {/* Dateline row */}
-      <div className="mx-auto flex max-w-[1500px] items-baseline justify-between gap-4 border-b border-[rgba(26,23,19,0.08)] px-4 py-3 md:px-8 xl:px-12">
+      <div className="mx-auto flex max-w-[1500px] items-baseline justify-between gap-4 border-b border-[var(--t1-hairline-soft)] px-4 py-3 md:px-8 xl:px-12">
         <motion.p className="t1-mono-label" {...rise(0.05)}>
           [ {city}, {state} ]
         </motion.p>
@@ -111,7 +111,7 @@ export default function T1Hero({
       {/* Wordmark + photo interleave */}
       <div className="relative pt-8 md:pt-12">
         <motion.h1
-          className="relative z-0 whitespace-nowrap text-center font-t1-press uppercase leading-[0.84] tracking-[0.005em] text-[#D92B21]"
+          className="relative z-0 whitespace-nowrap text-center font-t1-press uppercase leading-[0.84] tracking-[0.005em] text-[var(--t1-red)]"
           style={settleEnabled ? { letterSpacing: wordTracking } : undefined}
         >
           <span className="sr-only">{practiceName}</span>
@@ -132,7 +132,7 @@ export default function T1Hero({
             initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.15, ease: T1_EASE }}
-            className="group relative border border-[#1A1713] bg-[#E9E3D4]"
+            className="group relative border border-[var(--t1-ink)] bg-[var(--t1-paper-deep)]"
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden md:aspect-[16/10]">
               <Image
@@ -149,7 +149,7 @@ export default function T1Hero({
                 className="t1-halftone pointer-events-none absolute inset-x-0 bottom-0 h-16"
               />
             </div>
-            <figcaption className="flex items-baseline justify-between gap-4 border-t border-[#1A1713] px-3 py-2">
+            <figcaption className="flex items-baseline justify-between gap-4 border-t border-[var(--t1-ink)] px-3 py-2">
               <span className="t1-mono-label t1-mono-label-stone">
                 FIG. 01 — THE PRACTICE
               </span>
@@ -163,11 +163,11 @@ export default function T1Hero({
           {avgRating !== null && (
             <motion.aside
               aria-label="Patient rating"
-              className="mt-3 border border-[#1A1713] bg-[#F3EFE6] px-4 py-3 lg:absolute lg:-left-[9.5rem] lg:top-10 lg:mt-0 lg:w-36 xl:-left-44 xl:w-40"
+              className="mt-3 border border-[var(--t1-ink)] bg-[var(--t1-paper)] px-4 py-3 lg:absolute lg:-left-[9.5rem] lg:top-10 lg:mt-0 lg:w-36 xl:-left-44 xl:w-40"
               {...rise(0.35)}
             >
-              <p className="font-t1-press text-4xl leading-none text-[#1A1713]">
-                <span aria-hidden="true" className="mr-1 text-[#D92B21]">
+              <p className="font-t1-press text-4xl leading-none text-[var(--t1-ink)]">
+                <span aria-hidden="true" className="mr-1 text-[var(--t1-red)]">
                   ★
                 </span>
                 {avgRating}
@@ -180,13 +180,13 @@ export default function T1Hero({
 
           <motion.aside
             aria-label="Care availability"
-            className="mt-3 border border-[#1A1713] bg-[#1A1713] px-4 py-3 text-[#F3EFE6] lg:absolute lg:-right-[9.5rem] lg:bottom-16 lg:mt-0 lg:w-36 xl:-right-44 xl:w-40"
+            className="mt-3 border border-[var(--t1-ink)] bg-[var(--t1-ink)] px-4 py-3 text-[var(--t1-paper)] lg:absolute lg:-right-[9.5rem] lg:bottom-16 lg:mt-0 lg:w-36 xl:-right-44 xl:w-40"
             {...rise(0.45)}
           >
             <p className="font-t1-press text-2xl uppercase leading-[0.95]">
               {hasSameDayEmergency ? "Same-day" : "Careful"}
             </p>
-            <p className="t1-mono-label mt-2 !text-[#F3EFE6]/70">
+            <p className="t1-mono-label mt-2 !text-[var(--t1-paper-70)]">
               {hasSameDayEmergency
                 ? "EMERGENCY CARE, BY PHONE"
                 : "APPOINTMENTS, BY RESERVATION"}
@@ -198,11 +198,11 @@ export default function T1Hero({
       {/* Statement + CTA */}
       <div className="mx-auto max-w-[1500px] px-4 pb-16 pt-14 md:px-8 md:pb-24 md:pt-24 xl:px-12">
         <motion.h2
-          className="mx-auto max-w-4xl text-center font-t1-press text-[clamp(1.9rem,5vw,3.5rem)] uppercase leading-[0.95] text-[#1A1713]"
+          className="mx-auto max-w-4xl text-center font-t1-press text-[clamp(1.9rem,5vw,3.5rem)] uppercase leading-[0.95] text-[var(--t1-ink)]"
           {...rise(0.25)}
         >
           Good dentistry deserves{" "}
-          <em className="t1-italic normal-case text-[#D92B21]">
+          <em className="t1-italic normal-case text-[var(--t1-red)]">
             to be seen.
           </em>
         </motion.h2>

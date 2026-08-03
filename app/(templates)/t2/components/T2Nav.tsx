@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { practice, location, bookingHref, telHref, EASE } from "./t2-lib";
 import { pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 /** Main nav navigates PAGES (like the finished site) — the homepage's
  *  on-page sections stay reachable from the footer's Index column. */
@@ -51,7 +52,13 @@ export default function T2Nav({ homeHref = "" }: T2NavProps) {
             {/* Wordmark */}
             <Link href={homeHref || "/"} className="group flex items-baseline gap-3 shrink-0">
               <span className="font-innovator text-base md:text-lg font-medium tracking-tight text-[var(--t2p-text)] whitespace-nowrap">
-                {practice.globalPracticeName}
+                <BrandMark
+                  height={24}
+                  maxWidth={210}
+                  label={practice.globalPracticeName}
+                >
+                  {practice.globalPracticeName}
+                </BrandMark>
               </span>
               {/* City tag: shown on tablet and on ultrawide, hidden at xl where
                   it would compete with the full horizontal nav */}

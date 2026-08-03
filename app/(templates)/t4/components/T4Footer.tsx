@@ -2,6 +2,7 @@
 
 import type { LocationNAP } from "@/types/dentist";
 import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T4FooterProps {
   practiceName: string;
@@ -40,7 +41,9 @@ export default function T4Footer({
           {/* wordmark + the standing invitation */}
           <div className="lg:col-span-4">
             <p className="t4-display text-[1.35rem] uppercase tracking-[0.16em] text-[var(--t4-ivory)]">
-              {practiceName}
+              <BrandMark height={32} maxWidth={250} on="dark" label={practiceName}>
+                {practiceName}
+              </BrandMark>
             </p>
             <p className="mt-4 max-w-sm font-t4-body text-[0.92rem] font-light leading-relaxed text-[var(--t4-ivory-faint)]">
               Cosmetic and general dentistry, practiced with a tailor's

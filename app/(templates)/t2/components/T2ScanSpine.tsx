@@ -28,7 +28,7 @@ export default function T2ScanSpine() {
           style={{
             scaleY: scrollYProgress,
             boxShadow:
-              "0 0 8px rgba(56, 189, 248, 0.7), 0 0 22px rgba(3, 105, 161, 0.4)",
+              "0 0 8px rgb(var(--t2p-scan-rgb) / 0.7), 0 0 22px rgb(var(--t2p-blue-rgb) / 0.4)",
           }}
         />
       )}

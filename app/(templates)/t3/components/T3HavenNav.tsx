@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSmoothScroll } from "@/components/premium/SmoothScrollProvider";
 import { telHref } from "./hours";
 import { pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T3HavenNavProps {
   practiceName: string;
@@ -82,7 +83,9 @@ export default function T3HavenNav({
             aria-hidden="true"
           />
           <span className="text-[17px] font-light tracking-[0.04em] text-[var(--t3-moss)]">
-            {practiceName}
+            <BrandMark height={24} maxWidth={210} label={practiceName}>
+              {practiceName}
+            </BrandMark>
           </span>
         </a>
 

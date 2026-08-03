@@ -45,7 +45,7 @@ export default function T1ChapterHeading({
     return () => io.disconnect();
   }, []);
 
-  const ruleColor = dark ? "bg-[rgba(243,239,230,0.22)]" : "bg-[rgba(26,23,19,0.15)]";
+  const ruleColor = dark ? "bg-[var(--t1-hairline-light)]" : "bg-[var(--t1-hairline)]";
 
   return (
     <header
@@ -67,7 +67,7 @@ export default function T1ChapterHeading({
         <p className="t1-mono-label t1-mono-label-red">[ {numeral} ]</p>
         <p
           className={`t1-mono-label text-right ${
-            dark ? "!text-[#F3EFE6]/60" : "t1-mono-label-stone"
+            dark ? "!text-[var(--t1-paper-60)]" : "t1-mono-label-stone"
           }`}
         >
           [ {kicker.toUpperCase()} ]
@@ -77,7 +77,7 @@ export default function T1ChapterHeading({
       <LineReveal
         as="h2"
         className={`t1-display mt-5 max-w-4xl ${
-          dark ? "text-[#F3EFE6]" : "text-[#1A1713]"
+          dark ? "text-[var(--t1-paper)]" : "text-[var(--t1-ink)]"
         }`}
       >
         {title}
@@ -87,7 +87,7 @@ export default function T1ChapterHeading({
         <Fade delay={0.1}>
           <p
             className={`font-t3-serif mt-4 max-w-xl text-[16px] leading-[1.7] ${
-              dark ? "text-[#F3EFE6]/70" : "text-[#6B675E]"
+              dark ? "text-[var(--t1-paper-70)]" : "text-[var(--t1-stone)]"
             }`}
           >
             {deck}

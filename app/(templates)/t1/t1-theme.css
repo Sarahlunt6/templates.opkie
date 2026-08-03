@@ -10,6 +10,7 @@
   --t1-paper-deep: #e9e3d4;
   --t1-ink: #1a1713;
   --t1-red: #d92b21;
+  --t1-red-rgb: 217 43 33;
   --t1-stone: #6b675e;
   /* AA-safe inks for 11.5px mono labels (≥4.5:1 on paper AND paper-deep);
      the brighter --t1-red / --t1-stone stay for rules, buttons, large type */
@@ -17,9 +18,21 @@
   --t1-stone-ink: #5f5b52;
   /* AA-safe red for labels ON INK grounds (footer, dark blocks) */
   --t1-red-paper: #e8564a;
+  --t1-paper-mid: #efeadc;
   --t1-hairline: rgba(26, 23, 19, 0.15);
   --t1-hairline-soft: rgba(26, 23, 19, 0.08);
   --t1-hairline-light: rgba(243, 239, 230, 0.22);
+  /* Washes of ink and paper that components reach for by name. Tailwind
+     cannot put an alpha on an arbitrary var(), so the steps in use are
+     declared here rather than written as `bg-[var(--t1-ink)]/25`. */
+  --t1-ink-25: rgba(26, 23, 19, 0.25);
+  --t1-ink-30: rgba(26, 23, 19, 0.3);
+  --t1-ink-50: rgba(26, 23, 19, 0.5);
+  --t1-paper-40: rgba(243, 239, 230, 0.4);
+  --t1-paper-60: rgba(243, 239, 230, 0.6);
+  --t1-paper-65: rgba(243, 239, 230, 0.65);
+  --t1-paper-70: rgba(243, 239, 230, 0.7);
+  --t1-paper-80: rgba(243, 239, 230, 0.8);
 
   background-color: var(--t1-paper);
   color: var(--t1-ink);

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ChatConcierge from "@/components/interactive/ChatConcierge";
+import BrandStudioProvider from "@/components/brand/BrandStudioProvider";
+import BrandStudioPanel from "@/components/brand/BrandStudioPanel";
 
 // Universal Body Text - Highly legible clean paragraphs.
 // Template display fonts intentionally do NOT load here — each template's
@@ -27,8 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen bg-brand-canvas text-brand-mainText antialiased">
-        {children}
-        <ChatConcierge />
+        {/* The brand studio wraps the whole collection so a client's colors
+            and logo follow them from the hub into any template and back. */}
+        <BrandStudioProvider>
+          {children}
+          <ChatConcierge />
+          <BrandStudioPanel />
+        </BrandStudioProvider>
       </body>
     </html>
   );

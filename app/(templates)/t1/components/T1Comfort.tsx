@@ -43,13 +43,13 @@ export default function T1Comfort({ hasSedation }: T1ComfortProps) {
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
         {/* Statement */}
         <div className="lg:col-span-5">
-          <p className="max-w-prose font-sans text-base leading-[1.8] text-[#1A1713]">
+          <p className="max-w-prose font-sans text-base leading-[1.8] text-[var(--t1-ink)]">
             If your pulse climbs in the parking lot, you are exactly who this
             practice was built for. Nobody asks why it has been a while. Nobody
             starts before you are ready.
           </p>
-          <blockquote className="mt-10 border-l-2 border-[#D92B21] pl-6">
-            <p className="font-t1-press text-2xl uppercase leading-tight text-[#1A1713] md:text-3xl">
+          <blockquote className="mt-10 border-l-2 border-[var(--t1-red)] pl-6">
+            <p className="font-t1-press text-2xl uppercase leading-tight text-[var(--t1-ink)] md:text-3xl">
               &ldquo;The bravest thing a nervous patient does is walk in. We
               take it from there.&rdquo;
             </p>
@@ -63,17 +63,17 @@ export default function T1Comfort({ hasSedation }: T1ComfortProps) {
             {measures.map((m, i) => (
               <li
                 key={m.title}
-                className="border-t border-[rgba(26,23,19,0.15)] py-4 first:border-t-0"
+                className="border-t border-[var(--t1-hairline)] py-4 first:border-t-0"
               >
                 <p className="flex items-baseline gap-3">
                   <span className="t1-mono-label t1-mono-label-red shrink-0">
                     [ {String(i + 1).padStart(2, "0")} ]
                   </span>
-                  <span className="font-t1-press text-lg uppercase leading-none text-[#1A1713] md:text-xl">
+                  <span className="font-t1-press text-lg uppercase leading-none text-[var(--t1-ink)] md:text-xl">
                     {m.title}
                   </span>
                 </p>
-                <p className="mt-2 pl-[2.75rem] font-sans text-sm leading-relaxed text-[#6B675E] md:text-[15px]">
+                <p className="mt-2 pl-[2.75rem] font-sans text-sm leading-relaxed text-[var(--t1-stone)] md:text-[15px]">
                   {m.note}
                 </p>
               </li>

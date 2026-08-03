@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T1MastheadProps {
   practiceName: string;
@@ -46,8 +47,8 @@ export default function T1Masthead({
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-[rgba(26,23,19,0.15)] bg-[#F3EFE6] transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_1px_0_rgba(26,23,19,0.15)]" : ""
+      className={`sticky top-0 z-50 border-b border-[var(--t1-hairline)] bg-[var(--t1-paper)] transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_1px_0_var(--t1-hairline)]" : ""
       }`}
     >
       <div className="mx-auto flex max-w-[1500px] items-stretch justify-between gap-4 px-4 md:px-8 xl:px-12">
@@ -55,9 +56,11 @@ export default function T1Masthead({
             brand mark, and 2xl wraps long practice names at 375px */}
         <a
           href={`${homeHref}#top`}
-          className="flex items-center py-3 font-t1-press text-xl uppercase leading-none tracking-[0.01em] text-[#1A1713] md:text-2xl"
+          className="flex items-center py-3 font-t1-press text-xl uppercase leading-none tracking-[0.01em] text-[var(--t1-ink)] md:text-2xl"
         >
-          {practiceName}
+          <BrandMark height={26} maxWidth={230} label={practiceName}>
+            {practiceName}
+          </BrandMark>
         </a>
 
         {/* Index nav — desktop. Chapter numerals live on the page headings;
@@ -70,7 +73,7 @@ export default function T1Masthead({
             <a
               key={link.index}
               href={pageHref(homeHref, link.slug)}
-              className="t1-mono-label whitespace-nowrap transition-colors duration-200 hover:text-[#D92B21]"
+              className="t1-mono-label whitespace-nowrap transition-colors duration-200 hover:text-[var(--t1-red)]"
             >
               {link.label}
             </a>
@@ -81,7 +84,7 @@ export default function T1Masthead({
         <div className="flex items-center gap-5">
           <a
             href={tel}
-            className="t1-link hidden whitespace-nowrap font-sans text-sm text-[#1A1713] md:inline-block"
+            className="t1-link hidden whitespace-nowrap font-sans text-sm text-[var(--t1-ink)] md:inline-block"
           >
             {phone}
           </a>

@@ -60,14 +60,14 @@ export default function T1ServicesGallery({
   return (
     <div>
       <Fade>
-        <div className="grid grid-cols-1 gap-px border border-[rgba(26,23,19,0.15)] bg-[rgba(26,23,19,0.15)] lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-px border border-[var(--t1-hairline)] bg-[var(--t1-hairline)] lg:grid-cols-12">
           {/* Index — the ruled contents list */}
           <div
             role="tablist"
             aria-label="Services index"
             aria-orientation="vertical"
             onKeyDown={onKeyDown}
-            className="flex flex-col gap-px bg-[rgba(26,23,19,0.15)] lg:col-span-5"
+            className="flex flex-col gap-px bg-[var(--t1-hairline)] lg:col-span-5"
           >
             {services.map((service, i) => {
               const on = i === active;
@@ -85,7 +85,7 @@ export default function T1ServicesGallery({
                   onClick={() => setActive(i)}
                   onMouseEnter={() => setActive(i)}
                   className={`group flex items-center gap-4 p-5 text-left transition-colors duration-300 md:gap-5 md:p-7 ${
-                    on ? "bg-[#F3EFE6]" : "bg-[#E9E3D4] hover:bg-[#EFEADC]"
+                    on ? "bg-[var(--t1-paper)]" : "bg-[var(--t1-paper-deep)] hover:bg-[var(--t1-paper-mid)]"
                   }`}
                 >
                   <span
@@ -98,8 +98,8 @@ export default function T1ServicesGallery({
                   <span
                     className={`flex-1 font-t1-press text-2xl uppercase leading-[0.95] transition-colors duration-300 md:text-[1.75rem] ${
                       on
-                        ? "text-[#1A1713]"
-                        : "text-[#6B675E] group-hover:text-[#1A1713]"
+                        ? "text-[var(--t1-ink)]"
+                        : "text-[var(--t1-stone)] group-hover:text-[var(--t1-ink)]"
                     }`}
                   >
                     {service.title}
@@ -108,8 +108,8 @@ export default function T1ServicesGallery({
                     aria-hidden="true"
                     className={`text-lg transition-all duration-300 ${
                       on
-                        ? "translate-x-0 text-[#D92B21]"
-                        : "-translate-x-1 text-[rgba(26,23,19,0.3)] group-hover:translate-x-0 group-hover:text-[#1A1713]"
+                        ? "translate-x-0 text-[var(--t1-red)]"
+                        : "-translate-x-1 text-[var(--t1-ink-30)] group-hover:translate-x-0 group-hover:text-[var(--t1-ink)]"
                     }`}
                   >
                     →
@@ -124,7 +124,7 @@ export default function T1ServicesGallery({
             role="tabpanel"
             id="svc-panel"
             aria-labelledby={`svc-tab-${active}`}
-            className="bg-[#E9E3D4] lg:col-span-7"
+            className="bg-[var(--t1-paper-deep)] lg:col-span-7"
           >
             <AnimatePresence mode="wait">
               <motion.article
@@ -139,12 +139,12 @@ export default function T1ServicesGallery({
                   <span className="t1-mono-label t1-mono-label-red">
                     [ {String(active + 1).padStart(2, "0")} ]
                   </span>
-                  <span className="t1-mono-label border border-[#1A1713] px-2 py-1 !text-[10px]">
+                  <span className="t1-mono-label border border-[var(--t1-ink)] px-2 py-1 !text-[10px]">
                     {STATUS_TAGS[active % STATUS_TAGS.length]}
                   </span>
                 </div>
 
-                <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden border border-[#1A1713] bg-[#F3EFE6]">
+                <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden border border-[var(--t1-ink)] bg-[var(--t1-paper)]">
                   <Image
                     src={svc.image}
                     alt={`${svc.title} — photographed for the practice catalog`}
@@ -156,14 +156,14 @@ export default function T1ServicesGallery({
                   {active === 1 && <div aria-hidden="true" className="t1-tint-red" />}
                 </div>
 
-                <h3 className="mt-6 font-t1-press text-3xl uppercase leading-[0.95] text-[#1A1713] md:text-4xl">
+                <h3 className="mt-6 font-t1-press text-3xl uppercase leading-[0.95] text-[var(--t1-ink)] md:text-4xl">
                   {svc.title}
                 </h3>
-                <p className="font-t3-serif mt-3 flex-1 text-[15px] leading-[1.7] text-[#6B675E] md:text-base">
+                <p className="font-t3-serif mt-3 flex-1 text-[15px] leading-[1.7] text-[var(--t1-stone)] md:text-base">
                   {svc.description}
                 </p>
 
-                <div className="mt-6 flex items-center justify-between border-t border-[rgba(26,23,19,0.15)] pt-4">
+                <div className="mt-6 flex items-center justify-between border-t border-[var(--t1-hairline)] pt-4">
                   <span className="t1-mono-label t1-mono-label-stone">
                     BY CONSULTATION
                   </span>
@@ -179,7 +179,7 @@ export default function T1ServicesGallery({
 
       {/* Also practiced — ruled closing line (hidden until categories exist) */}
       {alsoPracticed.length > 0 && (
-        <div className="mt-8 flex flex-col gap-2 border-t border-[rgba(26,23,19,0.15)] pt-4 sm:flex-row sm:items-baseline sm:gap-6">
+        <div className="mt-8 flex flex-col gap-2 border-t border-[var(--t1-hairline)] pt-4 sm:flex-row sm:items-baseline sm:gap-6">
           <p className="t1-mono-label t1-mono-label-red shrink-0">
             [ ALSO PRACTICED ]
           </p>

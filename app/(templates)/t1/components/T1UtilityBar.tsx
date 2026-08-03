@@ -22,7 +22,7 @@ export default function T1UtilityBar({
   const hasBooking = bookingUrl !== "none";
 
   return (
-    <div className="border-b border-[rgba(26,23,19,0.15)] bg-[#F3EFE6]">
+    <div className="border-b border-[var(--t1-hairline)] bg-[var(--t1-paper)]">
       <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-4 py-2 md:px-8 xl:px-12">
         <a href={tel} className="t1-mono-label t1-link whitespace-nowrap">
           T. {phone}

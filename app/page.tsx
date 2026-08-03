@@ -9,6 +9,8 @@ import { t2FontVariables } from "./(templates)/t2/fonts";
 import { t3FontVariables } from "./(templates)/t3/fonts";
 import { t4FontVariables } from "./(templates)/t4/fonts";
 import { t5FontVariables } from "./(templates)/t5/fonts";
+import { useBrandStudio } from "@/components/brand/BrandStudioProvider";
+import { readableOn } from "@/lib/brand/color";
 
 /* ────────────────────────────────────────────────────────────────
    The Opkie Collection — hub page.
@@ -319,7 +321,16 @@ function ConceptAmbient({ id, active }: { id: string; active: boolean }) {
 function ConceptCard({ concept, index }: { concept: Concept; index: number }) {
   const reduced = useReducedMotion();
   const [hovered, setHovered] = useState(false);
-  const a = concept.accentOnDark;
+  const studio = useBrandStudio();
+
+  /* Once a client has set their colors, the placards on this wall switch
+     to their primary, lifted to read on the dark ground. The plates
+     themselves are photographs of the original designs — the concept in
+     their palette is one click away, inside the template. */
+  const a =
+    studio?.active && studio.hydrated
+      ? readableOn(studio.colors.primary, "#0D0D0F", 4.5)
+      : concept.accentOnDark;
 
   return (
     <motion.div
@@ -441,6 +452,33 @@ function ConceptCard({ concept, index }: { concept: Concept; index: number }) {
   );
 }
 
+/**
+ * The plates on this wall are photographs of the original designs, so
+ * they cannot carry a client's palette. Rather than let that read as a
+ * bug, say it plainly and point at where the colors do live.
+ */
+function BrandPreviewNote() {
+  const studio = useBrandStudio();
+  if (!studio?.hydrated || !studio.active) return null;
+
+  return (
+    <p className="mt-5 flex items-center gap-2.5 text-[12.5px] font-light leading-relaxed text-white/45">
+      <span className="flex shrink-0 -space-x-1">
+        <span
+          className="block h-3 w-3 rounded-full ring-1 ring-white/25"
+          style={{ backgroundColor: studio.colors.primary }}
+        />
+        <span
+          className="block h-3 w-3 rounded-full ring-1 ring-white/25"
+          style={{ backgroundColor: studio.colors.accent }}
+        />
+      </span>
+      Your colors are on. The previews below are the original designs — open
+      any concept to see it wearing yours.
+    </p>
+  );
+}
+
 /* ── Page ──────────────────────────────────────────────────────── */
 
 export default function CollectionPage() {
@@ -500,6 +538,7 @@ export default function CollectionPage() {
             signature. Open the one that fits your practice — we tailor every
             word, photograph, and color from there.
           </p>
+          <BrandPreviewNote />
         </motion.div>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-11 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">

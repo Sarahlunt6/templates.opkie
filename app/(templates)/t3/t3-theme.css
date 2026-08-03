@@ -12,6 +12,7 @@
   --t3-sage-light: #f4f6ec; /* alternating lighter sections — warmed one degree toward cream */
   --t3-moss: #2e3b34; /* text ground */
   --t3-euc: #6d8b7d; /* eucalyptus accent */
+  --t3-euc-rgb: 109 139 125;
   --t3-euc-deep: #566e61; /* button fills, large accent phrases */
   --t3-euc-ink: #47594f; /* AA-safe on sage & sand for small text */
   --t3-clay: #c97e5d; /* the ONE warm clay moment per screen */
@@ -21,7 +22,7 @@
   /* derived */
   --t3-moss-soft: rgba(46, 59, 52, 0.74);
   --t3-moss-faint: rgba(46, 59, 52, 0.5); /* decorative / large only */
-  --t3-line: rgba(109, 139, 125, 0.3);
+  --t3-line: rgb(var(--t3-euc-rgb) / 0.3);
   --t3-shadow-soft: 0 18px 48px -20px rgba(46, 59, 52, 0.22);
   --t3-shadow-bloom: 0 30px 70px -24px rgba(46, 59, 52, 0.3);
 
@@ -31,7 +32,7 @@
   --t3-glass-shadow: 0 12px 32px -12px rgba(46, 59, 52, 0.25);
 
   /* scoped overrides so shared primitives inherit the Haven accent */
-  --primary-brand: #566e61;
+  --primary-brand: var(--t3-euc-deep);
   --bg-canvas: #e8efe3;
   --text-main: #2e3b34;
 
@@ -41,7 +42,7 @@
 }
 
 .t3-haven ::selection {
-  background-color: rgba(109, 139, 125, 0.3);
+  background-color: rgb(var(--t3-euc-rgb) / 0.3);
   color: var(--t3-moss);
 }
 
@@ -156,7 +157,7 @@
 }
 .t3-btn-quiet:hover {
   border-color: var(--t3-euc);
-  background-color: rgba(109, 139, 125, 0.08);
+  background-color: rgb(var(--t3-euc-rgb) / 0.08);
 }
 
 /* ── organic image frames ─────────────────────────────────────────────── */

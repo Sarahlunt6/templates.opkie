@@ -105,7 +105,7 @@ export default function T1PageTurnReveal({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onPointerLeave={endDrag}
-        className="relative w-full cursor-ew-resize select-none overflow-hidden border border-[#1A1713] touch-pan-y"
+        className="relative w-full cursor-ew-resize select-none overflow-hidden border border-[var(--t1-ink)] touch-pan-y"
       >
         <div className="relative aspect-[4/3] w-full md:aspect-[21/10]">
           {/* Before — the base proof */}
@@ -135,19 +135,19 @@ export default function T1PageTurnReveal({
           {/* Seam — a hard red rule with a square handle */}
           <motion.div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 w-0.5 bg-[#D92B21]"
+            className="pointer-events-none absolute inset-y-0 w-0.5 bg-[var(--t1-red)]"
             style={{ left: seamLeft, opacity: seamOpacity }}
           >
-            <span className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#D92B21] bg-[#F3EFE6] font-mono text-[11px] tracking-[0.1em] text-[#D92B21]">
+            <span className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[var(--t1-red)] bg-[var(--t1-paper)] font-mono text-[11px] tracking-[0.1em] text-[var(--t1-red)]">
               &lt;&gt;
             </span>
           </motion.div>
 
           {/* Corner captions */}
-          <span className="t1-mono-label absolute bottom-3 left-3 bg-[#1A1713] px-2.5 py-1.5 !text-[#F3EFE6]">
+          <span className="t1-mono-label absolute bottom-3 left-3 bg-[var(--t1-ink)] px-2.5 py-1.5 !text-[var(--t1-paper)]">
             BEFORE
           </span>
-          <span className="t1-mono-label absolute bottom-3 right-3 bg-[#F3EFE6] px-2.5 py-1.5">
+          <span className="t1-mono-label absolute bottom-3 right-3 bg-[var(--t1-paper)] px-2.5 py-1.5">
             AFTER
           </span>
         </div>

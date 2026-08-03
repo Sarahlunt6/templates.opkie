@@ -47,9 +47,9 @@ const SYSTEMS = [
 export default function T1Technology() {
   return (
     <Fade>
-      <div className="grid grid-cols-1 gap-px border border-[rgba(26,23,19,0.15)] bg-[rgba(26,23,19,0.15)] md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-px border border-[var(--t1-hairline)] bg-[var(--t1-hairline)] md:grid-cols-3">
         {SYSTEMS.map((sys, i) => (
-          <div key={sys.ref} className="flex flex-col bg-[#F3EFE6] p-6 md:p-8">
+          <div key={sys.ref} className="flex flex-col bg-[var(--t1-paper)] p-6 md:p-8">
             <div className="flex items-baseline justify-between gap-4">
               <span className="t1-mono-label t1-mono-label-red">
                 [ {String(i + 1).padStart(2, "0")} ]
@@ -57,18 +57,18 @@ export default function T1Technology() {
               <span className="t1-mono-label t1-mono-label-stone">{sys.ref}</span>
             </div>
 
-            <h3 className="mt-5 font-t1-press text-2xl uppercase leading-[0.95] text-[#1A1713]">
+            <h3 className="mt-5 font-t1-press text-2xl uppercase leading-[0.95] text-[var(--t1-ink)]">
               {sys.name}
             </h3>
-            <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-[#6B675E] md:text-[15px]">
+            <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-[var(--t1-stone)] md:text-[15px]">
               {sys.claim}
             </p>
 
-            <ul className="mt-6 border-t border-[rgba(26,23,19,0.15)]">
+            <ul className="mt-6 border-t border-[var(--t1-hairline)]">
               {sys.specs.map(([k, v]) => (
                 <li
                   key={k}
-                  className="flex items-baseline justify-between gap-4 border-b border-[rgba(26,23,19,0.15)] py-2.5 last:border-b-0"
+                  className="flex items-baseline justify-between gap-4 border-b border-[var(--t1-hairline)] py-2.5 last:border-b-0"
                 >
                   <span className="t1-mono-label t1-mono-label-stone">{k}</span>
                   <span className="t1-mono-label text-right">{v}</span>

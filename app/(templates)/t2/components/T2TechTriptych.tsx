@@ -97,7 +97,7 @@ export default function T2TechTriptych() {
                 className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
                   background:
-                    "radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(56,189,248,0.1), transparent 65%)",
+                    "radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--t2p-scan-rgb) / 0.1), transparent 65%)",
                 }}
                 aria-hidden="true"
               />
@@ -105,7 +105,7 @@ export default function T2TechTriptych() {
               <div className="relative flex h-full flex-col">
                 <div className="flex items-center justify-between mb-8">
                   {/* Rounded blue icon tile */}
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--t2p-scan-dim)] bg-[rgba(56,189,248,0.08)]">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--t2p-scan-dim)] bg-[rgb(var(--t2p-scan-rgb)_/_0.08)]">
                     <inst.Icon
                       className="h-5 w-5 text-[var(--t2p-blue)]"
                       strokeWidth={1.25}

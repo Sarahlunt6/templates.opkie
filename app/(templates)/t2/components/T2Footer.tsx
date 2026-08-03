@@ -2,6 +2,7 @@
 
 import { practice, location, telHref, bookingHref } from "./t2-lib";
 import { SITE_PAGES, pageHref } from "@/components/wireframe/site-pages";
+import BrandMark from "@/components/brand/BrandMark";
 
 interface T2FooterProps {
   /** Path of the template home ("/t2" in the hub, "/" in a client site) so
@@ -19,7 +20,13 @@ export default function T2Footer({ homeHref = "" }: T2FooterProps) {
           {/* Identity */}
           <div className="md:col-span-4">
             <p className="font-innovator text-lg font-medium tracking-tight text-[var(--t2p-text)]">
-              {practice.globalPracticeName}
+              <BrandMark
+                height={30}
+                maxWidth={240}
+                label={practice.globalPracticeName}
+              >
+                {practice.globalPracticeName}
+              </BrandMark>
             </p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[var(--t2p-text-70)]">
               Digital dentistry in {location.cityServed} — 3D imaging, same-day

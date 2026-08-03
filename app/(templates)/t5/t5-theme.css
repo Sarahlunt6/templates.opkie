@@ -12,6 +12,7 @@
   --t5-cream: #fff6e8; /* morning-light canvas */
   --t5-butter: #ffe9c4; /* tinted blocks, menu board */
   --t5-marigold: #f0a32f; /* the awning, buttons, sunshine */
+  --t5-marigold-rgb: 240 163 47;
   --t5-marigold-deep: #b26e0e; /* AA-safe marigold ink on cream */
   --t5-teal: #23655f; /* deep retro teal — secondary voice */
   --t5-teal-bright: #37847c; /* chips, hovers */
@@ -28,8 +29,8 @@
   --t5-shadow-soft: 0 16px 40px -18px rgba(70, 49, 42, 0.28);
 
   /* scoped overrides so shared primitives inherit the storefront colors */
-  --primary-brand: #23655f;
-  --secondary-accent: #f0a32f;
+  --primary-brand: var(--t5-teal);
+  --secondary-accent: var(--t5-marigold);
   --bg-canvas: #fff6e8;
   --text-main: #46312a;
 
@@ -39,7 +40,7 @@
 }
 
 .t5-marigold ::selection {
-  background-color: rgba(240, 163, 47, 0.45);
+  background-color: rgb(var(--t5-marigold-rgb) / 0.45);
   color: var(--t5-walnut);
 }
 
@@ -223,7 +224,7 @@
   width: 96px;
   height: 26px;
   transform: translateX(-50%) rotate(-2deg);
-  background-color: rgba(240, 163, 47, 0.4);
+  background-color: rgb(var(--t5-marigold-rgb) / 0.4);
   border-left: 1px dashed rgba(70, 49, 42, 0.2);
   border-right: 1px dashed rgba(70, 49, 42, 0.2);
   z-index: 1;
