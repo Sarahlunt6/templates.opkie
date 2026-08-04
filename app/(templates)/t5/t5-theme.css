@@ -259,16 +259,32 @@
 /* hand-painted wavy underline for one key phrase per section.
    inline-block so the squiggle hugs a single unwrapped fragment —
    keep the phrase short (a word or two). */
+/* The sign-painter's underline. The wave is a masked pseudo-element
+   rather than a background image, because a color baked into an SVG data
+   URI cannot follow a custom property — and this stroke has to change
+   with the client's brand like everything else. The mask has to live on
+   ::after, not on .t5-wave itself: masking the span would clip the
+   headline text to the shape of the squiggle. */
 .t5-marigold .t5-wave {
   display: inline-block;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 5 Q 5 1 10 5 T 20 5 T 30 5 T 40 5' fill='none' stroke='%23f0a32f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-position: 0 100%;
-  background-size: 40px 8px;
+  position: relative;
   padding-bottom: 10px;
 }
-.t5-marigold .t5-wave--teal {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 5 Q 5 1 10 5 T 20 5 T 30 5 T 40 5' fill='none' stroke='%2337847c' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+.t5-marigold .t5-wave::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  background-color: var(--t5-marigold);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 5 Q 5 1 10 5 T 20 5 T 30 5 T 40 5' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E")
+    repeat-x 0 100% / 40px 8px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 5 Q 5 1 10 5 T 20 5 T 30 5 T 40 5' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E")
+    repeat-x 0 100% / 40px 8px;
+}
+.t5-marigold .t5-wave--teal::after {
+  background-color: var(--t5-teal-bright);
 }
 
 /* ── the neighborhood parade (marquee expects tripled content) ────────── */

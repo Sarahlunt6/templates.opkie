@@ -12,6 +12,7 @@ import { t5FontVariables } from "./(templates)/t5/fonts";
 import { useBrandStudio } from "@/components/brand/BrandStudioProvider";
 import BrandedPlate from "@/components/brand/BrandedPlate";
 import { readableOn } from "@/lib/brand/color";
+import { signatureColors } from "@/lib/brand/templates";
 
 /* ────────────────────────────────────────────────────────────────
    The Opkie Collection — hub page.
@@ -116,9 +117,27 @@ const concepts: Concept[] = [
   },
 ];
 
-/* ── Per-concept ambient signatures, played over the screenshot ──── */
+/* ── Per-concept ambient signatures, played over the plate ────────
+   These are painted by the hub, on top of the plate, so each one takes
+   the concept's signature color as a prop rather than hardcoding it —
+   otherwise a hovered plate shows the client's brand underneath and the
+   template's original color on top of it. ──────────────────────────── */
 
-function PressEffect({ active }: { active: boolean }) {
+interface Signature {
+  main: string;
+  alt: string;
+}
+
+/** Each concept's own signature color, used until a client sets a brand. */
+const DEFAULT_SIGNATURES: Record<string, Signature> = {
+  t1: { main: "#D92B21", alt: "#D92B21" },
+  t2: { main: "#38BDF8", alt: "#22D3EE" },
+  t3: { main: "#6D8B7D", alt: "#6D8B7D" },
+  t4: { main: "#E6CB96", alt: "#C9A56A" },
+  t5: { main: "#F0A32F", alt: "#F0A32F" },
+};
+
+function PressEffect({ active, sig }: { active: boolean; sig: Signature }) {
   return (
     <>
       {/* Ink hairlines draw in from the edges, like the chapter rules */}
@@ -140,7 +159,7 @@ function PressEffect({ active }: { active: boolean }) {
       <motion.span
         aria-hidden
         className="pointer-events-none absolute -right-2 bottom-[-3rem] select-none font-t1-press text-[11rem] uppercase leading-none"
-        style={{ color: "rgba(217,43,33,0.14)" }}
+        style={{ color: withAlpha(sig.main, 0.14) }}
         animate={{ opacity: active ? 1 : 0, x: active ? 0 : 20 }}
         transition={{ duration: 1, ease: EASE }}
       >
@@ -150,7 +169,7 @@ function PressEffect({ active }: { active: boolean }) {
   );
 }
 
-function PrecisionEffect({ active }: { active: boolean }) {
+function PrecisionEffect({ active, sig }: { active: boolean; sig: Signature }) {
   const reduced = useReducedMotion();
   return (
     <>
@@ -172,9 +191,8 @@ function PrecisionEffect({ active }: { active: boolean }) {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 h-px"
           style={{
-            background:
-              "linear-gradient(90deg, transparent, #38BDF8 30%, #22D3EE 70%, transparent)",
-            boxShadow: "0 0 18px rgba(56,189,248,0.5)",
+            background: `linear-gradient(90deg, transparent, ${sig.main} 30%, ${sig.alt} 70%, transparent)`,
+            boxShadow: `0 0 18px ${withAlpha(sig.main, 0.5)}`,
           }}
           initial={{ top: "0%" }}
           animate={{ top: ["0%", "100%"] }}
@@ -185,15 +203,14 @@ function PrecisionEffect({ active }: { active: boolean }) {
   );
 }
 
-function HavenEffect({ active }: { active: boolean }) {
+function HavenEffect({ active, sig }: { active: boolean; sig: Signature }) {
   const reduced = useReducedMotion();
   return (
     <motion.div
       aria-hidden
       className="pointer-events-none absolute left-1/2 top-1/2 h-[20rem] w-[20rem] -translate-x-1/2 -translate-y-1/2 rounded-full"
       style={{
-        background:
-          "radial-gradient(circle, rgba(109,139,125,0.30) 0%, rgba(109,139,125,0.10) 45%, transparent 70%)",
+        background: `radial-gradient(circle, ${withAlpha(sig.main, 0.3)} 0%, ${withAlpha(sig.main, 0.1)} 45%, transparent 70%)`,
       }}
       animate={
         active
@@ -214,7 +231,7 @@ function HavenEffect({ active }: { active: boolean }) {
   );
 }
 
-function AtelierEffect({ active }: { active: boolean }) {
+function AtelierEffect({ active, sig }: { active: boolean; sig: Signature }) {
   const reduced = useReducedMotion();
   return (
     <>
@@ -223,8 +240,7 @@ function AtelierEffect({ active }: { active: boolean }) {
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "radial-gradient(80% 60% at 50% -8%, rgba(230,203,150,0.30), rgba(230,203,150,0.06) 50%, transparent 72%)",
+          background: `radial-gradient(80% 60% at 50% -8%, ${withAlpha(sig.main, 0.3)}, ${withAlpha(sig.main, 0.06)} 50%, transparent 72%)`,
         }}
         animate={{ opacity: active ? 1 : 0.35 }}
         transition={{ duration: 0.8 }}
@@ -233,7 +249,7 @@ function AtelierEffect({ active }: { active: boolean }) {
       <motion.div
         aria-hidden
         className="pointer-events-none absolute left-6 right-6 bottom-[22%] h-px origin-left"
-        style={{ backgroundColor: "rgba(201,165,106,0.55)" }}
+        style={{ backgroundColor: withAlpha(sig.alt, 0.55) }}
         animate={{ scaleX: active ? 1 : 0, opacity: active ? 1 : 0 }}
         transition={{ duration: 0.9, ease: EASE }}
       />
@@ -243,8 +259,7 @@ function AtelierEffect({ active }: { active: boolean }) {
           aria-hidden
           className="pointer-events-none absolute inset-y-0 w-1/3"
           style={{
-            background:
-              "linear-gradient(100deg, transparent 10%, rgba(230,203,150,0.16) 50%, transparent 90%)",
+            background: `linear-gradient(100deg, transparent 10%, ${withAlpha(sig.main, 0.16)} 50%, transparent 90%)`,
           }}
           initial={{ x: "-140%" }}
           animate={{ x: "340%" }}
@@ -260,7 +275,7 @@ function AtelierEffect({ active }: { active: boolean }) {
   );
 }
 
-function MarigoldEffect({ active }: { active: boolean }) {
+function MarigoldEffect({ active, sig }: { active: boolean; sig: Signature }) {
   const reduced = useReducedMotion();
   return (
     <>
@@ -277,15 +292,13 @@ function MarigoldEffect({ active }: { active: boolean }) {
         <div
           style={{
             height: 14,
-            background:
-              "repeating-linear-gradient(90deg, #F0A32F 0 28px, #FFFDF7 28px 56px)",
+            background: `repeating-linear-gradient(90deg, ${sig.main} 0 28px, #FFFDF7 28px 56px)`,
           }}
         />
         <div
           style={{
             height: 13,
-            backgroundImage:
-              "radial-gradient(circle at 14px 0, #F0A32F 12px, transparent 13px), radial-gradient(circle at 42px 0, #FFFDF7 12px, transparent 13px)",
+            backgroundImage: `radial-gradient(circle at 14px 0, ${sig.main} 12px, transparent 13px), radial-gradient(circle at 42px 0, #FFFDF7 12px, transparent 13px)`,
             backgroundSize: "56px 13px",
             backgroundRepeat: "repeat-x",
           }}
@@ -295,7 +308,7 @@ function MarigoldEffect({ active }: { active: boolean }) {
       <motion.div
         aria-hidden
         className="pointer-events-none absolute -right-8 -bottom-8 h-36 w-36 rounded-full"
-        style={{ backgroundColor: "rgba(240,163,47,0.85)" }}
+        style={{ backgroundColor: withAlpha(sig.main, 0.85) }}
         animate={
           active
             ? reduced
@@ -309,12 +322,20 @@ function MarigoldEffect({ active }: { active: boolean }) {
   );
 }
 
-function ConceptAmbient({ id, active }: { id: string; active: boolean }) {
-  if (id === "t1") return <PressEffect active={active} />;
-  if (id === "t2") return <PrecisionEffect active={active} />;
-  if (id === "t4") return <AtelierEffect active={active} />;
-  if (id === "t5") return <MarigoldEffect active={active} />;
-  return <HavenEffect active={active} />;
+function ConceptAmbient({
+  id,
+  active,
+  sig,
+}: {
+  id: string;
+  active: boolean;
+  sig: Signature;
+}) {
+  if (id === "t1") return <PressEffect active={active} sig={sig} />;
+  if (id === "t2") return <PrecisionEffect active={active} sig={sig} />;
+  if (id === "t4") return <AtelierEffect active={active} sig={sig} />;
+  if (id === "t5") return <MarigoldEffect active={active} sig={sig} />;
+  return <HavenEffect active={active} sig={sig} />;
 }
 
 /* ── Specimen plate ────────────────────────────────────────────── */
@@ -328,10 +349,19 @@ function ConceptCard({ concept, index }: { concept: Concept; index: number }) {
      to their primary, lifted to read on the dark ground. The plates
      themselves are photographs of the original designs — the concept in
      their palette is one click away, inside the template. */
-  const a =
-    studio?.active && studio.hydrated
-      ? readableOn(studio.colors.primary, "#0D0D0F", 4.5)
-      : concept.accentOnDark;
+  const branded = Boolean(studio?.active && studio.hydrated);
+
+  const a = branded
+    ? readableOn(studio!.colors.primary, "#0D0D0F", 4.5)
+    : concept.accentOnDark;
+
+  /* The hover signature is painted over the plate, so it has to resolve
+     to the exact shade the plate itself is using — same derivation, same
+     variable — or a hovered Marigold shows the client's awning under the
+     template's original one. */
+  const sig =
+    (branded ? signatureColors(concept.id, studio!.colors) : null) ??
+    DEFAULT_SIGNATURES[concept.id];
 
   return (
     <motion.div
@@ -342,7 +372,12 @@ function ConceptCard({ concept, index }: { concept: Concept; index: number }) {
       <Link
         href={`/${concept.id}`}
         target="_blank"
-        rel="noopener noreferrer"
+        /* Deliberately no `rel="noopener"`. A new tab inherits session
+           storage from the tab that opened it — but only when it is not
+           opened with noopener, which severs it and hands the template a
+           blank session. Losing the brand on the click that matters most
+           is the worse trade, and these are our own same-origin pages,
+           so there is nothing for window.opener to abuse. */
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setHovered(true)}
@@ -375,7 +410,7 @@ function ConceptCard({ concept, index }: { concept: Concept; index: number }) {
           />
 
           {/* The concept's own signature, played over its live screenshot */}
-          <ConceptAmbient id={concept.id} active={hovered} />
+          <ConceptAmbient id={concept.id} active={hovered} sig={sig} />
         </div>
 
         {/* Placard */}

@@ -278,6 +278,38 @@ export const TEMPLATE_BRANDS: TemplateBrandSpec[] = [
 ];
 
 /**
+ * The variable each template's hub signature is drawn in — Press's giant
+ * numeral, Precision's scan sweep, Marigold's awning. The hub paints
+ * these itself, over the plate, so they have to resolve to the very same
+ * shade the plate underneath is using or the hover reads as a mismatch.
+ */
+const SIGNATURE_VARS: Record<string, [main: string, alt: string]> = {
+  t1: ["--t1-red", "--t1-red"],
+  t2: ["--t2p-scan", "--t2p-scan-bright"],
+  t3: ["--t3-euc", "--t3-euc"],
+  t4: ["--t4-champagne-bright", "--t4-champagne"],
+  t5: ["--t5-marigold", "--t5-marigold"],
+};
+
+/**
+ * The two colors a concept's hover signature should be drawn in for a
+ * given brand. Null for an unknown id, so callers keep their own defaults.
+ */
+export function signatureColors(
+  id: string,
+  colors: BrandColors,
+): { main: string; alt: string } | null {
+  const spec = TEMPLATE_BRANDS.find((t) => t.id === id);
+  const names = SIGNATURE_VARS[id];
+  if (!spec || !names) return null;
+
+  const vars = spec.vars(colors);
+  const main = vars[names[0]];
+  const alt = vars[names[1]];
+  return main && alt ? { main, alt } : null;
+}
+
+/**
  * The whole override sheet: one scoped rule per template. Injected as a
  * single <style> so a color change is one style recalculation, and
  * removing the element restores every template to its own palette.

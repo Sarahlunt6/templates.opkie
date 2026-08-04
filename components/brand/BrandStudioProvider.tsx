@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -51,6 +52,11 @@ interface BrandStudioValue extends BrandState {
 
 const STORAGE_KEY = "opkie.brand-studio";
 const STYLE_ID = "opkie-brand-studio";
+const CHANNEL = "opkie.brand-studio";
+
+type SyncMessage =
+  | { type: "state"; state: BrandState }
+  | { type: "request" };
 
 /** Neutral seeds, shown before a client has picked anything. */
 const SEED: BrandColors = { primary: "#0f766e", accent: "#38bdf8" };
@@ -103,13 +109,73 @@ export default function BrandStudioProvider({
   });
   const [hydrated, setHydrated] = useState(false);
 
+  /* Cross-tab sync. A new tab opened from the hub inherits the session
+     outright, but a tab opened any other way — typed, bookmarked, or
+     already sitting open before the client picked a color — would start
+     blank. This channel closes that gap: a fresh tab asks, whoever has
+     the brand answers, and later edits fan out to every tab at once.
+     Declared before the restore effect so the channel exists when that
+     effect needs to ask. Nothing here is persisted. */
+  const channelRef = useRef<BroadcastChannel | null>(null);
+  /* The last state we sent or accepted — the guard that stops two tabs
+     from echoing the same brand back and forth forever. */
+  const syncedRef = useRef<string>("");
+
+  useEffect(() => {
+    if (typeof BroadcastChannel === "undefined") return;
+    const channel = new BroadcastChannel(CHANNEL);
+    channelRef.current = channel;
+
+    channel.onmessage = (event: MessageEvent<SyncMessage>) => {
+      const message = event.data;
+
+      if (message?.type === "request") {
+        // A new tab is asking. Mirrors stay quiet; the real pages answer.
+        if (syncedRef.current && !isFramed()) {
+          channel.postMessage({
+            type: "state",
+            state: JSON.parse(syncedRef.current) as BrandState,
+          });
+        }
+        return;
+      }
+
+      if (message?.type === "state" && message.state) {
+        const json = JSON.stringify(message.state);
+        if (json === syncedRef.current) return;
+        syncedRef.current = json;
+        setState(message.state);
+      }
+    };
+
+    return () => {
+      channel.close();
+      channelRef.current = null;
+    };
+  }, []);
+
   /* Restore the in-tab session, so moving between templates keeps the
      brand on. Runs once, after mount, to keep SSR markup deterministic. */
   useEffect(() => {
     const stored = readStored();
-    if (stored) setState(stored);
+    if (stored) {
+      setState(stored);
+      syncedRef.current = JSON.stringify(stored);
+    } else {
+      channelRef.current?.postMessage({ type: "request" } satisfies SyncMessage);
+    }
     setHydrated(true);
   }, []);
+
+  /* Fan local edits out to the other tabs. Skipped when the state is one
+     we just accepted from another tab, so the two do not trade it back. */
+  useEffect(() => {
+    if (!hydrated || isFramed()) return;
+    const json = JSON.stringify(state);
+    if (json === syncedRef.current) return;
+    syncedRef.current = json;
+    channelRef.current?.postMessage({ type: "state", state } satisfies SyncMessage);
+  }, [state, hydrated]);
 
   /* Same-origin iframes in this tab share our sessionStorage AND receive
      its `storage` events — which is exactly what the hub's live plates
