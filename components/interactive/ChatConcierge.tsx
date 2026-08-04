@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { isFramed } from "@/components/brand/BrandStudioProvider";
 
 interface Message {
   id: string;
@@ -210,6 +211,13 @@ export default function ChatConcierge() {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [isOpen]);
+
+  /* The hub's brand-preview plates frame these pages to show them in a
+     client's colors. A concierge bubble floating inside a thumbnail is
+     chrome, not design — it sits out until the page is the real one. */
+  const [framed, setFramed] = useState(false);
+  useEffect(() => setFramed(isFramed()), []);
+  if (framed) return null;
 
   const handleSendMessage = (text: string) => {
     if (!text.trim()) return;

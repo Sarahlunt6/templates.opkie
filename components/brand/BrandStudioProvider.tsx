@@ -57,6 +57,22 @@ const SEED: BrandColors = { primary: "#0f766e", accent: "#38bdf8" };
 
 const BrandStudioContext = createContext<BrandStudioValue | null>(null);
 
+/**
+ * True when this document is running inside one of the hub's preview
+ * plates rather than as the page the client is actually looking at.
+ * The plates are same-origin, so this never throws in practice; the
+ * guard is there so a hostile embed degrades to "not framed" instead
+ * of taking the page down.
+ */
+export function isFramed(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+}
+
 function readStored(): BrandState | null {
   try {
     const raw = window.sessionStorage.getItem(STORAGE_KEY);
@@ -95,8 +111,25 @@ export default function BrandStudioProvider({
     setHydrated(true);
   }, []);
 
+  /* Same-origin iframes in this tab share our sessionStorage AND receive
+     its `storage` events — which is exactly what the hub's live plates
+     need. Each plate is a real template document running this provider;
+     it listens here and repaints when the client moves a color, with no
+     reload and no message plumbing. */
   useEffect(() => {
-    if (!hydrated) return;
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== null && e.key !== STORAGE_KEY) return;
+      setState(readStored() ?? { colors: SEED, logo: null, active: false });
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  /* Only the top-level document writes. A framed plate is a read-only
+     mirror — letting it write would echo its own state back out and
+     fight the panel the client is actually typing into. */
+  useEffect(() => {
+    if (!hydrated || isFramed()) return;
     try {
       window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {

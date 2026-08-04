@@ -10,6 +10,7 @@ import { t3FontVariables } from "./(templates)/t3/fonts";
 import { t4FontVariables } from "./(templates)/t4/fonts";
 import { t5FontVariables } from "./(templates)/t5/fonts";
 import { useBrandStudio } from "@/components/brand/BrandStudioProvider";
+import BrandedPlate from "@/components/brand/BrandedPlate";
 import { readableOn } from "@/lib/brand/color";
 
 /* ────────────────────────────────────────────────────────────────
@@ -365,17 +366,12 @@ function ConceptCard({ concept, index }: { concept: Concept; index: number }) {
               "transform 0.55s cubic-bezier(0.22,1,0.36,1), box-shadow 0.55s cubic-bezier(0.22,1,0.36,1), border-color 0.55s cubic-bezier(0.22,1,0.36,1)",
           }}
         >
-          <Image
-            src={`/images/templates/${concept.id}-preview.png`}
+          <BrandedPlate
+            id={concept.id}
             alt={`${concept.name} homepage design preview`}
-            fill
-            sizes="(max-width: 768px) 90vw, 32vw"
             priority={index === 0}
-            className="object-cover object-top"
-            style={{
-              transform: hovered && !reduced ? "scale(1.04)" : "scale(1)",
-              transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)",
-            }}
+            hovered={hovered}
+            reduced={Boolean(reduced)}
           />
 
           {/* The concept's own signature, played over its live screenshot */}
@@ -453,9 +449,8 @@ function ConceptCard({ concept, index }: { concept: Concept; index: number }) {
 }
 
 /**
- * The plates on this wall are photographs of the original designs, so
- * they cannot carry a client's palette. Rather than let that read as a
- * bug, say it plainly and point at where the colors do live.
+ * Confirmation that the brand took, and that it took everywhere — the
+ * one thing a client cannot tell from a wall of thumbnails alone.
  */
 function BrandPreviewNote() {
   const studio = useBrandStudio();
@@ -473,8 +468,8 @@ function BrandPreviewNote() {
           style={{ backgroundColor: studio.colors.accent }}
         />
       </span>
-      Your colors are on. The previews below are the original designs — open
-      any concept to see it wearing yours.
+      Your brand is on — every concept below is showing it live. Open any one
+      to walk through the whole site.
     </p>
   );
 }

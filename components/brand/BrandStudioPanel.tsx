@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useBrandStudio } from "./BrandStudioProvider";
+import { isFramed, useBrandStudio } from "./BrandStudioProvider";
 import { isValidHex, normalizeHex } from "@/lib/brand/color";
 import { LogoError, readLogoFile } from "@/lib/brand/logo";
 import { TEMPLATE_BRANDS, type BrandColors } from "@/lib/brand/templates";
@@ -35,6 +35,12 @@ export default function BrandStudioPanel() {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
+  /* Inside a hub preview plate this document is a picture of a website,
+     not a website — the control that drives it belongs to the page doing
+     the framing. */
+  const [framed, setFramed] = useState(false);
+  useEffect(() => setFramed(isFramed()), []);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -45,7 +51,7 @@ export default function BrandStudioPanel() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  if (!studio) return null;
+  if (!studio || framed) return null;
 
   return (
     <>
